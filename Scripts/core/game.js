@@ -11,7 +11,9 @@
     assetManifest = [
         { id: "backButton", src: "./Assets/BackButton.png" },
         { id: "nextButton", src: "./Assets/NextButton.png" },
-        { id: "background", src: "./Assets/background.png" }
+        { id: "background", src: "./Assets/background.png" },
+        { id: "player", src: "./Assets/player.png" },
+        { id: "weapon", src: "./Assets/phantos.png" }
     ];
     function Init() {
         console.log("Initialization Start");

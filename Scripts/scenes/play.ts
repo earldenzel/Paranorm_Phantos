@@ -2,6 +2,7 @@ module scenes {
     export class PlayScene extends objects.Scene {
         // Variables
         private background:objects.Background;
+        private player:objects.Player;
 
         // Constructor
         constructor(assetManager:createjs.LoadQueue) {
@@ -14,6 +15,7 @@ module scenes {
         public Start(): void {
             // Initialize our variables
             this.background = new objects.Background(this.assetManager);
+            this.player = new objects.Player(this.assetManager);
             this.Main();
         }
 
@@ -24,6 +26,8 @@ module scenes {
 
         public Main(): void {
             this.addChild(this.background);
+            this.addChild(this.player.weapon);
+            this.addChild(this.player);
         }
     }
 }
