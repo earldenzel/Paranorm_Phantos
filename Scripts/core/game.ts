@@ -36,8 +36,10 @@
 
         // Initialize CreateJS
         stage = new createjs.Stage(canvas);
-        // Freqeuncy of checks. Computationally expensive. Turn on in menus, Turn off in game
+
         stage.enableMouseOver(20);
+        // Freqeuncy of checks. Computationally expensive. Turn on in menus, Turn off in game
+        
         createjs.Ticker.framerate = 60; // 60 FPS
         createjs.Ticker.on("tick", Update);
 
