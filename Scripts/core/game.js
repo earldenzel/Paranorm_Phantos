@@ -31,6 +31,8 @@
         stage.enableMouseOver(20);
         createjs.Ticker.framerate = 60; // 60 FPS
         createjs.Ticker.on("tick", Update);
+        // Create a global reference to our stage object
+        objects.Game.stage = stage;
         // Set up default game state
         objects.Game.currentScene = config.Scene.START;
         currentState = config.Scene.START;

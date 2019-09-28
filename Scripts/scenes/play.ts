@@ -1,4 +1,5 @@
 module scenes {
+
     export class PlayScene extends objects.Scene {
         // Variables
         private background:objects.Background;
@@ -19,14 +20,23 @@ module scenes {
             this.Main();
         }
 
+        
+
         public Update(): void {
             // Update the background here
             this.background.Update();
+
+            this.player.Update();
+            //this.enemy.Update();
+            // this.enemies.forEach(e => {
+            //     e.Update();
+            //     managers.Collision.Check(this.player, e);
+            // });
         }
 
         public Main(): void {
             this.addChild(this.background);
-            this.addChild(this.player.weapon);
+            //this.addChild(this.player.weapon);
             this.addChild(this.player);
         }
     }

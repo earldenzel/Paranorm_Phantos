@@ -31,10 +31,16 @@ var scenes;
         PlayScene.prototype.Update = function () {
             // Update the background here
             this.background.Update();
+            this.player.Update();
+            //this.enemy.Update();
+            // this.enemies.forEach(e => {
+            //     e.Update();
+            //     managers.Collision.Check(this.player, e);
+            // });
         };
         PlayScene.prototype.Main = function () {
             this.addChild(this.background);
-            this.addChild(this.player.weapon);
+            //this.addChild(this.player.weapon);
             this.addChild(this.player);
         };
         return PlayScene;

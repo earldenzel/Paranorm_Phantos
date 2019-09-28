@@ -15,40 +15,38 @@ var objects;
 (function (objects) {
     var Player = /** @class */ (function (_super) {
         __extends(Player, _super);
-        // Variables
-        // Constructor
         function Player(assetManager) {
             var _this = _super.call(this, assetManager, "player") || this;
-            _this.weapon = new objects.Weapon(assetManager, _this);
             _this.Start();
             return _this;
         }
         // Methods
-        // Initializing our variables with default values
         Player.prototype.Start = function () {
-            this.speedX = 0;
-            this.speedY = 0;
-            this.Reset();
+            // set the initial position
+            this.y = 700;
+            this.x = 320;
         };
-        // Updated 60 times per second (60FPS)
         Player.prototype.Update = function () {
             this.Move();
-            this.CheckBound();
+            this.CheckBound(); // <-- Check collisions
         };
-        // Resets the position of the object
-        Player.prototype.Reset = function () {
-            this.x = 320;
-            this.y = 450;
-            this.weapon.x = this.x;
-            this.weapon.y = this.y - 15;
-        };
-        // Move the object
+        Player.prototype.Reset = function () { };
         Player.prototype.Move = function () {
+            console.log("Move()");
+            // We reference the stage object and get mouse position
             this.x = objects.Game.stage.mouseX;
-            this.y = objects.Game.stage.mouseY;
+            // this is evetually replaced with keyboard input
+            // Maybe xbox controller
         };
-        // Collision Detection 
         Player.prototype.CheckBound = function () {
+            // right bound
+            if (this.x >= 640 - this.halfW) {
+                this.x = 640 - this.halfW;
+            }
+            // left bound
+            if (this.x <= this.halfW) {
+                this.x = this.halfW;
+            }
         };
         return Player;
     }(objects.GameObject));
