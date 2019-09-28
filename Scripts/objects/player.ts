@@ -10,7 +10,7 @@ module objects {
         constructor(assetManager: createjs.LoadQueue) {
             super(assetManager, "player");
             this.Start();
-            this.AddEventListeners();
+            this.Move();
         }
 
         // Methods
@@ -33,7 +33,7 @@ module objects {
             // this.y = objects.Game.stage.mouseY;
 
             // this is evetually replaced with keyboard input
-
+            this.AddEventListeners();
             // Maybe xbox controller
         }
 

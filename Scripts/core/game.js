@@ -13,7 +13,8 @@
         { id: "nextButton", src: "./Assets/NextButton.png" },
         { id: "background", src: "./Assets/background.png" },
         { id: "player", src: "./Assets/player.png" },
-        { id: "weapon", src: "./Assets/phantos.png" }
+        { id: "weapon", src: "./Assets/phantos.png" },
+        { id: "testEnemy", src: "./Assets/ship.png" }
     ];
     function Init() {
         console.log("Initialization Start");

@@ -19,7 +19,7 @@ var objects;
         function Player(assetManager) {
             var _this = _super.call(this, assetManager, "player") || this;
             _this.Start();
-            _this.AddEventListeners();
+            _this.Move();
             return _this;
         }
         // Methods
@@ -39,6 +39,7 @@ var objects;
             // this.x = objects.Game.stage.mouseX;
             // this.y = objects.Game.stage.mouseY;
             // this is evetually replaced with keyboard input
+            this.AddEventListeners();
             // Maybe xbox controller
         };
         Player.prototype.CheckBound = function () {

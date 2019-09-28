@@ -26,12 +26,13 @@ var scenes;
             // Initialize our variables
             this.background = new objects.Background(this.assetManager);
             this.player = new objects.Player(this.assetManager);
+            this.testEnemy = new objects.TestEnemy(this.assetManager);
             this.Main();
         };
         PlayScene.prototype.Update = function () {
-            // Update the background here
             this.background.Update();
             this.player.Update();
+            this.testEnemy.Update();
             //this.enemy.Update();
             // this.enemies.forEach(e => {
             //     e.Update();
@@ -42,6 +43,7 @@ var scenes;
             this.addChild(this.background);
             //this.addChild(this.player.weapon);
             this.addChild(this.player);
+            this.addChild(this.testEnemy);
         };
         return PlayScene;
     }(objects.Scene));
