@@ -34,6 +34,11 @@ module scenes {
             //     e.Update();
             //     managers.Collision.Check(this.player, e);
             // });
+
+            if(managers.Collision.Check(this.player,this.testEnemy)){
+                this.removeChild(this.testEnemy);
+                this.testEnemy.visible = false;
+            };
         }
 
         public Main(): void {
