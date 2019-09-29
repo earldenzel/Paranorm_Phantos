@@ -16,13 +16,12 @@ module scenes {
             this.background = new objects.Background(this.assetManager);
 
             this.welcomeLabel = new objects.Label(
-                "Welcome to School!", "60px", "Consolas", "#FFFFFF", 320, 240, true);
+                "PARANORM //// PHANTOS", "40px", "Consolas", "#FFFFFF", 320, 240, true);
 
             this.startButton = new objects.Button(this.assetManager, "nextButton", 320, 300);
             this.Main();
         }
         public Update():void {
-            // this.background.Update();
         }
 
         private startButtonClick():void {

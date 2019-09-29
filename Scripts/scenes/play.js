@@ -27,6 +27,7 @@ var scenes;
             this.background = new objects.Background(this.assetManager);
             this.player = new objects.Player(this.assetManager);
             this.testEnemy = new objects.TestEnemy(this.assetManager);
+            objects.Game.player = this.player;
             this.Main();
         };
         PlayScene.prototype.Update = function () {
@@ -38,7 +39,7 @@ var scenes;
             //     e.Update();
             //     managers.Collision.Check(this.player, e);
             // });
-            if (managers.Collision.Check(this.player, this.testEnemy)) {
+            if (managers.Collision.Check(this.player.weapon, this.testEnemy) && !managers.Collision.Check(this.player, this.testEnemy)) {
                 this.removeChild(this.testEnemy);
                 this.testEnemy.visible = false;
             }
@@ -46,7 +47,7 @@ var scenes;
         };
         PlayScene.prototype.Main = function () {
             this.addChild(this.background);
-            //this.addChild(this.player.weapon);
+            this.addChild(this.player.weapon);
             this.addChild(this.player);
             this.addChild(this.testEnemy);
         };

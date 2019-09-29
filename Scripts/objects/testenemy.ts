@@ -1,5 +1,5 @@
 module objects{
-    export class TestEnemy extends objects.GameObject{
+    export class TestEnemy extends objects.Enemy{
         // variables
         // constructors
         constructor(assetManager:createjs.LoadQueue){

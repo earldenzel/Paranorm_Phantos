@@ -17,7 +17,7 @@ var objects;
         __extends(Weapon, _super);
         // Variables
         // Constructor
-        function Weapon(assetManager, player) {
+        function Weapon(assetManager) {
             var _this = _super.call(this, assetManager, "weapon") || this;
             _this.Start();
             return _this;
@@ -28,15 +28,21 @@ var objects;
         };
         // Updated 60 times per second (60FPS)
         Weapon.prototype.Update = function () {
+            if (!objects.Game.player.playerController.Z) {
+                this.x = objects.Game.player.x;
+                this.y = objects.Game.player.y;
+            }
+            this.CheckBound();
         };
         // Resets the position of the object
         Weapon.prototype.Reset = function () {
         };
-        // Move the object
-        Weapon.prototype.Move = function () {
-        };
         // Collision Detection 
         Weapon.prototype.CheckBound = function () {
+            // top bound - TODO: directions            
+            if (this.y <= objects.Game.player.y - this.halfH) {
+                this.y = objects.Game.player.y - this.halfH;
+            }
         };
         return Weapon;
     }(objects.GameObject));

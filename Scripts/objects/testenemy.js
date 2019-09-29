@@ -36,7 +36,7 @@ var objects;
         TestEnemy.prototype.Move = function () { };
         TestEnemy.prototype.CheckBound = function () { };
         return TestEnemy;
-    }(objects.GameObject));
+    }(objects.Enemy));
     objects.TestEnemy = TestEnemy;
 })(objects || (objects = {}));
 //# sourceMappingURL=testenemy.js.map

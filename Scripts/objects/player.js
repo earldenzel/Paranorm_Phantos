@@ -16,8 +16,11 @@ var objects;
     ;
     var Player = /** @class */ (function (_super) {
         __extends(Player, _super);
+        //Constructor
         function Player(assetManager) {
             var _this = _super.call(this, assetManager, "player") || this;
+            _this.playerMoveSpeed = 10;
+            _this.weapon = new objects.Weapon(assetManager);
             _this.Start();
             _this.Move();
             return _this;
@@ -27,20 +30,17 @@ var objects;
             // set the initial position
             this.y = 700;
             this.x = 320;
-            this.playerController = { "W": false, "A": false, "S": false, "D": false };
+            this.playerController = { "W": false, "A": false, "S": false, "D": false, "Z": false };
         };
         Player.prototype.Update = function () {
             this.Move();
+            this.weapon.Update();
             this.CheckBound(); // <-- Check collisions
         };
         Player.prototype.Reset = function () { };
         Player.prototype.Move = function () {
-            // We reference the stage object and get mouse position
-            // this.x = objects.Game.stage.mouseX;
-            // this.y = objects.Game.stage.mouseY;
-            // this is evetually replaced with keyboard input
+            //current keyboard implementation - will likely change later
             this.AddEventListeners();
-            // Maybe xbox controller
         };
         Player.prototype.CheckBound = function () {
             // right bound
@@ -51,7 +51,16 @@ var objects;
             if (this.x <= this.halfW) {
                 this.x = this.halfW;
             }
+            // top bound
+            if (this.y >= 900 - this.halfH) {
+                this.y = 900 - this.halfH;
+            }
+            // bot bound
+            if (this.y <= this.halfH) {
+                this.y = this.halfH;
+            }
         };
+        //current keyboard implementation
         Player.prototype.AddEventListeners = function () {
             var _this = this;
             document.addEventListener('keydown', function (e) {
@@ -60,7 +69,7 @@ var objects;
                         //console.log('UpKeys: Hold');
                         _this.playerController.W = true;
                         _this.goingUpInterval = setInterval(function () {
-                            _this.y -= 1;
+                            _this.y -= _this.playerMoveSpeed;
                         }, 10);
                     }
                 }
@@ -69,7 +78,7 @@ var objects;
                         // console.log('LeftKeys: Hold');
                         _this.playerController.A = true;
                         _this.goingLeftInterval = setInterval(function () {
-                            _this.x -= 1;
+                            _this.x -= _this.playerMoveSpeed;
                         }, 10);
                     }
                 }
@@ -78,7 +87,7 @@ var objects;
                         // console.log('DownKeys: Hold');
                         _this.playerController.S = true;
                         _this.goingDownInterval = setInterval(function () {
-                            _this.y += 1;
+                            _this.y += _this.playerMoveSpeed;
                         }, 10);
                     }
                 }
@@ -87,7 +96,17 @@ var objects;
                         // console.log('RightKeys: Hold');
                         _this.playerController.D = true;
                         _this.goingRightInterval = setInterval(function () {
-                            _this.x += 1;
+                            _this.x += _this.playerMoveSpeed;
+                        }, 10);
+                    }
+                }
+                if (e.key === "z") {
+                    if (!_this.playerController.Z) {
+                        _this.playerController.Z = true;
+                        console.log("Attack initiated");
+                        _this.attackSequence = setInterval(function () {
+                            _this.weapon.y -= 20;
+                            _this.weapon.x = _this.x;
                         }, 10);
                     }
                 }
@@ -120,6 +139,14 @@ var objects;
                         // console.log('RightKeys: Released');
                         _this.playerController.D = false;
                         clearInterval(_this.goingRightInterval);
+                    }
+                }
+                if (e.key === "z") {
+                    if (_this.playerController.Z) {
+                        // console.log('UpKeys: Released');
+                        _this.playerController.Z = false;
+                        clearInterval(_this.attackSequence);
+                        console.log("Attack stopped");
                     }
                 }
             });

@@ -1,14 +1,20 @@
 module objects {
     export interface Controller<T> { [key: string]: T };
     export class Player extends objects.GameObject {
-        private playerController: Controller<boolean>;
+        //Variables
+        public playerController: Controller<boolean>;
         private goingUpInterval: any;
         private goingDownInterval: any;
         private goingLeftInterval: any;
         private goingRightInterval: any;
+        private attackSequence: any;
+        private playerMoveSpeed: number = 10;
+        public weapon: objects.Weapon;
 
+        //Constructor
         constructor(assetManager: createjs.LoadQueue) {
             super(assetManager, "player");
+            this.weapon = new objects.Weapon(assetManager);
             this.Start();
             this.Move();
         }
@@ -18,23 +24,20 @@ module objects {
             // set the initial position
             this.y = 700;
             this.x = 320;
-
-            this.playerController = { "W": false, "A": false, "S": false, "D": false };
+            this.playerController = { "W": false, "A": false, "S": false, "D": false, "Z": false };
         }
-
+        
         public Update(): void {
             this.Move();
+            this.weapon.Update();
             this.CheckBound(); // <-- Check collisions
         }
-        public Reset(): void { }
-        public Move(): void {
-            // We reference the stage object and get mouse position
-            // this.x = objects.Game.stage.mouseX;
-            // this.y = objects.Game.stage.mouseY;
 
-            // this is evetually replaced with keyboard input
+        public Reset(): void { }
+
+        public Move(): void {
+            //current keyboard implementation - will likely change later
             this.AddEventListeners();
-            // Maybe xbox controller
         }
 
         public CheckBound(): void {
@@ -46,8 +49,17 @@ module objects {
             if (this.x <= this.halfW) {
                 this.x = this.halfW;
             }
+            // top bound
+            if (this.y >= 900 - this.halfH) {
+                this.y = 900 - this.halfH;
+            }
+            // bot bound
+            if (this.y <= this.halfH) {
+                this.y = this.halfH;
+            }
         }
 
+        //current keyboard implementation
         private AddEventListeners(): void {
             document.addEventListener('keydown', (e: KeyboardEvent) => {
                 if (e.key === "w" || e.key === "ArrowUp") {
@@ -55,7 +67,7 @@ module objects {
                         //console.log('UpKeys: Hold');
                         this.playerController.W = true;
                         this.goingUpInterval = setInterval(() => {
-                            this.y -= 1;
+                            this.y -= this.playerMoveSpeed;
                         }, 10);
                     }
                 }
@@ -64,7 +76,7 @@ module objects {
                         // console.log('LeftKeys: Hold');
                         this.playerController.A = true;
                         this.goingLeftInterval = setInterval(() => {
-                            this.x -= 1;
+                            this.x -= this.playerMoveSpeed;
                         }, 10);
                     }
                 }
@@ -73,7 +85,7 @@ module objects {
                         // console.log('DownKeys: Hold');
                         this.playerController.S = true;
                         this.goingDownInterval = setInterval(() => {
-                            this.y += 1;
+                            this.y += this.playerMoveSpeed;
                         }, 10);
                         
                     }
@@ -83,7 +95,17 @@ module objects {
                         // console.log('RightKeys: Hold');
                         this.playerController.D = true;
                         this.goingRightInterval = setInterval(() => {
-                            this.x += 1;
+                            this.x += this.playerMoveSpeed;
+                        }, 10);
+                    }
+                }                
+                if (e.key === "z") {
+                    if (!this.playerController.Z) {
+                        this.playerController.Z = true;
+                        console.log("Attack initiated");
+                        this.attackSequence = setInterval(() => {
+                            this.weapon.y -= 20;
+                            this.weapon.x = this.x;
                         }, 10);
                     }
                 }
@@ -116,6 +138,14 @@ module objects {
                         // console.log('RightKeys: Released');
                         this.playerController.D = false;
                         clearInterval(this.goingRightInterval);
+                    }
+                }
+                if (e.key === "z") {
+                    if (this.playerController.Z) {
+                        // console.log('UpKeys: Released');
+                        this.playerController.Z = false;
+                        clearInterval(this.attackSequence);
+                        console.log("Attack stopped");
                     }
                 }
             });
