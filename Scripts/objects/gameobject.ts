@@ -9,6 +9,9 @@ module objects {
         public halfW: number;   // Half-width; Useful for collision detection
         public halfH: number;   // Half-height
         public isColliding: boolean;
+        public isTakingDamage: boolean;
+        public hp: number;
+        public attackPower: number;
 
         // Constructor
         constructor(assetManager:createjs.LoadQueue, imageString:string) {
@@ -31,6 +34,7 @@ module objects {
             this.regY = this.halfH;
 
             this.isColliding = false;
+            this.isTakingDamage = false;
         }
 
         public Start():void {}
@@ -38,5 +42,13 @@ module objects {
         public Reset():void {}
         public Move():void {}
         public CheckBound():void {}
+
+        public GetDamage(attacker:objects.GameObject){
+            if (!this.isTakingDamage){
+                this.isTakingDamage = true;
+                this.hp -= attacker.attackPower;
+                console.log(attacker.name + " dealt " + attacker.attackPower + " damage to " + this.name);
+            }
+        }
     }
 }

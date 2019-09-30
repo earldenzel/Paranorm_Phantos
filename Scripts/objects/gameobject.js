@@ -33,12 +33,20 @@ var objects;
             this.regX = this.halfW;
             this.regY = this.halfH;
             this.isColliding = false;
+            this.isTakingDamage = false;
         };
         GameObject.prototype.Start = function () { };
         GameObject.prototype.Update = function () { };
         GameObject.prototype.Reset = function () { };
         GameObject.prototype.Move = function () { };
         GameObject.prototype.CheckBound = function () { };
+        GameObject.prototype.GetDamage = function (attacker) {
+            if (!this.isTakingDamage) {
+                this.isTakingDamage = true;
+                this.hp -= attacker.attackPower;
+                console.log(attacker.name + " dealt " + attacker.attackPower + " damage to " + this.name);
+            }
+        };
         return GameObject;
     }(createjs.Bitmap));
     objects.GameObject = GameObject;

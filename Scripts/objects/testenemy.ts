@@ -5,6 +5,9 @@ module objects{
         constructor(assetManager:createjs.LoadQueue){
             super(assetManager,"testEnemy");
             this.Start();
+            this.hp = 2;
+            this.isStunned = false;
+            this.attackPower = 2;
         }
         // methods
 
@@ -14,6 +17,7 @@ module objects{
             this.x = 320;
         }
         public Update(): void {
+            super.Update();
             this.Move();
             this.CheckBound(); // <-- Check collisions
         }

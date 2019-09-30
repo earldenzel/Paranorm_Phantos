@@ -23,6 +23,8 @@ var objects;
             _this.weapon = new objects.Weapon(assetManager);
             _this.Start();
             _this.Move();
+            _this.hp = 5;
+            _this.attackPower = 1;
             return _this;
         }
         // Methods

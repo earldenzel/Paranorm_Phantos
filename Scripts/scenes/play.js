@@ -39,11 +39,20 @@ var scenes;
             //     e.Update();
             //     managers.Collision.Check(this.player, e);
             // });
-            if (managers.Collision.Check(this.player.weapon, this.testEnemy) && !managers.Collision.Check(this.player, this.testEnemy)) {
-                this.removeChild(this.testEnemy);
-                this.testEnemy.visible = false;
+            if (managers.Collision.Check(this.player, this.testEnemy)) {
+                this.player.GetDamage(this.testEnemy);
             }
-            ;
+            else {
+                this.player.isTakingDamage = false;
+            }
+            if (managers.Collision.Check(this.player.weapon, this.testEnemy) && !managers.Collision.Check(this.player, this.testEnemy)) {
+                this.testEnemy.GetDamage(this.player);
+            }
+            else {
+                this.testEnemy.isTakingDamage = false;
+            }
+            //this.removeChild(this.testEnemy);
+            //this.testEnemy.visible = false;
         };
         PlayScene.prototype.Main = function () {
             this.addChild(this.background);

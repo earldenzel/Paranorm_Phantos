@@ -20,6 +20,9 @@ var objects;
         function TestEnemy(assetManager) {
             var _this = _super.call(this, assetManager, "testEnemy") || this;
             _this.Start();
+            _this.hp = 2;
+            _this.isStunned = false;
+            _this.attackPower = 2;
             return _this;
         }
         // methods
@@ -29,6 +32,7 @@ var objects;
             this.x = 320;
         };
         TestEnemy.prototype.Update = function () {
+            _super.prototype.Update.call(this);
             this.Move();
             this.CheckBound(); // <-- Check collisions
         };

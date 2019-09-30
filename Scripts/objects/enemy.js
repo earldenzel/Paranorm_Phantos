@@ -25,6 +25,10 @@ var objects;
         Enemy.prototype.Start = function () {
         };
         Enemy.prototype.Update = function () {
+            if (this.hp <= 0) {
+                this.isStunned = true;
+                console.log(this.name + " is stunned!");
+            }
         };
         Enemy.prototype.Reset = function () {
         };

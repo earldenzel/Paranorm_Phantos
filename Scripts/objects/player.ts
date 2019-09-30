@@ -17,6 +17,8 @@ module objects {
             this.weapon = new objects.Weapon(assetManager);
             this.Start();
             this.Move();
+            this.hp = 5;
+            this.attackPower = 1;
         }
 
         // Methods
@@ -25,6 +27,7 @@ module objects {
             this.y = 700;
             this.x = 320;
             this.playerController = { "W": false, "A": false, "S": false, "D": false, "Z": false };
+
         }
         
         public Update(): void {
