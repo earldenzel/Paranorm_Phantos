@@ -48,9 +48,6 @@ module scenes {
             else{
                 this.testEnemy.isTakingDamage = false;
             }
-            
-            //this.removeChild(this.testEnemy);
-            //this.testEnemy.visible = false;
         }
 
         public Main(): void {

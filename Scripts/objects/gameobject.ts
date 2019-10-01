@@ -44,6 +44,7 @@ module objects {
         public CheckBound():void {}
 
         public GetDamage(attacker:objects.GameObject){
+            //normal hp reduction
             if (!this.isTakingDamage){
                 this.isTakingDamage = true;
                 this.hp -= attacker.attackPower;

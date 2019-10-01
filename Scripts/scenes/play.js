@@ -51,8 +51,6 @@ var scenes;
             else {
                 this.testEnemy.isTakingDamage = false;
             }
-            //this.removeChild(this.testEnemy);
-            //this.testEnemy.visible = false;
         };
         PlayScene.prototype.Main = function () {
             this.addChild(this.background);

@@ -41,6 +41,7 @@ var objects;
         GameObject.prototype.Move = function () { };
         GameObject.prototype.CheckBound = function () { };
         GameObject.prototype.GetDamage = function (attacker) {
+            //normal hp reduction
             if (!this.isTakingDamage) {
                 this.isTakingDamage = true;
                 this.hp -= attacker.attackPower;

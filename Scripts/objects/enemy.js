@@ -27,7 +27,9 @@ var objects;
         Enemy.prototype.Update = function () {
             if (this.hp <= 0) {
                 this.isStunned = true;
-                console.log(this.name + " is stunned!");
+                if (this.visible) {
+                    console.log(this.name + " is stunned!");
+                }
             }
         };
         Enemy.prototype.Reset = function () {
@@ -35,6 +37,17 @@ var objects;
         Enemy.prototype.Move = function () {
         };
         Enemy.prototype.CheckBound = function () {
+        };
+        Enemy.prototype.GetDamage = function (attacker) {
+            //enemy state = stunned
+            if (!this.isTakingDamage && this.isStunned) {
+                console.log(attacker.name + " ended " + this.name + "'s life.");
+                objects.Game.stage.removeChild(attacker);
+                this.visible = false;
+            }
+            else {
+                _super.prototype.GetDamage.call(this, attacker);
+            }
         };
         return Enemy;
     }(objects.GameObject));

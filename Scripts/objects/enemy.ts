@@ -16,7 +16,9 @@ module objects {
         public Update(): void {            
             if (this.hp <=0){
                 this.isStunned = true;
-                console.log(this.name + " is stunned!");
+                if (this.visible){
+                    console.log(this.name + " is stunned!");
+                }
             }
         }
         public Reset(): void { 
@@ -26,6 +28,18 @@ module objects {
         }
 
         public CheckBound(): void {
+        }
+        
+        public GetDamage(attacker:objects.GameObject){
+            //enemy state = stunned
+            if (!this.isTakingDamage && this.isStunned){
+                console.log(attacker.name + " ended " + this.name + "'s life.");
+                objects.Game.stage.removeChild(attacker);
+                this.visible = false;                
+            }
+            else{
+                super.GetDamage(attacker);
+            }
         }
     }
 }

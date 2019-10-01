@@ -62,6 +62,17 @@ var objects;
                 this.y = this.halfH;
             }
         };
+        Player.prototype.GetDamage = function (attacker) {
+            _super.prototype.GetDamage.call(this, attacker);
+            if (this.hp < 0) {
+                console.log(attacker.name + " erased " + this.name + "'s existence from this world.");
+                objects.Game.stage.removeChild(this.weapon);
+                objects.Game.stage.removeChild(this);
+                this.weapon.visible = false;
+                this.visible = false;
+                //insert gameover transition scene here
+            }
+        };
         //current keyboard implementation
         Player.prototype.AddEventListeners = function () {
             var _this = this;

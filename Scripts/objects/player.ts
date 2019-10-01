@@ -62,6 +62,19 @@ module objects {
             }
         }
 
+        public GetDamage(attacker:objects.GameObject){
+            super.GetDamage(attacker);
+            if (this.hp < 0){
+                console.log(attacker.name + " erased " + this.name + "'s existence from this world.");
+                objects.Game.stage.removeChild(this.weapon);
+                objects.Game.stage.removeChild(this);
+                this.weapon.visible = false;
+                this.visible = false;
+
+                //insert gameover transition scene here
+            }
+        }
+
         //current keyboard implementation
         private AddEventListeners(): void {
             document.addEventListener('keydown', (e: KeyboardEvent) => {
