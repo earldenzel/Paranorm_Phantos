@@ -1,0 +1,30 @@
+[
+    {
+        "id": "backButton",
+        "src": "./Assets/Old/BackButton.png"
+    },
+    {
+        "id": "nextButton",
+        "src": "./Assets/Old/NextButton.png"
+    },
+    {
+        "id": "background",
+        "src": "./Assets/Old/background.png"
+    },
+    {
+        "id": "title_background",
+        "src": "./Assets/_Background/_TestStage/Placeholder_BlackBackground.png"
+    },
+    {
+        "id": "player",
+        "src": "./Assets/Old/player.png"
+    },
+    {
+        "id": "weapon",
+        "src": "./Assets/Old/phantos.png"
+    },
+    {
+        "id": "testEnemy",
+        "src": "./Assets/Old/ship.png"
+    }
+]

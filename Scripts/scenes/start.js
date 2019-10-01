@@ -23,9 +23,11 @@ var scenes;
         }
         StartScene.prototype.Start = function () {
             // Initialize our objects for this scene
-            this.background = new objects.Background(this.assetManager);
-            this.welcomeLabel = new objects.Label("PARANORM //// PHANTOS", "40px", "Consolas", "#FFFFFF", 320, 240, true);
-            this.startButton = new objects.Button(this.assetManager, "nextButton", 320, 300);
+            this.background = new objects.TitleBackground(this.assetManager);
+            //this.welcomeLabel = new objects.Label(
+            //    "PARANORM //// PHANTOS", "40px", "Consolas", "#FFFFFF", 320, 240, true);
+            this.title = new objects.TitleUI(this.assetManager, 90, 240);
+            this.startButton = new objects.Button(this.assetManager, "nextButton", 320, 500);
             this.Main();
         };
         StartScene.prototype.Update = function () {
@@ -37,7 +39,7 @@ var scenes;
         StartScene.prototype.Main = function () {
             // Add items to our scene
             this.addChild(this.background);
-            this.addChild(this.welcomeLabel);
+            this.addChild(this.title);
             this.addChild(this.startButton);
             this.startButton.on("click", this.startButtonClick);
         };

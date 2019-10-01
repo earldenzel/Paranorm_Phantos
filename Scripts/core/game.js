@@ -14,7 +14,9 @@
         { id: "background", src: "./Assets/Old/background.png" },
         { id: "player", src: "./Assets/Old/player.png" },
         { id: "weapon", src: "./Assets/Old/phantos.png" },
-        { id: "testEnemy", src: "./Assets/Old/ship.png" }
+        { id: "testEnemy", src: "./Assets/Old/ship.png" },
+        { id: "title_background", src: "./Assets/_Background/_TestStage/Placeholder_BlackBackground.png" },
+        { id: "title_ui", src: "./Assets/_UI/Title/Title_1.png" }
     ];
     function Init() {
         console.log("Initialization Start");

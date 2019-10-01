@@ -1,8 +1,9 @@
 module scenes {
     export class StartScene extends objects.Scene {
         // Variables
-        private background: objects.Background;
-        private welcomeLabel: objects.Label;
+        private background: objects.TitleBackground;
+        private title: objects.TitleUI;
+        //private welcomeLabel: objects.Label;
         private startButton: objects.Button;
 
         // Constructor
@@ -13,12 +14,13 @@ module scenes {
 
         public Start():void {
             // Initialize our objects for this scene
-            this.background = new objects.Background(this.assetManager);
+            this.background = new objects.TitleBackground(this.assetManager);
 
-            this.welcomeLabel = new objects.Label(
-                "PARANORM //// PHANTOS", "40px", "Consolas", "#FFFFFF", 320, 240, true);
+            //this.welcomeLabel = new objects.Label(
+            //    "PARANORM //// PHANTOS", "40px", "Consolas", "#FFFFFF", 320, 240, true);
 
-            this.startButton = new objects.Button(this.assetManager, "nextButton", 320, 300);
+            this.title = new objects.TitleUI(this.assetManager,90,240);
+            this.startButton = new objects.Button(this.assetManager, "nextButton", 320, 500);
             this.Main();
         }
         public Update():void {
@@ -32,7 +34,7 @@ module scenes {
         public Main():void {
             // Add items to our scene
             this.addChild(this.background);
-            this.addChild(this.welcomeLabel);
+            this.addChild(this.title);
             this.addChild(this.startButton);
             this.startButton.on("click", this.startButtonClick);
         }
