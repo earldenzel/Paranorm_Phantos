@@ -115,7 +115,7 @@ module objects {
                         }, 10);
                     }
                 }                
-                if (e.key === "z") {
+                if (e.key === "z" || e.key === "j") {
                     if (!this.playerController.Z) {
                         this.playerController.Z = true;
                         console.log("Attack initiated");
@@ -156,7 +156,7 @@ module objects {
                         clearInterval(this.goingRightInterval);
                     }
                 }
-                if (e.key === "z") {
+                if (e.key === "z" || e.key === "j") {
                     if (this.playerController.Z) {
                         // console.log('UpKeys: Released');
                         this.playerController.Z = false;

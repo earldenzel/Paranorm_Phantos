@@ -9,12 +9,12 @@
     var currentScene;
     var currentState;
     assetManifest = [
-        { id: "backButton", src: "./Assets/BackButton.png" },
-        { id: "nextButton", src: "./Assets/NextButton.png" },
-        { id: "background", src: "./Assets/background.png" },
-        { id: "player", src: "./Assets/player.png" },
-        { id: "weapon", src: "./Assets/phantos.png" },
-        { id: "testEnemy", src: "./Assets/ship.png" }
+        { id: "backButton", src: "./Assets/Old/BackButton.png" },
+        { id: "nextButton", src: "./Assets/Old/NextButton.png" },
+        { id: "background", src: "./Assets/Old/background.png" },
+        { id: "player", src: "./Assets/Old/player.png" },
+        { id: "weapon", src: "./Assets/Old/phantos.png" },
+        { id: "testEnemy", src: "./Assets/Old/ship.png" }
     ];
     function Init() {
         console.log("Initialization Start");

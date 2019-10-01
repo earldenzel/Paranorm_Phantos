@@ -113,7 +113,7 @@ var objects;
                         }, 10);
                     }
                 }
-                if (e.key === "z") {
+                if (e.key === "z" || e.key === "j") {
                     if (!_this.playerController.Z) {
                         _this.playerController.Z = true;
                         console.log("Attack initiated");
@@ -154,7 +154,7 @@ var objects;
                         clearInterval(_this.goingRightInterval);
                     }
                 }
-                if (e.key === "z") {
+                if (e.key === "z" || e.key === "j") {
                     if (_this.playerController.Z) {
                         // console.log('UpKeys: Released');
                         _this.playerController.Z = false;
