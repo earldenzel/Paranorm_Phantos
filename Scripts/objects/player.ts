@@ -8,12 +8,12 @@ module objects {
         private goingLeftInterval: any;
         private goingRightInterval: any;
         private attackSequence: any;
-        private playerMoveSpeed: number = 10;
+        private playerMoveSpeed: number = 2;
         public weapon: objects.Weapon;
 
         //Constructor
         constructor(assetManager: createjs.LoadQueue) {
-            super(assetManager, "p_walk1");
+            super(assetManager, "player_p_walk1");
             this.weapon = new objects.Weapon(assetManager);
             this.Start();
             this.Move();

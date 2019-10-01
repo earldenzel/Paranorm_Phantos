@@ -3,7 +3,7 @@ module objects {
         // Variables
         // Constructor
         constructor(assetManager:createjs.LoadQueue) {
-            super(assetManager, "weapon");
+            super(assetManager, "item_p_back2");
             this.Start();
         }
         // Methods

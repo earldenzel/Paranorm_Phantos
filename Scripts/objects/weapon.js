@@ -18,7 +18,7 @@ var objects;
         // Variables
         // Constructor
         function Weapon(assetManager) {
-            var _this = _super.call(this, assetManager, "weapon") || this;
+            var _this = _super.call(this, assetManager, "item_p_back2") || this;
             _this.Start();
             return _this;
         }

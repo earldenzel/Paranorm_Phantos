@@ -18,8 +18,8 @@ var objects;
         __extends(Player, _super);
         //Constructor
         function Player(assetManager) {
-            var _this = _super.call(this, assetManager, "p_walk1") || this;
-            _this.playerMoveSpeed = 10;
+            var _this = _super.call(this, assetManager, "player_p_walk1") || this;
+            _this.playerMoveSpeed = 2;
             _this.weapon = new objects.Weapon(assetManager);
             _this.Start();
             _this.Move();
