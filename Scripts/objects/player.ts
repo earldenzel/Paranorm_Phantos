@@ -13,7 +13,7 @@ module objects {
 
         //Constructor
         constructor(assetManager: createjs.LoadQueue) {
-            super(assetManager, "player");
+            super(assetManager, "p_walk1");
             this.weapon = new objects.Weapon(assetManager);
             this.Start();
             this.Move();

@@ -1,28 +1,30 @@
 // Immediate Invoked Anonymous Function
 
-(function() {
+(function () {
 
     // Global Game Variables
     let canvas = document.getElementById("canvas");
-    let stage:createjs.Stage;
+    let stage: createjs.Stage;
 
-    let assetManager:createjs.LoadQueue;
+    let assetManager: createjs.LoadQueue;
     let assetManifest: any[];
 
     // Store current scene and state information
-    let currentScene:objects.Scene;
-    let currentState:number
+    let currentScene: objects.Scene;
+    let currentState: number
 
     assetManifest = [
-        {id: "backButton", src:"./Assets/Old/BackButton.png"},
-        {id: "nextButton", src:"./Assets/Old/NextButton.png"},
-        {id: "background", src:"./Assets/Old/background.png"},     
-        {id: "player", src:"./Assets/Old/player.png"},
-        {id: "weapon", src:"./Assets/Old/phantos.png"},
-        {id:"testEnemy", src:"./Assets/Old/ship.png"},
+        { id: "backButton", src: "./Assets/Old/BackButton.png" },
+        { id: "nextButton", src: "./Assets/Old/NextButton.png" },
+        { id: "background", src: "./Assets/Old/background.png" },
+        { id: "player", src: "./Assets/Old/player.png" },
+        { id: "weapon", src: "./Assets/Old/phantos.png" },
+        { id: "testEnemy", src: "./Assets/Old/ship.png" },
 
-        {id: "title_background", src:"./Assets/_Background/_TestStage/Placeholder_BlackBackground.png"},
-        {id: "title_ui", src:"./Assets/_UI/Title/Title_1.png"}
+        { id: "title_background", src: "./Assets/_Background/_TestStage/Placeholder_BlackBackground.png" },
+        { id: "title_ui", src: "./Assets/_UI/Title/Title_1.png" },
+
+        { id: "p_walk1", src: "./Assets/_Player/Phoebe/Phoebe_Walk1.png" }
 
     ];
 
@@ -44,7 +46,7 @@
 
         stage.enableMouseOver(20);
         // Freqeuncy of checks. Computationally expensive. Turn on in menus, Turn off in game
-        
+
         createjs.Ticker.framerate = 60; // 60 FPS
         createjs.Ticker.on("tick", Update);
 
@@ -53,14 +55,14 @@
 
         // Set up default game state
         objects.Game.currentScene = config.Scene.START;
-        currentState = config.Scene.START; 
+        currentState = config.Scene.START;
 
         Main();
     }
 
     function Update() {
         // Has my state changed since the last check?
-        if(currentState != objects.Game.currentScene) {
+        if (currentState != objects.Game.currentScene) {
             console.log("Changing scenes to" + objects.Game.currentScene);
             Main();
         }
@@ -70,7 +72,7 @@
         stage.update();
     }
 
-    function clickableButtonMouseClick():void {
+    function clickableButtonMouseClick(): void {
         console.log("AHHHHHHH");
     }
 
@@ -78,22 +80,22 @@
         console.log("Game Start...");
 
         // Finite State Machine
-        switch(objects.Game.currentScene) {
+        switch (objects.Game.currentScene) {
             case config.Scene.START:
                 stage.removeAllChildren();
                 currentScene = new scenes.StartScene(assetManager);
                 stage.addChild(currentScene);
-            break;
+                break;
             case config.Scene.GAME:
                 stage.removeAllChildren();
                 currentScene = new scenes.PlayScene(assetManager);
                 stage.addChild(currentScene);
-            break;
+                break;
             case config.Scene.OVER:
                 stage.removeAllChildren();
                 currentScene = new scenes.GameOverScene(assetManager);
                 stage.addChild(currentScene);
-            break;
+                break;
         }
 
         currentState = objects.Game.currentScene;

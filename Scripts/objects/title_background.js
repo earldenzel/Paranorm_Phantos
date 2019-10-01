@@ -25,8 +25,6 @@ var objects;
         // Functions 
         // Initializing our variables with default values
         TitleBackground.prototype.Start = function () {
-            this.scaleX = 2.3;
-            this.scaleY = 2.3;
         };
         // Updated 60 times per second (60FPS)
         TitleBackground.prototype.Update = function () {

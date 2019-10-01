@@ -10,8 +10,6 @@ module objects {
         // Functions 
         // Initializing our variables with default values
         public Start():void {
-            this.scaleX = 2.3;
-            this.scaleY = 2.3;
         }
         // Updated 60 times per second (60FPS)
         public Update():void {

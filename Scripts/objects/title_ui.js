@@ -28,8 +28,6 @@ var objects;
         }
         // Methods
         TitleUI.prototype.Start = function () {
-            this.scaleX = 2;
-            this.scaleY = 2;
         };
         return TitleUI;
     }(createjs.Bitmap));

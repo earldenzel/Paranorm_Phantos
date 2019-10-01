@@ -16,7 +16,8 @@
         { id: "weapon", src: "./Assets/Old/phantos.png" },
         { id: "testEnemy", src: "./Assets/Old/ship.png" },
         { id: "title_background", src: "./Assets/_Background/_TestStage/Placeholder_BlackBackground.png" },
-        { id: "title_ui", src: "./Assets/_UI/Title/Title_1.png" }
+        { id: "title_ui", src: "./Assets/_UI/Title/Title_1.png" },
+        { id: "p_walk1", src: "./Assets/_Player/Phoebe/Phoebe_Walk1.png" }
     ];
     function Init() {
         console.log("Initialization Start");

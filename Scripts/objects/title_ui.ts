@@ -11,8 +11,6 @@ module objects{
         }
         // Methods
         public Start():void{
-            this.scaleX = 2;
-            this.scaleY = 2;
         }
     }
 }

@@ -24,6 +24,11 @@ module scenes {
             this.Main();
         }
         public Update():void {
+            document.addEventListener('keydown',(e: KeyboardEvent)=>{
+                if(e.key === "Enter"){
+                    this.startButtonClick();
+                }
+            });
         }
 
         private startButtonClick():void {

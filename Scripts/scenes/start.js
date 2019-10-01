@@ -31,6 +31,12 @@ var scenes;
             this.Main();
         };
         StartScene.prototype.Update = function () {
+            var _this = this;
+            document.addEventListener('keydown', function (e) {
+                if (e.key === "Enter") {
+                    _this.startButtonClick();
+                }
+            });
         };
         StartScene.prototype.startButtonClick = function () {
             // Change our game state from START to GAME
