@@ -51,6 +51,9 @@ var scenes;
             else {
                 this.testEnemy.isTakingDamage = false;
             }
+            if (!this.player.visible && this.player.hp <= 0) {
+                objects.Game.currentScene = config.Scene.OVER;
+            }
         };
         PlayScene.prototype.Main = function () {
             this.addChild(this.background);

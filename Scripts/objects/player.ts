@@ -13,7 +13,7 @@ module objects {
 
         //Constructor
         constructor(assetManager: createjs.LoadQueue) {
-            super(assetManager, "player_p_walk1");
+            super(assetManager, "player_p_walk7");
             this.weapon = new objects.Weapon(assetManager);
             this.Start();
             this.Move();
@@ -70,8 +70,6 @@ module objects {
                 objects.Game.stage.removeChild(this);
                 this.weapon.visible = false;
                 this.visible = false;
-
-                //insert gameover transition scene here
             }
         }
 
@@ -119,10 +117,11 @@ module objects {
                     if (!this.playerController.Z) {
                         this.playerController.Z = true;
                         console.log("Attack initiated");
+                        this.weapon.visible = true;
                         this.attackSequence = setInterval(() => {
                             this.weapon.y -= 20;
                             this.weapon.x = this.x;
-                        }, 10);
+                        }, 50);
                     }
                 }
             });
@@ -161,6 +160,7 @@ module objects {
                         // console.log('UpKeys: Released');
                         this.playerController.Z = false;
                         clearInterval(this.attackSequence);
+                        this.weapon.visible = false;
                         console.log("Attack stopped");
                     }
                 }

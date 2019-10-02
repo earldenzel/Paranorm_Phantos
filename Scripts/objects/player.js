@@ -18,7 +18,7 @@ var objects;
         __extends(Player, _super);
         //Constructor
         function Player(assetManager) {
-            var _this = _super.call(this, assetManager, "player_p_walk1") || this;
+            var _this = _super.call(this, assetManager, "player_p_walk7") || this;
             _this.playerMoveSpeed = 2;
             _this.weapon = new objects.Weapon(assetManager);
             _this.Start();
@@ -70,7 +70,6 @@ var objects;
                 objects.Game.stage.removeChild(this);
                 this.weapon.visible = false;
                 this.visible = false;
-                //insert gameover transition scene here
             }
         };
         //current keyboard implementation
@@ -117,10 +116,11 @@ var objects;
                     if (!_this.playerController.Z) {
                         _this.playerController.Z = true;
                         console.log("Attack initiated");
+                        _this.weapon.visible = true;
                         _this.attackSequence = setInterval(function () {
                             _this.weapon.y -= 20;
                             _this.weapon.x = _this.x;
-                        }, 10);
+                        }, 50);
                     }
                 }
             });
@@ -159,6 +159,7 @@ var objects;
                         // console.log('UpKeys: Released');
                         _this.playerController.Z = false;
                         clearInterval(_this.attackSequence);
+                        _this.weapon.visible = false;
                         console.log("Attack stopped");
                     }
                 }

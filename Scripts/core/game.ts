@@ -30,7 +30,7 @@
         { id: "player_p_walk7", src: "./Assets/_Player/Phoebe/Phoebe_Walk7.png" },
 
 
-        { id: "item_p_back2", src: "./Assets/_Items/Phantos/Phantos_Back2.png" }
+        { id: "item_p_front2", src: "./Assets/_Items/Phantos/Phantos_Front2.png" }
 
     ];
 

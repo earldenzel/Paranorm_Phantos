@@ -18,19 +18,22 @@ var objects;
         // Variables
         // Constructor
         function Weapon(assetManager) {
-            var _this = _super.call(this, assetManager, "item_p_back2") || this;
+            var _this = _super.call(this, assetManager, "item_p_front2") || this;
             _this.Start();
             return _this;
         }
         // Methods
         // Initializing our variables with default values
         Weapon.prototype.Start = function () {
+            this.rotation = 180;
+            this.visible = false;
         };
         // Updated 60 times per second (60FPS)
         Weapon.prototype.Update = function () {
             if (!objects.Game.player.playerController.Z) {
+                //phoebe looking up right now only
                 this.x = objects.Game.player.x;
-                this.y = objects.Game.player.y;
+                this.y = objects.Game.player.y - objects.Game.player.halfH;
             }
             this.CheckBound();
         };
@@ -40,8 +43,8 @@ var objects;
         // Collision Detection 
         Weapon.prototype.CheckBound = function () {
             // top bound - TODO: directions            
-            if (this.y <= objects.Game.player.y - this.halfH) {
-                this.y = objects.Game.player.y - this.halfH;
+            if (this.y <= objects.Game.player.y - objects.Game.player.height + objects.Game.player.halfH) {
+                this.y = objects.Game.player.y - objects.Game.player.height + objects.Game.player.halfH;
             }
         };
         return Weapon;
