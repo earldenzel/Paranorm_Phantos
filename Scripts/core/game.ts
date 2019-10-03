@@ -30,7 +30,17 @@
         { id: "player_p_walk7", src: "./Assets/_Player/Phoebe/Phoebe_Walk7.png" },
 
 
-        { id: "item_p_front2", src: "./Assets/_Items/Phantos/Phantos_Front2.png" }
+        { id: "item_p_front2", src: "./Assets/_Items/Phantos/Phantos_Front2.png" },
+
+        { id: "enemy_test", src: "./Assets/_Enemies/Test_Enemy.png" },
+
+        { id: "background_c_hori", src: "./Assets/_Background/_TestStage/Placeholder_CEILING-Horizontal.png" },
+        { id: "background_c_vert", src: "./Assets/_Background/_TestStage/Placeholder_CEILING-Vertical.png" },
+        { id: "background_d_vertT", src: "./Assets/_Background/_TestStage/Placeholder_DOOR-VerticalTop.png" },
+        { id: "background_d_vert", src: "./Assets/_Background/_TestStage/Placeholder_DOOR-Vertical.png" },
+        { id: "background_f_all",  src: "./Assets/_Background/_TestStage/Placeholder_FLOOR-All.png" },
+        { id: "background_w_hori", src: "./Assets/_Background/_TestStage/Placeholder_WALL-Horizontal.png" },
+        { id: "background_w_vert", src: "./Assets/_Background/_TestStage/Placeholder_WALL-Vertical.png" }
 
     ];
 

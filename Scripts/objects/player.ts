@@ -45,20 +45,24 @@ module objects {
 
         public CheckBound(): void {
             // right bound
-            if (this.x >= 640 - this.halfW) {
-                this.x = 640 - this.halfW;
+            if (this.x >= 565 - this.halfW) {
+                this.x = 565 - this.halfW;
             }
             // left bound
-            if (this.x <= this.halfW) {
-                this.x = this.halfW;
+            if (this.x <= this.halfW + 80) {
+                console.log(this.y);
+                this.x = this.halfW + 80;
+            }
+            // bottom bound
+            if (this.y >= 765 - this.halfH) {
+                this.y = 765 - this.halfH;
             }
             // top bound
-            if (this.y >= 900 - this.halfH) {
-                this.y = 900 - this.halfH;
-            }
-            // bot bound
-            if (this.y <= this.halfH) {
-                this.y = this.halfH;
+            if (this.y <= this.halfH + 40) {
+                console.log(this.x);
+                if(this.x < 276 || this.x > 372){
+                    this.y = this.halfH + 40;
+                }
             }
         }
 
@@ -116,11 +120,18 @@ module objects {
                 if (e.key === "z" || e.key === "j") {
                     if (!this.playerController.Z) {
                         this.playerController.Z = true;
+                        let attackTimer = 0;
                         console.log("Attack initiated");
                         this.weapon.visible = true;
                         this.attackSequence = setInterval(() => {
+                            attackTimer++;
+                            console.log(attackTimer);
                             this.weapon.y -= 20;
                             this.weapon.x = this.x;
+                            if(attackTimer > 15){
+                                clearInterval(this.attackSequence);
+                                this.weapon.visible = false;
+                            }
                         }, 50);
                     }
                 }

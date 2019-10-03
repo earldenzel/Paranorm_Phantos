@@ -46,20 +46,24 @@ var objects;
         };
         Player.prototype.CheckBound = function () {
             // right bound
-            if (this.x >= 640 - this.halfW) {
-                this.x = 640 - this.halfW;
+            if (this.x >= 565 - this.halfW) {
+                this.x = 565 - this.halfW;
             }
             // left bound
-            if (this.x <= this.halfW) {
-                this.x = this.halfW;
+            if (this.x <= this.halfW + 80) {
+                console.log(this.y);
+                this.x = this.halfW + 80;
+            }
+            // bottom bound
+            if (this.y >= 765 - this.halfH) {
+                this.y = 765 - this.halfH;
             }
             // top bound
-            if (this.y >= 900 - this.halfH) {
-                this.y = 900 - this.halfH;
-            }
-            // bot bound
-            if (this.y <= this.halfH) {
-                this.y = this.halfH;
+            if (this.y <= this.halfH + 40) {
+                console.log(this.x);
+                if (this.x < 276 || this.x > 372) {
+                    this.y = this.halfH + 40;
+                }
             }
         };
         Player.prototype.GetDamage = function (attacker) {
@@ -115,11 +119,18 @@ var objects;
                 if (e.key === "z" || e.key === "j") {
                     if (!_this.playerController.Z) {
                         _this.playerController.Z = true;
+                        var attackTimer_1 = 0;
                         console.log("Attack initiated");
                         _this.weapon.visible = true;
                         _this.attackSequence = setInterval(function () {
+                            attackTimer_1++;
+                            console.log(attackTimer_1);
                             _this.weapon.y -= 20;
                             _this.weapon.x = _this.x;
+                            if (attackTimer_1 > 15) {
+                                clearInterval(_this.attackSequence);
+                                _this.weapon.visible = false;
+                            }
                         }, 50);
                     }
                 }

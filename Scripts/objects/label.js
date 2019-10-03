@@ -18,6 +18,7 @@ var objects;
         // Variables
         // Constructor
         function Label(labelString, fontSize, fontFamily, fontColor, x, y, isCentered) {
+            if (fontFamily === void 0) { fontFamily = "'Press Start 2P'"; }
             if (x === void 0) { x = 0; }
             if (y === void 0) { y = 0; }
             if (isCentered === void 0) { isCentered = false; }

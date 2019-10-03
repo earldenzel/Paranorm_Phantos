@@ -18,7 +18,7 @@ var objects;
         // variables
         // constructors
         function TestEnemy(assetManager) {
-            var _this = _super.call(this, assetManager, "testEnemy") || this;
+            var _this = _super.call(this, assetManager, "enemy_test") || this;
             _this.Start();
             _this.hp = 2;
             _this.isStunned = false;

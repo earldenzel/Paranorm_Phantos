@@ -3,7 +3,7 @@ module objects{
         // variables
         // constructors
         constructor(assetManager:createjs.LoadQueue){
-            super(assetManager,"testEnemy");
+            super(assetManager,"enemy_test");
             this.Start();
             this.hp = 2;
             this.isStunned = false;
