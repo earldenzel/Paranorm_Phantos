@@ -33,7 +33,11 @@ module objects {
         public Update(): void {
             this.Move();
             this.weapon.Update();
-            this.CheckBound(); // <-- Check collisions
+            this.CheckBound(); // <-- Check collisions           
+
+            if(!this.visible && this.hp <= 0){
+                objects.Game.currentScene = config.Scene.OVER;
+            }
         }
 
         public Reset(): void { }

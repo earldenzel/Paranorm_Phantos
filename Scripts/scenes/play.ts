@@ -3,7 +3,7 @@ module scenes {
     export class PlayScene extends objects.Scene {
         // Variables
         private player:objects.Player;
-        private testEnemy:objects.TestEnemy;
+        private enemies: Array<objects.Enemy>;
 
         private ceilingVertical:objects.Background;
         private ceilingHorizontal:objects.Background;
@@ -12,6 +12,9 @@ module scenes {
         private wallHorizontal: objects.Background;
         private doorVertical: objects.Background;
         private doorVerticalTop: objects.Background;
+        private playerStatus: objects.Label;
+        private messageStatus: objects.Label;
+        private controllerHelp: objects.Label;
 
         // Constructor
         constructor(assetManager:createjs.LoadQueue) {
@@ -24,7 +27,10 @@ module scenes {
         public Start(): void {
             // Initialize our variables
             this.player = new objects.Player(this.assetManager);
-            this.testEnemy=new objects.TestEnemy(this.assetManager);
+            this.enemies = new Array<objects.Enemy>();
+            this.enemies[0] = new objects.TestEnemy(this.assetManager, 5, true, true);
+            this.enemies[1] = new objects.TestEnemy(this.assetManager, 3, false, false);
+            this.enemies[2] = new objects.TestEnemy(this.assetManager, 2, false, true);
 
             this.ceilingHorizontal =new objects.Background(this.assetManager,"background_c_hori");
             this.ceilingVertical =new objects.Background(this.assetManager,"background_c_vert");
@@ -34,39 +40,29 @@ module scenes {
             this.wallVertical = new objects.Background(this.assetManager, "background_w_vert");
 
             this.doorVertical = new objects.Background(this.assetManager, "background_d_vert");
-            this.doorVerticalTop = new objects.Background(this.assetManager, "background_d_vertT")
+            this.doorVerticalTop = new objects.Background(this.assetManager, "background_d_vertT");
+
+            this.playerStatus = new objects.Label("PLAYER STATUSES GO HERE", "16px", "'Press Start 2P'", "#000000", 0, 800, false);
+            this.messageStatus = new objects.Label("MESSAGES GO HERE", "16px", "'Press Start 2P'", "#000000", 0, 820, false);
+            this.controllerHelp = new objects.Label("UP-DOWN-LEFT-RIGHT + Z OR W-A-S-D + J", "16px", "'Press Start 2P'", "#000000", 0, 840, false);
             
             objects.Game.player = this.player;
+            objects.Game.messageStatus = this.messageStatus;
             this.Main();
         }        
 
         public Update(): void {
 
             this.player.Update();
-            this.testEnemy.Update();
-            //this.enemy.Update();
-            // this.enemies.forEach(e => {
-            //     e.Update();
-            //     managers.Collision.Check(this.player, e);
-            // });
-
-            if(managers.Collision.Check(this.player,this.testEnemy)){
-                this.player.GetDamage(this.testEnemy);
+            let collectiveCollision: boolean = false;
+            this.enemies.forEach(e => {
+                e.Update();
+                collectiveCollision = collectiveCollision || managers.Collision.Check(objects.Game.player,e);
+            });
+            if (objects.Game.player.isTakingDamage && !collectiveCollision){
+                objects.Game.player.isTakingDamage = false;
             }
-            else{
-                this.player.isTakingDamage = false;
-            }
-
-            if(managers.Collision.Check(this.player.weapon,this.testEnemy) && !managers.Collision.Check(this.player,this.testEnemy)){
-                this.testEnemy.GetDamage(this.player);
-            }
-            else{
-                this.testEnemy.isTakingDamage = false;
-            }
-
-            if(!this.player.visible && this.player.hp <= 0){
-                objects.Game.currentScene = config.Scene.OVER;
-            }
+            this.playerStatus.text = "PLAYER HP" + this.player.hp + "/5";
         }
 
         public Main(): void {
@@ -79,13 +75,20 @@ module scenes {
             this.addChild(this.ceilingVertical);
             // ITEM PLACEMENT
             // ENEMY PLACEMENT
-            this.addChild(this.testEnemy);
+            this.enemies.forEach(e => {
+                this.addChild(e);
+            });
 
             // PLAYER PLACEMENT
             this.addChild(this.player.weapon);
             this.addChild(this.player);
 
             this.addChild(this.doorVerticalTop);
+            
+            //UI PLACEMENT
+            this.addChild(this.playerStatus);
+            this.addChild(this.messageStatus);
+            this.addChild(this.controllerHelp);
         }
     }
 }

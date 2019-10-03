@@ -37,7 +37,10 @@ var objects;
         Player.prototype.Update = function () {
             this.Move();
             this.weapon.Update();
-            this.CheckBound(); // <-- Check collisions
+            this.CheckBound(); // <-- Check collisions           
+            if (!this.visible && this.hp <= 0) {
+                objects.Game.currentScene = config.Scene.OVER;
+            }
         };
         Player.prototype.Reset = function () { };
         Player.prototype.Move = function () {

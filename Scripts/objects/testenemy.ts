@@ -1,13 +1,21 @@
 module objects{
     export class TestEnemy extends objects.Enemy{
         // variables
+        private rightDirection: boolean;
+        private downDirection : boolean;
+        private moveSpeed: number;
+
         // constructors
-        constructor(assetManager:createjs.LoadQueue){
+        
+        constructor(assetManager:createjs.LoadQueue, moveSpeed:number, rightDirection:boolean, downDirection:boolean){
             super(assetManager,"enemy_test");
             this.Start();
             this.hp = 2;
-            this.isStunned = false;
             this.attackPower = 2;
+            
+            this.moveSpeed = moveSpeed;
+            this.rightDirection = rightDirection;
+            this.downDirection = downDirection
         }
         // methods
 
@@ -18,11 +26,25 @@ module objects{
         }
         public Update(): void {
             super.Update();
-            this.Move();
-            this.CheckBound(); // <-- Check collisions
         }
         public Reset(): void {}
-        public Move(): void {}
+        public Move(): void {            
+            this.x += this.rightDirection ? this.moveSpeed : -this.moveSpeed;
+            this.y += this.downDirection ? this.moveSpeed : -this.moveSpeed;
+    
+            if (this.x > objects.Game.gameWidth && this.rightDirection){
+                this.rightDirection = false;
+            }
+            else if (this.x < 0 && !this.rightDirection){
+                this.rightDirection = true;
+            }
+            if (this.y > objects.Game.gameHeight && this.downDirection){
+                this.downDirection = false;
+            }
+            else if (this.y < 0 && !this.downDirection){
+                this.downDirection = true;
+            }
+        }
         public CheckBound(): void {}
     }
 }

@@ -15,14 +15,15 @@ var objects;
 (function (objects) {
     var TestEnemy = /** @class */ (function (_super) {
         __extends(TestEnemy, _super);
-        // variables
         // constructors
-        function TestEnemy(assetManager) {
+        function TestEnemy(assetManager, moveSpeed, rightDirection, downDirection) {
             var _this = _super.call(this, assetManager, "enemy_test") || this;
             _this.Start();
             _this.hp = 2;
-            _this.isStunned = false;
             _this.attackPower = 2;
+            _this.moveSpeed = moveSpeed;
+            _this.rightDirection = rightDirection;
+            _this.downDirection = downDirection;
             return _this;
         }
         // methods
@@ -33,11 +34,24 @@ var objects;
         };
         TestEnemy.prototype.Update = function () {
             _super.prototype.Update.call(this);
-            this.Move();
-            this.CheckBound(); // <-- Check collisions
         };
         TestEnemy.prototype.Reset = function () { };
-        TestEnemy.prototype.Move = function () { };
+        TestEnemy.prototype.Move = function () {
+            this.x += this.rightDirection ? this.moveSpeed : -this.moveSpeed;
+            this.y += this.downDirection ? this.moveSpeed : -this.moveSpeed;
+            if (this.x > objects.Game.gameWidth && this.rightDirection) {
+                this.rightDirection = false;
+            }
+            else if (this.x < 0 && !this.rightDirection) {
+                this.rightDirection = true;
+            }
+            if (this.y > objects.Game.gameHeight && this.downDirection) {
+                this.downDirection = false;
+            }
+            else if (this.y < 0 && !this.downDirection) {
+                this.downDirection = true;
+            }
+        };
         TestEnemy.prototype.CheckBound = function () { };
         return TestEnemy;
     }(objects.Enemy));

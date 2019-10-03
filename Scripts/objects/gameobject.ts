@@ -44,12 +44,8 @@ module objects {
         public CheckBound():void {}
 
         public GetDamage(attacker:objects.GameObject){
-            //normal hp reduction
-            if (!this.isTakingDamage){
-                this.isTakingDamage = true;
-                this.hp -= attacker.attackPower;
-                console.log(attacker.name + " dealt " + attacker.attackPower + " damage to " + this.name);
-            }
+            this.hp -= attacker.attackPower;
+            console.log(attacker.name + " dealt " + attacker.attackPower + " damage to " + this.name);
         }
     }
 }
