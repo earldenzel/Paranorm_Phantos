@@ -13,47 +13,51 @@ var __extends = (this && this.__extends) || (function () {
 })();
 var scenes;
 (function (scenes) {
-    var PlayScene = /** @class */ (function (_super) {
-        __extends(PlayScene, _super);
+    var Graveyard_1 = /** @class */ (function (_super) {
+        __extends(Graveyard_1, _super);
         // Constructor
-        function PlayScene(assetManager) {
+        function Graveyard_1(assetManager) {
             var _this = _super.call(this, assetManager) || this;
             _this.Start();
             return _this;
         }
         // Methods
-        PlayScene.prototype.Start = function () {
+        Graveyard_1.prototype.Start = function () {
             // Initialize our variables
-            this.player = objects.Game.player;
+            this.changingScenes = false;
+            this.player = new objects.Player(this.assetManager);
             this.enemies = new Array();
-            this.enemies[0] = new objects.TestEnemy(this.assetManager, 1, true, true);
-            this.enemies[1] = new objects.TestEnemy(this.assetManager, 1, false, false);
+            this.enemies[0] = new objects.TestEnemy(this.assetManager, 5, true, true);
+            this.enemies[1] = new objects.TestEnemy(this.assetManager, 3, false, false);
+            this.enemies[2] = new objects.TestEnemy(this.assetManager, 2, false, true);
             this.ceilingHorizontal = new objects.Background(this.assetManager, "background_c_hori");
             this.ceilingVertical = new objects.Background(this.assetManager, "background_c_vert");
             this.floor = new objects.Background(this.assetManager, "background_f_all");
             this.wallHorizontal = new objects.Background(this.assetManager, "background_w_hori");
             this.wallVertical = new objects.Background(this.assetManager, "background_w_vert");
             this.doorVertical = new objects.Background(this.assetManager, "background_d_vert");
-            this.doorVerticalTop = new objects.Background(this.assetManager, "background_d_vertT");
             this.playerStatus = new objects.Label("PLAYER STATUSES GO HERE", "16px", "'Press Start 2P'", "#000000", 0, 800, false);
             this.messageStatus = new objects.Label("MESSAGES GO HERE", "16px", "'Press Start 2P'", "#000000", 0, 820, false);
             this.controllerHelp = new objects.Label("UP-DOWN-LEFT-RIGHT + Z OR W-A-S-D + J", "16px", "'Press Start 2P'", "#000000", 0, 840, false);
+            objects.Game.player = this.player;
             objects.Game.messageStatus = this.messageStatus;
             this.Main();
         };
-        PlayScene.prototype.Update = function () {
+        Graveyard_1.prototype.Update = function () {
             this.player.Update();
+            this.Checkbounds();
             var collectiveCollision = false;
             this.enemies.forEach(function (e) {
                 e.Update();
                 collectiveCollision = collectiveCollision || managers.Collision.Check(objects.Game.player, e);
             });
+            //this.portalNorth.Update();
             if (objects.Game.player.isTakingDamage && !collectiveCollision) {
                 objects.Game.player.isTakingDamage = false;
             }
             this.playerStatus.text = "PLAYER HP" + this.player.hp + "/5";
         };
-        PlayScene.prototype.Main = function () {
+        Graveyard_1.prototype.Main = function () {
             var _this = this;
             // BACKGROUND PLACEMENT
             this.addChild(this.floor);
@@ -70,14 +74,42 @@ var scenes;
             // PLAYER PLACEMENT
             this.addChild(this.player.weapon);
             this.addChild(this.player);
-            this.addChild(this.doorVerticalTop);
             //UI PLACEMENT
             this.addChild(this.playerStatus);
             this.addChild(this.messageStatus);
             this.addChild(this.controllerHelp);
         };
-        return PlayScene;
+        Graveyard_1.prototype.Checkbounds = function () {
+            var player = objects.Game.player;
+            // right bound
+            if (player.x >= 565 - player.halfW) {
+                player.x = 565 - player.halfW;
+            }
+            // left bound
+            if (player.x <= player.halfW + 80) {
+                console.log(player.y);
+                player.x = player.halfW + 80;
+            }
+            // bottom bound
+            if (player.y >= 765 - player.halfH) {
+                player.y = 765 - player.halfH;
+            }
+            // top bound
+            if (player.y <= player.halfH + 40) {
+                console.log(player.x);
+                if (player.x < 276 || player.x > 372) {
+                    player.y = player.halfH + 40;
+                }
+                if (player.y <= player.halfH && !this.changingScenes) {
+                    console.log("Moving to next scene...");
+                    this.changingScenes = true;
+                    objects.Game.currentScene = config.Scene.GRAVEYARD_2;
+                    objects.Game.player.SetPosition(new math.Vec2(player.x, 765 - player.halfH));
+                }
+            }
+        };
+        return Graveyard_1;
     }(objects.Scene));
-    scenes.PlayScene = PlayScene;
+    scenes.Graveyard_1 = Graveyard_1;
 })(scenes || (scenes = {}));
-//# sourceMappingURL=play.js.map
+//# sourceMappingURL=graveyard_1.js.map

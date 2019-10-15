@@ -10,6 +10,7 @@ module objects {
         private attackSequence: any;
         private playerMoveSpeed: number = 2;
         public weapon: objects.Weapon;
+        private playerPosition: math.Vec2;
 
         //Constructor
         constructor(assetManager: createjs.LoadQueue) {
@@ -22,15 +23,15 @@ module objects {
         }
 
         // Methods
-        public Start(): void {
-            // set the initial position
-            this.y = 700;
+        public Start(): void {     
             this.x = 320;
+            this.y = 700;
             this.playerController = { "W": false, "A": false, "S": false, "D": false, "Z": false };
 
         }
         
         public Update(): void {
+            objects.Game.player = this;
             this.Move();
             this.weapon.Update();
             this.CheckBound(); // <-- Check collisions           
@@ -43,31 +44,17 @@ module objects {
         public Reset(): void { }
 
         public Move(): void {
+            
             //current keyboard implementation - will likely change later
             this.AddEventListeners();
         }
 
         public CheckBound(): void {
-            // right bound
-            if (this.x >= 565 - this.halfW) {
-                this.x = 565 - this.halfW;
-            }
-            // left bound
-            if (this.x <= this.halfW + 80) {
-                console.log(this.y);
-                this.x = this.halfW + 80;
-            }
-            // bottom bound
-            if (this.y >= 765 - this.halfH) {
-                this.y = 765 - this.halfH;
-            }
-            // top bound
-            if (this.y <= this.halfH + 40) {
-                console.log(this.x);
-                if(this.x < 276 || this.x > 372){
-                    this.y = this.halfH + 40;
-                }
-            }
+        }
+
+        public SetPosition(position: math.Vec2){
+            this.x = position.x;
+            this.y = position.y;
         }
 
         public GetDamage(attacker:objects.GameObject){

@@ -13,36 +13,33 @@ var __extends = (this && this.__extends) || (function () {
 })();
 var scenes;
 (function (scenes) {
-    var PlayScene = /** @class */ (function (_super) {
-        __extends(PlayScene, _super);
+    var Graveyard = /** @class */ (function (_super) {
+        __extends(Graveyard, _super);
         // Constructor
-        function PlayScene(assetManager) {
+        function Graveyard(assetManager) {
             var _this = _super.call(this, assetManager) || this;
             _this.Start();
             return _this;
         }
         // Methods
-        PlayScene.prototype.Start = function () {
+        Graveyard.prototype.Start = function () {
             // Initialize our variables
             this.player = objects.Game.player;
-            this.enemies = new Array();
-            this.enemies[0] = new objects.TestEnemy(this.assetManager, 1, true, true);
-            this.enemies[1] = new objects.TestEnemy(this.assetManager, 1, false, false);
             this.ceilingHorizontal = new objects.Background(this.assetManager, "background_c_hori");
             this.ceilingVertical = new objects.Background(this.assetManager, "background_c_vert");
             this.floor = new objects.Background(this.assetManager, "background_f_all");
             this.wallHorizontal = new objects.Background(this.assetManager, "background_w_hori");
             this.wallVertical = new objects.Background(this.assetManager, "background_w_vert");
-            this.doorVertical = new objects.Background(this.assetManager, "background_d_vert");
-            this.doorVerticalTop = new objects.Background(this.assetManager, "background_d_vertT");
+            //UI... will change
             this.playerStatus = new objects.Label("PLAYER STATUSES GO HERE", "16px", "'Press Start 2P'", "#000000", 0, 800, false);
             this.messageStatus = new objects.Label("MESSAGES GO HERE", "16px", "'Press Start 2P'", "#000000", 0, 820, false);
             this.controllerHelp = new objects.Label("UP-DOWN-LEFT-RIGHT + Z OR W-A-S-D + J", "16px", "'Press Start 2P'", "#000000", 0, 840, false);
             objects.Game.messageStatus = this.messageStatus;
             this.Main();
         };
-        PlayScene.prototype.Update = function () {
+        Graveyard.prototype.Update = function () {
             this.player.Update();
+            this.Checkbounds();
             var collectiveCollision = false;
             this.enemies.forEach(function (e) {
                 e.Update();
@@ -53,13 +50,12 @@ var scenes;
             }
             this.playerStatus.text = "PLAYER HP" + this.player.hp + "/5";
         };
-        PlayScene.prototype.Main = function () {
+        Graveyard.prototype.Main = function () {
             var _this = this;
             // BACKGROUND PLACEMENT
             this.addChild(this.floor);
             this.addChild(this.wallHorizontal);
             this.addChild(this.wallVertical);
-            this.addChild(this.doorVertical);
             this.addChild(this.ceilingHorizontal);
             this.addChild(this.ceilingVertical);
             // ITEM PLACEMENT
@@ -70,14 +66,36 @@ var scenes;
             // PLAYER PLACEMENT
             this.addChild(this.player.weapon);
             this.addChild(this.player);
-            this.addChild(this.doorVerticalTop);
             //UI PLACEMENT
             this.addChild(this.playerStatus);
             this.addChild(this.messageStatus);
             this.addChild(this.controllerHelp);
         };
-        return PlayScene;
+        Graveyard.prototype.Checkbounds = function () {
+            var player = objects.Game.player;
+            // right bound
+            if (player.x >= 565 - player.halfW) {
+                player.x = 565 - player.halfW;
+            }
+            // left bound
+            if (player.x <= player.halfW + 80) {
+                console.log(player.y);
+                player.x = player.halfW + 80;
+            }
+            // bottom bound
+            if (player.y >= 765 - player.halfH) {
+                player.y = 765 - player.halfH;
+            }
+            // top bound
+            if (player.y <= player.halfH + 40) {
+                console.log(player.x);
+                if (player.x < 276 || player.x > 372) {
+                    player.y = player.halfH + 40;
+                }
+            }
+        };
+        return Graveyard;
     }(objects.Scene));
-    scenes.PlayScene = PlayScene;
+    scenes.Graveyard = Graveyard;
 })(scenes || (scenes = {}));
-//# sourceMappingURL=play.js.map
+//# sourceMappingURL=graveyard.js.map

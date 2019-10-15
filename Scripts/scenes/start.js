@@ -42,8 +42,8 @@ var scenes;
             });
         };
         StartScene.prototype.startButtonClick = function () {
-            // Change our game state from START to GAME
-            objects.Game.currentScene = config.Scene.GAME;
+            // Change our game state from START to OPENING_SCENE
+            objects.Game.currentScene = config.Scene.OPENING_SCENE;
         };
         StartScene.prototype.Main = function () {
             // Add items to our scene

@@ -16,18 +16,20 @@ var scenes;
     var PlayScene = /** @class */ (function (_super) {
         __extends(PlayScene, _super);
         // Constructor
-        function PlayScene(assetManager) {
+        function PlayScene(assetManager, playerPosition) {
             var _this = _super.call(this, assetManager) || this;
+            _this.playerPosition = playerPosition;
             _this.Start();
             return _this;
         }
         // Methods
         PlayScene.prototype.Start = function () {
             // Initialize our variables
-            this.player = objects.Game.player;
+            this.player = new objects.Player(this.assetManager, this.playerPosition);
             this.enemies = new Array();
-            this.enemies[0] = new objects.TestEnemy(this.assetManager, 1, true, true);
-            this.enemies[1] = new objects.TestEnemy(this.assetManager, 1, false, false);
+            this.enemies[0] = new objects.TestEnemy(this.assetManager, 5, true, true);
+            this.enemies[1] = new objects.TestEnemy(this.assetManager, 3, false, false);
+            this.enemies[2] = new objects.TestEnemy(this.assetManager, 2, false, true);
             this.ceilingHorizontal = new objects.Background(this.assetManager, "background_c_hori");
             this.ceilingVertical = new objects.Background(this.assetManager, "background_c_vert");
             this.floor = new objects.Background(this.assetManager, "background_f_all");
@@ -38,6 +40,7 @@ var scenes;
             this.playerStatus = new objects.Label("PLAYER STATUSES GO HERE", "16px", "'Press Start 2P'", "#000000", 0, 800, false);
             this.messageStatus = new objects.Label("MESSAGES GO HERE", "16px", "'Press Start 2P'", "#000000", 0, 820, false);
             this.controllerHelp = new objects.Label("UP-DOWN-LEFT-RIGHT + Z OR W-A-S-D + J", "16px", "'Press Start 2P'", "#000000", 0, 840, false);
+            objects.Game.player = this.player;
             objects.Game.messageStatus = this.messageStatus;
             this.Main();
         };
@@ -80,4 +83,4 @@ var scenes;
     }(objects.Scene));
     scenes.PlayScene = PlayScene;
 })(scenes || (scenes = {}));
-//# sourceMappingURL=play.js.map
+//# sourceMappingURL=play copy.js.map

@@ -39,8 +39,8 @@ module scenes {
         }
 
         private startButtonClick():void {
-            // Change our game state from START to GAME
-            objects.Game.currentScene = config.Scene.GAME;
+            // Change our game state from START to OPENING_SCENE
+            objects.Game.currentScene = config.Scene.OPENING_SCENE;
         }
 
         public Main():void {

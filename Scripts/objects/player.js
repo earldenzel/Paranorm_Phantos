@@ -29,12 +29,12 @@ var objects;
         }
         // Methods
         Player.prototype.Start = function () {
-            // set the initial position
-            this.y = 700;
             this.x = 320;
+            this.y = 700;
             this.playerController = { "W": false, "A": false, "S": false, "D": false, "Z": false };
         };
         Player.prototype.Update = function () {
+            objects.Game.player = this;
             this.Move();
             this.weapon.Update();
             this.CheckBound(); // <-- Check collisions           
@@ -48,26 +48,10 @@ var objects;
             this.AddEventListeners();
         };
         Player.prototype.CheckBound = function () {
-            // right bound
-            if (this.x >= 565 - this.halfW) {
-                this.x = 565 - this.halfW;
-            }
-            // left bound
-            if (this.x <= this.halfW + 80) {
-                console.log(this.y);
-                this.x = this.halfW + 80;
-            }
-            // bottom bound
-            if (this.y >= 765 - this.halfH) {
-                this.y = 765 - this.halfH;
-            }
-            // top bound
-            if (this.y <= this.halfH + 40) {
-                console.log(this.x);
-                if (this.x < 276 || this.x > 372) {
-                    this.y = this.halfH + 40;
-                }
-            }
+        };
+        Player.prototype.SetPosition = function (position) {
+            this.x = position.x;
+            this.y = position.y;
         };
         Player.prototype.GetDamage = function (attacker) {
             _super.prototype.GetDamage.call(this, attacker);

@@ -88,10 +88,6 @@
         stage.update();
     }
 
-    function clickableButtonMouseClick(): void {
-        console.log("AHHHHHHH");
-    }
-
     function Main() {
         console.log("Game Start...");
 
@@ -102,7 +98,17 @@
                 currentScene = new scenes.StartScene(assetManager);
                 stage.addChild(currentScene);
                 break;
-            case config.Scene.GAME:
+            case config.Scene.OPENING_SCENE:
+                stage.removeAllChildren();
+                currentScene = new scenes.OpeningScene(assetManager);
+                stage.addChild(currentScene);
+                break;
+            case config.Scene.GRAVEYARD_1:
+                stage.removeAllChildren();
+                currentScene = new scenes.Graveyard_1(assetManager);
+                stage.addChild(currentScene);
+                break;
+            case config.Scene.GRAVEYARD_2:
                 stage.removeAllChildren();
                 currentScene = new scenes.PlayScene(assetManager);
                 stage.addChild(currentScene);
