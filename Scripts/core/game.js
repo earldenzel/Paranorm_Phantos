@@ -8,6 +8,7 @@
     // Store current scene and state information
     var currentScene;
     var currentState;
+    var keyboardManager;
     assetManifest = [
         { id: "backButton", src: "./Assets/Old/BackButton.png" },
         { id: "nextButton", src: "./Assets/Old/NextButton.png" },
@@ -52,6 +53,9 @@
         // Set up default game state
         objects.Game.currentScene = config.Scene.START;
         currentState = config.Scene.START;
+        // Keyboard Manager
+        keyboardManager = new managers.Keyboard;
+        objects.Game.keyboardManager = keyboardManager;
         Main();
     }
     function Update() {

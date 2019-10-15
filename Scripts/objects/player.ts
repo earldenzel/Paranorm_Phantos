@@ -29,13 +29,13 @@ module objects {
             this.playerController = { "W": false, "A": false, "S": false, "D": false, "Z": false };
 
         }
-        
+
         public Update(): void {
             this.Move();
             this.weapon.Update();
             this.CheckBound(); // <-- Check collisions           
 
-            if(!this.visible && this.hp <= 0){
+            if (!this.visible && this.hp <= 0) {
                 objects.Game.currentScene = config.Scene.OVER;
             }
         }
@@ -44,7 +44,39 @@ module objects {
 
         public Move(): void {
             //current keyboard implementation - will likely change later
-            this.AddEventListeners();
+            //this.AddEventListeners();
+            if (objects.Game.keyboardManager.moveLeft) {
+                this.x -= this.playerMoveSpeed;
+            }
+            if (objects.Game.keyboardManager.moveRight) {
+                this.x += this.playerMoveSpeed;
+            }
+            if (objects.Game.keyboardManager.moveUp) {
+                this.y -= this.playerMoveSpeed;
+            }
+            if (objects.Game.keyboardManager.moveDown) {
+                this.y += this.playerMoveSpeed;
+            }
+            if (objects.Game.keyboardManager.attacking) {
+                let attackTimer = 0;
+                console.log("Attack initiated");
+                this.weapon.visible = true;
+                this.attackSequence = setInterval(() => {
+                    attackTimer++;
+                    console.log(attackTimer);
+                    this.weapon.y -= 20;
+                    this.weapon.x = this.x;
+                    if (attackTimer > 15) {
+                        clearInterval(this.attackSequence);
+                        this.weapon.visible = false;
+                    }
+                }, 50);
+            }
+            else {
+                clearInterval(this.attackSequence);
+                this.weapon.visible = false;
+            }
+
         }
 
         public CheckBound(): void {
@@ -64,15 +96,15 @@ module objects {
             // top bound
             if (this.y <= this.halfH + 40) {
                 console.log(this.x);
-                if(this.x < 276 || this.x > 372){
+                if (this.x < 276 || this.x > 372) {
                     this.y = this.halfH + 40;
                 }
             }
         }
 
-        public GetDamage(attacker:objects.GameObject){
+        public GetDamage(attacker: objects.GameObject) {
             super.GetDamage(attacker);
-            if (this.hp < 0){
+            if (this.hp < 0) {
                 console.log(attacker.name + " erased " + this.name + "'s existence from this world.");
                 objects.Game.stage.removeChild(this.weapon);
                 objects.Game.stage.removeChild(this);
@@ -82,104 +114,104 @@ module objects {
         }
 
         //current keyboard implementation
-        private AddEventListeners(): void {
-            document.addEventListener('keydown', (e: KeyboardEvent) => {
-                if (e.key === "w" || e.key === "ArrowUp") {
-                    if (!this.playerController.W) {
-                        //console.log('UpKeys: Hold');
-                        this.playerController.W = true;
-                        this.goingUpInterval = setInterval(() => {
-                            this.y -= this.playerMoveSpeed;
-                        }, 10);
-                    }
-                }
-                if (e.key === "a" || e.key === "ArrowLeft") {
-                    if (!this.playerController.A) {
-                        // console.log('LeftKeys: Hold');
-                        this.playerController.A = true;
-                        this.goingLeftInterval = setInterval(() => {
-                            this.x -= this.playerMoveSpeed;
-                        }, 10);
-                    }
-                }
-                if (e.key === "s" || e.key === "ArrowDown") {
-                    if (!this.playerController.S) {
-                        // console.log('DownKeys: Hold');
-                        this.playerController.S = true;
-                        this.goingDownInterval = setInterval(() => {
-                            this.y += this.playerMoveSpeed;
-                        }, 10);
-                        
-                    }
-                }
-                if (e.key === "d" || e.key === "ArrowRight") {
-                    if (!this.playerController.D) {
-                        // console.log('RightKeys: Hold');
-                        this.playerController.D = true;
-                        this.goingRightInterval = setInterval(() => {
-                            this.x += this.playerMoveSpeed;
-                        }, 10);
-                    }
-                }                
-                if (e.key === "z" || e.key === "j") {
-                    if (!this.playerController.Z) {
-                        this.playerController.Z = true;
-                        let attackTimer = 0;
-                        console.log("Attack initiated");
-                        this.weapon.visible = true;
-                        this.attackSequence = setInterval(() => {
-                            attackTimer++;
-                            console.log(attackTimer);
-                            this.weapon.y -= 20;
-                            this.weapon.x = this.x;
-                            if(attackTimer > 15){
-                                clearInterval(this.attackSequence);
-                                this.weapon.visible = false;
-                            }
-                        }, 50);
-                    }
-                }
-            });
-            // when keyup
-            document.addEventListener('keyup', (e: KeyboardEvent) => {
-                if (e.key === "w"|| e.key === "ArrowUp") {
-                    if (this.playerController.W) {
-                        // console.log('UpKeys: Released');
-                        this.playerController.W = false;
-                        clearInterval(this.goingUpInterval);
-                    }
-                }
-                if (e.key === "a" || e.key === "ArrowLeft") {
-                    if (this.playerController.A) {
-                        // console.log('LeftKeys: Released');
-                        this.playerController.A = false;
-                        clearInterval(this.goingLeftInterval);
-                    }
-                }
-                if (e.key === "s" || e.key === "ArrowDown") {
-                    if (this.playerController.S) {
-                        // console.log('DownKeys: Released');
-                        this.playerController.S = false;
-                        clearInterval(this.goingDownInterval);
-                    }
-                }
-                if (e.key === "d" || e.key === "ArrowRight") {
-                    if (this.playerController.D) {
-                        // console.log('RightKeys: Released');
-                        this.playerController.D = false;
-                        clearInterval(this.goingRightInterval);
-                    }
-                }
-                if (e.key === "z" || e.key === "j") {
-                    if (this.playerController.Z) {
-                        // console.log('UpKeys: Released');
-                        this.playerController.Z = false;
-                        clearInterval(this.attackSequence);
-                        this.weapon.visible = false;
-                        console.log("Attack stopped");
-                    }
-                }
-            });
-        }
+        //private AddEventListeners(): void {
+        //    document.addEventListener('keydown', (e: KeyboardEvent) => {
+        //        if (e.key === "w" || e.key === "ArrowUp") {
+        //            if (!this.playerController.W) {
+        //                //console.log('UpKeys: Hold');
+        //                this.playerController.W = true;
+        //                this.goingUpInterval = setInterval(() => {
+        //                    this.y -= this.playerMoveSpeed;
+        //                }, 10);
+        //            }
+        //        }
+        //        if (e.key === "a" || e.key === "ArrowLeft") {
+        //            if (!this.playerController.A) {
+        //                // console.log('LeftKeys: Hold');
+        //                this.playerController.A = true;
+        //                this.goingLeftInterval = setInterval(() => {
+        //                    this.x -= this.playerMoveSpeed;
+        //                }, 10);
+        //            }
+        //        }
+        //        if (e.key === "s" || e.key === "ArrowDown") {
+        //            if (!this.playerController.S) {
+        //                // console.log('DownKeys: Hold');
+        //                this.playerController.S = true;
+        //                this.goingDownInterval = setInterval(() => {
+        //                    this.y += this.playerMoveSpeed;
+        //                }, 10);
+        //
+        //            }
+        //        }
+        //        if (e.key === "d" || e.key === "ArrowRight") {
+        //            if (!this.playerController.D) {
+        //                // console.log('RightKeys: Hold');
+        //                this.playerController.D = true;
+        //                this.goingRightInterval = setInterval(() => {
+        //                    this.x += this.playerMoveSpeed;
+        //                }, 10);
+        //            }
+        //        }
+        //        if (e.key === "z" || e.key === "j") {
+        //            if (!this.playerController.Z) {
+        //                this.playerController.Z = true;
+        //                let attackTimer = 0;
+        //                console.log("Attack initiated");
+        //                this.weapon.visible = true;
+        //                this.attackSequence = setInterval(() => {
+        //                    attackTimer++;
+        //                    console.log(attackTimer);
+        //                    this.weapon.y -= 20;
+        //                    this.weapon.x = this.x;
+        //                    if (attackTimer > 15) {
+        //                        clearInterval(this.attackSequence);
+        //                        this.weapon.visible = false;
+        //                    }
+        //                }, 50);
+        //            }
+        //        }
+        //    });
+        //    // when keyup
+        //    document.addEventListener('keyup', (e: KeyboardEvent) => {
+        //        if (e.key === "w" || e.key === "ArrowUp") {
+        //            if (this.playerController.W) {
+        //                // console.log('UpKeys: Released');
+        //                this.playerController.W = false;
+        //                clearInterval(this.goingUpInterval);
+        //            }
+        //        }
+        //        if (e.key === "a" || e.key === "ArrowLeft") {
+        //            if (this.playerController.A) {
+        //                // console.log('LeftKeys: Released');
+        //                this.playerController.A = false;
+        //                clearInterval(this.goingLeftInterval);
+        //            }
+        //        }
+        //        if (e.key === "s" || e.key === "ArrowDown") {
+        //            if (this.playerController.S) {
+        //                // console.log('DownKeys: Released');
+        //                this.playerController.S = false;
+        //                clearInterval(this.goingDownInterval);
+        //            }
+        //        }
+        //        if (e.key === "d" || e.key === "ArrowRight") {
+        //            if (this.playerController.D) {
+        //                // console.log('RightKeys: Released');
+        //                this.playerController.D = false;
+        //                clearInterval(this.goingRightInterval);
+        //            }
+        //        }
+        //        if (e.key === "z" || e.key === "j") {
+        //            if (this.playerController.Z) {
+        //                // console.log('UpKeys: Released');
+        //                this.playerController.Z = false;
+        //                clearInterval(this.attackSequence);
+        //                this.weapon.visible = false;
+        //                console.log("Attack stopped");
+        //            }
+        //        }
+        //    });
+        //}
     }
 }
