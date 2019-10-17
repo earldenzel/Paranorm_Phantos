@@ -15,13 +15,14 @@
 
     let keyboardManager: managers.Keyboard;
 
+    // Gets the asset manifest
     let request = new Request("./Content/assetManifest.json");
     fetch(request)
         .then(response => {
             return response.json();
         })
         .then(data => {
-            assetManifest = data;
+            assetManifest = data; 
         });
 
     //assetManifest = [
