@@ -6,6 +6,8 @@ module objects {
         public static player: objects.Player;
         public static gameHeight: number = 900;
         public static gameWidth: number = 640;
-        public static messageStatus: objects.Label;
+        public static messageStatus: objects.Label
+        public static keyboardManager: managers.Keyboard;
+
     }
 }

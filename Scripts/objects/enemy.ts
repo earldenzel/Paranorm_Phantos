@@ -2,6 +2,7 @@ module objects {
     export abstract class Enemy extends objects.GameObject {
         
         public isStunned: boolean;
+        protected knockback: number;
 
         constructor(assetManager: createjs.LoadQueue, enemyName: string) {
             super(assetManager, enemyName);
@@ -21,6 +22,7 @@ module objects {
                 if (this.visible){
                     objects.Game.messageStatus.text = this.name + " is stunned!";
                 }
+                //TODO: ensure that enemy is inside stage when stunned
             }
 
             //if it is not stunned, it can move
@@ -44,7 +46,7 @@ module objects {
                     this.GetDamage(objects.Game.player);
                 }
             }
-            //else, only remove the flag for taking damage when collosion with weapon has ended
+            //else, only remove the flag for taking damage when collision with weapon has ended
             else{
                 if(!managers.Collision.Check(objects.Game.player.weapon,this)){
                     this.isTakingDamage = false;
@@ -69,6 +71,10 @@ module objects {
                 this.visible = false;                
             }
             else{
+                //introduce a knockback
+                let awayVector: math.Vec2 = this.GetPosition().AwayFrom(objects.Game.player.GetPosition()).Multiply(this.knockback);
+                let newPosition: math.Vec2 = math.Vec2.Add(this.GetPosition(), awayVector);
+                this.SetPosition(newPosition);
                 super.GetDamage(attacker);
             }
         }

@@ -26,6 +26,15 @@ var math;
         Vec2.Distance = function (P1, P2) {
             return Math.floor(Math.sqrt(Math.pow(P2.x - P1.x, 2) + Math.pow(P2.y - P1.y, 2)));
         };
+        Vec2.Add = function (P1, P2) {
+            return new Vec2(P1.x + P2.x, P1.y + P2.y);
+        };
+        Vec2.prototype.AwayFrom = function (P) {
+            return new Vec2(this.x - P.x, this.y - P.y);
+        };
+        Vec2.prototype.Multiply = function (multiplier) {
+            return new Vec2(this.x * multiplier, this.y * multiplier);
+        };
         return Vec2;
     }(createjs.Point));
     math.Vec2 = Vec2;

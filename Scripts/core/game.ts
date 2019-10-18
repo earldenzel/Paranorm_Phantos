@@ -11,38 +11,50 @@
 
     // Store current scene and state information
     let currentScene: objects.Scene;
-    let currentState: number
+    let currentState: number;
 
-    assetManifest = [
-        { id: "backButton", src: "./Assets/Old/BackButton.png" },
-        { id: "nextButton", src: "./Assets/Old/NextButton.png" },
-        { id: "background", src: "./Assets/Old/background.png" },
-        { id: "player", src: "./Assets/Old/player.png" },
-        { id: "weapon", src: "./Assets/Old/phantos.png" },
-        { id: "testEnemy", src: "./Assets/Old/ship.png" },
+    let keyboardManager: managers.Keyboard;
 
-        { id: "title_background", src: "./Assets/_Background/_TestStage/Placeholder_BlackBackground.png" },
-        { id: "title_ui", src: "./Assets/_UI/Title/Title_1.png" },
+    // Gets the asset manifest
+    let request = new Request("./Content/assetManifest.json");
+    fetch(request)
+        .then(response => {
+            return response.json();
+        })
+        .then(data => {
+            assetManifest = data; 
+        });
 
-        { id: "player_p_walk1", src: "./Assets/_Player/Phoebe/Phoebe_Walk1.png" },
-        { id: "player_p_walk3", src: "./Assets/_Player/Phoebe/Phoebe_Walk3.png" },
-        { id: "player_p_walk5", src: "./Assets/_Player/Phoebe/Phoebe_Walk5.png" },
-        { id: "player_p_walk7", src: "./Assets/_Player/Phoebe/Phoebe_Walk7.png" },
-
-
-        { id: "item_p_front2", src: "./Assets/_Items/Phantos/Phantos_Front2.png" },
-
-        { id: "enemy_test", src: "./Assets/_Enemies/Test_Enemy.png" },
-
-        { id: "background_c_hori", src: "./Assets/_Background/_TestStage/Placeholder_CEILING-Horizontal.png" },
-        { id: "background_c_vert", src: "./Assets/_Background/_TestStage/Placeholder_CEILING-Vertical.png" },
-        { id: "background_d_vertT", src: "./Assets/_Background/_TestStage/Placeholder_DOOR-VerticalTop.png" },
-        { id: "background_d_vert", src: "./Assets/_Background/_TestStage/Placeholder_DOOR-Vertical.png" },
-        { id: "background_f_all",  src: "./Assets/_Background/_TestStage/Placeholder_FLOOR-All.png" },
-        { id: "background_w_hori", src: "./Assets/_Background/_TestStage/Placeholder_WALL-Horizontal.png" },
-        { id: "background_w_vert", src: "./Assets/_Background/_TestStage/Placeholder_WALL-Vertical.png" }
-
-    ];
+    //assetManifest = [
+    //    { id: "backButton", src: "./Assets/Old/BackButton.png" },
+    //    { id: "nextButton", src: "./Assets/Old/NextButton.png" },
+    //    { id: "background", src: "./Assets/Old/background.png" },
+    //    { id: "player", src: "./Assets/Old/player.png" },
+    //    { id: "weapon", src: "./Assets/Old/phantos.png" },
+    //    { id: "testEnemy", src: "./Assets/Old/ship.png" },
+    //
+    //    { id: "title_background", src: "./Assets/_Background/_TestStage/Placeholder_BlackBackground.png" },
+    //    { id: "title_ui", src: "./Assets/_UI/Title/Title_1.png" },
+    //
+    //    { id: "player_p_walk1", src: "./Assets/_Player/Phoebe/Phoebe_Walk1.png" },
+    //    { id: "player_p_walk3", src: "./Assets/_Player/Phoebe/Phoebe_Walk3.png" },
+    //    { id: "player_p_walk5", src: "./Assets/_Player/Phoebe/Phoebe_Walk5.png" },
+    //    { id: "player_p_walk7", src: "./Assets/_Player/Phoebe/Phoebe_Walk7.png" },
+    //
+    //
+    //    { id: "item_p_front2", src: "./Assets/_Items/Phantos/Phantos_Front2.png" },
+    //
+    //    { id: "enemy_test", src: "./Assets/_Enemies/Test_Enemy.png" },
+    //
+    //    { id: "background_c_hori", src: "./Assets/_Background/_TestStage/Placeholder_CEILING-Horizontal.png" },
+    //    { id: "background_c_vert", src: "./Assets/_Background/_TestStage/Placeholder_CEILING-Vertical.png" },
+    //    { id: "background_d_vertT", src: "./Assets/_Background/_TestStage/Placeholder_DOOR-VerticalTop.png" },
+    //    { id: "background_d_vert", src: "./Assets/_Background/_TestStage/Placeholder_DOOR-Vertical.png" },
+    //    { id: "background_f_all",  src: "./Assets/_Background/_TestStage/Placeholder_FLOOR-All.png" },
+    //    { id: "background_w_hori", src: "./Assets/_Background/_TestStage/Placeholder_WALL-Horizontal.png" },
+    //    { id: "background_w_vert", src: "./Assets/_Background/_TestStage/Placeholder_WALL-Vertical.png" }
+    //
+    //];
 
     function Init() {
         console.log("Initialization Start");
@@ -72,6 +84,10 @@
         // Set up default game state
         objects.Game.currentScene = config.Scene.START;
         currentState = config.Scene.START;
+
+        // Keyboard Manager
+        keyboardManager = new managers.Keyboard;
+        objects.Game.keyboardManager = keyboardManager;
 
         Main();
     }

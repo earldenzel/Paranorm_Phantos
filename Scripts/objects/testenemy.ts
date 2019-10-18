@@ -15,7 +15,8 @@ module objects{
             
             this.moveSpeed = moveSpeed;
             this.rightDirection = rightDirection;
-            this.downDirection = downDirection
+            this.downDirection = downDirection;
+            this.knockback = 0.75;
         }
         // methods
 

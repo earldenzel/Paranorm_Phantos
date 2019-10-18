@@ -4,5 +4,6 @@
         "**/*.js": true,
         "**/*.map": true,
         "node_modules/**": true
-    }
+    },    
+    "vscode.tsc.compiler.alertTSConfigChanges": "never"
 }
