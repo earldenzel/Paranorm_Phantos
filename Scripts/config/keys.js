@@ -16,6 +16,9 @@ var config;
         // Z J Keys
         Keys.Z = 90;
         Keys.J = 74;
+        // Enter Escape
+        Keys.ENTER = 13;
+        Keys.ESCAPE = 27;
         return Keys;
     }());
     config.Keys = Keys;

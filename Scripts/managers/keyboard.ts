@@ -40,9 +40,13 @@ module managers {
                     break;
                 case config.Keys.J:
                 case config.Keys.Z:
+                case config.Keys.ENTER:
                     if (this.attackEnabled){
                         this.attacking = true;
                     }
+                    break;                
+                case config.Keys.ESCAPE:
+                    this.biting = true;
                     break;
             }
         }
@@ -66,9 +70,13 @@ module managers {
                     break;
                 case config.Keys.J:
                 case config.Keys.Z:
+                case config.Keys.ENTER:
                     if (this.attackEnabled){
                         this.attacking = false;
                     }
+                    break;         
+                case config.Keys.ESCAPE:
+                    this.biting = false;
                     break;
             }
         }

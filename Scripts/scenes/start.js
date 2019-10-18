@@ -18,6 +18,7 @@ var scenes;
         // Constructor
         function StartScene(assetManager) {
             var _this = _super.call(this, assetManager) || this;
+            _this.messageTimeout = 0;
             _this.Start();
             return _this;
         }
@@ -35,11 +36,20 @@ var scenes;
         };
         StartScene.prototype.Update = function () {
             var _this = this;
-            document.addEventListener('keydown', function (e) {
-                if (e.key === "Enter") {
-                    _this.startButtonClick();
+            //press attack button to show next message
+            if (objects.Game.keyboardManager.attacking) {
+                if (this.messageTimeout == 0) {
+                    this.messageTimeout = setTimeout(function () {
+                        _this.startButtonClick();
+                    }, 50);
                 }
-            });
+            }
+            else {
+                if (this.messageTimeout > 0) {
+                    this.messageTimeout = 0;
+                    clearTimeout(this.messageTimeout);
+                }
+            }
         };
         StartScene.prototype.startButtonClick = function () {
             // Change our game state from START to OPENING_SCENE

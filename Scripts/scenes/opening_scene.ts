@@ -6,7 +6,7 @@ module scenes {
         
         private cutSceneMessages: Array<string>;
         private currentMessage: number;
-        private changingMessage: boolean;
+        private messageTimeout: number = 0;
 
         private player:objects.Player;
 
@@ -19,12 +19,12 @@ module scenes {
         public Start():void {
             // Initialize our objects for this scene
             this.currentMessage = 0;
-            this.changingMessage = false;
             this.background = new objects.Background(this.assetManager, "background");
 
             this.pressEnterLabel = new objects.Label("", "16px", "'Press Start 2P'", "#000000", 10, 200, true);
             this.pressEnterLabel.color = "#FFFFFF";
             this.cutSceneMessages = [
+                "",
                 "Hello, welcome... stranger",
                 "Before we begin, please note you may \nescape cutscenes via the ESC key.\nThat is, if you already know what to do.",
                 "In this game, you play the role of \nPhoebe, who is a paranormal bounty\nhunter.",
@@ -44,20 +44,26 @@ module scenes {
         }
         public Update():void {
             this.pressEnterLabel.text = this.cutSceneMessages[this.currentMessage];
-            document.addEventListener('keydown',(e: KeyboardEvent)=>{
-                if(e.key === "Escape"){
-                    this.startButtonClick();
-                }             
-                else if(!this.changingMessage){
-                    this.changingMessage = true;
-                    setTimeout(() => 
-                    {
+            if (objects.Game.keyboardManager.biting){
+                setTimeout(() => {
+                        this.startButtonClick();
+                    }, 200);
+            }
+            
+            //press attack button to show next message
+            if (objects.Game.keyboardManager.attacking){
+                if (this.messageTimeout == 0){
+                    this.messageTimeout = setTimeout(() => {
                         this.nextMessage();
-                        this.changingMessage = false;
-                    },
-                    500);
+                    }, 50);
                 }
-            });
+            }
+            else{
+                if (this.messageTimeout > 0){
+                    this.messageTimeout = 0;
+                    clearTimeout(this.messageTimeout);
+                }
+            }
         }
 
         private startButtonClick():void {

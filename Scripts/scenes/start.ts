@@ -6,6 +6,7 @@ module scenes {
         //private welcomeLabel: objects.Label;
         //private startButton: objects.Button;
         private pressEnterLabel: objects.Label;
+        private messageTimeout: number = 0;
         private enterVisibility: boolean;
 
         // Constructor
@@ -30,12 +31,20 @@ module scenes {
             this.Main();
         }
         public Update():void {
-            document.addEventListener('keydown',(e: KeyboardEvent)=>{
-                if(e.key === "Enter"){
-                    this.startButtonClick();
+            //press attack button to show next message
+            if (objects.Game.keyboardManager.attacking){
+                if (this.messageTimeout == 0){
+                    this.messageTimeout = setTimeout(() => {
+                        this.startButtonClick();
+                    }, 50);
                 }
-            });
-            
+            }
+            else{
+                if (this.messageTimeout > 0){
+                    this.messageTimeout = 0;
+                    clearTimeout(this.messageTimeout);
+                }
+            }            
         }
 
         private startButtonClick():void {

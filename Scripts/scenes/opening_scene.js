@@ -18,17 +18,18 @@ var scenes;
         // Constructor
         function OpeningScene(assetManager) {
             var _this = _super.call(this, assetManager) || this;
+            _this.messageTimeout = 0;
             _this.Start();
             return _this;
         }
         OpeningScene.prototype.Start = function () {
             // Initialize our objects for this scene
             this.currentMessage = 0;
-            this.changingMessage = false;
             this.background = new objects.Background(this.assetManager, "background");
             this.pressEnterLabel = new objects.Label("", "16px", "'Press Start 2P'", "#000000", 10, 200, true);
             this.pressEnterLabel.color = "#FFFFFF";
             this.cutSceneMessages = [
+                "",
                 "Hello, welcome... stranger",
                 "Before we begin, please note you may \nescape cutscenes via the ESC key.\nThat is, if you already know what to do.",
                 "In this game, you play the role of \nPhoebe, who is a paranormal bounty\nhunter.",
@@ -47,18 +48,25 @@ var scenes;
         OpeningScene.prototype.Update = function () {
             var _this = this;
             this.pressEnterLabel.text = this.cutSceneMessages[this.currentMessage];
-            document.addEventListener('keydown', function (e) {
-                if (e.key === "Escape") {
+            if (objects.Game.keyboardManager.biting) {
+                setTimeout(function () {
                     _this.startButtonClick();
-                }
-                else if (!_this.changingMessage) {
-                    _this.changingMessage = true;
-                    setTimeout(function () {
+                }, 200);
+            }
+            //press attack button to show next message
+            if (objects.Game.keyboardManager.attacking) {
+                if (this.messageTimeout == 0) {
+                    this.messageTimeout = setTimeout(function () {
                         _this.nextMessage();
-                        _this.changingMessage = false;
-                    }, 500);
+                    }, 50);
                 }
-            });
+            }
+            else {
+                if (this.messageTimeout > 0) {
+                    this.messageTimeout = 0;
+                    clearTimeout(this.messageTimeout);
+                }
+            }
         };
         OpeningScene.prototype.startButtonClick = function () {
             // Change our game state to GAME

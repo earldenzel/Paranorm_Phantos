@@ -20,7 +20,7 @@ var objects;
         function Player(assetManager) {
             var _this = _super.call(this, assetManager, "player_p_walk7") || this;
             _this.attackSequence = 0;
-            _this.playerMoveSpeed = 2;
+            _this.playerMoveSpeed = 4;
             _this.attackTimer = 0;
             _this.weapon = new objects.Weapon(assetManager);
             _this.Start();

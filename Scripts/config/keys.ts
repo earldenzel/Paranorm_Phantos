@@ -13,5 +13,8 @@ module config {
         // Z J Keys
         public static Z: number = 90;
         public static J: number = 74;
+        // Enter Escape
+        public static ENTER: number = 13;
+        public static ESCAPE: number = 27;
     }
 }

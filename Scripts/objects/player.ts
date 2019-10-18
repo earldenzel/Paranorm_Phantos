@@ -8,7 +8,7 @@ module objects {
         private goingLeftInterval: any;
         private goingRightInterval: any;
         private attackSequence: number = 0;
-        private playerMoveSpeed: number = 2;
+        private playerMoveSpeed: number = 4;
         public weapon: objects.Weapon;
         private attackTimer: number = 0;
 
