@@ -3,6 +3,7 @@ var managers;
     var Keyboard = /** @class */ (function () {
         // Constructor
         function Keyboard() {
+            this.attackEnabled = true;
             this.enabled = true;
             document.addEventListener("keydown", this.onKeyDown.bind(this), false);
             document.addEventListener("keyup", this.onKeyUp.bind(this), false);
@@ -28,7 +29,9 @@ var managers;
                     break;
                 case config.Keys.J:
                 case config.Keys.Z:
-                    this.attacking = true;
+                    if (this.attackEnabled) {
+                        this.attacking = true;
+                    }
                     break;
             }
         };
@@ -52,7 +55,9 @@ var managers;
                     break;
                 case config.Keys.J:
                 case config.Keys.Z:
-                    this.attacking = true;
+                    if (this.attackEnabled) {
+                        this.attacking = false;
+                    }
                     break;
             }
         };

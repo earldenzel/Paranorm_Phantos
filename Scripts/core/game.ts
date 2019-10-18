@@ -104,10 +104,6 @@
         stage.update();
     }
 
-    function clickableButtonMouseClick(): void {
-        console.log("AHHHHHHH");
-    }
-
     function Main() {
         console.log("Game Start...");
 

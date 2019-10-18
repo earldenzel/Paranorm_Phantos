@@ -9,6 +9,7 @@ module managers {
         public biting: boolean;
 
         public enabled: boolean;
+        public attackEnabled: boolean = true;
         public pause: boolean;
 
         // Constructor
@@ -39,7 +40,9 @@ module managers {
                     break;
                 case config.Keys.J:
                 case config.Keys.Z:
-                    this.attacking = true;
+                    if (this.attackEnabled){
+                        this.attacking = true;
+                    }
                     break;
             }
         }
@@ -63,7 +66,9 @@ module managers {
                     break;
                 case config.Keys.J:
                 case config.Keys.Z:
-                    this.attacking = true;
+                    if (this.attackEnabled){
+                        this.attacking = false;
+                    }
                     break;
             }
         }

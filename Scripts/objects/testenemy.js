@@ -24,6 +24,7 @@ var objects;
             _this.moveSpeed = moveSpeed;
             _this.rightDirection = rightDirection;
             _this.downDirection = downDirection;
+            _this.knockback = 0.75;
             return _this;
         }
         // methods

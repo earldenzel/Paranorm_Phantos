@@ -44,6 +44,13 @@ var objects;
             this.hp -= attacker.attackPower;
             console.log(attacker.name + " dealt " + attacker.attackPower + " damage to " + this.name);
         };
+        GameObject.prototype.SetPosition = function (position) {
+            this.x = position.x;
+            this.y = position.y;
+        };
+        GameObject.prototype.GetPosition = function () {
+            return new math.Vec2(this.x, this.y);
+        };
         return GameObject;
     }(createjs.Bitmap));
     objects.GameObject = GameObject;

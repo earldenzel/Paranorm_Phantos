@@ -32,6 +32,7 @@ var objects;
                 if (this.visible) {
                     objects.Game.messageStatus.text = this.name + " is stunned!";
                 }
+                //TODO: ensure that enemy is inside stage when stunned
             }
             //if it is not stunned, it can move
             if (!this.isStunned) {
@@ -52,7 +53,7 @@ var objects;
                     this.GetDamage(objects.Game.player);
                 }
             }
-            //else, only remove the flag for taking damage when collosion with weapon has ended
+            //else, only remove the flag for taking damage when collision with weapon has ended
             else {
                 if (!managers.Collision.Check(objects.Game.player.weapon, this)) {
                     this.isTakingDamage = false;
@@ -73,6 +74,10 @@ var objects;
                 this.visible = false;
             }
             else {
+                //introduce a knockback
+                var awayVector = this.GetPosition().AwayFrom(objects.Game.player.GetPosition()).Multiply(this.knockback);
+                var newPosition = math.Vec2.Add(this.GetPosition(), awayVector);
+                this.SetPosition(newPosition);
                 _super.prototype.GetDamage.call(this, attacker);
             }
         };

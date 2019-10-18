@@ -47,5 +47,14 @@ module objects {
             this.hp -= attacker.attackPower;
             console.log(attacker.name + " dealt " + attacker.attackPower + " damage to " + this.name);
         }
+
+        public SetPosition(position: math.Vec2){
+            this.x = position.x;
+            this.y = position.y;
+        }
+
+        public GetPosition(): math.Vec2{
+            return new math.Vec2(this.x, this.y);
+        }
     }
 }

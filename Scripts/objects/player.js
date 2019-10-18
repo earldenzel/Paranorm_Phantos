@@ -19,7 +19,9 @@ var objects;
         //Constructor
         function Player(assetManager) {
             var _this = _super.call(this, assetManager, "player_p_walk7") || this;
+            _this.attackSequence = 0;
             _this.playerMoveSpeed = 2;
+            _this.attackTimer = 0;
             _this.weapon = new objects.Weapon(assetManager);
             _this.Start();
             _this.Move();
@@ -45,8 +47,7 @@ var objects;
         Player.prototype.Reset = function () { };
         Player.prototype.Move = function () {
             var _this = this;
-            //current keyboard implementation - will likely change later
-            //this.AddEventListeners();
+            //movement implementation
             if (objects.Game.keyboardManager.moveLeft) {
                 this.x -= this.playerMoveSpeed;
             }
@@ -59,24 +60,47 @@ var objects;
             if (objects.Game.keyboardManager.moveDown) {
                 this.y += this.playerMoveSpeed;
             }
+            //if player presses the attack button
             if (objects.Game.keyboardManager.attacking) {
-                var attackTimer_1 = 0;
-                console.log("Attack initiated");
-                this.weapon.visible = true;
-                this.attackSequence = setInterval(function () {
-                    attackTimer_1++;
-                    console.log(attackTimer_1);
-                    _this.weapon.y -= 20;
-                    _this.weapon.x = _this.x;
-                    if (attackTimer_1 > 15) {
-                        clearInterval(_this.attackSequence);
-                        _this.weapon.visible = false;
-                    }
-                }, 50);
+                //and the attack sequence is not defined... then define attack sequence
+                if (this.attackSequence == 0) {
+                    console.log("Attack initiated");
+                    this.weapon.visible = true;
+                    this.attackSequence = setInterval(function () {
+                        _this.weapon.y -= 20;
+                        _this.weapon.x = _this.x;
+                    }, 50);
+                }
+                //and the attack sequence is defined, then increase timer for attack (button held down)
+                else {
+                    this.attackTimer++;
+                }
+                //if button is held down too long, then weapon visibility is lost. 
+                if (this.attackTimer > 50) {
+                    console.log("Attack disabled");
+                    this.weapon.visible = false;
+                }
             }
+            //if player does not press the attack button
             else {
-                clearInterval(this.attackSequence);
-                this.weapon.visible = false;
+                //attack sequence is defined and the button was held down sparingly, then turn off attack
+                if (this.attackSequence > 0 && this.attackTimer <= 50) {
+                    console.log("Attack sequence cancelled");
+                    this.attackTimer = 0;
+                    clearInterval(this.attackSequence);
+                    this.weapon.visible = false;
+                    this.attackSequence = 0;
+                }
+                //if weapon is disabled, and button is let go, then reset timer
+                //introduce a 300ms disable of the weapon
+                if (this.attackTimer > 50 && !this.weapon.visible) {
+                    this.attackTimer = 0;
+                    objects.Game.keyboardManager.attackEnabled = false;
+                    setTimeout(function () {
+                        console.log("Attack re-enabled");
+                        objects.Game.keyboardManager.attackEnabled = true;
+                    }, 300);
+                }
             }
         };
         Player.prototype.CheckBound = function () {

@@ -83,9 +83,6 @@
         currentScene.Update();
         stage.update();
     }
-    function clickableButtonMouseClick() {
-        console.log("AHHHHHHH");
-    }
     function Main() {
         console.log("Game Start...");
         // Finite State Machine
