@@ -126,7 +126,7 @@
                 break;
             case config.Scene.GRAVEYARD_2:
                 stage.removeAllChildren();
-                currentScene = new scenes.PlayScene(assetManager);
+                currentScene = new scenes.Graveyard_2(assetManager);
                 stage.addChild(currentScene);
                 break;
             case config.Scene.OVER:

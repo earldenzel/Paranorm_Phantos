@@ -52,6 +52,9 @@ var scenes;
             }
         };
         StartScene.prototype.startButtonClick = function () {
+            //initialize player on start play
+            var player = new objects.Player(this.assetManager);
+            objects.Game.player = player;
             // Change our game state from START to OPENING_SCENE
             objects.Game.currentScene = config.Scene.OPENING_SCENE;
         };

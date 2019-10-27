@@ -22,6 +22,10 @@ var objects;
             _this.attackSequence = 0;
             _this.playerMoveSpeed = 4;
             _this.attackTimer = 0;
+            _this.canTraverseTop = false;
+            _this.canTraverseBot = false;
+            _this.canTraverseLeft = false;
+            _this.canTraverseRight = false;
             _this.weapon = new objects.Weapon(assetManager);
             _this.Start();
             _this.Move();
@@ -32,7 +36,7 @@ var objects;
         // Methods
         Player.prototype.Start = function () {
             this.x = 320;
-            this.y = 700;
+            this.y = 380;
             this.playerController = { "W": false, "A": false, "S": false, "D": false, "Z": false };
         };
         Player.prototype.Update = function () {
@@ -110,17 +114,35 @@ var objects;
             }
             // left bound
             if (this.x <= this.halfW + 80) {
-                console.log(this.y);
                 this.x = this.halfW + 80;
             }
             // bottom bound
             if (this.y >= 765 - this.halfH) {
-                this.y = 765 - this.halfH;
+                if (this.canTraverseBot) {
+                    if (this.x < 276 || this.x > 372) {
+                        this.y = 765 - this.halfH;
+                    }
+                    if (this.y >= 765) {
+                        objects.Game.currentScene = this.sceneOnBot;
+                        this.SetPosition(new math.Vec2(this.x, this.halfH + 40));
+                    }
+                }
+                else {
+                    this.y = 765 - this.halfH;
+                }
             }
             // top bound
             if (this.y <= this.halfH + 40) {
-                console.log(this.x);
-                if (this.x < 276 || this.x > 372) {
+                if (this.canTraverseTop) {
+                    if (this.x < 276 || this.x > 372) {
+                        this.y = this.halfH + 40;
+                    }
+                    if (this.y <= 0) {
+                        objects.Game.currentScene = this.sceneOnTop;
+                        this.SetPosition(new math.Vec2(this.x, 765 - this.halfH));
+                    }
+                }
+                else {
                     this.y = this.halfH + 40;
                 }
             }

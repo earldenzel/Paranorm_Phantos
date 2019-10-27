@@ -24,12 +24,7 @@ var scenes;
         // Methods
         Graveyard_1.prototype.Start = function () {
             // Initialize our variables
-            this.changingScenes = false;
-            this.player = new objects.Player(this.assetManager);
-            this.enemies = new Array();
-            this.enemies[0] = new objects.TestEnemy(this.assetManager, 5, true, true);
-            this.enemies[1] = new objects.TestEnemy(this.assetManager, 3, false, false);
-            this.enemies[2] = new objects.TestEnemy(this.assetManager, 2, false, true);
+            this.player = objects.Game.player;
             this.ceilingHorizontal = new objects.Background(this.assetManager, "background_c_hori");
             this.ceilingVertical = new objects.Background(this.assetManager, "background_c_vert");
             this.floor = new objects.Background(this.assetManager, "background_f_all");
@@ -39,26 +34,17 @@ var scenes;
             this.playerStatus = new objects.Label("PLAYER STATUSES GO HERE", "16px", "'Press Start 2P'", "#000000", 0, 800, false);
             this.messageStatus = new objects.Label("MESSAGES GO HERE", "16px", "'Press Start 2P'", "#000000", 0, 820, false);
             this.controllerHelp = new objects.Label("UP-DOWN-LEFT-RIGHT + Z OR W-A-S-D + J", "16px", "'Press Start 2P'", "#000000", 0, 840, false);
-            objects.Game.player = this.player;
             objects.Game.messageStatus = this.messageStatus;
+            this.player.canTraverseTop = true;
+            this.player.canTraverseBot = false;
+            this.player.sceneOnTop = config.Scene.GRAVEYARD_2;
             this.Main();
         };
         Graveyard_1.prototype.Update = function () {
             this.player.Update();
-            this.Checkbounds();
-            var collectiveCollision = false;
-            this.enemies.forEach(function (e) {
-                e.Update();
-                collectiveCollision = collectiveCollision || managers.Collision.Check(objects.Game.player, e);
-            });
-            //this.portalNorth.Update();
-            if (objects.Game.player.isTakingDamage && !collectiveCollision) {
-                objects.Game.player.isTakingDamage = false;
-            }
             this.playerStatus.text = "PLAYER HP" + this.player.hp + "/5";
         };
         Graveyard_1.prototype.Main = function () {
-            var _this = this;
             // BACKGROUND PLACEMENT
             this.addChild(this.floor);
             this.addChild(this.wallHorizontal);
@@ -68,9 +54,6 @@ var scenes;
             this.addChild(this.ceilingVertical);
             // ITEM PLACEMENT
             // ENEMY PLACEMENT
-            this.enemies.forEach(function (e) {
-                _this.addChild(e);
-            });
             // PLAYER PLACEMENT
             this.addChild(this.player.weapon);
             this.addChild(this.player);
@@ -78,35 +61,6 @@ var scenes;
             this.addChild(this.playerStatus);
             this.addChild(this.messageStatus);
             this.addChild(this.controllerHelp);
-        };
-        Graveyard_1.prototype.Checkbounds = function () {
-            var player = objects.Game.player;
-            // right bound
-            if (player.x >= 565 - player.halfW) {
-                player.x = 565 - player.halfW;
-            }
-            // left bound
-            if (player.x <= player.halfW + 80) {
-                console.log(player.y);
-                player.x = player.halfW + 80;
-            }
-            // bottom bound
-            if (player.y >= 765 - player.halfH) {
-                player.y = 765 - player.halfH;
-            }
-            // top bound
-            if (player.y <= player.halfH + 40) {
-                console.log(player.x);
-                if (player.x < 276 || player.x > 372) {
-                    player.y = player.halfH + 40;
-                }
-                if (player.y <= player.halfH && !this.changingScenes) {
-                    console.log("Moving to next scene...");
-                    this.changingScenes = true;
-                    objects.Game.currentScene = config.Scene.GRAVEYARD_2;
-                    objects.Game.player.SetPosition(new math.Vec2(player.x, 765 - player.halfH));
-                }
-            }
         };
         return Graveyard_1;
     }(objects.Scene));

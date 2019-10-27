@@ -13,19 +13,18 @@ var __extends = (this && this.__extends) || (function () {
 })();
 var scenes;
 (function (scenes) {
-    var PlayScene = /** @class */ (function (_super) {
-        __extends(PlayScene, _super);
+    var Graveyard_2 = /** @class */ (function (_super) {
+        __extends(Graveyard_2, _super);
         // Constructor
-        function PlayScene(assetManager, playerPosition) {
+        function Graveyard_2(assetManager) {
             var _this = _super.call(this, assetManager) || this;
-            _this.playerPosition = playerPosition;
             _this.Start();
             return _this;
         }
         // Methods
-        PlayScene.prototype.Start = function () {
+        Graveyard_2.prototype.Start = function () {
             // Initialize our variables
-            this.player = new objects.Player(this.assetManager, this.playerPosition);
+            this.player = objects.Game.player;
             this.enemies = new Array();
             this.enemies[0] = new objects.TestEnemy(this.assetManager, 5, true, true);
             this.enemies[1] = new objects.TestEnemy(this.assetManager, 3, false, false);
@@ -35,34 +34,39 @@ var scenes;
             this.floor = new objects.Background(this.assetManager, "background_f_all");
             this.wallHorizontal = new objects.Background(this.assetManager, "background_w_hori");
             this.wallVertical = new objects.Background(this.assetManager, "background_w_vert");
-            this.doorVertical = new objects.Background(this.assetManager, "background_d_vert");
-            this.doorVerticalTop = new objects.Background(this.assetManager, "background_d_vertT");
+            this.doorBot = new objects.Background(this.assetManager, "background_d_vert");
+            this.doorBot.FlipY();
+            this.doorTop = new objects.Background(this.assetManager, "background_d_vert");
             this.playerStatus = new objects.Label("PLAYER STATUSES GO HERE", "16px", "'Press Start 2P'", "#000000", 0, 800, false);
             this.messageStatus = new objects.Label("MESSAGES GO HERE", "16px", "'Press Start 2P'", "#000000", 0, 820, false);
             this.controllerHelp = new objects.Label("UP-DOWN-LEFT-RIGHT + Z OR W-A-S-D + J", "16px", "'Press Start 2P'", "#000000", 0, 840, false);
-            objects.Game.player = this.player;
             objects.Game.messageStatus = this.messageStatus;
+            this.player.canTraverseTop = false;
+            this.player.canTraverseBot = true;
+            this.player.sceneOnBot = config.Scene.GRAVEYARD_1;
             this.Main();
         };
-        PlayScene.prototype.Update = function () {
+        Graveyard_2.prototype.Update = function () {
             this.player.Update();
             var collectiveCollision = false;
             this.enemies.forEach(function (e) {
                 e.Update();
                 collectiveCollision = collectiveCollision || managers.Collision.Check(objects.Game.player, e);
             });
+            //this.portalNorth.Update();
             if (objects.Game.player.isTakingDamage && !collectiveCollision) {
                 objects.Game.player.isTakingDamage = false;
             }
             this.playerStatus.text = "PLAYER HP" + this.player.hp + "/5";
         };
-        PlayScene.prototype.Main = function () {
+        Graveyard_2.prototype.Main = function () {
             var _this = this;
             // BACKGROUND PLACEMENT
             this.addChild(this.floor);
             this.addChild(this.wallHorizontal);
             this.addChild(this.wallVertical);
-            this.addChild(this.doorVertical);
+            this.addChild(this.doorBot);
+            this.addChild(this.doorTop);
             this.addChild(this.ceilingHorizontal);
             this.addChild(this.ceilingVertical);
             // ITEM PLACEMENT
@@ -73,14 +77,13 @@ var scenes;
             // PLAYER PLACEMENT
             this.addChild(this.player.weapon);
             this.addChild(this.player);
-            this.addChild(this.doorVerticalTop);
             //UI PLACEMENT
             this.addChild(this.playerStatus);
             this.addChild(this.messageStatus);
             this.addChild(this.controllerHelp);
         };
-        return PlayScene;
+        return Graveyard_2;
     }(objects.Scene));
-    scenes.PlayScene = PlayScene;
+    scenes.Graveyard_2 = Graveyard_2;
 })(scenes || (scenes = {}));
-//# sourceMappingURL=play copy.js.map
+//# sourceMappingURL=graveyard_2.js.map

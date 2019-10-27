@@ -3,14 +3,18 @@ module objects {
     export class Player extends objects.GameObject {
         //Variables
         public playerController: Controller<boolean>;
-        private goingUpInterval: any;
-        private goingDownInterval: any;
-        private goingLeftInterval: any;
-        private goingRightInterval: any;
         private attackSequence: number = 0;
         private playerMoveSpeed: number = 4;
         public weapon: objects.Weapon;
         private attackTimer: number = 0;
+        public canTraverseTop: boolean = false;
+        public canTraverseBot: boolean = false;
+        public canTraverseLeft: boolean = false;
+        public canTraverseRight: boolean = false;
+        public sceneOnTop: number;
+        public sceneOnBot: number;
+        public sceneOnLeft: number;
+        public sceneOnRight: number;
 
         //Constructor
         constructor(assetManager: createjs.LoadQueue) {
@@ -25,7 +29,7 @@ module objects {
         // Methods
         public Start(): void {     
             this.x = 320;
-            this.y = 700;
+            this.y = 380;
             this.playerController = { "W": false, "A": false, "S": false, "D": false, "Z": false };
 
         }
@@ -109,17 +113,35 @@ module objects {
             }
             // left bound
             if (this.x <= this.halfW + 80) {
-                console.log(this.y);
                 this.x = this.halfW + 80;
             }
             // bottom bound
-            if (this.y >= 765 - this.halfH) {
-                this.y = 765 - this.halfH;
+            if (this.y >= 765 - this.halfH) {                
+                if (this.canTraverseBot){
+                    if(this.x < 276 || this.x > 372){
+                        this.y = 765 - this.halfH;
+                    }
+                    if(this.y >= 765){
+                        objects.Game.currentScene = this.sceneOnBot;                        
+                        this.SetPosition(new math.Vec2(this.x, this.halfH + 40));
+                    }
+                }
+                else{                    
+                    this.y = 765 - this.halfH;
+                }                
             }
             // top bound
             if (this.y <= this.halfH + 40) {
-                console.log(this.x);
-                if (this.x < 276 || this.x > 372) {
+                if (this.canTraverseTop){
+                    if(this.x < 276 || this.x > 372){
+                        this.y = this.halfH + 40;
+                    }
+                    if(this.y <= 0){
+                        objects.Game.currentScene = this.sceneOnTop;                        
+                        this.SetPosition(new math.Vec2(this.x, 765 - this.halfH));
+                    }
+                }
+                else{                    
                     this.y = this.halfH + 40;
                 }
             }

@@ -33,5 +33,11 @@ module objects {
             //    this.Reset();
             //}
         }
+
+        public FlipY(): void{            
+            this.regX = this.getBounds().width;
+            this.regY = this.getBounds().height;
+            this.rotation = 180;
+        }
     }
 }
