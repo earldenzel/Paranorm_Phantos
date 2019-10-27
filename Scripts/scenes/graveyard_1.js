@@ -29,8 +29,8 @@ var scenes;
             this.player = new objects.Player(this.assetManager);
             this.enemies = new Array();
             this.enemies[0] = new objects.TestEnemy(this.assetManager, 1, true, true);
-            this.enemies[1] = new objects.TestEnemy(this.assetManager, 1, false, false);
-            this.enemies[2] = new objects.Bat(this.assetManager, 2);
+            this.enemies[1] = new objects.TestZombie(this.assetManager, 0.5);
+            this.enemies[2] = new objects.Bat(this.assetManager, 1);
             this.ceilingHorizontal = new objects.Background(this.assetManager, "background_c_hori");
             this.ceilingVertical = new objects.Background(this.assetManager, "background_c_vert");
             this.floor = new objects.Background(this.assetManager, "background_f_all");
@@ -58,7 +58,8 @@ var scenes;
                 objects.Game.player.isTakingDamage = false;
             }
             this.playerStatus.text = "PLAYER HP" + this.player.hp + "/5";
-            this.CheckBarrierCollision();
+            this.PlayerCheckBarrierCollision();
+            this.TestZombieCheckBarrierCollision();
         };
         Graveyard_1.prototype.Main = function () {
             var _this = this;
@@ -83,7 +84,7 @@ var scenes;
             this.addChild(this.messageStatus);
             this.addChild(this.controllerHelp);
         };
-        Graveyard_1.prototype.CheckBarrierCollision = function () {
+        Graveyard_1.prototype.PlayerCheckBarrierCollision = function () {
             if (managers.Collision.Check(this.barrierTest, objects.Game.player)) {
                 if (objects.Game.keyboardManager.moveLeft) {
                     this.player.x += this.playerMoveSpeed;
@@ -97,6 +98,16 @@ var scenes;
                 if (objects.Game.keyboardManager.moveDown) {
                     this.player.y -= this.playerMoveSpeed;
                 }
+            }
+        };
+        Graveyard_1.prototype.TestZombieCheckBarrierCollision = function () {
+            var playerPosition = new math.Vec2(this.player.x, this.player.y);
+            var enemyPosition = new math.Vec2(this.enemies[1].x, this.enemies[1].y);
+            var dirToPlayer = math.Vec2.Subtract(enemyPosition, playerPosition);
+            var distanceToPlayer = math.Vec2.Distance(enemyPosition, playerPosition);
+            if (managers.Collision.Check(this.barrierTest, this.enemies[1])) {
+                this.enemies[1].x -= math.Vec2.NormalizeMultiplySpeed(dirToPlayer, distanceToPlayer, this.enemies[1].GetObjectSpeed()).x;
+                this.enemies[1].y -= math.Vec2.NormalizeMultiplySpeed(dirToPlayer, distanceToPlayer, this.enemies[1].GetObjectSpeed()).y;
             }
         };
         Graveyard_1.prototype.Checkbounds = function () {

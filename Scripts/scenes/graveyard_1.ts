@@ -2,11 +2,11 @@ module scenes {
 
     export class Graveyard_1 extends objects.Scene {
         // Variables
-        private player:objects.Player;
+        private player: objects.Player;
         private enemies: Array<objects.Enemy>;
 
-        private ceilingVertical:objects.Background;
-        private ceilingHorizontal:objects.Background;
+        private ceilingVertical: objects.Background;
+        private ceilingHorizontal: objects.Background;
         private floor: objects.Background;
         private wallVertical: objects.Background;
         private wallHorizontal: objects.Background;
@@ -20,7 +20,7 @@ module scenes {
         private playerMoveSpeed: number = 4;
 
         // Constructor
-        constructor(assetManager:createjs.LoadQueue) {
+        constructor(assetManager: createjs.LoadQueue) {
             super(assetManager);
             this.Start();
         }
@@ -32,14 +32,14 @@ module scenes {
             this.player = new objects.Player(this.assetManager);
             this.enemies = new Array<objects.Enemy>();
             this.enemies[0] = new objects.TestEnemy(this.assetManager, 1, true, true);
-            this.enemies[1] = new objects.TestEnemy(this.assetManager, 1, false, false);
-            this.enemies[2] = new objects.Bat(this.assetManager, 2);
+            this.enemies[1] = new objects.TestZombie(this.assetManager, 0.5);
+            this.enemies[2] = new objects.Bat(this.assetManager, 1);
 
-            this.ceilingHorizontal =new objects.Background(this.assetManager,"background_c_hori");
-            this.ceilingVertical =new objects.Background(this.assetManager,"background_c_vert");
-            this.floor = new objects.Background(this.assetManager,"background_f_all");
+            this.ceilingHorizontal = new objects.Background(this.assetManager, "background_c_hori");
+            this.ceilingVertical = new objects.Background(this.assetManager, "background_c_vert");
+            this.floor = new objects.Background(this.assetManager, "background_f_all");
 
-            this.wallHorizontal = new objects.Background(this.assetManager,"background_w_hori");
+            this.wallHorizontal = new objects.Background(this.assetManager, "background_w_hori");
             this.wallVertical = new objects.Background(this.assetManager, "background_w_vert");
 
             this.doorVertical = new objects.Background(this.assetManager, "background_d_vert");
@@ -49,11 +49,11 @@ module scenes {
             this.playerStatus = new objects.Label("PLAYER STATUSES GO HERE", "16px", "'Press Start 2P'", "#000000", 0, 800, false);
             this.messageStatus = new objects.Label("MESSAGES GO HERE", "16px", "'Press Start 2P'", "#000000", 0, 820, false);
             this.controllerHelp = new objects.Label("UP-DOWN-LEFT-RIGHT + Z OR W-A-S-D + J", "16px", "'Press Start 2P'", "#000000", 0, 840, false);
-            
+
             objects.Game.player = this.player;
             objects.Game.messageStatus = this.messageStatus;
             this.Main();
-        }        
+        }
 
         public Update(): void {
 
@@ -62,15 +62,16 @@ module scenes {
             let collectiveCollision: boolean = false;
             this.enemies.forEach(e => {
                 e.Update();
-                collectiveCollision = collectiveCollision || managers.Collision.Check(objects.Game.player,e);
+                collectiveCollision = collectiveCollision || managers.Collision.Check(objects.Game.player, e);
             });
             //this.portalNorth.Update();
-            if (objects.Game.player.isTakingDamage && !collectiveCollision){
+            if (objects.Game.player.isTakingDamage && !collectiveCollision) {
                 objects.Game.player.isTakingDamage = false;
             }
             this.playerStatus.text = "PLAYER HP" + this.player.hp + "/5";
 
-            this.CheckBarrierCollision();
+            this.PlayerCheckBarrierCollision();
+            this.TestZombieCheckBarrierCollision();
         }
 
         public Main(): void {
@@ -91,15 +92,15 @@ module scenes {
             // PLAYER PLACEMENT
             this.addChild(this.player.weapon);
             this.addChild(this.player);
-            
+
             //UI PLACEMENT
             this.addChild(this.playerStatus);
             this.addChild(this.messageStatus);
             this.addChild(this.controllerHelp);
         }
 
-        public CheckBarrierCollision(): void{
-            if(managers.Collision.Check(this.barrierTest, objects.Game.player)){
+        public PlayerCheckBarrierCollision(): void {
+            if (managers.Collision.Check(this.barrierTest, objects.Game.player)) {
                 if (objects.Game.keyboardManager.moveLeft) {
                     this.player.x += this.playerMoveSpeed;
                 }
@@ -107,7 +108,7 @@ module scenes {
                     this.player.x -= this.playerMoveSpeed;
                 }
                 if (objects.Game.keyboardManager.moveUp) {
-                    this.player.y +=  this.playerMoveSpeed;
+                    this.player.y += this.playerMoveSpeed;
                 }
                 if (objects.Game.keyboardManager.moveDown) {
                     this.player.y -= this.playerMoveSpeed;
@@ -115,7 +116,20 @@ module scenes {
             }
         }
 
-        public Checkbounds(): void{
+        public TestZombieCheckBarrierCollision(): void {
+            let playerPosition: math.Vec2 = new math.Vec2(this.player.x, this.player.y);
+            let enemyPosition: math.Vec2 = new math.Vec2(this.enemies[1].x, this.enemies[1].y);
+
+            let dirToPlayer: math.Vec2 = math.Vec2.Subtract(enemyPosition, playerPosition);
+            let distanceToPlayer: number = math.Vec2.Distance(enemyPosition, playerPosition);
+
+            if (managers.Collision.Check(this.barrierTest, this.enemies[1])) {
+                this.enemies[1].x -= math.Vec2.NormalizeMultiplySpeed(dirToPlayer, distanceToPlayer, this.enemies[1].GetObjectSpeed()).x;
+                this.enemies[1].y -= math.Vec2.NormalizeMultiplySpeed(dirToPlayer, distanceToPlayer, this.enemies[1].GetObjectSpeed()).y;
+            }
+        }
+
+        public Checkbounds(): void {
             let player: objects.Player = objects.Game.player;
             // right bound
             if (player.x >= 565 - player.halfW) {
@@ -133,10 +147,10 @@ module scenes {
             // top bound
             if (player.y <= player.halfH + 40) {
                 console.log(player.x);
-                if(player.x < 276 || player.x > 372){
+                if (player.x < 276 || player.x > 372) {
                     player.y = player.halfH + 40;
                 }
-                if(player.y <= player.halfH && !this.changingScenes){
+                if (player.y <= player.halfH && !this.changingScenes) {
                     console.log("Moving to next scene...");
                     this.changingScenes = true;
                     objects.Game.currentScene = config.Scene.GRAVEYARD_2;
