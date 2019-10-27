@@ -8,6 +8,8 @@ module config {
         GRAVEYARD_4,
         GRAVEYARD_5,
         GRAVEYARD_6,
+        GRAVEYARD_7,
+        GRAVEYARD_8,
         STAGE_PICKER,
         SHOP,
         OVER = -1

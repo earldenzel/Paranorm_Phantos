@@ -16,8 +16,12 @@ var scenes;
     var PlayScene = /** @class */ (function (_super) {
         __extends(PlayScene, _super);
         // Constructor
-        function PlayScene(assetManager) {
+        function PlayScene(assetManager, hasDoorTop, hasDoorBot, hasDoorLeft, hasDoorRight) {
             var _this = _super.call(this, assetManager) || this;
+            _this.hasDoorTop = hasDoorTop;
+            _this.hasDoorBot = hasDoorBot;
+            _this.hasDoorLeft = hasDoorLeft;
+            _this.hasDoorRight = hasDoorRight;
             _this.Start();
             return _this;
         }
@@ -25,16 +29,36 @@ var scenes;
         PlayScene.prototype.Start = function () {
             // Initialize our variables
             this.player = objects.Game.player;
-            this.enemies = new Array();
-            this.enemies[0] = new objects.TestEnemy(this.assetManager, 1, true, true);
-            this.enemies[1] = new objects.TestEnemy(this.assetManager, 1, false, false);
             this.ceilingHorizontal = new objects.Background(this.assetManager, "background_c_hori");
             this.ceilingVertical = new objects.Background(this.assetManager, "background_c_vert");
             this.floor = new objects.Background(this.assetManager, "background_f_all");
             this.wallHorizontal = new objects.Background(this.assetManager, "background_w_hori");
             this.wallVertical = new objects.Background(this.assetManager, "background_w_vert");
-            this.doorVertical = new objects.Background(this.assetManager, "background_d_vert");
-            this.doorVerticalTop = new objects.Background(this.assetManager, "background_d_vertT");
+            this.player.canTraverseTop = false;
+            this.player.canTraverseBot = false;
+            this.player.canTraverseLeft = false;
+            this.player.canTraverseRight = false;
+            if (this.hasDoorTop) {
+                this.doorTop = new objects.Background(this.assetManager, "background_d_vert");
+                this.doorTopFrame = new objects.Background(this.assetManager, "background_d_vertT");
+                this.player.canTraverseTop = true;
+            }
+            if (this.hasDoorBot) {
+                this.doorBot = new objects.Background(this.assetManager, "background_d_vert");
+                this.doorBotFrame = new objects.Background(this.assetManager, "background_d_vertT");
+                this.doorBot.Flip();
+                this.doorBotFrame.Flip();
+                this.player.canTraverseBot = true;
+            }
+            if (this.hasDoorLeft) {
+                this.doorLeft = new objects.Background(this.assetManager, "background_d_hori");
+                this.player.canTraverseLeft = true;
+            }
+            if (this.hasDoorRight) {
+                this.doorRight = new objects.Background(this.assetManager, "background_d_hori");
+                this.doorRight.Flip();
+                this.player.canTraverseRight = true;
+            }
             this.playerStatus = new objects.Label("PLAYER STATUSES GO HERE", "16px", "'Press Start 2P'", "#000000", 0, 800, false);
             this.messageStatus = new objects.Label("MESSAGES GO HERE", "16px", "'Press Start 2P'", "#000000", 0, 820, false);
             this.controllerHelp = new objects.Label("UP-DOWN-LEFT-RIGHT + Z OR W-A-S-D + J", "16px", "'Press Start 2P'", "#000000", 0, 840, false);
@@ -54,14 +78,35 @@ var scenes;
             this.playerStatus.text = "PLAYER HP" + this.player.hp + "/5";
         };
         PlayScene.prototype.Main = function () {
-            var _this = this;
             // BACKGROUND PLACEMENT
+            var _this = this;
+            //floor and walls
             this.addChild(this.floor);
             this.addChild(this.wallHorizontal);
             this.addChild(this.wallVertical);
-            this.addChild(this.doorVertical);
+            //door holes
+            if (this.hasDoorTop) {
+                this.addChild(this.doorTop);
+            }
+            if (this.hasDoorBot) {
+                this.addChild(this.doorBot);
+            }
+            if (this.hasDoorLeft) {
+                this.addChild(this.doorLeft);
+            }
+            if (this.hasDoorRight) {
+                this.addChild(this.doorRight);
+            }
+            //ceiling
             this.addChild(this.ceilingHorizontal);
             this.addChild(this.ceilingVertical);
+            //door frames
+            if (this.hasDoorTop) {
+                this.addChild(this.doorTopFrame);
+            }
+            if (this.hasDoorBot) {
+                this.addChild(this.doorBotFrame);
+            }
             // ITEM PLACEMENT
             // ENEMY PLACEMENT
             this.enemies.forEach(function (e) {
@@ -70,7 +115,6 @@ var scenes;
             // PLAYER PLACEMENT
             this.addChild(this.player.weapon);
             this.addChild(this.player);
-            this.addChild(this.doorVerticalTop);
             //UI PLACEMENT
             this.addChild(this.playerStatus);
             this.addChild(this.messageStatus);

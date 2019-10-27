@@ -108,12 +108,34 @@ module objects {
 
         public CheckBound(): void {
             // right bound
-            if (this.x >= 565 - this.halfW) {
-                this.x = 565 - this.halfW;
+            if (this.x >= 565 - this.halfW) {               
+                if (this.canTraverseRight){
+                    if(this.y < 335 || this.y > 431){
+                        this.x = 565 - this.halfW;
+                    }
+                    if(this.x >= 565){
+                        objects.Game.currentScene = this.sceneOnRight;                        
+                        this.SetPosition(new math.Vec2(this.halfW + 80, this.y));
+                    }
+                }
+                else{                    
+                    this.x = 565 - this.halfW;
+                }        
             }
             // left bound
-            if (this.x <= this.halfW + 80) {
-                this.x = this.halfW + 80;
+            if (this.x <= this.halfW + 80) {               
+                if (this.canTraverseLeft){
+                    if(this.y < 335 || this.y > 431){
+                        this.x = this.halfW + 80;
+                    }
+                    if(this.x <= 0){
+                        objects.Game.currentScene = this.sceneOnLeft;                        
+                        this.SetPosition(new math.Vec2(565 - this.halfW, this.y));
+                    }
+                }
+                else{                    
+                    this.x = this.halfW + 80;
+                }                
             }
             // bottom bound
             if (this.y >= 765 - this.halfH) {                

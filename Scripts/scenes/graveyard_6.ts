@@ -1,18 +1,17 @@
 module scenes {
 
-    export class Graveyard_1 extends scenes.PlayScene {
+    export class Graveyard_6 extends scenes.PlayScene {
         // Constructor
         constructor(assetManager:createjs.LoadQueue) {
-            super(assetManager, false, true, true, true);
+            super(assetManager, true, true, false, false);
             this.Start();
         }
 
         // Methods
         public Start(): void {
             this.enemies = new Array<objects.Enemy>();
-            objects.Game.player.sceneOnBot = config.Scene.GRAVEYARD_5;
-            objects.Game.player.sceneOnLeft = config.Scene.GRAVEYARD_3;
-            objects.Game.player.sceneOnRight = config.Scene.GRAVEYARD_4;
+            objects.Game.player.sceneOnTop = config.Scene.GRAVEYARD_5;
+            objects.Game.player.sceneOnBot = config.Scene.GRAVEYARD_8;
             super.Start();
         }        
 

@@ -34,7 +34,7 @@ module objects {
             //}
         }
 
-        public FlipY(): void{            
+        public Flip(): void{            
             this.regX = this.getBounds().width;
             this.regY = this.getBounds().height;
             this.rotation = 180;

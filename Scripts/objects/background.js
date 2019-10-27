@@ -45,7 +45,7 @@ var objects;
             //    this.Reset();
             //}
         };
-        Background.prototype.FlipY = function () {
+        Background.prototype.Flip = function () {
             this.regX = this.getBounds().width;
             this.regY = this.getBounds().height;
             this.rotation = 180;

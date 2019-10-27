@@ -17,53 +17,26 @@ var scenes;
         __extends(Graveyard_1, _super);
         // Constructor
         function Graveyard_1(assetManager) {
-            var _this = _super.call(this, assetManager) || this;
+            var _this = _super.call(this, assetManager, false, true, true, true) || this;
             _this.Start();
             return _this;
         }
         // Methods
         Graveyard_1.prototype.Start = function () {
-            // Initialize our variables
-            this.player = objects.Game.player;
-            this.ceilingHorizontal = new objects.Background(this.assetManager, "background_c_hori");
-            this.ceilingVertical = new objects.Background(this.assetManager, "background_c_vert");
-            this.floor = new objects.Background(this.assetManager, "background_f_all");
-            this.wallHorizontal = new objects.Background(this.assetManager, "background_w_hori");
-            this.wallVertical = new objects.Background(this.assetManager, "background_w_vert");
-            this.doorVertical = new objects.Background(this.assetManager, "background_d_vert");
-            this.playerStatus = new objects.Label("PLAYER STATUSES GO HERE", "16px", "'Press Start 2P'", "#000000", 0, 800, false);
-            this.messageStatus = new objects.Label("MESSAGES GO HERE", "16px", "'Press Start 2P'", "#000000", 0, 820, false);
-            this.controllerHelp = new objects.Label("UP-DOWN-LEFT-RIGHT + Z OR W-A-S-D + J", "16px", "'Press Start 2P'", "#000000", 0, 840, false);
-            objects.Game.messageStatus = this.messageStatus;
-            this.player.canTraverseTop = true;
-            this.player.canTraverseBot = false;
-            this.player.sceneOnTop = config.Scene.GRAVEYARD_2;
-            this.Main();
+            this.enemies = new Array();
+            objects.Game.player.sceneOnBot = config.Scene.GRAVEYARD_5;
+            objects.Game.player.sceneOnLeft = config.Scene.GRAVEYARD_3;
+            objects.Game.player.sceneOnRight = config.Scene.GRAVEYARD_4;
+            _super.prototype.Start.call(this);
         };
         Graveyard_1.prototype.Update = function () {
-            this.player.Update();
-            this.playerStatus.text = "PLAYER HP" + this.player.hp + "/5";
+            _super.prototype.Update.call(this);
         };
         Graveyard_1.prototype.Main = function () {
-            // BACKGROUND PLACEMENT
-            this.addChild(this.floor);
-            this.addChild(this.wallHorizontal);
-            this.addChild(this.wallVertical);
-            this.addChild(this.doorVertical);
-            this.addChild(this.ceilingHorizontal);
-            this.addChild(this.ceilingVertical);
-            // ITEM PLACEMENT
-            // ENEMY PLACEMENT
-            // PLAYER PLACEMENT
-            this.addChild(this.player.weapon);
-            this.addChild(this.player);
-            //UI PLACEMENT
-            this.addChild(this.playerStatus);
-            this.addChild(this.messageStatus);
-            this.addChild(this.controllerHelp);
+            _super.prototype.Main.call(this);
         };
         return Graveyard_1;
-    }(objects.Scene));
+    }(scenes.PlayScene));
     scenes.Graveyard_1 = Graveyard_1;
 })(scenes || (scenes = {}));
 //# sourceMappingURL=graveyard_1.js.map
