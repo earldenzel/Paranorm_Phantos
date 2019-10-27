@@ -24,7 +24,7 @@ var math;
         }
         //method
         Vec2.Distance = function (P1, P2) {
-            return Math.floor(Math.sqrt(Math.pow(P2.x - P1.x, 2) + Math.pow(P2.y - P1.y, 2)));
+            return Math.sqrt(Math.pow(P2.x - P1.x, 2) + Math.pow(P2.y - P1.y, 2));
         };
         Vec2.Add = function (P1, P2) {
             return new Vec2(P1.x + P2.x, P1.y + P2.y);
@@ -34,6 +34,14 @@ var math;
         };
         Vec2.prototype.Multiply = function (multiplier) {
             return new Vec2(this.x * multiplier, this.y * multiplier);
+        };
+        // Vector P1 to P2
+        Vec2.Subtract = function (P1, P2) {
+            return new Vec2(P2.x - P1.x, P2.y - P1.y);
+        };
+        // Vector nomalization
+        Vec2.NormalizeMultiplySpeed = function (vectorSubtract, distance, speed) {
+            return new Vec2(vectorSubtract.x * speed / distance, vectorSubtract.y * speed / distance);
         };
         return Vec2;
     }(createjs.Point));

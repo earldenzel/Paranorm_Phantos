@@ -28,9 +28,9 @@ module scenes {
             this.changingScenes = false;
             this.player = new objects.Player(this.assetManager);
             this.enemies = new Array<objects.Enemy>();
-            this.enemies[0] = new objects.TestEnemy(this.assetManager, 5, true, true);
-            this.enemies[1] = new objects.TestEnemy(this.assetManager, 3, false, false);
-            this.enemies[2] = new objects.TestEnemy(this.assetManager, 2, false, true);
+            this.enemies[0] = new objects.TestEnemy(this.assetManager, 1, true, true);
+            this.enemies[1] = new objects.TestEnemy(this.assetManager, 1, false, false);
+            this.enemies[2] = new objects.Bat(this.assetManager, 2);
 
             this.ceilingHorizontal =new objects.Background(this.assetManager,"background_c_hori");
             this.ceilingVertical =new objects.Background(this.assetManager,"background_c_vert");
