@@ -24,8 +24,8 @@ var objects;
         }
         // Methods
         Barriers.prototype.Start = function () {
-            this.x = 320;
-            this.y = 435;
+            this.x = 200;
+            this.y = 200;
         };
         Barriers.prototype.Update = function () { };
         Barriers.prototype.Reset = function () { };

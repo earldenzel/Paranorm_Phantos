@@ -16,6 +16,9 @@ module scenes {
         private controllerHelp: objects.Label;
         private changingScenes: boolean;
 
+        private barrierTest: objects.Barriers;
+        private playerMoveSpeed: number = 4;
+
         // Constructor
         constructor(assetManager:createjs.LoadQueue) {
             super(assetManager);
@@ -41,6 +44,8 @@ module scenes {
 
             this.doorVertical = new objects.Background(this.assetManager, "background_d_vert");
 
+            this.barrierTest = new objects.Barriers(this.assetManager, "background_barrierTest");
+
             this.playerStatus = new objects.Label("PLAYER STATUSES GO HERE", "16px", "'Press Start 2P'", "#000000", 0, 800, false);
             this.messageStatus = new objects.Label("MESSAGES GO HERE", "16px", "'Press Start 2P'", "#000000", 0, 820, false);
             this.controllerHelp = new objects.Label("UP-DOWN-LEFT-RIGHT + Z OR W-A-S-D + J", "16px", "'Press Start 2P'", "#000000", 0, 840, false);
@@ -64,6 +69,8 @@ module scenes {
                 objects.Game.player.isTakingDamage = false;
             }
             this.playerStatus.text = "PLAYER HP" + this.player.hp + "/5";
+
+            this.CheckBarrierCollision();
         }
 
         public Main(): void {
@@ -75,6 +82,7 @@ module scenes {
             this.addChild(this.ceilingHorizontal);
             this.addChild(this.ceilingVertical);
             // ITEM PLACEMENT
+            this.addChild(this.barrierTest);
             // ENEMY PLACEMENT
             this.enemies.forEach(e => {
                 this.addChild(e);
@@ -88,6 +96,23 @@ module scenes {
             this.addChild(this.playerStatus);
             this.addChild(this.messageStatus);
             this.addChild(this.controllerHelp);
+        }
+
+        public CheckBarrierCollision(): void{
+            if(managers.Collision.Check(this.barrierTest, objects.Game.player)){
+                if (objects.Game.keyboardManager.moveLeft) {
+                    this.player.x += this.playerMoveSpeed;
+                }
+                if (objects.Game.keyboardManager.moveRight) {
+                    this.player.x -= this.playerMoveSpeed;
+                }
+                if (objects.Game.keyboardManager.moveUp) {
+                    this.player.y +=  this.playerMoveSpeed;
+                }
+                if (objects.Game.keyboardManager.moveDown) {
+                    this.player.y -= this.playerMoveSpeed;
+                }
+            }
         }
 
         public Checkbounds(): void{

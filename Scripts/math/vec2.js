@@ -39,7 +39,7 @@ var math;
         Vec2.Subtract = function (P1, P2) {
             return new Vec2(P2.x - P1.x, P2.y - P1.y);
         };
-        // Vector nomalization
+        // Vector nomalization (multiply speed is to calculate the movement per frame)
         Vec2.NormalizeMultiplySpeed = function (vectorSubtract, distance, speed) {
             return new Vec2(vectorSubtract.x * speed / distance, vectorSubtract.y * speed / distance);
         };

@@ -10,8 +10,8 @@ module objects{
         }
         // Methods
         public Start():void {
-            this.x = 320;
-            this.y = 435;
+            this.x = 200;
+            this.y = 200;
         }
         public Update():void {}
         public Reset():void {}

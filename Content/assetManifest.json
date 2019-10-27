@@ -61,6 +61,11 @@
     },
 
     {
+        "id": "enemy_zombieTest",
+        "src": "./Assets/_Enemies/zombieTest.png"
+    },
+
+    {
         "id": "background_c_hori",
         "src": "./Assets/_Background/_TestStage/Placeholder_CEILING-Horizontal.png"
     },
@@ -87,5 +92,9 @@
     {
         "id": "background_w_vert",
         "src": "./Assets/_Background/_TestStage/Placeholder_WALL-Vertical.png"
+    },
+    {
+        "id": "background_barrierTest",
+        "src": "./Assets/_Background/_TestStage/barrierTest.png"
     }
 ]

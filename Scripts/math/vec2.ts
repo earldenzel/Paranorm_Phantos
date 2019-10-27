@@ -27,7 +27,7 @@ module math {
             return new Vec2(P2.x - P1.x, P2.y - P1.y);
         }
 
-        // Vector nomalization
+        // Vector nomalization (multiply speed is to calculate the movement per frame)
         public static NormalizeMultiplySpeed(vectorSubtract: Vec2, distance: number, speed: number): Vec2 {
             return new Vec2(vectorSubtract.x * speed / distance , vectorSubtract.y * speed / distance);
         }

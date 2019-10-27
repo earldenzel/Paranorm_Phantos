@@ -29,9 +29,12 @@ module objects {
             this.halfW = this.width * 0.5;
             this.halfH = this.height * 0.5;
 
+            // from Yizhi: Why I change this is since: for AABB collision, 
+            // it uses the left corner as x and y instead of the center of the object
+            
             // Registration Points
-            this.regX = this.halfW;
-            this.regY = this.halfH;
+            // this.regX = this.halfW;
+            // this.regY = this.halfH;
 
             this.isColliding = false;
             this.isTakingDamage = false;

@@ -18,6 +18,7 @@ var scenes;
         // Constructor
         function Graveyard_1(assetManager) {
             var _this = _super.call(this, assetManager) || this;
+            _this.playerMoveSpeed = 4;
             _this.Start();
             return _this;
         }
@@ -36,6 +37,7 @@ var scenes;
             this.wallHorizontal = new objects.Background(this.assetManager, "background_w_hori");
             this.wallVertical = new objects.Background(this.assetManager, "background_w_vert");
             this.doorVertical = new objects.Background(this.assetManager, "background_d_vert");
+            this.barrierTest = new objects.Barriers(this.assetManager, "background_barrierTest");
             this.playerStatus = new objects.Label("PLAYER STATUSES GO HERE", "16px", "'Press Start 2P'", "#000000", 0, 800, false);
             this.messageStatus = new objects.Label("MESSAGES GO HERE", "16px", "'Press Start 2P'", "#000000", 0, 820, false);
             this.controllerHelp = new objects.Label("UP-DOWN-LEFT-RIGHT + Z OR W-A-S-D + J", "16px", "'Press Start 2P'", "#000000", 0, 840, false);
@@ -56,6 +58,7 @@ var scenes;
                 objects.Game.player.isTakingDamage = false;
             }
             this.playerStatus.text = "PLAYER HP" + this.player.hp + "/5";
+            this.CheckBarrierCollision();
         };
         Graveyard_1.prototype.Main = function () {
             var _this = this;
@@ -67,6 +70,7 @@ var scenes;
             this.addChild(this.ceilingHorizontal);
             this.addChild(this.ceilingVertical);
             // ITEM PLACEMENT
+            this.addChild(this.barrierTest);
             // ENEMY PLACEMENT
             this.enemies.forEach(function (e) {
                 _this.addChild(e);
@@ -78,6 +82,22 @@ var scenes;
             this.addChild(this.playerStatus);
             this.addChild(this.messageStatus);
             this.addChild(this.controllerHelp);
+        };
+        Graveyard_1.prototype.CheckBarrierCollision = function () {
+            if (managers.Collision.Check(this.barrierTest, objects.Game.player)) {
+                if (objects.Game.keyboardManager.moveLeft) {
+                    this.player.x += this.playerMoveSpeed;
+                }
+                if (objects.Game.keyboardManager.moveRight) {
+                    this.player.x -= this.playerMoveSpeed;
+                }
+                if (objects.Game.keyboardManager.moveUp) {
+                    this.player.y += this.playerMoveSpeed;
+                }
+                if (objects.Game.keyboardManager.moveDown) {
+                    this.player.y -= this.playerMoveSpeed;
+                }
+            }
         };
         Graveyard_1.prototype.Checkbounds = function () {
             var player = objects.Game.player;
