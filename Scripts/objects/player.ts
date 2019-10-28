@@ -143,7 +143,7 @@ module objects {
                     if(this.x < 276 || this.x > 372){
                         this.y = 765 - this.halfH;
                     }
-                    if(this.y >= 765){
+                    if(this.y >= 765 + this.height){
                         objects.Game.currentScene = this.sceneOnBot;                        
                         this.SetPosition(new math.Vec2(this.x, this.halfH + 40));
                     }
@@ -160,7 +160,7 @@ module objects {
                     }
                     if(this.y <= 0){
                         objects.Game.currentScene = this.sceneOnTop;                        
-                        this.SetPosition(new math.Vec2(this.x, 765 - this.halfH));
+                        this.SetPosition(new math.Vec2(this.x, 765 + this.height));
                     }
                 }
                 else{                    

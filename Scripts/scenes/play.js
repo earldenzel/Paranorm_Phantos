@@ -100,13 +100,6 @@ var scenes;
             //ceiling
             this.addChild(this.ceilingHorizontal);
             this.addChild(this.ceilingVertical);
-            //door frames
-            if (this.hasDoorTop) {
-                this.addChild(this.doorTopFrame);
-            }
-            if (this.hasDoorBot) {
-                this.addChild(this.doorBotFrame);
-            }
             // ITEM PLACEMENT
             // ENEMY PLACEMENT
             this.enemies.forEach(function (e) {
@@ -115,6 +108,13 @@ var scenes;
             // PLAYER PLACEMENT
             this.addChild(this.player.weapon);
             this.addChild(this.player);
+            //door frames
+            if (this.hasDoorTop) {
+                this.addChild(this.doorTopFrame);
+            }
+            if (this.hasDoorBot) {
+                this.addChild(this.doorBotFrame);
+            }
             //UI PLACEMENT
             this.addChild(this.playerStatus);
             this.addChild(this.messageStatus);

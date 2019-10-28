@@ -129,13 +129,6 @@ module scenes {
             this.addChild(this.ceilingHorizontal);
             this.addChild(this.ceilingVertical);
 
-            //door frames
-            if (this.hasDoorTop){
-                this.addChild(this.doorTopFrame);
-            }
-            if (this.hasDoorBot){
-                this.addChild(this.doorBotFrame);
-            }
 
             // ITEM PLACEMENT
             // ENEMY PLACEMENT
@@ -146,6 +139,15 @@ module scenes {
             // PLAYER PLACEMENT
             this.addChild(this.player.weapon);
             this.addChild(this.player);
+
+            
+            //door frames
+            if (this.hasDoorTop){
+                this.addChild(this.doorTopFrame);
+            }
+            if (this.hasDoorBot){
+                this.addChild(this.doorBotFrame);
+            }
             
             //UI PLACEMENT
             this.addChild(this.playerStatus);
