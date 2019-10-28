@@ -32,8 +32,8 @@ var objects;
             // from Yizhi: Why I change this is since: for AABB collision, 
             // it uses the left corner as x and y instead of the center of the object
             // Registration Points
-            // this.regX = this.halfW;
-            // this.regY = this.halfH;
+            this.regX = this.halfW;
+            this.regY = this.halfH;
             this.isColliding = false;
             this.isTakingDamage = false;
         };

@@ -12,6 +12,8 @@ module objects{
         public Start():void {
             this.x = 200;
             this.y = 200;
+            this.regX = objects.Game.player.halfW;
+            this.regY = objects.Game.player.halfH;
         }
         public Update():void {}
         public Reset():void {}
