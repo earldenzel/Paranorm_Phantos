@@ -26,11 +26,11 @@ module scenes {
             this.cutSceneMessages = [
                 "",
                 "Hello, welcome... stranger",
-                "Before we begin, please note you may \nescape cutscenes via the ESC key.\nThat is, if you already know what to do.",
+                "Before we begin, please note you \nmay escape cutscenes via the ESC \nkey.\nThat is, if you already know what \nto do.",
                 "In this game, you play the role of \nPhoebe, who is a paranormal bounty\nhunter.",
-                "This time, her case involves investi-\ngating a graveyard. Eerie voices were \nreported during the wee hours",
-                "Missing persons reports state that \nthe gravekeeper seems to be missing for \na month now ",
-                "Graves seem to have been freshly \ntrampled upon, and headstones... let's\njust say these weren't on the right \nplace.",
+                "This time, her case involves \ninvestigating a graveyard. Eerie \nvoices were reported during the \nwee hours",
+                "Missing persons reports state that \nthe gravekeeper seems to be \nmissing for a month now ",
+                "Graves seem to have been freshly \ntrampled upon, and headstones... \nlet's just say these weren't on \nthe right place.",
                 "Phoebe already knows what it is -\na ghoulish existence that gained a\nfollowing. A spirit horde...",
                 "And she has three objectives:\n\tsolve this case,\n\tearn sweet, sweet dough,\n\tand devour the rest.",
                 "Let's jump right in..."

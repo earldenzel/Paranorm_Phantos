@@ -30,6 +30,7 @@ var objects;
             _this.Start();
             _this.Move();
             _this.hp = 5;
+            _this.ecto = 5;
             _this.attackPower = 1;
             return _this;
         }
@@ -109,63 +110,63 @@ var objects;
         };
         Player.prototype.CheckBound = function () {
             // right bound
-            if (this.x >= 565 - this.halfW) {
+            if (this.x >= config.Bounds.RIGHT_BOUND - this.halfW) {
                 if (this.canTraverseRight) {
                     if (this.y < 335 || this.y > 431) {
-                        this.x = 565 - this.halfW;
+                        this.x = config.Bounds.RIGHT_BOUND - this.halfW;
                     }
-                    if (this.x >= 565) {
+                    if (this.x >= config.Bounds.RIGHT_BOUND + this.width) {
                         objects.Game.currentScene = this.sceneOnRight;
-                        this.SetPosition(new math.Vec2(this.halfW + 80, this.y));
+                        this.SetPosition(new math.Vec2(config.Bounds.LEFT_BOUND - this.halfW, this.y));
                     }
                 }
                 else {
-                    this.x = 565 - this.halfW;
+                    this.x = config.Bounds.RIGHT_BOUND - this.halfW;
                 }
             }
             // left bound
-            if (this.x <= this.halfW + 80) {
+            if (this.x <= this.halfW + config.Bounds.LEFT_BOUND) {
                 if (this.canTraverseLeft) {
                     if (this.y < 335 || this.y > 431) {
-                        this.x = this.halfW + 80;
+                        this.x = this.halfW + config.Bounds.LEFT_BOUND;
                     }
                     if (this.x <= 0) {
                         objects.Game.currentScene = this.sceneOnLeft;
-                        this.SetPosition(new math.Vec2(565 - this.halfW, this.y));
+                        this.SetPosition(new math.Vec2(config.Bounds.RIGHT_BOUND + this.halfW, this.y));
                     }
                 }
                 else {
-                    this.x = this.halfW + 80;
+                    this.x = this.halfW + config.Bounds.LEFT_BOUND;
                 }
             }
             // bottom bound
-            if (this.y >= 765 - this.halfH) {
+            if (this.y >= config.Bounds.BOTTOM_BOUND - this.halfH) {
                 if (this.canTraverseBot) {
                     if (this.x < 276 || this.x > 372) {
-                        this.y = 765 - this.halfH;
+                        this.y = config.Bounds.BOTTOM_BOUND - this.halfH;
                     }
-                    if (this.y >= 765 + this.height) {
+                    if (this.y >= config.Bounds.BOTTOM_BOUND + this.height) {
                         objects.Game.currentScene = this.sceneOnBot;
-                        this.SetPosition(new math.Vec2(this.x, this.halfH + 40));
+                        this.SetPosition(new math.Vec2(this.x, this.halfH + config.Bounds.TOP_BOUND));
                     }
                 }
                 else {
-                    this.y = 765 - this.halfH;
+                    this.y = config.Bounds.BOTTOM_BOUND - this.halfH;
                 }
             }
             // top bound
-            if (this.y <= this.halfH + 40) {
+            if (this.y <= this.halfH + config.Bounds.TOP_BOUND) {
                 if (this.canTraverseTop) {
                     if (this.x < 276 || this.x > 372) {
-                        this.y = this.halfH + 40;
+                        this.y = this.halfH + config.Bounds.TOP_BOUND;
                     }
-                    if (this.y <= 0) {
+                    if (this.y <= config.Bounds.TOP_BOUND - (this.height / 2)) {
                         objects.Game.currentScene = this.sceneOnTop;
-                        this.SetPosition(new math.Vec2(this.x, 765 + this.height));
+                        this.SetPosition(new math.Vec2(this.x, config.Bounds.BOTTOM_BOUND + this.height));
                     }
                 }
                 else {
-                    this.y = this.halfH + 40;
+                    this.y = this.halfH + config.Bounds.TOP_BOUND;
                 }
             }
         };
