@@ -15,6 +15,7 @@ var scenes;
 (function (scenes) {
     var Graveyard_1 = /** @class */ (function (_super) {
         __extends(Graveyard_1, _super);
+        // Variables
         // Constructor
         function Graveyard_1(assetManager) {
             var _this = _super.call(this, assetManager, false, true, true, true) || this;
@@ -23,7 +24,6 @@ var scenes;
         }
         // Methods
         Graveyard_1.prototype.Start = function () {
-            this.enemies = new Array();
             objects.Game.player.sceneOnBot = config.Scene.GRAVEYARD_5;
             objects.Game.player.sceneOnLeft = config.Scene.GRAVEYARD_3;
             objects.Game.player.sceneOnRight = config.Scene.GRAVEYARD_4;

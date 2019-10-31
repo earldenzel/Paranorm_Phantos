@@ -69,6 +69,14 @@ var config;
                 "src": "./Assets/_Enemies/_Test/Test_Enemy.png"
             },
             {
+                "id": "enemy_bat",
+                "src": "./Assets/_Enemies/bat/bat1.png"
+            },
+            {
+                "id": "enemy_zombieTest",
+                "src": "./Assets/_Enemies/zombieTest.png"
+            },
+            {
                 "id": "background_c_hori",
                 "src": "./Assets/_Background/_TestStage/Placeholder_CEILING-Horizontal.png"
             },
@@ -169,6 +177,10 @@ var config;
             {
                 "id": "ecto_5-5",
                 "src": "./Assets/_UI/PlayerInfo/_Ecto/Ecto_5-5.png"
+            },
+            {
+                "id": "background_barrierTest",
+                "src": "./Assets/_Background/_TestStage/barrierTest.png"
             }
         ];
         return Assets;

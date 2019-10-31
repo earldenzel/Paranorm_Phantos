@@ -3,7 +3,8 @@ module scenes {
     export abstract class PlayScene extends objects.Scene {
         // Variables
         private player:objects.Player;
-        protected enemies: Array<objects.Enemy>;
+        protected enemies: Array<objects.Enemy> = new Array<objects.Enemy>();
+        protected barriers: Array<objects.Barriers> = new Array<objects.Barriers>();
 
         //ceilings, doors and floors
         //private ceilingVertical:objects.Background;
@@ -128,6 +129,16 @@ module scenes {
             if (objects.Game.player.isTakingDamage && !collectiveCollision){
                 objects.Game.player.isTakingDamage = false;
             }
+            this.barriers.forEach(e =>{
+                e.CheckBound();
+                this.enemies.forEach(f => {
+                    if (f instanceof objects.TestZombie){
+                        e.TestZombieCheckBarrierCollision(f);
+                    }
+                });
+            });
+
+
             this.playerStatus.text = "PLAYER HP" + this.player.hp + "/5";
             // Sets the Player Health
             this.playerInfo.PlayerHealth = this.player.hp;
@@ -162,8 +173,11 @@ module scenes {
             //this.addChild(this.ceilingHorizontal);
             //this.addChild(this.ceilingVertical);
 
+            // ITEM PLACEMENT - barriers
+            this.barriers.forEach(e => {
+                this.addChild(e);
+            });
 
-            // ITEM PLACEMENT
             // ENEMY PLACEMENT
             this.enemies.forEach(e => {
                 this.addChild(e);
@@ -172,7 +186,6 @@ module scenes {
             // PLAYER PLACEMENT
             this.addChild(this.player.weapon);
             this.addChild(this.player);
-
             
             //door frames
             if (this.hasDoorTop){

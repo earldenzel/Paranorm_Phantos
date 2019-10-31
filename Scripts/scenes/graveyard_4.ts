@@ -10,7 +10,6 @@ module scenes {
 
         // Methods
         public Start(): void {
-            this.enemies = new Array<objects.Enemy>();
             this.enemies[0] = new objects.TestEnemy(this.assetManager, 5, true, true);
             this.enemies[1] = new objects.TestEnemy(this.assetManager, 3, false, false);
             this.enemies[2] = new objects.TestEnemy(this.assetManager, 2, false, true);

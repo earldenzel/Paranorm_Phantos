@@ -81,6 +81,9 @@ var objects;
                 _super.prototype.GetDamage.call(this, attacker);
             }
         };
+        Enemy.prototype.GetObjectSpeed = function () {
+            return 0;
+        };
         return Enemy;
     }(objects.GameObject));
     objects.Enemy = Enemy;

@@ -37,7 +37,7 @@ var objects;
         // Methods
         Player.prototype.Start = function () {
             this.x = 320;
-            this.y = 380;
+            this.y = 700;
             this.playerController = { "W": false, "A": false, "S": false, "D": false, "Z": false };
         };
         Player.prototype.Update = function () {
@@ -172,7 +172,7 @@ var objects;
         };
         Player.prototype.GetDamage = function (attacker) {
             _super.prototype.GetDamage.call(this, attacker);
-            if (this.hp < 0) {
+            if (this.hp <= 0) {
                 console.log(attacker.name + " erased " + this.name + "'s existence from this world.");
                 objects.Game.stage.removeChild(this.weapon);
                 objects.Game.stage.removeChild(this);

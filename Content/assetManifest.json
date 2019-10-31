@@ -1,5 +1,4 @@
-[
-    {
+[{
         "id": "backButton",
         "src": "./Assets/Old/BackButton.png"
     },
@@ -62,6 +61,14 @@
     {
         "id": "enemy_test",
         "src": "./Assets/_Enemies/_Test/Test_Enemy.png"
+    },
+    {
+        "id": "enemy_bat",
+        "src": "./Assets/_Enemies/bat/bat1.png"
+    },
+    {
+        "id": "enemy_zombieTest",
+        "src": "./Assets/_Enemies/zombieTest.png"
     },
     {
         "id": "background_c_hori",
@@ -146,5 +153,9 @@
     {
         "id": "ecto_5-5",
         "src": "./Assets/_UI/PlayerInfo/_Ecto/Ecto_5-5.png"
+    },
+    {
+        "id": "background_barrierTest",
+        "src": "./Assets/_Background/_TestStage/barrierTest.png"
     }
 ]

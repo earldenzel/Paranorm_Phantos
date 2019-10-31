@@ -18,6 +18,8 @@ var scenes;
         // Constructor
         function PlayScene(assetManager, hasDoorTop, hasDoorBot, hasDoorLeft, hasDoorRight) {
             var _this = _super.call(this, assetManager) || this;
+            _this.enemies = new Array();
+            _this.barriers = new Array();
             _this.hasDoorTop = hasDoorTop;
             _this.hasDoorBot = hasDoorBot;
             _this.hasDoorLeft = hasDoorLeft;
@@ -85,6 +87,7 @@ var scenes;
             this.Main();
         };
         PlayScene.prototype.Update = function () {
+            var _this = this;
             this.player.Update();
             var collectiveCollision = false;
             this.enemies.forEach(function (e) {
@@ -94,6 +97,14 @@ var scenes;
             if (objects.Game.player.isTakingDamage && !collectiveCollision) {
                 objects.Game.player.isTakingDamage = false;
             }
+            this.barriers.forEach(function (e) {
+                e.CheckBound();
+                _this.enemies.forEach(function (f) {
+                    if (f instanceof objects.TestZombie) {
+                        e.TestZombieCheckBarrierCollision(f);
+                    }
+                });
+            });
             this.playerStatus.text = "PLAYER HP" + this.player.hp + "/5";
             // Sets the Player Health
             this.playerInfo.PlayerHealth = this.player.hp;
@@ -123,7 +134,10 @@ var scenes;
             //ceiling
             //this.addChild(this.ceilingHorizontal);
             //this.addChild(this.ceilingVertical);
-            // ITEM PLACEMENT
+            // ITEM PLACEMENT - barriers
+            this.barriers.forEach(function (e) {
+                _this.addChild(e);
+            });
             // ENEMY PLACEMENT
             this.enemies.forEach(function (e) {
                 _this.addChild(e);

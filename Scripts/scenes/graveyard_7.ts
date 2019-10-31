@@ -9,7 +9,6 @@ module scenes {
 
         // Methods
         public Start(): void {
-            this.enemies = new Array<objects.Enemy>();
             objects.Game.player.sceneOnLeft = config.Scene.GRAVEYARD_5;
             super.Start();
         }        

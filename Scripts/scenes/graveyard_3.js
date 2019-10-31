@@ -24,7 +24,6 @@ var scenes;
         }
         // Methods
         Graveyard_3.prototype.Start = function () {
-            this.enemies = new Array();
             objects.Game.player.sceneOnRight = config.Scene.GRAVEYARD_1;
             objects.Game.player.sceneOnLeft = config.Scene.GRAVEYARD_2;
             _super.prototype.Start.call(this);

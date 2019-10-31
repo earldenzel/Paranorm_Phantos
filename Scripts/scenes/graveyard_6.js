@@ -23,7 +23,6 @@ var scenes;
         }
         // Methods
         Graveyard_6.prototype.Start = function () {
-            this.enemies = new Array();
             objects.Game.player.sceneOnTop = config.Scene.GRAVEYARD_5;
             objects.Game.player.sceneOnBot = config.Scene.GRAVEYARD_8;
             _super.prototype.Start.call(this);
