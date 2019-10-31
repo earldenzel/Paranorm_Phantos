@@ -13,30 +13,31 @@ var __extends = (this && this.__extends) || (function () {
 })();
 var scenes;
 (function (scenes) {
-    var Graveyard_1 = /** @class */ (function (_super) {
-        __extends(Graveyard_1, _super);
-        // Variables
+    var Graveyard_4 = /** @class */ (function (_super) {
+        __extends(Graveyard_4, _super);
+        //this scene is right of graveyard 1
         // Constructor
-        function Graveyard_1(assetManager) {
-            var _this = _super.call(this, assetManager, false, true, true, true) || this;
+        function Graveyard_4(assetManager) {
+            var _this = _super.call(this, assetManager, false, false, true, false) || this;
             _this.Start();
             return _this;
         }
         // Methods
-        Graveyard_1.prototype.Start = function () {
-            objects.Game.player.sceneOnBot = config.Scene.GRAVEYARD_5;
-            objects.Game.player.sceneOnLeft = config.Scene.GRAVEYARD_3;
-            objects.Game.player.sceneOnRight = config.Scene.GRAVEYARD_4;
+        Graveyard_4.prototype.Start = function () {
+            this.enemies[0] = new objects.TestEnemy(this.assetManager, 5, true, true);
+            this.enemies[1] = new objects.TestEnemy(this.assetManager, 3, false, false);
+            this.enemies[2] = new objects.TestEnemy(this.assetManager, 2, false, true);
+            objects.Game.player.sceneOnLeft = config.Scene.GRAVEYARD_1;
             _super.prototype.Start.call(this);
         };
-        Graveyard_1.prototype.Update = function () {
+        Graveyard_4.prototype.Update = function () {
             _super.prototype.Update.call(this);
         };
-        Graveyard_1.prototype.Main = function () {
+        Graveyard_4.prototype.Main = function () {
             _super.prototype.Main.call(this);
         };
-        return Graveyard_1;
+        return Graveyard_4;
     }(scenes.PlayScene));
-    scenes.Graveyard_1 = Graveyard_1;
+    scenes.Graveyard_4 = Graveyard_4;
 })(scenes || (scenes = {}));
-//# sourceMappingURL=graveyard_1.js.map
+//# sourceMappingURL=graveyard_4.js.map

@@ -13,30 +13,27 @@ var __extends = (this && this.__extends) || (function () {
 })();
 var scenes;
 (function (scenes) {
-    var Graveyard_1 = /** @class */ (function (_super) {
-        __extends(Graveyard_1, _super);
-        // Variables
+    var Graveyard_8 = /** @class */ (function (_super) {
+        __extends(Graveyard_8, _super);
         // Constructor
-        function Graveyard_1(assetManager) {
-            var _this = _super.call(this, assetManager, false, true, true, true) || this;
+        function Graveyard_8(assetManager) {
+            var _this = _super.call(this, assetManager, true, false, false, false) || this;
             _this.Start();
             return _this;
         }
         // Methods
-        Graveyard_1.prototype.Start = function () {
-            objects.Game.player.sceneOnBot = config.Scene.GRAVEYARD_5;
-            objects.Game.player.sceneOnLeft = config.Scene.GRAVEYARD_3;
-            objects.Game.player.sceneOnRight = config.Scene.GRAVEYARD_4;
+        Graveyard_8.prototype.Start = function () {
+            objects.Game.player.sceneOnTop = config.Scene.GRAVEYARD_6;
             _super.prototype.Start.call(this);
         };
-        Graveyard_1.prototype.Update = function () {
+        Graveyard_8.prototype.Update = function () {
             _super.prototype.Update.call(this);
         };
-        Graveyard_1.prototype.Main = function () {
+        Graveyard_8.prototype.Main = function () {
             _super.prototype.Main.call(this);
         };
-        return Graveyard_1;
+        return Graveyard_8;
     }(scenes.PlayScene));
-    scenes.Graveyard_1 = Graveyard_1;
+    scenes.Graveyard_8 = Graveyard_8;
 })(scenes || (scenes = {}));
-//# sourceMappingURL=graveyard_1.js.map
+//# sourceMappingURL=graveyard_8.js.map

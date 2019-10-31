@@ -104,7 +104,37 @@
                 break;
             case config.Scene.GRAVEYARD_2:
                 stage.removeAllChildren();
-                currentScene = new scenes.PlayScene(assetManager);
+                currentScene = new scenes.Graveyard_2(assetManager);
+                stage.addChild(currentScene);
+                break;
+            case config.Scene.GRAVEYARD_3:
+                stage.removeAllChildren();
+                currentScene = new scenes.Graveyard_3(assetManager);
+                stage.addChild(currentScene);
+                break;
+            case config.Scene.GRAVEYARD_4:
+                stage.removeAllChildren();
+                currentScene = new scenes.Graveyard_4(assetManager);
+                stage.addChild(currentScene);
+                break;
+            case config.Scene.GRAVEYARD_5:
+                stage.removeAllChildren();
+                currentScene = new scenes.Graveyard_5(assetManager);
+                stage.addChild(currentScene);
+                break;
+            case config.Scene.GRAVEYARD_6:
+                stage.removeAllChildren();
+                currentScene = new scenes.Graveyard_6(assetManager);
+                stage.addChild(currentScene);
+                break;
+            case config.Scene.GRAVEYARD_7:
+                stage.removeAllChildren();
+                currentScene = new scenes.Graveyard_7(assetManager);
+                stage.addChild(currentScene);
+                break;
+            case config.Scene.GRAVEYARD_8:
+                stage.removeAllChildren();
+                currentScene = new scenes.Graveyard_8(assetManager);
                 stage.addChild(currentScene);
                 break;
             case config.Scene.OVER:

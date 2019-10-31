@@ -82,6 +82,10 @@
         "src": "./Assets/_Background/_TestStage/Placeholder_DOOR-Vertical.png"
     },
     {
+        "id": "background_d_hori",
+        "src": "./Assets/_Background/_TestStage/Placeholder_DOOR-Horizontal.png"
+    },
+    {
         "id": "background_f_all",
         "src": "./Assets/_Background/_TestStage/Placeholder_FLOOR-All.png"
     },

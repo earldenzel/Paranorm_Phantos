@@ -3,14 +3,18 @@ module objects {
     export class Player extends objects.GameObject {
         //Variables
         public playerController: Controller<boolean>;
-        private goingUpInterval: any;
-        private goingDownInterval: any;
-        private goingLeftInterval: any;
-        private goingRightInterval: any;
         private attackSequence: number = 0;
-        private playerMoveSpeed: number = 4;
+        public playerMoveSpeed: number = 4;
         public weapon: objects.Weapon;
         private attackTimer: number = 0;
+        public canTraverseTop: boolean = false;
+        public canTraverseBot: boolean = false;
+        public canTraverseLeft: boolean = false;
+        public canTraverseRight: boolean = false;
+        public sceneOnTop: number;
+        public sceneOnBot: number;
+        public sceneOnLeft: number;
+        public sceneOnRight: number;
 
         //Constructor
         constructor(assetManager: createjs.LoadQueue) {
@@ -23,7 +27,7 @@ module objects {
         }
 
         // Methods
-        public Start(): void {     
+        public Start(): void {    
             this.x = 320;
             this.y = 700;
             this.playerController = { "W": false, "A": false, "S": false, "D": false, "Z": false };
@@ -104,22 +108,62 @@ module objects {
 
         public CheckBound(): void {
             // right bound
-            if (this.x >= 565 - this.halfW) {
-                this.x = 565 - this.halfW;
+            if (this.x >= 565 - this.halfW) {               
+                if (this.canTraverseRight){
+                    if(this.y < 335 || this.y > 431){
+                        this.x = 565 - this.halfW;
+                    }
+                    if(this.x >= 565){
+                        objects.Game.currentScene = this.sceneOnRight;                        
+                        this.SetPosition(new math.Vec2(this.halfW + 80, this.y));
+                    }
+                }
+                else{                    
+                    this.x = 565 - this.halfW;
+                }        
             }
             // left bound
-            if (this.x <= this.halfW + 80) {
-                console.log(this.y);
-                this.x = this.halfW + 80;
+            if (this.x <= this.halfW + 80) {               
+                if (this.canTraverseLeft){
+                    if(this.y < 335 || this.y > 431){
+                        this.x = this.halfW + 80;
+                    }
+                    if(this.x <= 0){
+                        objects.Game.currentScene = this.sceneOnLeft;                        
+                        this.SetPosition(new math.Vec2(565 - this.halfW, this.y));
+                    }
+                }
+                else{                    
+                    this.x = this.halfW + 80;
+                }                
             }
             // bottom bound
-            if (this.y >= 765 - this.halfH) {
-                this.y = 765 - this.halfH;
+            if (this.y >= 765 - this.halfH) {                
+                if (this.canTraverseBot){
+                    if(this.x < 276 || this.x > 372){
+                        this.y = 765 - this.halfH;
+                    }
+                    if(this.y >= 765 + this.height){
+                        objects.Game.currentScene = this.sceneOnBot;                        
+                        this.SetPosition(new math.Vec2(this.x, this.halfH + 40));
+                    }
+                }
+                else{                    
+                    this.y = 765 - this.halfH;
+                }                
             }
             // top bound
             if (this.y <= this.halfH + 40) {
-                console.log(this.x);
-                if (this.x < 276 || this.x > 372) {
+                if (this.canTraverseTop){
+                    if(this.x < 276 || this.x > 372){
+                        this.y = this.halfH + 40;
+                    }
+                    if(this.y <= 0){
+                        objects.Game.currentScene = this.sceneOnTop;                        
+                        this.SetPosition(new math.Vec2(this.x, 765 + this.height));
+                    }
+                }
+                else{                    
                     this.y = this.halfH + 40;
                 }
             }
@@ -127,7 +171,7 @@ module objects {
 
         public GetDamage(attacker: objects.GameObject) {
             super.GetDamage(attacker);
-            if (this.hp < 0) {
+            if (this.hp <= 0) {
                 console.log(attacker.name + " erased " + this.name + "'s existence from this world.");
                 objects.Game.stage.removeChild(this.weapon);
                 objects.Game.stage.removeChild(this);

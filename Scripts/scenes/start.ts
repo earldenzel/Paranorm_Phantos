@@ -48,6 +48,9 @@ module scenes {
         }
 
         private startButtonClick():void {
+            //initialize player on start play
+            let player = new objects.Player(this.assetManager);
+            objects.Game.player = player;
             // Change our game state from START to OPENING_SCENE
             objects.Game.currentScene = config.Scene.OPENING_SCENE;
         }
