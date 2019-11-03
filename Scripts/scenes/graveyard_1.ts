@@ -10,9 +10,10 @@ module scenes {
 
         // Methods
         public Start(): void {
-            objects.Game.player.sceneOnBot = config.Scene.GRAVEYARD_5;
-            objects.Game.player.sceneOnLeft = config.Scene.GRAVEYARD_3;
-            objects.Game.player.sceneOnRight = config.Scene.GRAVEYARD_4;
+            this.enemies[0] = new objects.TestEnemy(this.assetManager, 0, true, true);
+            managers.Game.player.sceneOnBot = config.Scene.GRAVEYARD_5;
+            managers.Game.player.sceneOnLeft = config.Scene.GRAVEYARD_3;
+            managers.Game.player.sceneOnRight = config.Scene.GRAVEYARD_4;
             super.Start();
         }
 

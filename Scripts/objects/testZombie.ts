@@ -14,6 +14,7 @@ module objects {
             this.attackPower = 1;
             this.moveSpeed = moveSpeed;
             this.knockback = 0.75;
+            this.eatTimer = 300;
         }
         // methods
 
@@ -28,7 +29,7 @@ module objects {
         public Reset(): void { }
 
         public Move(): void {
-            let playerPosition: math.Vec2 = new math.Vec2(objects.Game.player.x, objects.Game.player.y);
+            let playerPosition: math.Vec2 = new math.Vec2(managers.Game.player.x, managers.Game.player.y);
             let enemyPosition: math.Vec2 = new math.Vec2(this.x, this.y);
 
             let dirToPlayer: math.Vec2 = math.Vec2.Subtract(enemyPosition, playerPosition);
@@ -49,6 +50,10 @@ module objects {
 
         public GetObjectSpeed(): number {
             return this.currentSpeed;
+        }
+
+        public DevourEffect(): void{
+            managers.Game.player.hp += 1;
         }
     }
 }

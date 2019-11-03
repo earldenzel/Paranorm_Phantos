@@ -24,8 +24,16 @@ var scenes;
         }
         // Methods
         Graveyard_3.prototype.Start = function () {
-            objects.Game.player.sceneOnRight = config.Scene.GRAVEYARD_1;
-            objects.Game.player.sceneOnLeft = config.Scene.GRAVEYARD_2;
+            managers.Game.player.sceneOnRight = config.Scene.GRAVEYARD_1;
+            managers.Game.player.sceneOnLeft = config.Scene.GRAVEYARD_2;
+            this.enemies[0] = new objects.Bat(this.assetManager, 5, 150);
+            this.enemies[0].SetPosition(new math.Vec2(config.Bounds.RIGHT_BOUND, config.Bounds.TOP_BOUND));
+            this.enemies[1] = new objects.Bat(this.assetManager, 7, 175);
+            this.enemies[1].SetPosition(new math.Vec2(config.Bounds.LEFT_BOUND, config.Bounds.TOP_BOUND));
+            this.enemies[2] = new objects.Bat(this.assetManager, 4, 100);
+            this.enemies[2].SetPosition(new math.Vec2(config.Bounds.RIGHT_BOUND, config.Bounds.BOTTOM_BOUND));
+            this.enemies[3] = new objects.Bat(this.assetManager, 2, 50);
+            this.enemies[3].SetPosition(new math.Vec2(config.Bounds.LEFT_BOUND, config.Bounds.BOTTOM_BOUND));
             _super.prototype.Start.call(this);
         };
         Graveyard_3.prototype.Update = function () {

@@ -17,6 +17,7 @@ module objects{
             this.rightDirection = rightDirection;
             this.downDirection = downDirection;
             this.knockback = 0.75;
+            this.eatTimer = 200;
         }
         // methods
 
@@ -33,13 +34,13 @@ module objects{
             this.x += this.rightDirection ? this.moveSpeed : -this.moveSpeed;
             this.y += this.downDirection ? this.moveSpeed : -this.moveSpeed;
     
-            if (this.x > objects.Game.gameWidth && this.rightDirection){
+            if (this.x > managers.Game.gameWidth && this.rightDirection){
                 this.rightDirection = false;
             }
             else if (this.x < 0 && !this.rightDirection){
                 this.rightDirection = true;
             }
-            if (this.y > objects.Game.gameHeight && this.downDirection){
+            if (this.y > managers.Game.gameHeight && this.downDirection){
                 this.downDirection = false;
             }
             else if (this.y < 0 && !this.downDirection){
@@ -47,5 +48,10 @@ module objects{
             }
         }
         public CheckBound(): void {}
+
+        public DevourEffect(): void{
+            managers.Game.player.attackPower += 1;
+            managers.Game.player.hp += 1;
+        }
     }
 }

@@ -23,6 +23,7 @@ var objects;
             _this.attackPower = 1;
             _this.moveSpeed = moveSpeed;
             _this.knockback = 0.75;
+            _this.eatTimer = 300;
             return _this;
         }
         // methods
@@ -36,7 +37,7 @@ var objects;
         };
         TestZombie.prototype.Reset = function () { };
         TestZombie.prototype.Move = function () {
-            var playerPosition = new math.Vec2(objects.Game.player.x, objects.Game.player.y);
+            var playerPosition = new math.Vec2(managers.Game.player.x, managers.Game.player.y);
             var enemyPosition = new math.Vec2(this.x, this.y);
             var dirToPlayer = math.Vec2.Subtract(enemyPosition, playerPosition);
             var distanceToPlayer = math.Vec2.Distance(enemyPosition, playerPosition);
@@ -53,6 +54,9 @@ var objects;
         TestZombie.prototype.CheckBound = function () { };
         TestZombie.prototype.GetObjectSpeed = function () {
             return this.currentSpeed;
+        };
+        TestZombie.prototype.DevourEffect = function () {
+            managers.Game.player.hp += 1;
         };
         return TestZombie;
     }(objects.Enemy));

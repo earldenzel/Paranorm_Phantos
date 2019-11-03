@@ -52,7 +52,7 @@ module scenes {
         // Methods
         public Start(): void {
             // Initialize our variables
-            this.player = objects.Game.player;
+            this.player = managers.Game.player;
 
             this.ceilingAndWall = new objects.Background(this.assetManager,"background_c_w_all");
 
@@ -110,7 +110,7 @@ module scenes {
             this.messageStatus.shadow = new createjs.Shadow("#000000",0,0,10);
             this.controllerHelp.shadow = new createjs.Shadow("#000000",0,0,10);
 
-            objects.Game.messageStatus = this.messageStatus;
+            managers.Game.messageStatus = this.messageStatus;
 
             this.playerInfo = new managers.PlayerInfo_UI(this.assetManager);
             //this.playerInfo.x = 38;
@@ -124,10 +124,10 @@ module scenes {
             let collectiveCollision: boolean = false;
             this.enemies.forEach(e => {
                 e.Update();
-                collectiveCollision = collectiveCollision || managers.Collision.Check(objects.Game.player,e);
+                collectiveCollision = collectiveCollision || managers.Collision.Check(managers.Game.player,e);
             });
-            if (objects.Game.player.isTakingDamage && !collectiveCollision){
-                objects.Game.player.isTakingDamage = false;
+            if (managers.Game.player.isTakingDamage && !collectiveCollision){
+                managers.Game.player.isTakingDamage = false;
             }
             this.barriers.forEach(e =>{
                 e.CheckBound();

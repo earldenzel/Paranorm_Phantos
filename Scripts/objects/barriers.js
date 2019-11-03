@@ -26,31 +26,31 @@ var objects;
         Barriers.prototype.Start = function () {
             this.x = 200;
             this.y = 200;
-            this.regX = objects.Game.player.halfW;
-            this.regY = objects.Game.player.halfH;
+            this.regX = managers.Game.player.halfW;
+            this.regY = managers.Game.player.halfH;
         };
         Barriers.prototype.Update = function () { };
         Barriers.prototype.Reset = function () { };
         Barriers.prototype.Move = function () { };
         Barriers.prototype.CheckBound = function () {
             //Yizhi's movement cancellation function upon barrier contact          
-            if (managers.Collision.Check(this, objects.Game.player)) {
-                if (objects.Game.keyboardManager.moveLeft) {
-                    objects.Game.player.x += objects.Game.player.playerMoveSpeed;
+            if (managers.Collision.Check(this, managers.Game.player)) {
+                if (managers.Game.keyboardManager.moveLeft) {
+                    managers.Game.player.x += managers.Game.player.playerMoveSpeed;
                 }
-                if (objects.Game.keyboardManager.moveRight) {
-                    objects.Game.player.x -= objects.Game.player.playerMoveSpeed;
+                if (managers.Game.keyboardManager.moveRight) {
+                    managers.Game.player.x -= managers.Game.player.playerMoveSpeed;
                 }
-                if (objects.Game.keyboardManager.moveUp) {
-                    objects.Game.player.y += objects.Game.player.playerMoveSpeed;
+                if (managers.Game.keyboardManager.moveUp) {
+                    managers.Game.player.y += managers.Game.player.playerMoveSpeed;
                 }
-                if (objects.Game.keyboardManager.moveDown) {
-                    objects.Game.player.y -= objects.Game.player.playerMoveSpeed;
+                if (managers.Game.keyboardManager.moveDown) {
+                    managers.Game.player.y -= managers.Game.player.playerMoveSpeed;
                 }
             }
         };
         Barriers.prototype.TestZombieCheckBarrierCollision = function (zombie) {
-            var playerPosition = new math.Vec2(objects.Game.player.x, objects.Game.player.y);
+            var playerPosition = new math.Vec2(managers.Game.player.x, managers.Game.player.y);
             var enemyPosition = new math.Vec2(zombie.x, zombie.y);
             var dirToPlayer = math.Vec2.Subtract(enemyPosition, playerPosition);
             var distanceToPlayer = math.Vec2.Distance(enemyPosition, playerPosition);

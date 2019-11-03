@@ -37,7 +37,7 @@ var scenes;
         StartScene.prototype.Update = function () {
             var _this = this;
             //press attack button to show next message
-            if (objects.Game.keyboardManager.attacking) {
+            if (managers.Game.keyboardManager.attacking) {
                 if (this.messageTimeout == 0) {
                     this.messageTimeout = setTimeout(function () {
                         _this.startButtonClick();
@@ -54,9 +54,9 @@ var scenes;
         StartScene.prototype.startButtonClick = function () {
             //initialize player on start play
             var player = new objects.Player(this.assetManager);
-            objects.Game.player = player;
+            managers.Game.player = player;
             // Change our game state from START to OPENING_SCENE
-            objects.Game.currentScene = config.Scene.OPENING_SCENE;
+            managers.Game.currentScene = config.Scene.OPENING_SCENE;
         };
         StartScene.prototype.Main = function () {
             // Add items to our scene

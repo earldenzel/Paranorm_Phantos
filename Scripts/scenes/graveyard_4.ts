@@ -13,7 +13,7 @@ module scenes {
             this.enemies[0] = new objects.TestEnemy(this.assetManager, 5, true, true);
             this.enemies[1] = new objects.TestEnemy(this.assetManager, 3, false, false);
             this.enemies[2] = new objects.TestEnemy(this.assetManager, 2, false, true);
-            objects.Game.player.sceneOnLeft = config.Scene.GRAVEYARD_1;
+            managers.Game.player.sceneOnLeft = config.Scene.GRAVEYARD_1;
             super.Start();
         }        
 

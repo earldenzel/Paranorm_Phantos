@@ -44,7 +44,9 @@ module managers {
                     if (this.attackEnabled){
                         this.attacking = true;
                     }
-                    break;                
+                    break;              
+                case config.Keys.X:
+                case config.Keys.K:  
                 case config.Keys.ESCAPE:
                     this.biting = true;
                     break;
@@ -75,6 +77,8 @@ module managers {
                         this.attacking = false;
                     }
                     break;         
+                case config.Keys.X:
+                case config.Keys.K:  
                 case config.Keys.ESCAPE:
                     this.biting = false;
                     break;

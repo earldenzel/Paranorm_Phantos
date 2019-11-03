@@ -25,6 +25,7 @@ var objects;
             _this.rightDirection = rightDirection;
             _this.downDirection = downDirection;
             _this.knockback = 0.75;
+            _this.eatTimer = 200;
             return _this;
         }
         // methods
@@ -40,13 +41,13 @@ var objects;
         TestEnemy.prototype.Move = function () {
             this.x += this.rightDirection ? this.moveSpeed : -this.moveSpeed;
             this.y += this.downDirection ? this.moveSpeed : -this.moveSpeed;
-            if (this.x > objects.Game.gameWidth && this.rightDirection) {
+            if (this.x > managers.Game.gameWidth && this.rightDirection) {
                 this.rightDirection = false;
             }
             else if (this.x < 0 && !this.rightDirection) {
                 this.rightDirection = true;
             }
-            if (this.y > objects.Game.gameHeight && this.downDirection) {
+            if (this.y > managers.Game.gameHeight && this.downDirection) {
                 this.downDirection = false;
             }
             else if (this.y < 0 && !this.downDirection) {
@@ -54,6 +55,10 @@ var objects;
             }
         };
         TestEnemy.prototype.CheckBound = function () { };
+        TestEnemy.prototype.DevourEffect = function () {
+            managers.Game.player.attackPower += 1;
+            managers.Game.player.hp += 1;
+        };
         return TestEnemy;
     }(objects.Enemy));
     objects.TestEnemy = TestEnemy;

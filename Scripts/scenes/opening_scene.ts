@@ -38,20 +38,20 @@ module scenes {
 
             //initialize new player
             this.player = new objects.Player(this.assetManager);
-            objects.Game.player = this.player;
+            managers.Game.player = this.player;
             
             this.Main();
         }
         public Update():void {
             this.pressEnterLabel.text = this.cutSceneMessages[this.currentMessage];
-            if (objects.Game.keyboardManager.biting){
+            if (managers.Game.keyboardManager.biting){
                 setTimeout(() => {
                         this.startButtonClick();
                     }, 200);
             }
             
             //press attack button to show next message
-            if (objects.Game.keyboardManager.attacking){
+            if (managers.Game.keyboardManager.attacking){
                 if (this.messageTimeout == 0){
                     this.messageTimeout = setTimeout(() => {
                         this.nextMessage();
@@ -68,7 +68,7 @@ module scenes {
 
         private startButtonClick():void {
             // Change our game state to GAME
-            objects.Game.currentScene = config.Scene.GRAVEYARD_1;
+            managers.Game.currentScene = config.Scene.GRAVEYARD_1;
         }
 
         public Main():void {

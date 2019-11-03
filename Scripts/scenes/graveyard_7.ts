@@ -9,7 +9,7 @@ module scenes {
 
         // Methods
         public Start(): void {
-            objects.Game.player.sceneOnLeft = config.Scene.GRAVEYARD_5;
+            managers.Game.player.sceneOnLeft = config.Scene.GRAVEYARD_5;
             super.Start();
         }        
 

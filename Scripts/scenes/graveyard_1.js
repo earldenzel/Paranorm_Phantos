@@ -24,9 +24,10 @@ var scenes;
         }
         // Methods
         Graveyard_1.prototype.Start = function () {
-            objects.Game.player.sceneOnBot = config.Scene.GRAVEYARD_5;
-            objects.Game.player.sceneOnLeft = config.Scene.GRAVEYARD_3;
-            objects.Game.player.sceneOnRight = config.Scene.GRAVEYARD_4;
+            this.enemies[0] = new objects.TestEnemy(this.assetManager, 0, true, true);
+            managers.Game.player.sceneOnBot = config.Scene.GRAVEYARD_5;
+            managers.Game.player.sceneOnLeft = config.Scene.GRAVEYARD_3;
+            managers.Game.player.sceneOnRight = config.Scene.GRAVEYARD_4;
             _super.prototype.Start.call(this);
         };
         Graveyard_1.prototype.Update = function () {

@@ -13,12 +13,14 @@ var __extends = (this && this.__extends) || (function () {
 })();
 var objects;
 (function (objects) {
-    ;
+    //export interface Controller<T> { [key: string]: T };
     var Player = /** @class */ (function (_super) {
         __extends(Player, _super);
         //Constructor
         function Player(assetManager) {
             var _this = _super.call(this, assetManager, "player_p_walk7") || this;
+            //Variables
+            //public playerController: Controller<boolean>;
             _this.attackSequence = 0;
             _this.playerMoveSpeed = 4;
             _this.attackTimer = 0;
@@ -28,53 +30,58 @@ var objects;
             _this.canTraverseRight = false;
             _this.weapon = new objects.Weapon(assetManager);
             _this.Start();
-            _this.Move();
             _this.hp = 5;
             _this.ecto = 5;
             _this.attackPower = 1;
+            _this.images = [
+                assetManager.getResult("player_p_walk7"),
+                assetManager.getResult("player_p_walk1"),
+                assetManager.getResult("player_p_walk3"),
+                assetManager.getResult("player_p_walk5")
+            ];
+            _this.direction = config.Direction.UP;
             return _this;
         }
         // Methods
         Player.prototype.Start = function () {
             this.x = 320;
             this.y = 700;
-            this.playerController = { "W": false, "A": false, "S": false, "D": false, "Z": false };
+            //this.playerController = { "W": false, "A": false, "S": false, "D": false, "Z": false };
         };
         Player.prototype.Update = function () {
-            objects.Game.player = this;
+            managers.Game.player = this;
+            this.image = this.images[this.direction];
             this.Move();
             this.weapon.Update();
             this.CheckBound(); // <-- Check collisions           
             if (!this.visible && this.hp <= 0) {
-                objects.Game.currentScene = config.Scene.OVER;
+                managers.Game.currentScene = config.Scene.OVER;
             }
         };
         Player.prototype.Reset = function () { };
         Player.prototype.Move = function () {
-            var _this = this;
             //movement implementation
-            if (objects.Game.keyboardManager.moveLeft) {
-                this.x -= this.playerMoveSpeed;
-            }
-            if (objects.Game.keyboardManager.moveRight) {
-                this.x += this.playerMoveSpeed;
-            }
-            if (objects.Game.keyboardManager.moveUp) {
+            if (managers.Game.keyboardManager.moveUp) {
                 this.y -= this.playerMoveSpeed;
+                this.direction = config.Direction.UP;
             }
-            if (objects.Game.keyboardManager.moveDown) {
+            if (managers.Game.keyboardManager.moveDown) {
                 this.y += this.playerMoveSpeed;
+                this.direction = config.Direction.DOWN;
+            }
+            if (managers.Game.keyboardManager.moveLeft) {
+                this.x -= this.playerMoveSpeed;
+                this.direction = config.Direction.LEFT;
+            }
+            if (managers.Game.keyboardManager.moveRight) {
+                this.x += this.playerMoveSpeed;
+                this.direction = config.Direction.RIGHT;
             }
             //if player presses the attack button
-            if (objects.Game.keyboardManager.attacking) {
+            if (managers.Game.keyboardManager.attacking) {
                 //and the attack sequence is not defined... then define attack sequence
-                if (this.attackSequence == 0) {
-                    console.log("Attack initiated");
-                    this.weapon.visible = true;
-                    this.attackSequence = setInterval(function () {
-                        _this.weapon.y -= 20;
-                        _this.weapon.x = _this.x;
-                    }, 50);
+                if (this.attackSequence == 0 && this.weapon != undefined) {
+                    this.weapon.Attack();
                 }
                 //and the attack sequence is defined, then increase timer for attack (button held down)
                 else {
@@ -100,10 +107,10 @@ var objects;
                 //introduce a 300ms disable of the weapon
                 if (this.attackTimer > 50 && !this.weapon.visible) {
                     this.attackTimer = 0;
-                    objects.Game.keyboardManager.attackEnabled = false;
+                    managers.Game.keyboardManager.attackEnabled = false;
                     setTimeout(function () {
                         console.log("Attack re-enabled");
-                        objects.Game.keyboardManager.attackEnabled = true;
+                        managers.Game.keyboardManager.attackEnabled = true;
                     }, 300);
                 }
             }
@@ -116,7 +123,7 @@ var objects;
                         this.x = config.Bounds.RIGHT_BOUND - this.halfW;
                     }
                     if (this.x >= config.Bounds.RIGHT_BOUND + this.width) {
-                        objects.Game.currentScene = this.sceneOnRight;
+                        managers.Game.currentScene = this.sceneOnRight;
                         this.SetPosition(new math.Vec2(config.Bounds.LEFT_BOUND - this.halfW, this.y));
                     }
                 }
@@ -131,7 +138,7 @@ var objects;
                         this.x = this.halfW + config.Bounds.LEFT_BOUND;
                     }
                     if (this.x <= 0) {
-                        objects.Game.currentScene = this.sceneOnLeft;
+                        managers.Game.currentScene = this.sceneOnLeft;
                         this.SetPosition(new math.Vec2(config.Bounds.RIGHT_BOUND + this.halfW, this.y));
                     }
                 }
@@ -146,7 +153,7 @@ var objects;
                         this.y = config.Bounds.BOTTOM_BOUND - this.halfH;
                     }
                     if (this.y >= config.Bounds.BOTTOM_BOUND + this.height) {
-                        objects.Game.currentScene = this.sceneOnBot;
+                        managers.Game.currentScene = this.sceneOnBot;
                         this.SetPosition(new math.Vec2(this.x, this.halfH + config.Bounds.TOP_BOUND));
                     }
                 }
@@ -161,7 +168,7 @@ var objects;
                         this.y = this.halfH + config.Bounds.TOP_BOUND;
                     }
                     if (this.y <= config.Bounds.TOP_BOUND - (this.height / 2)) {
-                        objects.Game.currentScene = this.sceneOnTop;
+                        managers.Game.currentScene = this.sceneOnTop;
                         this.SetPosition(new math.Vec2(this.x, config.Bounds.BOTTOM_BOUND + this.height));
                     }
                 }
@@ -174,8 +181,8 @@ var objects;
             _super.prototype.GetDamage.call(this, attacker);
             if (this.hp <= 0) {
                 console.log(attacker.name + " erased " + this.name + "'s existence from this world.");
-                objects.Game.stage.removeChild(this.weapon);
-                objects.Game.stage.removeChild(this);
+                managers.Game.stage.removeChild(this.weapon);
+                managers.Game.stage.removeChild(this);
                 this.weapon.visible = false;
                 this.visible = false;
             }

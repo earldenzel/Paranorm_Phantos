@@ -34,6 +34,8 @@ var managers;
                         this.attacking = true;
                     }
                     break;
+                case config.Keys.X:
+                case config.Keys.K:
                 case config.Keys.ESCAPE:
                     this.biting = true;
                     break;
@@ -64,6 +66,8 @@ var managers;
                         this.attacking = false;
                     }
                     break;
+                case config.Keys.X:
+                case config.Keys.K:
                 case config.Keys.ESCAPE:
                     this.biting = false;
                     break;

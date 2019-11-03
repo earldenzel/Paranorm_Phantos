@@ -42,19 +42,19 @@ var scenes;
             ];
             //initialize new player
             this.player = new objects.Player(this.assetManager);
-            objects.Game.player = this.player;
+            managers.Game.player = this.player;
             this.Main();
         };
         OpeningScene.prototype.Update = function () {
             var _this = this;
             this.pressEnterLabel.text = this.cutSceneMessages[this.currentMessage];
-            if (objects.Game.keyboardManager.biting) {
+            if (managers.Game.keyboardManager.biting) {
                 setTimeout(function () {
                     _this.startButtonClick();
                 }, 200);
             }
             //press attack button to show next message
-            if (objects.Game.keyboardManager.attacking) {
+            if (managers.Game.keyboardManager.attacking) {
                 if (this.messageTimeout == 0) {
                     this.messageTimeout = setTimeout(function () {
                         _this.nextMessage();
@@ -70,7 +70,7 @@ var scenes;
         };
         OpeningScene.prototype.startButtonClick = function () {
             // Change our game state to GAME
-            objects.Game.currentScene = config.Scene.GRAVEYARD_1;
+            managers.Game.currentScene = config.Scene.GRAVEYARD_1;
         };
         OpeningScene.prototype.Main = function () {
             this.addChild(this.background);

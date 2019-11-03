@@ -23,8 +23,8 @@ var scenes;
         }
         // Methods
         Graveyard_6.prototype.Start = function () {
-            objects.Game.player.sceneOnTop = config.Scene.GRAVEYARD_5;
-            objects.Game.player.sceneOnBot = config.Scene.GRAVEYARD_8;
+            managers.Game.player.sceneOnTop = config.Scene.GRAVEYARD_5;
+            managers.Game.player.sceneOnBot = config.Scene.GRAVEYARD_8;
             _super.prototype.Start.call(this);
         };
         Graveyard_6.prototype.Update = function () {

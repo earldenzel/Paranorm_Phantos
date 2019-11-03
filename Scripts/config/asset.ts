@@ -62,6 +62,14 @@ module config{
                 "src": "./Assets/_Items/Phantos/Phantos_Front2.png"
             },
             {
+                "id": "item_p_left2",
+                "src": "./Assets/_Items/Phantos/Phantos_Left2.png"
+            },
+            {
+                "id": "item_p_right2",
+                "src": "./Assets/_Items/Phantos/Phantos_Right2.png"
+            },
+            {
                 "id": "enemy_test",
                 "src": "./Assets/_Enemies/_Test/Test_Enemy.png"
             },
@@ -178,6 +186,10 @@ module config{
             {
                 "id": "background_barrierTest",
                 "src": "./Assets/_Background/_TestStage/barrierTest.png"
+            },
+            {
+                "id": "xKeyIndicator",
+                "src": "./Assets/_UI/HowToPlay/HowToPlay_XKey.png"
             }
         ];
     }

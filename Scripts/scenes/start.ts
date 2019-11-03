@@ -32,7 +32,7 @@ module scenes {
         }
         public Update():void {
             //press attack button to show next message
-            if (objects.Game.keyboardManager.attacking){
+            if (managers.Game.keyboardManager.attacking){
                 if (this.messageTimeout == 0){
                     this.messageTimeout = setTimeout(() => {
                         this.startButtonClick();
@@ -50,9 +50,9 @@ module scenes {
         private startButtonClick():void {
             //initialize player on start play
             let player = new objects.Player(this.assetManager);
-            objects.Game.player = player;
+            managers.Game.player = player;
             // Change our game state from START to OPENING_SCENE
-            objects.Game.currentScene = config.Scene.OPENING_SCENE;
+            managers.Game.currentScene = config.Scene.OPENING_SCENE;
         }
 
         public Main():void {

@@ -9,8 +9,8 @@ module scenes {
 
         // Methods
         public Start(): void {
-            objects.Game.player.sceneOnTop = config.Scene.GRAVEYARD_5;
-            objects.Game.player.sceneOnBot = config.Scene.GRAVEYARD_8;
+            managers.Game.player.sceneOnTop = config.Scene.GRAVEYARD_5;
+            managers.Game.player.sceneOnBot = config.Scene.GRAVEYARD_8;
             super.Start();
         }        
 
