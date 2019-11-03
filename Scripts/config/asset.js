@@ -191,8 +191,28 @@ var config;
                 "src": "./Assets/_Background/_TestStage/barrierTest.png"
             },
             {
-                "id": "xKeyIndicator",
-                "src": "./Assets/_UI/HowToPlay/HowToPlay_XKey.png"
+                "id": "kKeyIndicator",
+                "src": "./Assets/_UI/HowToPlay/HowToPlay_KKey.png"
+            },
+            {
+                "id": "wKeyIndicator",
+                "src": "./Assets/_UI/HowToPlay/HowToPlay_WKey.png"
+            },
+            {
+                "id": "aKeyIndicator",
+                "src": "./Assets/_UI/HowToPlay/HowToPlay_AKey.png"
+            },
+            {
+                "id": "sKeyIndicator",
+                "src": "./Assets/_UI/HowToPlay/HowToPlay_SKey.png"
+            },
+            {
+                "id": "dKeyIndicator",
+                "src": "./Assets/_UI/HowToPlay/HowToPlay_DKey.png"
+            },
+            {
+                "id": "jKeyIndicator",
+                "src": "./Assets/_UI/HowToPlay/HowToPlay_JKey.png"
             }
         ];
         return Assets;

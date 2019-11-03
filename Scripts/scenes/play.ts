@@ -5,6 +5,7 @@ module scenes {
         private player:objects.Player;
         protected enemies: Array<objects.Enemy> = new Array<objects.Enemy>();
         protected barriers: Array<objects.Barriers> = new Array<objects.Barriers>();
+        protected cosmetics: Array<objects.GameObject> = new Array<objects.GameObject>();
 
         //ceilings, doors and floors
         //private ceilingVertical:objects.Background;
@@ -29,9 +30,9 @@ module scenes {
         private doorLeftFrame: objects.Background;
         private doorRightFrame: objects.Background;
 
-        protected playerStatus: objects.Label;
-        protected messageStatus: objects.Label;
-        protected controllerHelp: objects.Label;
+        //protected playerStatus: objects.Label;
+        //protected messageStatus: objects.Label;
+        //protected controllerHelp: objects.Label;
 
         private playerInfo: managers.PlayerInfo_UI;
 
@@ -102,15 +103,15 @@ module scenes {
                 this.player.canTraverseRight = true;
             }
 
-            this.playerStatus = new objects.Label("PLAYER ", "16px", "'Press Start 2P'", "#FFFFFF", 20, 670, false);
-            this.messageStatus = new objects.Label("MESSAGES GO HERE", "16px", "'Press Start 2P'", "#FFFFFF", 20, 690, false);
-            this.controllerHelp = new objects.Label("UP-DOWN-LEFT-RIGHT + Z OR \nW-A-S-D + J", "16px", "'Press Start 2P'", "#FFFFFF", 20, 710, false);
+            //this.playerStatus = new objects.Label("PLAYER ", "16px", "'Press Start 2P'", "#FFFFFF", 20, 670, false);
+            //this.messageStatus = new objects.Label("MESSAGES GO HERE", "16px", "'Press Start 2P'", "#FFFFFF", 20, 690, false);
+            //this.controllerHelp = new objects.Label("UP-DOWN-LEFT-RIGHT + Z OR \nW-A-S-D + J", "16px", "'Press Start 2P'", "#FFFFFF", 20, 710, false);
             
-            this.playerStatus.shadow = new createjs.Shadow("#000000",0,0,10);
-            this.messageStatus.shadow = new createjs.Shadow("#000000",0,0,10);
-            this.controllerHelp.shadow = new createjs.Shadow("#000000",0,0,10);
+            //this.playerStatus.shadow = new createjs.Shadow("#000000",0,0,10);
+            //this.messageStatus.shadow = new createjs.Shadow("#000000",0,0,10);
+            //this.controllerHelp.shadow = new createjs.Shadow("#000000",0,0,10);
 
-            managers.Game.messageStatus = this.messageStatus;
+            //managers.Game.messageStatus = this.messageStatus;
 
             this.playerInfo = new managers.PlayerInfo_UI(this.assetManager);
             //this.playerInfo.x = 38;
@@ -132,6 +133,11 @@ module scenes {
             this.barriers.forEach(e =>{
                 e.CheckBound();
                 this.enemies.forEach(f => {
+                    //if enemy is stunned and knocked back on a barrier, then enemy dies
+                    if (f.isStunned && managers.Collision.Check(e, f)){
+                        f.RemoveFromPlay(f.CalculateBounty());
+                    }
+                    //if enemy is
                     if (f instanceof objects.TestZombie){
                         e.TestZombieCheckBarrierCollision(f);
                     }
@@ -139,9 +145,10 @@ module scenes {
             });
 
 
-            this.playerStatus.text = "PLAYER HP" + this.player.hp + "/5";
+            //this.playerStatus.text = "PLAYER HP" + this.player.hp + "/5";
             // Sets the Player Health
             this.playerInfo.PlayerHealth = this.player.hp;
+            this.playerInfo.Money = this.player.money;
 
             this.playerInfo.PlayerEcto = this.player.ecto;
         }
@@ -178,9 +185,15 @@ module scenes {
                 this.addChild(e);
             });
 
+            // COSMETICS PLACEMENT
+            this.cosmetics.forEach(e => {
+                this.addChild(e);
+            });
+
             // ENEMY PLACEMENT
             this.enemies.forEach(e => {
                 this.addChild(e);
+                this.addChild(e.stunIndicator);
             });
 
             // PLAYER PLACEMENT
@@ -202,9 +215,9 @@ module scenes {
             }
             
             //UI PLACEMENT
-            this.addChild(this.playerStatus);
-            this.addChild(this.messageStatus);
-            this.addChild(this.controllerHelp);
+            //this.addChild(this.playerStatus);
+            //this.addChild(this.messageStatus);
+            //this.addChild(this.controllerHelp);
             this.addChild(this.playerInfo);
         }
     }

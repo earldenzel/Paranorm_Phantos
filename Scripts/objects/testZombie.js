@@ -23,7 +23,8 @@ var objects;
             _this.attackPower = 1;
             _this.moveSpeed = moveSpeed;
             _this.knockback = 0.75;
-            _this.eatTimer = 300;
+            _this.eatTimer = 1000;
+            _this.bounty = 10;
             return _this;
         }
         // methods
@@ -51,7 +52,9 @@ var objects;
             this.x = newPos.x;
             this.y = newPos.y;
         };
-        TestZombie.prototype.CheckBound = function () { };
+        TestZombie.prototype.CheckBound = function () {
+            _super.prototype.CheckBound.call(this);
+        };
         TestZombie.prototype.GetObjectSpeed = function () {
             return this.currentSpeed;
         };

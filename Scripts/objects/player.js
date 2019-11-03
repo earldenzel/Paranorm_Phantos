@@ -22,6 +22,7 @@ var objects;
             //Variables
             //public playerController: Controller<boolean>;
             _this.attackSequence = 0;
+            _this.biteSequence = 0;
             _this.playerMoveSpeed = 4;
             _this.attackTimer = 0;
             _this.canTraverseTop = false;
@@ -40,6 +41,7 @@ var objects;
                 assetManager.getResult("player_p_walk5")
             ];
             _this.direction = config.Direction.UP;
+            _this.money = 0;
             return _this;
         }
         // Methods

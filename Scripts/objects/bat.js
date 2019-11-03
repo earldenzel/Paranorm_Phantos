@@ -23,9 +23,10 @@ var objects;
             _this.attackPower = 1;
             _this.moveSpeed = moveSpeed;
             _this.knockback = 0.75;
-            _this.eatTimer = 100;
+            _this.eatTimer = 500;
             _this.updateTime = updateTime;
             _this.currentTime = updateTime;
+            _this.bounty = 2;
             return _this;
         }
         // methods
@@ -38,7 +39,9 @@ var objects;
         Bat.prototype.Update = function () {
             _super.prototype.Update.call(this);
         };
-        Bat.prototype.Reset = function () { };
+        Bat.prototype.Reset = function () {
+            _super.prototype.CheckBound.call(this);
+        };
         Bat.prototype.Move = function () {
             this.currentTime -= 1;
             var playerPosition = new math.Vec2(managers.Game.player.x, managers.Game.player.y);
@@ -53,7 +56,9 @@ var objects;
             this.x = newPos.x;
             this.y = newPos.y;
         };
-        Bat.prototype.CheckBound = function () { };
+        Bat.prototype.CheckBound = function () {
+            _super.prototype.CheckBound.call(this);
+        };
         Bat.prototype.DevourEffect = function () {
             managers.Game.player.hp += 2;
         };

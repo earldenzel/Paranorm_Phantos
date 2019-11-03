@@ -18,7 +18,7 @@ var objects;
         function Enemy(assetManager, enemyName) {
             var _this = _super.call(this, assetManager, enemyName) || this;
             _this.Start();
-            _this.stunIndicator = new objects.Indicator(assetManager, "xKeyIndicator");
+            _this.stunIndicator = new objects.Indicator(assetManager, "kKeyIndicator");
             _this.Move();
             return _this;
         }
@@ -27,29 +27,32 @@ var objects;
             this.isStunned = false;
         };
         Enemy.prototype.Update = function () {
+            var _this = this;
             //if current hp  of enemy = 0, then it is stunned           
             if (this.hp <= 0) {
                 this.isStunned = true;
-                //TODO: ensure that enemy is inside stage when stunned
+                this.CheckBound();
             }
             //if it is stunned
             if (this.isStunned) {
                 //determine whether it is currently in contact with player and whether the biting button is pressed
                 //disable attack button during eating phase
-                if (managers.Game.keyboardManager.biting && managers.Collision.Check(managers.Game.player, this)) {
-                    managers.Game.messageStatus.text = "Phoebe started eating " + this.name;
-                    this.eatTimer -= 1;
-                    managers.Game.keyboardManager.attackEnabled = false;
-                    //if the enemy eat timer is less than zero, then phoebe is finished eating                    
-                    if (this.eatTimer <= 0) {
-                        managers.Game.messageStatus.text = "Phoebe finished eating " + this.name;
-                        this.DevourEffect();
-                        this.RemoveFromPlay();
-                    }
+                if (managers.Game.keyboardManager.biting
+                    && managers.Collision.Check(managers.Game.player, this)
+                    && managers.Game.player.biteSequence == 0) {
+                    managers.Game.player.SetPosition(this.GetPosition());
+                    //managers.Game.messageStatus.text = "Phoebe started eating " + this.name;
+                    managers.Game.keyboardManager.enabled = false;
+                    managers.Game.player.biteSequence = setTimeout(function () {
+                        //managers.Game.messageStatus.text = "Phoebe finished eating " + this.name;
+                        _this.DevourEffect();
+                        _this.RemoveFromPlay(0);
+                        managers.Game.player.biteSequence = 0;
+                    }, this.eatTimer);
                 }
                 //re-enable attacking since Phoebe is not eating 
                 else {
-                    managers.Game.keyboardManager.attackEnabled = true;
+                    managers.Game.keyboardManager.enabled = true;
                 }
             }
             //else, the player is not stunned and can move
@@ -83,12 +86,29 @@ var objects;
         Enemy.prototype.Move = function () {
         };
         Enemy.prototype.CheckBound = function () {
+            // right bound
+            if (this.x >= config.Bounds.RIGHT_BOUND - this.halfW) {
+                this.x = config.Bounds.RIGHT_BOUND - this.halfW;
+            }
+            // left bound
+            if (this.x <= this.halfW + config.Bounds.LEFT_BOUND) {
+                this.x = this.halfW + config.Bounds.LEFT_BOUND;
+            }
+            // bottom bound
+            if (this.y >= config.Bounds.BOTTOM_BOUND - this.halfH) {
+                this.y = config.Bounds.BOTTOM_BOUND - this.halfH;
+            }
+            // top bound
+            if (this.y <= this.halfH + config.Bounds.TOP_BOUND) {
+                this.y = this.halfH + config.Bounds.TOP_BOUND;
+            }
         };
         Enemy.prototype.GetDamage = function (attacker) {
+            var _this = this;
             //enemy state = stunned
             if (this.isStunned) {
-                managers.Game.messageStatus.text = attacker.name + " ended " + this.name + "'s life.";
-                this.RemoveFromPlay();
+                //managers.Game.messageStatus.text = attacker.name + " ended " + this.name + "'s life.";
+                this.RemoveFromPlay(this.bounty);
             }
             else {
                 //introduce a knockback
@@ -96,25 +116,32 @@ var objects;
                 var newPosition = math.Vec2.Add(this.GetPosition(), awayVector);
                 this.SetPosition(newPosition);
                 _super.prototype.GetDamage.call(this, attacker);
-                //if hp < 0, show player that it can be eaten via the X key
                 if (this.hp <= 0) {
-                    managers.Game.messageStatus.text = this.name + " is stunned!";
-                    this.stunIndicator.x = this.x;
-                    this.stunIndicator.y = this.y - this.stunIndicator.height;
-                    this.stunIndicator.visible = true;
-                    managers.Game.stage.addChild(this.stunIndicator);
+                    //delay is important so there is no-split second show of the enemy body atop the barrier
+                    setTimeout(function () {
+                        //managers.Game.messageStatus.text = this.name + " is stunned!";
+                        _this.stunIndicator.x = _this.x;
+                        _this.stunIndicator.y = _this.y - _this.halfH - _this.stunIndicator.halfH;
+                        _this.stunIndicator.visible = true;
+                    }, 5);
                 }
             }
         };
         Enemy.prototype.GetObjectSpeed = function () {
             return 0;
         };
-        Enemy.prototype.RemoveFromPlay = function () {
+        Enemy.prototype.RemoveFromPlay = function (bounty) {
+            managers.Game.player.money += bounty;
+            this.stunIndicator.visible = false;
             managers.Game.stage.removeChild(this);
             this.visible = false;
-            this.stunIndicator.visible = false;
         };
+        //this function governs what happens when Phoebe eats enemy
         Enemy.prototype.DevourEffect = function () {
+        };
+        //function governs how much Phoebe earns
+        Enemy.prototype.CalculateBounty = function () {
+            return this.bounty;
         };
         return Enemy;
     }(objects.GameObject));

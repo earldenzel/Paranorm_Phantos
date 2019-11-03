@@ -17,7 +17,8 @@ module objects{
             this.rightDirection = rightDirection;
             this.downDirection = downDirection;
             this.knockback = 0.75;
-            this.eatTimer = 200;
+            this.eatTimer = 600;
+            this.bounty = 5;
         }
         // methods
 
@@ -47,7 +48,9 @@ module objects{
                 this.downDirection = true;
             }
         }
-        public CheckBound(): void {}
+        public CheckBound(): void {
+            super.CheckBound();
+        }
 
         public DevourEffect(): void{
             managers.Game.player.attackPower += 1;

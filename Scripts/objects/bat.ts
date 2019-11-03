@@ -16,9 +16,10 @@ module objects{
             this.attackPower = 1;         
             this.moveSpeed = moveSpeed;
             this.knockback = 0.75;
-            this.eatTimer = 100;
+            this.eatTimer = 500;
             this.updateTime = updateTime;
             this.currentTime = updateTime;
+            this.bounty = 2;
         }
         // methods
 
@@ -31,7 +32,9 @@ module objects{
         public Update(): void {
             super.Update();
         }
-        public Reset(): void {}
+        public Reset(): void {
+            super.CheckBound();
+        }
 
         public Move(): void {
             this.currentTime -= 1;
@@ -52,7 +55,9 @@ module objects{
             this.y = newPos.y;
         }
 
-        public CheckBound(): void {}        
+        public CheckBound(): void {
+            super.CheckBound();
+        }        
 
         public DevourEffect(): void{
             managers.Game.player.hp += 2;

@@ -14,7 +14,8 @@ module objects {
             this.attackPower = 1;
             this.moveSpeed = moveSpeed;
             this.knockback = 0.75;
-            this.eatTimer = 300;
+            this.eatTimer = 1000;            
+            this.bounty = 10;
         }
         // methods
 
@@ -46,7 +47,9 @@ module objects {
             this.y = newPos.y;
         }
 
-        public CheckBound(): void { }
+        public CheckBound(): void {
+            super.CheckBound();
+        }
 
         public GetObjectSpeed(): number {
             return this.currentSpeed;

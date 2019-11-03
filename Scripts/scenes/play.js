@@ -20,6 +20,7 @@ var scenes;
             var _this = _super.call(this, assetManager) || this;
             _this.enemies = new Array();
             _this.barriers = new Array();
+            _this.cosmetics = new Array();
             _this.hasDoorTop = hasDoorTop;
             _this.hasDoorBot = hasDoorBot;
             _this.hasDoorLeft = hasDoorLeft;
@@ -75,13 +76,13 @@ var scenes;
                 this.doorRightFrame.Flip();
                 this.player.canTraverseRight = true;
             }
-            this.playerStatus = new objects.Label("PLAYER ", "16px", "'Press Start 2P'", "#FFFFFF", 20, 670, false);
-            this.messageStatus = new objects.Label("MESSAGES GO HERE", "16px", "'Press Start 2P'", "#FFFFFF", 20, 690, false);
-            this.controllerHelp = new objects.Label("UP-DOWN-LEFT-RIGHT + Z OR \nW-A-S-D + J", "16px", "'Press Start 2P'", "#FFFFFF", 20, 710, false);
-            this.playerStatus.shadow = new createjs.Shadow("#000000", 0, 0, 10);
-            this.messageStatus.shadow = new createjs.Shadow("#000000", 0, 0, 10);
-            this.controllerHelp.shadow = new createjs.Shadow("#000000", 0, 0, 10);
-            managers.Game.messageStatus = this.messageStatus;
+            //this.playerStatus = new objects.Label("PLAYER ", "16px", "'Press Start 2P'", "#FFFFFF", 20, 670, false);
+            //this.messageStatus = new objects.Label("MESSAGES GO HERE", "16px", "'Press Start 2P'", "#FFFFFF", 20, 690, false);
+            //this.controllerHelp = new objects.Label("UP-DOWN-LEFT-RIGHT + Z OR \nW-A-S-D + J", "16px", "'Press Start 2P'", "#FFFFFF", 20, 710, false);
+            //this.playerStatus.shadow = new createjs.Shadow("#000000",0,0,10);
+            //this.messageStatus.shadow = new createjs.Shadow("#000000",0,0,10);
+            //this.controllerHelp.shadow = new createjs.Shadow("#000000",0,0,10);
+            //managers.Game.messageStatus = this.messageStatus;
             this.playerInfo = new managers.PlayerInfo_UI(this.assetManager);
             //this.playerInfo.x = 38;
             this.Main();
@@ -100,14 +101,20 @@ var scenes;
             this.barriers.forEach(function (e) {
                 e.CheckBound();
                 _this.enemies.forEach(function (f) {
+                    //if enemy is stunned and knocked back on a barrier, then enemy dies
+                    if (f.isStunned && managers.Collision.Check(e, f)) {
+                        f.RemoveFromPlay(f.CalculateBounty());
+                    }
+                    //if enemy is
                     if (f instanceof objects.TestZombie) {
                         e.TestZombieCheckBarrierCollision(f);
                     }
                 });
             });
-            this.playerStatus.text = "PLAYER HP" + this.player.hp + "/5";
+            //this.playerStatus.text = "PLAYER HP" + this.player.hp + "/5";
             // Sets the Player Health
             this.playerInfo.PlayerHealth = this.player.hp;
+            this.playerInfo.Money = this.player.money;
             this.playerInfo.PlayerEcto = this.player.ecto;
         };
         PlayScene.prototype.Main = function () {
@@ -138,9 +145,14 @@ var scenes;
             this.barriers.forEach(function (e) {
                 _this.addChild(e);
             });
+            // COSMETICS PLACEMENT
+            this.cosmetics.forEach(function (e) {
+                _this.addChild(e);
+            });
             // ENEMY PLACEMENT
             this.enemies.forEach(function (e) {
                 _this.addChild(e);
+                _this.addChild(e.stunIndicator);
             });
             // PLAYER PLACEMENT
             this.addChild(this.player.weapon);
@@ -159,9 +171,9 @@ var scenes;
                 this.addChild(this.doorRightFrame);
             }
             //UI PLACEMENT
-            this.addChild(this.playerStatus);
-            this.addChild(this.messageStatus);
-            this.addChild(this.controllerHelp);
+            //this.addChild(this.playerStatus);
+            //this.addChild(this.messageStatus);
+            //this.addChild(this.controllerHelp);
             this.addChild(this.playerInfo);
         };
         return PlayScene;

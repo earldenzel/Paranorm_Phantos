@@ -25,7 +25,8 @@ var objects;
             _this.rightDirection = rightDirection;
             _this.downDirection = downDirection;
             _this.knockback = 0.75;
-            _this.eatTimer = 200;
+            _this.eatTimer = 600;
+            _this.bounty = 5;
             return _this;
         }
         // methods
@@ -54,7 +55,9 @@ var objects;
                 this.downDirection = true;
             }
         };
-        TestEnemy.prototype.CheckBound = function () { };
+        TestEnemy.prototype.CheckBound = function () {
+            _super.prototype.CheckBound.call(this);
+        };
         TestEnemy.prototype.DevourEffect = function () {
             managers.Game.player.attackPower += 1;
             managers.Game.player.hp += 1;

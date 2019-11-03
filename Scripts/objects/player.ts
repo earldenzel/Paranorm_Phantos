@@ -4,6 +4,7 @@ module objects {
         //Variables
         //public playerController: Controller<boolean>;
         public attackSequence: number = 0;
+        public biteSequence: number = 0;
         public playerMoveSpeed: number = 4;
         public weapon: objects.Weapon;
         private attackTimer: number = 0;
@@ -17,6 +18,7 @@ module objects {
         public sceneOnRight: number;
         private images: Array<any>;
         public direction: config.Direction;
+        public money: number;
 
         public ecto: number;
 
@@ -35,6 +37,7 @@ module objects {
                 assetManager.getResult("player_p_walk5")
             ]
             this.direction = config.Direction.UP;
+            this.money = 0;
         }
 
         // Methods
