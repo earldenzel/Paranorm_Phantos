@@ -28,24 +28,34 @@ module objects {
 
             //if it is stunned
             if (this.isStunned) {                
-                //determine whether it is currently in contact with player and whether the biting button is pressed
-                //disable attack button during eating phase
-                if (managers.Game.keyboardManager.biting 
-                    && managers.Collision.Check(managers.Game.player, this) 
-                    && managers.Game.player.biteSequence == 0) {
+                //determine whether a bit is currently happening 
+                if (managers.Game.player.biteSequence == 0){
+                    //if it is currently in contact with player and whether the biting button is pressed, then disable movement
+                    if (managers.Game.keyboardManager.biting && managers.Collision.Check(managers.Game.player, this)){                        
                         managers.Game.player.SetPosition(this.GetPosition());
-                        //managers.Game.messageStatus.text = "Phoebe started eating " + this.name;
+                        managers.Game.keyboardManager.moveLeft = false;
+                        managers.Game.keyboardManager.moveRight = false;
+                        managers.Game.keyboardManager.moveUp = false;
+                        managers.Game.keyboardManager.moveDown = false;
                         managers.Game.keyboardManager.enabled = false;
+                        managers.Game.keyboardManager.attacking = false;
+                        managers.Game.keyboardManager.biting = false;
+                        //after eat timer is done, enable keyboard and reset sequence
                         managers.Game.player.biteSequence = setTimeout(() => {
-                            //managers.Game.messageStatus.text = "Phoebe finished eating " + this.name;
                             this.DevourEffect();
                             this.RemoveFromPlay(0);
-                            managers.Game.player.biteSequence = 0;                            
+                            managers.Game.player.biteSequence = 0;
+                            managers.Game.keyboardManager.enabled = true;                      
                         }, this.eatTimer);
+                    }
+                    //else, no contact and therefore, movement enabled
+                    else{
+                        managers.Game.keyboardManager.enabled = true;  
+                    }
                 }
-                //re-enable attacking since Phoebe is not eating 
+                //bite is currently happening, so keyboard is off
                 else{
-                    managers.Game.keyboardManager.enabled = true;
+                    managers.Game.keyboardManager.enabled = false;
                 }
             }
             //else, the player is not stunned and can move
