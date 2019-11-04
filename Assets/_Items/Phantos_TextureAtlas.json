@@ -1,0 +1,43 @@
+{
+
+"images": [
+    "Phantos_TextureAtlas.png"
+],
+
+"framerate": 20,
+"frames": [
+    [0, 0, 105, 92, 0, 0, 0],
+    [105, 0, 105, 92, 0, 0, 0],
+    [210, 0, 105, 92, 0, 0, 0],
+    [315, 0, 105, 92, 0, 0, 0],
+    [0, 97, 105, 92, 0, 0, 0],
+    [105, 97, 105, 92, 0, 0, 0],
+    [210, 97, 105, 92, 0, 0, 0],
+    [315, 97, 105, 92, 0, 0, 0],
+    [0, 194, 105, 92, 0, 0, 0],
+    [105, 194, 105, 92, 0, 0, 0],
+    [210, 194, 105, 92, 0, 0, 0],
+    [315, 194, 105, 92, 0, 0, 0],
+    [0, 291, 97, 97, 0, 0, 0],
+    [105, 291, 97, 97, 0, 0, 0],
+    [210, 291, 97, 97, 0, 0, 0],
+    [315, 291, 97, 97, 0, 0, 0]
+],
+
+"animations": {
+    "Phantos_Left": { "frames": [0, 1, 2] },
+	"Phantos_Front": { "frames": [3, 4, 5] },
+	"Phantos_Right": { "frames": [ 6, 7, 8] },
+	"Phantos_Back": { "frames": [9, 10, 11] },
+    "PhantosSoul_Back": { "frames": [12] },
+    "PhantosSoul_Front": { "frames": [13] },
+    "PhantosSoul_Left": { "frames": [14] },
+    "PhantosSoul_Right": { "frames": [15] }
+},
+
+"texturepacker": [
+        "SmartUpdateHash: $TexturePacker:SmartUpdate:22689b30243f1cf6b88f781ffc7e6e2e:6f530c15c1bffde53171438d2142877d:4ed404f9470f6a6a7385f4f055f3d25c$",
+        "Created with TexturePacker (https://www.codeandweb.com/texturepacker) for EaselJS"
+]
+
+}

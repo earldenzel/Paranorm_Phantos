@@ -16,6 +16,9 @@ module config {
         // X K Keys
         public static X: number = 88;
         public static K: number = 75;
+        // C L Keys
+        public static C: number = 67;
+        public static L: number = 76;
         // Enter Escape
         public static ENTER: number = 13;
         public static ESCAPE: number = 27;

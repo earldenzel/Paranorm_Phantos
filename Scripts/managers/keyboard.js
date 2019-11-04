@@ -40,6 +40,10 @@ var managers;
                     case config.Keys.ESCAPE:
                         this.biting = true;
                         break;
+                    case config.Keys.L:
+                    case config.Keys.C:
+                        this.running = true;
+                        break;
                 }
             }
         };
@@ -73,6 +77,10 @@ var managers;
                     case config.Keys.K:
                     case config.Keys.ESCAPE:
                         this.biting = false;
+                        break;
+                    case config.Keys.L:
+                    case config.Keys.C:
+                        this.running = false;
                         break;
                 }
             }

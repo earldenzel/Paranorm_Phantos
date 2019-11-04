@@ -25,6 +25,8 @@ var objects;
             _this.biteSequence = 0;
             _this.playerMoveSpeed = 4;
             _this.attackTimer = 0;
+            _this.bitingTimer = 0;
+            _this.bitingReset = 0;
             _this.canTraverseTop = false;
             _this.canTraverseBot = false;
             _this.canTraverseLeft = false;
@@ -59,6 +61,14 @@ var objects;
             if (!this.visible && this.hp <= 0) {
                 managers.Game.currentScene = config.Scene.OVER;
             }
+            if (this.bitingTimer == 4) {
+                this.bitingReset++;
+            }
+            if (this.bitingReset == 40) {
+                console.log("BITING RESET");
+                this.bitingTimer = 0;
+                this.bitingReset = 0;
+            }
         };
         Player.prototype.Reset = function () { };
         Player.prototype.Move = function () {
@@ -78,6 +88,26 @@ var objects;
             if (managers.Game.keyboardManager.moveRight) {
                 this.x += this.playerMoveSpeed;
                 this.direction = config.Direction.RIGHT;
+            }
+            // Running Implementation
+            if (managers.Game.keyboardManager.running) {
+                var runningSpeed = this.playerMoveSpeed + 1;
+                if (managers.Game.keyboardManager.moveUp) {
+                    this.y -= runningSpeed;
+                    this.direction = config.Direction.UP;
+                }
+                if (managers.Game.keyboardManager.moveDown) {
+                    this.y += runningSpeed;
+                    this.direction = config.Direction.DOWN;
+                }
+                if (managers.Game.keyboardManager.moveLeft) {
+                    this.x -= runningSpeed;
+                    this.direction = config.Direction.LEFT;
+                }
+                if (managers.Game.keyboardManager.moveRight) {
+                    this.x += runningSpeed;
+                    this.direction = config.Direction.RIGHT;
+                }
             }
             //if player presses the attack button
             if (managers.Game.keyboardManager.attacking) {
@@ -115,6 +145,27 @@ var objects;
                         managers.Game.keyboardManager.attackEnabled = true;
                     }, 300);
                 }
+            }
+            // Biting/Dash Implementation
+            if (managers.Game.keyboardManager.biting && this.bitingTimer <= 3) {
+                console.log("BITING");
+                managers.Game.keyboardManager.enabled = false;
+                switch (this.direction) {
+                    case config.Direction.UP:
+                        this.y -= (this.playerMoveSpeed + 16);
+                        break;
+                    case config.Direction.DOWN:
+                        this.y += (this.playerMoveSpeed + 16);
+                        break;
+                    case config.Direction.RIGHT:
+                        this.x += (this.playerMoveSpeed + 16);
+                        break;
+                    case config.Direction.LEFT:
+                        this.x -= (this.playerMoveSpeed + 16);
+                        break;
+                }
+                managers.Game.keyboardManager.enabled = true;
+                this.bitingTimer++;
             }
         };
         Player.prototype.CheckBound = function () {

@@ -7,6 +7,7 @@ module managers {
         public moveRight: boolean;
         public attacking: boolean;
         public biting: boolean;
+        public running: boolean;
 
         public enabled: boolean;
         public attackEnabled: boolean = true;
@@ -51,6 +52,10 @@ module managers {
                     case config.Keys.ESCAPE:
                         this.biting = true;
                         break;
+                    case config.Keys.L:
+                    case config.Keys.C:
+                        this.running = true;
+                        break;
                 }
             }
         }
@@ -85,6 +90,10 @@ module managers {
                     case config.Keys.ESCAPE:
                         this.biting = false;
                         break;
+                    case config.Keys.L:
+                    case config.Keys.C:
+                        this.running = false;
+                     break;
                 }
             }
         }
