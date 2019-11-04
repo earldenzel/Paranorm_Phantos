@@ -1,0 +1,31 @@
+{
+
+"images": [
+    "Chest_TextureAtlas.png"
+],
+
+"framerate": 20,
+"frames": [
+    [0, 0, 79, 77, 0, 0, 0],
+    [79, 0, 79, 77, 0, 0, 0],
+    [158, 0, 79, 77, 0, 0, 0],
+    [237, 0, 79, 77, 0, 0, 0],
+    [316, 0, 79, 77, 0, 0, 0],
+    [395, 0, 79, 77, 0, 0, 0]
+],
+
+"animations": {
+    "chestWithBossKey": { "frames": [0] },
+    "chestWithGold": { "frames": [1] },
+    "chestWithKey": { "frames": [2] },
+    "lockedChest": { "frames": [3] },
+    "openedChest": { "frames": [4] },
+    "regularChest": { "frames": [5] }
+},
+
+"texturepacker": [
+        "SmartUpdateHash: $TexturePacker:SmartUpdate:3dfc15232b09fba43337cd7058c56b07:6ee17ec9ed4791b0bad0634314c6e820:395f172dfec1959208426f58a6373c63$",
+        "Created with TexturePacker (https://www.codeandweb.com/texturepacker) for EaselJS"
+]
+
+}

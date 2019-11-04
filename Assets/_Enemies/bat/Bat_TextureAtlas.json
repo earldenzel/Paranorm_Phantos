@@ -1,0 +1,25 @@
+{
+
+"images": [
+    "Bat_TextureAtlas.png"
+],
+
+"framerate": 20,
+"frames": [
+    [0, 0, 96, 56, 0, 0, 0],
+    [96, 0, 96, 56, 0, 0, 0],
+    [192, 0, 96, 56, 0, 0, 0]
+],
+
+"animations": {
+    "bat1": { "frames": [0] },
+    "bat2": { "frames": [1] },
+    "bat3": { "frames": [2] }
+},
+
+"texturepacker": [
+        "SmartUpdateHash: $TexturePacker:SmartUpdate:32f209fd8cf308b2c47bececd3dd0e70:358617c9811096e7cb54d7069ff5809d:8b0a9dfacd45172f517757649553a9a4$",
+        "Created with TexturePacker (https://www.codeandweb.com/texturepacker) for EaselJS"
+]
+
+}
