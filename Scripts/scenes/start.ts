@@ -10,19 +10,19 @@ module scenes {
         private enterVisibility: boolean;
 
         // Constructor
-        constructor(assetManager:createjs.LoadQueue) {
-            super(assetManager);
+        constructor() {
+            super();
             this.Start();
         }
 
         public Start():void {
             // Initialize our objects for this scene
-            this.background = new objects.Background(this.assetManager, "title_background");
+            this.background = new objects.Background("title_background");
 
             //this.welcomeLabel = new objects.Label(
             //    "PARANORM //// PHANTOS", "40px", "Consolas", "#FFFFFF", 320, 240, true);
 
-            this.title = new objects.TitleUI(this.assetManager,"title_ui",40,240);
+            this.title = new objects.TitleUI("title_ui",40,240);
             //this.startButton = new objects.Button(this.assetManager, "nextButton", 320, 500);
             this.pressEnterLabel = new objects.Label("PRESS ENTER", "16px", "'Press Start 2P'", "#000000", 300, 500, true);
             this.pressEnterLabel.color = "#FFFFFF";
@@ -49,7 +49,7 @@ module scenes {
 
         private startButtonClick():void {
             //initialize player on start play
-            let player = new objects.Player(this.assetManager);
+            let player = new objects.Player();
             managers.Game.player = player;
             // Change our game state from START to OPENING_SCENE
             managers.Game.currentScene = config.Scene.OPENING_SCENE;

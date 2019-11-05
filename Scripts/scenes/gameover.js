@@ -16,24 +16,24 @@ var scenes;
     var GameOverScene = /** @class */ (function (_super) {
         __extends(GameOverScene, _super);
         // Constructor
-        function GameOverScene(assetManager) {
-            var _this = _super.call(this, assetManager) || this;
+        function GameOverScene() {
+            var _this = _super.call(this) || this;
             _this.Start();
             return _this;
         }
         // Method
         GameOverScene.prototype.Start = function () {
-            this.background = new objects.Background(this.assetManager, "title_background");
-            this.gameOver = new objects.TitleUI(this.assetManager, "gameover_ui", 90, 240);
+            this.background = new objects.Background("title_background");
+            this.gameOver = new objects.TitleUI("gameover_ui", 90, 240);
             //this.gameOverLabel = new objects.Label(
             //    "Game Over!", "40px", "Consolas", "#000000", 320, 240, true);
             //
-            this.spotlight = new createjs.Bitmap(this.assetManager.getResult("gameover_spotlight"));
+            this.spotlight = new createjs.Bitmap(managers.Game.assetManager.getResult("gameover_spotlight"));
             this.spotlight.x = 148;
-            this.phoebe = new createjs.Bitmap(this.assetManager.getResult("player_p_walk7"));
+            this.phoebe = new createjs.Bitmap(managers.Game.assetManager.getResult("player_p_walk7"));
             this.phoebe.x = 260;
             this.phoebe.y = 500;
-            this.backButton = new objects.Button(this.assetManager, "backButton", 290, 340);
+            this.backButton = new objects.Button(managers.Game.assetManager, "backButton", 290, 340);
             this.Main();
         };
         GameOverScene.prototype.Update = function () { };

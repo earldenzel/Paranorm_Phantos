@@ -2,8 +2,8 @@ module scenes {
 
     export class Graveyard_8 extends scenes.PlayScene {
         // Constructor
-        constructor(assetManager:createjs.LoadQueue) {
-            super(assetManager, true, false, false, false);
+        constructor() {
+            super(true, false, false, false);
             this.Start();
         }
 

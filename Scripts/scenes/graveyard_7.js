@@ -16,8 +16,8 @@ var scenes;
     var Graveyard_7 = /** @class */ (function (_super) {
         __extends(Graveyard_7, _super);
         // Constructor
-        function Graveyard_7(assetManager) {
-            var _this = _super.call(this, assetManager, false, false, true, false) || this;
+        function Graveyard_7() {
+            var _this = _super.call(this, false, false, true, false) || this;
             _this.Start();
             return _this;
         }

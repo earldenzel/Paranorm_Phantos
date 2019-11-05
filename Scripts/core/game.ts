@@ -59,6 +59,9 @@
         keyboardManager = new managers.Keyboard;
         managers.Game.keyboardManager = keyboardManager;
 
+        // Asset Manager
+        managers.Game.assetManager = assetManager;
+
         Main();
     }
 
@@ -81,57 +84,57 @@
         switch (managers.Game.currentScene) {
             case config.Scene.START:
                 stage.removeAllChildren();
-                currentScene = new scenes.StartScene(assetManager);
+                currentScene = new scenes.StartScene();
                 stage.addChild(currentScene);
                 break;
             case config.Scene.OPENING_SCENE:
                 stage.removeAllChildren();
-                currentScene = new scenes.OpeningScene(assetManager);
+                currentScene = new scenes.OpeningScene();
                 stage.addChild(currentScene);
                 break;
             case config.Scene.GRAVEYARD_1:
                 stage.removeAllChildren();
-                currentScene = new scenes.Graveyard_1(assetManager);
+                currentScene = new scenes.Graveyard_1();
                 stage.addChild(currentScene);
                 break;
             case config.Scene.GRAVEYARD_2:
                 stage.removeAllChildren();
-                currentScene = new scenes.Graveyard_2(assetManager);
+                currentScene = new scenes.Graveyard_2();
                 stage.addChild(currentScene);
                 break;
             case config.Scene.GRAVEYARD_3:
                 stage.removeAllChildren();
-                currentScene = new scenes.Graveyard_3(assetManager);
+                currentScene = new scenes.Graveyard_3();
                 stage.addChild(currentScene);
                 break;
             case config.Scene.GRAVEYARD_4:
                 stage.removeAllChildren();
-                currentScene = new scenes.Graveyard_4(assetManager);
+                currentScene = new scenes.Graveyard_4();
                 stage.addChild(currentScene);
                 break;
             case config.Scene.GRAVEYARD_5:
                 stage.removeAllChildren();
-                currentScene = new scenes.Graveyard_5(assetManager);
+                currentScene = new scenes.Graveyard_5();
                 stage.addChild(currentScene);
                 break;
             case config.Scene.GRAVEYARD_6:
                 stage.removeAllChildren();
-                currentScene = new scenes.Graveyard_6(assetManager);
+                currentScene = new scenes.Graveyard_6();
                 stage.addChild(currentScene);
                 break;
             case config.Scene.GRAVEYARD_7:
                 stage.removeAllChildren();
-                currentScene = new scenes.Graveyard_7(assetManager);
+                currentScene = new scenes.Graveyard_7();
                 stage.addChild(currentScene);
                 break;
             case config.Scene.GRAVEYARD_8:
                 stage.removeAllChildren();
-                currentScene = new scenes.Graveyard_8(assetManager);
+                currentScene = new scenes.Graveyard_8();
                 stage.addChild(currentScene);
                 break;
             case config.Scene.OVER:
                 stage.removeAllChildren();
-                currentScene = new scenes.GameOverScene(assetManager);
+                currentScene = new scenes.GameOverScene();
                 stage.addChild(currentScene);
                 break;
         }

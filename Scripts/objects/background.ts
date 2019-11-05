@@ -3,8 +3,8 @@ module objects {
         // Variables
         private speedY:number;  // Speed of background scrolling on Y-axis
         // Constructor
-        constructor(assetManager:createjs.LoadQueue, imageString:string) {
-            super(assetManager.getResult(imageString));
+        constructor(imageString:string) {
+            super(managers.Game.assetManager.getResult(imageString));
 
             //this.Start();
         }

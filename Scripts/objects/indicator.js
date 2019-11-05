@@ -16,8 +16,8 @@ var objects;
     var Indicator = /** @class */ (function (_super) {
         __extends(Indicator, _super);
         // Constructor
-        function Indicator(assetManager, imageString) {
-            var _this = _super.call(this, assetManager, imageString) || this;
+        function Indicator(imageString) {
+            var _this = _super.call(this, imageString) || this;
             _this.name = imageString;
             return _this;
         }

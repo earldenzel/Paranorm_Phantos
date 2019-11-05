@@ -7,10 +7,10 @@ module objects {
         public stunIndicator: objects.Indicator;
         protected bounty: number;
 
-        constructor(assetManager: createjs.LoadQueue, enemyName: string) {
-            super(assetManager, enemyName);
+        constructor(enemyName: string) {
+            super(enemyName);
             this.Start();
-            this.stunIndicator = new objects.Indicator(assetManager, "kKeyIndicator");
+            this.stunIndicator = new objects.Indicator("kKeyIndicator");
             this.Move();
         }
 

@@ -17,22 +17,22 @@ var scenes;
         __extends(Graveyard_1, _super);
         // Variables
         // Constructor
-        function Graveyard_1(assetManager) {
-            var _this = _super.call(this, assetManager, false, true, true, true) || this;
+        function Graveyard_1() {
+            var _this = _super.call(this, false, true, true, true) || this;
             _this.Start();
             return _this;
         }
         // Methods
         Graveyard_1.prototype.Start = function () {
-            this.enemies[0] = new objects.TestEnemy(this.assetManager, 0, true, true);
+            this.enemies[0] = new objects.TestEnemy(0, true, true);
             this.enemies[0].attackPower = 0; // you will never die from starter enemy
             var x = (config.Bounds.LEFT_BOUND + config.Bounds.RIGHT_BOUND) / 2;
             var y = (config.Bounds.TOP_BOUND + config.Bounds.BOTTOM_BOUND) / 2 + 150;
-            this.cosmetics[0] = new objects.Indicator(this.assetManager, "wKeyIndicator");
-            this.cosmetics[1] = new objects.Indicator(this.assetManager, "sKeyIndicator");
-            this.cosmetics[2] = new objects.Indicator(this.assetManager, "aKeyIndicator");
-            this.cosmetics[3] = new objects.Indicator(this.assetManager, "dKeyIndicator");
-            this.cosmetics[4] = new objects.Indicator(this.assetManager, "jKeyIndicator");
+            this.cosmetics[0] = new objects.Indicator("wKeyIndicator");
+            this.cosmetics[1] = new objects.Indicator("sKeyIndicator");
+            this.cosmetics[2] = new objects.Indicator("aKeyIndicator");
+            this.cosmetics[3] = new objects.Indicator("dKeyIndicator");
+            this.cosmetics[4] = new objects.Indicator("jKeyIndicator");
             this.cosmetics[0].SetPosition(new math.Vec2(x, y - this.cosmetics[0].height));
             this.cosmetics[1].SetPosition(new math.Vec2(x, y + this.cosmetics[1].height));
             this.cosmetics[2].SetPosition(new math.Vec2(x - this.cosmetics[2].width, y));

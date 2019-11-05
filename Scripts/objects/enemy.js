@@ -15,10 +15,10 @@ var objects;
 (function (objects) {
     var Enemy = /** @class */ (function (_super) {
         __extends(Enemy, _super);
-        function Enemy(assetManager, enemyName) {
-            var _this = _super.call(this, assetManager, enemyName) || this;
+        function Enemy(enemyName) {
+            var _this = _super.call(this, enemyName) || this;
             _this.Start();
-            _this.stunIndicator = new objects.Indicator(assetManager, "kKeyIndicator");
+            _this.stunIndicator = new objects.Indicator("kKeyIndicator");
             _this.Move();
             return _this;
         }

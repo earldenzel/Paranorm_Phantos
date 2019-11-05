@@ -2,18 +2,18 @@ module scenes {
 
     export class Graveyard_2 extends scenes.PlayScene {
         // Constructor
-        constructor(assetManager:createjs.LoadQueue) {
-            super(assetManager, false, false, false, true);
+        constructor() {
+            super(false, false, false, true);
             this.Start();
         }
 
         // Methods
         public Start(): void {
-            this.enemies[0] = new objects.TestEnemy(this.assetManager, 1, true, true);
-            this.enemies[1] = new objects.TestZombie(this.assetManager, 0.5);
-            this.enemies[2] = new objects.Bat(this.assetManager, 2.5, 100);
+            this.enemies[0] = new objects.TestEnemy( 1, true, true);
+            this.enemies[1] = new objects.TestZombie( 0.5);
+            this.enemies[2] = new objects.Bat( 2.5, 100);
 
-            this.barriers[0] = new objects.Barriers(this.assetManager, "background_barrierTest");
+            this.barriers[0] = new objects.Barriers("background_barrierTest");
 
             managers.Game.player.sceneOnRight = config.Scene.GRAVEYARD_3;
             super.Start();

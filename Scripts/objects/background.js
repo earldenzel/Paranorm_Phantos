@@ -16,8 +16,8 @@ var objects;
     var Background = /** @class */ (function (_super) {
         __extends(Background, _super);
         // Constructor
-        function Background(assetManager, imageString) {
-            return _super.call(this, assetManager.getResult(imageString)) || this;
+        function Background(imageString) {
+            return _super.call(this, managers.Game.assetManager.getResult(imageString)) || this;
             //this.Start();
         }
         // Functions 

@@ -25,18 +25,18 @@ module objects {
         public ecto: number;
 
         //Constructor
-        constructor(assetManager: createjs.LoadQueue) {
-            super(assetManager, "player_p_walk7");
-            this.weapon = new objects.Weapon(assetManager);
+        constructor() {
+            super("player_p_walk7");
+            this.weapon = new objects.Weapon();
             this.Start();
             this.hp = 5;
             this.ecto = 5;
             this.attackPower = 1;
             this.images = [
-                assetManager.getResult("player_p_walk7"),
-                assetManager.getResult("player_p_walk1"),
-                assetManager.getResult("player_p_walk3"),
-                assetManager.getResult("player_p_walk5")
+                managers.Game.assetManager.getResult("player_p_walk7"),
+                managers.Game.assetManager.getResult("player_p_walk1"),
+                managers.Game.assetManager.getResult("player_p_walk3"),
+                managers.Game.assetManager.getResult("player_p_walk5")
             ]
             this.direction = config.Direction.UP;
             this.money = 0;

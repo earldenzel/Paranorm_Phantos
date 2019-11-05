@@ -16,8 +16,8 @@ var objects;
     var Bat = /** @class */ (function (_super) {
         __extends(Bat, _super);
         // constructors
-        function Bat(assetManager, moveSpeed, updateTime) {
-            var _this = _super.call(this, assetManager, "enemy_bat") || this;
+        function Bat(moveSpeed, updateTime) {
+            var _this = _super.call(this, "enemy_bat") || this;
             _this.Start();
             _this.hp = 3;
             _this.attackPower = 1;

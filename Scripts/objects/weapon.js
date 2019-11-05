@@ -16,13 +16,13 @@ var objects;
     var Weapon = /** @class */ (function (_super) {
         __extends(Weapon, _super);
         // Constructor
-        function Weapon(assetManager) {
-            var _this = _super.call(this, assetManager, "item_p_front2") || this;
+        function Weapon() {
+            var _this = _super.call(this, "item_p_front2") || this;
             _this.images = [
-                assetManager.getResult("item_p_front2"),
-                assetManager.getResult("item_p_front2"),
-                assetManager.getResult("item_p_left2"),
-                assetManager.getResult("item_p_right2")
+                managers.Game.assetManager.getResult("item_p_front2"),
+                managers.Game.assetManager.getResult("item_p_front2"),
+                managers.Game.assetManager.getResult("item_p_left2"),
+                managers.Game.assetManager.getResult("item_p_right2")
             ];
             _this.Start();
             return _this;

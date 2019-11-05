@@ -37,12 +37,12 @@ module scenes {
         private playerInfo: managers.PlayerInfo_UI;
 
         // Constructor
-        constructor(assetManager:createjs.LoadQueue, 
+        constructor( 
             hasDoorTop: boolean,
             hasDoorBot: boolean,
             hasDoorLeft: boolean,
             hasDoorRight: boolean) {
-                super(assetManager);
+                super();
                 this.hasDoorTop = hasDoorTop;
                 this.hasDoorBot = hasDoorBot;
                 this.hasDoorLeft = hasDoorLeft;
@@ -55,12 +55,12 @@ module scenes {
             // Initialize our variables
             this.player = managers.Game.player;
 
-            this.ceilingAndWall = new objects.Background(this.assetManager,"background_c_w_all");
+            this.ceilingAndWall = new objects.Background("background_c_w_all");
 
             this.ceilingAndWall.y = 110;
             //this.ceilingHorizontal =new objects.Background(this.assetManager,"background_c_hori");
             //this.ceilingVertical =new objects.Background(this.assetManager,"background_c_vert");
-            this.floor = new objects.Background(this.assetManager,"background_f_all");
+            this.floor = new objects.Background("background_f_all");
             this.floor.y = 110;
             //this.wallHorizontal = new objects.Background(this.assetManager,"background_w_hori");
             //this.wallVertical = new objects.Background(this.assetManager, "background_w_vert");
@@ -71,15 +71,15 @@ module scenes {
             this.player.canTraverseRight = false;
 
             if (this.hasDoorTop){                
-                this.doorTop = new objects.Background(this.assetManager, "background_d_vert");
-                this.doorTopFrame = new objects.Background(this.assetManager, "background_d_vertT");
+                this.doorTop = new objects.Background("background_d_vert");
+                this.doorTopFrame = new objects.Background("background_d_vertT");
                 this.doorTop.y = 110;
                 this.doorTopFrame.y = 110;
                 this.player.canTraverseTop = true;
             }
             if (this.hasDoorBot){
-                this.doorBot = new objects.Background(this.assetManager, "background_d_vert");
-                this.doorBotFrame = new objects.Background(this.assetManager, "background_d_vertT");
+                this.doorBot = new objects.Background("background_d_vert");
+                this.doorBotFrame = new objects.Background("background_d_vertT");
                 this.doorBot.y = 110;
                 this.doorBotFrame.y = 110;
                 this.doorBot.Flip();
@@ -87,15 +87,15 @@ module scenes {
                 this.player.canTraverseBot = true;
             }
             if (this.hasDoorLeft){
-                this.doorLeft = new objects.Background(this.assetManager, "background_d_hori");
-                this.doorLeftFrame = new objects.Background(this.assetManager,"background_d_horiT");
+                this.doorLeft = new objects.Background("background_d_hori");
+                this.doorLeftFrame = new objects.Background("background_d_horiT");
                 this.doorLeft.y = 110;
                 this.doorLeftFrame.y = 110;
                 this.player.canTraverseLeft = true;
             }
             if (this.hasDoorRight){
-                this.doorRight = new objects.Background(this.assetManager, "background_d_hori");
-                this.doorRightFrame = new objects.Background(this.assetManager,"background_d_horiT");
+                this.doorRight = new objects.Background("background_d_hori");
+                this.doorRightFrame = new objects.Background("background_d_horiT");
                 this.doorRight.y = 110;
                 this.doorRightFrame.y = 110;
                 this.doorRight.Flip();
@@ -113,7 +113,7 @@ module scenes {
 
             //managers.Game.messageStatus = this.messageStatus;
 
-            this.playerInfo = new managers.PlayerInfo_UI(this.assetManager);
+            this.playerInfo = new managers.PlayerInfo_UI();
             //this.playerInfo.x = 38;
 
             this.Main();

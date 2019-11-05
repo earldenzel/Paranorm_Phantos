@@ -16,8 +16,8 @@ var scenes;
     var OpeningScene = /** @class */ (function (_super) {
         __extends(OpeningScene, _super);
         // Constructor
-        function OpeningScene(assetManager) {
-            var _this = _super.call(this, assetManager) || this;
+        function OpeningScene() {
+            var _this = _super.call(this) || this;
             _this.messageTimeout = 0;
             _this.Start();
             return _this;
@@ -25,7 +25,7 @@ var scenes;
         OpeningScene.prototype.Start = function () {
             // Initialize our objects for this scene
             this.currentMessage = 0;
-            this.background = new objects.Background(this.assetManager, "background");
+            this.background = new objects.Background("background");
             this.pressEnterLabel = new objects.Label("", "16px", "'Press Start 2P'", "#000000", 10, 200, true);
             this.pressEnterLabel.color = "#FFFFFF";
             this.cutSceneMessages = [
@@ -41,7 +41,7 @@ var scenes;
                 "Let's jump right in..."
             ];
             //initialize new player
-            this.player = new objects.Player(this.assetManager);
+            this.player = new objects.Player();
             managers.Game.player = this.player;
             this.Main();
         };

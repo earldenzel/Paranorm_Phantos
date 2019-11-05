@@ -17,8 +17,8 @@ var objects;
     var Player = /** @class */ (function (_super) {
         __extends(Player, _super);
         //Constructor
-        function Player(assetManager) {
-            var _this = _super.call(this, assetManager, "player_p_walk7") || this;
+        function Player() {
+            var _this = _super.call(this, "player_p_walk7") || this;
             //Variables
             //public playerController: Controller<boolean>;
             _this.attackSequence = 0;
@@ -31,16 +31,16 @@ var objects;
             _this.canTraverseBot = false;
             _this.canTraverseLeft = false;
             _this.canTraverseRight = false;
-            _this.weapon = new objects.Weapon(assetManager);
+            _this.weapon = new objects.Weapon();
             _this.Start();
             _this.hp = 5;
             _this.ecto = 5;
             _this.attackPower = 1;
             _this.images = [
-                assetManager.getResult("player_p_walk7"),
-                assetManager.getResult("player_p_walk1"),
-                assetManager.getResult("player_p_walk3"),
-                assetManager.getResult("player_p_walk5")
+                managers.Game.assetManager.getResult("player_p_walk7"),
+                managers.Game.assetManager.getResult("player_p_walk1"),
+                managers.Game.assetManager.getResult("player_p_walk3"),
+                managers.Game.assetManager.getResult("player_p_walk5")
             ];
             _this.direction = config.Direction.UP;
             _this.money = 0;

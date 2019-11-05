@@ -8,6 +8,7 @@ module managers {
         public static gameWidth: number = 640;
         //public static messageStatus: objects.Label
         public static keyboardManager: managers.Keyboard;
+        public static SFX: createjs.AbstractSoundInstance;
 
     }
 }

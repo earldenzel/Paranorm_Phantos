@@ -17,8 +17,8 @@ var objects;
         __extends(Barriers, _super);
         // Variables
         // Constructor
-        function Barriers(assetManager, imageString) {
-            var _this = _super.call(this, assetManager, imageString) || this;
+        function Barriers(imageString) {
+            var _this = _super.call(this, imageString) || this;
             _this.Start();
             return _this;
         }

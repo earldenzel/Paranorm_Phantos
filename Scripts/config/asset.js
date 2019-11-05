@@ -4,6 +4,7 @@ var config;
         function Assets() {
         }
         Assets.getAssets = [
+            // SPRITES
             {
                 "id": "backButton",
                 "src": "./Assets/Old/BackButton.png"
@@ -213,6 +214,39 @@ var config;
             {
                 "id": "jKeyIndicator",
                 "src": "./Assets/_UI/HowToPlay/HowToPlay_JKey.png"
+            },
+            // SOUND EFFECTS
+            {
+                "id": "enemiesHit",
+                "src": "./Assets/_SoundEffects/Enemies_Hit.wav"
+            },
+            {
+                "id": "itemCollect",
+                "src": "./Assets/_SoundEffects/Item_Collect.wav"
+            },
+            {
+                "id": "doorUnlock",
+                "src": "./Assets/_SoundEffects/Door_Unlock.wav"
+            },
+            {
+                "id": "phoebeDash-Swing",
+                "src": "./Assets/_SoundEffects/Phoebe_DashOrSwing.wav"
+            },
+            {
+                "id": "phoebeEat",
+                "src": "./Assets/_SoundEffects/Phoebe_Eat.wav"
+            },
+            {
+                "id": "phoebeHit",
+                "src": "./Assets/_SoundEffects/Phoebe_Hit.wav"
+            },
+            {
+                "id": "phoebeTransform",
+                "src": "./Assets/_SoundEffects/Phoebe_Transform.wav"
+            },
+            {
+                "id": "anyDefeated",
+                "src": "./Assets/_SoundEffects/Defeat.wav"
             }
         ];
         return Assets;

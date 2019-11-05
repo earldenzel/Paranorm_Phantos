@@ -11,15 +11,15 @@ module scenes {
         private player:objects.Player;
 
         // Constructor
-        constructor(assetManager:createjs.LoadQueue) {
-            super(assetManager);
+        constructor() {
+            super();
             this.Start();
         }
 
         public Start():void {
             // Initialize our objects for this scene
             this.currentMessage = 0;
-            this.background = new objects.Background(this.assetManager, "background");
+            this.background = new objects.Background("background");
 
             this.pressEnterLabel = new objects.Label("", "16px", "'Press Start 2P'", "#000000", 10, 200, true);
             this.pressEnterLabel.color = "#FFFFFF";
@@ -37,7 +37,7 @@ module scenes {
             ];
 
             //initialize new player
-            this.player = new objects.Player(this.assetManager);
+            this.player = new objects.Player();
             managers.Game.player = this.player;
             
             this.Main();

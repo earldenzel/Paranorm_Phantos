@@ -3,8 +3,8 @@ module objects{
         // Variables
 
         // Constructor
-        constructor(assetManager:createjs.LoadQueue,imageString: string,x:number = 0, y:number = 0){
-            super(assetManager.getResult(imageString));
+        constructor(imageString: string,x:number = 0, y:number = 0){
+            super(managers.Game.assetManager.getResult(imageString));
             this.x = x;
             this.y = y;
             this.Start();

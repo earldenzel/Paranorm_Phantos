@@ -6,8 +6,8 @@ module objects {
 
         // constructors
 
-        constructor(assetManager: createjs.LoadQueue, moveSpeed: number) {
-            super(assetManager, "enemy_zombieTest");
+        constructor(moveSpeed: number) {
+            super("enemy_zombieTest");
             this.Start();
 
             this.hp = 3;

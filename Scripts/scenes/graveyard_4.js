@@ -17,16 +17,16 @@ var scenes;
         __extends(Graveyard_4, _super);
         //this scene is right of graveyard 1
         // Constructor
-        function Graveyard_4(assetManager) {
-            var _this = _super.call(this, assetManager, false, false, true, false) || this;
+        function Graveyard_4() {
+            var _this = _super.call(this, false, false, true, false) || this;
             _this.Start();
             return _this;
         }
         // Methods
         Graveyard_4.prototype.Start = function () {
-            this.enemies[0] = new objects.TestEnemy(this.assetManager, 5, true, true);
-            this.enemies[1] = new objects.TestEnemy(this.assetManager, 3, false, false);
-            this.enemies[2] = new objects.TestEnemy(this.assetManager, 2, false, true);
+            this.enemies[0] = new objects.TestEnemy(5, true, true);
+            this.enemies[1] = new objects.TestEnemy(3, false, false);
+            this.enemies[2] = new objects.TestEnemy(2, false, true);
             managers.Game.player.sceneOnLeft = config.Scene.GRAVEYARD_1;
             _super.prototype.Start.call(this);
         };

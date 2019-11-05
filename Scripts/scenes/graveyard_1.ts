@@ -3,23 +3,23 @@ module scenes {
     export class Graveyard_1 extends scenes.PlayScene {
         // Variables
         // Constructor
-        constructor(assetManager:createjs.LoadQueue) {
-            super(assetManager, false, true, true, true);
+        constructor() {
+            super(false, true, true, true);
             this.Start();
         }
 
         // Methods
         public Start(): void {
-            this.enemies[0] = new objects.TestEnemy(this.assetManager, 0, true, true);
+            this.enemies[0] = new objects.TestEnemy(0, true, true);
             this.enemies[0].attackPower = 0; // you will never die from starter enemy
 
             let x : number = (config.Bounds.LEFT_BOUND + config.Bounds.RIGHT_BOUND)/2;
             let y : number = (config.Bounds.TOP_BOUND + config.Bounds.BOTTOM_BOUND)/2 + 150;
-            this.cosmetics[0] = new objects.Indicator(this.assetManager, "wKeyIndicator");
-            this.cosmetics[1] = new objects.Indicator(this.assetManager, "sKeyIndicator");
-            this.cosmetics[2] = new objects.Indicator(this.assetManager, "aKeyIndicator");
-            this.cosmetics[3] = new objects.Indicator(this.assetManager, "dKeyIndicator");
-            this.cosmetics[4] = new objects.Indicator(this.assetManager, "jKeyIndicator");
+            this.cosmetics[0] = new objects.Indicator("wKeyIndicator");
+            this.cosmetics[1] = new objects.Indicator("sKeyIndicator");
+            this.cosmetics[2] = new objects.Indicator("aKeyIndicator");
+            this.cosmetics[3] = new objects.Indicator("dKeyIndicator");
+            this.cosmetics[4] = new objects.Indicator("jKeyIndicator");
             this.cosmetics[0].SetPosition(new math.Vec2(x,y-this.cosmetics[0].height));
             this.cosmetics[1].SetPosition(new math.Vec2(x,y+this.cosmetics[1].height));
             this.cosmetics[2].SetPosition(new math.Vec2(x-this.cosmetics[2].width,y));

@@ -1,6 +1,7 @@
 module config{
     export class Assets{
         public static getAssets: any[] = [
+            // SPRITES
             {
                 "id": "backButton",
                 "src": "./Assets/Old/BackButton.png"
@@ -210,6 +211,40 @@ module config{
             {
                 "id": "jKeyIndicator",
                 "src": "./Assets/_UI/HowToPlay/HowToPlay_JKey.png"
+            },
+
+            // SOUND EFFECTS
+            {
+                "id": "enemiesHit",
+                "src": "./Assets/_SoundEffects/Enemies_Hit.wav"
+            },
+            {
+                "id": "itemCollect",
+                "src": "./Assets/_SoundEffects/Item_Collect.wav"
+            },
+            {
+                "id": "doorUnlock",
+                "src": "./Assets/_SoundEffects/Door_Unlock.wav"
+            },
+            {
+                "id": "phoebeDash-Swing",
+                "src": "./Assets/_SoundEffects/Phoebe_DashOrSwing.wav"
+            },
+            {
+                "id": "phoebeEat",
+                "src": "./Assets/_SoundEffects/Phoebe_Eat.wav"
+            },
+            {
+                "id": "phoebeHit",
+                "src": "./Assets/_SoundEffects/Phoebe_Hit.wav"
+            },
+            {
+                "id": "phoebeTransform",
+                "src": "./Assets/_SoundEffects/Phoebe_Transform.wav"
+            },
+            {
+                "id": "anyDefeated",
+                "src": "./Assets/_SoundEffects/Defeat.wav"
             }
         ];
     }

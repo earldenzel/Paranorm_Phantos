@@ -8,8 +8,8 @@ module objects{
 
         // constructors
         
-        constructor(assetManager:createjs.LoadQueue, moveSpeed:number, updateTime: number){
-            super(assetManager,"enemy_bat");
+        constructor(moveSpeed:number, updateTime: number){
+            super("enemy_bat");
             this.Start();
 
             this.hp = 3;

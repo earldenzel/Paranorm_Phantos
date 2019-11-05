@@ -14,8 +14,8 @@ module objects {
         public attackPower: number;
 
         // Constructor
-        constructor(assetManager:createjs.LoadQueue, imageString:string) {
-            super(assetManager.getResult(imageString));
+        constructor(imageString:string) {
+            super(managers.Game.assetManager.getResult(imageString));
 
             this.name = imageString;
 

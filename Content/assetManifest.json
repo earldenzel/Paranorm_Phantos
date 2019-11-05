@@ -157,5 +157,61 @@
     {
         "id": "background_barrierTest",
         "src": "./Assets/_Background/_TestStage/barrierTest.png"
+    },
+    {
+        "id": "kKeyIndicator",
+        "src": "./Assets/_UI/HowToPlay/HowToPlay_KKey.png"
+    },
+    {
+        "id": "wKeyIndicator",
+        "src": "./Assets/_UI/HowToPlay/HowToPlay_WKey.png"
+    },
+    {
+        "id": "aKeyIndicator",
+        "src": "./Assets/_UI/HowToPlay/HowToPlay_AKey.png"
+    },
+    {
+        "id": "sKeyIndicator",
+        "src": "./Assets/_UI/HowToPlay/HowToPlay_SKey.png"
+    },
+    {
+        "id": "dKeyIndicator",
+        "src": "./Assets/_UI/HowToPlay/HowToPlay_DKey.png"
+    },
+    {
+        "id": "jKeyIndicator",
+        "src": "./Assets/_UI/HowToPlay/HowToPlay_JKey.png"
+    },
+    {
+        "id": "enemiesHit",
+        "src": "./Assets/_SoundEffects/Enemies_Hit.wav"
+    },
+    {
+        "id": "itemCollect",
+        "src": "./Assets/_SoundEffects/Item_Collect.wav"
+    },
+    {
+        "id": "doorUnlock",
+        "src": "./Assets/_SoundEffects/Door_Unlock.wav"
+    },
+    {
+        "id": "phoebeDash-Swing",
+        "src": "./Assets/_SoundEffects/Phoebe_DashOrSwing.wav"
+    },
+    {
+        "id": "phoebeEat",
+        "src": "./Assets/_SoundEffects/Phoebe_Eat.wav"
+    },
+    {
+        "id": "phoebeHit",
+        "src": "./Assets/_SoundEffects/Phoebe_Hit.wav"
+    },
+    {
+        "id": "phoebeTransform",
+        "src": "./Assets/_SoundEffects/Phoebe_Transform.wav"
+    },
+    {
+        "id": "anyDefeated",
+        "src": "./Assets/_SoundEffects/Defeat.wav"
     }
 ]

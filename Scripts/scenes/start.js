@@ -16,18 +16,18 @@ var scenes;
     var StartScene = /** @class */ (function (_super) {
         __extends(StartScene, _super);
         // Constructor
-        function StartScene(assetManager) {
-            var _this = _super.call(this, assetManager) || this;
+        function StartScene() {
+            var _this = _super.call(this) || this;
             _this.messageTimeout = 0;
             _this.Start();
             return _this;
         }
         StartScene.prototype.Start = function () {
             // Initialize our objects for this scene
-            this.background = new objects.Background(this.assetManager, "title_background");
+            this.background = new objects.Background("title_background");
             //this.welcomeLabel = new objects.Label(
             //    "PARANORM //// PHANTOS", "40px", "Consolas", "#FFFFFF", 320, 240, true);
-            this.title = new objects.TitleUI(this.assetManager, "title_ui", 40, 240);
+            this.title = new objects.TitleUI("title_ui", 40, 240);
             //this.startButton = new objects.Button(this.assetManager, "nextButton", 320, 500);
             this.pressEnterLabel = new objects.Label("PRESS ENTER", "16px", "'Press Start 2P'", "#000000", 300, 500, true);
             this.pressEnterLabel.color = "#FFFFFF";
@@ -53,7 +53,7 @@ var scenes;
         };
         StartScene.prototype.startButtonClick = function () {
             //initialize player on start play
-            var player = new objects.Player(this.assetManager);
+            var player = new objects.Player();
             managers.Game.player = player;
             // Change our game state from START to OPENING_SCENE
             managers.Game.currentScene = config.Scene.OPENING_SCENE;

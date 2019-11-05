@@ -3,8 +3,8 @@ module objects{
         // Variables
 
         // Constructor
-        constructor(assetManager: createjs.LoadQueue, imageString: string){
-            super(assetManager,imageString);
+        constructor(imageString: string){
+            super(imageString);
             this.Start();
             
         }

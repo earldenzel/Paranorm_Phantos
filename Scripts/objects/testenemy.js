@@ -16,8 +16,8 @@ var objects;
     var TestEnemy = /** @class */ (function (_super) {
         __extends(TestEnemy, _super);
         // constructors
-        function TestEnemy(assetManager, moveSpeed, rightDirection, downDirection) {
-            var _this = _super.call(this, assetManager, "enemy_test") || this;
+        function TestEnemy(moveSpeed, rightDirection, downDirection) {
+            var _this = _super.call(this, "enemy_test") || this;
             _this.Start();
             _this.hp = 2;
             _this.attackPower = 2;

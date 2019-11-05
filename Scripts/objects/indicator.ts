@@ -1,8 +1,8 @@
 module objects {
     export class Indicator extends objects.GameObject {
         // Constructor
-        constructor(assetManager:createjs.LoadQueue, imageString:string) {
-            super(assetManager, imageString);
+        constructor(imageString:string) {
+            super(imageString);
 
             this.name = imageString;
         }

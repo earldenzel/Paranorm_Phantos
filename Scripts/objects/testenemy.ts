@@ -7,8 +7,8 @@ module objects{
 
         // constructors
         
-        constructor(assetManager:createjs.LoadQueue, moveSpeed:number, rightDirection:boolean, downDirection:boolean){
-            super(assetManager,"enemy_test");
+        constructor(moveSpeed:number, rightDirection:boolean, downDirection:boolean){
+            super("enemy_test");
             this.Start();
             this.hp = 2;
             this.attackPower = 2;

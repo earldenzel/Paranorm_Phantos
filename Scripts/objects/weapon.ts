@@ -3,13 +3,13 @@ module objects {
         // Variables
         private images: Array<any>;
         // Constructor
-        constructor(assetManager:createjs.LoadQueue) {
-            super(assetManager, "item_p_front2");
+        constructor() {
+            super("item_p_front2");
             this.images = [
-                assetManager.getResult("item_p_front2"),
-                assetManager.getResult("item_p_front2"),
-                assetManager.getResult("item_p_left2"),
-                assetManager.getResult("item_p_right2")
+                managers.Game.assetManager.getResult("item_p_front2"),
+                managers.Game.assetManager.getResult("item_p_front2"),
+                managers.Game.assetManager.getResult("item_p_left2"),
+                managers.Game.assetManager.getResult("item_p_right2")
             ]
             this.Start();
         }

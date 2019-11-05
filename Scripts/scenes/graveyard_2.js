@@ -16,17 +16,17 @@ var scenes;
     var Graveyard_2 = /** @class */ (function (_super) {
         __extends(Graveyard_2, _super);
         // Constructor
-        function Graveyard_2(assetManager) {
-            var _this = _super.call(this, assetManager, false, false, false, true) || this;
+        function Graveyard_2() {
+            var _this = _super.call(this, false, false, false, true) || this;
             _this.Start();
             return _this;
         }
         // Methods
         Graveyard_2.prototype.Start = function () {
-            this.enemies[0] = new objects.TestEnemy(this.assetManager, 1, true, true);
-            this.enemies[1] = new objects.TestZombie(this.assetManager, 0.5);
-            this.enemies[2] = new objects.Bat(this.assetManager, 2.5, 100);
-            this.barriers[0] = new objects.Barriers(this.assetManager, "background_barrierTest");
+            this.enemies[0] = new objects.TestEnemy(1, true, true);
+            this.enemies[1] = new objects.TestZombie(0.5);
+            this.enemies[2] = new objects.Bat(2.5, 100);
+            this.barriers[0] = new objects.Barriers("background_barrierTest");
             managers.Game.player.sceneOnRight = config.Scene.GRAVEYARD_3;
             _super.prototype.Start.call(this);
         };

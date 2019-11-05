@@ -16,9 +16,8 @@ var managers;
     var PlayerInfo_UI = /** @class */ (function (_super) {
         __extends(PlayerInfo_UI, _super);
         // Constructor
-        function PlayerInfo_UI(assetManager) {
+        function PlayerInfo_UI() {
             var _this = _super.call(this) || this;
-            _this.assetManager = assetManager;
             _this.InIt();
             return _this;
         }
@@ -75,7 +74,7 @@ var managers;
         // Methods
         PlayerInfo_UI.prototype.InIt = function () {
             // Create Base
-            this.playerInfo_Base = new createjs.Bitmap(this.assetManager.getResult("ui_playerinfo"));
+            this.playerInfo_Base = new createjs.Bitmap(managers.Game.assetManager.getResult("ui_playerinfo"));
             // Create Labels
             this.moneyLabel = new objects.Label("00000000", "16px", "'Press Start 2P'", "#FFFFFF", 236, 20, false);
             this.keyLabel = new objects.Label("00", "16px", "'Press Start 2P'", "#FFFFFF", 250, 77, false);
@@ -99,22 +98,22 @@ var managers;
         PlayerInfo_UI.prototype.ChangeHealthInfo = function () {
             switch (this.playerHealth) {
                 case 0:
-                    this.playerInfo_Health = new createjs.Bitmap(this.assetManager.getResult("life_0-5"));
+                    this.playerInfo_Health = new createjs.Bitmap(managers.Game.assetManager.getResult("life_0-5"));
                     break;
                 case 1:
-                    this.playerInfo_Health = new createjs.Bitmap(this.assetManager.getResult("life_1-5"));
+                    this.playerInfo_Health = new createjs.Bitmap(managers.Game.assetManager.getResult("life_1-5"));
                     break;
                 case 2:
-                    this.playerInfo_Health = new createjs.Bitmap(this.assetManager.getResult("life_2-5"));
+                    this.playerInfo_Health = new createjs.Bitmap(managers.Game.assetManager.getResult("life_2-5"));
                     break;
                 case 3:
-                    this.playerInfo_Health = new createjs.Bitmap(this.assetManager.getResult("life_3-5"));
+                    this.playerInfo_Health = new createjs.Bitmap(managers.Game.assetManager.getResult("life_3-5"));
                     break;
                 case 4:
-                    this.playerInfo_Health = new createjs.Bitmap(this.assetManager.getResult("life_4-5"));
+                    this.playerInfo_Health = new createjs.Bitmap(managers.Game.assetManager.getResult("life_4-5"));
                     break;
                 case 5:
-                    this.playerInfo_Health = new createjs.Bitmap(this.assetManager.getResult("life_5-5"));
+                    this.playerInfo_Health = new createjs.Bitmap(managers.Game.assetManager.getResult("life_5-5"));
                     break;
             }
             this.playerInfo_Health.x = 376;
@@ -123,22 +122,22 @@ var managers;
         PlayerInfo_UI.prototype.ChangeEctoInfo = function () {
             switch (this.playerEcto) {
                 case 0:
-                    this.playerInfo_Ecto = new createjs.Bitmap(this.assetManager.getResult("ecto_0-5"));
+                    this.playerInfo_Ecto = new createjs.Bitmap(managers.Game.assetManager.getResult("ecto_0-5"));
                     break;
                 case 1:
-                    this.playerInfo_Ecto = new createjs.Bitmap(this.assetManager.getResult("ecto_1-5"));
+                    this.playerInfo_Ecto = new createjs.Bitmap(managers.Game.assetManager.getResult("ecto_1-5"));
                     break;
                 case 2:
-                    this.playerInfo_Ecto = new createjs.Bitmap(this.assetManager.getResult("ecto_2-5"));
+                    this.playerInfo_Ecto = new createjs.Bitmap(managers.Game.assetManager.getResult("ecto_2-5"));
                     break;
                 case 3:
-                    this.playerInfo_Ecto = new createjs.Bitmap(this.assetManager.getResult("ecto_3-5"));
+                    this.playerInfo_Ecto = new createjs.Bitmap(managers.Game.assetManager.getResult("ecto_3-5"));
                     break;
                 case 4:
-                    this.playerInfo_Ecto = new createjs.Bitmap(this.assetManager.getResult("ecto_4-5"));
+                    this.playerInfo_Ecto = new createjs.Bitmap(managers.Game.assetManager.getResult("ecto_4-5"));
                     break;
                 case 5:
-                    this.playerInfo_Ecto = new createjs.Bitmap(this.assetManager.getResult("ecto_5-5"));
+                    this.playerInfo_Ecto = new createjs.Bitmap(managers.Game.assetManager.getResult("ecto_5-5"));
                     break;
             }
             this.playerInfo_Ecto.x = 10;
