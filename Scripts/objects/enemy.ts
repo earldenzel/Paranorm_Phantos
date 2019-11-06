@@ -45,7 +45,11 @@ module objects {
                             this.DevourEffect();
                             this.RemoveFromPlay(0);
                             managers.Game.player.biteSequence = 0;
-                            managers.Game.keyboardManager.enabled = true;                      
+                            managers.Game.keyboardManager.enabled = true;
+                            // Sound Effect
+                            managers.Game.SFX = createjs.Sound.play("phoebeEat");
+                            managers.Game.SFX.volume = 0.2;
+                                               
                         }, this.eatTimer);
                     }
                     //else, no contact and therefore, movement enabled
@@ -67,6 +71,8 @@ module objects {
             if (!managers.Game.player.isTakingDamage) {
                 if (managers.Collision.Check(managers.Game.player, this) && !this.isStunned) {
                     managers.Game.player.isTakingDamage = true;
+                    managers.Game.SFX = createjs.Sound.play("phoebeHit");
+                    managers.Game.SFX.volume = 0.5;
                     managers.Game.player.GetDamage(this);
                 }
             }
@@ -116,10 +122,14 @@ module objects {
             //enemy state = stunned
             if (this.isStunned) {
                 //managers.Game.messageStatus.text = attacker.name + " ended " + this.name + "'s life.";
+                managers.Game.SFX = createjs.Sound.play("anyDefeated");
+                managers.Game.SFX.volume = 0.2;
                 this.RemoveFromPlay(this.bounty);
             }
             else {
                 //introduce a knockback
+                managers.Game.SFX = createjs.Sound.play("enemiesHit");
+                managers.Game.SFX.volume = 0.2;
                 let awayVector: math.Vec2 = this.GetPosition().AwayFrom(managers.Game.player.GetPosition()).Multiply(this.knockback);
                 let newPosition: math.Vec2 = math.Vec2.Add(this.GetPosition(), awayVector);
                 this.SetPosition(newPosition);
@@ -150,7 +160,7 @@ module objects {
 
         //this function governs what happens when Phoebe eats enemy
         public DevourEffect(): void{
-            
+
         }
 
         //function governs how much Phoebe earns

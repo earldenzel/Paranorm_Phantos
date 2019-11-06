@@ -69,6 +69,17 @@ var objects;
                 this.bitingTimer = 0;
                 this.bitingReset = 0;
             }
+            // SOUND EFFECTS
+            if (this.bitingTimer == 1) {
+                managers.Game.SFX = createjs.Sound.play("phoebeDash-Swing");
+                managers.Game.SFX.volume = 0.2;
+                this.bitingTimer++;
+            }
+            if (this.attackTimer == 1) {
+                managers.Game.SFX = createjs.Sound.play("phoebeDash-Swing");
+                managers.Game.SFX.volume = 0.2;
+                this.attackTimer++;
+            }
         };
         Player.prototype.Reset = function () { };
         Player.prototype.Move = function () {
