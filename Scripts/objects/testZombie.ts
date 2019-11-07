@@ -16,6 +16,7 @@ module objects {
             this.knockback = 0.75;
             this.eatTimer = 1000;            
             this.bounty = 10;
+            this.isFlying = false;
         }
         // methods
 

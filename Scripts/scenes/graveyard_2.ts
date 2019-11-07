@@ -13,7 +13,7 @@ module scenes {
             this.enemies[1] = new objects.TestZombie( 0.5);
             this.enemies[2] = new objects.Bat( 2.5, 100);
 
-            this.barriers[0] = new objects.Barriers("background_barrierTest");
+            this.obstacles[0] = new objects.Barriers("background_barrierTest", new math.Vec2(150, 500));
 
             managers.Game.player.sceneOnRight = config.Scene.GRAVEYARD_3;
             super.Start();

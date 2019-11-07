@@ -21,6 +21,7 @@ module objects {
         private images: Array<any>;
         public direction: config.Direction;
         public money: number;
+        public lastPosition: math.Vec2;
 
         public ecto: number;
 
@@ -56,7 +57,7 @@ module objects {
             this.weapon.Update();
             this.CheckBound(); // <-- Check collisions           
 
-            if (!this.visible && this.hp <= 0) {
+            if (this.hp <= 0) {
                 managers.Game.currentScene = config.Scene.OVER;
             }
             if(this.bitingTimer == 4){
@@ -191,7 +192,8 @@ module objects {
                     }
                     if (this.x >= config.Bounds.RIGHT_BOUND + this.width) {
                         managers.Game.currentScene = this.sceneOnRight;
-                        this.SetPosition(new math.Vec2(config.Bounds.LEFT_BOUND - this.halfW, this.y));
+                        this.lastPosition = new math.Vec2(config.Bounds.LEFT_BOUND - this.halfW, this.y);
+                        this.SetPosition(this.lastPosition);
                     }
                 }
                 else {
@@ -206,7 +208,8 @@ module objects {
                     }
                     if (this.x <= 0) {
                         managers.Game.currentScene = this.sceneOnLeft;
-                        this.SetPosition(new math.Vec2(config.Bounds.RIGHT_BOUND + this.halfW, this.y));
+                        this.lastPosition = new math.Vec2(config.Bounds.RIGHT_BOUND + this.halfW, this.y);
+                        this.SetPosition(this.lastPosition);
                     }
                 }
                 else {
@@ -221,7 +224,8 @@ module objects {
                     }
                     if (this.y >= config.Bounds.BOTTOM_BOUND + this.height) {
                         managers.Game.currentScene = this.sceneOnBot;
-                        this.SetPosition(new math.Vec2(this.x, this.halfH + config.Bounds.TOP_BOUND));
+                        this.lastPosition = new math.Vec2(this.x, this.halfH + config.Bounds.TOP_BOUND)
+                        this.SetPosition(this.lastPosition);
                     }
                 }
                 else {
@@ -236,7 +240,8 @@ module objects {
                     }
                     if (this.y <= config.Bounds.TOP_BOUND - (this.height / 2)) {
                         managers.Game.currentScene = this.sceneOnTop;
-                        this.SetPosition(new math.Vec2(this.x, config.Bounds.BOTTOM_BOUND + this.height));
+                        this.lastPosition = new math.Vec2(this.x, config.Bounds.BOTTOM_BOUND + this.height);
+                        this.SetPosition(this.lastPosition);
                     }
                 }
                 else {

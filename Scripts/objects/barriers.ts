@@ -3,23 +3,26 @@ module objects{
         // Variables
 
         // Constructor
-        constructor(imageString: string){
+        constructor(imageString: string, position: math.Vec2){
             super(imageString);
-            this.Start();
-            
+            this.x = position.x;
+            this.y = position.y;            
         }
         // Methods
         public Start():void {
-            this.x = 200;
-            this.y = 200;
-            this.regX = managers.Game.player.halfW;
-            this.regY = managers.Game.player.halfH;
         }
         public Update():void {}
         public Reset():void {}
         public Move(): void {}
         public CheckBound():void{
-            //Yizhi's movement cancellation function upon barrier contact          
+            //Yizhi's movement cancellation function upon barrier contact. TODO: change!
+            
+            let gapTopLeftX = this.x - this.halfW;
+            let gapTopLeftY = this.y - this.halfH;
+            let entityFeetX = managers.Game.player.x;
+            let entityFeetY = managers.Game.player.y + managers.Game.player.halfH;
+
+            
             if (managers.Collision.Check(this, managers.Game.player)) {
                 if (managers.Game.keyboardManager.moveLeft) {
                     managers.Game.player.x += managers.Game.player.playerMoveSpeed;
@@ -33,7 +36,8 @@ module objects{
                 if (managers.Game.keyboardManager.moveDown) {
                     managers.Game.player.y -= managers.Game.player.playerMoveSpeed;
                 }
-            }            
+            }
+            
         }        
 
         public TestZombieCheckBarrierCollision(zombie: objects.TestZombie): void {
@@ -48,12 +52,5 @@ module objects{
                 zombie.y -= math.Vec2.NormalizeMultiplySpeed(dirToPlayer, distanceToPlayer, zombie.GetObjectSpeed()).y;
             }
         }
-
-
-        
-
-        
-
-        
     }
 }

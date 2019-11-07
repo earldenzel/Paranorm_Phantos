@@ -17,23 +17,24 @@ var objects;
         __extends(Barriers, _super);
         // Variables
         // Constructor
-        function Barriers(imageString) {
+        function Barriers(imageString, position) {
             var _this = _super.call(this, imageString) || this;
-            _this.Start();
+            _this.x = position.x;
+            _this.y = position.y;
             return _this;
         }
         // Methods
         Barriers.prototype.Start = function () {
-            this.x = 200;
-            this.y = 200;
-            this.regX = managers.Game.player.halfW;
-            this.regY = managers.Game.player.halfH;
         };
         Barriers.prototype.Update = function () { };
         Barriers.prototype.Reset = function () { };
         Barriers.prototype.Move = function () { };
         Barriers.prototype.CheckBound = function () {
-            //Yizhi's movement cancellation function upon barrier contact          
+            //Yizhi's movement cancellation function upon barrier contact. TODO: change!
+            var gapTopLeftX = this.x - this.halfW;
+            var gapTopLeftY = this.y - this.halfH;
+            var entityFeetX = managers.Game.player.x;
+            var entityFeetY = managers.Game.player.y + managers.Game.player.halfH;
             if (managers.Collision.Check(this, managers.Game.player)) {
                 if (managers.Game.keyboardManager.moveLeft) {
                     managers.Game.player.x += managers.Game.player.playerMoveSpeed;

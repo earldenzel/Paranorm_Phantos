@@ -6,6 +6,7 @@ module objects {
         protected eatTimer: number;
         public stunIndicator: objects.Indicator;
         protected bounty: number;
+        public isFlying: boolean;
 
         constructor(enemyName: string) {
             super(enemyName);

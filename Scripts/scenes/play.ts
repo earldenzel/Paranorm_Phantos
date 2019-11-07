@@ -4,7 +4,7 @@ module scenes {
         // Variables
         private player:objects.Player;
         protected enemies: Array<objects.Enemy> = new Array<objects.Enemy>();
-        protected barriers: Array<objects.Barriers> = new Array<objects.Barriers>();
+        protected obstacles: Array<objects.GameObject> = new Array<objects.GameObject>();
         protected cosmetics: Array<objects.GameObject> = new Array<objects.GameObject>();
 
         //ceilings, doors and floors
@@ -130,7 +130,7 @@ module scenes {
             if (managers.Game.player.isTakingDamage && !collectiveCollision){
                 managers.Game.player.isTakingDamage = false;
             }
-            this.barriers.forEach(e =>{
+            this.obstacles.forEach(e =>{
                 e.CheckBound();
                 this.enemies.forEach(f => {
                     //if enemy is stunned and knocked back on a barrier, then enemy dies
@@ -138,10 +138,17 @@ module scenes {
                         f.RemoveFromPlay(f.CalculateBounty());
                     }
                     //if enemy is
-                    if (f instanceof objects.TestZombie){
+                    if (f instanceof objects.TestZombie && e instanceof objects.Barriers){
                         e.TestZombieCheckBarrierCollision(f);
                     }
+
+                    if (!f.isFlying  && e instanceof objects.Gap){
+                        e.CheckGapDamage(f);
+                    }
                 });
+                if (e instanceof objects.Gap){
+                    e.CheckGapDamage(this.player);
+                }
             });
 
 
@@ -181,7 +188,7 @@ module scenes {
             //this.addChild(this.ceilingVertical);
 
             // ITEM PLACEMENT - barriers
-            this.barriers.forEach(e => {
+            this.obstacles.forEach(e => {
                 this.addChild(e);
             });
 

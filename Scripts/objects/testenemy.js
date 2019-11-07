@@ -27,6 +27,7 @@ var objects;
             _this.knockback = 0.75;
             _this.eatTimer = 600;
             _this.bounty = 5;
+            _this.isFlying = true;
             return _this;
         }
         // methods

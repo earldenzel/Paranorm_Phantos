@@ -19,7 +19,7 @@ var scenes;
         function PlayScene(hasDoorTop, hasDoorBot, hasDoorLeft, hasDoorRight) {
             var _this = _super.call(this) || this;
             _this.enemies = new Array();
-            _this.barriers = new Array();
+            _this.obstacles = new Array();
             _this.cosmetics = new Array();
             _this.hasDoorTop = hasDoorTop;
             _this.hasDoorBot = hasDoorBot;
@@ -98,7 +98,7 @@ var scenes;
             if (managers.Game.player.isTakingDamage && !collectiveCollision) {
                 managers.Game.player.isTakingDamage = false;
             }
-            this.barriers.forEach(function (e) {
+            this.obstacles.forEach(function (e) {
                 e.CheckBound();
                 _this.enemies.forEach(function (f) {
                     //if enemy is stunned and knocked back on a barrier, then enemy dies
@@ -106,10 +106,16 @@ var scenes;
                         f.RemoveFromPlay(f.CalculateBounty());
                     }
                     //if enemy is
-                    if (f instanceof objects.TestZombie) {
+                    if (f instanceof objects.TestZombie && e instanceof objects.Barriers) {
                         e.TestZombieCheckBarrierCollision(f);
                     }
+                    if (!f.isFlying && e instanceof objects.Gap) {
+                        e.CheckGapDamage(f);
+                    }
                 });
+                if (e instanceof objects.Gap) {
+                    e.CheckGapDamage(_this.player);
+                }
             });
             //this.playerStatus.text = "PLAYER HP" + this.player.hp + "/5";
             // Sets the Player Health
@@ -142,7 +148,7 @@ var scenes;
             //this.addChild(this.ceilingHorizontal);
             //this.addChild(this.ceilingVertical);
             // ITEM PLACEMENT - barriers
-            this.barriers.forEach(function (e) {
+            this.obstacles.forEach(function (e) {
                 _this.addChild(e);
             });
             // COSMETICS PLACEMENT
