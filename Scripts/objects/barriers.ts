@@ -16,14 +16,9 @@ module objects{
         public Move(): void {}
         public CheckBound():void{
             //Yizhi's movement cancellation function upon barrier contact. TODO: change!
-            
-            let gapTopLeftX = this.x - this.halfW;
-            let gapTopLeftY = this.y - this.halfH;
-            let entityFeetX = managers.Game.player.x;
-            let entityFeetY = managers.Game.player.y + managers.Game.player.halfH;
 
             
-            if (managers.Collision.Check(this, managers.Game.player)) {
+            if (managers.Collision.CheckWithOffset(this, managers.Game.player, 0, managers.Game.player.height, managers.Game.player.halfW, managers.Game.player.halfW)) {
                 if (managers.Game.keyboardManager.moveLeft) {
                     managers.Game.player.x += managers.Game.player.playerMoveSpeed;
                 }

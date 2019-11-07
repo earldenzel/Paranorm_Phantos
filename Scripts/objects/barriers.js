@@ -31,11 +31,7 @@ var objects;
         Barriers.prototype.Move = function () { };
         Barriers.prototype.CheckBound = function () {
             //Yizhi's movement cancellation function upon barrier contact. TODO: change!
-            var gapTopLeftX = this.x - this.halfW;
-            var gapTopLeftY = this.y - this.halfH;
-            var entityFeetX = managers.Game.player.x;
-            var entityFeetY = managers.Game.player.y + managers.Game.player.halfH;
-            if (managers.Collision.Check(this, managers.Game.player)) {
+            if (managers.Collision.CheckWithOffset(this, managers.Game.player, 0, managers.Game.player.height, managers.Game.player.halfW, managers.Game.player.halfW)) {
                 if (managers.Game.keyboardManager.moveLeft) {
                     managers.Game.player.x += managers.Game.player.playerMoveSpeed;
                 }
