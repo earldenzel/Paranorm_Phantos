@@ -3,13 +3,13 @@ module objects{
         // Variables
 
         // Constructor
-        constructor(imageString: string, position: math.Vec2){
-            super(imageString);
-            this.x = position.x;
-            this.y = position.y;            
+        constructor(imageString: string){
+            super(imageString);      
         }
         // Methods
         public Start():void {
+            this.x = 100;
+            this.y = 100;
         }
         public Update():void {}
         public Reset():void {}
