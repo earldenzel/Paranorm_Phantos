@@ -192,6 +192,10 @@ var config;
                 "src": "./Assets/_Background/_TestStage/barrierTest.png"
             },
             {
+                "id": "background_gapTest",
+                "src": "./Assets/_Background/_TestStage/gapTest.png"
+            },
+            {
                 "id": "kKeyIndicator",
                 "src": "./Assets/_UI/HowToPlay/HowToPlay_KKey.png"
             },
