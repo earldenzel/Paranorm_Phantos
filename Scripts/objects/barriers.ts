@@ -15,10 +15,13 @@ module objects{
         public Reset():void {}
         public Move(): void {}
         public CheckBound():void{
-            //Yizhi's movement cancellation function upon barrier contact. TODO: change!
-
-            
-            if (managers.Collision.CheckWithOffset(this, managers.Game.player, 0, managers.Game.player.height, managers.Game.player.halfW, managers.Game.player.halfW)) {
+            if (managers.Collision.CheckWithOffset(
+                this, managers.Game.player, 
+                0, 
+                managers.Game.player.height - config.Bounds.OBSTACLE_OFFSET, 
+                managers.Game.player.halfW - config.Bounds.OBSTACLE_OFFSET, 
+                managers.Game.player.halfW - config.Bounds.OBSTACLE_OFFSET
+                )) {
                 if (managers.Game.keyboardManager.moveLeft) {
                     managers.Game.player.x += managers.Game.player.playerMoveSpeed;
                 }

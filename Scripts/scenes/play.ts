@@ -127,7 +127,14 @@ module scenes {
             let collectiveCollision: boolean = false;
             this.enemies.forEach(e => {
                 e.Update();
-                collectiveCollision = collectiveCollision || managers.Collision.Check(managers.Game.player,e);
+                //collectiveCollision = collectiveCollision || managers.Collision.Check(managers.Game.player,e);
+                collectiveCollision = collectiveCollision || 
+                    managers.Collision.CheckWithOffset(managers.Game.player, 
+                                                        e, 
+                                                        0, 
+                                                        -config.Bounds.ENEMY_COLLISION_OFFSET,
+                                                        -config.Bounds.ENEMY_COLLISION_OFFSET,
+                                                        -config.Bounds.ENEMY_COLLISION_OFFSET,);
             });
             if (managers.Game.player.isTakingDamage && !collectiveCollision){
                 managers.Game.player.isTakingDamage = false;
