@@ -113,10 +113,18 @@ module config{
                 //"./Assets/_Background/_TestStage/Placeholder_DOOR-Vertical.png"
             },
             {
+                "id": "background_d_vertC",
+                "src": "./Assets/_Background/_TestStageB/PlaceholderB_DoorV_Closed.png"
+            },
+            {
                 // EDIT
                 "id": "background_d_hori",
                 "src": "./Assets/_Background/_TestStageB/PlaceholderB_DoorH.png"
                 //"./Assets/_Background/_TestStage/Placeholder_DOOR-Horizontal.png"
+            },
+            {
+                "id": "background_d_horiC",
+                "src": "./Assets/_Background/_TestStageB/PlaceholderB_DoorH_Closed.png"
             },
             {   
                 // EDIT 

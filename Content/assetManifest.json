@@ -99,6 +99,14 @@
         "src": "./Assets/_Background/_TestStageB/PlaceholderB_DoorH.png"
     },
     {
+        "id": "background_d_vertC",
+        "src": "./Assets/_Background/_TestStageB/PlaceholderB_DoorV_Closed.png"
+    },
+    {
+        "id": "background_d_horiC",
+        "src": "./Assets/_Background/_TestStageB/PlaceholderB_DoorH_Closed.png"
+    },
+    {
         "id": "background_f_all",
         "src": "./Assets/_Background/_TestStageB/PlaceholderB_Background_Floor.png"
     },
