@@ -116,6 +116,8 @@ module scenes {
             this.playerInfo = new managers.PlayerInfo_UI();
             //this.playerInfo.x = 38;
 
+            managers.Game.keyboardManager.playMode = true;
+
             this.Main();
         }        
 

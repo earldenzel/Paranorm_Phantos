@@ -6,7 +6,7 @@ module scenes {
         //private gameOverLabel: objects.Label;
         private spotlight: createjs.Bitmap;
         private phoebe: createjs.Bitmap;
-        private backButton: objects.Button;
+        private messageTimeout: number = 0;
 
         // Constructor
         constructor() {
@@ -29,11 +29,25 @@ module scenes {
             this.phoebe = new createjs.Bitmap(managers.Game.assetManager.getResult("player_p_walk7"));
             this.phoebe.x = 260;
             this.phoebe.y = 500;
-            this.backButton = new objects.Button(managers.Game.assetManager, "backButton", 290, 340);
+            managers.Game.keyboardManager.playMode = false;
             this.Main();
         }
 
-        public Update():void {}
+        public Update():void {
+            if(managers.Game.keyboardManager.attacking){
+                if (this.messageTimeout == 0){
+                    this.messageTimeout = setTimeout(() => {
+                        this.backButtonClick();
+                    }, 50);
+                }
+            }
+            else{
+                if (this.messageTimeout > 0){
+                    this.messageTimeout = 0;
+                    clearTimeout(this.messageTimeout);
+                }
+            } 
+        }
 
         private backButtonClick():void {
             managers.Game.currentScene = config.Scene.START;
@@ -44,9 +58,6 @@ module scenes {
             this.addChild(this.spotlight);
             this.addChild(this.phoebe);
             this.addChild(this.gameOver);
-            this.addChild(this.backButton);
-
-            this.backButton.on("click", this.backButtonClick);
         }
     }
 }

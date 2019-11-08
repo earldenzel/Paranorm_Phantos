@@ -43,6 +43,7 @@ var scenes;
             //initialize new player
             this.player = new objects.Player();
             managers.Game.player = this.player;
+            managers.Game.keyboardManager.playMode = false;
             this.Main();
         };
         OpeningScene.prototype.Update = function () {

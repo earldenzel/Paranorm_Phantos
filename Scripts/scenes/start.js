@@ -32,6 +32,7 @@ var scenes;
             this.pressEnterLabel = new objects.Label("PRESS ENTER", "16px", "'Press Start 2P'", "#000000", 300, 500, true);
             this.pressEnterLabel.color = "#FFFFFF";
             this.enterVisibility = true;
+            managers.Game.keyboardManager.playMode = false;
             this.Main();
         };
         StartScene.prototype.Update = function () {
