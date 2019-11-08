@@ -49,6 +49,7 @@ module scenes {
             this.obstacles[35] = new objects.Gap("background_gapTest", new math.Vec2(332, 505));
 
             super.Start();
+            this.playerInfo.PlayerLocation = new math.Vec2(14,12);
         }        
 
         public Update(): void {

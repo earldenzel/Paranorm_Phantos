@@ -50,6 +50,7 @@ module scenes {
             managers.Game.player.sceneOnBot = config.Scene.GRAVEYARD_6;
             managers.Game.player.sceneOnRight = config.Scene.GRAVEYARD_7;
             super.Start();
+            this.playerInfo.PlayerLocation = new math.Vec2(30,28);
         }        
 
         public Update(): void {

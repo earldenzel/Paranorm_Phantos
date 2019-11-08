@@ -25,6 +25,7 @@ var scenes;
         Graveyard_8.prototype.Start = function () {
             managers.Game.player.sceneOnTop = config.Scene.GRAVEYARD_6;
             _super.prototype.Start.call(this);
+            this.playerInfo.PlayerLocation = new math.Vec2(30, 60);
         };
         Graveyard_8.prototype.Update = function () {
             _super.prototype.Update.call(this);

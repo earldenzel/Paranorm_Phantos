@@ -11,6 +11,7 @@ module scenes {
         public Start(): void {
             managers.Game.player.sceneOnLeft = config.Scene.GRAVEYARD_5;
             super.Start();
+            this.playerInfo.PlayerLocation = new math.Vec2(46,28);
         }        
 
         public Update(): void {

@@ -225,6 +225,12 @@ module config{
                 "src": "./Assets/_UI/HowToPlay/HowToPlay_JKey.png"
             },
 
+            // SPRITE SHEETS
+            {
+                "id": "tAtlas_MapG",
+                "src": "./Assets/_UI/PlayerInfo/_Map/Map_Graveyard_TextureAtlas.png"
+            },
+
             // SOUND EFFECTS
             {
                 "id": "enemiesHit",
@@ -259,5 +265,32 @@ module config{
                 "src": "./Assets/_SoundEffects/Defeat.wav"
             }
         ];
+
+        public static getAtlas_MapGraveYard: any = {
+            "images": [
+                ""
+            ],
+            
+            "framerate": 20,
+            "frames": [
+                [1, 1, 162, 86, 0, 0, 0],
+                [165, 1, 162, 86, 0, 0, 0],
+                [329, 1, 162, 86, 0, 0, 0],
+                [493, 1, 14, 14, 0, -81, -21],
+                [1, 89, 162, 86, 0, 0, 0],
+                [165, 89, 162, 86, 0, 0, 0],
+                [329, 89, 162, 86, 0, 0, 0]
+            ],
+            
+            "animations": {
+                "MapsGraveyard_Initial": { "frames": [0] },
+                "MapsGraveyard_UnlockA": { "frames": [1] },
+                "MapsGraveyard_UnlockAB": { "frames": [2] },
+                "MapsGraveyard_PlayerLocation": { "frames": [3] },
+                "MapsGraveyard_UnlockABC": { "frames": [4] },
+                "MapsGraveyard_UnlockB": { "frames": [5] },
+                "MapsGraveyard_UnlockBC": { "frames": [6] }
+            }
+        }
     }
 }

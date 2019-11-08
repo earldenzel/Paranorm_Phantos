@@ -15,6 +15,9 @@
 
     let keyboardManager: managers.Keyboard;
 
+    let mapG_TextureAtlasData: any;
+    let mapG_TextureAtlas: createjs.SpriteSheet;
+
     // Gets the asset manifest
     //let request = new Request("./Content/assetManifest.json");
     //fetch(request)
@@ -25,6 +28,8 @@
     //        assetManifest = data; 
     //    });
     assetManifest = config.Assets.getAssets;
+
+
 
     function Init() {
         console.log("Initialization Start");
@@ -38,6 +43,10 @@
 
     function Start() {
         console.log("Starting Application...");
+
+        mapG_TextureAtlasData = config.Assets.getAtlas_MapGraveYard;
+        mapG_TextureAtlasData.images = [assetManager.getResult("tAtlas_MapG")];
+        mapG_TextureAtlas = new createjs.SpriteSheet(mapG_TextureAtlasData);
 
         // Initialize CreateJS
         stage = new createjs.Stage(canvas);
@@ -61,6 +70,7 @@
 
         // Asset Manager
         managers.Game.assetManager = assetManager;
+        managers.Game.map_TextureAtlas = mapG_TextureAtlas;
 
         Main();
     }

@@ -61,6 +61,7 @@ var scenes;
             this.obstacles[34] = new objects.Gap("background_gapTest", new math.Vec2(332, 555));
             this.obstacles[35] = new objects.Gap("background_gapTest", new math.Vec2(332, 505));
             _super.prototype.Start.call(this);
+            this.playerInfo.PlayerLocation = new math.Vec2(14, 12);
         };
         Graveyard_3.prototype.Update = function () {
             _super.prototype.Update.call(this);

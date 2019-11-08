@@ -84,6 +84,7 @@ var scenes;
             //this.controllerHelp.shadow = new createjs.Shadow("#000000",0,0,10);
             //managers.Game.messageStatus = this.messageStatus;
             this.playerInfo = new managers.PlayerInfo_UI();
+            this.playerInfo.PlayerLocation = new math.Vec2(30, 12);
             //this.playerInfo.x = 38;
             managers.Game.keyboardManager.playMode = true;
             this.Main();

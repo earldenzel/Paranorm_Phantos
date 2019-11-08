@@ -44,6 +44,7 @@ module scenes {
         }
 
         public Main(): void {
+            this.playerInfo.PlayerLocation = new math.Vec2(30,12);
             super.Main();
         }
     }

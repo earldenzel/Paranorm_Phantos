@@ -71,6 +71,19 @@ var managers;
             enumerable: true,
             configurable: true
         });
+        Object.defineProperty(PlayerInfo_UI.prototype, "PlayerLocation", {
+            get: function () {
+                return this.playerLocation;
+            },
+            set: function (newCoordinates) {
+                this.playerLocation = newCoordinates;
+                this.removeChild(this.playerInfo_Location);
+                this.ChangePlayerLocation();
+                this.addChild(this.playerInfo_Location);
+            },
+            enumerable: true,
+            configurable: true
+        });
         // Methods
         PlayerInfo_UI.prototype.InIt = function () {
             // Create Base
@@ -78,11 +91,17 @@ var managers;
             // Create Labels
             this.moneyLabel = new objects.Label("00000000", "16px", "'Press Start 2P'", "#FFFFFF", 236, 20, false);
             this.keyLabel = new objects.Label("00", "16px", "'Press Start 2P'", "#FFFFFF", 250, 77, false);
+            this.playerInfo_Map = new createjs.Sprite(managers.Game.map_TextureAtlas, "MapsGraveyard_UnlockABC");
+            this.playerInfo_Map.x = 30;
+            this.playerInfo_Map.y = 12;
+            this.playerInfo_Location = new createjs.Sprite(managers.Game.map_TextureAtlas, "MapsGraveyard_PlayerLocation");
             // Set Defaults
             this.playerHealth = 5;
             this.playerEcto = 5;
             this.money = 0;
             this.key = 0;
+            this.playerLocation = new math.Vec2(0, 0);
+            this.ChangePlayerLocation();
             this.ChangeHealthInfo();
             this.ChangeEctoInfo();
             this.Main();
@@ -94,6 +113,8 @@ var managers;
             this.addChild(this.keyLabel);
             this.addChild(this.playerInfo_Health);
             this.addChild(this.playerInfo_Ecto);
+            this.addChild(this.playerInfo_Map);
+            this.addChild(this.playerInfo_Location);
         };
         PlayerInfo_UI.prototype.ChangeHealthInfo = function () {
             switch (this.playerHealth) {
@@ -142,6 +163,10 @@ var managers;
             }
             this.playerInfo_Ecto.x = 10;
             this.playerInfo_Ecto.y = 10;
+        };
+        PlayerInfo_UI.prototype.ChangePlayerLocation = function () {
+            this.playerInfo_Location.x = this.playerLocation.x;
+            this.playerInfo_Location.y = this.playerLocation.y;
         };
         return PlayerInfo_UI;
     }(createjs.Container));

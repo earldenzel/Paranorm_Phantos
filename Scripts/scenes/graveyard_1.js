@@ -55,6 +55,7 @@ var scenes;
             _super.prototype.Update.call(this);
         };
         Graveyard_1.prototype.Main = function () {
+            this.playerInfo.PlayerLocation = new math.Vec2(30, 12);
             _super.prototype.Main.call(this);
         };
         return Graveyard_1;

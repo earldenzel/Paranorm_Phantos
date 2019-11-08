@@ -61,6 +61,7 @@ var scenes;
             managers.Game.player.sceneOnTop = config.Scene.GRAVEYARD_5;
             managers.Game.player.sceneOnBot = config.Scene.GRAVEYARD_8;
             _super.prototype.Start.call(this);
+            this.playerInfo.PlayerLocation = new math.Vec2(30, 44);
         };
         Graveyard_6.prototype.Update = function () {
             _super.prototype.Update.call(this);

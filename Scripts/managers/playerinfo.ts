@@ -7,12 +7,16 @@ module managers{
         public keyLabel: objects.Label;
         public playerInfo_Health: createjs.Bitmap;
         public playerInfo_Ecto: createjs.Bitmap;
+        public playerInfo_Map: createjs.Sprite;
+        public playerInfo_Location: createjs.Sprite;
         // Add in Player Info Map
 
         private money: number;
         private key: number;
         private playerHealth: number;
         private playerEcto: number;
+        private playerLocation: math.Vec2;
+
         // Add in Player Location
 
         // Getters and Setters
@@ -48,6 +52,16 @@ module managers{
             this.ChangeEctoInfo();
             this.addChild(this.playerInfo_Ecto);
         }
+        get PlayerLocation():math.Vec2{
+            return this.playerLocation;
+        }
+        set PlayerLocation(newCoordinates:math.Vec2){
+            this.playerLocation = newCoordinates;
+            this.removeChild(this.playerInfo_Location);
+            this.ChangePlayerLocation();
+            this.addChild(this.playerInfo_Location);
+        }
+
 
         // Constructor
         constructor(){
@@ -66,12 +80,20 @@ module managers{
             this.keyLabel = new objects.Label(
                 "00","16px", "'Press Start 2P'", "#FFFFFF",250,77,false
             );
+            this.playerInfo_Map = new createjs.Sprite(managers.Game.map_TextureAtlas,"MapsGraveyard_UnlockABC");
+            this.playerInfo_Map.x = 30;
+            this.playerInfo_Map.y = 12;
+
+            this.playerInfo_Location = new createjs.Sprite(managers.Game.map_TextureAtlas, "MapsGraveyard_PlayerLocation");
 
             // Set Defaults
             this.playerHealth = 5;
             this.playerEcto = 5;
             this.money = 0;
             this.key = 0;
+            this.playerLocation = new math.Vec2(0,0);
+
+            this.ChangePlayerLocation();
 
             this.ChangeHealthInfo();
             this.ChangeEctoInfo();
@@ -86,6 +108,8 @@ module managers{
             this.addChild(this.keyLabel);
             this.addChild(this.playerInfo_Health);
             this.addChild(this.playerInfo_Ecto);
+            this.addChild(this.playerInfo_Map);
+            this.addChild(this.playerInfo_Location);
         }
         private ChangeHealthInfo():void{
             
@@ -136,6 +160,10 @@ module managers{
             }
             this.playerInfo_Ecto.x = 10;
             this.playerInfo_Ecto.y = 10;
+        }
+        private ChangePlayerLocation():void{
+            this.playerInfo_Location.x = this.playerLocation.x;
+            this.playerInfo_Location.y = this.playerLocation.y;
         }
     }
 }

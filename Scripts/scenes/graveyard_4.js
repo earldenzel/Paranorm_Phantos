@@ -37,6 +37,7 @@ var scenes;
             this.obstacles[3].SetPosition(new math.Vec2(360, 510));
             managers.Game.player.sceneOnLeft = config.Scene.GRAVEYARD_1;
             _super.prototype.Start.call(this);
+            this.playerInfo.PlayerLocation = new math.Vec2(46, 12);
         };
         Graveyard_4.prototype.Update = function () {
             _super.prototype.Update.call(this);

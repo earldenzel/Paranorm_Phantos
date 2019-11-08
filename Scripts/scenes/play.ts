@@ -34,7 +34,7 @@ module scenes {
         //protected messageStatus: objects.Label;
         //protected controllerHelp: objects.Label;
 
-        private playerInfo: managers.PlayerInfo_UI;
+        protected playerInfo: managers.PlayerInfo_UI;
 
         // Constructor
         constructor( 
@@ -114,6 +114,7 @@ module scenes {
             //managers.Game.messageStatus = this.messageStatus;
 
             this.playerInfo = new managers.PlayerInfo_UI();
+            this.playerInfo.PlayerLocation = new math.Vec2(30,12);
             //this.playerInfo.x = 38;
 
             managers.Game.keyboardManager.playMode = true;
@@ -167,6 +168,7 @@ module scenes {
             this.playerInfo.Money = this.player.money;
 
             this.playerInfo.PlayerEcto = this.player.ecto;
+            
         }
 
         public Main(): void {
