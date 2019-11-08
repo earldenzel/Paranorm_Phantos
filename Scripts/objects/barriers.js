@@ -17,14 +17,13 @@ var objects;
         __extends(Barriers, _super);
         // Variables
         // Constructor
-        function Barriers(imageString, position) {
-            var _this = _super.call(this, imageString) || this;
-            _this.x = position.x;
-            _this.y = position.y;
-            return _this;
+        function Barriers(imageString) {
+            return _super.call(this, imageString) || this;
         }
         // Methods
         Barriers.prototype.Start = function () {
+            this.x = 100;
+            this.y = 100;
         };
         Barriers.prototype.Update = function () { };
         Barriers.prototype.Reset = function () { };
