@@ -20,7 +20,7 @@ var objects;
             var _this = _super.call(this, "enemy_test") || this;
             _this.Start();
             _this.hp = 2;
-            _this.attackPower = 2;
+            _this.attackPower = 1;
             _this.moveSpeed = moveSpeed;
             _this.rightDirection = rightDirection;
             _this.downDirection = downDirection;

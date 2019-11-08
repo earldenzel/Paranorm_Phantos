@@ -11,7 +11,7 @@ module objects{
             super("enemy_test");
             this.Start();
             this.hp = 2;
-            this.attackPower = 2;
+            this.attackPower = 1;
             
             this.moveSpeed = moveSpeed;
             this.rightDirection = rightDirection;

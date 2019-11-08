@@ -23,6 +23,7 @@ var objects;
             //public playerController: Controller<boolean>;
             _this.attackSequence = 0;
             _this.biteSequence = 0;
+            _this.fallSequence = 0;
             _this.playerMoveSpeed = 4;
             _this.attackTimer = 0;
             _this.bitingTimer = 0;
@@ -55,6 +56,8 @@ var objects;
         Player.prototype.Update = function () {
             managers.Game.player = this;
             this.image = this.images[this.direction];
+            this.x = Math.round(this.x);
+            this.y = Math.round(this.y);
             this.Move();
             this.weapon.Update();
             this.CheckBound(); // <-- Check collisions           
@@ -183,7 +186,7 @@ var objects;
             // right bound
             if (this.x >= config.Bounds.RIGHT_BOUND - this.halfW) {
                 if (this.canTraverseRight) {
-                    if (this.y < 335 || this.y > 431) {
+                    if (this.y < config.Bounds.DOOR_EASING_TOP || this.y > config.Bounds.DOOR_EASING_BOTTOM) {
                         this.x = config.Bounds.RIGHT_BOUND - this.halfW;
                     }
                     if (this.x >= config.Bounds.RIGHT_BOUND + this.width) {
@@ -199,7 +202,7 @@ var objects;
             // left bound
             if (this.x <= this.halfW + config.Bounds.LEFT_BOUND) {
                 if (this.canTraverseLeft) {
-                    if (this.y < 335 || this.y > 431) {
+                    if (this.y < config.Bounds.DOOR_EASING_TOP || this.y > config.Bounds.DOOR_EASING_BOTTOM) {
                         this.x = this.halfW + config.Bounds.LEFT_BOUND;
                     }
                     if (this.x <= 0) {
@@ -215,7 +218,7 @@ var objects;
             // bottom bound
             if (this.y >= config.Bounds.BOTTOM_BOUND - this.halfH) {
                 if (this.canTraverseBot) {
-                    if (this.x < 276 || this.x > 372) {
+                    if (this.x < config.Bounds.DOOR_EASING_LEFT || this.x > config.Bounds.DOOR_EASING_RIGHT) {
                         this.y = config.Bounds.BOTTOM_BOUND - this.halfH;
                     }
                     if (this.y >= config.Bounds.BOTTOM_BOUND + this.height) {
@@ -231,7 +234,7 @@ var objects;
             // top bound
             if (this.y <= this.halfH + config.Bounds.TOP_BOUND) {
                 if (this.canTraverseTop) {
-                    if (this.x < 276 || this.x > 372) {
+                    if (this.x < config.Bounds.DOOR_EASING_LEFT || this.x > config.Bounds.DOOR_EASING_RIGHT) {
                         this.y = this.halfH + config.Bounds.TOP_BOUND;
                     }
                     if (this.y <= config.Bounds.TOP_BOUND - (this.height / 2)) {
