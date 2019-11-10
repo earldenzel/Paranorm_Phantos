@@ -4,6 +4,7 @@ module scenes {
         // Constructor
         constructor() {
             super(true, true, false, true);
+            this.isDoorBotLocked = managers.GraveyardLocks.graveyard_5_lockBot;
             this.Start();
         }
 
@@ -54,6 +55,15 @@ module scenes {
         }        
 
         public Update(): void {
+            if(!this.enemies[0].visible && !this.enemies[1].visible && !this.enemies[2].visible && !this.enemies[3].visible){
+                if(!this.getChildByName("item_key") && managers.GraveyardLocks.graveyard_5_key){
+                    this.key = new objects.Key();
+                    this.key.x = 250;
+                    this.key.y = 300;
+                    this.addChild(this.key);
+                    managers.GraveyardLocks.graveyard_5_key = false;
+                }
+            }
             super.Update();
         }
 

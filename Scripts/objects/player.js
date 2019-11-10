@@ -50,6 +50,7 @@ var objects;
             _this.direction = config.Direction.UP;
             _this.money = 0;
             _this.playerStatus = new objects.Label("1234567890", "16px", "'Press Start 2P'", "#FFFFFF", _this.x, _this.y, true);
+            _this.key = 0;
             return _this;
         }
         // Methods

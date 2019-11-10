@@ -5,6 +5,9 @@ module scenes {
         // Constructor
         constructor() {
             super(false, true, true, true);
+            this.isDoorLeftLocked = managers.GraveyardLocks.graveyard_1_lockLeft;
+            this.isDoorRightLocked = managers.GraveyardLocks.graveyard_1_lockRight;
+            this.isDoorBotLocked = managers.GraveyardLocks.graveyard_1_lockBot;
             this.Start();
         }
 
@@ -37,8 +40,15 @@ module scenes {
                 setTimeout(() => {
                     this.cosmetics.forEach(cosmetic =>{
                         cosmetic.visible = false;
+                        managers.GraveyardLocks.graveyard_1_lockRight = false;
+                        this.isDoorRightLocked = false;
+                        managers.GraveyardLocks.graveyard_1_lockBot = false;
+                        this.isDoorBotLocked = false;
                     });                  
                 }, 1500);
+            }
+            if(!this.isDoorLeftLocked){
+                managers.GraveyardLocks.graveyard_1_lockLeft = false;
             }
             super.Update();
         }

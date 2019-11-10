@@ -23,6 +23,7 @@ module objects {
         private images: Array<any>;
         public direction: config.Direction;
         public money: number;
+        public key: number;
         public lastPosition: math.Vec2;
         public playerStatus: objects.Label;
         public isDead: boolean = false;
@@ -50,6 +51,7 @@ module objects {
             this.direction = config.Direction.UP;
             this.money = 0;
             this.playerStatus = new objects.Label("1234567890", "16px", "'Press Start 2P'", "#FFFFFF", this.x, this.y, true);
+            this.key = 0;
         }
 
         // Methods
@@ -125,7 +127,7 @@ module objects {
             }
             // Running Implementation
             if(managers.Game.keyboardManager.running){
-                let runningSpeed = this.playerMoveSpeed + 1;
+                let runningSpeed: number = this.playerMoveSpeed + 1;
                 if (managers.Game.keyboardManager.moveUp) {
                     this.y -= runningSpeed;
                     this.direction = config.Direction.UP;

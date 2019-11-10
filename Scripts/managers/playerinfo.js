@@ -29,7 +29,17 @@ var managers;
             },
             set: function (newMoney) {
                 this.money = newMoney;
-                this.moneyLabel.text = this.money.toString();
+                this.moneyLabel.text = "";
+                if (this.money > 99999999) {
+                    this.moneyLabel.text = "99999999";
+                }
+                else {
+                    var numberOfZeros = 8 - String(this.money).length;
+                    for (var i = 0; i < numberOfZeros; i++) {
+                        this.moneyLabel.text += "0";
+                    }
+                    this.moneyLabel.text += this.money.toString();
+                }
             },
             enumerable: true,
             configurable: true
@@ -40,7 +50,18 @@ var managers;
             },
             set: function (newKey) {
                 this.key = newKey;
-                this.keyLabel.text = this.Key.toString();
+                var numberOfZeros = 2 - String(this.key).length;
+                this.keyLabel.text = "";
+                if (this.key > 99) {
+                    this.keyLabel.text = "99";
+                }
+                else {
+                    var numberOfZeros_1 = 2 - String(this.key).length;
+                    for (var i = 0; i < numberOfZeros_1; i++) {
+                        this.keyLabel.text += "0";
+                    }
+                    this.keyLabel.text = this.Key.toString();
+                }
             },
             enumerable: true,
             configurable: true

@@ -45,36 +45,56 @@ var scenes;
             this.player.canTraverseLeft = false;
             this.player.canTraverseRight = false;
             if (this.hasDoorTop) {
-                this.doorTop = new objects.Background("background_d_vert");
+                if (this.isDoorTopLocked) {
+                    this.doorTop = new objects.Background("background_d_vertC");
+                }
+                else {
+                    this.doorTop = new objects.Background("background_d_vert");
+                }
                 this.doorTopFrame = new objects.Background("background_d_vertT");
                 this.doorTop.y = 110;
                 this.doorTopFrame.y = 110;
-                this.player.canTraverseTop = true;
+                this.player.canTraverseTop = !this.isDoorTopLocked;
             }
             if (this.hasDoorBot) {
-                this.doorBot = new objects.Background("background_d_vert");
+                if (this.isDoorBotLocked) {
+                    this.doorBot = new objects.Background("background_d_vertC");
+                }
+                else {
+                    this.doorBot = new objects.Background("background_d_vert");
+                }
                 this.doorBotFrame = new objects.Background("background_d_vertT");
                 this.doorBot.y = 110;
                 this.doorBotFrame.y = 110;
                 this.doorBot.Flip();
                 this.doorBotFrame.Flip();
-                this.player.canTraverseBot = true;
+                this.player.canTraverseBot = !this.isDoorBotLocked;
             }
             if (this.hasDoorLeft) {
-                this.doorLeft = new objects.Background("background_d_hori");
+                if (this.isDoorLeftLocked) {
+                    this.doorLeft = new objects.Background("background_d_horiC");
+                }
+                else {
+                    this.doorLeft = new objects.Background("background_d_hori");
+                }
                 this.doorLeftFrame = new objects.Background("background_d_horiT");
                 this.doorLeft.y = 110;
                 this.doorLeftFrame.y = 110;
-                this.player.canTraverseLeft = true;
+                this.player.canTraverseLeft = !this.isDoorLeftLocked;
             }
             if (this.hasDoorRight) {
-                this.doorRight = new objects.Background("background_d_hori");
+                if (this.isDoorRightLocked) {
+                    this.doorRight = new objects.Background("background_d_horiC");
+                }
+                else {
+                    this.doorRight = new objects.Background("background_d_hori");
+                }
                 this.doorRightFrame = new objects.Background("background_d_horiT");
                 this.doorRight.y = 110;
                 this.doorRightFrame.y = 110;
                 this.doorRight.Flip();
                 this.doorRightFrame.Flip();
-                this.player.canTraverseRight = true;
+                this.player.canTraverseRight = !this.isDoorRightLocked;
             }
             //this.playerStatus = new objects.Label("PLAYER ", "16px", "'Press Start 2P'", "#FFFFFF", 20, 670, false);
             //this.messageStatus = new objects.Label("MESSAGES GO HERE", "16px", "'Press Start 2P'", "#FFFFFF", 20, 690, false);
@@ -122,10 +142,83 @@ var scenes;
                     e.CheckGapDamage(_this.player);
                 }
             });
+            // KEY AND LOCKED DOORS
+            if (this.getChildByName("item_key") && managers.Collision.Check(this.player, this.key) && this.key.visible) {
+                this.player.key += 1;
+                this.key.RemoveFromPlay();
+            }
+            // TO BE FIXED AND OPTIMIZED.
+            //  The position of Phoebe is accordance to the door is off. 
+            //  Thus in the beta version there should be a platform that Phoebe collides when a door is locked.
+            //  One pressed with a key, it unlocks.
+            //  - Kris Campbell
+            if (this.player.y < config.Bounds.DOOR_EASING_TOP || this.player.y > config.Bounds.DOOR_EASING_BOTTOM) {
+                if (this.player.x == config.Bounds.LEFT_BOUND + this.player.halfW) {
+                    if (this.hasDoorLeft && this.isDoorLeftLocked && this.player.key > 0) {
+                        this.isDoorLeftLocked = false;
+                        this.player.key -= 1;
+                    }
+                }
+                if (this.player.x == config.Bounds.RIGHT_BOUND - this.player.halfW) {
+                    if (this.hasDoorRight && this.isDoorRightLocked && this.player.key > 0) {
+                        this.isDoorRightLocked = false;
+                        this.player.key -= 1;
+                    }
+                }
+            }
+            if (this.player.x < config.Bounds.DOOR_EASING_LEFT || this.player.x > config.Bounds.DOOR_EASING_RIGHT) {
+                if (this.player.y == config.Bounds.BOTTOM_BOUND - this.player.halfH) {
+                    if (this.hasDoorBot && this.isDoorBotLocked && this.player.key > 0) {
+                        this.isDoorBotLocked = false;
+                        this.player.key -= 1;
+                    }
+                }
+                if (this.player.y == this.player.halfH + config.Bounds.TOP_BOUND) {
+                    if (this.hasDoorTop && this.isDoorTopLocked && this.player.key > 0) {
+                        this.isDoorTopLocked = false;
+                        this.player.key -= 1;
+                    }
+                }
+            }
+            if (this.hasDoorLeft && !this.isDoorLeftLocked && this.doorLeft.name == "background_d_horiC") {
+                this.removeChild(this.doorLeft);
+                this.doorLeft = new objects.Background("background_d_hori");
+                this.doorLeft.y = 110;
+                this.player.canTraverseLeft = !this.isDoorLeftLocked;
+                this.addChild(this.doorLeft);
+                this.setChildIndex(this.doorLeft, this.getNumChildren() - 8);
+            }
+            if (this.hasDoorRight && !this.isDoorRightLocked && this.doorRight.name == "background_d_horiC") {
+                this.removeChild(this.doorRight);
+                this.doorRight = new objects.Background("background_d_hori");
+                this.doorRight.y = 110;
+                this.doorRight.Flip();
+                this.player.canTraverseRight = !this.isDoorRightLocked;
+                this.addChild(this.doorRight);
+                this.setChildIndex(this.doorRight, this.getNumChildren() - 8);
+            }
+            if (this.hasDoorTop && !this.isDoorTopLocked && this.doorTop.name == "background_d_vertC") {
+                this.removeChild(this.doorTop);
+                this.doorTop = new objects.Background("background_d_vert");
+                this.doorTop.y = 110;
+                this.player.canTraverseTop = !this.isDoorTopLocked;
+                this.addChild(this.doorTop);
+                this.setChildIndex(this.doorTop, this.getNumChildren() - 8);
+            }
+            if (this.hasDoorBot && !this.isDoorBotLocked && this.doorBot.name == "background_d_vertC") {
+                this.removeChild(this.doorBot);
+                this.doorBot = new objects.Background("background_d_vert");
+                this.doorBot.y = 110;
+                this.doorBot.Flip();
+                this.player.canTraverseBot = !this.isDoorBotLocked;
+                this.addChild(this.doorBot);
+                this.setChildIndex(this.doorBot, this.getNumChildren() - 8);
+            }
             //this.playerStatus.text = "PLAYER HP" + this.player.hp + "/5";
             // Sets the Player Health
             this.playerInfo.PlayerHealth = this.player.hp;
             this.playerInfo.Money = this.player.money;
+            this.playerInfo.Key = this.player.key;
             this.playerInfo.PlayerEcto = this.player.ecto;
         };
         PlayScene.prototype.Main = function () {

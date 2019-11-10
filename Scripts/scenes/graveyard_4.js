@@ -40,6 +40,16 @@ var scenes;
             this.playerInfo.PlayerLocation = new math.Vec2(46, 12);
         };
         Graveyard_4.prototype.Update = function () {
+            // If all enemies are defeated, make the key appear
+            if (!this.enemies[0].visible && !this.enemies[1].visible && !this.enemies[2].visible) {
+                if (!this.getChildByName("item_key") && managers.GraveyardLocks.graveyard_4_key) {
+                    this.key = new objects.Key();
+                    this.key.x = 250;
+                    this.key.y = 300;
+                    this.addChild(this.key);
+                    managers.GraveyardLocks.graveyard_4_key = false;
+                }
+            }
             _super.prototype.Update.call(this);
         };
         Graveyard_4.prototype.Main = function () {

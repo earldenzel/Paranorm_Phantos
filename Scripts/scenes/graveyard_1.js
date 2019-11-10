@@ -19,6 +19,9 @@ var scenes;
         // Constructor
         function Graveyard_1() {
             var _this = _super.call(this, false, true, true, true) || this;
+            _this.isDoorLeftLocked = managers.GraveyardLocks.graveyard_1_lockLeft;
+            _this.isDoorRightLocked = managers.GraveyardLocks.graveyard_1_lockRight;
+            _this.isDoorBotLocked = managers.GraveyardLocks.graveyard_1_lockBot;
             _this.Start();
             return _this;
         }
@@ -49,8 +52,15 @@ var scenes;
                 setTimeout(function () {
                     _this.cosmetics.forEach(function (cosmetic) {
                         cosmetic.visible = false;
+                        managers.GraveyardLocks.graveyard_1_lockRight = false;
+                        _this.isDoorRightLocked = false;
+                        managers.GraveyardLocks.graveyard_1_lockBot = false;
+                        _this.isDoorBotLocked = false;
                     });
                 }, 1500);
+            }
+            if (!this.isDoorLeftLocked) {
+                managers.GraveyardLocks.graveyard_1_lockLeft = false;
             }
             _super.prototype.Update.call(this);
         };

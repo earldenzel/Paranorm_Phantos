@@ -18,6 +18,7 @@ var scenes;
         // Constructor
         function Graveyard_5() {
             var _this = _super.call(this, true, true, false, true) || this;
+            _this.isDoorBotLocked = managers.GraveyardLocks.graveyard_5_lockBot;
             _this.Start();
             return _this;
         }
@@ -62,6 +63,15 @@ var scenes;
             this.playerInfo.PlayerLocation = new math.Vec2(30, 28);
         };
         Graveyard_5.prototype.Update = function () {
+            if (!this.enemies[0].visible && !this.enemies[1].visible && !this.enemies[2].visible && !this.enemies[3].visible) {
+                if (!this.getChildByName("item_key") && managers.GraveyardLocks.graveyard_5_key) {
+                    this.key = new objects.Key();
+                    this.key.x = 250;
+                    this.key.y = 300;
+                    this.addChild(this.key);
+                    managers.GraveyardLocks.graveyard_5_key = false;
+                }
+            }
             _super.prototype.Update.call(this);
         };
         Graveyard_5.prototype.Main = function () {
