@@ -43,7 +43,7 @@ var scenes;
                 if (this.messageTimeout == 0) {
                     this.messageTimeout = setTimeout(function () {
                         _this.backButtonClick();
-                    }, 50);
+                    }, 1000);
                 }
             }
             else {

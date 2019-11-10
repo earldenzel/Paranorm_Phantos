@@ -61,7 +61,7 @@ var objects;
             _super.prototype.CheckBound.call(this);
         };
         Bat.prototype.DevourEffect = function () {
-            managers.Game.player.hp += 2;
+            managers.Game.player.GainHealth(2);
         };
         return Bat;
     }(objects.Enemy));

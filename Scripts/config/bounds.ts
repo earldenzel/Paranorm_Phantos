@@ -10,5 +10,7 @@ module config{
         public static DOOR_EASING_BOTTOM: number = 460;
         public static OBSTACLE_OFFSET: number = 10;
         public static ENEMY_COLLISION_OFFSET: number = 20;
+        public static TEXT_OFFSET: number = 20;
+        public static TEXT_SHIFT_Y: number = 210;
     }
 }

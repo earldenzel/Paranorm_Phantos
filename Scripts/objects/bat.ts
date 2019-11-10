@@ -61,7 +61,7 @@ module objects{
         }        
 
         public DevourEffect(): void{
-            managers.Game.player.hp += 2;
+            managers.Game.player.GainHealth(2);
         }
     }
 }

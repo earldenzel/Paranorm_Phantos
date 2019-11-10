@@ -60,8 +60,13 @@ var objects;
             _super.prototype.CheckBound.call(this);
         };
         TestEnemy.prototype.DevourEffect = function () {
-            managers.Game.player.attackPower += 1;
-            managers.Game.player.hp += 1;
+            var random = Math.random() * 100;
+            if (random > 90) {
+                managers.Game.player.GainAttack(1);
+            }
+            else {
+                managers.Game.player.GainHealth(2);
+            }
         };
         return TestEnemy;
     }(objects.Enemy));

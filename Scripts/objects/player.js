@@ -24,6 +24,7 @@ var objects;
             _this.attackSequence = 0;
             _this.biteSequence = 0;
             _this.fallSequence = 0;
+            _this.textSequence = 0;
             _this.playerMoveSpeed = 4;
             _this.attackTimer = 0;
             _this.bitingTimer = 0;
@@ -32,10 +33,13 @@ var objects;
             _this.canTraverseBot = false;
             _this.canTraverseLeft = false;
             _this.canTraverseRight = false;
+            _this.isDead = false;
             _this.weapon = new objects.Weapon();
             _this.Start();
             _this.hp = 5;
+            _this.maxHp = _this.hp;
             _this.ecto = 5;
+            _this.maxEcto = _this.ecto;
             _this.attackPower = 1;
             _this.images = [
                 managers.Game.assetManager.getResult("player_p_walk7"),
@@ -45,6 +49,7 @@ var objects;
             ];
             _this.direction = config.Direction.UP;
             _this.money = 0;
+            _this.playerStatus = new objects.Label("1234567890", "16px", "'Press Start 2P'", "#FFFFFF", _this.x, _this.y, true);
             return _this;
         }
         // Methods
@@ -60,9 +65,18 @@ var objects;
             this.y = Math.round(this.y);
             this.Move();
             this.weapon.Update();
-            this.CheckBound(); // <-- Check collisions           
-            if (this.hp <= 0) {
-                managers.Game.currentScene = config.Scene.OVER;
+            this.CheckBound(); // <-- Check collisions
+            //define the moving status bar for Phoebe
+            this.playerStatus.x = this.x;
+            if (this.y < config.Bounds.TEXT_SHIFT_Y) {
+                this.playerStatus.y = this.y + this.halfH + config.Bounds.TEXT_OFFSET;
+            }
+            else {
+                this.playerStatus.y = this.y - this.halfH - config.Bounds.TEXT_OFFSET;
+            }
+            if (this.hp <= 0 && !this.isDead) {
+                this.isDead = true;
+                this.DeadMessage();
             }
             if (this.bitingTimer == 4) {
                 this.bitingReset++;
@@ -250,12 +264,137 @@ var objects;
         };
         Player.prototype.GetDamage = function (attacker) {
             _super.prototype.GetDamage.call(this, attacker);
+            this.HurtMessage();
             if (this.hp <= 0) {
                 console.log(attacker.name + " erased " + this.name + "'s existence from this world.");
                 managers.Game.stage.removeChild(this.weapon);
                 managers.Game.stage.removeChild(this);
                 this.weapon.visible = false;
                 this.visible = false;
+            }
+        };
+        //phoebe effects from devour
+        Player.prototype.GainHealth = function (healthGain) {
+            var oldHp = this.hp;
+            this.hp += healthGain;
+            if (this.hp > this.maxHp) {
+                this.hp = this.maxHp;
+            }
+            var gain = this.hp - oldHp;
+            var message = "";
+            if (gain > 0) {
+                var random = Math.random() * 100;
+                if (random > 75) {
+                    message = "DELICIOUS.";
+                }
+                else if (random > 50) {
+                    message = "I WANT MORE FOOD";
+                }
+                else if (random > 25) {
+                    message = "HEALED UP!";
+                }
+                else {
+                    message = "+" + gain + " HP";
+                }
+            }
+            else {
+                var random = Math.random() * 100;
+                if (random > 75) {
+                    message = "YUMMY!";
+                }
+                else if (random > 50) {
+                    message = "AHHH! FRESH MEAT";
+                }
+                else if (random > 25) {
+                    message = "NOM NOM NOM";
+                }
+                else {
+                    message = "ALREADY FULL THO";
+                }
+            }
+            this.EchoMessage(message);
+        };
+        Player.prototype.GainSpeed = function (speedGain) {
+            this.playerMoveSpeed += speedGain;
+            this.EchoMessage("+" + speedGain + " MOVE SPD");
+        };
+        Player.prototype.GainAttack = function (attackGain) {
+            this.attackPower += attackGain;
+            this.EchoMessage("+" + attackGain + " ATK");
+        };
+        Player.prototype.GainDollars = function (dollars) {
+            this.money += dollars;
+            this.EchoMessage("GAINED $" + dollars);
+        };
+        Player.prototype.HurtMessage = function () {
+            var random = Math.random() * 100;
+            if (random > 75) {
+                this.EchoMessage("OUCH!", 500);
+            }
+            else if (random > 50) {
+                this.EchoMessage("UGH...", 500);
+            }
+            else if (random > 25) {
+                this.EchoMessage("GET OFF ME!", 500);
+            }
+            else {
+                this.EchoMessage("WHY YOU!", 500);
+            }
+        };
+        Player.prototype.FallMessage = function () {
+            var random = Math.random() * 100;
+            if (random > 75) {
+                this.EchoMessage("AAAAHH!", 500);
+            }
+            else if (random > 50) {
+                this.EchoMessage("NOOOOO...", 500);
+            }
+            else if (random > 25) {
+                this.EchoMessage("UH OH", 500);
+            }
+            else {
+                this.EchoMessage("OOPS", 500);
+            }
+        };
+        Player.prototype.DeadMessage = function () {
+            var random = Math.random() * 100;
+            if (random > 75) {
+                this.EchoMessage("I FAILED...", 3000);
+            }
+            else if (random > 50) {
+                this.EchoMessage("IS THIS IT?", 3000);
+            }
+            else if (random > 25) {
+                this.EchoMessage("FINALLY, DEATH...", 3000);
+            }
+            else {
+                this.EchoMessage("BYE BYE", 3000);
+            }
+        };
+        Player.prototype.EchoMessage = function (message, timeout) {
+            var _this = this;
+            if (timeout === void 0) { timeout = 1000; }
+            if (this.isDead) {
+                this.playerStatus.text = message;
+                this.playerStatus.Recenter();
+                this.playerStatus.visible = true;
+                if (this.isDead) {
+                    setTimeout(function () {
+                        managers.Game.currentScene = config.Scene.OVER;
+                    }, timeout);
+                }
+            }
+            else {
+                if (this.textSequence != 0) {
+                    clearTimeout();
+                }
+                this.playerStatus.text = message;
+                this.playerStatus.Recenter();
+                this.playerStatus.visible = true;
+                this.textSequence = setTimeout(function () {
+                    _this.playerStatus.visible = false;
+                    _this.textSequence = 0;
+                }, timeout);
             }
         };
         return Player;

@@ -25,14 +25,18 @@ var objects;
             var _this = _super.call(this, labelString, fontSize + " " + fontFamily, fontColor) || this;
             // Set the registration point if true to be in the middle
             if (isCentered) {
-                _this.regX = _this.getMeasuredWidth() * 0.5;
-                _this.regY = _this.getMeasuredHeight() * 0.5;
+                _this.Recenter();
             }
             // Set initial position
             _this.x = x;
             _this.y = y;
             return _this;
         }
+        // Methods
+        Label.prototype.Recenter = function () {
+            this.regX = this.getMeasuredWidth() * 0.5;
+            this.regY = this.getMeasuredHeight() * 0.5;
+        };
         return Label;
     }(createjs.Text));
     objects.Label = Label;

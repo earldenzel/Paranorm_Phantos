@@ -60,7 +60,13 @@ var objects;
             return this.currentSpeed;
         };
         TestZombie.prototype.DevourEffect = function () {
-            managers.Game.player.hp += 1;
+            var random = Math.random() * 100;
+            if (random > 98) {
+                managers.Game.player.GainSpeed(1);
+            }
+            else {
+                managers.Game.player.GainHealth(3);
+            }
         };
         return TestZombie;
     }(objects.Enemy));

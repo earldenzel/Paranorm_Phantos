@@ -59,7 +59,7 @@ module objects {
         }
 
         public DevourEffect(): void{
-            managers.Game.player.hp += 1;
+            managers.Game.player.GainAttack(10);            
         }
     }
 }

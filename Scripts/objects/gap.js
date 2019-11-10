@@ -45,6 +45,7 @@ var objects;
                 if (entity instanceof objects.Player && managers.Game.player.fallSequence == 0) {
                     entity.visible = false;
                     entity.weapon.visible = false;
+                    entity.FallMessage();
                     managers.Game.keyboardManager.moveLeft = false;
                     managers.Game.keyboardManager.moveRight = false;
                     managers.Game.keyboardManager.moveUp = false;

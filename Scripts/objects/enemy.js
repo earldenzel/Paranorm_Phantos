@@ -150,7 +150,9 @@ var objects;
             return 0;
         };
         Enemy.prototype.RemoveFromPlay = function (bounty) {
-            managers.Game.player.money += bounty;
+            if (bounty > 0) {
+                managers.Game.player.GainDollars(bounty);
+            }
             this.stunIndicator.visible = false;
             managers.Game.stage.removeChild(this);
             this.visible = false;

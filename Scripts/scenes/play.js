@@ -86,6 +86,7 @@ var scenes;
             this.playerInfo = new managers.PlayerInfo_UI();
             this.playerInfo.PlayerLocation = new math.Vec2(30, 12);
             //this.playerInfo.x = 38;
+            this.player.playerStatus.visible = false;
             managers.Game.keyboardManager.playMode = true;
             this.Main();
         };
@@ -181,7 +182,7 @@ var scenes;
                 this.addChild(this.doorRightFrame);
             }
             //UI PLACEMENT
-            //this.addChild(this.playerStatus);
+            this.addChild(this.player.playerStatus);
             //this.addChild(this.messageStatus);
             //this.addChild(this.controllerHelp);
             this.addChild(this.playerInfo);

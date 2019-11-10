@@ -153,7 +153,9 @@ module objects {
         }
 
         public RemoveFromPlay(bounty: number): void{
-            managers.Game.player.money += bounty;
+            if (bounty > 0){
+                managers.Game.player.GainDollars(bounty);
+            }
             this.stunIndicator.visible = false;
             managers.Game.stage.removeChild(this);
             this.visible = false;

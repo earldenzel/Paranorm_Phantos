@@ -62,7 +62,7 @@ var objects;
             return this.currentSpeed;
         };
         Undertaker.prototype.DevourEffect = function () {
-            managers.Game.player.hp += 1;
+            managers.Game.player.GainAttack(10);
         };
         return Undertaker;
     }(objects.Enemy));

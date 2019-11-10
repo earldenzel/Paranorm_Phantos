@@ -8,8 +8,7 @@ module objects {    // Module == Namespace
 
             // Set the registration point if true to be in the middle
             if(isCentered) {
-                this.regX = this.getMeasuredWidth() * 0.5;
-                this.regY = this.getMeasuredHeight() * 0.5;
+                this.Recenter();
             }
 
             // Set initial position
@@ -17,5 +16,9 @@ module objects {    // Module == Namespace
             this.y = y;
         }
         // Methods
+        public Recenter(): void{
+            this.regX = this.getMeasuredWidth() * 0.5;
+            this.regY = this.getMeasuredHeight() * 0.5;
+        }
     }
 }

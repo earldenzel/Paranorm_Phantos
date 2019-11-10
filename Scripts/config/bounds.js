@@ -13,6 +13,8 @@ var config;
         Bounds.DOOR_EASING_BOTTOM = 460;
         Bounds.OBSTACLE_OFFSET = 10;
         Bounds.ENEMY_COLLISION_OFFSET = 20;
+        Bounds.TEXT_OFFSET = 20;
+        Bounds.TEXT_SHIFT_Y = 210;
         return Bounds;
     }());
     config.Bounds = Bounds;

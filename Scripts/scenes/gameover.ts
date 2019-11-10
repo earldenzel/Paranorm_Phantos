@@ -38,7 +38,7 @@ module scenes {
                 if (this.messageTimeout == 0){
                     this.messageTimeout = setTimeout(() => {
                         this.backButtonClick();
-                    }, 50);
+                    }, 1000);
                 }
             }
             else{

@@ -57,7 +57,13 @@ module objects {
         }
 
         public DevourEffect(): void{
-            managers.Game.player.hp += 1;
+            let random: number = Math.random() * 100;
+            if (random > 98){
+                managers.Game.player.GainSpeed(1);
+            }
+            else{
+                managers.Game.player.GainHealth(3);
+            }
         }
     }
 }
