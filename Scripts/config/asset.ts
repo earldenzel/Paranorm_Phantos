@@ -1,5 +1,5 @@
-module config{
-    export class Assets{
+module config {
+    export class Assets {
         public static getAssets: any[] = [
             // SPRITES
             {
@@ -89,7 +89,7 @@ module config{
             {
                 "id": "background_c_vert",
                 "src": "./Assets/_Background/_TestStage/Placeholder_CEILING-Vertical.png"
-            }, 
+            },
             {
                 // NEW
                 "id": "background_c_w_all",
@@ -126,10 +126,10 @@ module config{
                 "id": "background_d_horiC",
                 "src": "./Assets/_Background/_TestStageB/PlaceholderB_DoorH_Closed.png"
             },
-            {   
+            {
                 // EDIT 
                 "id": "background_f_all",
-                "src": "./Assets/_Background/_TestStageB/PlaceholderB_Background_Floor.png" 
+                "src": "./Assets/_Background/_TestStageB/PlaceholderB_Background_Floor.png"
                 //"./Assets/_Background/_TestStage/Placeholder_FLOOR-All.png"
             },
             {
@@ -224,11 +224,19 @@ module config{
                 "id": "jKeyIndicator",
                 "src": "./Assets/_UI/HowToPlay/HowToPlay_JKey.png"
             },
+            {
+                "id": "item_key",
+                "src": "./Assets/_Items/Key.png"
+            },
 
             // SPRITE SHEETS
             {
                 "id": "tAtlas_MapG",
                 "src": "./Assets/_UI/PlayerInfo/_Map/Map_Graveyard_TextureAtlas.png"
+            },
+            {
+                "id": "tAtlas_Items",
+                "src": "./Assets/_Items/Items_TextureAtlas.png"
             },
 
             // SOUND EFFECTS
@@ -270,7 +278,7 @@ module config{
             "images": [
                 ""
             ],
-            
+
             "framerate": 20,
             "frames": [
                 [1, 1, 162, 86, 0, 0, 0],
@@ -281,7 +289,7 @@ module config{
                 [165, 89, 162, 86, 0, 0, 0],
                 [329, 89, 162, 86, 0, 0, 0]
             ],
-            
+
             "animations": {
                 "MapsGraveyard_Initial": { "frames": [0] },
                 "MapsGraveyard_UnlockA": { "frames": [1] },
@@ -291,6 +299,53 @@ module config{
                 "MapsGraveyard_UnlockB": { "frames": [5] },
                 "MapsGraveyard_UnlockBC": { "frames": [6] }
             }
-        }
+        };
+        public static getAtlas_Items: any = {
+            "images": [
+                ""
+            ],
+
+            "framerate": 20,
+            "frames": [
+                [0, 0, 28, 51, 0, -115, -61],
+                [28, 0, 28, 49, 0, -49, -63],
+                [28, 49, 28, 16, 0, -17, -37],
+                [0, 51, 24, 24, 0, -85, -87],
+                [24, 65, 24, 22, 0, -115, -35],
+                [0, 75, 22, 25, 0, -99, 0],
+                [48, 65, 13, 14, 0, 0, -39],
+                [22, 87, 22, 25, 0, -29, 0],
+                [0, 100, 22, 25, 0, -7, 0],
+                [44, 87, 20, 24, 0, -71, -33],
+                [44, 111, 20, 24, 0, -93, -33],
+                [22, 112, 22, 25, 0, -123, 0],
+                [44, 135, 20, 24, 0, -49, -33],
+                [0, 125, 22, 25, 0, -51, 0],
+                [22, 137, 22, 25, 0, -75, 0],
+                [0, 150, 21, 40, 0, 0, -71],
+                [21, 162, 21, 22, 0, -143, -35]
+            ],
+
+            "animations": {
+                "Items_Hellebore-Flower": {
+                    "frames": [1, 3, 0],
+                    "speed": 0.1
+                },
+                "Items_Gold-Bar": { "frames": [2] },
+                "Items_Diamonds": { "frames": [4] },
+                "Items_Fifty-Dollars": { "frames": [5] },
+                "Items_One-Dollar-Coin": { "frames": [6] },
+                "Items_Five-Dollars": { "frames": [7] },
+                "Items_One-Dollar": { "frames": [8] },
+                "Items_Emeralds": { "frames": [9] },
+                "Items_Rubies": { "frames": [10] },
+                "Items_One-Hundred-Dollars": { "frames": [11] },
+                "Items_Sapphires": { "frames": [12] },
+                "Items_Ten-Dollars": { "frames": [13] },
+                "Items_Twenty-Dollars": { "frames": [14] },
+                "Items_Key": { "frames": [15] },
+                "Items_Pearl": { "frames": [16] }
+            }
+        };
     }
 }

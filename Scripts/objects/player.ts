@@ -22,6 +22,7 @@ module objects {
         private images: Array<any>;
         public direction: config.Direction;
         public money: number;
+        public key: number;
         public lastPosition: math.Vec2;
 
         public ecto: number;
@@ -42,6 +43,7 @@ module objects {
             ]
             this.direction = config.Direction.UP;
             this.money = 0;
+            this.key = 0;
         }
 
         // Methods
@@ -107,7 +109,7 @@ module objects {
             }
             // Running Implementation
             if(managers.Game.keyboardManager.running){
-                let runningSpeed = this.playerMoveSpeed + 1;
+                let runningSpeed: number = this.playerMoveSpeed + 1;
                 if (managers.Game.keyboardManager.moveUp) {
                     this.y -= runningSpeed;
                     this.direction = config.Direction.UP;

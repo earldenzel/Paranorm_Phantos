@@ -5,6 +5,7 @@ module objects {
         // Constructor
         constructor(imageString:string) {
             super(managers.Game.assetManager.getResult(imageString));
+            this.name = imageString;
 
             //this.Start();
         }

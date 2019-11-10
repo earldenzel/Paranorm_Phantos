@@ -18,6 +18,9 @@
     let mapG_TextureAtlasData: any;
     let mapG_TextureAtlas: createjs.SpriteSheet;
 
+    let item_TextureAtlasData: any;
+    let item_TextureAtlas: createjs.SpriteSheet;
+
     // Gets the asset manifest
     //let request = new Request("./Content/assetManifest.json");
     //fetch(request)
@@ -48,6 +51,10 @@
         mapG_TextureAtlasData.images = [assetManager.getResult("tAtlas_MapG")];
         mapG_TextureAtlas = new createjs.SpriteSheet(mapG_TextureAtlasData);
 
+        item_TextureAtlasData = config.Assets.getAtlas_Items;
+        item_TextureAtlasData.images = [assetManager.getResult("tAtlas_Items")];
+        item_TextureAtlas = new createjs.SpriteSheet(item_TextureAtlasData);
+
         // Initialize CreateJS
         stage = new createjs.Stage(canvas);
 
@@ -71,6 +78,7 @@
         // Asset Manager
         managers.Game.assetManager = assetManager;
         managers.Game.map_TextureAtlas = mapG_TextureAtlas;
+        managers.Game.item_TextureAtlas = item_TextureAtlas;
 
         Main();
     }

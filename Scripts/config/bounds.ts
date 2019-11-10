@@ -6,8 +6,8 @@ module config{
         public static BOTTOM_BOUND: number = 675;
         public static DOOR_EASING_LEFT: number = 248;
         public static DOOR_EASING_RIGHT: number = 324;
-        public static DOOR_EASING_TOP: number = 412;
-        public static DOOR_EASING_BOTTOM: number = 460;
+        public static DOOR_EASING_TOP: number = 402; //402
+        public static DOOR_EASING_BOTTOM: number = 440;
         public static OBSTACLE_OFFSET: number = 10;
         public static ENEMY_COLLISION_OFFSET: number = 20;
     }

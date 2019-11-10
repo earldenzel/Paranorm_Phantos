@@ -25,14 +25,35 @@ module managers{
         }
         set Money(newMoney: number){
             this.money = newMoney;
-            this.moneyLabel.text = this.money.toString();
+            this.moneyLabel.text = "";
+            if(this.money > 99999999){
+                this.moneyLabel.text = "99999999";
+            }
+            else{
+                let numberOfZeros = 8 - String(this.money).length;
+                for (let i = 0; i < numberOfZeros; i++) {
+                    this.moneyLabel.text += "0";                
+                }
+                this.moneyLabel.text += this.money.toString();
+            }
         }
         get Key():number{
             return this.key;
         }
         set Key(newKey: number){
             this.key = newKey;
-            this.keyLabel.text = this.Key.toString();
+            let numberOfZeros = 2 - String(this.key).length;
+            this.keyLabel.text = "";
+            if(this.key > 99){
+                this.keyLabel.text = "99";
+            }
+            else{
+                let numberOfZeros = 2 - String(this.key).length;
+                for (let i = 0; i < numberOfZeros; i++) {
+                    this.keyLabel.text += "0";                
+                }
+                this.keyLabel.text = this.Key.toString();
+            }
         }
         get PlayerHealth():number{
             return this.playerHealth;

@@ -42,6 +42,21 @@ var objects;
                 if (managers.Game.keyboardManager.moveDown) {
                     managers.Game.player.y -= managers.Game.player.playerMoveSpeed;
                 }
+                if (managers.Game.keyboardManager.running) {
+                    var runningSpeed = managers.Game.player.playerMoveSpeed + 1;
+                    if (managers.Game.keyboardManager.moveLeft) {
+                        managers.Game.player.x += runningSpeed;
+                    }
+                    if (managers.Game.keyboardManager.moveRight) {
+                        managers.Game.player.x -= runningSpeed;
+                    }
+                    if (managers.Game.keyboardManager.moveUp) {
+                        managers.Game.player.y += runningSpeed;
+                    }
+                    if (managers.Game.keyboardManager.moveDown) {
+                        managers.Game.player.y -= runningSpeed;
+                    }
+                }
             }
         };
         Barriers.prototype.TestZombieCheckBarrierCollision = function (zombie) {

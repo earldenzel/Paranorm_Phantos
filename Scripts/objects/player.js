@@ -45,6 +45,7 @@ var objects;
             ];
             _this.direction = config.Direction.UP;
             _this.money = 0;
+            _this.key = 0;
             return _this;
         }
         // Methods

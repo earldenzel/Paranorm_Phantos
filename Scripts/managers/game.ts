@@ -3,6 +3,7 @@ module managers {
         public static stage: createjs.Stage;
         public static assetManager: createjs.LoadQueue;
         public static map_TextureAtlas: createjs.SpriteSheet;
+        public static item_TextureAtlas: createjs.SpriteSheet;
         public static currentScene: number;
         public static player: objects.Player;
         public static gameHeight: number = 900;
