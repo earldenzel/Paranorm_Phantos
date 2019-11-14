@@ -9,7 +9,7 @@ module objects{
         // constructors
         
         constructor(moveSpeed:number, updateTime: number){
-            super("enemy_bat");
+            super(managers.Game.bat_TextureAtlas, "bat");
             this.Start();
 
             this.hp = 3;

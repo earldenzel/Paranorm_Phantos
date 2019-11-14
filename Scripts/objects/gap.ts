@@ -4,8 +4,8 @@ module objects{
         public position: math.Vec2;
 
         // Constructor
-        constructor(imageString: string, position: math.Vec2){
-            super(imageString);
+        constructor(textureAtlas: createjs.SpriteSheet, imageString: string, position: math.Vec2){
+            super(textureAtlas, imageString);
             this.position = position;
             this.Start();  
         }

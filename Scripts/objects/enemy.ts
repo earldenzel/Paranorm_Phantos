@@ -4,14 +4,14 @@ module objects {
         public isStunned: boolean;
         protected knockback: number;
         protected eatTimer: number;
-        public stunIndicator: objects.Indicator;
+        //public stunIndicator: objects.Indicator;
         protected bounty: number;
         public isFlying: boolean;
 
-        constructor(enemyName: string) {
-            super(enemyName);
+        constructor(textureAtlas: createjs.SpriteSheet, enemyName: string) {
+            super(textureAtlas, enemyName);
             this.Start();
-            this.stunIndicator = new objects.Indicator("kKeyIndicator");
+            //this.stunIndicator = new objects.Indicator("kKeyIndicator");
             this.Move();
         }
 
@@ -140,9 +140,9 @@ module objects {
                     //delay is important so there is no-split second show of the enemy body atop the barrier
                     setTimeout(() => {
                         //managers.Game.messageStatus.text = this.name + " is stunned!";
-                        this.stunIndicator.x = this.x;
-                        this.stunIndicator.y = this.y - this.halfH - this.stunIndicator.halfH;
-                        this.stunIndicator.visible = true;                        
+                        //this.stunIndicator.x = this.x;
+                        //this.stunIndicator.y = this.y - this.halfH - this.stunIndicator.halfH;
+                        //this.stunIndicator.visible = true;                        
                     }, 5);
                 }
             }
@@ -156,7 +156,7 @@ module objects {
             if (bounty > 0){
                 managers.Game.player.GainDollars(bounty);
             }
-            this.stunIndicator.visible = false;
+            //this.stunIndicator.visible = false;
             managers.Game.stage.removeChild(this);
             this.visible = false;
         }

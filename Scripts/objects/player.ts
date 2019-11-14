@@ -34,7 +34,7 @@ module objects {
 
         //Constructor
         constructor() {
-            super("player_p_walk7");
+            super(managers.Game.phoebe_TextureAtlas, "Phoebe_Walk_Back1");
             this.weapon = new objects.Weapon();
             this.Start();
             this.hp = 5;
@@ -43,10 +43,10 @@ module objects {
             this.maxEcto = this.ecto;
             this.attackPower = 1;
             this.images = [
-                managers.Game.assetManager.getResult("player_p_walk7"),
-                managers.Game.assetManager.getResult("player_p_walk1"),
-                managers.Game.assetManager.getResult("player_p_walk3"),
-                managers.Game.assetManager.getResult("player_p_walk5")
+                new createjs.Sprite(managers.Game.phoebe_TextureAtlas, "Phoebe_Walk_Back1"),
+                new createjs.Sprite(managers.Game.phoebe_TextureAtlas, "Phoebe_Walk_Front1"),
+                new createjs.Sprite(managers.Game.phoebe_TextureAtlas, "Phoebe_Walk_Left1"),
+                new createjs.Sprite(managers.Game.phoebe_TextureAtlas, "Phoebe_Walk_Right1"),
             ]
             this.direction = config.Direction.UP;
             this.money = 0;
@@ -63,7 +63,7 @@ module objects {
 
         public Update(): void {
             managers.Game.player = this;
-            this.image = this.images[this.direction as number];
+            this.currentAnimation = this.images[this.direction as number];
             this.x = Math.round(this.x);
             this.y = Math.round(this.y);
             this.Move();

@@ -15,10 +15,10 @@ var objects;
 (function (objects) {
     var Enemy = /** @class */ (function (_super) {
         __extends(Enemy, _super);
-        function Enemy(enemyName) {
-            var _this = _super.call(this, enemyName) || this;
+        function Enemy(textureAtlas, enemyName) {
+            var _this = _super.call(this, textureAtlas, enemyName) || this;
             _this.Start();
-            _this.stunIndicator = new objects.Indicator("kKeyIndicator");
+            //this.stunIndicator = new objects.Indicator("kKeyIndicator");
             _this.Move();
             return _this;
         }
@@ -119,7 +119,6 @@ var objects;
             }
         };
         Enemy.prototype.GetDamage = function (attacker) {
-            var _this = this;
             //enemy state = stunned
             if (this.isStunned) {
                 //managers.Game.messageStatus.text = attacker.name + " ended " + this.name + "'s life.";
@@ -139,9 +138,9 @@ var objects;
                     //delay is important so there is no-split second show of the enemy body atop the barrier
                     setTimeout(function () {
                         //managers.Game.messageStatus.text = this.name + " is stunned!";
-                        _this.stunIndicator.x = _this.x;
-                        _this.stunIndicator.y = _this.y - _this.halfH - _this.stunIndicator.halfH;
-                        _this.stunIndicator.visible = true;
+                        //this.stunIndicator.x = this.x;
+                        //this.stunIndicator.y = this.y - this.halfH - this.stunIndicator.halfH;
+                        //this.stunIndicator.visible = true;                        
                     }, 5);
                 }
             }
@@ -153,7 +152,7 @@ var objects;
             if (bounty > 0) {
                 managers.Game.player.GainDollars(bounty);
             }
-            this.stunIndicator.visible = false;
+            //this.stunIndicator.visible = false;
             managers.Game.stage.removeChild(this);
             this.visible = false;
         };

@@ -238,6 +238,18 @@ module config {
                 "id": "tAtlas_Items",
                 "src": "./Assets/_Items/Items_TextureAtlas.png"
             },
+            {
+                "id": "tAtlas_Phoebe",
+                "src": "./Assets/_Player/Phoebe_TextureAtlas.png"
+            },
+            {
+                "id": "tAtlas_Bat",
+                "src": "./Assets/_Enemies/bat/Bat_TextureAtlas.png"
+            },
+            {
+                "id": "tAtlas_Graveyard",
+                "src": "./Assets/_Background/Graveyard_TextureAtlas.png"
+            },
 
             // SOUND EFFECTS
             {
@@ -274,6 +286,25 @@ module config {
             }
         ];
 
+        public static getAtlas_Bat: any = {
+            "images": [
+            ],
+            
+            "framerate": 20,
+            "frames": [
+                [0, 0, 96, 56, 0, 0, 0],
+                [96, 0, 96, 56, 0, 0, 0],
+                [192, 0, 96, 56, 0, 0, 0]
+            ],
+            
+            "animations": {
+                "bat": { 
+                    "frames": [0, 1, 2] ,
+                    "speed" : 0.1
+                }
+            },
+        };
+
         public static getAtlas_MapGraveYard: any = {
             "images": [
                 ""
@@ -300,6 +331,72 @@ module config {
                 "MapsGraveyard_UnlockBC": { "frames": [6] }
             }
         };
+
+        public static getAtlas_Graveyard: any = {
+
+            "images": [
+                ""
+            ],
+            
+            "framerate": 20,
+            "frames": [
+                [1, 1, 564, 651, 0, 0, -1],
+                [567, 1, 28, 642, 0, -87, -6],
+                [1, 654, 556, 34, 0, 0, -265],
+                [1, 690, 194, 244, 0, -281, -325],
+                [197, 690, 88, 161, 0, -239, 0],
+                [287, 690, 142, 64, 0, -1, -295],
+                [287, 756, 78, 104, 0, -15, -275],
+                [197, 853, 88, 64, 0, -239, -25],
+                [431, 690, 92, 78, 0, -237, -11],
+                [367, 756, 46, 150, 0, -209, -5],
+                [287, 862, 52, 64, 0, -257, -85],
+                [341, 862, 24, 44, 0, -181, -87],
+                [415, 770, 52, 64, 0, -89, -85],
+                [415, 836, 52, 64, 0, -89, -175],
+                [469, 770, 52, 64, 0, -321, -145],
+                [469, 836, 52, 64, 0, -369, -145],
+                [525, 690, 52, 64, 0, -161, -175],
+                [567, 645, 28, 38, 0, -149, -95],
+                [525, 756, 52, 34, 0, -89, -265],
+                [523, 792, 52, 64, 0, -321, -175],
+                [523, 858, 52, 64, 0, -161, -265],
+                [415, 902, 52, 34, 0, -369, -205],
+                [469, 902, 28, 34, 0, -89, -295],
+                [341, 908, 32, 16, 0, -147, -119],
+                [375, 908, 24, 24, 0, -151, -131]
+            ],
+            
+            "animations": {
+                "Graveyard_GrassTile_FullScreen": { "frames": [0] },
+                "Graveyard_FenceVertical": { "frames": [1] },
+                "Graveyard_FenceHorizontal": { "frames": [2] },
+                "Graveyard_GrassTile_1_4Screen": { "frames": [3] },
+                "Graveyard_ParanormalGlow_Closed-Final": { "frames": [4] },
+                "Graveyard_ParanormalGlow_Open-copy": { "frames": [5] },
+                "Graveyard_Gate_H": { "frames": [6] },
+                "Graveyard_Gate_Closed": { "frames": [7] },
+                "Graveyard_Gate_V": { "frames": [8] },
+                "Graveyard_Tree": { "frames": [9] },
+                "Graveyard_DirtTile": { "frames": [10] },
+                "Graveyard_Cross": { "frames": [11] },
+                "Graveyard_GrassTile": { "frames": [12] },
+                "Graveyard_HoleTile": { "frames": [13] },
+                "Graveyard_HoleTile_Center": { "frames": [14] },
+                "Graveyard_HoleTile_Horizontal": { "frames": [15] },
+                "Graveyard_HoleTile_Stairs": { "frames": [16] },
+                "Graveyard_Grave": { "frames": [17] },
+                "Graveyard_Fence2x": { "frames": [18] },
+                "Graveyard_HoleTile_Vertical": { "frames": [19] },
+                "Graveyard_Stairs_Up": { "frames": [20] },
+                "Graveyard_HoleTile_Corner": { "frames": [21] },
+                "Graveyard_Fence": { "frames": [22] },
+                "Graveyard_Flowers": { "frames": [23] },
+                "Graveyard_GraveTile": { "frames": [24] }
+            }
+
+        };
+
         public static getAtlas_Items: any = {
             "images": [
                 ""
@@ -345,6 +442,127 @@ module config {
                 "Items_Twenty-Dollars": { "frames": [14] },
                 "Items_Key": { "frames": [15] },
                 "Items_Pearl": { "frames": [16] }
+            }
+        };
+        public static getAtlas_Phoebe: any = {
+            "images": [
+                ""
+            ],
+            
+            "framerate": 20,
+            "frames": [
+                [0, 0, 37, 46, 0, 0, 0],
+                [37, 0, 37, 46, 0, 0, 0],
+                [74, 0, 37, 46, 0, 0, 0],
+                [111, 0, 37, 46, 0, 0, 0],
+                [148, 0, 37, 46, 0, 0, 0],
+                [185, 0, 37, 46, 0, 0, 0],
+                [222, 0, 37, 46, 0, 0, 0],
+                [259, 0, 37, 46, 0, 0, 0],
+                [296, 0, 37, 46, 0, 0, 0],
+                [333, 0, 37, 46, 0, 0, 0],
+                [370, 0, 37, 46, 0, 0, 0],
+                [407, 0, 37, 46, 0, 0, 0],
+                [444, 0, 37, 46, 0, 0, 0],
+                [0, 51, 37, 46, 0, 0, 0],
+                [37, 51, 37, 46, 0, 0, 0],
+                [74, 51, 37, 46, 0, 0, 0],
+                [111, 51, 37, 46, 0, 0, 0],
+                [148, 51, 37, 46, 0, 0, 0],
+                [185, 51, 37, 46, 0, 0, 0],
+                [222, 51, 37, 46, 0, 0, 0],
+                [259, 51, 37, 46, 0, 0, 0],
+                [296, 51, 37, 46, 0, 0, 0],
+                [333, 51, 37, 46, 0, 0, 0],
+                [370, 51, 37, 46, 0, 0, 0],
+                [407, 51, 37, 46, 0, 0, 0],
+                [444, 51, 37, 46, 0, 0, 0],
+                [0, 102, 37, 46, 0, 0, 0],
+                [37, 102, 37, 46, 0, 0, 0],
+                [74, 102, 37, 46, 0, 0, 0],
+                [111, 102, 37, 46, 0, 0, 0],
+                [148, 102, 37, 46, 0, 0, 0],
+                [185, 102, 37, 46, 0, 0, 0],
+                [222, 102, 37, 46, 0, 0, 0],
+                [259, 102, 37, 46, 0, 0, 0],
+                [296, 102, 37, 46, 0, 0, 0],
+                [333, 102, 37, 46, 0, 0, 0],
+                [370, 102, 37, 46, 0, 0, 0],
+                [407, 102, 37, 46, 0, 0, 0],
+                [444, 102, 37, 46, 0, 0, 0],
+                [0, 153, 37, 46, 0, 0, 0],
+                [37, 153, 37, 46, 0, 0, 0],
+                [74, 153, 37, 46, 0, 0, 0],
+                [111, 153, 37, 46, 0, 0, 0],
+                [148, 153, 37, 46, 0, 0, 0],
+                [185, 153, 37, 46, 0, 0, 0],
+                [222, 153, 37, 46, 0, 0, 0],
+                [259, 153, 37, 46, 0, 0, 0],
+                [296, 153, 37, 46, 0, 0, 0],
+                [333, 153, 37, 51, 0, 0, 0],
+                [370, 153, 37, 51, 0, 0, 0],
+                [407, 153, 37, 51, 0, 0, 0],
+                [444, 153, 37, 51, 0, 0, 0],
+                [0, 204, 37, 51, 0, 0, 0],
+                [37, 204, 37, 51, 0, 0, 0],
+                [74, 204, 37, 51, 0, 0, 0],
+                [111, 204, 37, 51, 0, 0, 0],
+                [148, 204, 37, 51, 0, 0, 0],
+                [185, 204, 37, 51, 0, 0, 0],
+                [222, 204, 37, 51, 0, 0, 0],
+                [259, 204, 37, 51, 0, 0, 0],
+                [296, 204, 37, 51, 0, 0, 0],
+                [333, 204, 37, 51, 0, 0, 0],
+                [370, 204, 37, 51, 0, 0, 0],
+                [407, 204, 37, 51, 0, 0, 0],
+                [444, 204, 37, 51, 0, 0, 0]
+            ],
+            
+            "animations": {
+                "Phoebe_Attack_Left": { "frames": [0,1,2] },
+                "Phoebe_Attack_Front": { "frames": [3,4,5] },
+                "Phoebe_Attack_Right": { "frames": [6,7,8] },
+                "Phoebe_Attack_Back": { "frames": [9,10,11] },
+                "Phoebe_Bite_Left1": { "frames": [12] },
+                "Phoebe_Bite_Left2": { "frames": [13] },
+                "Phoebe_Bite_Front1": { "frames": [14] },
+                "Phoebe_Bite_Front2": { "frames": [15] },
+                "Phoebe_Bite_Back": { "frames": [16] },
+                "Phoebe_Bite_Right1": { "frames": [17] },
+                "Phoebe_Bite_Right2": { "frames": [18] },
+                "Phoebe_Dead_A": { "frames": [19,20] },
+                "Phoebe_Dead_B": { "frames": [21,22] },
+                "Phoebe_Explosion": { "frames": [23,24,25,26] },
+                "Phoebe_Hurt": { "frames": [27] },
+                "Phoebe_Run_Left": { "frames": [28,29] },
+                "Phoebe_Run_Front": { "frames": [30,31,32,33] },
+                "Phoebe_Run_Right": { "frames": [34,35] },
+                "Phoebe_Run_Back": { "frames": [36,37,38,39] },
+                "Phoebe_Walk_Front1": { "frames": [40] },
+                "Phoebe_Walk_Front2": { "frames": [41] },
+                "Phoebe_Walk_Left1": { "frames": [42] },
+                "Phoebe_Walk_Left2": { "frames": [43] },
+                "Phoebe_Walk_Right1": { "frames": [44] },
+                "Phoebe_Walk_Right2": { "frames": [45] },
+                "Phoebe_Walk_Back1": { "frames": [46] },
+                "Phoebe_Walk_Back2": { "frames": [47] },
+                "PhoebeSoul_Attack_Left": { "frames": [48] },
+                "PhoebeSoul_Attack_Front": { "frames": [49] },
+                "PhoebeSoul_Attack_Right": { "frames": [50] },
+                "PhoebeSoul_Attack_Back": { "frames": [51] },
+                "PhoebeSoul_Dodge_Left": { "frames": [52] },
+                "PhoebeSoul_Dodge_Right": { "frames": [53] },
+                "PhoebeSoul_Dodge_Front": { "frames": [54] },
+                "PhoebeSoul_Dodge_Back": { "frames": [55] },
+                "PhoebeSoul_Hit": { "frames": [56] },
+                "PhoebeSoul_Run_Left": { "frames": [57] },
+                "PhoebeSoul_Run_Right": { "frames": [58] },
+                "PhoebeSoul_Run_Front": { "frames": [59] },
+                "PhoebeSoul_Run_Back": { "frames": [60] },
+                "PhoebeSoul_Walk_Front": { "frames": [61] },
+                "PhoebeSoul_Walk_Left": { "frames": [62] },
+                "PhoebeSoul_Walk_Right": { "frames": [63] },
+                "PhoebeSoul_Walk_Back": { "frames": [64] }
             }
         };
     }

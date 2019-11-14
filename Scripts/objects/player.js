@@ -18,7 +18,7 @@ var objects;
         __extends(Player, _super);
         //Constructor
         function Player() {
-            var _this = _super.call(this, "player_p_walk7") || this;
+            var _this = _super.call(this, managers.Game.phoebe_TextureAtlas, "Phoebe_Walk_Back1") || this;
             //Variables
             //public playerController: Controller<boolean>;
             _this.attackSequence = 0;
@@ -42,10 +42,10 @@ var objects;
             _this.maxEcto = _this.ecto;
             _this.attackPower = 1;
             _this.images = [
-                managers.Game.assetManager.getResult("player_p_walk7"),
-                managers.Game.assetManager.getResult("player_p_walk1"),
-                managers.Game.assetManager.getResult("player_p_walk3"),
-                managers.Game.assetManager.getResult("player_p_walk5")
+                new createjs.Sprite(managers.Game.phoebe_TextureAtlas, "Phoebe_Walk_Back1"),
+                new createjs.Sprite(managers.Game.phoebe_TextureAtlas, "Phoebe_Walk_Front1"),
+                new createjs.Sprite(managers.Game.phoebe_TextureAtlas, "Phoebe_Walk_Left1"),
+                new createjs.Sprite(managers.Game.phoebe_TextureAtlas, "Phoebe_Walk_Right1"),
             ];
             _this.direction = config.Direction.UP;
             _this.money = 0;
@@ -61,7 +61,7 @@ var objects;
         };
         Player.prototype.Update = function () {
             managers.Game.player = this;
-            this.image = this.images[this.direction];
+            this.currentAnimation = this.images[this.direction];
             this.x = Math.round(this.x);
             this.y = Math.round(this.y);
             this.Move();

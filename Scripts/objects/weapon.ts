@@ -4,12 +4,12 @@ module objects {
         private images: Array<any>;
         // Constructor
         constructor() {
-            super("item_p_front2");
+            super(managers.Game.phoebe_TextureAtlas, "Phoebe_Walk_Back1");
             this.images = [
-                managers.Game.assetManager.getResult("item_p_front2"),
-                managers.Game.assetManager.getResult("item_p_front2"),
-                managers.Game.assetManager.getResult("item_p_left2"),
-                managers.Game.assetManager.getResult("item_p_right2")
+                new createjs.Sprite(managers.Game.phoebe_TextureAtlas, "Phoebe_Attack_Back1"),
+                new createjs.Sprite(managers.Game.phoebe_TextureAtlas, "Phoebe_Attack_Front1"),
+                new createjs.Sprite(managers.Game.phoebe_TextureAtlas, "Phoebe_Attack_Left1"),
+                new createjs.Sprite(managers.Game.phoebe_TextureAtlas, "Phoebe_Attack_Right1"),
             ]
             this.Start();
         }
@@ -20,7 +20,7 @@ module objects {
         }
         // Updated 60 times per second (60FPS)
         public Update():void {
-            this.image = this.images[managers.Game.player.direction as number];
+            this.currentAnimation = this.images[managers.Game.player.direction as number];
             this.rotation = 0;
             switch(managers.Game.player.direction){
                 case config.Direction.UP:

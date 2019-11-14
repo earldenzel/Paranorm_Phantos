@@ -1,8 +1,8 @@
 module objects {
     export class Indicator extends objects.GameObject {
         // Constructor
-        constructor(imageString:string) {
-            super(imageString);
+        constructor(textureAtlas: createjs.SpriteSheet, imageString:string) {
+            super(textureAtlas, imageString);
 
             this.name = imageString;
         }

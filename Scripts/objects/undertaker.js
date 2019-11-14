@@ -17,7 +17,7 @@ var objects;
         __extends(Undertaker, _super);
         // constructors
         function Undertaker(moveSpeed) {
-            var _this = _super.call(this, "enemy_zombieTest") || this;
+            var _this = _super.call(this, managers.Game.bat_TextureAtlas, "bat") || this;
             _this.scaleX = 2;
             _this.scaleY = 2;
             _this.Start();

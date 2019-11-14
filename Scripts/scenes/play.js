@@ -143,7 +143,7 @@ var scenes;
                 }
             });
             // KEY AND LOCKED DOORS
-            if (this.getChildByName("item_key") && managers.Collision.Check(this.player, this.key) && this.key.visible) {
+            if (this.getChildByName("Items_Key") && managers.Collision.Check(this.player, this.key) && this.key.visible) {
                 this.player.key += 1;
                 this.key.RemoveFromPlay();
             }
@@ -256,7 +256,7 @@ var scenes;
             // ENEMY PLACEMENT
             this.enemies.forEach(function (e) {
                 _this.addChild(e);
-                _this.addChild(e.stunIndicator);
+                //this.addChild(e.stunIndicator);
             });
             // PLAYER PLACEMENT
             this.addChild(this.player.weapon);

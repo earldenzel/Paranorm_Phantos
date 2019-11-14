@@ -17,7 +17,7 @@ var objects;
         __extends(TestEnemy, _super);
         // constructors
         function TestEnemy(moveSpeed, rightDirection, downDirection) {
-            var _this = _super.call(this, "enemy_test") || this;
+            var _this = _super.call(this, managers.Game.bat_TextureAtlas, "bat") || this;
             _this.Start();
             _this.hp = 2;
             _this.attackPower = 1;

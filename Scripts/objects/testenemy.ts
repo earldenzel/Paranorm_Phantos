@@ -8,7 +8,7 @@ module objects{
         // constructors
         
         constructor(moveSpeed:number, rightDirection:boolean, downDirection:boolean){
-            super("enemy_test");
+            super(managers.Game.bat_TextureAtlas, "bat");
             this.Start();
             this.hp = 2;
             this.attackPower = 1;

@@ -17,7 +17,7 @@ var objects;
         __extends(Bat, _super);
         // constructors
         function Bat(moveSpeed, updateTime) {
-            var _this = _super.call(this, "enemy_bat") || this;
+            var _this = _super.call(this, managers.Game.bat_TextureAtlas, "bat") || this;
             _this.Start();
             _this.hp = 3;
             _this.attackPower = 1;

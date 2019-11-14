@@ -3,7 +3,7 @@ module objects{
         // Variables
         // Constructor
         constructor(){
-            super("item_key");
+            super(managers.Game.item_TextureAtlas, "Items_Key");
             this.Start();
         }
         // Methods

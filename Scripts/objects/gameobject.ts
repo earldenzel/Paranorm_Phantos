@@ -1,5 +1,5 @@
 module objects {
-    export abstract class GameObject extends createjs.Bitmap {
+    export abstract class GameObject extends createjs.Sprite {
         // Variables
         protected speedX: number;
         protected speedY: number;
@@ -14,8 +14,8 @@ module objects {
         public attackPower: number;
 
         // Constructor
-        constructor(imageString:string) {
-            super(managers.Game.assetManager.getResult(imageString));
+        constructor(textureAtlas: createjs.SpriteSheet, imageString:string) {
+            super(textureAtlas, imageString);
 
             this.name = imageString;
 

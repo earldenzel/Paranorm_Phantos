@@ -16,8 +16,8 @@ var objects;
     var Gap = /** @class */ (function (_super) {
         __extends(Gap, _super);
         // Constructor
-        function Gap(imageString, position) {
-            var _this = _super.call(this, imageString) || this;
+        function Gap(textureAtlas, imageString, position) {
+            var _this = _super.call(this, textureAtlas, imageString) || this;
             _this.position = position;
             _this.Start();
             return _this;

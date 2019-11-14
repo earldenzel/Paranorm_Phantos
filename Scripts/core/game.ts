@@ -21,6 +21,15 @@
     let item_TextureAtlasData: any;
     let item_TextureAtlas: createjs.SpriteSheet;
 
+    let phoebe_TextureAtlasData: any;
+    let phoebe_TextureAtlas: createjs.SpriteSheet;
+
+    let graveyard_TextureAtlasData: any;
+    let graveyard_TextureAtlas: createjs.SpriteSheet;
+    
+    let bat_TextureAtlasData: any;
+    let bat_TextureAtlas: createjs.SpriteSheet;
+
     // Gets the asset manifest
     //let request = new Request("./Content/assetManifest.json");
     //fetch(request)
@@ -55,6 +64,18 @@
         item_TextureAtlasData.images = [assetManager.getResult("tAtlas_Items")];
         item_TextureAtlas = new createjs.SpriteSheet(item_TextureAtlasData);
 
+        phoebe_TextureAtlasData = config.Assets.getAtlas_Phoebe;
+        phoebe_TextureAtlasData.images = [assetManager.getResult("tAtlas_Phoebe")];
+        phoebe_TextureAtlas = new createjs.SpriteSheet(phoebe_TextureAtlasData);
+
+        graveyard_TextureAtlasData = config.Assets.getAtlas_Graveyard;
+        graveyard_TextureAtlasData.images = [assetManager.getResult("tAtlas_Graveyard")];
+        graveyard_TextureAtlas = new createjs.SpriteSheet(graveyard_TextureAtlasData);
+
+        bat_TextureAtlasData = config.Assets.getAtlas_Bat;
+        bat_TextureAtlasData.images = [assetManager.getResult("tAtlas_Bat")];
+        bat_TextureAtlas = new createjs.SpriteSheet(bat_TextureAtlasData);
+
         // Initialize CreateJS
         stage = new createjs.Stage(canvas);
 
@@ -79,6 +100,9 @@
         managers.Game.assetManager = assetManager;
         managers.Game.map_TextureAtlas = mapG_TextureAtlas;
         managers.Game.item_TextureAtlas = item_TextureAtlas;
+        managers.Game.phoebe_TextureAtlas = phoebe_TextureAtlas;
+        managers.Game.graveyard_TextureAtlas = graveyard_TextureAtlas;
+        managers.Game.bat_TextureAtlas = bat_TextureAtlas;
 
         Main();
     }

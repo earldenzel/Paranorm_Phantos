@@ -18,7 +18,7 @@ var objects;
         // Variables
         // Constructor
         function Key() {
-            var _this = _super.call(this, "item_key") || this;
+            var _this = _super.call(this, managers.Game.item_TextureAtlas, "Items_Key") || this;
             _this.Start();
             return _this;
         }

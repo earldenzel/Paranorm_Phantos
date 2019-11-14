@@ -4,6 +4,9 @@ module managers {
         public static assetManager: createjs.LoadQueue;
         public static map_TextureAtlas: createjs.SpriteSheet;
         public static item_TextureAtlas: createjs.SpriteSheet;
+        public static phoebe_TextureAtlas: createjs.SpriteSheet;
+        public static graveyard_TextureAtlas: createjs.SpriteSheet;
+        public static bat_TextureAtlas: createjs.SpriteSheet;
         public static currentScene: number;
         public static player: objects.Player;
         public static gameHeight: number = 900;

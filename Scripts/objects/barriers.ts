@@ -3,13 +3,11 @@ module objects {
         // Variables
 
         // Constructor
-        constructor(imageString: string) {
-            super(imageString);
+        constructor(textureAtlas: createjs.SpriteSheet, imageString: string) {
+            super(textureAtlas, imageString);
         }
         // Methods
         public Start(): void {
-            this.x = 100;
-            this.y = 100;
         }
         public Update(): void { }
         public Reset(): void { }

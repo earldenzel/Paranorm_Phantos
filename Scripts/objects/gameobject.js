@@ -16,8 +16,8 @@ var objects;
     var GameObject = /** @class */ (function (_super) {
         __extends(GameObject, _super);
         // Constructor
-        function GameObject(imageString) {
-            var _this = _super.call(this, managers.Game.assetManager.getResult(imageString)) || this;
+        function GameObject(textureAtlas, imageString) {
+            var _this = _super.call(this, textureAtlas, imageString) || this;
             _this.name = imageString;
             _this.Init();
             return _this;
@@ -54,7 +54,7 @@ var objects;
             return new math.Vec2(this.x, this.y);
         };
         return GameObject;
-    }(createjs.Bitmap));
+    }(createjs.Sprite));
     objects.GameObject = GameObject;
 })(objects || (objects = {}));
 //# sourceMappingURL=gameobject.js.map

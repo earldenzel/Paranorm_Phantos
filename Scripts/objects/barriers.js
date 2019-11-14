@@ -17,13 +17,11 @@ var objects;
         __extends(Barriers, _super);
         // Variables
         // Constructor
-        function Barriers(imageString) {
-            return _super.call(this, imageString) || this;
+        function Barriers(textureAtlas, imageString) {
+            return _super.call(this, textureAtlas, imageString) || this;
         }
         // Methods
         Barriers.prototype.Start = function () {
-            this.x = 100;
-            this.y = 100;
         };
         Barriers.prototype.Update = function () { };
         Barriers.prototype.Reset = function () { };
