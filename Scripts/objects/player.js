@@ -56,7 +56,7 @@ var objects;
         };
         Player.prototype.Update = function () {
             managers.Game.player = this;
-            if (this.currentAnimation != this.images[managers.Game.player.direction]) {
+            if (this.hp > 0 && this.currentAnimation != this.images[managers.Game.player.direction]) {
                 this.gotoAndPlay(this.images[this.direction]);
             }
             this.x = Math.round(this.x);
@@ -265,10 +265,16 @@ var objects;
             this.HurtMessage();
             if (this.hp <= 0) {
                 console.log(attacker.name + " erased " + this.name + "'s existence from this world.");
-                managers.Game.stage.removeChild(this.weapon);
-                managers.Game.stage.removeChild(this);
-                this.weapon.visible = false;
-                this.visible = false;
+                this.gotoAndPlay("Phoebe_Explosion");
+                this.on("animationend", this.animationEnded.bind(this, "Phoebe_Dead_A"), false);
+                //this.gotoAndPlay("Phoebe_Dead_A");
+                //this.on("animationend", this.animationEnded.bind(this), false);
+                //this.gotoAndPlay("Phoebe_Dead_B");
+                //this.on("animationend", this.animationEnded.bind(this), false);
+                //managers.Game.stage.removeChild(this.weapon);
+                //managers.Game.stage.removeChild(this);
+                //this.weapon.visible = false;
+                //this.visible = false;
             }
         };
         //phoebe effects from devour
@@ -393,6 +399,20 @@ var objects;
                     _this.playerStatus.visible = false;
                     _this.textSequence = 0;
                 }, timeout);
+            }
+        };
+        Player.prototype.animationEnded = function (nextAnimation, nextAnimation2) {
+            //this.alpha = 0;            
+            if (nextAnimation2 === void 0) { nextAnimation2 = ""; }
+            if (nextAnimation2 != "") {
+                this.off("animationend", this.animationEnded.bind(this), false);
+                this.y -= 1;
+                this.on("animationend", this.animationEnded.bind(this, nextAnimation2, nextAnimation), false);
+                this.gotoAndPlay(nextAnimation);
+            }
+            else {
+                this.off("animationend", this.animationEnded.bind(this), false);
+                this.gotoAndPlay(nextAnimation);
             }
         };
         return Player;

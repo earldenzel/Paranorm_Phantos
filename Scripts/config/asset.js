@@ -526,9 +526,18 @@ var config;
                 "Phoebe_Bite_Back": { "frames": [16] },
                 "Phoebe_Bite_Right1": { "frames": [17] },
                 "Phoebe_Bite_Right2": { "frames": [18] },
-                "Phoebe_Dead_A": { "frames": [19, 20] },
-                "Phoebe_Dead_B": { "frames": [21, 22] },
-                "Phoebe_Explosion": { "frames": [23, 24, 25, 26] },
+                "Phoebe_Dead_A": {
+                    "frames": [19, 20],
+                    "speed": 0.1
+                },
+                "Phoebe_Dead_B": {
+                    "frames": [21, 22],
+                    "speed": 0.1
+                },
+                "Phoebe_Explosion": {
+                    "frames": [23, 24, 25, 26],
+                    "speed": 0.1
+                },
                 "Phoebe_Hurt": { "frames": [27] },
                 "Phoebe_Run_Left": { "frames": [28, 29] },
                 "Phoebe_Run_Front": { "frames": [30, 31, 32, 33] },
