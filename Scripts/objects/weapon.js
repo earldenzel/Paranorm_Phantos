@@ -18,12 +18,7 @@ var objects;
         // Constructor
         function Weapon() {
             var _this = _super.call(this, managers.Game.phoebe_TextureAtlas, "Phoebe_Walk_Back1") || this;
-            _this.images = [
-                new createjs.Sprite(managers.Game.phoebe_TextureAtlas, "Phoebe_Attack_Back1"),
-                new createjs.Sprite(managers.Game.phoebe_TextureAtlas, "Phoebe_Attack_Front1"),
-                new createjs.Sprite(managers.Game.phoebe_TextureAtlas, "Phoebe_Attack_Left1"),
-                new createjs.Sprite(managers.Game.phoebe_TextureAtlas, "Phoebe_Attack_Right1"),
-            ];
+            _this.images = ["Phoebe_Attack_Back", "Phoebe_Attack_Front", "Phoebe_Attack_Left", "Phoebe_Attack_Right"];
             _this.Start();
             return _this;
         }
@@ -34,11 +29,12 @@ var objects;
         };
         // Updated 60 times per second (60FPS)
         Weapon.prototype.Update = function () {
-            this.currentAnimation = this.images[managers.Game.player.direction];
+            if (this.currentAnimation != this.images[managers.Game.player.direction]) {
+                this.gotoAndPlay(this.images[managers.Game.player.direction]);
+            }
             this.rotation = 0;
             switch (managers.Game.player.direction) {
                 case config.Direction.UP:
-                    this.rotation = 180;
                     this.x = managers.Game.player.x;
                     this.y = managers.Game.player.y - managers.Game.player.halfH;
                     break;

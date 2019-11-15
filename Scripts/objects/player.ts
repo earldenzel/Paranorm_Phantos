@@ -42,12 +42,7 @@ module objects {
             this.ecto = 5;
             this.maxEcto = this.ecto;
             this.attackPower = 1;
-            this.images = [
-                new createjs.Sprite(managers.Game.phoebe_TextureAtlas, "Phoebe_Walk_Back1"),
-                new createjs.Sprite(managers.Game.phoebe_TextureAtlas, "Phoebe_Walk_Front1"),
-                new createjs.Sprite(managers.Game.phoebe_TextureAtlas, "Phoebe_Walk_Left1"),
-                new createjs.Sprite(managers.Game.phoebe_TextureAtlas, "Phoebe_Walk_Right1"),
-            ]
+            this.images = ["Phoebe_Walk_Back1","Phoebe_Walk_Front1", "Phoebe_Walk_Left1", "Phoebe_Walk_Right1"];
             this.direction = config.Direction.UP;
             this.money = 0;
             this.playerStatus = new objects.Label("1234567890", "16px", "'Press Start 2P'", "#FFFFFF", this.x, this.y, true);
@@ -63,7 +58,9 @@ module objects {
 
         public Update(): void {
             managers.Game.player = this;
-            this.currentAnimation = this.images[this.direction as number];
+            if (this.currentAnimation != this.images[managers.Game.player.direction as number]){
+                this.gotoAndPlay(this.images[this.direction as number]);
+            }
             this.x = Math.round(this.x);
             this.y = Math.round(this.y);
             this.Move();

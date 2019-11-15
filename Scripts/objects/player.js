@@ -41,12 +41,7 @@ var objects;
             _this.ecto = 5;
             _this.maxEcto = _this.ecto;
             _this.attackPower = 1;
-            _this.images = [
-                new createjs.Sprite(managers.Game.phoebe_TextureAtlas, "Phoebe_Walk_Back1"),
-                new createjs.Sprite(managers.Game.phoebe_TextureAtlas, "Phoebe_Walk_Front1"),
-                new createjs.Sprite(managers.Game.phoebe_TextureAtlas, "Phoebe_Walk_Left1"),
-                new createjs.Sprite(managers.Game.phoebe_TextureAtlas, "Phoebe_Walk_Right1"),
-            ];
+            _this.images = ["Phoebe_Walk_Back1", "Phoebe_Walk_Front1", "Phoebe_Walk_Left1", "Phoebe_Walk_Right1"];
             _this.direction = config.Direction.UP;
             _this.money = 0;
             _this.playerStatus = new objects.Label("1234567890", "16px", "'Press Start 2P'", "#FFFFFF", _this.x, _this.y, true);
@@ -61,7 +56,9 @@ var objects;
         };
         Player.prototype.Update = function () {
             managers.Game.player = this;
-            this.currentAnimation = this.images[this.direction];
+            if (this.currentAnimation != this.images[managers.Game.player.direction]) {
+                this.gotoAndPlay(this.images[this.direction]);
+            }
             this.x = Math.round(this.x);
             this.y = Math.round(this.y);
             this.Move();
