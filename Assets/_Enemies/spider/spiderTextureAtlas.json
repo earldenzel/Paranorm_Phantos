@@ -1,0 +1,33 @@
+{
+
+"images": [
+    "spiderTextureAtlas.png"
+],
+
+"framerate": 20,
+"frames": [
+    [0, 0, 11, 11, 0, 0, 0],
+    [11, 0, 56, 92, 0, -4, 0],
+    [67, 0, 56, 92, 0, -4, 0],
+    [0, 92, 64, 86, 0, 0, -3],
+    [64, 92, 64, 86, 0, 0, -3],
+    [0, 178, 86, 64, 0, -3, 0],
+    [0, 242, 92, 56, 0, 0, -4]
+],
+
+"animations": {
+    "spiderBullet": { "frames": [0] },
+    "spiderRight1": { "frames": [1] },
+    "spiderLeft1": { "frames": [2] },
+    "spiderLeft2": { "frames": [3] },
+    "spiderRight2": { "frames": [4] },
+    "spiderUp2": { "frames": [5] },
+    "spiderUp1": { "frames": [6] }
+},
+
+"texturepacker": [
+        "SmartUpdateHash: $TexturePacker:SmartUpdate:893ec6e24287297ee0c5d1af229acbe9:9c19d7a9a67e157abb01d8eb96fa200d:1b33b9433930376c3cb93c8ee1bac3d5$",
+        "Created with TexturePacker (https://www.codeandweb.com/texturepacker) for EaselJS"
+]
+
+}
