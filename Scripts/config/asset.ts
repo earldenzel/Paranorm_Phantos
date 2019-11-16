@@ -250,6 +250,10 @@ module config {
                 "id": "tAtlas_Graveyard",
                 "src": "./Assets/_Background/Graveyard_TextureAtlas.png"
             },
+            {
+                "id": "tAtlas_Spider",
+                "src": "./Assets/_Enemies/spider/Spider_TextureAtlas.png"
+            },
 
             // SOUND EFFECTS
             {
@@ -289,19 +293,61 @@ module config {
         public static getAtlas_Bat: any = {
             "images": [
             ],
-            
+
             "framerate": 20,
             "frames": [
                 [0, 0, 96, 56, 0, 0, 0],
                 [96, 0, 96, 56, 0, 0, 0],
                 [192, 0, 96, 56, 0, 0, 0]
             ],
-            
+
             "animations": {
-                "bat": { 
-                    "frames": [0, 1, 2] ,
-                    "speed" : 0.1
+                "bat": {
+                    "frames": [0, 1, 2],
+                    "speed": 0.1
                 }
+            },
+        };
+
+        public static getAtlas_Spider: any = {
+            "images": [
+            ],
+
+            "framerate": 20,
+            "frames": [
+                [0, 0, 11, 11, 0, 0, 0],
+                [11, 0, 56, 92, 0, -4, 0],
+                [67, 0, 56, 92, 0, -4, 0],
+                [0, 92, 64, 86, 0, 0, -3],
+                [64, 92, 64, 86, 0, 0, -3],
+                [0, 178, 86, 64, 0, -3, 0],
+                [0, 242, 92, 56, 0, 0, -4]
+            ],
+
+            "animations": {
+                "spiderRight": {
+                    "frames": [1, 4],
+                    "speed": 0.1
+                },
+
+                "spiderLeft": {
+                    "frames": [2, 3],
+                    "speed": 0.1
+                },
+
+                "spiderUp": {
+                    "frames": [6, 5],
+                    "speed": 0.1
+                },
+
+                "spiderBullet": { "frames": [0] },
+                
+                "spiderRight1": { "frames": [1] },
+                "spiderLeft1": { "frames": [2] },
+                "spiderLeft2": { "frames": [3] },
+                "spiderRight2": { "frames": [4] },
+                "spiderUp2": { "frames": [5] },
+                "spiderUp1": { "frames": [6] }
             },
         };
 
@@ -337,7 +383,7 @@ module config {
             "images": [
                 ""
             ],
-            
+
             "framerate": 20,
             "frames": [
                 [1, 1, 564, 651, 0, 0, 0],
@@ -366,7 +412,7 @@ module config {
                 [341, 908, 32, 16, 0, 0, 0],
                 [375, 908, 24, 24, 0, 0, 0]
             ],
-            
+
             "animations": {
                 "Graveyard_GrassTile_FullScreen": { "frames": [0] },
                 "Graveyard_FenceVertical": { "frames": [1] },
@@ -448,7 +494,7 @@ module config {
             "images": [
                 ""
             ],
-            
+
             "framerate": 20,
             "frames": [
                 [0, 0, 37, 46, 0, 0, 0],
@@ -517,22 +563,22 @@ module config {
                 [407, 204, 37, 51, 0, 0, 0],
                 [444, 204, 37, 51, 0, 0, 0]
             ],
-            
+
             "animations": {
-                "Phoebe_Attack_Left": { 
-                    "frames": [0,1,2],
+                "Phoebe_Attack_Left": {
+                    "frames": [0, 1, 2],
                     "speed": 0.1
                 },
-                "Phoebe_Attack_Front": { 
-                    "frames": [3,4,5],
+                "Phoebe_Attack_Front": {
+                    "frames": [3, 4, 5],
                     "speed": 0.1
                 },
-                "Phoebe_Attack_Right": { 
-                    "frames": [6,7,8],
-                    "speed": 0.1 
+                "Phoebe_Attack_Right": {
+                    "frames": [6, 7, 8],
+                    "speed": 0.1
                 },
-                "Phoebe_Attack_Back": { 
-                    "frames": [9,10,11],
+                "Phoebe_Attack_Back": {
+                    "frames": [9, 10, 11],
                     "speed": 0.1
                 },
                 "Phoebe_Bite_Left1": { "frames": [12] },
@@ -542,23 +588,23 @@ module config {
                 "Phoebe_Bite_Back": { "frames": [16] },
                 "Phoebe_Bite_Right1": { "frames": [17] },
                 "Phoebe_Bite_Right2": { "frames": [18] },
-                "Phoebe_Dead_A": { 
-                    "frames": [19,20],
+                "Phoebe_Dead_A": {
+                    "frames": [19, 20],
                     "speed": 0.1
-                 },
-                "Phoebe_Dead_B": { 
-                    "frames": [21,22],
-                    "speed": 0.1 
                 },
-                "Phoebe_Explosion": { 
-                    "frames": [23,24,25,26],
+                "Phoebe_Dead_B": {
+                    "frames": [21, 22],
+                    "speed": 0.1
+                },
+                "Phoebe_Explosion": {
+                    "frames": [23, 24, 25, 26],
                     "speed": 0.1
                 },
                 "Phoebe_Hurt": { "frames": [27] },
-                "Phoebe_Run_Left": { "frames": [28,29] },
-                "Phoebe_Run_Front": { "frames": [30,31,32,33] },
-                "Phoebe_Run_Right": { "frames": [34,35] },
-                "Phoebe_Run_Back": { "frames": [36,37,38,39] },
+                "Phoebe_Run_Left": { "frames": [28, 29] },
+                "Phoebe_Run_Front": { "frames": [30, 31, 32, 33] },
+                "Phoebe_Run_Right": { "frames": [34, 35] },
+                "Phoebe_Run_Back": { "frames": [36, 37, 38, 39] },
                 "Phoebe_Walk_Front1": { "frames": [40] },
                 "Phoebe_Walk_Front2": { "frames": [41] },
                 "Phoebe_Walk_Left1": { "frames": [42] },

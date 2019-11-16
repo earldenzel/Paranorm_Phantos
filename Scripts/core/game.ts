@@ -30,6 +30,9 @@
     let bat_TextureAtlasData: any;
     let bat_TextureAtlas: createjs.SpriteSheet;
 
+    let spider_TextureAtlasData: any;
+    let spider_TextureAtlas: createjs.SpriteSheet;
+
     // Gets the asset manifest
     //let request = new Request("./Content/assetManifest.json");
     //fetch(request)
@@ -76,6 +79,10 @@
         bat_TextureAtlasData.images = [assetManager.getResult("tAtlas_Bat")];
         bat_TextureAtlas = new createjs.SpriteSheet(bat_TextureAtlasData);
 
+        spider_TextureAtlasData = config.Assets.getAtlas_Spider;
+        spider_TextureAtlasData.images = [assetManager.getResult("tAtlas_Spider")];
+        spider_TextureAtlas = new createjs.SpriteSheet(spider_TextureAtlasData);
+
         // Initialize CreateJS
         stage = new createjs.Stage(canvas);
 
@@ -103,6 +110,7 @@
         managers.Game.phoebe_TextureAtlas = phoebe_TextureAtlas;
         managers.Game.graveyard_TextureAtlas = graveyard_TextureAtlas;
         managers.Game.bat_TextureAtlas = bat_TextureAtlas;
+        managers.Game.spider_TextureAtlas = spider_TextureAtlas;
 
         Main();
     }

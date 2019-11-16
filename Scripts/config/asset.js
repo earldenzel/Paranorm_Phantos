@@ -252,6 +252,10 @@ var config;
                 "id": "tAtlas_Graveyard",
                 "src": "./Assets/_Background/Graveyard_TextureAtlas.png"
             },
+            {
+                "id": "tAtlas_Spider",
+                "src": "./Assets/_Enemies/spider/Spider_TextureAtlas.png"
+            },
             // SOUND EFFECTS
             {
                 "id": "enemiesHit",
@@ -299,6 +303,40 @@ var config;
                     "frames": [0, 1, 2],
                     "speed": 0.1
                 }
+            },
+        };
+        Assets.getAtlas_Spider = {
+            "images": [],
+            "framerate": 20,
+            "frames": [
+                [0, 0, 11, 11, 0, 0, 0],
+                [11, 0, 56, 92, 0, -4, 0],
+                [67, 0, 56, 92, 0, -4, 0],
+                [0, 92, 64, 86, 0, 0, -3],
+                [64, 92, 64, 86, 0, 0, -3],
+                [0, 178, 86, 64, 0, -3, 0],
+                [0, 242, 92, 56, 0, 0, -4]
+            ],
+            "animations": {
+                "spiderRight": {
+                    "frames": [1, 4],
+                    "speed": 0.1
+                },
+                "spiderLeft": {
+                    "frames": [2, 3],
+                    "speed": 0.1
+                },
+                "spiderUp": {
+                    "frames": [6, 5],
+                    "speed": 0.1
+                },
+                "spiderBullet": { "frames": [0] },
+                "spiderRight1": { "frames": [1] },
+                "spiderLeft1": { "frames": [2] },
+                "spiderLeft2": { "frames": [3] },
+                "spiderRight2": { "frames": [4] },
+                "spiderUp2": { "frames": [5] },
+                "spiderUp1": { "frames": [6] }
             },
         };
         Assets.getAtlas_MapGraveYard = {

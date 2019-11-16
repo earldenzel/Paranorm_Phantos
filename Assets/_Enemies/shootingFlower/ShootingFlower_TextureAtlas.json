@@ -1,0 +1,23 @@
+{
+
+    "images": [
+        "ShootingFlower_TextureAtlas.png"
+    ],
+
+    "framerate": 20,
+    "frames": [
+        [0, 0, 62, 92, 0, -6, 0],
+        [0, 92, 15, 15, 0, 0, 0]
+    ],
+
+    "animations": {
+        "shootingFlower": { "frames": [0] },
+        "shootingFlowerBullet": { "frames": [1] }
+    },
+
+    "texturepacker": [
+        "SmartUpdateHash: $TexturePacker:SmartUpdate:f177340f93449555351b0b59ac95c679:a592d896cadbbb9a6c1e9a5204f238b9:0fcbd92fbab05acf3aef0ce38b22be82$",
+        "Created with TexturePacker (https://www.codeandweb.com/texturepacker) for EaselJS"
+    ]
+
+}

@@ -13,7 +13,8 @@ module scenes {
 
         // Methods
         public Start(): void {
-            this.enemies[0] = new objects.TestEnemy(0, true, true);
+            this.enemies[0] = new objects.SpiderUp(10, 2);
+            this.enemies[0].SetPosition(new math.Vec2(275, 430));
             this.enemies[0].attackPower = 5; // you will never die from starter enemy
 
             let x : number = (config.Bounds.LEFT_BOUND + config.Bounds.RIGHT_BOUND)/2;
