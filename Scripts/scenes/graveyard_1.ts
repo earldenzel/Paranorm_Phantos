@@ -22,6 +22,10 @@ module scenes {
             // this.enemies[0].SetPosition(new math.Vec2(275, 430));
             this.enemies[1].attackPower = 1; // you will never die from starter enemy
 
+            this.enemies[2] = new objects.SpiderRight(new math.Vec2(400, 600), 350);
+            // this.enemies[0].SetPosition(new math.Vec2(275, 430));
+            this.enemies[2].attackPower = 1; // you will never die from starter enemy
+
             let x : number = (config.Bounds.LEFT_BOUND + config.Bounds.RIGHT_BOUND)/2;
             let y : number = (config.Bounds.TOP_BOUND + config.Bounds.BOTTOM_BOUND)/2 + 150;
             /*
@@ -94,6 +98,17 @@ module scenes {
                     managers.Game.player.hp -= 1;
                 }
             });
+
+             // check if spiderBulletsRight collides with player
+             this.bulletManager.spiderBulletsRight.forEach(bullet => {
+                if(managers.Collision.Check(managers.Game.player, bullet)){
+                    let ticker: number = createjs.Ticker.getTicks();
+
+                    // use ticker to restrict 1 bullet only hurts 1 hp
+                    if (ticker % 10 == 0)
+                    managers.Game.player.hp -= 1;
+                }
+            });
         }
 
         public Main(): void {
@@ -105,6 +120,10 @@ module scenes {
             });
 
             this.bulletManager.spiderBulletsLeft.forEach(bullet => {
+                this.addChild(bullet);
+            });
+
+            this.bulletManager.spiderBulletsRight.forEach(bullet => {
                 this.addChild(bullet);
             });
         }

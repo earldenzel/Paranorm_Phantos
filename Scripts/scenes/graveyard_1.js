@@ -32,6 +32,9 @@ var scenes;
             this.enemies[1] = new objects.SpiderLeft(new math.Vec2(120, 200), 350);
             // this.enemies[0].SetPosition(new math.Vec2(275, 430));
             this.enemies[1].attackPower = 1; // you will never die from starter enemy
+            this.enemies[2] = new objects.SpiderRight(new math.Vec2(400, 600), 350);
+            // this.enemies[0].SetPosition(new math.Vec2(275, 430));
+            this.enemies[2].attackPower = 1; // you will never die from starter enemy
             var x = (config.Bounds.LEFT_BOUND + config.Bounds.RIGHT_BOUND) / 2;
             var y = (config.Bounds.TOP_BOUND + config.Bounds.BOTTOM_BOUND) / 2 + 150;
             /*
@@ -97,6 +100,15 @@ var scenes;
                         managers.Game.player.hp -= 1;
                 }
             });
+            // check if spiderBulletsRight collides with player
+            this.bulletManager.spiderBulletsRight.forEach(function (bullet) {
+                if (managers.Collision.Check(managers.Game.player, bullet)) {
+                    var ticker = createjs.Ticker.getTicks();
+                    // use ticker to restrict 1 bullet only hurts 1 hp
+                    if (ticker % 10 == 0)
+                        managers.Game.player.hp -= 1;
+                }
+            });
         };
         Graveyard_1.prototype.Main = function () {
             var _this = this;
@@ -106,6 +118,9 @@ var scenes;
                 _this.addChild(bullet);
             });
             this.bulletManager.spiderBulletsLeft.forEach(function (bullet) {
+                _this.addChild(bullet);
+            });
+            this.bulletManager.spiderBulletsRight.forEach(function (bullet) {
                 _this.addChild(bullet);
             });
         };

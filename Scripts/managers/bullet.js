@@ -10,6 +10,7 @@ var managers;
             this.bulletCount = 50;
             this.spiderBullets = new Array();
             this.spiderBulletsLeft = new Array();
+            this.spiderBulletsRight = new Array();
             this.buildBulletPool();
             this.CurrentSpiderBullet = 0;
         };
@@ -20,12 +21,16 @@ var managers;
             this.spiderBulletsLeft.forEach(function (bullet) {
                 bullet.Update();
             });
+            this.spiderBulletsRight.forEach(function (bullet) {
+                bullet.Update();
+            });
         };
         // Functions
         Bullet.prototype.buildBulletPool = function () {
             for (var i = 0; i < this.bulletCount; i++) {
                 this.spiderBullets[i] = new objects.SpiderBullet();
                 this.spiderBulletsLeft[i] = new objects.SpiderBulletLeft();
+                this.spiderBulletsRight[i] = new objects.SpiderBulletRight();
             }
         };
         return Bullet;

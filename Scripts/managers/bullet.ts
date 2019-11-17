@@ -3,6 +3,7 @@ module managers {
         // Variables
         public spiderBullets: objects.SpiderBullet[];
         public spiderBulletsLeft: objects.SpiderBulletLeft[];
+        public spiderBulletsRight: objects.SpiderBulletRight[];
         public CurrentSpiderBullet: number;
 
         private bulletCount: number;
@@ -17,6 +18,7 @@ module managers {
             this.bulletCount = 50;
             this.spiderBullets = new Array<objects.SpiderBullet>();
             this.spiderBulletsLeft = new Array<objects.SpiderBulletLeft>();
+            this.spiderBulletsRight = new Array<objects.SpiderBulletRight>();
 
             this.buildBulletPool();
             this.CurrentSpiderBullet = 0;
@@ -30,6 +32,10 @@ module managers {
             this.spiderBulletsLeft.forEach(bullet => {
                 bullet.Update();
             });
+
+            this.spiderBulletsRight.forEach(bullet => {
+                bullet.Update();
+            });
         }
 
         // Functions
@@ -37,6 +43,7 @@ module managers {
             for (let i = 0; i < this.bulletCount; i++) {
                 this.spiderBullets[i] = new objects.SpiderBullet();
                 this.spiderBulletsLeft[i] = new objects.SpiderBulletLeft();
+                this.spiderBulletsRight[i] = new objects.SpiderBulletRight();
             }
         }
     }
