@@ -5,6 +5,8 @@ module objects {
         private speed: number = 1;
         private isToRight: Boolean = true;
 
+        private bulletSpawn: math.Vec2;
+
         // constructor
         constructor(startPosition: math.Vec2, distance: number) {
             super(managers.Game.spider_TextureAtlas, "spiderUp", startPosition);
@@ -27,6 +29,7 @@ module objects {
 
         public Update(): void {
             super.Update();
+            this.bulletFire();
         }
 
         public Reset(): void {
@@ -52,6 +55,32 @@ module objects {
 
         public DevourEffect(): void {
             managers.Game.player.GainHealth(2);
+        }
+
+        public bulletFire(): void {
+            let ticker: number = createjs.Ticker.getTicks();
+
+            // If Spider alive, shoots the bullet
+            if (this.hp > 0) {
+                if (ticker % 70 == 0) {
+                    this.bulletSpawn = new math.Vec2(this.x, this.y + this.halfH);
+
+                    let currentBullet = managers.Game.bulletManager.CurrentSpiderBullet;
+                    let bullet = managers.Game.bulletManager.spiderBullets[currentBullet];
+
+                    bullet.x = this.bulletSpawn.x;
+                    bullet.y = this.bulletSpawn.y;
+
+                    managers.Game.bulletManager.CurrentSpiderBullet++;
+
+                    if (managers.Game.bulletManager.CurrentSpiderBullet > 49) {
+                        managers.Game.bulletManager.CurrentSpiderBullet = 0;
+                    }
+                }
+            }else{
+                this.bulletSpawn = new math.Vec2(-5000, -5000);
+            }
+
         }
     }
 }

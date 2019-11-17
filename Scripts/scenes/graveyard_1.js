@@ -15,7 +15,6 @@ var scenes;
 (function (scenes) {
     var Graveyard_1 = /** @class */ (function (_super) {
         __extends(Graveyard_1, _super);
-        // Variables
         // Constructor
         function Graveyard_1() {
             var _this = _super.call(this, false, true, true, true) || this;
@@ -44,6 +43,9 @@ var scenes;
             this.cosmetics[3].SetPosition(new math.Vec2(x+this.cosmetics[3].width,y));
             this.cosmetics[4].SetPosition(new math.Vec2(this.enemies[0].x,this.enemies[0].y - 100));
             */
+            // Initialize bulletManager
+            this.bulletManager = new managers.Bullet();
+            managers.Game.bulletManager = this.bulletManager;
             managers.Game.player.sceneOnBot = config.Scene.GRAVEYARD_5;
             managers.Game.player.sceneOnLeft = config.Scene.GRAVEYARD_3;
             managers.Game.player.sceneOnRight = config.Scene.GRAVEYARD_4;
@@ -73,10 +75,24 @@ var scenes;
                 managers.GraveyardLocks.graveyard_1_lockLeft = false;
             }
             _super.prototype.Update.call(this);
+            this.bulletManager.Update();
+            // check if bullet collides with player
+            this.bulletManager.spiderBullets.forEach(function (bullet) {
+                if (managers.Collision.Check(managers.Game.player, bullet)) {
+                    var ticker = createjs.Ticker.getTicks();
+                    // use ticker to restrict 1 bullet only hurts 1 hp
+                    if (ticker % 20 == 0)
+                        managers.Game.player.hp -= 1;
+                }
+            });
         };
         Graveyard_1.prototype.Main = function () {
+            var _this = this;
             this.playerInfo.PlayerLocation = new math.Vec2(30, 12);
             _super.prototype.Main.call(this);
+            this.bulletManager.spiderBullets.forEach(function (bullet) {
+                _this.addChild(bullet);
+            });
         };
         return Graveyard_1;
     }(scenes.PlayScene));

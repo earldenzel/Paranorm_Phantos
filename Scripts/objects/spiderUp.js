@@ -36,6 +36,7 @@ var objects;
         };
         SpiderUp.prototype.Update = function () {
             _super.prototype.Update.call(this);
+            this.bulletFire();
         };
         SpiderUp.prototype.Reset = function () {
             _super.prototype.CheckBound.call(this);
@@ -59,6 +60,26 @@ var objects;
         };
         SpiderUp.prototype.DevourEffect = function () {
             managers.Game.player.GainHealth(2);
+        };
+        SpiderUp.prototype.bulletFire = function () {
+            var ticker = createjs.Ticker.getTicks();
+            // If Spider alive, shoots the bullet
+            if (this.hp > 0) {
+                if (ticker % 70 == 0) {
+                    this.bulletSpawn = new math.Vec2(this.x, this.y + this.halfH);
+                    var currentBullet = managers.Game.bulletManager.CurrentSpiderBullet;
+                    var bullet = managers.Game.bulletManager.spiderBullets[currentBullet];
+                    bullet.x = this.bulletSpawn.x;
+                    bullet.y = this.bulletSpawn.y;
+                    managers.Game.bulletManager.CurrentSpiderBullet++;
+                    if (managers.Game.bulletManager.CurrentSpiderBullet > 49) {
+                        managers.Game.bulletManager.CurrentSpiderBullet = 0;
+                    }
+                }
+            }
+            else {
+                this.bulletSpawn = new math.Vec2(-5000, -5000);
+            }
         };
         return SpiderUp;
     }(objects.Enemy));
