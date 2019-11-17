@@ -15,7 +15,6 @@ var objects;
 (function (objects) {
     var ShootingFlowerBullet = /** @class */ (function (_super) {
         __extends(ShootingFlowerBullet, _super);
-        // Variables
         // Constructor
         function ShootingFlowerBullet() {
             var _this = _super.call(this, managers.Game.shootingFlower_TextureAtlas, "shootingFlowerBullet") || this;
@@ -24,19 +23,24 @@ var objects;
         }
         // Methods
         ShootingFlowerBullet.prototype.Start = function () {
-            this.speedX = 0;
-            this.speedY = 5;
             this.Reset();
         };
         ShootingFlowerBullet.prototype.Update = function () {
-            this.Move();
+            if (this.farPointPosition) {
+                this.Move();
+            }
         };
         ShootingFlowerBullet.prototype.Reset = function () {
             this.x = -5000;
             this.y = -5000;
         };
         ShootingFlowerBullet.prototype.Move = function () {
-            this.y += this.speedY;
+            var bulletPosition = new math.Vec2(this.x, this.y);
+            var dirToFarPoint = math.Vec2.Subtract(bulletPosition, this.farPointPosition);
+            var distanceToFarPoint = math.Vec2.Distance(bulletPosition, this.farPointPosition);
+            var newPos = math.Vec2.Add(bulletPosition, math.Vec2.NormalizeMultiplySpeed(dirToFarPoint, distanceToFarPoint, 2));
+            this.x = newPos.x;
+            this.y = newPos.y;
         };
         ShootingFlowerBullet.prototype.Main = function () { };
         ShootingFlowerBullet.prototype.CheckBounds = function () { };

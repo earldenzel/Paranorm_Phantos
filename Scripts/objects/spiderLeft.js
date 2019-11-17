@@ -71,7 +71,6 @@ var objects;
                     var bullet = managers.Game.bulletManager.spiderBulletsLeft[currentBullet];
                     bullet.x = this.bulletSpawn.x;
                     bullet.y = this.bulletSpawn.y;
-                    console.log(bullet.x + " " + bullet.y);
                     managers.Game.bulletManager.CurrentBullet++;
                     if (managers.Game.bulletManager.CurrentBullet > 49) {
                         managers.Game.bulletManager.CurrentBullet = 0;

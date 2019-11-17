@@ -71,8 +71,6 @@ module objects {
                     bullet.x = this.bulletSpawn.x;
                     bullet.y = this.bulletSpawn.y;
 
-                    console.log(bullet.x + " " + bullet.y);
-
                     managers.Game.bulletManager.CurrentBullet++;
 
                     if (managers.Game.bulletManager.CurrentBullet > 49) {
