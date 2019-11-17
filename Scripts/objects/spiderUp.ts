@@ -2,19 +2,17 @@ module objects {
     export class SpiderUp extends objects.Enemy {
         // variables
         private distance: number;
-        private moveSpeed: number;
+        private speed: number = 1;
+        private isToRight: Boolean = true;
 
         // constructor
-        constructor(distance: number, moveSpeed: number) {
-            super(managers.Game.spider_TextureAtlas, "spiderUp");
-
-            this.Start();
+        constructor(startPosition: math.Vec2, distance: number) {
+            super(managers.Game.spider_TextureAtlas, "spiderUp", startPosition);
 
             this.distance = distance;
-            this.moveSpeed = moveSpeed;
 
-            this.hp = 3;
-            this.attackPower = 1;         
+            this.hp = 1;
+            this.attackPower = 1;
             this.knockback = 0.75;
             this.eatTimer = 500;
             this.bounty = 4;
@@ -24,8 +22,7 @@ module objects {
         // methods
         public Start(): void {
             // set the initial position
-            this.y = 200;
-            this.x = 320;
+            this.SetPosition(this.startPosition);
         }
 
         public Update(): void {
@@ -37,14 +34,23 @@ module objects {
         }
 
         public Move(): void {
-            
+
+            if (this.isToRight && !(this.x == this.startPosition.x + this.distance)) {
+                this.x += this.speed;
+            } else if (this.isToRight && (this.x == this.startPosition.x + this.distance)) {
+                this.isToRight = false;
+            } else if (!this.isToRight && !(this.x == this.startPosition.x)) {
+                this.x -= this.speed;
+            } else if (!this.isToRight && (this.x == this.startPosition.x)) {
+                this.isToRight = true;
+            }
         }
 
         public CheckBound(): void {
             super.CheckBound();
-        }        
+        }
 
-        public DevourEffect(): void{
+        public DevourEffect(): void {
             managers.Game.player.GainHealth(2);
         }
     }

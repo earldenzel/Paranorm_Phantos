@@ -16,12 +16,12 @@ var objects;
     var SpiderUp = /** @class */ (function (_super) {
         __extends(SpiderUp, _super);
         // constructor
-        function SpiderUp(distance, moveSpeed) {
-            var _this = _super.call(this, managers.Game.spider_TextureAtlas, "spiderUp") || this;
-            _this.Start();
+        function SpiderUp(startPosition, distance) {
+            var _this = _super.call(this, managers.Game.spider_TextureAtlas, "spiderUp", startPosition) || this;
+            _this.speed = 1;
+            _this.isToRight = true;
             _this.distance = distance;
-            _this.moveSpeed = moveSpeed;
-            _this.hp = 3;
+            _this.hp = 1;
             _this.attackPower = 1;
             _this.knockback = 0.75;
             _this.eatTimer = 500;
@@ -32,8 +32,7 @@ var objects;
         // methods
         SpiderUp.prototype.Start = function () {
             // set the initial position
-            this.y = 200;
-            this.x = 320;
+            this.SetPosition(this.startPosition);
         };
         SpiderUp.prototype.Update = function () {
             _super.prototype.Update.call(this);
@@ -42,6 +41,18 @@ var objects;
             _super.prototype.CheckBound.call(this);
         };
         SpiderUp.prototype.Move = function () {
+            if (this.isToRight && !(this.x == this.startPosition.x + this.distance)) {
+                this.x += this.speed;
+            }
+            else if (this.isToRight && (this.x == this.startPosition.x + this.distance)) {
+                this.isToRight = false;
+            }
+            else if (!this.isToRight && !(this.x == this.startPosition.x)) {
+                this.x -= this.speed;
+            }
+            else if (!this.isToRight && (this.x == this.startPosition.x)) {
+                this.isToRight = true;
+            }
         };
         SpiderUp.prototype.CheckBound = function () {
             _super.prototype.CheckBound.call(this);

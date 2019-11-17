@@ -8,8 +8,12 @@ module objects {
         protected bounty: number;
         public isFlying: boolean;
 
-        constructor(textureAtlas: createjs.SpriteSheet, enemyName: string) {
+        public startPosition: math.Vec2;
+
+        constructor(textureAtlas: createjs.SpriteSheet, enemyName: string, startPosition: math.Vec2 = null) {
             super(textureAtlas, enemyName);
+
+            this.startPosition = startPosition;
             this.Start();
             //this.stunIndicator = new objects.Indicator("kKeyIndicator");
             this.Move();

@@ -27,9 +27,9 @@ var scenes;
         }
         // Methods
         Graveyard_1.prototype.Start = function () {
-            this.enemies[0] = new objects.SpiderUp(10, 2);
-            this.enemies[0].SetPosition(new math.Vec2(275, 430));
-            this.enemies[0].attackPower = 5; // you will never die from starter enemy
+            this.enemies[0] = new objects.SpiderUp(new math.Vec2(120, 200), 350);
+            // this.enemies[0].SetPosition(new math.Vec2(275, 430));
+            this.enemies[0].attackPower = 1; // you will never die from starter enemy
             var x = (config.Bounds.LEFT_BOUND + config.Bounds.RIGHT_BOUND) / 2;
             var y = (config.Bounds.TOP_BOUND + config.Bounds.BOTTOM_BOUND) / 2 + 150;
             /*
