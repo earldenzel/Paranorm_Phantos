@@ -170,8 +170,8 @@ module scenes {
             this.obstacles.forEach(e => {
                 e.CheckBound();
                 this.enemies.forEach(f => {
-                    //if enemy is stunned and knocked back on a barrier, then enemy dies
-                    if (f.isStunned && managers.Collision.Check(e, f)) {
+                    //if enemy is stunned and knocked back on a gap, then enemy dies
+                    if (f.isStunned && e instanceof objects.Gap && managers.Collision.Check(e, f)) {
                         f.RemoveFromPlay(f.CalculateBounty());
                     }
                     //if enemy is
@@ -307,19 +307,19 @@ module scenes {
             this.cosmetics.forEach(e => {
                 this.addChild(e);
             });
-
-            // ENEMY PLACEMENT
-            this.enemies.forEach(e => {
-                this.addChild(e);
-                //this.addChild(e.stunIndicator);
-            });
-
+            
             // PLAYER PLACEMENT
             this.addChild(this.player);
             this.addChild(this.player.weapon);
             this.player.deadPlayer.forEach(e => {
                 this.addChild(e);
             });
+
+            // ENEMY PLACEMENT
+            this.enemies.forEach(e => {
+                this.addChild(e);
+                //this.addChild(e.stunIndicator);
+            });            
 
             //door frames
             if (this.hasDoorTop) {

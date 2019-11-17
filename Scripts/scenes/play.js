@@ -126,8 +126,8 @@ var scenes;
             this.obstacles.forEach(function (e) {
                 e.CheckBound();
                 _this.enemies.forEach(function (f) {
-                    //if enemy is stunned and knocked back on a barrier, then enemy dies
-                    if (f.isStunned && managers.Collision.Check(e, f)) {
+                    //if enemy is stunned and knocked back on a gap, then enemy dies
+                    if (f.isStunned && e instanceof objects.Gap && managers.Collision.Check(e, f)) {
                         f.RemoveFromPlay(f.CalculateBounty());
                     }
                     //if enemy is
@@ -253,16 +253,16 @@ var scenes;
             this.cosmetics.forEach(function (e) {
                 _this.addChild(e);
             });
-            // ENEMY PLACEMENT
-            this.enemies.forEach(function (e) {
-                _this.addChild(e);
-                //this.addChild(e.stunIndicator);
-            });
             // PLAYER PLACEMENT
             this.addChild(this.player);
             this.addChild(this.player.weapon);
             this.player.deadPlayer.forEach(function (e) {
                 _this.addChild(e);
+            });
+            // ENEMY PLACEMENT
+            this.enemies.forEach(function (e) {
+                _this.addChild(e);
+                //this.addChild(e.stunIndicator);
             });
             //door frames
             if (this.hasDoorTop) {

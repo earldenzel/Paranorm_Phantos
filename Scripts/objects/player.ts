@@ -24,6 +24,8 @@ module objects {
         private run: Array<any>;
         private stand: Array<any>;
         private attack: Array<any>;
+        private bitedash: Array<any>;
+        private bite: Array<any>;
         public direction: config.Direction;
         public money: number;
         public key: number;
@@ -43,13 +45,15 @@ module objects {
             this.Start();
             this.hp = 5;
             this.maxHp = this.hp;
-            this.ecto = 5;
-            this.maxEcto = this.ecto;
+            this.ecto = 0;
+            this.maxEcto = 5;
             this.attackPower = 1;
             this.walk = ["Phoebe_Walk_Back1","Phoebe_Walk_Front1", "Phoebe_Walk_Left1", "Phoebe_Walk_Right1"];
             this.stand = ["Phoebe_Walk_Back2","Phoebe_Walk_Front2", "Phoebe_Walk_Left2", "Phoebe_Walk_Right2"];
             this.run = ["Phoebe_Run_Back","Phoebe_Run_Front", "Phoebe_Run_Left", "Phoebe_Run_Right"];
             this.attack = ["Phoebe_Attack_Back", "Phoebe_Attack_Front", "Phoebe_Attack_Left", "Phoebe_Attack_Right"];
+            this.bitedash = ["Phoebe_Bite_Back", "Phoebe_Bite_Front1", "Phoebe_Bite_Left1", "Phoebe_Bite_Right1"];
+            this.bite = ["Phoebe_Bite_Front2", "Phoebe_Bite_Front2", "Phoebe_Bite_Left2", "Phoebe_Bite_Right2"];
             this.direction = config.Direction.UP;
             this.money = 0;
             this.playerStatus = new objects.Label("1234567890", "16px", "'Press Start 2P'", "#FFFFFF", this.x, this.y, true);
@@ -125,7 +129,9 @@ module objects {
                 && !managers.Game.keyboardManager.moveDown
                 && !managers.Game.keyboardManager.moveLeft
                 && !managers.Game.keyboardManager.moveRight
-                && !managers.Game.keyboardManager.attacking){
+                && !managers.Game.keyboardManager.attacking
+                && !managers.Game.keyboardManager.biting
+                && this.biteSequence === 0){
                 this.SwitchAnimation(this.stand[this.direction as number]);
             } 
             // Running Implementation
@@ -213,26 +219,35 @@ module objects {
                     }, 300);
                 }
             }
+            
+            if (this.biteSequence !== 0){
+                this.SwitchAnimation(this.bite[this.direction as number]);
+            }
             // Biting/Dash Implementation
-            if (managers.Game.keyboardManager.biting && this.bitingTimer <= 3) {
-                console.log("BITING");
-                managers.Game.keyboardManager.enabled = false;
-                switch (this.direction) {
-                    case config.Direction.UP:
-                        this.y -= (this.playerMoveSpeed + 16);
-                        break;
-                    case config.Direction.DOWN:
-                        this.y += (this.playerMoveSpeed + 16);
-                        break;
-                    case config.Direction.RIGHT:
-                        this.x += (this.playerMoveSpeed + 16);
-                        break;
-                    case config.Direction.LEFT:
-                        this.x -= (this.playerMoveSpeed + 16);
-                        break;
+            if (managers.Game.keyboardManager.biting) {
+                if (this.bitingTimer <= 3){
+                    managers.Game.keyboardManager.enabled = false;
+                    switch (this.direction) {
+                        case config.Direction.UP:
+                            this.y -= (this.playerMoveSpeed + 16);
+                            this.SwitchAnimation(this.bitedash[this.direction as number]);
+                            break;
+                        case config.Direction.DOWN:
+                            this.y += (this.playerMoveSpeed + 16);
+                            this.SwitchAnimation(this.bitedash[this.direction as number]);
+                            break;
+                        case config.Direction.RIGHT:
+                            this.x += (this.playerMoveSpeed + 16);
+                            this.SwitchAnimation(this.bitedash[this.direction as number]);
+                            break;
+                        case config.Direction.LEFT:
+                            this.x -= (this.playerMoveSpeed + 16);
+                            this.SwitchAnimation(this.bitedash[this.direction as number]);
+                            break;
+                    }
+                    managers.Game.keyboardManager.enabled = true;
+                    this.bitingTimer++;
                 }
-                managers.Game.keyboardManager.enabled = true;
-                this.bitingTimer++;
             }
         }
 
@@ -325,7 +340,7 @@ module objects {
                 if (random > 75){                    
                     message = "DELICIOUS.";
                 } else if (random > 50){
-                    message = "I WANT MORE FOOD";
+                    message = "I FEEL BETTER";
                 } else if (random > 25){
                     message = "HEALED UP!"
                 } else {
@@ -335,13 +350,13 @@ module objects {
             else{
                 let random: number = Math.random() * 100;
                 if (random > 75){                    
-                    message = "YUMMY!";
+                    message = "YUM!";
                 } else if (random > 50){
-                    message = "AHHH! FRESH MEAT";
+                    message = "FRESH MEAT";
                 } else if (random > 25){
-                    message = "NOM NOM NOM"
+                    message = "TASTY!"
                 } else {
-                    message = "ALREADY FULL THO";
+                    message = "ALL GOOD";
                 }
             }
             this.EchoMessage(message); 
@@ -360,7 +375,14 @@ module objects {
         public GainDollars(dollars: number){
             this.money += dollars;
             this.EchoMessage("GAINED $" + dollars);
+        }        
+
+        public GainEcto(){
+            if (this.ecto < this.maxEcto){
+                this.ecto += 1;
+            }
         }
+
 
         public HurtMessage(){                     
             let random: number = Math.random() * 100;
@@ -398,6 +420,19 @@ module objects {
                 this.EchoMessage("GOOD NIGHT..", 3000);
             } else {
                 this.EchoMessage("BYE BYE", 3000);
+            }
+        }
+
+        public EatMessage(){                     
+            let random: number = Math.random() * 100;
+            if (random > 75){
+                this.EchoMessage("MUNCH MUNCH", 3000);
+            } else if (random > 50){
+                this.EchoMessage("CHOMP CHOMP", 3000);
+            } else if (random > 25){
+                this.EchoMessage("MMMMMM...", 3000);
+            } else {
+                this.EchoMessage("AHHHH...", 3000);
             }
         }
 
@@ -446,6 +481,24 @@ module objects {
             if (this.currentAnimation != newAnimation){
                 this.gotoAndPlay(newAnimation);
             }
+        }
+
+        public SetBitePositionDirection(target: math.Vec2): void{
+            switch (this.direction) {
+                case config.Direction.UP:
+                    this.direction = config.Direction.DOWN;
+                case config.Direction.DOWN:
+                    target = math.Vec2.Add(target, new math.Vec2(0, -this.halfH/2));
+                    break;
+                case config.Direction.RIGHT:
+                    target = math.Vec2.Add(target, new math.Vec2(-this.halfW, 0));
+                    break;
+                case config.Direction.LEFT:
+                    target = math.Vec2.Add(target, new math.Vec2(this.halfW, 0));
+                    break;
+            }
+            this.SetPosition(target);
+
         }
     }
 }

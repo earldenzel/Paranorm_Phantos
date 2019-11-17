@@ -524,12 +524,21 @@ var config;
                     "speed": 0.1
                 },
                 "Phoebe_Bite_Left1": { "frames": [12] },
-                "Phoebe_Bite_Left2": { "frames": [13] },
+                "Phoebe_Bite_Left2": {
+                    "frames": [12, 13],
+                    "speed": 0.1
+                },
                 "Phoebe_Bite_Front1": { "frames": [14] },
-                "Phoebe_Bite_Front2": { "frames": [15] },
+                "Phoebe_Bite_Front2": {
+                    "frames": [14, 15],
+                    "speed": 0.1
+                },
                 "Phoebe_Bite_Back": { "frames": [16] },
                 "Phoebe_Bite_Right1": { "frames": [17] },
-                "Phoebe_Bite_Right2": { "frames": [18] },
+                "Phoebe_Bite_Right2": {
+                    "frames": [17, 18],
+                    "speed": 0.1
+                },
                 "Phoebe_Dead_A": {
                     "frames": [19, 20],
                     "speed": 0.1

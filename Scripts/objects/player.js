@@ -39,13 +39,15 @@ var objects;
             _this.Start();
             _this.hp = 5;
             _this.maxHp = _this.hp;
-            _this.ecto = 5;
-            _this.maxEcto = _this.ecto;
+            _this.ecto = 0;
+            _this.maxEcto = 5;
             _this.attackPower = 1;
             _this.walk = ["Phoebe_Walk_Back1", "Phoebe_Walk_Front1", "Phoebe_Walk_Left1", "Phoebe_Walk_Right1"];
             _this.stand = ["Phoebe_Walk_Back2", "Phoebe_Walk_Front2", "Phoebe_Walk_Left2", "Phoebe_Walk_Right2"];
             _this.run = ["Phoebe_Run_Back", "Phoebe_Run_Front", "Phoebe_Run_Left", "Phoebe_Run_Right"];
             _this.attack = ["Phoebe_Attack_Back", "Phoebe_Attack_Front", "Phoebe_Attack_Left", "Phoebe_Attack_Right"];
+            _this.bitedash = ["Phoebe_Bite_Back", "Phoebe_Bite_Front1", "Phoebe_Bite_Left1", "Phoebe_Bite_Right1"];
+            _this.bite = ["Phoebe_Bite_Front2", "Phoebe_Bite_Front2", "Phoebe_Bite_Left2", "Phoebe_Bite_Right2"];
             _this.direction = config.Direction.UP;
             _this.money = 0;
             _this.playerStatus = new objects.Label("1234567890", "16px", "'Press Start 2P'", "#FFFFFF", _this.x, _this.y, true);
@@ -115,7 +117,9 @@ var objects;
                 && !managers.Game.keyboardManager.moveDown
                 && !managers.Game.keyboardManager.moveLeft
                 && !managers.Game.keyboardManager.moveRight
-                && !managers.Game.keyboardManager.attacking) {
+                && !managers.Game.keyboardManager.attacking
+                && !managers.Game.keyboardManager.biting
+                && this.biteSequence === 0) {
                 this.SwitchAnimation(this.stand[this.direction]);
             }
             // Running Implementation
@@ -202,26 +206,34 @@ var objects;
                     }, 300);
                 }
             }
+            if (this.biteSequence !== 0) {
+                this.SwitchAnimation(this.bite[this.direction]);
+            }
             // Biting/Dash Implementation
-            if (managers.Game.keyboardManager.biting && this.bitingTimer <= 3) {
-                console.log("BITING");
-                managers.Game.keyboardManager.enabled = false;
-                switch (this.direction) {
-                    case config.Direction.UP:
-                        this.y -= (this.playerMoveSpeed + 16);
-                        break;
-                    case config.Direction.DOWN:
-                        this.y += (this.playerMoveSpeed + 16);
-                        break;
-                    case config.Direction.RIGHT:
-                        this.x += (this.playerMoveSpeed + 16);
-                        break;
-                    case config.Direction.LEFT:
-                        this.x -= (this.playerMoveSpeed + 16);
-                        break;
+            if (managers.Game.keyboardManager.biting) {
+                if (this.bitingTimer <= 3) {
+                    managers.Game.keyboardManager.enabled = false;
+                    switch (this.direction) {
+                        case config.Direction.UP:
+                            this.y -= (this.playerMoveSpeed + 16);
+                            this.SwitchAnimation(this.bitedash[this.direction]);
+                            break;
+                        case config.Direction.DOWN:
+                            this.y += (this.playerMoveSpeed + 16);
+                            this.SwitchAnimation(this.bitedash[this.direction]);
+                            break;
+                        case config.Direction.RIGHT:
+                            this.x += (this.playerMoveSpeed + 16);
+                            this.SwitchAnimation(this.bitedash[this.direction]);
+                            break;
+                        case config.Direction.LEFT:
+                            this.x -= (this.playerMoveSpeed + 16);
+                            this.SwitchAnimation(this.bitedash[this.direction]);
+                            break;
+                    }
+                    managers.Game.keyboardManager.enabled = true;
+                    this.bitingTimer++;
                 }
-                managers.Game.keyboardManager.enabled = true;
-                this.bitingTimer++;
             }
         };
         Player.prototype.CheckBound = function () {
@@ -312,7 +324,7 @@ var objects;
                     message = "DELICIOUS.";
                 }
                 else if (random > 50) {
-                    message = "I WANT MORE FOOD";
+                    message = "I FEEL BETTER";
                 }
                 else if (random > 25) {
                     message = "HEALED UP!";
@@ -324,16 +336,16 @@ var objects;
             else {
                 var random = Math.random() * 100;
                 if (random > 75) {
-                    message = "YUMMY!";
+                    message = "YUM!";
                 }
                 else if (random > 50) {
-                    message = "AHHH! FRESH MEAT";
+                    message = "FRESH MEAT";
                 }
                 else if (random > 25) {
-                    message = "NOM NOM NOM";
+                    message = "TASTY!";
                 }
                 else {
-                    message = "ALREADY FULL THO";
+                    message = "ALL GOOD";
                 }
             }
             this.EchoMessage(message);
@@ -349,6 +361,11 @@ var objects;
         Player.prototype.GainDollars = function (dollars) {
             this.money += dollars;
             this.EchoMessage("GAINED $" + dollars);
+        };
+        Player.prototype.GainEcto = function () {
+            if (this.ecto < this.maxEcto) {
+                this.ecto += 1;
+            }
         };
         Player.prototype.HurtMessage = function () {
             var random = Math.random() * 100;
@@ -395,6 +412,21 @@ var objects;
                 this.EchoMessage("BYE BYE", 3000);
             }
         };
+        Player.prototype.EatMessage = function () {
+            var random = Math.random() * 100;
+            if (random > 75) {
+                this.EchoMessage("MUNCH MUNCH", 3000);
+            }
+            else if (random > 50) {
+                this.EchoMessage("CHOMP CHOMP", 3000);
+            }
+            else if (random > 25) {
+                this.EchoMessage("MMMMMM...", 3000);
+            }
+            else {
+                this.EchoMessage("AHHHH...", 3000);
+            }
+        };
         Player.prototype.EchoMessage = function (message, timeout) {
             var _this = this;
             if (timeout === void 0) { timeout = 1000; }
@@ -439,6 +471,22 @@ var objects;
             if (this.currentAnimation != newAnimation) {
                 this.gotoAndPlay(newAnimation);
             }
+        };
+        Player.prototype.SetBitePositionDirection = function (target) {
+            switch (this.direction) {
+                case config.Direction.UP:
+                    this.direction = config.Direction.DOWN;
+                case config.Direction.DOWN:
+                    target = math.Vec2.Add(target, new math.Vec2(0, -this.halfH / 2));
+                    break;
+                case config.Direction.RIGHT:
+                    target = math.Vec2.Add(target, new math.Vec2(-this.halfW, 0));
+                    break;
+                case config.Direction.LEFT:
+                    target = math.Vec2.Add(target, new math.Vec2(this.halfW, 0));
+                    break;
+            }
+            this.SetPosition(target);
         };
         return Player;
     }(objects.GameObject));
