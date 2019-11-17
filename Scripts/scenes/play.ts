@@ -315,8 +315,11 @@ module scenes {
             });
 
             // PLAYER PLACEMENT
-            this.addChild(this.player.weapon);
             this.addChild(this.player);
+            this.addChild(this.player.weapon);
+            this.player.deadPlayer.forEach(e => {
+                this.addChild(e);
+            });
 
             //door frames
             if (this.hasDoorTop) {

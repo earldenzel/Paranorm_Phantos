@@ -259,8 +259,11 @@ var scenes;
                 //this.addChild(e.stunIndicator);
             });
             // PLAYER PLACEMENT
-            this.addChild(this.player.weapon);
             this.addChild(this.player);
+            this.addChild(this.player.weapon);
+            this.player.deadPlayer.forEach(function (e) {
+                _this.addChild(e);
+            });
             //door frames
             if (this.hasDoorTop) {
                 this.addChild(this.doorTopFrame);

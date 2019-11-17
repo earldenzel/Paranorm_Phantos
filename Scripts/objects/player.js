@@ -34,6 +34,7 @@ var objects;
             _this.canTraverseLeft = false;
             _this.canTraverseRight = false;
             _this.isDead = false;
+            _this.deadPlayer = new Array();
             _this.weapon = new objects.Weapon();
             _this.Start();
             _this.hp = 5;
@@ -46,6 +47,13 @@ var objects;
             _this.money = 0;
             _this.playerStatus = new objects.Label("1234567890", "16px", "'Press Start 2P'", "#FFFFFF", _this.x, _this.y, true);
             _this.key = 0;
+            _this.deadPlayer = [
+                new objects.DeadPlayer("Phoebe_Dead_A"),
+                new objects.DeadPlayer("Phoebe_Dead_B", false, false),
+                new objects.DeadPlayer("Phoebe_Dead_B", true, false),
+                new objects.DeadPlayer("Phoebe_Dead_B", false, true),
+                new objects.DeadPlayer("Phoebe_Dead_B", true, true)
+            ];
             return _this;
         }
         // Methods
@@ -63,6 +71,12 @@ var objects;
             this.y = Math.round(this.y);
             this.Move();
             this.weapon.Update();
+            if (this.isDead) {
+                this.deadPlayer.forEach(function (e) {
+                    e.visible = true;
+                    e.Update();
+                });
+            }
             this.CheckBound(); // <-- Check collisions
             //define the moving status bar for Phoebe
             this.playerStatus.x = this.x;
@@ -71,10 +85,6 @@ var objects;
             }
             else {
                 this.playerStatus.y = this.y - this.halfH - config.Bounds.TEXT_OFFSET;
-            }
-            if (this.hp <= 0 && !this.isDead) {
-                this.isDead = true;
-                this.DeadMessage();
             }
             if (this.bitingTimer == 4) {
                 this.bitingReset++;
@@ -264,17 +274,7 @@ var objects;
             _super.prototype.GetDamage.call(this, attacker);
             this.HurtMessage();
             if (this.hp <= 0) {
-                console.log(attacker.name + " erased " + this.name + "'s existence from this world.");
-                this.gotoAndPlay("Phoebe_Explosion");
-                this.on("animationend", this.animationEnded.bind(this, "Phoebe_Dead_A"), false);
-                //this.gotoAndPlay("Phoebe_Dead_A");
-                //this.on("animationend", this.animationEnded.bind(this), false);
-                //this.gotoAndPlay("Phoebe_Dead_B");
-                //this.on("animationend", this.animationEnded.bind(this), false);
-                //managers.Game.stage.removeChild(this.weapon);
-                //managers.Game.stage.removeChild(this);
-                //this.weapon.visible = false;
-                //this.visible = false;
+                this.DeathSequence();
             }
         };
         //phoebe effects from devour
@@ -369,7 +369,7 @@ var objects;
                 this.EchoMessage("IS THIS IT?", 3000);
             }
             else if (random > 25) {
-                this.EchoMessage("FINALLY, DEATH...", 3000);
+                this.EchoMessage("GOOD NIGHT..", 3000);
             }
             else {
                 this.EchoMessage("BYE BYE", 3000);
@@ -382,11 +382,9 @@ var objects;
                 this.playerStatus.text = message;
                 this.playerStatus.Recenter();
                 this.playerStatus.visible = true;
-                if (this.isDead) {
-                    setTimeout(function () {
-                        managers.Game.currentScene = config.Scene.OVER;
-                    }, timeout);
-                }
+                setTimeout(function () {
+                    managers.Game.currentScene = config.Scene.OVER;
+                }, timeout);
             }
             else {
                 if (this.textSequence != 0) {
@@ -401,19 +399,21 @@ var objects;
                 }, timeout);
             }
         };
-        Player.prototype.animationEnded = function (nextAnimation, nextAnimation2) {
-            //this.alpha = 0;            
-            if (nextAnimation2 === void 0) { nextAnimation2 = ""; }
-            if (nextAnimation2 != "") {
-                this.off("animationend", this.animationEnded.bind(this), false);
-                this.y -= 1;
-                this.on("animationend", this.animationEnded.bind(this, nextAnimation2, nextAnimation), false);
-                this.gotoAndPlay(nextAnimation);
-            }
-            else {
-                this.off("animationend", this.animationEnded.bind(this), false);
-                this.gotoAndPlay(nextAnimation);
-            }
+        Player.prototype.phoebeDied = function () {
+            var _this = this;
+            this.off("animationend", null);
+            this.deadPlayer.forEach(function (e) {
+                e.SetPosition(_this.GetPosition());
+                e.visible = true;
+            });
+            this.visible = false;
+            this.weapon.visible = false;
+        };
+        Player.prototype.DeathSequence = function () {
+            this.gotoAndPlay("Phoebe_Explosion");
+            this.on("animationend", this.phoebeDied.bind(this), false, true);
+            this.isDead = true;
+            this.DeadMessage();
         };
         return Player;
     }(objects.GameObject));

@@ -14,7 +14,7 @@ module scenes {
         // Methods
         public Start(): void {
             this.enemies[0] = new objects.TestEnemy(0, true, true);
-            this.enemies[0].attackPower = 5; // you will never die from starter enemy
+            this.enemies[0].attackPower = 0; // you will never die from starter enemy
 
             let x : number = (config.Bounds.LEFT_BOUND + config.Bounds.RIGHT_BOUND)/2;
             let y : number = (config.Bounds.TOP_BOUND + config.Bounds.BOTTOM_BOUND)/2 + 150;
