@@ -29,6 +29,9 @@ var scenes;
             this.enemies[0] = new objects.SpiderUp(new math.Vec2(120, 200), 350);
             // this.enemies[0].SetPosition(new math.Vec2(275, 430));
             this.enemies[0].attackPower = 1; // you will never die from starter enemy
+            this.enemies[1] = new objects.SpiderLeft(new math.Vec2(120, 200), 350);
+            // this.enemies[0].SetPosition(new math.Vec2(275, 430));
+            this.enemies[1].attackPower = 1; // you will never die from starter enemy
             var x = (config.Bounds.LEFT_BOUND + config.Bounds.RIGHT_BOUND) / 2;
             var y = (config.Bounds.TOP_BOUND + config.Bounds.BOTTOM_BOUND) / 2 + 150;
             /*
@@ -76,12 +79,21 @@ var scenes;
             }
             _super.prototype.Update.call(this);
             this.bulletManager.Update();
-            // check if bullet collides with player
+            // check if spiderBullets collides with player
             this.bulletManager.spiderBullets.forEach(function (bullet) {
                 if (managers.Collision.Check(managers.Game.player, bullet)) {
                     var ticker = createjs.Ticker.getTicks();
                     // use ticker to restrict 1 bullet only hurts 1 hp
-                    if (ticker % 20 == 0)
+                    if (ticker % 10 == 0)
+                        managers.Game.player.hp -= 1;
+                }
+            });
+            // check if spiderBulletsLeft collides with player
+            this.bulletManager.spiderBulletsLeft.forEach(function (bullet) {
+                if (managers.Collision.Check(managers.Game.player, bullet)) {
+                    var ticker = createjs.Ticker.getTicks();
+                    // use ticker to restrict 1 bullet only hurts 1 hp
+                    if (ticker % 10 == 0)
                         managers.Game.player.hp -= 1;
                 }
             });
@@ -91,6 +103,9 @@ var scenes;
             this.playerInfo.PlayerLocation = new math.Vec2(30, 12);
             _super.prototype.Main.call(this);
             this.bulletManager.spiderBullets.forEach(function (bullet) {
+                _this.addChild(bullet);
+            });
+            this.bulletManager.spiderBulletsLeft.forEach(function (bullet) {
                 _this.addChild(bullet);
             });
         };

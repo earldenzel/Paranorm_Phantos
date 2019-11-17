@@ -9,18 +9,23 @@ var managers;
         Bullet.prototype.Start = function () {
             this.bulletCount = 50;
             this.spiderBullets = new Array();
-            this.buildLaserPool();
+            this.spiderBulletsLeft = new Array();
+            this.buildBulletPool();
             this.CurrentSpiderBullet = 0;
         };
         Bullet.prototype.Update = function () {
             this.spiderBullets.forEach(function (bullet) {
                 bullet.Update();
             });
+            this.spiderBulletsLeft.forEach(function (bullet) {
+                bullet.Update();
+            });
         };
         // Functions
-        Bullet.prototype.buildLaserPool = function () {
+        Bullet.prototype.buildBulletPool = function () {
             for (var i = 0; i < this.bulletCount; i++) {
                 this.spiderBullets[i] = new objects.SpiderBullet();
+                this.spiderBulletsLeft[i] = new objects.SpiderBulletLeft();
             }
         };
         return Bullet;
