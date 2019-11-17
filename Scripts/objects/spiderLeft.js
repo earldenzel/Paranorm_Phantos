@@ -67,14 +67,14 @@ var objects;
             if (this.hp > 0) {
                 if (ticker % 70 == 0) {
                     this.bulletSpawn = new math.Vec2(this.x + this.halfW, this.y);
-                    var currentBullet = managers.Game.bulletManager.CurrentSpiderBullet;
+                    var currentBullet = managers.Game.bulletManager.CurrentBullet;
                     var bullet = managers.Game.bulletManager.spiderBulletsLeft[currentBullet];
                     bullet.x = this.bulletSpawn.x;
                     bullet.y = this.bulletSpawn.y;
                     console.log(bullet.x + " " + bullet.y);
-                    managers.Game.bulletManager.CurrentSpiderBullet++;
-                    if (managers.Game.bulletManager.CurrentSpiderBullet > 49) {
-                        managers.Game.bulletManager.CurrentSpiderBullet = 0;
+                    managers.Game.bulletManager.CurrentBullet++;
+                    if (managers.Game.bulletManager.CurrentBullet > 49) {
+                        managers.Game.bulletManager.CurrentBullet = 0;
                     }
                 }
             }

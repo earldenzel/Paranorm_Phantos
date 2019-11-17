@@ -13,65 +13,49 @@ var __extends = (this && this.__extends) || (function () {
 })();
 var objects;
 (function (objects) {
-    var SpiderRight = /** @class */ (function (_super) {
-        __extends(SpiderRight, _super);
+    var ShootingFLower = /** @class */ (function (_super) {
+        __extends(ShootingFLower, _super);
         // constructor
-        function SpiderRight(startPosition, distance) {
-            var _this = _super.call(this, managers.Game.spider_TextureAtlas, "spiderRight", startPosition) || this;
-            _this.speed = 1;
-            _this.isToUp = true;
-            _this.distance = distance;
+        function ShootingFLower(position) {
+            var _this = _super.call(this, managers.Game.shootingFlower_TextureAtlas, "shootingFlower", position) || this;
             _this.hp = 1;
             _this.attackPower = 1;
-            _this.knockback = 0.75;
+            _this.knockback = 0;
             _this.eatTimer = 500;
-            _this.bounty = 4;
+            _this.bounty = 3;
             _this.isFlying = false;
             return _this;
         }
         // methods
-        SpiderRight.prototype.Start = function () {
+        ShootingFLower.prototype.Start = function () {
             // set the initial position
             this.SetPosition(this.startPosition);
         };
-        SpiderRight.prototype.Update = function () {
+        ShootingFLower.prototype.Update = function () {
             _super.prototype.Update.call(this);
             this.bulletFire();
         };
-        SpiderRight.prototype.Reset = function () {
+        ShootingFLower.prototype.Reset = function () {
             _super.prototype.CheckBound.call(this);
         };
-        SpiderRight.prototype.Move = function () {
-            if (this.isToUp && !(this.y == this.startPosition.y - this.distance)) {
-                this.y -= this.speed;
-            }
-            else if (this.isToUp && (this.y == this.startPosition.y - this.distance)) {
-                this.isToUp = false;
-            }
-            else if (!this.isToUp && !(this.y == this.startPosition.y)) {
-                this.y += this.speed;
-            }
-            else if (!this.isToUp && (this.y == this.startPosition.y)) {
-                this.isToUp = true;
-            }
+        ShootingFLower.prototype.Move = function () {
         };
-        SpiderRight.prototype.CheckBound = function () {
+        ShootingFLower.prototype.CheckBound = function () {
             _super.prototype.CheckBound.call(this);
         };
-        SpiderRight.prototype.DevourEffect = function () {
+        ShootingFLower.prototype.DevourEffect = function () {
             managers.Game.player.GainHealth(2);
         };
-        SpiderRight.prototype.bulletFire = function () {
+        ShootingFLower.prototype.bulletFire = function () {
             var ticker = createjs.Ticker.getTicks();
             // If Spider alive, shoots the bullet
             if (this.hp > 0) {
                 if (ticker % 70 == 0) {
-                    this.bulletSpawn = new math.Vec2(this.x - this.halfW, this.y);
+                    this.bulletSpawn = new math.Vec2(this.x + 5, this.y - 20);
                     var currentBullet = managers.Game.bulletManager.CurrentBullet;
-                    var bullet = managers.Game.bulletManager.spiderBulletsRight[currentBullet];
+                    var bullet = managers.Game.bulletManager.shootingFLowerBullets[currentBullet];
                     bullet.x = this.bulletSpawn.x;
                     bullet.y = this.bulletSpawn.y;
-                    console.log(bullet.x + " " + bullet.y);
                     managers.Game.bulletManager.CurrentBullet++;
                     if (managers.Game.bulletManager.CurrentBullet > 49) {
                         managers.Game.bulletManager.CurrentBullet = 0;
@@ -82,8 +66,8 @@ var objects;
                 this.bulletSpawn = new math.Vec2(-5000, -5000);
             }
         };
-        return SpiderRight;
+        return ShootingFLower;
     }(objects.Enemy));
-    objects.SpiderRight = SpiderRight;
+    objects.ShootingFLower = ShootingFLower;
 })(objects || (objects = {}));
-//# sourceMappingURL=spiderRight.js.map
+//# sourceMappingURL=shootingflower.js.map

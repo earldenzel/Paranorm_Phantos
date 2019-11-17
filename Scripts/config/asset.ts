@@ -254,6 +254,11 @@ module config {
                 "id": "tAtlas_Spider",
                 "src": "./Assets/_Enemies/spider/Spider_TextureAtlas.png"
             },
+            {
+                "id": "tAtlas_ShootingFlower",
+                "src": "./Assets/_Enemies/shootingFlower/ShootingFlower_TextureAtlas.png"
+            },
+
 
             // SOUND EFFECTS
             {
@@ -341,13 +346,29 @@ module config {
                 },
 
                 "spiderBullet": { "frames": [0] },
-                
+
                 "spiderRight1": { "frames": [1] },
                 "spiderLeft1": { "frames": [2] },
                 "spiderLeft2": { "frames": [3] },
                 "spiderRight2": { "frames": [4] },
                 "spiderUp2": { "frames": [5] },
                 "spiderUp1": { "frames": [6] }
+            },
+        };
+
+        public static getAtlas_ShootingFlower: any = {
+            "images": [
+            ],
+
+            "framerate": 20,
+            "frames": [
+                [0, 0, 62, 92, 0, -6, 0],
+                [0, 92, 15, 15, 0, 0, 0]
+            ],
+
+            "animations": {
+                "shootingFlower": { "frames": [0] },
+                "shootingFlowerBullet": { "frames": [1] }
             },
         };
 

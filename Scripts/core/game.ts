@@ -33,6 +33,9 @@
     let spider_TextureAtlasData: any;
     let spider_TextureAtlas: createjs.SpriteSheet;
 
+    let shootingFlower_TextureAtlasData: any;
+    let shootingFlower_TextureAtlas: createjs.SpriteSheet;
+
     // Gets the asset manifest
     //let request = new Request("./Content/assetManifest.json");
     //fetch(request)
@@ -83,6 +86,10 @@
         spider_TextureAtlasData.images = [assetManager.getResult("tAtlas_Spider")];
         spider_TextureAtlas = new createjs.SpriteSheet(spider_TextureAtlasData);
 
+        shootingFlower_TextureAtlasData = config.Assets.getAtlas_ShootingFlower;
+        shootingFlower_TextureAtlasData.images = [assetManager.getResult("tAtlas_ShootingFlower")];
+        shootingFlower_TextureAtlas = new createjs.SpriteSheet(shootingFlower_TextureAtlasData);
+
         // Initialize CreateJS
         stage = new createjs.Stage(canvas);
 
@@ -111,6 +118,7 @@
         managers.Game.graveyard_TextureAtlas = graveyard_TextureAtlas;
         managers.Game.bat_TextureAtlas = bat_TextureAtlas;
         managers.Game.spider_TextureAtlas = spider_TextureAtlas;
+        managers.Game.shootingFlower_TextureAtlas = shootingFlower_TextureAtlas;
 
         Main();
     }

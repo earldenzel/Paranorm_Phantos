@@ -65,16 +65,16 @@ module objects {
                 if (ticker % 70 == 0) {
                     this.bulletSpawn = new math.Vec2(this.x, this.y + this.halfH);
 
-                    let currentBullet = managers.Game.bulletManager.CurrentSpiderBullet;
+                    let currentBullet = managers.Game.bulletManager.CurrentBullet;
                     let bullet = managers.Game.bulletManager.spiderBullets[currentBullet];
 
                     bullet.x = this.bulletSpawn.x;
                     bullet.y = this.bulletSpawn.y;
 
-                    managers.Game.bulletManager.CurrentSpiderBullet++;
+                    managers.Game.bulletManager.CurrentBullet++;
 
-                    if (managers.Game.bulletManager.CurrentSpiderBullet > 49) {
-                        managers.Game.bulletManager.CurrentSpiderBullet = 0;
+                    if (managers.Game.bulletManager.CurrentBullet > 49) {
+                        managers.Game.bulletManager.CurrentBullet = 0;
                     }
                 }
             }else{

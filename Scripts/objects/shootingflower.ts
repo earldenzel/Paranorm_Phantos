@@ -1,23 +1,17 @@
 module objects {
-    export class SpiderLeft extends objects.Enemy {
+    export class ShootingFLower extends objects.Enemy {
         // variables
-        private distance: number;
-        private speed: number = 1;
-        private isToDown: Boolean = true;
-
         private bulletSpawn: math.Vec2;
 
         // constructor
-        constructor(startPosition: math.Vec2, distance: number) {
-            super(managers.Game.spider_TextureAtlas, "spiderLeft", startPosition);
-
-            this.distance = distance;
+        constructor(position: math.Vec2) {
+            super(managers.Game.shootingFlower_TextureAtlas, "shootingFlower", position);
 
             this.hp = 1;
             this.attackPower = 1;
-            this.knockback = 0.75;
+            this.knockback = 0;
             this.eatTimer = 500;
-            this.bounty = 4;
+            this.bounty = 3;
             this.isFlying = false;
         }
 
@@ -38,15 +32,6 @@ module objects {
 
         public Move(): void {
 
-            if (this.isToDown && !(this.y == this.startPosition.y + this.distance)) {
-                this.y += this.speed;
-            } else if (this.isToDown && (this.y == this.startPosition.y + this.distance)) {
-                this.isToDown = false;
-            } else if (!this.isToDown && !(this.y == this.startPosition.y)) {
-                this.y -= this.speed;
-            } else if (!this.isToDown && (this.y == this.startPosition.y)) {
-                this.isToDown = true;
-            }
         }
 
         public CheckBound(): void {
@@ -63,15 +48,13 @@ module objects {
             // If Spider alive, shoots the bullet
             if (this.hp > 0) {
                 if (ticker % 70 == 0) {
-                    this.bulletSpawn = new math.Vec2(this.x + this.halfW, this.y);
+                    this.bulletSpawn = new math.Vec2(this.x + 5, this.y - 20);
 
                     let currentBullet = managers.Game.bulletManager.CurrentBullet;
-                    let bullet = managers.Game.bulletManager.spiderBulletsLeft[currentBullet];
+                    let bullet = managers.Game.bulletManager.shootingFLowerBullets[currentBullet];
 
                     bullet.x = this.bulletSpawn.x;
                     bullet.y = this.bulletSpawn.y;
-
-                    console.log(bullet.x + " " + bullet.y);
 
                     managers.Game.bulletManager.CurrentBullet++;
 

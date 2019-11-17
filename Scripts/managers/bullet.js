@@ -11,8 +11,9 @@ var managers;
             this.spiderBullets = new Array();
             this.spiderBulletsLeft = new Array();
             this.spiderBulletsRight = new Array();
+            this.shootingFLowerBullets = new Array();
             this.buildBulletPool();
-            this.CurrentSpiderBullet = 0;
+            this.CurrentBullet = 0;
         };
         Bullet.prototype.Update = function () {
             this.spiderBullets.forEach(function (bullet) {
@@ -24,6 +25,9 @@ var managers;
             this.spiderBulletsRight.forEach(function (bullet) {
                 bullet.Update();
             });
+            this.shootingFLowerBullets.forEach(function (bullet) {
+                bullet.Update();
+            });
         };
         // Functions
         Bullet.prototype.buildBulletPool = function () {
@@ -31,6 +35,7 @@ var managers;
                 this.spiderBullets[i] = new objects.SpiderBullet();
                 this.spiderBulletsLeft[i] = new objects.SpiderBulletLeft();
                 this.spiderBulletsRight[i] = new objects.SpiderBulletRight();
+                this.shootingFLowerBullets[i] = new objects.ShootingFlowerBullet();
             }
         };
         return Bullet;
