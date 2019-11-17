@@ -20,7 +20,10 @@ module objects {
         public sceneOnBot: number;
         public sceneOnLeft: number;
         public sceneOnRight: number;
-        private images: Array<any>;
+        private walk: Array<any>;
+        private run: Array<any>;
+        private stand: Array<any>;
+        private attack: Array<any>;
         public direction: config.Direction;
         public money: number;
         public key: number;
@@ -43,7 +46,10 @@ module objects {
             this.ecto = 5;
             this.maxEcto = this.ecto;
             this.attackPower = 1;
-            this.images = ["Phoebe_Walk_Back1","Phoebe_Walk_Front1", "Phoebe_Walk_Left1", "Phoebe_Walk_Right1"];
+            this.walk = ["Phoebe_Walk_Back1","Phoebe_Walk_Front1", "Phoebe_Walk_Left1", "Phoebe_Walk_Right1"];
+            this.stand = ["Phoebe_Walk_Back2","Phoebe_Walk_Front2", "Phoebe_Walk_Left2", "Phoebe_Walk_Right2"];
+            this.run = ["Phoebe_Run_Back","Phoebe_Run_Front", "Phoebe_Run_Left", "Phoebe_Run_Right"];
+            this.attack = ["Phoebe_Attack_Back", "Phoebe_Attack_Front", "Phoebe_Attack_Left", "Phoebe_Attack_Right"];
             this.direction = config.Direction.UP;
             this.money = 0;
             this.playerStatus = new objects.Label("1234567890", "16px", "'Press Start 2P'", "#FFFFFF", this.x, this.y, true);
@@ -65,14 +71,13 @@ module objects {
         }
 
         public Update(): void {
-            managers.Game.player = this;
-            if (this.hp > 0 && this.currentAnimation != this.images[managers.Game.player.direction as number]){
-                this.gotoAndPlay(this.images[this.direction as number]);
-            }
+            managers.Game.player = this;            
             this.x = Math.round(this.x);
             this.y = Math.round(this.y);
-            this.Move();
-            this.weapon.Update();
+            if (this.hp > 0){
+                this.Move();
+                this.weapon.Update();
+            }
             if (this.isDead){                
                 this.deadPlayer.forEach(e => {
                     e.visible = true;
@@ -116,46 +121,64 @@ module objects {
 
         public Move(): void {
             //movement implementation
-            if (managers.Game.keyboardManager.moveUp) {
-                this.y -= this.playerMoveSpeed;
-                this.direction = config.Direction.UP;
-            }
-            if (managers.Game.keyboardManager.moveDown) {
-                this.y += this.playerMoveSpeed;
-                this.direction = config.Direction.DOWN;
-            }
-            if (managers.Game.keyboardManager.moveLeft) {
-                this.x -= this.playerMoveSpeed;
-                this.direction = config.Direction.LEFT;
-            }
-            if (managers.Game.keyboardManager.moveRight) {
-                this.x += this.playerMoveSpeed;
-                this.direction = config.Direction.RIGHT;
-            }
+            if (!managers.Game.keyboardManager.moveUp
+                && !managers.Game.keyboardManager.moveDown
+                && !managers.Game.keyboardManager.moveLeft
+                && !managers.Game.keyboardManager.moveRight
+                && !managers.Game.keyboardManager.attacking){
+                this.SwitchAnimation(this.stand[this.direction as number]);
+            } 
             // Running Implementation
             if(managers.Game.keyboardManager.running){
                 let runningSpeed: number = this.playerMoveSpeed + 1;
                 if (managers.Game.keyboardManager.moveUp) {
                     this.y -= runningSpeed;
                     this.direction = config.Direction.UP;
+                    this.SwitchAnimation(this.run[this.direction as number]);
                 }
                 if (managers.Game.keyboardManager.moveDown) {
                     this.y += runningSpeed;
                     this.direction = config.Direction.DOWN;
+                    this.SwitchAnimation(this.run[this.direction as number]);
                 }
                 if (managers.Game.keyboardManager.moveLeft) {
                     this.x -= runningSpeed;
                     this.direction = config.Direction.LEFT;
+                    this.SwitchAnimation(this.run[this.direction as number]);
                 }
                 if (managers.Game.keyboardManager.moveRight) {
                     this.x += runningSpeed;
                     this.direction = config.Direction.RIGHT;
+                    this.SwitchAnimation(this.run[this.direction as number]);
+                }
+            }
+            else{                
+                if (managers.Game.keyboardManager.moveUp) {
+                    this.y -= this.playerMoveSpeed;
+                    this.direction = config.Direction.UP;
+                    this.SwitchAnimation(this.walk[this.direction as number]);
+                }
+                if (managers.Game.keyboardManager.moveDown) {
+                    this.y += this.playerMoveSpeed;
+                    this.direction = config.Direction.DOWN;
+                    this.SwitchAnimation(this.walk[this.direction as number]);
+                }
+                if (managers.Game.keyboardManager.moveLeft) {
+                    this.x -= this.playerMoveSpeed;
+                    this.direction = config.Direction.LEFT;
+                    this.SwitchAnimation(this.walk[this.direction as number]);
+                }
+                if (managers.Game.keyboardManager.moveRight) {
+                    this.x += this.playerMoveSpeed;
+                    this.direction = config.Direction.RIGHT;
+                    this.SwitchAnimation(this.walk[this.direction as number]);
                 }
             }
             //if player presses the attack button
             if (managers.Game.keyboardManager.attacking) {
                 //and the attack sequence is not defined... then define attack sequence
                 if (this.attackSequence == 0 && this.weapon != undefined) {
+                    this.SwitchAnimation(this.attack[this.direction as number]);
                     this.weapon.Attack();
                 }
                 //and the attack sequence is defined, then increase timer for attack (button held down)
@@ -412,11 +435,17 @@ module objects {
         }
 
         public DeathSequence(): void{  
-            this.gotoAndPlay("Phoebe_Explosion");
+            this.SwitchAnimation("Phoebe_Explosion");
             this.on("animationend", this.phoebeDied.bind(this), false, true);
             this.isDead = true;
             this.DeadMessage();
 
+        }
+
+        public SwitchAnimation(newAnimation: string){
+            if (this.currentAnimation != newAnimation){
+                this.gotoAndPlay(newAnimation);
+            }
         }
     }
 }

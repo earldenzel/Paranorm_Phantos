@@ -24,6 +24,9 @@
     let phoebe_TextureAtlasData: any;
     let phoebe_TextureAtlas: createjs.SpriteSheet;
 
+    let phantos_TextureAtlasData: any;
+    let phantos_TextureAtlas: createjs.SpriteSheet;
+
     let graveyard_TextureAtlasData: any;
     let graveyard_TextureAtlas: createjs.SpriteSheet;
     
@@ -66,7 +69,11 @@
 
         phoebe_TextureAtlasData = config.Assets.getAtlas_Phoebe;
         phoebe_TextureAtlasData.images = [assetManager.getResult("tAtlas_Phoebe")];
-        phoebe_TextureAtlas = new createjs.SpriteSheet(phoebe_TextureAtlasData);
+        phoebe_TextureAtlas = new createjs.SpriteSheet(phoebe_TextureAtlasData);        
+
+        phantos_TextureAtlasData = config.Assets.getAtlas_Phantos;
+        phantos_TextureAtlasData.images = [assetManager.getResult("tAtlas_Phantos")];
+        phantos_TextureAtlas = new createjs.SpriteSheet(phantos_TextureAtlasData);
 
         graveyard_TextureAtlasData = config.Assets.getAtlas_Graveyard;
         graveyard_TextureAtlasData.images = [assetManager.getResult("tAtlas_Graveyard")];
@@ -75,7 +82,7 @@
         bat_TextureAtlasData = config.Assets.getAtlas_Bat;
         bat_TextureAtlasData.images = [assetManager.getResult("tAtlas_Bat")];
         bat_TextureAtlas = new createjs.SpriteSheet(bat_TextureAtlasData);
-
+        
         // Initialize CreateJS
         stage = new createjs.Stage(canvas);
 
@@ -103,6 +110,7 @@
         managers.Game.phoebe_TextureAtlas = phoebe_TextureAtlas;
         managers.Game.graveyard_TextureAtlas = graveyard_TextureAtlas;
         managers.Game.bat_TextureAtlas = bat_TextureAtlas;
+        managers.Game.phantos_TextureAtlas = phantos_TextureAtlas;
 
         Main();
     }

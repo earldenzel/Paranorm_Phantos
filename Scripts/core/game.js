@@ -15,6 +15,8 @@
     var item_TextureAtlas;
     var phoebe_TextureAtlasData;
     var phoebe_TextureAtlas;
+    var phantos_TextureAtlasData;
+    var phantos_TextureAtlas;
     var graveyard_TextureAtlasData;
     var graveyard_TextureAtlas;
     var bat_TextureAtlasData;
@@ -48,6 +50,9 @@
         phoebe_TextureAtlasData = config.Assets.getAtlas_Phoebe;
         phoebe_TextureAtlasData.images = [assetManager.getResult("tAtlas_Phoebe")];
         phoebe_TextureAtlas = new createjs.SpriteSheet(phoebe_TextureAtlasData);
+        phantos_TextureAtlasData = config.Assets.getAtlas_Phantos;
+        phantos_TextureAtlasData.images = [assetManager.getResult("tAtlas_Phantos")];
+        phantos_TextureAtlas = new createjs.SpriteSheet(phantos_TextureAtlasData);
         graveyard_TextureAtlasData = config.Assets.getAtlas_Graveyard;
         graveyard_TextureAtlasData.images = [assetManager.getResult("tAtlas_Graveyard")];
         graveyard_TextureAtlas = new createjs.SpriteSheet(graveyard_TextureAtlasData);
@@ -75,6 +80,7 @@
         managers.Game.phoebe_TextureAtlas = phoebe_TextureAtlas;
         managers.Game.graveyard_TextureAtlas = graveyard_TextureAtlas;
         managers.Game.bat_TextureAtlas = bat_TextureAtlas;
+        managers.Game.phantos_TextureAtlas = phantos_TextureAtlas;
         Main();
     }
     function Update() {

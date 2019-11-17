@@ -42,7 +42,10 @@ var objects;
             _this.ecto = 5;
             _this.maxEcto = _this.ecto;
             _this.attackPower = 1;
-            _this.images = ["Phoebe_Walk_Back1", "Phoebe_Walk_Front1", "Phoebe_Walk_Left1", "Phoebe_Walk_Right1"];
+            _this.walk = ["Phoebe_Walk_Back1", "Phoebe_Walk_Front1", "Phoebe_Walk_Left1", "Phoebe_Walk_Right1"];
+            _this.stand = ["Phoebe_Walk_Back2", "Phoebe_Walk_Front2", "Phoebe_Walk_Left2", "Phoebe_Walk_Right2"];
+            _this.run = ["Phoebe_Run_Back", "Phoebe_Run_Front", "Phoebe_Run_Left", "Phoebe_Run_Right"];
+            _this.attack = ["Phoebe_Attack_Back", "Phoebe_Attack_Front", "Phoebe_Attack_Left", "Phoebe_Attack_Right"];
             _this.direction = config.Direction.UP;
             _this.money = 0;
             _this.playerStatus = new objects.Label("1234567890", "16px", "'Press Start 2P'", "#FFFFFF", _this.x, _this.y, true);
@@ -64,13 +67,12 @@ var objects;
         };
         Player.prototype.Update = function () {
             managers.Game.player = this;
-            if (this.hp > 0 && this.currentAnimation != this.images[managers.Game.player.direction]) {
-                this.gotoAndPlay(this.images[this.direction]);
-            }
             this.x = Math.round(this.x);
             this.y = Math.round(this.y);
-            this.Move();
-            this.weapon.Update();
+            if (this.hp > 0) {
+                this.Move();
+                this.weapon.Update();
+            }
             if (this.isDead) {
                 this.deadPlayer.forEach(function (e) {
                     e.visible = true;
@@ -109,21 +111,12 @@ var objects;
         Player.prototype.Reset = function () { };
         Player.prototype.Move = function () {
             //movement implementation
-            if (managers.Game.keyboardManager.moveUp) {
-                this.y -= this.playerMoveSpeed;
-                this.direction = config.Direction.UP;
-            }
-            if (managers.Game.keyboardManager.moveDown) {
-                this.y += this.playerMoveSpeed;
-                this.direction = config.Direction.DOWN;
-            }
-            if (managers.Game.keyboardManager.moveLeft) {
-                this.x -= this.playerMoveSpeed;
-                this.direction = config.Direction.LEFT;
-            }
-            if (managers.Game.keyboardManager.moveRight) {
-                this.x += this.playerMoveSpeed;
-                this.direction = config.Direction.RIGHT;
+            if (!managers.Game.keyboardManager.moveUp
+                && !managers.Game.keyboardManager.moveDown
+                && !managers.Game.keyboardManager.moveLeft
+                && !managers.Game.keyboardManager.moveRight
+                && !managers.Game.keyboardManager.attacking) {
+                this.SwitchAnimation(this.stand[this.direction]);
             }
             // Running Implementation
             if (managers.Game.keyboardManager.running) {
@@ -131,24 +124,51 @@ var objects;
                 if (managers.Game.keyboardManager.moveUp) {
                     this.y -= runningSpeed;
                     this.direction = config.Direction.UP;
+                    this.SwitchAnimation(this.run[this.direction]);
                 }
                 if (managers.Game.keyboardManager.moveDown) {
                     this.y += runningSpeed;
                     this.direction = config.Direction.DOWN;
+                    this.SwitchAnimation(this.run[this.direction]);
                 }
                 if (managers.Game.keyboardManager.moveLeft) {
                     this.x -= runningSpeed;
                     this.direction = config.Direction.LEFT;
+                    this.SwitchAnimation(this.run[this.direction]);
                 }
                 if (managers.Game.keyboardManager.moveRight) {
                     this.x += runningSpeed;
                     this.direction = config.Direction.RIGHT;
+                    this.SwitchAnimation(this.run[this.direction]);
+                }
+            }
+            else {
+                if (managers.Game.keyboardManager.moveUp) {
+                    this.y -= this.playerMoveSpeed;
+                    this.direction = config.Direction.UP;
+                    this.SwitchAnimation(this.walk[this.direction]);
+                }
+                if (managers.Game.keyboardManager.moveDown) {
+                    this.y += this.playerMoveSpeed;
+                    this.direction = config.Direction.DOWN;
+                    this.SwitchAnimation(this.walk[this.direction]);
+                }
+                if (managers.Game.keyboardManager.moveLeft) {
+                    this.x -= this.playerMoveSpeed;
+                    this.direction = config.Direction.LEFT;
+                    this.SwitchAnimation(this.walk[this.direction]);
+                }
+                if (managers.Game.keyboardManager.moveRight) {
+                    this.x += this.playerMoveSpeed;
+                    this.direction = config.Direction.RIGHT;
+                    this.SwitchAnimation(this.walk[this.direction]);
                 }
             }
             //if player presses the attack button
             if (managers.Game.keyboardManager.attacking) {
                 //and the attack sequence is not defined... then define attack sequence
                 if (this.attackSequence == 0 && this.weapon != undefined) {
+                    this.SwitchAnimation(this.attack[this.direction]);
                     this.weapon.Attack();
                 }
                 //and the attack sequence is defined, then increase timer for attack (button held down)
@@ -410,10 +430,15 @@ var objects;
             this.weapon.visible = false;
         };
         Player.prototype.DeathSequence = function () {
-            this.gotoAndPlay("Phoebe_Explosion");
+            this.SwitchAnimation("Phoebe_Explosion");
             this.on("animationend", this.phoebeDied.bind(this), false, true);
             this.isDead = true;
             this.DeadMessage();
+        };
+        Player.prototype.SwitchAnimation = function (newAnimation) {
+            if (this.currentAnimation != newAnimation) {
+                this.gotoAndPlay(newAnimation);
+            }
         };
         return Player;
     }(objects.GameObject));

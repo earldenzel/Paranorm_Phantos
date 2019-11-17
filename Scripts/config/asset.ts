@@ -243,6 +243,10 @@ module config {
                 "src": "./Assets/_Player/Phoebe_TextureAtlas.png"
             },
             {
+                "id": "tAtlas_Phantos",
+                "src": "./Assets/_Items/Phantos_TextureAtlas.png"
+            },
+            {
                 "id": "tAtlas_Bat",
                 "src": "./Assets/_Enemies/bat/Bat_TextureAtlas.png"
             },
@@ -555,18 +559,42 @@ module config {
                     "speed": 0.1
                 },
                 "Phoebe_Hurt": { "frames": [27] },
-                "Phoebe_Run_Left": { "frames": [28,29] },
-                "Phoebe_Run_Front": { "frames": [30,31,32,33] },
-                "Phoebe_Run_Right": { "frames": [34,35] },
-                "Phoebe_Run_Back": { "frames": [36,37,38,39] },
-                "Phoebe_Walk_Front1": { "frames": [40] },
-                "Phoebe_Walk_Front2": { "frames": [41] },
-                "Phoebe_Walk_Left1": { "frames": [42] },
-                "Phoebe_Walk_Left2": { "frames": [43] },
-                "Phoebe_Walk_Right1": { "frames": [44] },
-                "Phoebe_Walk_Right2": { "frames": [45] },
-                "Phoebe_Walk_Back1": { "frames": [46] },
-                "Phoebe_Walk_Back2": { "frames": [47] },
+                "Phoebe_Run_Left": { 
+                    "frames": [28,29],
+                    "speed": 0.1
+                },
+                "Phoebe_Run_Front": { 
+                    "frames": [30,31,32,33],
+                    "speed": 0.1
+                },
+                "Phoebe_Run_Right": { 
+                    "frames": [34,35],
+                    "speed": 0.1
+                },
+                "Phoebe_Run_Back": {
+                    "frames": [36,37,38,39],
+                    "speed": 0.1
+                },
+                "Phoebe_Walk_Front1": { 
+                    "frames": [40, 41],
+                    "speed": 0.1
+                },
+                "Phoebe_Walk_Front2": { "frames": [40] },
+                "Phoebe_Walk_Left1": { 
+                    "frames": [42, 43],
+                    "speed": 0.1
+                },
+                "Phoebe_Walk_Left2": { "frames": [42] },
+                "Phoebe_Walk_Right1": { 
+                    "frames": [44, 45],
+                    "speed": 0.1
+                },
+                "Phoebe_Walk_Right2": { "frames": [44] },
+                "Phoebe_Walk_Back1": { 
+                    "frames": [46, 47],
+                    "speed": 0.1
+                },
+                "Phoebe_Walk_Back2": { "frames": [46] },
                 "PhoebeSoul_Attack_Left": { "frames": [48] },
                 "PhoebeSoul_Attack_Front": { "frames": [49] },
                 "PhoebeSoul_Attack_Right": { "frames": [50] },
@@ -586,5 +614,56 @@ module config {
                 "PhoebeSoul_Walk_Back": { "frames": [64] }
             }
         };
+
+        
+        public static getAtlas_Phantos: any = {
+            "images": [
+                ""
+            ],
+            "framerate": 20,
+            "frames": [
+                [0, 0, 105, 92, 0, -18.5, 0],
+                [105, 0, 105, 92, 0, -18.5, 0],
+                [210, 0, 105, 92, 0, -18.5, 0],
+                [315, 0, 105, 92, 0, 0, 23],
+                [0, 97, 105, 92, 0, 0, 23],
+                [105, 97, 105, 92, 0, 0, 23],
+                [210, 97, 105, 92, 0, 18.5, 0],
+                [315, 97, 105, 92, 0, 18.5, 0],
+                [0, 194, 105, 92, 0, 18.5, 0],
+                [105, 194, 105, 92, 0, 0, -23],
+                [210, 194, 105, 92, 0, 0, -23],
+                [315, 194, 105, 92, 0, 0, -23],
+                [0, 291, 97, 97, 0, 0, 0],
+                [105, 291, 97, 97, 0, 0, 0],
+                [210, 291, 97, 97, 0, 0, 0],
+                [315, 291, 97, 97, 0, 0, 0]
+            ],
+            
+            "animations": {
+                "Phantos_Left": { 
+                    "frames": [0, 1, 2],
+                    "speed": 0.1
+                },
+                "Phantos_Front": { 
+                    "frames": [3, 4, 5],
+                    "speed": 0.1
+                },
+                "Phantos_Right": { 
+                    "frames": [ 6, 7, 8],
+                    "speed": 0.1
+                },
+                "Phantos_Back": { 
+                    "frames": [9, 10, 11],
+                    "speed": 0.1
+                },
+                "PhantosSoul_Back": { "frames": [12] },
+                "PhantosSoul_Front": { "frames": [13] },
+                "PhantosSoul_Left": { "frames": [14] },
+                "PhantosSoul_Right": { "frames": [15] }
+            },
+
+            "speed": 0.1
+        }
     }
 }

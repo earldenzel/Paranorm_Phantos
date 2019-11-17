@@ -17,8 +17,8 @@ var objects;
         __extends(Weapon, _super);
         // Constructor
         function Weapon() {
-            var _this = _super.call(this, managers.Game.phoebe_TextureAtlas, "Phoebe_Walk_Back1") || this;
-            _this.images = ["Phoebe_Attack_Back", "Phoebe_Attack_Front", "Phoebe_Attack_Left", "Phoebe_Attack_Right"];
+            var _this = _super.call(this, managers.Game.phantos_TextureAtlas, "Phantos_Back") || this;
+            _this.images = ["Phantos_Back", "Phantos_Front", "Phantos_Left", "Phantos_Right"];
             _this.Start();
             return _this;
         }
@@ -83,28 +83,29 @@ var objects;
             }
         };
         Weapon.prototype.Attack = function () {
-            var _this = this;
             console.log("Attack initiated");
             this.visible = true;
             managers.Game.player.attackSequence = setInterval(function () {
-                switch (managers.Game.player.direction) {
+                /*
+                switch(managers.Game.player.direction){
                     case config.Direction.UP:
-                        _this.x = _this.x;
-                        _this.y -= 20;
+                        this.x = this.x;
+                        this.y -= 20;
                         break;
                     case config.Direction.DOWN:
-                        _this.x = _this.x;
-                        _this.y += 20;
+                        this.x = this.x;
+                        this.y += 20;
                         break;
                     case config.Direction.LEFT:
-                        _this.x -= 20;
-                        _this.y = _this.y;
+                        this.x -= 20;
+                        this.y = this.y;
                         break;
                     case config.Direction.RIGHT:
-                        _this.x += 20;
-                        _this.y = _this.y;
+                        this.x += 20;
+                        this.y = this.y;
                         break;
                 }
+                */
             }, 50);
         };
         return Weapon;

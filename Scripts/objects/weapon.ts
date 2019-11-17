@@ -4,8 +4,8 @@ module objects {
         private images: Array<any>;
         // Constructor
         constructor() {
-            super(managers.Game.phoebe_TextureAtlas, "Phoebe_Walk_Back1");            
-            this.images = ["Phoebe_Attack_Back","Phoebe_Attack_Front", "Phoebe_Attack_Left", "Phoebe_Attack_Right"];
+            super(managers.Game.phantos_TextureAtlas, "Phantos_Back");            
+            this.images = ["Phantos_Back","Phantos_Front", "Phantos_Left", "Phantos_Right"];
             this.Start();
         }
         // Methods
@@ -75,6 +75,7 @@ module objects {
             console.log("Attack initiated");
             this.visible = true;
             managers.Game.player.attackSequence = setInterval(() => {
+                /*                
                 switch(managers.Game.player.direction){
                     case config.Direction.UP:
                         this.x = this.x;
@@ -93,6 +94,7 @@ module objects {
                         this.y = this.y;
                         break;
                 }
+                */
             }, 50);
         }
     }
