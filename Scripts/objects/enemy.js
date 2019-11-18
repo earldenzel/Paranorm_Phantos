@@ -15,8 +15,10 @@ var objects;
 (function (objects) {
     var Enemy = /** @class */ (function (_super) {
         __extends(Enemy, _super);
-        function Enemy(textureAtlas, enemyName) {
+        function Enemy(textureAtlas, enemyName, startPosition) {
+            if (startPosition === void 0) { startPosition = null; }
             var _this = _super.call(this, textureAtlas, enemyName) || this;
+            _this.startPosition = startPosition;
             _this.Start();
             _this.stunIndicator = new objects.Indicator("stunIndicator");
             _this.Move();

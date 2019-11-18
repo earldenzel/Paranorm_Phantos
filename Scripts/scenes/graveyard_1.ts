@@ -2,6 +2,7 @@ module scenes {
 
     export class Graveyard_1 extends scenes.PlayScene {
         // Variables
+        private bulletManager: managers.Bullet;
         // Constructor
         constructor() {
             super(false, true, true, true);
@@ -31,6 +32,10 @@ module scenes {
             this.cosmetics[4].SetPosition(new math.Vec2(this.enemies[0].x,this.enemies[0].y - 100));
             
 
+            // Initialize bulletManager
+            this.bulletManager = new managers.Bullet();
+            managers.Game.bulletManager = this.bulletManager;
+
             managers.Game.player.sceneOnBot = config.Scene.GRAVEYARD_5;
             managers.Game.player.sceneOnLeft = config.Scene.GRAVEYARD_3;
             managers.Game.player.sceneOnRight = config.Scene.GRAVEYARD_4;
@@ -54,11 +59,73 @@ module scenes {
                 managers.GraveyardLocks.graveyard_1_lockLeft = false;
             }
             super.Update();
+
+            this.bulletManager.Update();
+
+            // check if spiderBullets collides with player
+            this.bulletManager.spiderBullets.forEach(bullet => {
+                if(managers.Collision.Check(managers.Game.player, bullet)){
+                    let ticker: number = createjs.Ticker.getTicks();
+
+                    // use ticker to restrict 1 bullet only hurts 1 hp
+                    if (ticker % 10 == 0)
+                    managers.Game.player.hp -= 1;
+                }
+            });
+
+             // check if spiderBulletsLeft collides with player
+            this.bulletManager.spiderBulletsLeft.forEach(bullet => {
+                if(managers.Collision.Check(managers.Game.player, bullet)){
+                    let ticker: number = createjs.Ticker.getTicks();
+
+                    // use ticker to restrict 1 bullet only hurts 1 hp
+                    if (ticker % 10 == 0)
+                    managers.Game.player.hp -= 1;
+                }
+            });
+
+             // check if spiderBulletsRight collides with player
+             this.bulletManager.spiderBulletsRight.forEach(bullet => {
+                if(managers.Collision.Check(managers.Game.player, bullet)){
+                    let ticker: number = createjs.Ticker.getTicks();
+
+                    // use ticker to restrict 1 bullet only hurts 1 hp
+                    if (ticker % 10 == 0)
+                    managers.Game.player.hp -= 1;
+                }
+            });
+
+            // check if shootingFlowerBullets collides with player
+            this.bulletManager.shootingFLowerBullets.forEach(bullet => {
+                if(managers.Collision.Check(managers.Game.player, bullet)){
+                    let ticker: number = createjs.Ticker.getTicks();
+
+                    // use ticker to restrict 1 bullet only hurts 1 hp
+                    if (ticker % 10 == 0)
+                    managers.Game.player.hp -= 1;
+                }
+            });
         }
 
         public Main(): void {
             this.playerInfo.PlayerLocation = new math.Vec2(30,12);
             super.Main();
+
+            this.bulletManager.spiderBullets.forEach(bullet => {
+                this.addChild(bullet);
+            });
+
+            this.bulletManager.spiderBulletsLeft.forEach(bullet => {
+                this.addChild(bullet);
+            });
+
+            this.bulletManager.spiderBulletsRight.forEach(bullet => {
+                this.addChild(bullet);
+            });
+
+            this.bulletManager.shootingFLowerBullets.forEach(bullet => {
+                this.addChild(bullet);
+            });
         }
     }
 }

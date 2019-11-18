@@ -1,0 +1,21 @@
+{
+
+"images": [
+    "ghostWithEye.png"
+],
+
+"framerate": 20,
+"frames": [
+    [1, 1, 61, 86, 0, 0, 0]
+],
+
+"animations": {
+    "ghostWithEye": { "frames": [0] }
+},
+
+"texturepacker": [
+        "SmartUpdateHash: $TexturePacker:SmartUpdate:e4dcae5110a332e5a702b6ed97f1283e:ff7a1db078e3fedf0af1fff9bc66ebcf:1e9b5d208a85e65c86d8a22069fe6edc$",
+        "Created with TexturePacker (https://www.codeandweb.com/texturepacker) for EaselJS"
+]
+
+}
