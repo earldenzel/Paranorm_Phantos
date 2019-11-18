@@ -23,7 +23,6 @@ module objects {
         private walk: Array<any>;
         private run: Array<any>;
         private stand: Array<any>;
-        private attack: Array<any>;
         private bitedash: Array<any>;
         private bite: Array<any>;
         public direction: config.Direction;
@@ -51,7 +50,6 @@ module objects {
             this.walk = ["Phoebe_Walk_Back1","Phoebe_Walk_Front1", "Phoebe_Walk_Left1", "Phoebe_Walk_Right1"];
             this.stand = ["Phoebe_Walk_Back2","Phoebe_Walk_Front2", "Phoebe_Walk_Left2", "Phoebe_Walk_Right2"];
             this.run = ["Phoebe_Run_Back","Phoebe_Run_Front", "Phoebe_Run_Left", "Phoebe_Run_Right"];
-            this.attack = ["Phoebe_Attack_Back", "Phoebe_Attack_Front", "Phoebe_Attack_Left", "Phoebe_Attack_Right"];
             this.bitedash = ["Phoebe_Bite_Back", "Phoebe_Bite_Front1", "Phoebe_Bite_Left1", "Phoebe_Bite_Right1"];
             this.bite = ["Phoebe_Bite_Front2", "Phoebe_Bite_Front2", "Phoebe_Bite_Left2", "Phoebe_Bite_Right2"];
             this.direction = config.Direction.UP;
@@ -182,41 +180,10 @@ module objects {
             }
             //if player presses the attack button
             if (managers.Game.keyboardManager.attacking) {
-                //and the attack sequence is not defined... then define attack sequence
-                if (this.attackSequence == 0 && this.weapon != undefined) {
-                    this.SwitchAnimation(this.attack[this.direction as number]);
+                if (this.attackSequence == 0 && this.weapon != undefined){
+                    this.alpha = 0;
+                    this.attackSequence = 1;
                     this.weapon.Attack();
-                }
-                //and the attack sequence is defined, then increase timer for attack (button held down)
-                else {
-                    this.attackTimer++;
-                }
-
-                //if button is held down too long, then weapon visibility is lost. 
-                if (this.attackTimer > 50) {
-                    console.log("Attack disabled");
-                    this.weapon.visible = false;
-                }
-            }
-            //if player does not press the attack button
-            else {
-                //attack sequence is defined and the button was held down sparingly, then turn off attack
-                if (this.attackSequence > 0 && this.attackTimer <= 50) {
-                    console.log("Attack sequence cancelled");
-                    this.attackTimer = 0;
-                    clearInterval(this.attackSequence);
-                    this.weapon.visible = false;
-                    this.attackSequence = 0;
-                }
-                //if weapon is disabled, and button is let go, then reset timer
-                //introduce a 300ms disable of the weapon
-                if (this.attackTimer > 50 && !this.weapon.visible) {
-                    this.attackTimer = 0;
-                    managers.Game.keyboardManager.attackEnabled = false;
-                    setTimeout(() => {
-                        console.log("Attack re-enabled");
-                        managers.Game.keyboardManager.attackEnabled = true;
-                    }, 300);
                 }
             }
             

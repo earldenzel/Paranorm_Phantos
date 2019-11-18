@@ -8,6 +8,7 @@ module managers {
         public static graveyard_TextureAtlas: createjs.SpriteSheet;
         public static bat_TextureAtlas: createjs.SpriteSheet;
         public static phantos_TextureAtlas: createjs.SpriteSheet;
+        public static phantorm_TextureAtlas: createjs.SpriteSheet;
         public static currentScene: number;
         public static player: objects.Player;
         public static gameHeight: number = 900;

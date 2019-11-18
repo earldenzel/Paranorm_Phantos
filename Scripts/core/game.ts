@@ -27,6 +27,9 @@
     let phantos_TextureAtlasData: any;
     let phantos_TextureAtlas: createjs.SpriteSheet;
 
+    let phantorm_TextureAtlasData: any;
+    let phantorm_TextureAtlas: createjs.SpriteSheet;
+
     let graveyard_TextureAtlasData: any;
     let graveyard_TextureAtlas: createjs.SpriteSheet;
     
@@ -73,7 +76,11 @@
 
         phantos_TextureAtlasData = config.Assets.getAtlas_Phantos;
         phantos_TextureAtlasData.images = [assetManager.getResult("tAtlas_Phantos")];
-        phantos_TextureAtlas = new createjs.SpriteSheet(phantos_TextureAtlasData);
+        phantos_TextureAtlas = new createjs.SpriteSheet(phantos_TextureAtlasData);        
+
+        phantorm_TextureAtlasData = config.Assets.getAtlas_Phantorm;
+        phantorm_TextureAtlasData.images = [assetManager.getResult("tAtlas_Phantorm")];
+        phantorm_TextureAtlas = new createjs.SpriteSheet(phantorm_TextureAtlasData);
 
         graveyard_TextureAtlasData = config.Assets.getAtlas_Graveyard;
         graveyard_TextureAtlasData.images = [assetManager.getResult("tAtlas_Graveyard")];
@@ -111,6 +118,7 @@
         managers.Game.graveyard_TextureAtlas = graveyard_TextureAtlas;
         managers.Game.bat_TextureAtlas = bat_TextureAtlas;
         managers.Game.phantos_TextureAtlas = phantos_TextureAtlas;
+        managers.Game.phantorm_TextureAtlas = phantorm_TextureAtlas;
 
         Main();
     }
