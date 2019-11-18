@@ -26,28 +26,6 @@ var scenes;
         }
         // Methods
         Graveyard_1.prototype.Start = function () {
-            this.enemies[0] = new objects.SpiderUp(new math.Vec2(120, 200), 350);
-            // this.enemies[0].SetPosition(new math.Vec2(275, 430));
-            this.enemies[1] = new objects.SpiderLeft(new math.Vec2(120, 200), 350);
-            this.enemies[2] = new objects.SpiderRight(new math.Vec2(400, 600), 350);
-            this.enemies[3] = new objects.ShootingFLower(new math.Vec2(250, 300));
-            var x = (config.Bounds.LEFT_BOUND + config.Bounds.RIGHT_BOUND) / 2;
-            var y = (config.Bounds.TOP_BOUND + config.Bounds.BOTTOM_BOUND) / 2 + 150;
-            /*
-            this.cosmetics[0] = new objects.Indicator("wKeyIndicator");
-            this.cosmetics[1] = new objects.Indicator("sKeyIndicator");
-            this.cosmetics[2] = new objects.Indicator("aKeyIndicator");
-            this.cosmetics[3] = new objects.Indicator("dKeyIndicator");
-            this.cosmetics[4] = new objects.Indicator("jKeyIndicator");
-            this.cosmetics[0].SetPosition(new math.Vec2(x,y-this.cosmetics[0].height));
-            this.cosmetics[1].SetPosition(new math.Vec2(x,y+this.cosmetics[1].height));
-            this.cosmetics[2].SetPosition(new math.Vec2(x-this.cosmetics[2].width,y));
-            this.cosmetics[3].SetPosition(new math.Vec2(x+this.cosmetics[3].width,y));
-            this.cosmetics[4].SetPosition(new math.Vec2(this.enemies[0].x,this.enemies[0].y - 100));
-            */
-            // Initialize bulletManager
-            this.bulletManager = new managers.Bullet();
-            managers.Game.bulletManager = this.bulletManager;
             this.enemies[0] = new objects.TestEnemy(0, true, true);
             this.enemies[0].attackPower = 0; // you will never die from starter enemy
             var x = (config.Bounds.LEFT_BOUND + config.Bounds.RIGHT_BOUND) / 2;
@@ -62,6 +40,9 @@ var scenes;
             this.cosmetics[2].SetPosition(new math.Vec2(x - this.cosmetics[2].width, y));
             this.cosmetics[3].SetPosition(new math.Vec2(x + this.cosmetics[3].width, y));
             this.cosmetics[4].SetPosition(new math.Vec2(this.enemies[0].x, this.enemies[0].y - 100));
+            // Initialize bulletManager
+            this.bulletManager = new managers.Bullet();
+            managers.Game.bulletManager = this.bulletManager;
             managers.Game.player.sceneOnBot = config.Scene.GRAVEYARD_5;
             managers.Game.player.sceneOnLeft = config.Scene.GRAVEYARD_3;
             managers.Game.player.sceneOnRight = config.Scene.GRAVEYARD_4;

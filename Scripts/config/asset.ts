@@ -722,13 +722,6 @@ module config {
                 },
                 "Phoebe_Bite_Back": { "frames": [16] },
                 "Phoebe_Bite_Right1": { "frames": [17] },
-                "Phoebe_Bite_Right2": { "frames": [18] },
-                "Phoebe_Dead_A": {
-                    "frames": [19, 20],
-                    "speed": 0.1
-                },
-                "Phoebe_Dead_B": {
-                    "frames": [21, 22],
                 "Phoebe_Bite_Right2": { 
                     "frames": [17,18],
                     "speed": 0.1
@@ -737,24 +730,15 @@ module config {
                     "frames": [19,20],
                     "speed": 0.1
                 },
+                "Phoebe_Dead_B": {
+                    "frames": [21, 22],
+                    "speed": 0.1
+                },
                 "Phoebe_Explosion": {
                     "frames": [23, 24, 25, 26],
                     "speed": 0.1
                 },
                 "Phoebe_Hurt": { "frames": [27] },
-                "Phoebe_Run_Left": { "frames": [28, 29] },
-                "Phoebe_Run_Front": { "frames": [30, 31, 32, 33] },
-                "Phoebe_Run_Right": { "frames": [34, 35] },
-                "Phoebe_Run_Back": { "frames": [36, 37, 38, 39] },
-                "Phoebe_Walk_Front1": { "frames": [40] },
-                "Phoebe_Walk_Front2": { "frames": [41] },
-                "Phoebe_Walk_Left1": { "frames": [42] },
-                "Phoebe_Walk_Left2": { "frames": [43] },
-                "Phoebe_Walk_Right1": { "frames": [44] },
-                "Phoebe_Walk_Right2": { "frames": [45] },
-                "Phoebe_Walk_Back1": { "frames": [46] },
-                "Phoebe_Walk_Back2": { "frames": [47] },
-=======
                 "Phoebe_Run_Left": { 
                     "frames": [28,29],
                     "speed": 0.1
@@ -810,6 +794,7 @@ module config {
                 "PhoebeSoul_Walk_Back": { "frames": [64] }
             }
         };
+        
         
         public static getAtlas_Phantos: any = {
             "images": [
@@ -891,12 +876,12 @@ module config {
                 [225, 73, 25, 73, 0, -18, -5], 
                 [242, 146, 25, 39, 0, -6, -3],
                 [260, 185, 55, 65, 0, 11, 12], 
-                [250, 0, 25, 69, 0, -18, 16], //23
+                [250, 0, 25, 69, 0, -18, 16],
                 [250, 69, 55, 65, 0, -14, 12], 
                 [267, 134, 25, 51, 0, -6, 0],
                 [292, 134, 25, 51, 0, -6, 0],
-                [315, 185, 58, 58, 0, -18, 5], //23
-                [275, 0, 57, 58, 0, 14, 5], //28
+                [315, 185, 58, 58, 0, -18, 5],
+                [275, 0, 57, 58, 0, 14, 5], 
                 [305, 58, 66, 48, 0, 22, -5], 
                 [332, 0, 66, 48, 0, -14, -5], 
                 [317, 106, 37, 48, 0, 0, -3],
