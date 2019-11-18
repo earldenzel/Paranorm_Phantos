@@ -126,8 +126,8 @@ var scenes;
             this.obstacles.forEach(function (e) {
                 e.CheckBound();
                 _this.enemies.forEach(function (f) {
-                    //if enemy is stunned and knocked back on a barrier, then enemy dies
-                    if (f.isStunned && managers.Collision.Check(e, f)) {
+                    //if enemy is stunned and knocked back on a gap, then enemy dies
+                    if (f.isStunned && e instanceof objects.Gap && managers.Collision.Check(e, f)) {
                         f.RemoveFromPlay(f.CalculateBounty());
                     }
                     //if enemy is
@@ -186,7 +186,7 @@ var scenes;
                 this.doorLeft.y = 110;
                 this.player.canTraverseLeft = !this.isDoorLeftLocked;
                 this.addChild(this.doorLeft);
-                this.setChildIndex(this.doorLeft, this.getNumChildren() - 8);
+                this.setChildIndex(this.doorLeft, this.getNumChildren() - 15);
             }
             if (this.hasDoorRight && !this.isDoorRightLocked && this.doorRight.name == "background_d_horiC") {
                 this.removeChild(this.doorRight);
@@ -195,7 +195,7 @@ var scenes;
                 this.doorRight.Flip();
                 this.player.canTraverseRight = !this.isDoorRightLocked;
                 this.addChild(this.doorRight);
-                this.setChildIndex(this.doorRight, this.getNumChildren() - 8);
+                this.setChildIndex(this.doorRight, this.getNumChildren() - 15);
             }
             if (this.hasDoorTop && !this.isDoorTopLocked && this.doorTop.name == "background_d_vertC") {
                 this.removeChild(this.doorTop);
@@ -203,7 +203,7 @@ var scenes;
                 this.doorTop.y = 110;
                 this.player.canTraverseTop = !this.isDoorTopLocked;
                 this.addChild(this.doorTop);
-                this.setChildIndex(this.doorTop, this.getNumChildren() - 8);
+                this.setChildIndex(this.doorTop, this.getNumChildren() - 15);
             }
             if (this.hasDoorBot && !this.isDoorBotLocked && this.doorBot.name == "background_d_vertC") {
                 this.removeChild(this.doorBot);
@@ -212,7 +212,7 @@ var scenes;
                 this.doorBot.Flip();
                 this.player.canTraverseBot = !this.isDoorBotLocked;
                 this.addChild(this.doorBot);
-                this.setChildIndex(this.doorBot, this.getNumChildren() - 8);
+                this.setChildIndex(this.doorBot, this.getNumChildren() - 15);
             }
             //this.playerStatus.text = "PLAYER HP" + this.player.hp + "/5";
             // Sets the Player Health
@@ -253,14 +253,17 @@ var scenes;
             this.cosmetics.forEach(function (e) {
                 _this.addChild(e);
             });
+            // PLAYER PLACEMENT
+            this.addChild(this.player);
+            this.addChild(this.player.weapon);
+            this.player.deadPlayer.forEach(function (e) {
+                _this.addChild(e);
+            });
             // ENEMY PLACEMENT
             this.enemies.forEach(function (e) {
                 _this.addChild(e);
-                //this.addChild(e.stunIndicator);
+                _this.addChild(e.stunIndicator);
             });
-            // PLAYER PLACEMENT
-            this.addChild(this.player.weapon);
-            this.addChild(this.player);
             //door frames
             if (this.hasDoorTop) {
                 this.addChild(this.doorTopFrame);

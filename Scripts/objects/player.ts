@@ -20,13 +20,17 @@ module objects {
         public sceneOnBot: number;
         public sceneOnLeft: number;
         public sceneOnRight: number;
-        private images: Array<any>;
+        private walk: Array<any>;
+        private run: Array<any>;
+        private stand: Array<any>;
+        private bitedash: Array<any>;
+        private bite: Array<any>;
         public direction: config.Direction;
         public money: number;
         public key: number;
         public lastPosition: math.Vec2;
         public playerStatus: objects.Label;
-        public isDead: boolean = false;
+        public deadPlayer: Array<objects.DeadPlayer> = new Array<objects.DeadPlayer>();
 
         public ecto: number;
         public maxHp: number;
@@ -39,14 +43,25 @@ module objects {
             this.Start();
             this.hp = 5;
             this.maxHp = this.hp;
-            this.ecto = 5;
-            this.maxEcto = this.ecto;
+            this.ecto = 0;
+            this.maxEcto = 5;
             this.attackPower = 1;
-            this.images = ["Phoebe_Walk_Back1","Phoebe_Walk_Front1", "Phoebe_Walk_Left1", "Phoebe_Walk_Right1"];
+            this.walk = ["Phoebe_Walk_Back1","Phoebe_Walk_Front1", "Phoebe_Walk_Left1", "Phoebe_Walk_Right1"];
+            this.stand = ["Phoebe_Walk_Back2","Phoebe_Walk_Front2", "Phoebe_Walk_Left2", "Phoebe_Walk_Right2"];
+            this.run = ["Phoebe_Run_Back","Phoebe_Run_Front", "Phoebe_Run_Left", "Phoebe_Run_Right"];
+            this.bitedash = ["Phoebe_Bite_Back", "Phoebe_Bite_Front1", "Phoebe_Bite_Left1", "Phoebe_Bite_Right1"];
+            this.bite = ["Phoebe_Bite_Front2", "Phoebe_Bite_Front2", "Phoebe_Bite_Left2", "Phoebe_Bite_Right2"];
             this.direction = config.Direction.UP;
             this.money = 0;
             this.playerStatus = new objects.Label("1234567890", "16px", "'Press Start 2P'", "#FFFFFF", this.x, this.y, true);
             this.key = 0;
+            this.deadPlayer = [
+                new objects.DeadPlayer("Phoebe_Dead_A"),
+                new objects.DeadPlayer("Phoebe_Dead_B", false, false),
+                new objects.DeadPlayer("Phoebe_Dead_B", true, false),
+                new objects.DeadPlayer("Phoebe_Dead_B", false, true),
+                new objects.DeadPlayer("Phoebe_Dead_B", true, true)
+            ];
         }
 
         // Methods
@@ -57,14 +72,19 @@ module objects {
         }
 
         public Update(): void {
-            managers.Game.player = this;
-            if (this.hp > 0 && this.currentAnimation != this.images[managers.Game.player.direction as number]){
-                this.gotoAndPlay(this.images[this.direction as number]);
-            }
+            managers.Game.player = this;            
             this.x = Math.round(this.x);
             this.y = Math.round(this.y);
-            this.Move();
-            this.weapon.Update();
+            if (this.hp > 0){
+                this.Move();
+                this.weapon.Update();
+            }
+            if (this.isDead){                
+                this.deadPlayer.forEach(e => {
+                    e.visible = true;
+                    e.Update();
+                });
+            }
             this.CheckBound(); // <-- Check collisions
 
             //define the moving status bar for Phoebe
@@ -76,10 +96,6 @@ module objects {
                 this.playerStatus.y = this.y - this.halfH - config.Bounds.TEXT_OFFSET;
             }
 
-            if (this.hp <= 0 && !this.isDead) {
-                this.isDead = true;
-                this.DeadMessage();
-            }
             if(this.bitingTimer == 4){
                 this.bitingReset++;
             }
@@ -106,100 +122,98 @@ module objects {
 
         public Move(): void {
             //movement implementation
-            if (managers.Game.keyboardManager.moveUp) {
-                this.y -= this.playerMoveSpeed;
-                this.direction = config.Direction.UP;
-            }
-            if (managers.Game.keyboardManager.moveDown) {
-                this.y += this.playerMoveSpeed;
-                this.direction = config.Direction.DOWN;
-            }
-            if (managers.Game.keyboardManager.moveLeft) {
-                this.x -= this.playerMoveSpeed;
-                this.direction = config.Direction.LEFT;
-            }
-            if (managers.Game.keyboardManager.moveRight) {
-                this.x += this.playerMoveSpeed;
-                this.direction = config.Direction.RIGHT;
-            }
+            if (!managers.Game.keyboardManager.moveUp
+                && !managers.Game.keyboardManager.moveDown
+                && !managers.Game.keyboardManager.moveLeft
+                && !managers.Game.keyboardManager.moveRight
+                && !managers.Game.keyboardManager.attacking
+                && !managers.Game.keyboardManager.biting
+                && this.biteSequence === 0){
+                this.SwitchAnimation(this.stand[this.direction as number]);
+            } 
             // Running Implementation
             if(managers.Game.keyboardManager.running){
                 let runningSpeed: number = this.playerMoveSpeed + 1;
                 if (managers.Game.keyboardManager.moveUp) {
                     this.y -= runningSpeed;
                     this.direction = config.Direction.UP;
+                    this.SwitchAnimation(this.run[this.direction as number]);
                 }
                 if (managers.Game.keyboardManager.moveDown) {
                     this.y += runningSpeed;
                     this.direction = config.Direction.DOWN;
+                    this.SwitchAnimation(this.run[this.direction as number]);
                 }
                 if (managers.Game.keyboardManager.moveLeft) {
                     this.x -= runningSpeed;
                     this.direction = config.Direction.LEFT;
+                    this.SwitchAnimation(this.run[this.direction as number]);
                 }
                 if (managers.Game.keyboardManager.moveRight) {
                     this.x += runningSpeed;
                     this.direction = config.Direction.RIGHT;
+                    this.SwitchAnimation(this.run[this.direction as number]);
+                }
+            }
+            else{                
+                if (managers.Game.keyboardManager.moveUp) {
+                    this.y -= this.playerMoveSpeed;
+                    this.direction = config.Direction.UP;
+                    this.SwitchAnimation(this.walk[this.direction as number]);
+                }
+                if (managers.Game.keyboardManager.moveDown) {
+                    this.y += this.playerMoveSpeed;
+                    this.direction = config.Direction.DOWN;
+                    this.SwitchAnimation(this.walk[this.direction as number]);
+                }
+                if (managers.Game.keyboardManager.moveLeft) {
+                    this.x -= this.playerMoveSpeed;
+                    this.direction = config.Direction.LEFT;
+                    this.SwitchAnimation(this.walk[this.direction as number]);
+                }
+                if (managers.Game.keyboardManager.moveRight) {
+                    this.x += this.playerMoveSpeed;
+                    this.direction = config.Direction.RIGHT;
+                    this.SwitchAnimation(this.walk[this.direction as number]);
                 }
             }
             //if player presses the attack button
             if (managers.Game.keyboardManager.attacking) {
-                //and the attack sequence is not defined... then define attack sequence
-                if (this.attackSequence == 0 && this.weapon != undefined) {
+                if (this.attackSequence == 0 && this.weapon != undefined){
+                    this.alpha = 0;
+                    this.attackSequence = 1;
                     this.weapon.Attack();
                 }
-                //and the attack sequence is defined, then increase timer for attack (button held down)
-                else {
-                    this.attackTimer++;
-                }
-
-                //if button is held down too long, then weapon visibility is lost. 
-                if (this.attackTimer > 50) {
-                    console.log("Attack disabled");
-                    this.weapon.visible = false;
-                }
             }
-            //if player does not press the attack button
-            else {
-                //attack sequence is defined and the button was held down sparingly, then turn off attack
-                if (this.attackSequence > 0 && this.attackTimer <= 50) {
-                    console.log("Attack sequence cancelled");
-                    this.attackTimer = 0;
-                    clearInterval(this.attackSequence);
-                    this.weapon.visible = false;
-                    this.attackSequence = 0;
-                }
-                //if weapon is disabled, and button is let go, then reset timer
-                //introduce a 300ms disable of the weapon
-                if (this.attackTimer > 50 && !this.weapon.visible) {
-                    this.attackTimer = 0;
-                    managers.Game.keyboardManager.attackEnabled = false;
-                    setTimeout(() => {
-                        console.log("Attack re-enabled");
-                        managers.Game.keyboardManager.attackEnabled = true;
-                    }, 300);
-                }
+            
+            if (this.biteSequence !== 0){
+                this.SwitchAnimation(this.bite[this.direction as number]);
             }
             // Biting/Dash Implementation
-            if (managers.Game.keyboardManager.biting && this.bitingTimer <= 3) {
-                console.log("BITING");
-                managers.Game.keyboardManager.enabled = false;
-                switch (this.direction) {
-                    case config.Direction.UP:
-                        this.y -= (this.playerMoveSpeed + 16);
-                        break;
-                    case config.Direction.DOWN:
-                        this.y += (this.playerMoveSpeed + 16);
-                        break;
-                    case config.Direction.RIGHT:
-                        this.x += (this.playerMoveSpeed + 16);
-                        break;
-                    case config.Direction.LEFT:
-                        this.x -= (this.playerMoveSpeed + 16);
-                        break;
+            if (managers.Game.keyboardManager.biting) {
+                if (this.bitingTimer <= 3){
+                    managers.Game.keyboardManager.enabled = false;
+                    switch (this.direction) {
+                        case config.Direction.UP:
+                            this.y -= (this.playerMoveSpeed + 16);
+                            this.SwitchAnimation(this.bitedash[this.direction as number]);
+                            break;
+                        case config.Direction.DOWN:
+                            this.y += (this.playerMoveSpeed + 16);
+                            this.SwitchAnimation(this.bitedash[this.direction as number]);
+                            break;
+                        case config.Direction.RIGHT:
+                            this.x += (this.playerMoveSpeed + 16);
+                            this.SwitchAnimation(this.bitedash[this.direction as number]);
+                            break;
+                        case config.Direction.LEFT:
+                            this.x -= (this.playerMoveSpeed + 16);
+                            this.SwitchAnimation(this.bitedash[this.direction as number]);
+                            break;
+                    }
+                    managers.Game.keyboardManager.enabled = true;
+                    this.bitingTimer++;
                 }
-                managers.Game.keyboardManager.enabled = true;
-                this.bitingTimer++;
             }
         }
 
@@ -274,19 +288,7 @@ module objects {
             super.GetDamage(attacker);
             this.HurtMessage();   
             if (this.hp <= 0) {
-                console.log(attacker.name + " erased " + this.name + "'s existence from this world.");
-                this.gotoAndPlay("Phoebe_Explosion");
-                this.on("animationend", this.animationEnded.bind(this, "Phoebe_Dead_A"), false);
-                //this.gotoAndPlay("Phoebe_Dead_A");
-                //this.on("animationend", this.animationEnded.bind(this), false);
-                //this.gotoAndPlay("Phoebe_Dead_B");
-                //this.on("animationend", this.animationEnded.bind(this), false);
-                
-                
-                //managers.Game.stage.removeChild(this.weapon);
-                //managers.Game.stage.removeChild(this);
-                //this.weapon.visible = false;
-                //this.visible = false;
+                this.DeathSequence();
             }
         }
 
@@ -304,7 +306,7 @@ module objects {
                 if (random > 75){                    
                     message = "DELICIOUS.";
                 } else if (random > 50){
-                    message = "I WANT MORE FOOD";
+                    message = "I FEEL BETTER";
                 } else if (random > 25){
                     message = "HEALED UP!"
                 } else {
@@ -314,13 +316,13 @@ module objects {
             else{
                 let random: number = Math.random() * 100;
                 if (random > 75){                    
-                    message = "YUMMY!";
+                    message = "YUM!";
                 } else if (random > 50){
-                    message = "AHHH! FRESH MEAT";
+                    message = "FRESH MEAT";
                 } else if (random > 25){
-                    message = "NOM NOM NOM"
+                    message = "TASTY!"
                 } else {
-                    message = "ALREADY FULL THO";
+                    message = "ALL GOOD";
                 }
             }
             this.EchoMessage(message); 
@@ -339,7 +341,14 @@ module objects {
         public GainDollars(dollars: number){
             this.money += dollars;
             this.EchoMessage("GAINED $" + dollars);
+        }        
+
+        public GainEcto(){
+            if (this.ecto < this.maxEcto){
+                this.ecto += 1;
+            }
         }
+
 
         public HurtMessage(){                     
             let random: number = Math.random() * 100;
@@ -374,9 +383,22 @@ module objects {
             } else if (random > 50){
                 this.EchoMessage("IS THIS IT?", 3000);
             } else if (random > 25){
-                this.EchoMessage("FINALLY, DEATH...", 3000);
+                this.EchoMessage("GOOD NIGHT..", 3000);
             } else {
                 this.EchoMessage("BYE BYE", 3000);
+            }
+        }
+
+        public EatMessage(){                     
+            let random: number = Math.random() * 100;
+            if (random > 75){
+                this.EchoMessage("MUNCH MUNCH", 3000);
+            } else if (random > 50){
+                this.EchoMessage("CHOMP CHOMP", 3000);
+            } else if (random > 25){
+                this.EchoMessage("MMMMMM...", 3000);
+            } else {
+                this.EchoMessage("AHHHH...", 3000);
             }
         }
 
@@ -385,11 +407,9 @@ module objects {
                 this.playerStatus.text = message;
                 this.playerStatus.Recenter();
                 this.playerStatus.visible = true;
-                if (this.isDead){
-                    setTimeout(() => {
-                        managers.Game.currentScene = config.Scene.OVER;
-                    }, timeout);
-                }                
+                setTimeout(() => {
+                    managers.Game.currentScene = config.Scene.OVER;
+                }, timeout);
             }
             else{
                 if (this.textSequence != 0){
@@ -405,19 +425,46 @@ module objects {
             }
         }
 
-        private animationEnded(nextAnimation: string, nextAnimation2:string = ""): void{
-            //this.alpha = 0;            
-            
-            if (nextAnimation2 != ""){
-                this.off("animationend", this.animationEnded.bind(this), false);
-                this.y -= 1;
-                this.on("animationend", this.animationEnded.bind(this, nextAnimation2, nextAnimation), false);
-                this.gotoAndPlay(nextAnimation);
+        private phoebeDied(): void{
+            this.off("animationend", null);         
+            this.deadPlayer.forEach(e => {
+                e.SetPosition(this.GetPosition());
+                e.visible = true;
+            });
+            this.visible = false;
+            this.weapon.visible = false;
+        }
+
+        public DeathSequence(): void{  
+            this.SwitchAnimation("Phoebe_Explosion");
+            this.on("animationend", this.phoebeDied.bind(this), false, true);
+            this.isDead = true;
+            this.DeadMessage();
+
+        }
+
+        public SwitchAnimation(newAnimation: string){
+            if (this.currentAnimation != newAnimation){
+                this.gotoAndPlay(newAnimation);
             }
-            else{
-                this.off("animationend", this.animationEnded.bind(this), false)
-                this.gotoAndPlay(nextAnimation);
+        }
+
+        public SetBitePositionDirection(target: math.Vec2): void{
+            switch (this.direction) {
+                case config.Direction.UP:
+                    this.direction = config.Direction.DOWN;
+                case config.Direction.DOWN:
+                    target = math.Vec2.Add(target, new math.Vec2(0, -this.halfH/2));
+                    break;
+                case config.Direction.RIGHT:
+                    target = math.Vec2.Add(target, new math.Vec2(-this.halfW, 0));
+                    break;
+                case config.Direction.LEFT:
+                    target = math.Vec2.Add(target, new math.Vec2(this.halfW, 0));
+                    break;
             }
+            this.SetPosition(target);
+
         }
     }
 }

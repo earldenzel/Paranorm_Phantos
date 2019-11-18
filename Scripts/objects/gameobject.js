@@ -18,6 +18,7 @@ var objects;
         // Constructor
         function GameObject(textureAtlas, imageString) {
             var _this = _super.call(this, textureAtlas, imageString) || this;
+            _this.isDead = false;
             _this.name = imageString;
             _this.Init();
             return _this;

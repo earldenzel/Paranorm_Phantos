@@ -14,27 +14,23 @@ module scenes {
 
         // Methods
         public Start(): void {
-            this.enemies[0] = new objects.SpiderUp(new math.Vec2(120, 200), 350);
-            // this.enemies[0].SetPosition(new math.Vec2(275, 430));
-            this.enemies[1] = new objects.SpiderLeft(new math.Vec2(120, 200), 350);
-            this.enemies[2] = new objects.SpiderRight(new math.Vec2(400, 600), 350);
-            this.enemies[3] = new objects.ShootingFLower(new math.Vec2(250, 300));
-
+            this.enemies[0] = new objects.TestEnemy(0, true, true);
+            this.enemies[0].attackPower = 0; // you will never die from starter enemy
 
             let x : number = (config.Bounds.LEFT_BOUND + config.Bounds.RIGHT_BOUND)/2;
             let y : number = (config.Bounds.TOP_BOUND + config.Bounds.BOTTOM_BOUND)/2 + 150;
-            /*
-            this.cosmetics[0] = new objects.Indicator("wKeyIndicator");
-            this.cosmetics[1] = new objects.Indicator("sKeyIndicator");
-            this.cosmetics[2] = new objects.Indicator("aKeyIndicator");
-            this.cosmetics[3] = new objects.Indicator("dKeyIndicator");
-            this.cosmetics[4] = new objects.Indicator("jKeyIndicator");
+            
+            this.cosmetics[0] = new objects.Indicator("upIndicator");
+            this.cosmetics[1] = new objects.Indicator("downIndicator");
+            this.cosmetics[2] = new objects.Indicator("leftIndicator");
+            this.cosmetics[3] = new objects.Indicator("rightIndicator");
+            this.cosmetics[4] = new objects.Indicator("attackIndicator");
             this.cosmetics[0].SetPosition(new math.Vec2(x,y-this.cosmetics[0].height));
             this.cosmetics[1].SetPosition(new math.Vec2(x,y+this.cosmetics[1].height));
             this.cosmetics[2].SetPosition(new math.Vec2(x-this.cosmetics[2].width,y));
             this.cosmetics[3].SetPosition(new math.Vec2(x+this.cosmetics[3].width,y));
             this.cosmetics[4].SetPosition(new math.Vec2(this.enemies[0].x,this.enemies[0].y - 100));
-            */
+            
 
             // Initialize bulletManager
             this.bulletManager = new managers.Bullet();
@@ -50,7 +46,6 @@ module scenes {
             //if(!this.enemies[0].visible && this.cosmetics[0].visible){
             if(!this.enemies[0].visible){
                 setTimeout(() => {
-                    /*
                     this.cosmetics.forEach(cosmetic =>{
                         cosmetic.visible = false;
                         managers.GraveyardLocks.graveyard_1_lockRight = false;
@@ -58,11 +53,6 @@ module scenes {
                         managers.GraveyardLocks.graveyard_1_lockBot = false;
                         this.isDoorBotLocked = false;
                     });
-                    */
-                   managers.GraveyardLocks.graveyard_1_lockRight = false;
-                   this.isDoorRightLocked = false;
-                   managers.GraveyardLocks.graveyard_1_lockBot = false;
-                   this.isDoorBotLocked = false;
                 }, 1500);
             }
             if(!this.isDoorLeftLocked){

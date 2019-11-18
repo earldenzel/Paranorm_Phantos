@@ -236,11 +236,19 @@ module config {
             },
             {
                 "id": "tAtlas_Items",
-                "src": "./Assets/_Items/Items_TextureAtlas.png"
+                "src": "./Assets/_UI/TitleUiItemsMap_TextureAtlas.png"
             },
             {
                 "id": "tAtlas_Phoebe",
                 "src": "./Assets/_Player/Phoebe_TextureAtlas.png"
+            },
+            {
+                "id": "tAtlas_Phantos",
+                "src": "./Assets/_Items/Phantos_TextureAtlas.png"
+            },
+            {
+                "id": "tAtlas_Phantorm",
+                "src": "./Assets/_Player/Phoebe+Phantos_TextureAtlas.png"
             },
             {
                 "id": "tAtlas_Bat",
@@ -407,60 +415,60 @@ module config {
 
             "framerate": 20,
             "frames": [
-                [1, 1, 564, 651, 0, 0, 0],
-                [567, 1, 28, 642, 0, 0, 0],
-                [1, 654, 556, 34, 0, 0, 0],
-                [1, 690, 194, 244, 0, 0, 0],
-                [197, 690, 88, 161, 0, 0, 0],
-                [287, 690, 142, 64, 0, 0, 0],
-                [287, 756, 78, 104, 0, 0, 0],
-                [197, 853, 88, 64, 0, 0, 0],
-                [431, 690, 92, 78, 0, 0, 0],
-                [367, 756, 46, 150, 0, 0, 0],
-                [287, 862, 52, 64, 0, 0, 0],
-                [341, 862, 24, 44, 0, 0, 0],
-                [415, 770, 52, 64, 0, 0, 0],
-                [415, 836, 52, 64, 0, 0, 0],
-                [469, 770, 52, 64, 0, 0, 0],
-                [469, 836, 52, 64, 0, 0, 0],
-                [525, 690, 52, 64, 0, 0, 0],
-                [567, 645, 28, 38, 0, 0, 0],
-                [525, 756, 52, 34, 0, 0, 0],
-                [523, 792, 52, 64, 0, 0, 0],
-                [523, 858, 52, 64, 0, 0, 0],
-                [415, 902, 52, 34, 0, 0, 0],
-                [469, 902, 28, 34, 0, 0, 0],
-                [341, 908, 32, 16, 0, 0, 0],
-                [375, 908, 24, 24, 0, 0, 0]
+                [0, 0, 564, 650, 0, 0, 0],
+                [0, 650, 555, 32, 0, 0, 0],
+                [555, 650, 22, 42, 0, 0, 0],
+                [564, 0, 26, 640, 0, 0, 0],
+                [0, 682, 192, 242, 0, 0, 0],
+                [192, 682, 140, 62, 0, 0, 0],
+                [332, 682, 86, 160, 0, 0, 0],
+                [192, 744, 76, 102, 0, 0, 0],
+                [268, 744, 44, 148, 0, 0, 0],
+                [192, 846, 50, 62, 0, 0, 0],
+                [242, 846, 26, 36, 0, 0, 0],
+                [242, 882, 26, 32, 0, 0, 0],
+                [192, 908, 30, 14, 0, 0, 0],
+                [418, 692, 90, 76, 0, 0, 0],
+                [418, 768, 86, 62, 0, 0, 0],
+                [504, 768, 50, 62, 0, 0, 0],
+                [508, 692, 50, 62, 0, 0, 0],
+                [418, 830, 50, 62, 0, 0, 0],
+                [312, 842, 50, 62, 0, 0, 0],
+                [362, 842, 50, 62, 0, 0, 0],
+                [268, 892, 22, 22, 0, 0, 0],
+                [468, 830, 50, 62, 0, 0, 0],
+                [518, 830, 50, 62, 0, 0, 0],
+                [412, 892, 50, 32, 0, 0, 0],
+                [462, 892, 50, 32, 0, 0, 0]
             ],
 
             "animations": {
                 "Graveyard_GrassTile_FullScreen": { "frames": [0] },
-                "Graveyard_FenceVertical": { "frames": [1] },
-                "Graveyard_FenceHorizontal": { "frames": [2] },
-                "Graveyard_GrassTile_1_4Screen": { "frames": [3] },
-                "Graveyard_ParanormalGlow_Closed-Final": { "frames": [4] },
+                "Graveyard_FenceHorizontal": { "frames": [1] },
+                "Graveyard_Cross": { "frames": [2] },
+                "Graveyard_FenceVertical": { "frames": [3] },
+                "Graveyard_GrassTile_1_4Screen": { "frames": [4] },
                 "Graveyard_ParanormalGlow_Open-copy": { "frames": [5] },
-                "Graveyard_Gate_H": { "frames": [6] },
-                "Graveyard_Gate_Closed": { "frames": [7] },
-                "Graveyard_Gate_V": { "frames": [8] },
-                "Graveyard_Tree": { "frames": [9] },
-                "Graveyard_DirtTile": { "frames": [10] },
-                "Graveyard_Cross": { "frames": [11] },
-                "Graveyard_GrassTile": { "frames": [12] },
-                "Graveyard_HoleTile": { "frames": [13] },
-                "Graveyard_HoleTile_Center": { "frames": [14] },
-                "Graveyard_HoleTile_Horizontal": { "frames": [15] },
-                "Graveyard_HoleTile_Stairs": { "frames": [16] },
-                "Graveyard_Grave": { "frames": [17] },
-                "Graveyard_Fence2x": { "frames": [18] },
-                "Graveyard_HoleTile_Vertical": { "frames": [19] },
-                "Graveyard_Stairs_Up": { "frames": [20] },
-                "Graveyard_HoleTile_Corner": { "frames": [21] },
-                "Graveyard_Fence": { "frames": [22] },
-                "Graveyard_Flowers": { "frames": [23] },
-                "Graveyard_GraveTile": { "frames": [24] }
-            }
+                "Graveyard_ParanormalGlow_Closed-Final": { "frames": [6] },
+                "Graveyard_Gate_H": { "frames": [7] },
+                "Graveyard_Tree": { "frames": [8] },
+                "Graveyard_DirtTile": { "frames": [9] },
+                "Graveyard_Grave": { "frames": [10] },
+                "Graveyard_Fence": { "frames": [11] },
+                "Graveyard_Flowers": { "frames": [12] },
+                "Graveyard_Gate_V": { "frames": [13] },
+                "Graveyard_Gate_Closed": { "frames": [14] },
+                "Graveyard_GrassTile": { "frames": [15] },
+                "Graveyard_HoleTile": { "frames": [16] },
+                "Graveyard_HoleTile_Center": { "frames": [17] },
+                "Graveyard_HoleTile_Horizontal": { "frames": [18] },
+                "Graveyard_HoleTile_Stairs": { "frames": [19] },
+                "Graveyard_GraveTile": { "frames": [20] },
+                "Graveyard_HoleTile_Vertical": { "frames": [21] },
+                "Graveyard_Stairs_Up": { "frames": [22] },
+                "Graveyard_Fence2x": { "frames": [23] },
+                "Graveyard_HoleTile_Corner": { "frames": [24] }
+            },
 
         };
 
@@ -468,49 +476,149 @@ module config {
             "images": [
                 ""
             ],
-
+            
             "framerate": 20,
             "frames": [
-                [0, 0, 28, 51, 0, 0, 0],
-                [28, 0, 28, 49, 0, 0, 0],
-                [28, 49, 28, 16, 0, 0, 0],
-                [0, 51, 24, 24, 0, 0, 0],
-                [24, 65, 24, 22, 0, 0, 0],
-                [0, 75, 22, 25, 0, 0, 0],
-                [48, 65, 13, 14, 0, 0, 0],
-                [22, 87, 22, 25, 0, 0, 0],
-                [0, 100, 22, 25, 0, 0, 0],
-                [44, 87, 20, 24, 0, 0, 0],
-                [44, 111, 20, 24, 0, 0, 0],
-                [22, 112, 22, 25, 0, 0, 0],
-                [44, 135, 20, 24, 0, 0, 0],
-                [0, 125, 22, 25, 0, 0, 0],
-                [22, 137, 22, 25, 0, 0, 0],
-                [0, 150, 21, 40, 0, 0, 0],
-                [21, 162, 21, 22, 0, 0, 0]
+                [0, 0, 292, 650, 0, 0, 0],
+                [0, 650, 564, 110, 0, 0, 0],
+                [292, 0, 482, 180, 0, 0, 0],
+                [292, 180, 482, 134, 0, 0, 0],
+                [292, 314, 454, 108, 0, 0, 0],
+                [292, 422, 392, 92, 0, 0, 0],
+                [292, 514, 128, 128, 0, 0, 0],
+                [420, 514, 162, 86, 0, 0, 0],
+                [582, 514, 162, 86, 0, 0, 0],
+                [684, 422, 52, 72, 0, 0, 0],
+                [746, 314, 16, 86, 0, 0, 0],
+                [762, 314, 16, 86, 0, 0, 0],
+                [420, 600, 26, 50, 0, 0, 0],
+                [736, 422, 16, 86, 0, 0, 0],
+                [744, 508, 16, 86, 0, 0, 0],
+                [752, 400, 16, 86, 0, 0, 0],
+                [768, 400, 16, 86, 0, 0, 0],
+                [446, 600, 38, 38, 0, 0, 0],
+                [484, 600, 38, 38, 0, 0, 0],
+                [522, 600, 38, 38, 0, 0, 0],
+                [560, 600, 38, 38, 0, 0, 0],
+                [598, 600, 38, 38, 0, 0, 0],
+                [636, 600, 38, 38, 0, 0, 0],
+                [674, 600, 38, 38, 0, 0, 0],
+                [712, 600, 38, 38, 0, 0, 0],
+                [564, 638, 38, 38, 0, 0, 0],
+                [564, 676, 38, 38, 0, 0, 0],
+                [602, 638, 38, 38, 0, 0, 0],
+                [564, 714, 38, 38, 0, 0, 0],
+                [602, 676, 38, 38, 0, 0, 0],
+                [640, 638, 38, 38, 0, 0, 0],
+                [602, 714, 38, 38, 0, 0, 0],
+                [640, 676, 38, 38, 0, 0, 0],
+                [678, 638, 26, 48, 0, 0, 0],
+                [640, 714, 38, 34, 0, 0, 0],
+                [704, 638, 38, 34, 0, 0, 0],
+                [684, 494, 22, 20, 0, 0, 0],
+                [706, 494, 20, 20, 0, 0, 0],
+                [678, 686, 38, 34, 0, 0, 0],
+                [678, 720, 38, 34, 0, 0, 0],
+                [704, 672, 26, 14, 0, 0, 0],
+                [716, 686, 20, 38, 0, 0, 0],
+                [716, 724, 38, 34, 0, 0, 0],
+                [752, 486, 18, 22, 0, 0, 0],
+                [742, 638, 38, 34, 0, 0, 0],
+                [446, 638, 12, 12, 0, 0, 0],
+                [458, 638, 12, 12, 0, 0, 0],
+                [760, 508, 20, 24, 0, 0, 0],
+                [760, 532, 20, 24, 0, 0, 0],
+                [760, 556, 24, 24, 0, -1, -25],
+                [760, 580, 20, 24, 0, 0, 0],
+                [750, 604, 20, 24, 0, 0, 0],
+                [736, 672, 20, 24, 0, 0, 0],
+                [736, 696, 20, 24, 0, 0, 0],
+                [756, 672, 18, 22, 0, 0, 0],
+                [756, 694, 18, 22, 0, 0, 0]
             ],
-
+            
             "animations": {
-                "Items_Hellebore-Flower": {
-                    "frames": [1, 3, 0],
+                "GameOver_Spotlight": { "frames": [0] },
+                "UILayout_Placement": { "frames": [1] },
+                "Title": { "frames": [4, 3, 2] },
+                "GameOver": { "frames": [5] },
+                "Company_Logo": { "frames": [6] },
+                "MapsGraveyard_Initial": { "frames": [7] },
+                "MapsHotel_Initial": { "frames": [8] },
+                "FortuneTeller": { "frames": [9] },
+                "Ecto_0": { "frames": [10] },
+                "Ecto_1": { "frames": [11] },
+                "Items_Hellebore-Flower2": { "frames": [12] },
+                "Ecto_2": { "frames": [13] },
+                "Ecto_3": { "frames": [14] },
+                "Ecto_4": { "frames": [15] },
+                "Ecto_5": { "frames": [16] },
+                "HowToPlay_AKey": { "frames": [17] },
+                "HowToPlay_CKey": { "frames": [18] },
+                "HowToPlay_DKey": { "frames": [19] },
+                "HowToPlay_DownArrow": { "frames": [20] },
+                "HowToPlay_JKey": { "frames": [21] },
+                "HowToPlay_KKey": { "frames": [22] },
+                "HowToPlay_LKey": { "frames": [23] },
+                "HowToPlay_LeftArrow": { "frames": [24] },
+                "HowToPlay_RightArrow": { "frames": [25] },
+                "HowToPlay_SKey": { "frames": [26] },
+                "HowToPlay_SemiColonKey": { "frames": [27] },
+                "HowToPlay_UpArrow": { "frames": [28] },
+                "HowToPlay_VKey": { "frames": [29] },
+                "HowToPlay_WKey": { "frames": [30] },
+                "HowToPlay_XKey": { "frames": [31] },
+                "HowToPlay_ZKey": { "frames": [32] },
+                "Items_Hellebore-Flower0": { "frames": [33] },
+                "Life_0": { "frames": [34] },
+                "Life_1": { "frames": [35] },
+                "Items_Diamonds": { "frames": [36] },
+                "Items_Pearl": { "frames": [37] },
+                "Life_2": { "frames": [38] },
+                "Life_3": { "frames": [39] },
+                "Items_Gold-Bar": { "frames": [40] },
+                "Items_Key": { "frames": [41] },
+                "Life_4": { "frames": [42] },
+                "Items_Emeralds": { "frames": [43] },
+                "Life_5": { "frames": [44] },
+                "Items_One-Dollar-Coin": { "frames": [45] },
+                "PlayerLocation": { "frames": [46] },
+                "Items_Fifty-Dollars": { "frames": [47] },
+                "Items_Five-Dollars": { "frames": [48] },
+                "Items_Hellebore-Flower1": { "frames": [49] },
+                "Items_One-Dollar": { "frames": [50] },
+                "Items_One-Hundred-Dollars": { "frames": [51] },
+                "Items_Ten-Dollars": { "frames": [52] },
+                "Items_Twenty-Dollars": { "frames": [53] },
+                "Items_Rubies": { "frames": [54] },
+                "Items_Sapphires": { "frames": [55] },
+                "upIndicator": { 
+                    "frames": [28,28,28,30,30,30],
                     "speed": 0.1
                 },
-                "Items_Gold-Bar": { "frames": [2] },
-                "Items_Diamonds": { "frames": [4] },
-                "Items_Fifty-Dollars": { "frames": [5] },
-                "Items_One-Dollar-Coin": { "frames": [6] },
-                "Items_Five-Dollars": { "frames": [7] },
-                "Items_One-Dollar": { "frames": [8] },
-                "Items_Emeralds": { "frames": [9] },
-                "Items_Rubies": { "frames": [10] },
-                "Items_One-Hundred-Dollars": { "frames": [11] },
-                "Items_Sapphires": { "frames": [12] },
-                "Items_Ten-Dollars": { "frames": [13] },
-                "Items_Twenty-Dollars": { "frames": [14] },
-                "Items_Key": { "frames": [15] },
-                "Items_Pearl": { "frames": [16] }
+                "downIndicator": { 
+                    "frames": [20,20,20,26,26,26],
+                    "speed": 0.1
+                },
+                "leftIndicator": { 
+                    "frames": [24,24,24,17,17,17],
+                    "speed": 0.1
+                },
+                "rightIndicator": { 
+                    "frames": [25,25,25,19,19,19],
+                    "speed": 0.1
+                },
+                "attackIndicator": { 
+                    "frames": [21,21,21,32,32,32],
+                    "speed": 0.1
+                },
+                "stunIndicator": { 
+                    "frames": [22,22,22,31,31,31],
+                    "speed": 0.1
+                }
             }
         };
+
         public static getAtlas_Phoebe: any = {
             "images": [
                 ""
@@ -603,9 +711,15 @@ module config {
                     "speed": 0.1
                 },
                 "Phoebe_Bite_Left1": { "frames": [12] },
-                "Phoebe_Bite_Left2": { "frames": [13] },
+                "Phoebe_Bite_Left2": { 
+                    "frames": [12, 13],
+                    "speed": 0.1
+                },
                 "Phoebe_Bite_Front1": { "frames": [14] },
-                "Phoebe_Bite_Front2": { "frames": [15] },
+                "Phoebe_Bite_Front2": { 
+                    "frames": [14, 15],
+                    "speed": 0.1
+                },
                 "Phoebe_Bite_Back": { "frames": [16] },
                 "Phoebe_Bite_Right1": { "frames": [17] },
                 "Phoebe_Bite_Right2": { "frames": [18] },
@@ -615,6 +729,12 @@ module config {
                 },
                 "Phoebe_Dead_B": {
                     "frames": [21, 22],
+                "Phoebe_Bite_Right2": { 
+                    "frames": [17,18],
+                    "speed": 0.1
+                },
+                "Phoebe_Dead_A": { 
+                    "frames": [19,20],
                     "speed": 0.1
                 },
                 "Phoebe_Explosion": {
@@ -634,6 +754,43 @@ module config {
                 "Phoebe_Walk_Right2": { "frames": [45] },
                 "Phoebe_Walk_Back1": { "frames": [46] },
                 "Phoebe_Walk_Back2": { "frames": [47] },
+=======
+                "Phoebe_Run_Left": { 
+                    "frames": [28,29],
+                    "speed": 0.1
+                },
+                "Phoebe_Run_Front": { 
+                    "frames": [30,31,32,33],
+                    "speed": 0.1
+                },
+                "Phoebe_Run_Right": { 
+                    "frames": [34,35],
+                    "speed": 0.1
+                },
+                "Phoebe_Run_Back": {
+                    "frames": [36,37,38,39],
+                    "speed": 0.1
+                },
+                "Phoebe_Walk_Front1": { 
+                    "frames": [40, 41],
+                    "speed": 0.1
+                },
+                "Phoebe_Walk_Front2": { "frames": [40] },
+                "Phoebe_Walk_Left1": { 
+                    "frames": [42, 43],
+                    "speed": 0.1
+                },
+                "Phoebe_Walk_Left2": { "frames": [42] },
+                "Phoebe_Walk_Right1": { 
+                    "frames": [44, 45],
+                    "speed": 0.1
+                },
+                "Phoebe_Walk_Right2": { "frames": [44] },
+                "Phoebe_Walk_Back1": { 
+                    "frames": [46, 47],
+                    "speed": 0.1
+                },
+                "Phoebe_Walk_Back2": { "frames": [46] },
                 "PhoebeSoul_Attack_Left": { "frames": [48] },
                 "PhoebeSoul_Attack_Front": { "frames": [49] },
                 "PhoebeSoul_Attack_Right": { "frames": [50] },
@@ -651,6 +808,249 @@ module config {
                 "PhoebeSoul_Walk_Left": { "frames": [62] },
                 "PhoebeSoul_Walk_Right": { "frames": [63] },
                 "PhoebeSoul_Walk_Back": { "frames": [64] }
+            }
+        };
+        
+        public static getAtlas_Phantos: any = {
+            "images": [
+                ""
+            ],
+            "framerate": 20,
+            "frames": [
+                [0, 0, 105, 92, 0, -18.5, 0],
+                [105, 0, 105, 92, 0, -18.5, 0],
+                [210, 0, 105, 92, 0, -18.5, 0],
+                [315, 0, 105, 92, 0, 0, 23],
+                [0, 97, 105, 92, 0, 0, 23],
+                [105, 97, 105, 92, 0, 0, 23],
+                [210, 97, 105, 92, 0, 18.5, 0],
+                [315, 97, 105, 92, 0, 18.5, 0],
+                [0, 194, 105, 92, 0, 18.5, 0],
+                [105, 194, 105, 92, 0, 0, -23],
+                [210, 194, 105, 92, 0, 0, -23],
+                [315, 194, 105, 92, 0, 0, -23],
+                [0, 291, 97, 97, 0, 0, 0],
+                [105, 291, 97, 97, 0, 0, 0],
+                [210, 291, 97, 97, 0, 0, 0],
+                [315, 291, 97, 97, 0, 0, 0]
+            ],
+            
+            "animations": {
+                "Phantos_Left": { 
+                    "frames": [0, 1, 2],
+                    "speed": 0.1
+                },
+                "Phantos_Front": { 
+                    "frames": [3, 4, 5],
+                    "speed": 0.1
+                },
+                "Phantos_Right": { 
+                    "frames": [ 6, 7, 8],
+                    "speed": 0.1
+                },
+                "Phantos_Back": { 
+                    "frames": [9, 10, 11],
+                    "speed": 0.1
+                },
+                "PhantosSoul_Back": { "frames": [12] },
+                "PhantosSoul_Front": { "frames": [13] },
+                "PhantosSoul_Left": { "frames": [14] },
+                "PhantosSoul_Right": { "frames": [15] }
+            },
+
+            "speed": 0.1
+        };
+        
+        public static getAtlas_Phantorm: any = {
+            "images": [
+                ""
+            ],
+            
+            "framerate": 20,
+            "frames": [
+                [0, 0, 71, 98, 0, 0, -14],
+                [0, 98, 71, 98, 0, -42, -14],
+                [0, 196, 35, 51, 0, -1, 0],
+                [35, 196, 30, 51, 0, -1, 0],
+                [65, 196, 30, 51, 0, -6, 0],
+                [71, 0, 25, 86, 0, -44, 0],
+                [71, 86, 99, 75, 0, -8, -15],
+                [71, 161, 34, 34, 0, -2, -6],
+                [95, 195, 25, 51, 0, -6, 0],
+                [105, 161, 34, 34, 0, -2, -6],
+                [120, 195, 25, 51, 0, -6, 0],
+                [139, 161, 27, 27, 0, -5, -9],
+                [145, 188, 59, 62, 0, -18, -5], 
+                [166, 161, 17, 17, 0, -10, -14],
+                [96, 0, 99, 74, 0, -8, -38],
+                [170, 74, 55, 73, 0, 11, -5],
+                [183, 147, 34, 41, 0, -3, 0],
+                [204, 188, 56, 62, 0, 13, -5], 
+                [195, 0, 55, 73, 0, -14, -5],
+                [217, 147, 25, 39, 0, -6, -3],
+                [225, 73, 25, 73, 0, -18, -5], 
+                [242, 146, 25, 39, 0, -6, -3],
+                [260, 185, 55, 65, 0, 11, 12], 
+                [250, 0, 25, 69, 0, -18, 16], //23
+                [250, 69, 55, 65, 0, -14, 12], 
+                [267, 134, 25, 51, 0, -6, 0],
+                [292, 134, 25, 51, 0, -6, 0],
+                [315, 185, 58, 58, 0, -18, 5], //23
+                [275, 0, 57, 58, 0, 14, 5], //28
+                [305, 58, 66, 48, 0, 22, -5], 
+                [332, 0, 66, 48, 0, -14, -5], 
+                [317, 106, 37, 48, 0, 0, -3],
+                [354, 106, 37, 48, 0, 0, -3],
+                [371, 48, 37, 48, 0, 0, -3],
+                [398, 0, 37, 48, 0, 0, -3],
+                [373, 154, 30, 46, 0, -7, 0],
+                [373, 200, 29, 46, 0, -4, 0],
+                [402, 200, 29, 46, 0, -3, 0],
+                [391, 96, 29, 46, 0, -8, 0],
+                [408, 48, 29, 46, 0, -4, 0],
+                [435, 0, 28, 46, 0, -5, 0],
+                [403, 142, 28, 46, 0, -5, 0],
+                [420, 94, 28, 46, 0, -4, 0],
+                [437, 46, 28, 46, 0, -5, 0],
+                [463, 0, 28, 46, 0, -5, 0],
+                [431, 140, 26, 46, 0, -5, -5],
+                [448, 92, 26, 46, 0, -5, -5],
+                [465, 46, 26, 46, 0, -5, -5],
+                [431, 186, 26, 46, 0, -5, -5],
+                [457, 138, 26, 46, 0, -7, 0],
+                [474, 92, 26, 46, 0, -4, 0],
+                [457, 184, 26, 46, 0, -5, 0],
+                [491, 0, 25, 46, 0, -7, 0],
+                [491, 46, 25, 46, 0, -6, 0],
+                [483, 138, 25, 46, 0, -6, 0],
+                [500, 92, 25, 46, 0, -6, 0],
+                [483, 184, 25, 46, 0, -6, 0],
+                [516, 0, 25, 46, 0, -6, 0],
+                [516, 46, 25, 46, 0, -6, 0],
+                [541, 0, 37, 38, 0, 0, -4],
+                [578, 0, 37, 38, 0, 0, -4],
+                [615, 0, 26, 38, 0, -6, -4],
+                [541, 38, 37, 38, 0, 0, -4],
+                [578, 38, 37, 38, 0, 0, -4],
+                [615, 38, 26, 38, 0, -6, -4],
+                [541, 76, 37, 37, 0, 0, -4],
+                [578, 76, 37, 37, 0, 0, -4],
+                [615, 76, 26, 38, 0, -6, -4],
+                [525, 113, 25, 46, 0, -6, 0],
+                [550, 113, 25, 46, 0, -7, 0],
+                [575, 113, 25, 46, 0, -6, 0],
+                [600, 114, 25, 46, 0, -6, 0],
+                [508, 160, 25, 46, 0, -6, 0],
+                [508, 206, 25, 45, 0, -6, -1],
+                [533, 159, 25, 46, 0, -6, 0],
+                [533, 205, 25, 46, 0, -6, 0],
+                [558, 159, 25, 46, 0, -6, 0],
+                [558, 205, 25, 46, 0, -6, 0],
+                [583, 160, 25, 46, 0, -6, 0],
+                [583, 206, 25, 45, 0, -6, 0],
+                [608, 160, 25, 46, 0, -6, 0],
+                [608, 206, 25, 38, 0, -8, 0]
+            ],
+            
+            "animations": {
+                "PhoebeWeapon_SoulAttack1": { "frames": [0] },
+                "PhoebeWeapon_SoulAttack3": { "frames": [1] },
+                "PhoebeSoul_Attack4": { "frames": [2] },
+                "PhoebeSoul_Attack1": { "frames": [3] },
+                "PhoebeSoul_Attack3": { "frames": [4] },
+                "PhoebeWeapon_Victory": { "frames": [5] },
+                "PhoebeWeapon_SoulAttack4": { "frames": [6] },
+                "Phoebe_Dead3": { "frames": [7] },
+                "PhoebeSoul_Walk1": { "frames": [8] },
+                "Phoebe_Dead4": { "frames": [9] },
+                "PhoebeSoul_Walk2": { "frames": [10] },
+                "Phoebe_Explosion2": { "frames": [11] },
+                "PhoebeWeapon_Attack6": { "frames": [12] },
+                "Phoebe_Explosion1": { "frames": [13] },
+                "PhoebeWeapon_SoulAttack2": { "frames": [14] },
+                "PhoebeWeapon_Attack3": { "frames": [15] },
+                "PhoebeSoul_Attack2": { "frames": [16] },
+                "PhoebeWeapon_Attack4": { "frames": [17] },
+                "PhoebeWeapon_Attack9": { "frames": [18] },
+                "Phoebe_Dead1": { "frames": [19] },
+                "PhoebeWeapon_Attack5": { "frames": [20] },
+                "Phoebe_Dead2": { "frames": [21] },
+                "PhoebeWeapon_Attack1": { "frames": [22] },
+                "PhoebeWeapon_Attack11": { "frames": [23] },
+                "PhoebeWeapon_Attack7": { "frames": [24] },
+                "PhoebeSoul_Walk3": { "frames": [25] },
+                "PhoebeSoul_Walk4": { "frames": [26] },
+                "PhoebeWeapon_Attack10": { "frames": [27] },
+                "PhoebeWeapon_Attack12": { "frames": [28] },
+                "PhoebeWeapon_Attack2": { "frames": [29] },
+                "PhoebeWeapon_Attack8": { "frames": [30] },
+                "PhoebeSoul_Dodge1": { "frames": [31] },
+                "PhoebeSoul_Dodge2": { "frames": [32] },
+                "PhoebeSoul_Run1": { "frames": [33] },
+                "PhoebeSoul_Run2": { "frames": [34] },
+                "Phoebe_Attack10": { "frames": [35] },
+                "Phoebe_Attack1": { "frames": [36] },
+                "Phoebe_Attack12": { "frames": [37] },
+                "Phoebe_Attack6": { "frames": [38] },
+                "Phoebe_Attack7": { "frames": [39] },
+                "Phoebe_Attack2": { "frames": [40] },
+                "Phoebe_Attack4": { "frames": [41] },
+                "Phoebe_Attack8": { "frames": [42] },
+                "Phoebe_Run1": { "frames": [43] },
+                "Phoebe_Run7": { "frames": [44] },
+                "PhoebeSoul_Dodge3": { "frames": [45] },
+                "PhoebeSoul_Dodge4": { "frames": [46] },
+                "PhoebeSoul_Run3": { "frames": [47] },
+                "PhoebeSoul_Run4": { "frames": [48] },
+                "Phoebe_Attack3": { "frames": [49] },
+                "Phoebe_Attack9": { "frames": [50] },
+                "Phoebe_Run5": { "frames": [51] },
+                "Phoebe_Attack11": { "frames": [52] },
+                "Phoebe_Run10": { "frames": [53] },
+                "Phoebe_Run11": { "frames": [54] },
+                "Phoebe_Run12": { "frames": [55] },
+                "Phoebe_Run2": { "frames": [56] },
+                "Phoebe_Run3": { "frames": [57] },
+                "Phoebe_Run4": { "frames": [58] },
+                "Phoebe_Bite1": { "frames": [59] },
+                "Phoebe_Bite2": { "frames": [60] },
+                "Phoebe_Bite3": { "frames": [61] },
+                "Phoebe_Bite6": { "frames": [62] },
+                "Phoebe_Bite7": { "frames": [63] },
+                "Phoebe_Bite4": { "frames": [64] },
+                "Phoebe_Explosion3": { "frames": [65] },
+                "Phoebe_Explosion4": { "frames": [66] },
+                "Phoebe_Bite5": { "frames": [67] },
+                "Phoebe_Run6": { "frames": [68] },
+                "Phoebe_Run8": { "frames": [69] },
+                "Phoebe_Run9": { "frames": [70] },
+                "Phoebe_Walk1": { "frames": [71] },
+                "Phoebe_Walk2": { "frames": [72] },
+                "PhoebeSoul_Hit1": { "frames": [73] },
+                "Phoebe_Walk3": { "frames": [74] },
+                "Phoebe_Walk4": { "frames": [75] },
+                "Phoebe_Walk5": { "frames": [76] },
+                "Phoebe_Walk6": { "frames": [77] },
+                "Phoebe_Walk7": { "frames": [78] },
+                "Phoebe_Hurt1": { "frames": [79] },
+                "Phoebe_Walk8": { "frames": [80] },
+                "Phoebe_Attack5": { "frames": [81] },
+                "Phoebe_Attack_Left": {
+                    "frames" : [22, 29, 15],
+                    "speed": 0.2
+                },
+                "Phoebe_Attack_Front": {
+                    "frames" : [17, 20, 12],
+                    "speed": 0.2
+                },
+                "Phoebe_Attack_Right": {
+                    "frames" : [24, 30, 18],
+                    "speed": 0.2
+                },
+                "Phoebe_Attack_Back": {
+                    "frames" : [27, 23, 28],
+                    "speed": 0.2
+                }
             }
         };
     }

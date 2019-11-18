@@ -32,9 +32,6 @@ module objects{
                 //if enemy is entity, and a fall sequence was not defined, then define call sequence
                 //remove all view and keyboard, then after 1 second, transfer to original position
                 if (entity instanceof objects.Player && managers.Game.player.fallSequence == 0){
-                    entity.visible = false;
-                    entity.weapon.visible = false;
-                    entity.FallMessage();
                     managers.Game.keyboardManager.moveLeft = false;
                     managers.Game.keyboardManager.moveRight = false;
                     managers.Game.keyboardManager.moveUp = false;
@@ -42,12 +39,21 @@ module objects{
                     managers.Game.keyboardManager.enabled = false;
                     managers.Game.keyboardManager.attacking = false;
                     managers.Game.keyboardManager.biting = false;
+                    setTimeout(() => {
+                        entity.visible = false;
+                    }, 200);
+                    entity.weapon.visible = false;
+                    entity.FallMessage();
+                    entity.hp -= 1;
+                    if (entity.hp <= 0){
+                        entity.DeathSequence();
+                    }
                     managers.Game.player.fallSequence = setTimeout(() => {
-                        entity.hp -= 1;
                         entity.isTakingDamage = false;
                         entity.SetPosition(entity.lastPosition);
-                        entity.Update();
-                        entity.visible = true;
+                        if (entity.hp > 0){
+                            entity.visible = true;
+                        }
                         managers.Game.keyboardManager.enabled = true;
                         managers.Game.player.fallSequence = 0;
                         // Sound Effect

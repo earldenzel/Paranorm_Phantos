@@ -12,6 +12,7 @@ module objects {
         public isTakingDamage: boolean;
         public hp: number;
         public attackPower: number;
+        public isDead: boolean = false;
 
         // Constructor
         constructor(textureAtlas: createjs.SpriteSheet, imageString:string) {

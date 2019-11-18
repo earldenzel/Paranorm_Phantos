@@ -33,19 +33,30 @@ var objects;
             _this.canTraverseBot = false;
             _this.canTraverseLeft = false;
             _this.canTraverseRight = false;
-            _this.isDead = false;
+            _this.deadPlayer = new Array();
             _this.weapon = new objects.Weapon();
             _this.Start();
             _this.hp = 5;
             _this.maxHp = _this.hp;
-            _this.ecto = 5;
-            _this.maxEcto = _this.ecto;
+            _this.ecto = 0;
+            _this.maxEcto = 5;
             _this.attackPower = 1;
-            _this.images = ["Phoebe_Walk_Back1", "Phoebe_Walk_Front1", "Phoebe_Walk_Left1", "Phoebe_Walk_Right1"];
+            _this.walk = ["Phoebe_Walk_Back1", "Phoebe_Walk_Front1", "Phoebe_Walk_Left1", "Phoebe_Walk_Right1"];
+            _this.stand = ["Phoebe_Walk_Back2", "Phoebe_Walk_Front2", "Phoebe_Walk_Left2", "Phoebe_Walk_Right2"];
+            _this.run = ["Phoebe_Run_Back", "Phoebe_Run_Front", "Phoebe_Run_Left", "Phoebe_Run_Right"];
+            _this.bitedash = ["Phoebe_Bite_Back", "Phoebe_Bite_Front1", "Phoebe_Bite_Left1", "Phoebe_Bite_Right1"];
+            _this.bite = ["Phoebe_Bite_Front2", "Phoebe_Bite_Front2", "Phoebe_Bite_Left2", "Phoebe_Bite_Right2"];
             _this.direction = config.Direction.UP;
             _this.money = 0;
             _this.playerStatus = new objects.Label("1234567890", "16px", "'Press Start 2P'", "#FFFFFF", _this.x, _this.y, true);
             _this.key = 0;
+            _this.deadPlayer = [
+                new objects.DeadPlayer("Phoebe_Dead_A"),
+                new objects.DeadPlayer("Phoebe_Dead_B", false, false),
+                new objects.DeadPlayer("Phoebe_Dead_B", true, false),
+                new objects.DeadPlayer("Phoebe_Dead_B", false, true),
+                new objects.DeadPlayer("Phoebe_Dead_B", true, true)
+            ];
             return _this;
         }
         // Methods
@@ -56,13 +67,18 @@ var objects;
         };
         Player.prototype.Update = function () {
             managers.Game.player = this;
-            if (this.hp > 0 && this.currentAnimation != this.images[managers.Game.player.direction]) {
-                this.gotoAndPlay(this.images[this.direction]);
-            }
             this.x = Math.round(this.x);
             this.y = Math.round(this.y);
-            this.Move();
-            this.weapon.Update();
+            if (this.hp > 0) {
+                this.Move();
+                this.weapon.Update();
+            }
+            if (this.isDead) {
+                this.deadPlayer.forEach(function (e) {
+                    e.visible = true;
+                    e.Update();
+                });
+            }
             this.CheckBound(); // <-- Check collisions
             //define the moving status bar for Phoebe
             this.playerStatus.x = this.x;
@@ -71,10 +87,6 @@ var objects;
             }
             else {
                 this.playerStatus.y = this.y - this.halfH - config.Bounds.TEXT_OFFSET;
-            }
-            if (this.hp <= 0 && !this.isDead) {
-                this.isDead = true;
-                this.DeadMessage();
             }
             if (this.bitingTimer == 4) {
                 this.bitingReset++;
@@ -99,21 +111,14 @@ var objects;
         Player.prototype.Reset = function () { };
         Player.prototype.Move = function () {
             //movement implementation
-            if (managers.Game.keyboardManager.moveUp) {
-                this.y -= this.playerMoveSpeed;
-                this.direction = config.Direction.UP;
-            }
-            if (managers.Game.keyboardManager.moveDown) {
-                this.y += this.playerMoveSpeed;
-                this.direction = config.Direction.DOWN;
-            }
-            if (managers.Game.keyboardManager.moveLeft) {
-                this.x -= this.playerMoveSpeed;
-                this.direction = config.Direction.LEFT;
-            }
-            if (managers.Game.keyboardManager.moveRight) {
-                this.x += this.playerMoveSpeed;
-                this.direction = config.Direction.RIGHT;
+            if (!managers.Game.keyboardManager.moveUp
+                && !managers.Game.keyboardManager.moveDown
+                && !managers.Game.keyboardManager.moveLeft
+                && !managers.Game.keyboardManager.moveRight
+                && !managers.Game.keyboardManager.attacking
+                && !managers.Game.keyboardManager.biting
+                && this.biteSequence === 0) {
+                this.SwitchAnimation(this.stand[this.direction]);
             }
             // Running Implementation
             if (managers.Game.keyboardManager.running) {
@@ -121,77 +126,82 @@ var objects;
                 if (managers.Game.keyboardManager.moveUp) {
                     this.y -= runningSpeed;
                     this.direction = config.Direction.UP;
+                    this.SwitchAnimation(this.run[this.direction]);
                 }
                 if (managers.Game.keyboardManager.moveDown) {
                     this.y += runningSpeed;
                     this.direction = config.Direction.DOWN;
+                    this.SwitchAnimation(this.run[this.direction]);
                 }
                 if (managers.Game.keyboardManager.moveLeft) {
                     this.x -= runningSpeed;
                     this.direction = config.Direction.LEFT;
+                    this.SwitchAnimation(this.run[this.direction]);
                 }
                 if (managers.Game.keyboardManager.moveRight) {
                     this.x += runningSpeed;
                     this.direction = config.Direction.RIGHT;
+                    this.SwitchAnimation(this.run[this.direction]);
+                }
+            }
+            else {
+                if (managers.Game.keyboardManager.moveUp) {
+                    this.y -= this.playerMoveSpeed;
+                    this.direction = config.Direction.UP;
+                    this.SwitchAnimation(this.walk[this.direction]);
+                }
+                if (managers.Game.keyboardManager.moveDown) {
+                    this.y += this.playerMoveSpeed;
+                    this.direction = config.Direction.DOWN;
+                    this.SwitchAnimation(this.walk[this.direction]);
+                }
+                if (managers.Game.keyboardManager.moveLeft) {
+                    this.x -= this.playerMoveSpeed;
+                    this.direction = config.Direction.LEFT;
+                    this.SwitchAnimation(this.walk[this.direction]);
+                }
+                if (managers.Game.keyboardManager.moveRight) {
+                    this.x += this.playerMoveSpeed;
+                    this.direction = config.Direction.RIGHT;
+                    this.SwitchAnimation(this.walk[this.direction]);
                 }
             }
             //if player presses the attack button
             if (managers.Game.keyboardManager.attacking) {
-                //and the attack sequence is not defined... then define attack sequence
                 if (this.attackSequence == 0 && this.weapon != undefined) {
+                    this.alpha = 0;
+                    this.attackSequence = 1;
                     this.weapon.Attack();
                 }
-                //and the attack sequence is defined, then increase timer for attack (button held down)
-                else {
-                    this.attackTimer++;
-                }
-                //if button is held down too long, then weapon visibility is lost. 
-                if (this.attackTimer > 50) {
-                    console.log("Attack disabled");
-                    this.weapon.visible = false;
-                }
             }
-            //if player does not press the attack button
-            else {
-                //attack sequence is defined and the button was held down sparingly, then turn off attack
-                if (this.attackSequence > 0 && this.attackTimer <= 50) {
-                    console.log("Attack sequence cancelled");
-                    this.attackTimer = 0;
-                    clearInterval(this.attackSequence);
-                    this.weapon.visible = false;
-                    this.attackSequence = 0;
-                }
-                //if weapon is disabled, and button is let go, then reset timer
-                //introduce a 300ms disable of the weapon
-                if (this.attackTimer > 50 && !this.weapon.visible) {
-                    this.attackTimer = 0;
-                    managers.Game.keyboardManager.attackEnabled = false;
-                    setTimeout(function () {
-                        console.log("Attack re-enabled");
-                        managers.Game.keyboardManager.attackEnabled = true;
-                    }, 300);
-                }
+            if (this.biteSequence !== 0) {
+                this.SwitchAnimation(this.bite[this.direction]);
             }
             // Biting/Dash Implementation
-            if (managers.Game.keyboardManager.biting && this.bitingTimer <= 3) {
-                console.log("BITING");
-                managers.Game.keyboardManager.enabled = false;
-                switch (this.direction) {
-                    case config.Direction.UP:
-                        this.y -= (this.playerMoveSpeed + 16);
-                        break;
-                    case config.Direction.DOWN:
-                        this.y += (this.playerMoveSpeed + 16);
-                        break;
-                    case config.Direction.RIGHT:
-                        this.x += (this.playerMoveSpeed + 16);
-                        break;
-                    case config.Direction.LEFT:
-                        this.x -= (this.playerMoveSpeed + 16);
-                        break;
+            if (managers.Game.keyboardManager.biting) {
+                if (this.bitingTimer <= 3) {
+                    managers.Game.keyboardManager.enabled = false;
+                    switch (this.direction) {
+                        case config.Direction.UP:
+                            this.y -= (this.playerMoveSpeed + 16);
+                            this.SwitchAnimation(this.bitedash[this.direction]);
+                            break;
+                        case config.Direction.DOWN:
+                            this.y += (this.playerMoveSpeed + 16);
+                            this.SwitchAnimation(this.bitedash[this.direction]);
+                            break;
+                        case config.Direction.RIGHT:
+                            this.x += (this.playerMoveSpeed + 16);
+                            this.SwitchAnimation(this.bitedash[this.direction]);
+                            break;
+                        case config.Direction.LEFT:
+                            this.x -= (this.playerMoveSpeed + 16);
+                            this.SwitchAnimation(this.bitedash[this.direction]);
+                            break;
+                    }
+                    managers.Game.keyboardManager.enabled = true;
+                    this.bitingTimer++;
                 }
-                managers.Game.keyboardManager.enabled = true;
-                this.bitingTimer++;
             }
         };
         Player.prototype.CheckBound = function () {
@@ -264,17 +274,7 @@ var objects;
             _super.prototype.GetDamage.call(this, attacker);
             this.HurtMessage();
             if (this.hp <= 0) {
-                console.log(attacker.name + " erased " + this.name + "'s existence from this world.");
-                this.gotoAndPlay("Phoebe_Explosion");
-                this.on("animationend", this.animationEnded.bind(this, "Phoebe_Dead_A"), false);
-                //this.gotoAndPlay("Phoebe_Dead_A");
-                //this.on("animationend", this.animationEnded.bind(this), false);
-                //this.gotoAndPlay("Phoebe_Dead_B");
-                //this.on("animationend", this.animationEnded.bind(this), false);
-                //managers.Game.stage.removeChild(this.weapon);
-                //managers.Game.stage.removeChild(this);
-                //this.weapon.visible = false;
-                //this.visible = false;
+                this.DeathSequence();
             }
         };
         //phoebe effects from devour
@@ -292,7 +292,7 @@ var objects;
                     message = "DELICIOUS.";
                 }
                 else if (random > 50) {
-                    message = "I WANT MORE FOOD";
+                    message = "I FEEL BETTER";
                 }
                 else if (random > 25) {
                     message = "HEALED UP!";
@@ -304,16 +304,16 @@ var objects;
             else {
                 var random = Math.random() * 100;
                 if (random > 75) {
-                    message = "YUMMY!";
+                    message = "YUM!";
                 }
                 else if (random > 50) {
-                    message = "AHHH! FRESH MEAT";
+                    message = "FRESH MEAT";
                 }
                 else if (random > 25) {
-                    message = "NOM NOM NOM";
+                    message = "TASTY!";
                 }
                 else {
-                    message = "ALREADY FULL THO";
+                    message = "ALL GOOD";
                 }
             }
             this.EchoMessage(message);
@@ -329,6 +329,11 @@ var objects;
         Player.prototype.GainDollars = function (dollars) {
             this.money += dollars;
             this.EchoMessage("GAINED $" + dollars);
+        };
+        Player.prototype.GainEcto = function () {
+            if (this.ecto < this.maxEcto) {
+                this.ecto += 1;
+            }
         };
         Player.prototype.HurtMessage = function () {
             var random = Math.random() * 100;
@@ -369,10 +374,25 @@ var objects;
                 this.EchoMessage("IS THIS IT?", 3000);
             }
             else if (random > 25) {
-                this.EchoMessage("FINALLY, DEATH...", 3000);
+                this.EchoMessage("GOOD NIGHT..", 3000);
             }
             else {
                 this.EchoMessage("BYE BYE", 3000);
+            }
+        };
+        Player.prototype.EatMessage = function () {
+            var random = Math.random() * 100;
+            if (random > 75) {
+                this.EchoMessage("MUNCH MUNCH", 3000);
+            }
+            else if (random > 50) {
+                this.EchoMessage("CHOMP CHOMP", 3000);
+            }
+            else if (random > 25) {
+                this.EchoMessage("MMMMMM...", 3000);
+            }
+            else {
+                this.EchoMessage("AHHHH...", 3000);
             }
         };
         Player.prototype.EchoMessage = function (message, timeout) {
@@ -382,11 +402,9 @@ var objects;
                 this.playerStatus.text = message;
                 this.playerStatus.Recenter();
                 this.playerStatus.visible = true;
-                if (this.isDead) {
-                    setTimeout(function () {
-                        managers.Game.currentScene = config.Scene.OVER;
-                    }, timeout);
-                }
+                setTimeout(function () {
+                    managers.Game.currentScene = config.Scene.OVER;
+                }, timeout);
             }
             else {
                 if (this.textSequence != 0) {
@@ -401,19 +419,42 @@ var objects;
                 }, timeout);
             }
         };
-        Player.prototype.animationEnded = function (nextAnimation, nextAnimation2) {
-            //this.alpha = 0;            
-            if (nextAnimation2 === void 0) { nextAnimation2 = ""; }
-            if (nextAnimation2 != "") {
-                this.off("animationend", this.animationEnded.bind(this), false);
-                this.y -= 1;
-                this.on("animationend", this.animationEnded.bind(this, nextAnimation2, nextAnimation), false);
-                this.gotoAndPlay(nextAnimation);
+        Player.prototype.phoebeDied = function () {
+            var _this = this;
+            this.off("animationend", null);
+            this.deadPlayer.forEach(function (e) {
+                e.SetPosition(_this.GetPosition());
+                e.visible = true;
+            });
+            this.visible = false;
+            this.weapon.visible = false;
+        };
+        Player.prototype.DeathSequence = function () {
+            this.SwitchAnimation("Phoebe_Explosion");
+            this.on("animationend", this.phoebeDied.bind(this), false, true);
+            this.isDead = true;
+            this.DeadMessage();
+        };
+        Player.prototype.SwitchAnimation = function (newAnimation) {
+            if (this.currentAnimation != newAnimation) {
+                this.gotoAndPlay(newAnimation);
             }
-            else {
-                this.off("animationend", this.animationEnded.bind(this), false);
-                this.gotoAndPlay(nextAnimation);
+        };
+        Player.prototype.SetBitePositionDirection = function (target) {
+            switch (this.direction) {
+                case config.Direction.UP:
+                    this.direction = config.Direction.DOWN;
+                case config.Direction.DOWN:
+                    target = math.Vec2.Add(target, new math.Vec2(0, -this.halfH / 2));
+                    break;
+                case config.Direction.RIGHT:
+                    target = math.Vec2.Add(target, new math.Vec2(-this.halfW, 0));
+                    break;
+                case config.Direction.LEFT:
+                    target = math.Vec2.Add(target, new math.Vec2(this.halfW, 0));
+                    break;
             }
+            this.SetPosition(target);
         };
         return Player;
     }(objects.GameObject));

@@ -4,7 +4,7 @@ module objects {
         public isStunned: boolean;
         protected knockback: number;
         protected eatTimer: number;
-        //public stunIndicator: objects.Indicator;
+        public stunIndicator: objects.Indicator;
         protected bounty: number;
         public isFlying: boolean;
 
@@ -15,7 +15,7 @@ module objects {
 
             this.startPosition = startPosition;
             this.Start();
-            //this.stunIndicator = new objects.Indicator("kKeyIndicator");
+            this.stunIndicator = new objects.Indicator("stunIndicator");
             this.Move();
         }
 
@@ -32,12 +32,15 @@ module objects {
             }
 
             //if it is stunned
-            if (this.isStunned) {                
+            if (this.isStunned) {             
                 //determine whether a bit is currently happening 
                 if (managers.Game.player.biteSequence == 0){
                     //if it is currently in contact with player and whether the biting button is pressed, then disable movement
                     if (managers.Game.keyboardManager.biting && managers.Collision.Check(managers.Game.player, this)){                        
-                        managers.Game.player.SetPosition(this.GetPosition());
+                        managers.Game.player.SetBitePositionDirection(this.GetPosition());
+                        managers.Game.player.EatMessage();
+                        this.scaleX = managers.Game.player.halfH / this.height;
+                        this.scaleY = this.scaleX;
                         managers.Game.keyboardManager.moveLeft = false;
                         managers.Game.keyboardManager.moveRight = false;
                         managers.Game.keyboardManager.moveUp = false;
@@ -96,6 +99,14 @@ module objects {
                     this.isTakingDamage = false;
                 }
             }
+
+            if (this.isStunned && !this.isDead && managers.Game.player.biteSequence == 0){
+                this.stunIndicator.SetPosition(math.Vec2.Add(this.GetPosition(), new math.Vec2(0, -this.height)));
+                this.stunIndicator.visible = true;                    
+            }
+            else{
+                this.stunIndicator.visible = false;
+            }
         }
         public Reset(): void {
 
@@ -139,16 +150,6 @@ module objects {
                 let newPosition: math.Vec2 = math.Vec2.Add(this.GetPosition(), awayVector);
                 this.SetPosition(newPosition);
                 super.GetDamage(attacker);
-                
-                if (this.hp <= 0){
-                    //delay is important so there is no-split second show of the enemy body atop the barrier
-                    setTimeout(() => {
-                        //managers.Game.messageStatus.text = this.name + " is stunned!";
-                        //this.stunIndicator.x = this.x;
-                        //this.stunIndicator.y = this.y - this.halfH - this.stunIndicator.halfH;
-                        //this.stunIndicator.visible = true;                        
-                    }, 5);
-                }
             }
         }
 
@@ -157,10 +158,14 @@ module objects {
         }
 
         public RemoveFromPlay(bounty: number): void{
+            this.isDead = true;
+            managers.Game.player.GainEcto();
             if (bounty > 0){
+                managers.Game.SFX = createjs.Sound.play("anyDefeated");
+                managers.Game.SFX.volume = 0.2;
                 managers.Game.player.GainDollars(bounty);
             }
-            //this.stunIndicator.visible = false;
+            this.stunIndicator.visible = false;
             managers.Game.stage.removeChild(this);
             this.visible = false;
         }

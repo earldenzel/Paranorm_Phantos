@@ -17,8 +17,9 @@ var objects;
         __extends(Weapon, _super);
         // Constructor
         function Weapon() {
-            var _this = _super.call(this, managers.Game.phoebe_TextureAtlas, "Phoebe_Walk_Back1") || this;
+            var _this = _super.call(this, managers.Game.phantorm_TextureAtlas, "Phoebe_Attack_Back") || this;
             _this.images = ["Phoebe_Attack_Back", "Phoebe_Attack_Front", "Phoebe_Attack_Left", "Phoebe_Attack_Right"];
+            _this.animationEnd = [15, 12, 18, 28];
             _this.Start();
             return _this;
         }
@@ -29,83 +30,28 @@ var objects;
         };
         // Updated 60 times per second (60FPS)
         Weapon.prototype.Update = function () {
-            if (this.currentAnimation != this.images[managers.Game.player.direction]) {
-                this.gotoAndPlay(this.images[managers.Game.player.direction]);
+            this.x = managers.Game.player.x;
+            this.y = managers.Game.player.y;
+            if (this.currentAnimationFrame > 2.8) {
+                this.visible = false;
+                managers.Game.player.attackSequence = 0;
+                managers.Game.player.alpha = 1;
+                console.log("Attack ended");
             }
-            this.rotation = 0;
-            switch (managers.Game.player.direction) {
-                case config.Direction.UP:
-                    this.x = managers.Game.player.x;
-                    this.y = managers.Game.player.y - managers.Game.player.halfH;
-                    break;
-                case config.Direction.DOWN:
-                    this.x = managers.Game.player.x;
-                    this.y = managers.Game.player.y + managers.Game.player.halfH;
-                    break;
-                case config.Direction.LEFT:
-                    this.x = managers.Game.player.x - managers.Game.player.halfW;
-                    this.y = managers.Game.player.y;
-                    break;
-                case config.Direction.RIGHT:
-                    this.x = managers.Game.player.x + managers.Game.player.halfW;
-                    this.y = managers.Game.player.y;
-                    break;
-            }
-            this.CheckBound();
         };
         // Resets the position of the object
         Weapon.prototype.Reset = function () {
         };
         // Collision Detection 
         Weapon.prototype.CheckBound = function () {
-            // top bound - TODO: directions            
-            switch (managers.Game.player.direction) {
-                case config.Direction.UP:
-                    if (this.y <= managers.Game.player.y - managers.Game.player.height + managers.Game.player.halfH) {
-                        this.y = managers.Game.player.y - managers.Game.player.height + managers.Game.player.halfH;
-                    }
-                    break;
-                case config.Direction.DOWN:
-                    if (this.y >= managers.Game.player.y + managers.Game.player.halfH) {
-                        this.y = managers.Game.player.y + managers.Game.player.halfH;
-                    }
-                    break;
-                case config.Direction.LEFT:
-                    if (this.x <= managers.Game.player.x - managers.Game.player.width + managers.Game.player.halfW) {
-                        this.x = managers.Game.player.x - managers.Game.player.width + managers.Game.player.halfW;
-                    }
-                    break;
-                case config.Direction.RIGHT:
-                    if (this.x <= managers.Game.player.x + managers.Game.player.halfW) {
-                        this.x = managers.Game.player.x + managers.Game.player.halfW;
-                    }
-                    break;
-            }
         };
         Weapon.prototype.Attack = function () {
-            var _this = this;
             console.log("Attack initiated");
             this.visible = true;
-            managers.Game.player.attackSequence = setInterval(function () {
-                switch (managers.Game.player.direction) {
-                    case config.Direction.UP:
-                        _this.x = _this.x;
-                        _this.y -= 20;
-                        break;
-                    case config.Direction.DOWN:
-                        _this.x = _this.x;
-                        _this.y += 20;
-                        break;
-                    case config.Direction.LEFT:
-                        _this.x -= 20;
-                        _this.y = _this.y;
-                        break;
-                    case config.Direction.RIGHT:
-                        _this.x += 20;
-                        _this.y = _this.y;
-                        break;
-                }
-            }, 50);
+            this.currentAnimationFrame = 0;
+            if (this.currentAnimation != this.images[managers.Game.player.direction]) {
+                this.gotoAndPlay(this.images[managers.Game.player.direction]);
+            }
         };
         return Weapon;
     }(objects.GameObject));
