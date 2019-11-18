@@ -18,7 +18,7 @@ var objects;
         function Enemy(textureAtlas, enemyName) {
             var _this = _super.call(this, textureAtlas, enemyName) || this;
             _this.Start();
-            //this.stunIndicator = new objects.Indicator("kKeyIndicator");
+            _this.stunIndicator = new objects.Indicator("stunIndicator");
             _this.Move();
             return _this;
         }
@@ -98,6 +98,13 @@ var objects;
                     this.isTakingDamage = false;
                 }
             }
+            if (this.isStunned && !this.isDead && managers.Game.player.biteSequence == 0) {
+                this.stunIndicator.SetPosition(math.Vec2.Add(this.GetPosition(), new math.Vec2(0, -this.height)));
+                this.stunIndicator.visible = true;
+            }
+            else {
+                this.stunIndicator.visible = false;
+            }
         };
         Enemy.prototype.Reset = function () {
         };
@@ -143,13 +150,14 @@ var objects;
             return 0;
         };
         Enemy.prototype.RemoveFromPlay = function (bounty) {
+            this.isDead = true;
             managers.Game.player.GainEcto();
             if (bounty > 0) {
                 managers.Game.SFX = createjs.Sound.play("anyDefeated");
                 managers.Game.SFX.volume = 0.2;
                 managers.Game.player.GainDollars(bounty);
             }
-            //this.stunIndicator.visible = false;
+            this.stunIndicator.visible = false;
             managers.Game.stage.removeChild(this);
             this.visible = false;
         };

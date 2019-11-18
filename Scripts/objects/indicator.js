@@ -16,13 +16,15 @@ var objects;
     var Indicator = /** @class */ (function (_super) {
         __extends(Indicator, _super);
         // Constructor
-        function Indicator(textureAtlas, imageString) {
-            var _this = _super.call(this, textureAtlas, imageString) || this;
+        function Indicator(imageString) {
+            var _this = _super.call(this, managers.Game.item_TextureAtlas, imageString) || this;
             _this.name = imageString;
+            _this.Start();
             return _this;
         }
         Indicator.prototype.Start = function () {
-            this.visible = false;
+            this.scaleX = 0.8;
+            this.scaleY = 0.8;
         };
         Indicator.prototype.Update = function () { };
         Indicator.prototype.Reset = function () { };

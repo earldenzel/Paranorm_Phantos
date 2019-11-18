@@ -30,7 +30,6 @@ module objects {
         public key: number;
         public lastPosition: math.Vec2;
         public playerStatus: objects.Label;
-        public isDead: boolean = false;
         public deadPlayer: Array<objects.DeadPlayer> = new Array<objects.DeadPlayer>();
 
         public ecto: number;

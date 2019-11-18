@@ -33,7 +33,6 @@ var objects;
             _this.canTraverseBot = false;
             _this.canTraverseLeft = false;
             _this.canTraverseRight = false;
-            _this.isDead = false;
             _this.deadPlayer = new Array();
             _this.weapon = new objects.Weapon();
             _this.Start();

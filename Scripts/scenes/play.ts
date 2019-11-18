@@ -232,7 +232,7 @@ module scenes {
                 this.doorLeft.y = 110;
                 this.player.canTraverseLeft = !this.isDoorLeftLocked;
                 this.addChild(this.doorLeft);
-                this.setChildIndex(this.doorLeft, this.getNumChildren() - 8);
+                this.setChildIndex(this.doorLeft, this.getNumChildren() - 15);
             }
             if (this.hasDoorRight && !this.isDoorRightLocked && this.doorRight.name == "background_d_horiC") {
                 this.removeChild(this.doorRight);
@@ -241,7 +241,7 @@ module scenes {
                 this.doorRight.Flip();
                 this.player.canTraverseRight = !this.isDoorRightLocked;
                 this.addChild(this.doorRight);
-                this.setChildIndex(this.doorRight, this.getNumChildren() - 8);
+                this.setChildIndex(this.doorRight, this.getNumChildren() - 15);
             }
             if (this.hasDoorTop && !this.isDoorTopLocked && this.doorTop.name == "background_d_vertC") {
                 this.removeChild(this.doorTop);
@@ -249,7 +249,7 @@ module scenes {
                 this.doorTop.y = 110;
                 this.player.canTraverseTop = !this.isDoorTopLocked;
                 this.addChild(this.doorTop);
-                this.setChildIndex(this.doorTop, this.getNumChildren() - 8);
+                this.setChildIndex(this.doorTop, this.getNumChildren() - 15);
             }
             if (this.hasDoorBot && !this.isDoorBotLocked && this.doorBot.name == "background_d_vertC") {
                 this.removeChild(this.doorBot);
@@ -258,9 +258,8 @@ module scenes {
                 this.doorBot.Flip();
                 this.player.canTraverseBot = !this.isDoorBotLocked;
                 this.addChild(this.doorBot);
-                this.setChildIndex(this.doorBot, this.getNumChildren() - 8);
+                this.setChildIndex(this.doorBot, this.getNumChildren() - 15);
             }
-
             //this.playerStatus.text = "PLAYER HP" + this.player.hp + "/5";
             // Sets the Player Health
             this.playerInfo.PlayerHealth = this.player.hp;
@@ -318,7 +317,7 @@ module scenes {
             // ENEMY PLACEMENT
             this.enemies.forEach(e => {
                 this.addChild(e);
-                //this.addChild(e.stunIndicator);
+                this.addChild(e.stunIndicator);
             });            
 
             //door frames
