@@ -32,7 +32,7 @@
 
     let graveyard_TextureAtlasData: any;
     let graveyard_TextureAtlas: createjs.SpriteSheet;
-    
+
     let bat_TextureAtlasData: any;
     let bat_TextureAtlas: createjs.SpriteSheet;
 
@@ -78,11 +78,11 @@
 
         phoebe_TextureAtlasData = config.Assets.getAtlas_Phoebe;
         phoebe_TextureAtlasData.images = [assetManager.getResult("tAtlas_Phoebe")];
-        phoebe_TextureAtlas = new createjs.SpriteSheet(phoebe_TextureAtlasData);        
+        phoebe_TextureAtlas = new createjs.SpriteSheet(phoebe_TextureAtlasData);
 
         phantos_TextureAtlasData = config.Assets.getAtlas_Phantos;
         phantos_TextureAtlasData.images = [assetManager.getResult("tAtlas_Phantos")];
-        phantos_TextureAtlas = new createjs.SpriteSheet(phantos_TextureAtlasData);        
+        phantos_TextureAtlas = new createjs.SpriteSheet(phantos_TextureAtlasData);
 
         phantorm_TextureAtlasData = config.Assets.getAtlas_Phantorm;
         phantorm_TextureAtlasData.images = [assetManager.getResult("tAtlas_Phantorm")];
@@ -103,7 +103,7 @@
         shootingFlower_TextureAtlasData = config.Assets.getAtlas_ShootingFlower;
         shootingFlower_TextureAtlasData.images = [assetManager.getResult("tAtlas_ShootingFlower")];
         shootingFlower_TextureAtlas = new createjs.SpriteSheet(shootingFlower_TextureAtlasData);
-      
+
         // Initialize CreateJS
         stage = new createjs.Stage(canvas);
 
@@ -203,6 +203,81 @@
             case config.Scene.GRAVEYARD_8:
                 stage.removeAllChildren();
                 currentScene = new scenes.Graveyard_8();
+                stage.addChild(currentScene);
+                break;
+            case config.Scene.HOTEL_1:
+                stage.removeAllChildren();
+                currentScene = new scenes.Hotel_1();
+                stage.addChild(currentScene);
+                break;
+            case config.Scene.HOTEL_2:
+                stage.removeAllChildren();
+                currentScene = new scenes.Hotel_2();
+                stage.addChild(currentScene);
+                break;
+            case config.Scene.HOTEL_3:
+                stage.removeAllChildren();
+                currentScene = new scenes.Hotel_3();
+                stage.addChild(currentScene);
+                break;
+            case config.Scene.HOTEL_4:
+                stage.removeAllChildren();
+                currentScene = new scenes.Hotel_4();
+                stage.addChild(currentScene);
+                break;
+            case config.Scene.HOTEL_5:
+                stage.removeAllChildren();
+                currentScene = new scenes.Hotel_5();
+                stage.addChild(currentScene);
+                break;
+            case config.Scene.HOTEL_6:
+                stage.removeAllChildren();
+                currentScene = new scenes.Hotel_6();
+                stage.addChild(currentScene);
+                break;
+            case config.Scene.HOTEL_7:
+                stage.removeAllChildren();
+                currentScene = new scenes.Hotel_7();
+                stage.addChild(currentScene);
+                break;
+            case config.Scene.HOTEL_8:
+                stage.removeAllChildren();
+                currentScene = new scenes.Hotel_8();
+                stage.addChild(currentScene);
+                break;
+            case config.Scene.HOTEL_9:
+                stage.removeAllChildren();
+                currentScene = new scenes.Hotel_9();
+                stage.addChild(currentScene);
+                break;
+            case config.Scene.HOTEL_10:
+                stage.removeAllChildren();
+                currentScene = new scenes.Hotel_10();
+                stage.addChild(currentScene);
+                break;
+            case config.Scene.HOTEL_11:
+                stage.removeAllChildren();
+                currentScene = new scenes.Hotel_11();
+                stage.addChild(currentScene);
+                break;
+            case config.Scene.HOTEL_12:
+                stage.removeAllChildren();
+                currentScene = new scenes.Hotel_12();
+                stage.addChild(currentScene);
+                break;
+            case config.Scene.HOTEL_13:
+                stage.removeAllChildren();
+                currentScene = new scenes.Hotel_13();
+                stage.addChild(currentScene);
+                break;
+            case config.Scene.HOTEL_14:
+                stage.removeAllChildren();
+                currentScene = new scenes.Hotel_14();
+                stage.addChild(currentScene);
+                break;
+            case config.Scene.HOTEL_15:
+                stage.removeAllChildren();
+                currentScene = new scenes.Hotel_15();
                 stage.addChild(currentScene);
                 break;
             case config.Scene.OVER:
