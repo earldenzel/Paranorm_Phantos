@@ -17,7 +17,9 @@ var scenes;
         __extends(Graveyard_7, _super);
         // Constructor
         function Graveyard_7() {
-            var _this = _super.call(this, false, false, true, false) || this;
+            var _this = 
+            // hasDoorTop, hasDoorBot, hasDoorLeft, hasDoorRight
+            _super.call(this, false, false, true, false) || this;
             _this.Start();
             return _this;
         }

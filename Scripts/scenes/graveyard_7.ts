@@ -3,6 +3,7 @@ module scenes {
     export class Graveyard_7 extends scenes.PlayScene {
         // Constructor
         constructor() {
+            // hasDoorTop, hasDoorBot, hasDoorLeft, hasDoorRight
             super(false, false, true, false);
             this.Start();
         }
