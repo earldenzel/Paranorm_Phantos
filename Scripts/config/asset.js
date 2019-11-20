@@ -233,8 +233,16 @@ var config;
             },
             // SPRITE SHEETS
             {
+                "id": "tAtlas_Graveyard",
+                "src": "./Assets/_Background/Graveyard_TextureAtlas.png"
+            },
+            {
                 "id": "tAtlas_MapG",
                 "src": "./Assets/_UI/PlayerInfo/_Map/Map_Graveyard_TextureAtlas.png"
+            },
+            {
+                "id": "tAtlas_Hotel",
+                "src": "./Assets/_Background/Hotel_TextureAtlas.png"
             },
             {
                 "id": "tAtlas_Items",
@@ -255,10 +263,6 @@ var config;
             {
                 "id": "tAtlas_Bat",
                 "src": "./Assets/_Enemies/bat/Bat_TextureAtlas.png"
-            },
-            {
-                "id": "tAtlas_Graveyard",
-                "src": "./Assets/_Background/Graveyard_TextureAtlas.png"
             },
             {
                 "id": "tAtlas_Spider",
@@ -445,6 +449,102 @@ var config;
                 "Graveyard_Stairs_Up": { "frames": [22] },
                 "Graveyard_Fence2x": { "frames": [23] },
                 "Graveyard_HoleTile_Corner": { "frames": [24] }
+            },
+        };
+        Assets.getAtlas_Hotel = {
+            "images": [
+                ""
+            ],
+            "framerate": 20,
+            "frames": [
+                [0, 0, 564, 652, 0, 0, 0],
+                [564, 0, 386, 482, 0, 0, 0],
+                [0, 652, 564, 16, 0, 0, 0],
+                [950, 0, 16, 652, 0, 0, 0],
+                [564, 482, 194, 242, 0, 0, 0],
+                [758, 482, 74, 148, 0, 0, 0],
+                [832, 482, 118, 62, 0, 0, 0],
+                [0, 668, 80, 134, 0, 0, 0],
+                [80, 668, 76, 134, 0, 0, 0],
+                [156, 668, 134, 72, 0, 0, 0],
+                [290, 668, 134, 72, 0, 0, 0],
+                [424, 668, 120, 72, 0, 0, 0],
+                [966, 0, 52, 118, 0, 0, 0],
+                [758, 630, 74, 148, 0, 0, 0],
+                [832, 544, 76, 92, 0, 0, 0],
+                [832, 636, 76, 90, 0, 0, 0],
+                [156, 740, 98, 58, 0, 0, 0],
+                [254, 740, 82, 72, 0, 0, 0],
+                [336, 740, 76, 72, 0, 0, 0],
+                [412, 740, 76, 72, 0, 0, 0],
+                [832, 726, 76, 64, 0, 0, 0],
+                [488, 740, 76, 72, 0, 0, 0],
+                [564, 724, 66, 78, 0, 0, 0],
+                [966, 118, 50, 72, 0, 0, 0],
+                [630, 724, 80, 36, 0, 0, 0],
+                [966, 190, 50, 62, 0, 0, 0],
+                [966, 252, 50, 62, 0, 0, 0],
+                [966, 314, 50, 62, 0, 0, 0],
+                [966, 376, 50, 62, 0, 0, 0],
+                [966, 438, 50, 62, 0, 0, 0],
+                [966, 500, 50, 62, 0, 0, 0],
+                [966, 562, 50, 62, 0, 0, 0],
+                [908, 652, 76, 90, 0, 0, 0],
+                [908, 742, 52, 58, 0, 0, 0],
+                [630, 760, 50, 50, 0, 0, 0],
+                [960, 742, 50, 62, 0, 0, 0],
+                [908, 544, 36, 42, 0, 0, 0],
+                [710, 724, 32, 36, 0, 0, 0],
+                [680, 760, 50, 32, 0, 0, 0],
+                [908, 586, 26, 38, 0, 0, 0],
+                [742, 724, 16, 16, 0, 0, 0],
+                [730, 760, 26, 32, 0, 0, 0],
+                [984, 624, 24, 36, 0, 0, 0]
+            ],
+            "animations": {
+                "Hotel_Ceiling_Tile_FULL": { "frames": [0] },
+                "Hotel_CarpetTile_FullScreen": { "frames": [1] },
+                "Hotel_Ceiling_Tile_Horizontal": { "frames": [2] },
+                "Hotel_Ceiling_Tile_Vertical": { "frames": [3] },
+                "Hotel_CarpetTile_1_4Screen": { "frames": [4] },
+                "Hotel_Door_Horizontal-A": { "frames": [5] },
+                "Hotel_ParanormalGlow_Open": { "frames": [6] },
+                "Hotel_ParanormalGlow_Closed": { "frames": [7] },
+                "Hotel_Wall_Horizontal_A": { "frames": [8] },
+                "Hotel_Door_Vertical-A": { "frames": [9] },
+                "Hotel_Door_Vertical-A_Closed": { "frames": [10] },
+                "Hotel_Wall_Vertical_A": { "frames": [11] },
+                "Hotel_Desk__cal": { "frames": [12] },
+                "Hotel_Door_Horizontal-A_Closed": { "frames": [13] },
+                "Hotel_Wall_Horizontal_B": { "frames": [14] },
+                "Hotel_Wall_Horizontal_D": { "frames": [15] },
+                "Hotel_Desk__ontal": { "frames": [16] },
+                "Hotel_Closed_Door": { "frames": [17] },
+                "Hotel_Wall_Vertical_B": { "frames": [18] },
+                "Hotel_Wall_Vertical_D": { "frames": [19] },
+                "Hotel_Wall_Horizontal_C": { "frames": [20] },
+                "Hotel_Wall_Vertical_D2": { "frames": [21] },
+                "Hotel_Plant_Pot": { "frames": [22] },
+                "Hotel_Wall_Vertical_C": { "frames": [23] },
+                "Hotel_Painting_Frame": { "frames": [24] },
+                "Hotel_CarpetTile": { "frames": [25] },
+                "Hotel_CarpetTile_Blue": { "frames": [26] },
+                "Hotel_CarpetTile_Hole": { "frames": [27] },
+                "Hotel_HoleTile_Center": { "frames": [28] },
+                "Hotel_HoleTile_Horizontal": { "frames": [29] },
+                "Hotel_HoleTile_Vertical": { "frames": [30] },
+                "Hotel_Stairs_Down": { "frames": [31] },
+                "Hotel_Wall_Horizontal_D2": { "frames": [32] },
+                "Hotel_Desk_2Tiles": { "frames": [33] },
+                "Hotel_Light-Effect": { "frames": [34] },
+                "Hotel_Stairs_Up": { "frames": [35] },
+                "Hotel_Painting_OvalFrame": { "frames": [36] },
+                "Hotel_Empty_Pot": { "frames": [37] },
+                "Hotel_HoleTile_Corner": { "frames": [38] },
+                "Hotel_Light_On": { "frames": [39] },
+                "Hotel_Ceiling_Tile": { "frames": [40] },
+                "Hotel_CarpetTile_Singular": { "frames": [41] },
+                "Hotel_Light_Off": { "frames": [42] }
             },
         };
         Assets.getAtlas_Items = {
