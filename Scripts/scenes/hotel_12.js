@@ -25,15 +25,40 @@ var scenes;
         }
         // Methods
         Hotel_12.prototype.Start = function () {
+            this.enemies[0] = new objects.SpiderUp(new math.Vec2(140, 220), 300);
+            this.enemies[0].attackPower = 1;
+            this.enemies[1] = new objects.TestZombie(2);
+            this.enemies[1].SetPosition(new math.Vec2(100, 450));
+            this.enemies[2] = new objects.Bat(2, 100);
+            this.enemies[2].SetPosition(new math.Vec2(280, 650));
+            this.obstacles[0] = new objects.Barriers(managers.Game.hotel_TextureAtlas, "Hotel_CarpetTile");
+            this.obstacles[0].SetPosition(new math.Vec2(285, 440));
+            // Initialize bulletManager
+            this.bulletManager = new managers.Bullet();
+            managers.Game.bulletManager = this.bulletManager;
             managers.Game.player.sceneOnRight = config.Scene.HOTEL_13;
             _super.prototype.Start.call(this);
             this.playerInfo.PlayerLocation = new math.Vec2(46, 28);
         };
         Hotel_12.prototype.Update = function () {
             _super.prototype.Update.call(this);
+            this.bulletManager.Update();
+            // check if spiderBullets collides with player
+            this.bulletManager.spiderBullets.forEach(function (bullet) {
+                if (managers.Collision.Check(managers.Game.player, bullet)) {
+                    var ticker = createjs.Ticker.getTicks();
+                    // use ticker to restrict 1 bullet only hurts 1 hp
+                    if (ticker % 10 == 0)
+                        managers.Game.player.hp -= 1;
+                }
+            });
         };
         Hotel_12.prototype.Main = function () {
+            var _this = this;
             _super.prototype.Main.call(this);
+            this.bulletManager.spiderBullets.forEach(function (bullet) {
+                _this.addChild(bullet);
+            });
         };
         return Hotel_12;
     }(scenes.PlayScene));
