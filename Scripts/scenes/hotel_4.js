@@ -61,7 +61,7 @@ var scenes;
                 if (managers.Collision.Check(managers.Game.player, bullet)) {
                     var ticker = createjs.Ticker.getTicks();
                     // use ticker to restrict 1 bullet only hurts 1 hp
-                    if (ticker % 20 == 0)
+                    if (ticker % 10 == 0)
                         managers.Game.player.hp -= 1;
                 }
             });
