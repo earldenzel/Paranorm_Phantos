@@ -7,6 +7,7 @@ module scenes {
         protected obstacles: Array<objects.GameObject> = new Array<objects.GameObject>();
         protected cosmetics: Array<objects.GameObject> = new Array<objects.GameObject>();
         protected key: objects.Key;
+        protected design: config.Design;
 
         //ceilings, doors and floors
         //private ceilingVertical:objects.Background;
@@ -47,12 +48,14 @@ module scenes {
             hasDoorTop: boolean,
             hasDoorBot: boolean,
             hasDoorLeft: boolean,
-            hasDoorRight: boolean) {
+            hasDoorRight: boolean,
+            design: config.Design = config.Design.MANSION) {
             super();
             this.hasDoorTop = hasDoorTop;
             this.hasDoorBot = hasDoorBot;
             this.hasDoorLeft = hasDoorLeft;
             this.hasDoorRight = hasDoorRight;
+            this.design = design;
             this.Start();
         }
 
@@ -60,6 +63,15 @@ module scenes {
         public Start(): void {
             // Initialize our variables
             this.player = managers.Game.player;
+
+            switch(this.design){
+                case config.Design.GRAVEYARD:
+                    break;
+                case config.Design.HOTEL:
+                    break;
+                case config.Design.MANSION:
+                    break;
+            }
 
             this.ceilingAndWall = new objects.Background("background_c_w_all");
 
@@ -186,6 +198,13 @@ module scenes {
                 if (e instanceof objects.Gap) {
                     e.CheckGapDamage(this.player);
                 }
+            });
+
+            this.cosmetics.forEach(e =>{
+                if (e instanceof objects.Stairs && managers.Collision.Check(managers.Game.player, e)){
+                    managers.Game.currentScene = e.nextScene;
+                }
+
             });
 
             // KEY AND LOCKED DOORS

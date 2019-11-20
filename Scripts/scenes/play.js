@@ -16,7 +16,8 @@ var scenes;
     var PlayScene = /** @class */ (function (_super) {
         __extends(PlayScene, _super);
         // Constructor
-        function PlayScene(hasDoorTop, hasDoorBot, hasDoorLeft, hasDoorRight) {
+        function PlayScene(hasDoorTop, hasDoorBot, hasDoorLeft, hasDoorRight, design) {
+            if (design === void 0) { design = config.Design.MANSION; }
             var _this = _super.call(this) || this;
             _this.enemies = new Array();
             _this.obstacles = new Array();
@@ -25,6 +26,7 @@ var scenes;
             _this.hasDoorBot = hasDoorBot;
             _this.hasDoorLeft = hasDoorLeft;
             _this.hasDoorRight = hasDoorRight;
+            _this.design = design;
             _this.Start();
             return _this;
         }
@@ -32,6 +34,14 @@ var scenes;
         PlayScene.prototype.Start = function () {
             // Initialize our variables
             this.player = managers.Game.player;
+            switch (this.design) {
+                case config.Design.GRAVEYARD:
+                    break;
+                case config.Design.HOTEL:
+                    break;
+                case config.Design.MANSION:
+                    break;
+            }
             this.ceilingAndWall = new objects.Background("background_c_w_all");
             this.ceilingAndWall.y = 110;
             //this.ceilingHorizontal =new objects.Background(this.assetManager,"background_c_hori");
@@ -140,6 +150,11 @@ var scenes;
                 });
                 if (e instanceof objects.Gap) {
                     e.CheckGapDamage(_this.player);
+                }
+            });
+            this.cosmetics.forEach(function (e) {
+                if (e instanceof objects.Stairs && managers.Collision.Check(managers.Game.player, e)) {
+                    managers.Game.currentScene = e.nextScene;
                 }
             });
             // KEY AND LOCKED DOORS
