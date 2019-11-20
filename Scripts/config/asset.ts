@@ -231,8 +231,16 @@ module config {
 
             // SPRITE SHEETS
             {
+                "id": "tAtlas_Graveyard",
+                "src": "./Assets/_Background/Graveyard_TextureAtlas.png"
+            },
+            {
                 "id": "tAtlas_MapG",
                 "src": "./Assets/_UI/PlayerInfo/_Map/Map_Graveyard_TextureAtlas.png"
+            },
+            {
+                "id": "tAtlas_Hotel",
+                "src": "./Assets/_Background/Hotel_TextureAtlas.png"
             },
             {
                 "id": "tAtlas_Items",
@@ -253,10 +261,6 @@ module config {
             {
                 "id": "tAtlas_Bat",
                 "src": "./Assets/_Enemies/bat/Bat_TextureAtlas.png"
-            },
-            {
-                "id": "tAtlas_Graveyard",
-                "src": "./Assets/_Background/Graveyard_TextureAtlas.png"
             },
             {
                 "id": "tAtlas_Spider",
@@ -472,11 +476,111 @@ module config {
 
         };
 
+        public static getAtlas_Hotel: any = {
+
+            "images": [
+                ""
+            ],
+
+            "framerate": 20,
+            "frames": [
+                [0, 0, 564, 652, 0, 0, 0],
+                [564, 0, 386, 482, 0, 0, 0],
+                [0, 652, 564, 16, 0, 0, 0],
+                [950, 0, 16, 652, 0, 0, 0],
+                [564, 482, 194, 242, 0, 0, 0],
+                [758, 482, 74, 148, 0, 0, 0],
+                [832, 482, 118, 62, 0, 0, 0],
+                [0, 668, 80, 134, 0, 0, 0],
+                [80, 668, 76, 134, 0, 0, 0],
+                [156, 668, 134, 72, 0, 0, 0],
+                [290, 668, 134, 72, 0, 0, 0],
+                [424, 668, 120, 72, 0, 0, 0],
+                [966, 0, 52, 118, 0, 0, 0],
+                [758, 630, 74, 148, 0, 0, 0],
+                [832, 544, 76, 92, 0, 0, 0],
+                [832, 636, 76, 90, 0, 0, 0],
+                [156, 740, 98, 58, 0, 0, 0],
+                [254, 740, 82, 72, 0, 0, 0],
+                [336, 740, 76, 72, 0, 0, 0],
+                [412, 740, 76, 72, 0, 0, 0],
+                [832, 726, 76, 64, 0, 0, 0],
+                [488, 740, 76, 72, 0, 0, 0],
+                [564, 724, 66, 78, 0, 0, 0],
+                [966, 118, 50, 72, 0, 0, 0],
+                [630, 724, 80, 36, 0, 0, 0],
+                [966, 190, 50, 62, 0, 0, 0],
+                [966, 252, 50, 62, 0, 0, 0],
+                [966, 314, 50, 62, 0, 0, 0],
+                [966, 376, 50, 62, 0, 0, 0],
+                [966, 438, 50, 62, 0, 0, 0],
+                [966, 500, 50, 62, 0, 0, 0],
+                [966, 562, 50, 62, 0, 0, 0],
+                [908, 652, 76, 90, 0, 0, 0],
+                [908, 742, 52, 58, 0, 0, 0],
+                [630, 760, 50, 50, 0, 0, 0],
+                [960, 742, 50, 62, 0, 0, 0],
+                [908, 544, 36, 42, 0, 0, 0],
+                [710, 724, 32, 36, 0, 0, 0],
+                [680, 760, 50, 32, 0, 0, 0],
+                [908, 586, 26, 38, 0, 0, 0],
+                [742, 724, 16, 16, 0, 0, 0],
+                [730, 760, 26, 32, 0, 0, 0],
+                [984, 624, 24, 36, 0, 0, 0]
+            ],
+
+            "animations": {
+                "Hotel_Ceiling_Tile_FULL": { "frames": [0] },
+                "Hotel_CarpetTile_FullScreen": { "frames": [1] },
+                "Hotel_Ceiling_Tile_Horizontal": { "frames": [2] },
+                "Hotel_Ceiling_Tile_Vertical": { "frames": [3] },
+                "Hotel_CarpetTile_1_4Screen": { "frames": [4] },
+                "Hotel_Door_Horizontal-A": { "frames": [5] },
+                "Hotel_ParanormalGlow_Open": { "frames": [6] },
+                "Hotel_ParanormalGlow_Closed": { "frames": [7] },
+                "Hotel_Wall_Horizontal_A": { "frames": [8] },
+                "Hotel_Door_Vertical-A": { "frames": [9] },
+                "Hotel_Door_Vertical-A_Closed": { "frames": [10] },
+                "Hotel_Wall_Vertical_A": { "frames": [11] },
+                "Hotel_Desk__cal": { "frames": [12] },
+                "Hotel_Door_Horizontal-A_Closed": { "frames": [13] },
+                "Hotel_Wall_Horizontal_B": { "frames": [14] },
+                "Hotel_Wall_Horizontal_D": { "frames": [15] },
+                "Hotel_Desk__ontal": { "frames": [16] },
+                "Hotel_Closed_Door": { "frames": [17] },
+                "Hotel_Wall_Vertical_B": { "frames": [18] },
+                "Hotel_Wall_Vertical_D": { "frames": [19] },
+                "Hotel_Wall_Horizontal_C": { "frames": [20] },
+                "Hotel_Wall_Vertical_D2": { "frames": [21] },
+                "Hotel_Plant_Pot": { "frames": [22] },
+                "Hotel_Wall_Vertical_C": { "frames": [23] },
+                "Hotel_Painting_Frame": { "frames": [24] },
+                "Hotel_CarpetTile": { "frames": [25] },
+                "Hotel_CarpetTile_Blue": { "frames": [26] },
+                "Hotel_CarpetTile_Hole": { "frames": [27] },
+                "Hotel_HoleTile_Center": { "frames": [28] },
+                "Hotel_HoleTile_Horizontal": { "frames": [29] },
+                "Hotel_HoleTile_Vertical": { "frames": [30] },
+                "Hotel_Stairs_Down": { "frames": [31] },
+                "Hotel_Wall_Horizontal_D2": { "frames": [32] },
+                "Hotel_Desk_2Tiles": { "frames": [33] },
+                "Hotel_Light-Effect": { "frames": [34] },
+                "Hotel_Stairs_Up": { "frames": [35] },
+                "Hotel_Painting_OvalFrame": { "frames": [36] },
+                "Hotel_Empty_Pot": { "frames": [37] },
+                "Hotel_HoleTile_Corner": { "frames": [38] },
+                "Hotel_Light_On": { "frames": [39] },
+                "Hotel_Ceiling_Tile": { "frames": [40] },
+                "Hotel_CarpetTile_Singular": { "frames": [41] },
+                "Hotel_Light_Off": { "frames": [42] }
+            },
+        }
+
         public static getAtlas_Items: any = {
             "images": [
                 ""
             ],
-            
+
             "framerate": 20,
             "frames": [
                 [0, 0, 292, 650, 0, 0, 0],
@@ -536,7 +640,7 @@ module config {
                 [756, 672, 18, 22, 0, 0, 0],
                 [756, 694, 18, 22, 0, 0, 0]
             ],
-            
+
             "animations": {
                 "GameOver_Spotlight": { "frames": [0] },
                 "UILayout_Placement": { "frames": [1] },
@@ -592,28 +696,28 @@ module config {
                 "Items_Twenty-Dollars": { "frames": [53] },
                 "Items_Rubies": { "frames": [54] },
                 "Items_Sapphires": { "frames": [55] },
-                "upIndicator": { 
-                    "frames": [28,28,28,30,30,30],
+                "upIndicator": {
+                    "frames": [28, 28, 28, 30, 30, 30],
                     "speed": 0.1
                 },
-                "downIndicator": { 
-                    "frames": [20,20,20,26,26,26],
+                "downIndicator": {
+                    "frames": [20, 20, 20, 26, 26, 26],
                     "speed": 0.1
                 },
-                "leftIndicator": { 
-                    "frames": [24,24,24,17,17,17],
+                "leftIndicator": {
+                    "frames": [24, 24, 24, 17, 17, 17],
                     "speed": 0.1
                 },
-                "rightIndicator": { 
-                    "frames": [25,25,25,19,19,19],
+                "rightIndicator": {
+                    "frames": [25, 25, 25, 19, 19, 19],
                     "speed": 0.1
                 },
-                "attackIndicator": { 
-                    "frames": [21,21,21,32,32,32],
+                "attackIndicator": {
+                    "frames": [21, 21, 21, 32, 32, 32],
                     "speed": 0.1
                 },
-                "stunIndicator": { 
-                    "frames": [22,22,22,31,31,31],
+                "stunIndicator": {
+                    "frames": [22, 22, 22, 31, 31, 31],
                     "speed": 0.1
                 }
             }
@@ -711,23 +815,23 @@ module config {
                     "speed": 0.1
                 },
                 "Phoebe_Bite_Left1": { "frames": [12] },
-                "Phoebe_Bite_Left2": { 
+                "Phoebe_Bite_Left2": {
                     "frames": [12, 13],
                     "speed": 0.1
                 },
                 "Phoebe_Bite_Front1": { "frames": [14] },
-                "Phoebe_Bite_Front2": { 
+                "Phoebe_Bite_Front2": {
                     "frames": [14, 15],
                     "speed": 0.1
                 },
                 "Phoebe_Bite_Back": { "frames": [16] },
                 "Phoebe_Bite_Right1": { "frames": [17] },
-                "Phoebe_Bite_Right2": { 
-                    "frames": [17,18],
+                "Phoebe_Bite_Right2": {
+                    "frames": [17, 18],
                     "speed": 0.1
                 },
-                "Phoebe_Dead_A": { 
-                    "frames": [19,20],
+                "Phoebe_Dead_A": {
+                    "frames": [19, 20],
                     "speed": 0.1
                 },
                 "Phoebe_Dead_B": {
@@ -739,38 +843,38 @@ module config {
                     "speed": 0.1
                 },
                 "Phoebe_Hurt": { "frames": [27] },
-                "Phoebe_Run_Left": { 
-                    "frames": [28,29],
+                "Phoebe_Run_Left": {
+                    "frames": [28, 29],
                     "speed": 0.1
                 },
-                "Phoebe_Run_Front": { 
-                    "frames": [30,31,32,33],
+                "Phoebe_Run_Front": {
+                    "frames": [30, 31, 32, 33],
                     "speed": 0.1
                 },
-                "Phoebe_Run_Right": { 
-                    "frames": [34,35],
+                "Phoebe_Run_Right": {
+                    "frames": [34, 35],
                     "speed": 0.1
                 },
                 "Phoebe_Run_Back": {
-                    "frames": [36,37,38,39],
+                    "frames": [36, 37, 38, 39],
                     "speed": 0.1
                 },
-                "Phoebe_Walk_Front1": { 
+                "Phoebe_Walk_Front1": {
                     "frames": [40, 41],
                     "speed": 0.1
                 },
                 "Phoebe_Walk_Front2": { "frames": [40] },
-                "Phoebe_Walk_Left1": { 
+                "Phoebe_Walk_Left1": {
                     "frames": [42, 43],
                     "speed": 0.1
                 },
                 "Phoebe_Walk_Left2": { "frames": [42] },
-                "Phoebe_Walk_Right1": { 
+                "Phoebe_Walk_Right1": {
                     "frames": [44, 45],
                     "speed": 0.1
                 },
                 "Phoebe_Walk_Right2": { "frames": [44] },
-                "Phoebe_Walk_Back1": { 
+                "Phoebe_Walk_Back1": {
                     "frames": [46, 47],
                     "speed": 0.1
                 },
@@ -794,8 +898,8 @@ module config {
                 "PhoebeSoul_Walk_Back": { "frames": [64] }
             }
         };
-        
-        
+
+
         public static getAtlas_Phantos: any = {
             "images": [
                 ""
@@ -819,21 +923,21 @@ module config {
                 [210, 291, 97, 97, 0, 0, 0],
                 [315, 291, 97, 97, 0, 0, 0]
             ],
-            
+
             "animations": {
-                "Phantos_Left": { 
+                "Phantos_Left": {
                     "frames": [0, 1, 2],
                     "speed": 0.1
                 },
-                "Phantos_Front": { 
+                "Phantos_Front": {
                     "frames": [3, 4, 5],
                     "speed": 0.1
                 },
-                "Phantos_Right": { 
-                    "frames": [ 6, 7, 8],
+                "Phantos_Right": {
+                    "frames": [6, 7, 8],
                     "speed": 0.1
                 },
-                "Phantos_Back": { 
+                "Phantos_Back": {
                     "frames": [9, 10, 11],
                     "speed": 0.1
                 },
@@ -845,12 +949,12 @@ module config {
 
             "speed": 0.1
         };
-        
+
         public static getAtlas_Phantorm: any = {
             "images": [
                 ""
             ],
-            
+
             "framerate": 20,
             "frames": [
                 [0, 0, 71, 98, 0, 0, -14],
@@ -865,25 +969,25 @@ module config {
                 [105, 161, 34, 34, 0, -2, -6],
                 [120, 195, 25, 51, 0, -6, 0],
                 [139, 161, 27, 27, 0, -5, -9],
-                [145, 188, 59, 62, 0, -18, -5], 
+                [145, 188, 59, 62, 0, -18, -5],
                 [166, 161, 17, 17, 0, -10, -14],
                 [96, 0, 99, 74, 0, -8, -38],
                 [170, 74, 55, 73, 0, 11, -5],
                 [183, 147, 34, 41, 0, -3, 0],
-                [204, 188, 56, 62, 0, 13, -5], 
+                [204, 188, 56, 62, 0, 13, -5],
                 [195, 0, 55, 73, 0, -14, -5],
                 [217, 147, 25, 39, 0, -6, -3],
-                [225, 73, 25, 73, 0, -18, -5], 
+                [225, 73, 25, 73, 0, -18, -5],
                 [242, 146, 25, 39, 0, -6, -3],
-                [260, 185, 55, 65, 0, 11, 12], 
+                [260, 185, 55, 65, 0, 11, 12],
                 [250, 0, 25, 69, 0, -18, 16],
-                [250, 69, 55, 65, 0, -14, 12], 
+                [250, 69, 55, 65, 0, -14, 12],
                 [267, 134, 25, 51, 0, -6, 0],
                 [292, 134, 25, 51, 0, -6, 0],
                 [315, 185, 58, 58, 0, -18, 5],
-                [275, 0, 57, 58, 0, 14, 5], 
-                [305, 58, 66, 48, 0, 22, -5], 
-                [332, 0, 66, 48, 0, -14, -5], 
+                [275, 0, 57, 58, 0, 14, 5],
+                [305, 58, 66, 48, 0, 22, -5],
+                [332, 0, 66, 48, 0, -14, -5],
                 [317, 106, 37, 48, 0, 0, -3],
                 [354, 106, 37, 48, 0, 0, -3],
                 [371, 48, 37, 48, 0, 0, -3],
@@ -936,7 +1040,7 @@ module config {
                 [608, 160, 25, 46, 0, -6, 0],
                 [608, 206, 25, 38, 0, -8, 0]
             ],
-            
+
             "animations": {
                 "PhoebeWeapon_SoulAttack1": { "frames": [0] },
                 "PhoebeWeapon_SoulAttack3": { "frames": [1] },
@@ -1021,19 +1125,19 @@ module config {
                 "Phoebe_Walk8": { "frames": [80] },
                 "Phoebe_Attack5": { "frames": [81] },
                 "Phoebe_Attack_Left": {
-                    "frames" : [22, 29, 15],
+                    "frames": [22, 29, 15],
                     "speed": 0.2
                 },
                 "Phoebe_Attack_Front": {
-                    "frames" : [17, 20, 12],
+                    "frames": [17, 20, 12],
                     "speed": 0.2
                 },
                 "Phoebe_Attack_Right": {
-                    "frames" : [24, 30, 18],
+                    "frames": [24, 30, 18],
                     "speed": 0.2
                 },
                 "Phoebe_Attack_Back": {
-                    "frames" : [27, 23, 28],
+                    "frames": [27, 23, 28],
                     "speed": 0.2
                 }
             }

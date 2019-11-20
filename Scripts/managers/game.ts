@@ -6,6 +6,7 @@ module managers {
         public static item_TextureAtlas: createjs.SpriteSheet;
         public static phoebe_TextureAtlas: createjs.SpriteSheet;
         public static graveyard_TextureAtlas: createjs.SpriteSheet;
+        public static hotel_TextureAtlas: createjs.SpriteSheet;
         public static bat_TextureAtlas: createjs.SpriteSheet;
         public static spider_TextureAtlas: createjs.SpriteSheet;
         public static shootingFlower_TextureAtlas: createjs.SpriteSheet;
