@@ -18,7 +18,7 @@ module objects{
         }
         public Reset():void {           
             this.priceTag.x = this.x;
-            this.priceTag.y = this.y - config.Bounds.TEXT_OFFSET;
+            this.priceTag.y = this.y - this.halfH - config.Bounds.TEXT_OFFSET;
         }
         public Move():void {}
         public CheckBound():void {}

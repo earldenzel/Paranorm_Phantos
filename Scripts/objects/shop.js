@@ -31,13 +31,23 @@ var objects;
             this.shopItems[2].SetPosition(new math.Vec2(385, 400));
             this.Main();
         };
-        Shop.prototype.Update = function () { };
+        Shop.prototype.Update = function () {
+            var _this = this;
+            this.shopKeeper.Update();
+            this.shopItems.forEach(function (e) {
+                console.log(e.x + " " + e.y);
+                if (managers.Collision.Check(managers.Game.player, e)) {
+                    _this.shopKeeper.TellItemInformation(e);
+                }
+            });
+        };
         Shop.prototype.Reset = function () { };
         Shop.prototype.Move = function () { };
         Shop.prototype.CheckBound = function () { };
         Shop.prototype.Main = function () {
             var _this = this;
             this.addChild(this.shopKeeper);
+            this.addChild(this.shopKeeper.dialog);
             this.shopItems.forEach(function (e) {
                 _this.addChild(e);
                 e.Reset();

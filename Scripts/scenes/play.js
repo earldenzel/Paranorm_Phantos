@@ -168,6 +168,9 @@ var scenes;
             if (this.hasProjectileShooters) {
                 this.bulletManager.Update();
             }
+            if (this.hasShop) {
+                this.shop.Update();
+            }
             // KEY AND LOCKED DOORS
             if (this.getChildByName("Items_Key") && managers.Collision.Check(this.player, this.key) && this.key.visible) {
                 this.player.key += 1;
