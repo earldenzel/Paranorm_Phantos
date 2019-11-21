@@ -6,10 +6,13 @@ module scenes {
         protected enemies: Array<objects.Enemy> = new Array<objects.Enemy>();
         protected obstacles: Array<objects.GameObject> = new Array<objects.GameObject>();
         protected cosmetics: Array<objects.GameObject> = new Array<objects.GameObject>();
+        protected shopItems: Array<objects.ShopItem> = new Array<objects.ShopItem>();
         protected key: objects.Key;
         protected design: config.Design;        
         private bulletManager: managers.Bullet;
         protected hasProjectileShooters: boolean = false;
+        private shop: objects.Shop;
+        protected hasShop: boolean = false;
 
         //ceilings, doors and floors
         //private ceilingVertical:objects.Background;
@@ -141,6 +144,10 @@ module scenes {
                 this.doorRight.Flip();
                 this.doorRightFrame.Flip();
                 this.player.canTraverseRight = !this.isDoorRightLocked;
+            }
+
+            if (this.hasShop){
+                this.shop = new objects.Shop(this.shopItems);
             }
 
             //this.playerStatus.shadow = new createjs.Shadow("#000000",0,0,10);
@@ -332,6 +339,10 @@ module scenes {
             this.cosmetics.forEach(e => {
                 this.addChild(e);
             });
+
+            if (this.hasShop){
+                this.addChild(this.shop);
+            }
             
             // PLAYER PLACEMENT
             this.addChild(this.player);

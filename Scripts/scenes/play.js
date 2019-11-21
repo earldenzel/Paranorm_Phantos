@@ -22,7 +22,9 @@ var scenes;
             _this.enemies = new Array();
             _this.obstacles = new Array();
             _this.cosmetics = new Array();
+            _this.shopItems = new Array();
             _this.hasProjectileShooters = false;
+            _this.hasShop = false;
             _this.hasDoorTop = hasDoorTop;
             _this.hasDoorBot = hasDoorBot;
             _this.hasDoorLeft = hasDoorLeft;
@@ -106,6 +108,9 @@ var scenes;
                 this.doorRight.Flip();
                 this.doorRightFrame.Flip();
                 this.player.canTraverseRight = !this.isDoorRightLocked;
+            }
+            if (this.hasShop) {
+                this.shop = new objects.Shop(this.shopItems);
             }
             //this.playerStatus.shadow = new createjs.Shadow("#000000",0,0,10);
             //this.messageStatus.shadow = new createjs.Shadow("#000000",0,0,10);
@@ -274,6 +279,9 @@ var scenes;
             this.cosmetics.forEach(function (e) {
                 _this.addChild(e);
             });
+            if (this.hasShop) {
+                this.addChild(this.shop);
+            }
             // PLAYER PLACEMENT
             this.addChild(this.player);
             this.addChild(this.player.weapon);
