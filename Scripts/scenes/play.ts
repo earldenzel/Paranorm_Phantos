@@ -7,7 +7,9 @@ module scenes {
         protected obstacles: Array<objects.GameObject> = new Array<objects.GameObject>();
         protected cosmetics: Array<objects.GameObject> = new Array<objects.GameObject>();
         protected key: objects.Key;
-        protected design: config.Design;
+        protected design: config.Design;        
+        private bulletManager: managers.Bullet;
+        protected hasProjectileShooters: boolean = false;
 
         //ceilings, doors and floors
         //private ceilingVertical:objects.Background;
@@ -141,10 +143,6 @@ module scenes {
                 this.player.canTraverseRight = !this.isDoorRightLocked;
             }
 
-            //this.playerStatus = new objects.Label("PLAYER ", "16px", "'Press Start 2P'", "#FFFFFF", 20, 670, false);
-            //this.messageStatus = new objects.Label("MESSAGES GO HERE", "16px", "'Press Start 2P'", "#FFFFFF", 20, 690, false);
-            //this.controllerHelp = new objects.Label("UP-DOWN-LEFT-RIGHT + Z OR \nW-A-S-D + J", "16px", "'Press Start 2P'", "#FFFFFF", 20, 710, false);
-
             //this.playerStatus.shadow = new createjs.Shadow("#000000",0,0,10);
             //this.messageStatus.shadow = new createjs.Shadow("#000000",0,0,10);
             //this.controllerHelp.shadow = new createjs.Shadow("#000000",0,0,10);
@@ -157,6 +155,12 @@ module scenes {
             this.player.playerStatus.visible = false;
 
             managers.Game.keyboardManager.playMode = true;
+            
+            // Initialize bulletManager
+            if (this.hasProjectileShooters){
+                this.bulletManager = new managers.Bullet();
+                managers.Game.bulletManager = this.bulletManager;
+            }
 
             this.Main();
         }
@@ -204,8 +208,11 @@ module scenes {
                 if (e instanceof objects.Stairs && managers.Collision.Check(managers.Game.player, e)){
                     managers.Game.currentScene = e.nextScene;
                 }
-
             });
+
+            if (this.hasProjectileShooters){
+                this.bulletManager.Update();
+            }
 
             // KEY AND LOCKED DOORS
             if(this.getChildByName("Items_Key") && managers.Collision.Check(this.player,this.key) && this.key.visible){
@@ -357,7 +364,22 @@ module scenes {
             this.addChild(this.player.playerStatus);
             //this.addChild(this.messageStatus);
             //this.addChild(this.controllerHelp);
-            this.addChild(this.playerInfo);
+            this.addChild(this.playerInfo);            
+
+            if (this.hasProjectileShooters){
+                this.bulletManager.spiderBullets.forEach(bullet => {
+                    this.addChild(bullet);
+                });
+                this.bulletManager.spiderBulletsLeft.forEach(bullet => {
+                    this.addChild(bullet);
+                });
+                this.bulletManager.spiderBulletsRight.forEach(bullet => {
+                    this.addChild(bullet);
+                });
+                this.bulletManager.shootingFLowerBullets.forEach(bullet => {
+                    this.addChild(bullet);
+                });
+            }
         }
     }
 }
