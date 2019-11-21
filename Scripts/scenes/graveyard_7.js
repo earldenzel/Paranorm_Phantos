@@ -20,6 +20,7 @@ var scenes;
             var _this = 
             // hasDoorTop, hasDoorBot, hasDoorLeft, hasDoorRight
             _super.call(this, false, false, true, false) || this;
+            _this.hasShop = true;
             _this.Start();
             return _this;
         }
@@ -28,6 +29,9 @@ var scenes;
             managers.Game.player.sceneOnLeft = config.Scene.GRAVEYARD_5;
             _super.prototype.Start.call(this);
             this.playerInfo.PlayerLocation = new math.Vec2(46, 28);
+            this.shopItems[0] = new objects.ShopItem("Items_Hellebore-Flower0", 100);
+            this.shopItems[1] = new objects.ShopItem("Items_Hellebore-Flower0", 100);
+            this.shopItems[2] = new objects.ShopItem("Items_Hellebore-Flower0", 100);
         };
         Graveyard_7.prototype.Update = function () {
             _super.prototype.Update.call(this);

@@ -6,7 +6,13 @@ module scenes {
         protected enemies: Array<objects.Enemy> = new Array<objects.Enemy>();
         protected obstacles: Array<objects.GameObject> = new Array<objects.GameObject>();
         protected cosmetics: Array<objects.GameObject> = new Array<objects.GameObject>();
+        protected shopItems: Array<objects.ShopItem> = new Array<objects.ShopItem>();
         protected key: objects.Key;
+        protected design: config.Design;        
+        private bulletManager: managers.Bullet;
+        protected hasProjectileShooters: boolean = false;
+        private shop: objects.Shop;
+        protected hasShop: boolean = false;
 
         //ceilings, doors and floors
         //private ceilingVertical:objects.Background;
@@ -47,12 +53,14 @@ module scenes {
             hasDoorTop: boolean,
             hasDoorBot: boolean,
             hasDoorLeft: boolean,
-            hasDoorRight: boolean) {
+            hasDoorRight: boolean,
+            design: config.Design = config.Design.MANSION) {
             super();
             this.hasDoorTop = hasDoorTop;
             this.hasDoorBot = hasDoorBot;
             this.hasDoorLeft = hasDoorLeft;
             this.hasDoorRight = hasDoorRight;
+            this.design = design;
             this.Start();
         }
 
@@ -60,6 +68,15 @@ module scenes {
         public Start(): void {
             // Initialize our variables
             this.player = managers.Game.player;
+
+            switch(this.design){
+                case config.Design.GRAVEYARD:
+                    break;
+                case config.Design.HOTEL:
+                    break;
+                case config.Design.MANSION:
+                    break;
+            }
 
             this.ceilingAndWall = new objects.Background("background_c_w_all");
 
@@ -129,9 +146,9 @@ module scenes {
                 this.player.canTraverseRight = !this.isDoorRightLocked;
             }
 
-            //this.playerStatus = new objects.Label("PLAYER ", "16px", "'Press Start 2P'", "#FFFFFF", 20, 670, false);
-            //this.messageStatus = new objects.Label("MESSAGES GO HERE", "16px", "'Press Start 2P'", "#FFFFFF", 20, 690, false);
-            //this.controllerHelp = new objects.Label("UP-DOWN-LEFT-RIGHT + Z OR \nW-A-S-D + J", "16px", "'Press Start 2P'", "#FFFFFF", 20, 710, false);
+            if (this.hasShop){
+                this.shop = new objects.Shop(this.shopItems);
+            }
 
             //this.playerStatus.shadow = new createjs.Shadow("#000000",0,0,10);
             //this.messageStatus.shadow = new createjs.Shadow("#000000",0,0,10);
@@ -145,6 +162,12 @@ module scenes {
             this.player.playerStatus.visible = false;
 
             managers.Game.keyboardManager.playMode = true;
+            
+            // Initialize bulletManager
+            if (this.hasProjectileShooters){
+                this.bulletManager = new managers.Bullet();
+                managers.Game.bulletManager = this.bulletManager;
+            }
 
             this.Main();
         }
@@ -187,6 +210,16 @@ module scenes {
                     e.CheckGapDamage(this.player);
                 }
             });
+
+            this.cosmetics.forEach(e =>{
+                if (e instanceof objects.Stairs && managers.Collision.Check(managers.Game.player, e)){
+                    managers.Game.currentScene = e.nextScene;
+                }
+            });
+
+            if (this.hasProjectileShooters){
+                this.bulletManager.Update();
+            }
 
             // KEY AND LOCKED DOORS
             if(this.getChildByName("Items_Key") && managers.Collision.Check(this.player,this.key) && this.key.visible){
@@ -306,6 +339,10 @@ module scenes {
             this.cosmetics.forEach(e => {
                 this.addChild(e);
             });
+
+            if (this.hasShop){
+                this.addChild(this.shop);
+            }
             
             // PLAYER PLACEMENT
             this.addChild(this.player);
@@ -338,7 +375,22 @@ module scenes {
             this.addChild(this.player.playerStatus);
             //this.addChild(this.messageStatus);
             //this.addChild(this.controllerHelp);
-            this.addChild(this.playerInfo);
+            this.addChild(this.playerInfo);            
+
+            if (this.hasProjectileShooters){
+                this.bulletManager.spiderBullets.forEach(bullet => {
+                    this.addChild(bullet);
+                });
+                this.bulletManager.spiderBulletsLeft.forEach(bullet => {
+                    this.addChild(bullet);
+                });
+                this.bulletManager.spiderBulletsRight.forEach(bullet => {
+                    this.addChild(bullet);
+                });
+                this.bulletManager.shootingFLowerBullets.forEach(bullet => {
+                    this.addChild(bullet);
+                });
+            }
         }
     }
 }

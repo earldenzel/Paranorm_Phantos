@@ -16,15 +16,20 @@ var scenes;
     var PlayScene = /** @class */ (function (_super) {
         __extends(PlayScene, _super);
         // Constructor
-        function PlayScene(hasDoorTop, hasDoorBot, hasDoorLeft, hasDoorRight) {
+        function PlayScene(hasDoorTop, hasDoorBot, hasDoorLeft, hasDoorRight, design) {
+            if (design === void 0) { design = config.Design.MANSION; }
             var _this = _super.call(this) || this;
             _this.enemies = new Array();
             _this.obstacles = new Array();
             _this.cosmetics = new Array();
+            _this.shopItems = new Array();
+            _this.hasProjectileShooters = false;
+            _this.hasShop = false;
             _this.hasDoorTop = hasDoorTop;
             _this.hasDoorBot = hasDoorBot;
             _this.hasDoorLeft = hasDoorLeft;
             _this.hasDoorRight = hasDoorRight;
+            _this.design = design;
             _this.Start();
             return _this;
         }
@@ -32,6 +37,14 @@ var scenes;
         PlayScene.prototype.Start = function () {
             // Initialize our variables
             this.player = managers.Game.player;
+            switch (this.design) {
+                case config.Design.GRAVEYARD:
+                    break;
+                case config.Design.HOTEL:
+                    break;
+                case config.Design.MANSION:
+                    break;
+            }
             this.ceilingAndWall = new objects.Background("background_c_w_all");
             this.ceilingAndWall.y = 110;
             //this.ceilingHorizontal =new objects.Background(this.assetManager,"background_c_hori");
@@ -96,9 +109,9 @@ var scenes;
                 this.doorRightFrame.Flip();
                 this.player.canTraverseRight = !this.isDoorRightLocked;
             }
-            //this.playerStatus = new objects.Label("PLAYER ", "16px", "'Press Start 2P'", "#FFFFFF", 20, 670, false);
-            //this.messageStatus = new objects.Label("MESSAGES GO HERE", "16px", "'Press Start 2P'", "#FFFFFF", 20, 690, false);
-            //this.controllerHelp = new objects.Label("UP-DOWN-LEFT-RIGHT + Z OR \nW-A-S-D + J", "16px", "'Press Start 2P'", "#FFFFFF", 20, 710, false);
+            if (this.hasShop) {
+                this.shop = new objects.Shop(this.shopItems);
+            }
             //this.playerStatus.shadow = new createjs.Shadow("#000000",0,0,10);
             //this.messageStatus.shadow = new createjs.Shadow("#000000",0,0,10);
             //this.controllerHelp.shadow = new createjs.Shadow("#000000",0,0,10);
@@ -108,6 +121,11 @@ var scenes;
             //this.playerInfo.x = 38;
             this.player.playerStatus.visible = false;
             managers.Game.keyboardManager.playMode = true;
+            // Initialize bulletManager
+            if (this.hasProjectileShooters) {
+                this.bulletManager = new managers.Bullet();
+                managers.Game.bulletManager = this.bulletManager;
+            }
             this.Main();
         };
         PlayScene.prototype.Update = function () {
@@ -142,6 +160,14 @@ var scenes;
                     e.CheckGapDamage(_this.player);
                 }
             });
+            this.cosmetics.forEach(function (e) {
+                if (e instanceof objects.Stairs && managers.Collision.Check(managers.Game.player, e)) {
+                    managers.Game.currentScene = e.nextScene;
+                }
+            });
+            if (this.hasProjectileShooters) {
+                this.bulletManager.Update();
+            }
             // KEY AND LOCKED DOORS
             if (this.getChildByName("Items_Key") && managers.Collision.Check(this.player, this.key) && this.key.visible) {
                 this.player.key += 1;
@@ -253,6 +279,9 @@ var scenes;
             this.cosmetics.forEach(function (e) {
                 _this.addChild(e);
             });
+            if (this.hasShop) {
+                this.addChild(this.shop);
+            }
             // PLAYER PLACEMENT
             this.addChild(this.player);
             this.addChild(this.player.weapon);
@@ -282,6 +311,20 @@ var scenes;
             //this.addChild(this.messageStatus);
             //this.addChild(this.controllerHelp);
             this.addChild(this.playerInfo);
+            if (this.hasProjectileShooters) {
+                this.bulletManager.spiderBullets.forEach(function (bullet) {
+                    _this.addChild(bullet);
+                });
+                this.bulletManager.spiderBulletsLeft.forEach(function (bullet) {
+                    _this.addChild(bullet);
+                });
+                this.bulletManager.spiderBulletsRight.forEach(function (bullet) {
+                    _this.addChild(bullet);
+                });
+                this.bulletManager.shootingFLowerBullets.forEach(function (bullet) {
+                    _this.addChild(bullet);
+                });
+            }
         };
         return PlayScene;
     }(objects.Scene));
