@@ -23,6 +23,8 @@
     var graveyard_TextureAtlas;
     var hotel_TextureAtlasData;
     var hotel_TextureAtlas;
+    var mansion_TextureAtlasData;
+    var mansion_TextureAtlas;
     var bat_TextureAtlasData;
     var bat_TextureAtlas;
     var spider_TextureAtlasData;
@@ -70,6 +72,9 @@
         hotel_TextureAtlasData = config.Assets.getAtlas_Hotel;
         hotel_TextureAtlasData.images = [assetManager.getResult("tAtlas_Hotel")];
         hotel_TextureAtlas = new createjs.SpriteSheet(hotel_TextureAtlasData);
+        mansion_TextureAtlasData = config.Assets.getAtlas_Mansion;
+        mansion_TextureAtlasData.images = [assetManager.getResult("tAtlas_Mansion")];
+        mansion_TextureAtlas = new createjs.SpriteSheet(mansion_TextureAtlasData);
         bat_TextureAtlasData = config.Assets.getAtlas_Bat;
         bat_TextureAtlasData.images = [assetManager.getResult("tAtlas_Bat")];
         bat_TextureAtlas = new createjs.SpriteSheet(bat_TextureAtlasData);
@@ -100,6 +105,7 @@
         managers.Game.phoebe_TextureAtlas = phoebe_TextureAtlas;
         managers.Game.graveyard_TextureAtlas = graveyard_TextureAtlas;
         managers.Game.hotel_TextureAtlas = hotel_TextureAtlas;
+        managers.Game.mansion_TextureAtlas = mansion_TextureAtlas;
         managers.Game.bat_TextureAtlas = bat_TextureAtlas;
         managers.Game.spider_TextureAtlas = spider_TextureAtlas;
         managers.Game.shootingFlower_TextureAtlas = shootingFlower_TextureAtlas;
