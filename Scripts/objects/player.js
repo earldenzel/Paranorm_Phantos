@@ -123,6 +123,22 @@ var objects;
             // Running Implementation
             if (managers.Game.keyboardManager.running) {
                 var runningSpeed = this.playerMoveSpeed + 1;
+                if (managers.Game.keyboardManager.moveLeft) {
+                    this.x -= runningSpeed;
+                    this.direction = config.Direction.LEFT;
+                    if (!managers.Game.keyboardManager.moveDown &&
+                        !managers.Game.keyboardManager.moveUp) {
+                        this.SwitchAnimation(this.run[this.direction]);
+                    }
+                }
+                if (managers.Game.keyboardManager.moveRight) {
+                    this.x += runningSpeed;
+                    this.direction = config.Direction.RIGHT;
+                    if (!managers.Game.keyboardManager.moveDown &&
+                        !managers.Game.keyboardManager.moveUp) {
+                        this.SwitchAnimation(this.run[this.direction]);
+                    }
+                }
                 if (managers.Game.keyboardManager.moveUp) {
                     this.y -= runningSpeed;
                     this.direction = config.Direction.UP;
@@ -133,18 +149,24 @@ var objects;
                     this.direction = config.Direction.DOWN;
                     this.SwitchAnimation(this.run[this.direction]);
                 }
-                if (managers.Game.keyboardManager.moveLeft) {
-                    this.x -= runningSpeed;
-                    this.direction = config.Direction.LEFT;
-                    this.SwitchAnimation(this.run[this.direction]);
-                }
-                if (managers.Game.keyboardManager.moveRight) {
-                    this.x += runningSpeed;
-                    this.direction = config.Direction.RIGHT;
-                    this.SwitchAnimation(this.run[this.direction]);
-                }
             }
             else {
+                if (managers.Game.keyboardManager.moveLeft) {
+                    this.x -= this.playerMoveSpeed;
+                    this.direction = config.Direction.LEFT;
+                    if (!managers.Game.keyboardManager.moveDown &&
+                        !managers.Game.keyboardManager.moveUp) {
+                        this.SwitchAnimation(this.walk[this.direction]);
+                    }
+                }
+                if (managers.Game.keyboardManager.moveRight) {
+                    this.x += this.playerMoveSpeed;
+                    this.direction = config.Direction.RIGHT;
+                    if (!managers.Game.keyboardManager.moveDown &&
+                        !managers.Game.keyboardManager.moveUp) {
+                        this.SwitchAnimation(this.walk[this.direction]);
+                    }
+                }
                 if (managers.Game.keyboardManager.moveUp) {
                     this.y -= this.playerMoveSpeed;
                     this.direction = config.Direction.UP;
@@ -153,16 +175,6 @@ var objects;
                 if (managers.Game.keyboardManager.moveDown) {
                     this.y += this.playerMoveSpeed;
                     this.direction = config.Direction.DOWN;
-                    this.SwitchAnimation(this.walk[this.direction]);
-                }
-                if (managers.Game.keyboardManager.moveLeft) {
-                    this.x -= this.playerMoveSpeed;
-                    this.direction = config.Direction.LEFT;
-                    this.SwitchAnimation(this.walk[this.direction]);
-                }
-                if (managers.Game.keyboardManager.moveRight) {
-                    this.x += this.playerMoveSpeed;
-                    this.direction = config.Direction.RIGHT;
                     this.SwitchAnimation(this.walk[this.direction]);
                 }
             }

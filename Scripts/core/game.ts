@@ -79,8 +79,8 @@
         item_TextureAtlasData.images = [assetManager.getResult("tAtlas_Items")];
         item_TextureAtlas = new createjs.SpriteSheet(item_TextureAtlasData);
 
-        phoebe_TextureAtlasData = config.Assets.getAtlas_Phoebe;
-        phoebe_TextureAtlasData.images = [assetManager.getResult("tAtlas_Phoebe")];
+        phoebe_TextureAtlasData = config.Assets.getAtlas__Phoebe;
+        phoebe_TextureAtlasData.images = [assetManager.getResult("tAtlas__Phoebe")];
         phoebe_TextureAtlas = new createjs.SpriteSheet(phoebe_TextureAtlasData);
 
         phantos_TextureAtlasData = config.Assets.getAtlas_Phantos;
