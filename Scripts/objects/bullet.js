@@ -26,6 +26,9 @@ var objects;
         Bullet.prototype.Start = function () {
         };
         Bullet.prototype.Update = function () {
+            if (managers.Collision.Check(managers.Game.player.weapon, this)) {
+                this.Reset();
+            }
             if (managers.Collision.Check(managers.Game.player, this)) {
                 var ticker = createjs.Ticker.getTicks();
                 // use ticker to restrict 1 bullet every 10 frames for damage

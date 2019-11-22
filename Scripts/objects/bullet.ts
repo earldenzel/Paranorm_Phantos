@@ -13,6 +13,9 @@ module objects {
         }
 
         public Update(): void {
+            if(managers.Collision.Check(managers.Game.player.weapon, this)){
+                this.Reset();
+            }
             if(managers.Collision.Check(managers.Game.player, this)){
                 let ticker: number = createjs.Ticker.getTicks();
 
