@@ -10,6 +10,7 @@
     var currentState;
     var keyboardManager;
     var shopManager;
+    var bulletManager;
     var mapG_TextureAtlasData;
     var mapG_TextureAtlas;
     var item_TextureAtlasData;
@@ -97,6 +98,9 @@
         // Shop Manager
         shopManager = new managers.Shop;
         managers.Game.shopManager = shopManager;
+        // Bullet Manager
+        bulletManager = new managers.Bullet;
+        managers.Game.bulletManager = bulletManager;
         // Asset Manager
         managers.Game.assetManager = assetManager;
         managers.Game.map_TextureAtlas = mapG_TextureAtlas;

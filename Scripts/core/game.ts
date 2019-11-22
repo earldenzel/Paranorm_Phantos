@@ -15,6 +15,7 @@
 
     let keyboardManager: managers.Keyboard;
     let shopManager: managers.Shop;
+    let bulletManager: managers.Bullet;
 
     let mapG_TextureAtlasData: any;
     let mapG_TextureAtlas: createjs.SpriteSheet;
@@ -135,6 +136,10 @@
         // Shop Manager
         shopManager = new managers.Shop;
         managers.Game.shopManager = shopManager;
+
+        // Bullet Manager
+        bulletManager = new managers.Bullet;
+        managers.Game.bulletManager = bulletManager;
 
         // Asset Manager
         managers.Game.assetManager = assetManager;

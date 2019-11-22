@@ -67,6 +67,7 @@ module scenes {
         public Start(): void {
             // Initialize our variables
             this.player = managers.Game.player;
+            managers.Game.bulletManager.Reset();
 
             switch(this.design){
                 case config.Design.GRAVEYARD:
@@ -164,8 +165,7 @@ module scenes {
             
             // Initialize bulletManager
             if (this.hasProjectileShooters){
-                this.bulletManager = new managers.Bullet();
-                managers.Game.bulletManager = this.bulletManager;
+                this.bulletManager = managers.Game.bulletManager;
             }
 
             this.Main();

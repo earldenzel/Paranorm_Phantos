@@ -18,7 +18,6 @@ var objects;
         // Constructor
         function Bullet(textureAtlas, imageString, attackPower) {
             var _this = _super.call(this, textureAtlas, imageString) || this;
-            _this.projectileTickerTime = 10;
             _this.name = imageString;
             _this.attackPower = attackPower;
             return _this;
@@ -29,8 +28,8 @@ var objects;
         Bullet.prototype.Update = function () {
             if (managers.Collision.Check(managers.Game.player, this)) {
                 var ticker = createjs.Ticker.getTicks();
-                // use ticker to restrict 1 bullet only hurts 1 hp
-                if (ticker % this.projectileTickerTime == 0) {
+                // use ticker to restrict 1 bullet every 10 frames for damage
+                if (ticker % 10 == 0) {
                     managers.Game.player.GetDamage(this);
                     this.Reset();
                 }

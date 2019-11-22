@@ -21,6 +21,5 @@ module managers {
         //public static messageStatus: objects.Label
         public static keyboardManager: managers.Keyboard;
         public static SFX: createjs.AbstractSoundInstance;
-
     }
 }

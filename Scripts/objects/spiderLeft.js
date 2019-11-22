@@ -27,6 +27,7 @@ var objects;
             _this.eatTimer = 500;
             _this.bounty = 4;
             _this.isFlying = false;
+            _this.rateOfFire = 70;
             return _this;
         }
         // methods
@@ -65,7 +66,7 @@ var objects;
             var ticker = createjs.Ticker.getTicks();
             // If Spider alive, shoots the bullet
             if (this.hp > 0) {
-                if (ticker % 70 == 0) {
+                if (ticker % this.rateOfFire == 0) {
                     this.bulletSpawn = new math.Vec2(this.x + this.halfW, this.y);
                     var currentBullet = managers.Game.bulletManager.CurrentBullet;
                     var bullet = managers.Game.bulletManager.spiderBulletsLeft[currentBullet];

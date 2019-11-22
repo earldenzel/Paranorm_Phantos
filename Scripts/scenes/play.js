@@ -36,6 +36,7 @@ var scenes;
         PlayScene.prototype.Start = function () {
             // Initialize our variables
             this.player = managers.Game.player;
+            managers.Game.bulletManager.Reset();
             switch (this.design) {
                 case config.Design.GRAVEYARD:
                     break;
@@ -122,8 +123,7 @@ var scenes;
             managers.Game.keyboardManager.playMode = true;
             // Initialize bulletManager
             if (this.hasProjectileShooters) {
-                this.bulletManager = new managers.Bullet();
-                managers.Game.bulletManager = this.bulletManager;
+                this.bulletManager = managers.Game.bulletManager;
             }
             this.Main();
         };
