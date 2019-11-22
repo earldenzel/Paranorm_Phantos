@@ -52,7 +52,7 @@ module objects {
             this.bitedash = ["Phoebe_Bite_Back", "Phoebe_Bite_Front1", "Phoebe_Bite_Left1", "Phoebe_Bite_Right1"];
             this.bite = ["Phoebe_Bite_Front2", "Phoebe_Bite_Front2", "Phoebe_Bite_Left2", "Phoebe_Bite_Right2"];
             this.direction = config.Direction.UP;
-            this.money = 0;
+            this.money = 9999;
             this.playerStatus = new objects.Label("1234567890", "16px", "'Press Start 2P'", "#FFFFFF", this.x, this.y, true);
             this.key = 0;
             this.deadPlayer = [
@@ -292,6 +292,13 @@ module objects {
             }
         }
 
+        public GainMaxHealth(maxHpGain: number){
+            this.maxHp += maxHpGain;
+            this.hp = this.maxHp;
+            this.EchoMessage("MAX HP");
+
+        }
+
         //phoebe effects from devour
         public GainHealth(healthGain: number){
             let oldHp: number = this.hp;
@@ -340,7 +347,9 @@ module objects {
 
         public GainDollars(dollars: number){
             this.money += dollars;
-            this.EchoMessage("GAINED $" + dollars);
+            if (dollars > 0){
+                this.EchoMessage("GAINED $" + dollars);
+            }
         }        
 
         public GainEcto(){

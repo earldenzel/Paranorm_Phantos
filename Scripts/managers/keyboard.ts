@@ -21,6 +21,16 @@ module managers {
             document.addEventListener("keyup", this.onKeyUp.bind(this), false);
         }
 
+        public ControlReset(): void{            
+            this.moveLeft = false;
+            this.moveRight = false;
+            this.moveUp = false;
+            this.moveDown = false;
+            this.enabled = false;
+            this.attacking = false;
+            this.biting = false;
+        }
+
         // Methods
         public onKeyDown(event: KeyboardEvent): void {
             if (this.enabled){

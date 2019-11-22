@@ -22,7 +22,6 @@ var scenes;
             _this.enemies = new Array();
             _this.obstacles = new Array();
             _this.cosmetics = new Array();
-            _this.shopItems = new Array();
             _this.hasProjectileShooters = false;
             _this.hasShop = false;
             _this.hasDoorTop = hasDoorTop;
@@ -110,7 +109,8 @@ var scenes;
                 this.player.canTraverseRight = !this.isDoorRightLocked;
             }
             if (this.hasShop) {
-                this.shop = new objects.Shop(this.shopItems);
+                this.shopManager = new managers.Shop();
+                managers.Game.shopManager = this.shopManager;
             }
             //this.playerStatus.shadow = new createjs.Shadow("#000000",0,0,10);
             //this.messageStatus.shadow = new createjs.Shadow("#000000",0,0,10);
@@ -168,10 +168,15 @@ var scenes;
             if (this.hasProjectileShooters) {
                 this.bulletManager.Update();
             }
+            if (this.hasShop) {
+                this.shopManager.Update();
+            }
             // KEY AND LOCKED DOORS
-            if (this.getChildByName("Items_Key") && managers.Collision.Check(this.player, this.key) && this.key.visible) {
-                this.player.key += 1;
-                this.key.RemoveFromPlay();
+            if (this.key != undefined) {
+                if (this.getChildByName("Items_Key") && managers.Collision.Check(this.player, this.key) && this.key.visible) {
+                    this.player.key += 1;
+                    this.key.RemoveFromPlay();
+                }
             }
             // TO BE FIXED AND OPTIMIZED.
             //  The position of Phoebe is accordance to the door is off. 
@@ -280,7 +285,15 @@ var scenes;
                 _this.addChild(e);
             });
             if (this.hasShop) {
-                this.addChild(this.shop);
+                this.addChild(this.shopManager.shopKeeper);
+                this.addChild(this.shopManager.shopKeeper.dialog);
+                this.addChild(this.shopManager.chooseYes);
+                this.addChild(this.shopManager.chooseNo);
+                this.shopManager.shopItems.forEach(function (e) {
+                    _this.addChild(e);
+                    e.Reset();
+                    _this.addChild(e.priceTag);
+                });
             }
             // PLAYER PLACEMENT
             this.addChild(this.player);

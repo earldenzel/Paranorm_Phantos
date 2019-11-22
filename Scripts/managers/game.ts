@@ -12,6 +12,7 @@ module managers {
         public static spider_TextureAtlas: createjs.SpriteSheet;
         public static shootingFlower_TextureAtlas: createjs.SpriteSheet;
         public static bulletManager: managers.Bullet;
+        public static shopManager: managers.Shop;
         public static phantos_TextureAtlas: createjs.SpriteSheet;
         public static phantorm_TextureAtlas: createjs.SpriteSheet;
         public static currentScene: number;
