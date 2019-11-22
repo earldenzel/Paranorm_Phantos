@@ -34,7 +34,7 @@ var scenes;
             managers.Game.bulletManager = this.bulletManager;
             managers.Game.player.sceneOnLeft = config.Scene.HOTEL_10;
             _super.prototype.Start.call(this);
-            this.playerInfo.PlayerLocation = new math.Vec2(46, 28);
+            this.playerInfo.PlayerLocation = new math.Vec2(128, 50);
         };
         Hotel_11.prototype.Update = function () {
             _super.prototype.Update.call(this);

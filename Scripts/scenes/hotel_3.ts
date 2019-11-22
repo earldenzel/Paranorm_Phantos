@@ -32,7 +32,7 @@ module scenes {
             managers.Game.player.sceneOnLeft = config.Scene.HOTEL_1;
             managers.Game.player.sceneOnRight = config.Scene.HOTEL_4;
             super.Start();
-            this.playerInfo.PlayerLocation = new math.Vec2(46,28);
+            this.playerInfo.PlayerLocation = new math.Vec2(112,18);
         }        
 
         public Update(): void {

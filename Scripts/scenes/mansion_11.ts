@@ -14,7 +14,7 @@ module scenes {
             managers.Game.player.sceneOnTop = config.Scene.MANSION_7;
             managers.Game.player.sceneOnBot = config.Scene.MANSION_15;
             super.Start();
-            this.playerInfo.PlayerLocation = new math.Vec2(46,28);
+            this.playerInfo.PlayerLocation = new math.Vec2(96,50);
         }        
 
         public Update(): void {

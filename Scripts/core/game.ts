@@ -45,6 +45,13 @@
     let shootingFlower_TextureAtlasData: any;
     let shootingFlower_TextureAtlas: createjs.SpriteSheet;
 
+    // kc
+    let enemies_TextureAtlasData: any;
+    let enemies_TextureAtlas: createjs.SpriteSheet;
+
+    let titleUIMap_TextureAtlasData: any;
+    let titleUIMap_TextureAtlas: createjs.SpriteSheet;
+
     // Gets the asset manifest
     //let request = new Request("./Content/assetManifest.json");
     //fetch(request)
@@ -79,6 +86,7 @@
         item_TextureAtlasData.images = [assetManager.getResult("tAtlas_Items")];
         item_TextureAtlas = new createjs.SpriteSheet(item_TextureAtlasData);
 
+        // KC
         phoebe_TextureAtlasData = config.Assets.getAtlas__Phoebe;
         phoebe_TextureAtlasData.images = [assetManager.getResult("tAtlas__Phoebe")];
         phoebe_TextureAtlas = new createjs.SpriteSheet(phoebe_TextureAtlasData);
@@ -110,6 +118,15 @@
         shootingFlower_TextureAtlasData = config.Assets.getAtlas_ShootingFlower;
         shootingFlower_TextureAtlasData.images = [assetManager.getResult("tAtlas_ShootingFlower")];
         shootingFlower_TextureAtlas = new createjs.SpriteSheet(shootingFlower_TextureAtlasData);
+
+        // KC
+        enemies_TextureAtlasData = config.Assets.getAtlas__Enemies;
+        enemies_TextureAtlasData.images = [assetManager.getResult("tAtlas__Enemies")];
+        enemies_TextureAtlas = new createjs.SpriteSheet(enemies_TextureAtlasData);
+
+        titleUIMap_TextureAtlasData = config.Assets.getAtlas__TitleUiMap;
+        titleUIMap_TextureAtlasData.images = [assetManager.getResult("tAtlas__TitlesUIMap")];
+        titleUIMap_TextureAtlas = new createjs.SpriteSheet(titleUIMap_TextureAtlasData);
 
         // Initialize CreateJS
         stage = new createjs.Stage(canvas);
@@ -143,6 +160,9 @@
         managers.Game.shootingFlower_TextureAtlas = shootingFlower_TextureAtlas;
         managers.Game.phantos_TextureAtlas = phantos_TextureAtlas;
         managers.Game.phantorm_TextureAtlas = phantorm_TextureAtlas;
+        // KC
+        managers.Game.enemies_TextureAtlas = enemies_TextureAtlas;
+        managers.Game.titleUIMap_TextureAtlas = titleUIMap_TextureAtlas;
         Main();
     }
 

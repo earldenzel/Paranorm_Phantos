@@ -41,6 +41,7 @@ var objects;
             _this.ecto = 0;
             _this.maxEcto = 5;
             _this.attackPower = 1;
+            _this.activatePowers = false;
             _this.walk = ["Phoebe_Walk_Back1", "Phoebe_Walk_Front1", "Phoebe_Walk_Left1", "Phoebe_Walk_Right1"];
             _this.stand = ["Phoebe_Walk_Back2", "Phoebe_Walk_Front2", "Phoebe_Walk_Left2", "Phoebe_Walk_Right2"];
             _this.run = ["Phoebe_Run_Back", "Phoebe_Run_Front", "Phoebe_Run_Left", "Phoebe_Run_Right"];
@@ -213,6 +214,15 @@ var objects;
                     }
                     managers.Game.keyboardManager.enabled = true;
                     this.bitingTimer++;
+                }
+            }
+            if (managers.Game.keyboardManager.powers) {
+                this.activatePowers = !this.activatePowers;
+                if (this.activatePowers) {
+                    switch (this.powerUp) {
+                        case objects.powerUp.SHADOW:
+                            break;
+                    }
                 }
             }
         };

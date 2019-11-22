@@ -110,7 +110,7 @@ var scenes;
         };
         Graveyard_1.prototype.Main = function () {
             var _this = this;
-            this.playerInfo.PlayerLocation = new math.Vec2(30, 12);
+            this.playerInfo.PlayerLocation = new math.Vec2(112, 34); // 30,12
             _super.prototype.Main.call(this);
             this.bulletManager.spiderBullets.forEach(function (bullet) {
                 _this.addChild(bullet);

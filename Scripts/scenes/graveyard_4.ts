@@ -12,7 +12,7 @@ module scenes {
         public Start(): void {
             this.enemies[0] = new objects.TestEnemy(5, true, true);
             this.enemies[1] = new objects.TestEnemy(3, false, false);
-            this.enemies[2] = new objects.TestEnemy(2, false, true);
+            this.enemies[2] = new objects.ShadowGhost(2,false,true);
 
             this.obstacles[0] = new objects.Barriers(managers.Game.graveyard_TextureAtlas, "Graveyard_GraveTile");
             this.obstacles[0].SetPosition(new math.Vec2(200, 360));
@@ -25,7 +25,7 @@ module scenes {
 
             managers.Game.player.sceneOnLeft = config.Scene.GRAVEYARD_1;
             super.Start();
-            this.playerInfo.PlayerLocation = new math.Vec2(46,12);
+            this.playerInfo.PlayerLocation = new math.Vec2(128,34); // 46,12
         }        
 
         public Update(): void {

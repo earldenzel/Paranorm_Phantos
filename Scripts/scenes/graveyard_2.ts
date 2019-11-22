@@ -38,7 +38,7 @@ module scenes {
 
             managers.Game.player.sceneOnRight = config.Scene.GRAVEYARD_3;
             super.Start();
-            this.playerInfo.PlayerLocation = new math.Vec2(-2,12);
+            this.playerInfo.PlayerLocation = new math.Vec2(80,34); //-2,12
         }
 
         public Update(): void {

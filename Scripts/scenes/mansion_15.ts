@@ -13,7 +13,7 @@ module scenes {
             managers.Game.player.sceneOnLeft = config.Scene.MANSION_14;
             managers.Game.player.sceneOnTop = config.Scene.MANSION_11;
             super.Start();
-            this.playerInfo.PlayerLocation = new math.Vec2(46,28);
+            this.playerInfo.PlayerLocation = new math.Vec2(96,66);
         }        
 
         public Update(): void {

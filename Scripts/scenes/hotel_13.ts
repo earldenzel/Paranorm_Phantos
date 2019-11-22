@@ -31,7 +31,7 @@ module scenes {
             managers.Game.player.sceneOnBot = config.Scene.HOTEL_15;
             managers.Game.player.sceneOnTop = config.Scene.HOTEL_9;
             super.Start();
-            this.playerInfo.PlayerLocation = new math.Vec2(46,28);
+            this.playerInfo.PlayerLocation = new math.Vec2(96,66);
         }        
 
         public Update(): void {

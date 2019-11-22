@@ -12,7 +12,7 @@ module scenes {
         public Start(): void {
             managers.Game.player.sceneOnRight = config.Scene.MANSION_6;
             super.Start();
-            this.playerInfo.PlayerLocation = new math.Vec2(46,28);
+            this.playerInfo.PlayerLocation = new math.Vec2(64,34);
         }        
 
         public Update(): void {

@@ -39,7 +39,7 @@ var scenes;
             this.obstacles[3].SetPosition(new math.Vec2(380, 550));
             managers.Game.player.sceneOnRight = config.Scene.HOTEL_1;
             _super.prototype.Start.call(this);
-            this.playerInfo.PlayerLocation = new math.Vec2(46, 28);
+            this.playerInfo.PlayerLocation = new math.Vec2(80, 18);
         };
         Hotel_2.prototype.Update = function () {
             _super.prototype.Update.call(this);

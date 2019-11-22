@@ -7,6 +7,8 @@ module objects {
         public stunIndicator: objects.Indicator;
         protected bounty: number;
         public isFlying: boolean;
+        public canBeEaten: boolean;
+
 
         public startPosition: math.Vec2;
 
@@ -14,6 +16,9 @@ module objects {
             super(textureAtlas, enemyName);
 
             this.startPosition = startPosition;
+            // Some enemies can be eaten, some enemies cannot.
+            // They will start off as able to be eaten.
+            this.canBeEaten = true;
             this.Start();
             this.stunIndicator = new objects.Indicator("stunIndicator");
             this.Move();
@@ -36,7 +41,7 @@ module objects {
                 //determine whether a bit is currently happening 
                 if (managers.Game.player.biteSequence == 0){
                     //if it is currently in contact with player and whether the biting button is pressed, then disable movement
-                    if (managers.Game.keyboardManager.biting && managers.Collision.Check(managers.Game.player, this)){                        
+                    if (managers.Game.keyboardManager.biting && managers.Collision.Check(managers.Game.player, this) && this.canBeEaten){                        
                         managers.Game.player.SetBitePositionDirection(this.GetPosition());
                         managers.Game.player.EatMessage();
                         this.scaleX = managers.Game.player.halfH / this.height;

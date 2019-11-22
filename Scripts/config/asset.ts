@@ -246,6 +246,14 @@ module config {
                 "id": "tAtlas_Items",
                 "src": "./Assets/_UI/TitleUiItemsMap_TextureAtlas.png"
             },
+            { // KC
+                "id": "tAtlas__TitlesUIMap",
+                "src": "./Assets/_UI/_Final/TitleUiMap_TextureAtlas.png"
+            },
+            { // KC
+                "id": "tAtlas__Items",
+                "src": "./Assets/_Items/_Final/Items_TextureAtlas.png"
+            },
             {
                 "id": "tAtlas_Phoebe",
                 "src": "./Assets/_Player/Phoebe_TextureAtlas.png"
@@ -258,9 +266,13 @@ module config {
                 "id": "tAtlas_Phantorm",
                 "src": "./Assets/_Player/Phoebe+Phantos_TextureAtlas.png"
             },
-            {
+            { // KC
                 "id": "tAtlas__Phoebe",
                 "src": "./Assets/_Player/_Final/Phoebe__TextureAtlas.png"
+            },
+            { // KC
+                "id": "tAtlas__Enemies",
+                "src": "./Assets/_Enemies/_Final/Enemies__TextureAtlas.png"
             },
             {
                 "id": "tAtlas_Bat",
@@ -1147,6 +1159,7 @@ module config {
             }
         };
 
+        // KC
         public static getAtlas__Phoebe: any = {
 
             "images": [
@@ -1170,7 +1183,7 @@ module config {
                 [141, 0, 108, 144, 0, 12, -10], // 8
                 // OLD: -29, -77 => 12, -10 || (+41, +67)
                 [141, 144, 108, 144, 0, -48, -10], // 9
-                 // OLD: -89, -77 => -48, -10 || (+41, +67)
+                // OLD: -89, -77 => -48, -10 || (+41, +67)
                 [141, 288, 130, 94, 0, 34, -10], // 10
                 // OLD: -7, -77 => 34, -10 || (+41, +67)
                 [244, 382, 48, 144, 0, -48, -10], // 11
@@ -1181,11 +1194,11 @@ module config {
                 [249, 142, 48, 136, 0, -48, 32], // 14
                 // OLD: -89, -35 => 14, 32 || (+41, +67)
                 [271, 278, 130, 94, 0, -48, -10], // 15
-                 // OLD: -89, -77 => -48, -10 || (+41, +67)
+                // OLD: -89, -77 => -48, -10 || (+41, +67)
                 [297, 142, 108, 128, 0, 12, 24], // 16
                 // OLD: -29, -43 => 12, 24 || (+41, +67)
                 [292, 372, 108, 128, 0, -48, 24], // 17
-                 // OLD: -89, -43 => -48, 24 || (+41, +67)
+                // OLD: -89, -43 => -48, 24 || (+41, +67)
                 [318, 500, 68, 94, 0, -3, 0],
                 [386, 500, 67, 94, 0, -7, 0],
                 [400, 372, 116, 122, 0, -48, -10], // 20
@@ -1342,27 +1355,27 @@ module config {
                 },
                 "Phoebe_Walk_Back2": { "frames": [53] },
                 "Phoebe_Special": { "frames": [71] },
-                "Phoebe_SpecialAttack_Front":{
-                    "frames": [31,44,39],
+                "Phoebe_SpecialAttack_Front": {
+                    "frames": [31, 44, 39],
                     "speed": 0.1
                 },
-                "Phoebe_SpecialAttack_Back":{
-                    "frames": [33,43,30],
+                "Phoebe_SpecialAttack_Back": {
+                    "frames": [33, 43, 30],
                     "speed": 0.1
                 },
-                "Phoebe_SpecialAttack_Left":{
-                    "frames": [42,37,35],
+                "Phoebe_SpecialAttack_Left": {
+                    "frames": [42, 37, 35],
                     "speed": 0.1
                 },
-                "Phoebe_SpecialAttack_Right":{
-                    "frames": [40,38,36],
+                "Phoebe_SpecialAttack_Right": {
+                    "frames": [40, 38, 36],
                     "speed": 0.1
                 },
                 "Phoebe_Shadow": {
-                    "frames": [69,73],
+                    "frames": [69, 73],
                     "speed": 0.1
                 },
-                "Phoebe_Victory": {"frames": [2]}, // DONE
+                "Phoebe_Victory": { "frames": [2] }, // DONE
 
                 "PhoebeSoul_Attack_Left": { "frames": [0] }, // DONE
                 "PhoebeSoul_Attack_Front": { "frames": [4] }, // DONE
@@ -1381,11 +1394,619 @@ module config {
                 "PhoebeSoul_Walk_Left": { "frames": [29] },
                 "PhoebeSoul_Walk_Right": { "frames": [25] },
                 "PhoebeSoul_Walk_Back": { "frames": [24] },
-                "PhoebeSoul_SpecialAttack_Front":{"frames":[19]},
-                "PhoebeSoul_SpecialAttack_Left":{"frames":[23]},
-                "PhoebeSoul_SpecialAttack_Back":{"frames":[18]},
-                "PhoebeSoul_SpecialAttack_Right":{"frames":[21]}
+                "PhoebeSoul_SpecialAttack_Front": { "frames": [19] },
+                "PhoebeSoul_SpecialAttack_Left": { "frames": [23] },
+                "PhoebeSoul_SpecialAttack_Back": { "frames": [18] },
+                "PhoebeSoul_SpecialAttack_Right": { "frames": [21] }
             }
-        }
+        };
+
+        public static getAtlas__Items: any = {
+            "images": [
+                ""
+            ],
+
+            "framerate": 20,
+            "frames": [
+                [0, 0, 26, 50, 0, 0, 0],
+                [0, 50, 26, 48, 0, 0, 0],
+                [26, 0, 22, 43, 0, 0, 0],
+                [0, 98, 18, 44, 0, -2, 0],
+                [26, 43, 20, 38, 0, 0, 0],
+                [46, 43, 18, 22, 0, 0, 0],
+                [46, 65, 18, 22, 0, 0, 0],
+                [26, 81, 20, 24, 0, 0, 0],
+                [46, 87, 18, 22, 0, 0, 0],
+                [0, 142, 20, 24, 0, 0, 0],
+                [0, 166, 24, 24, 0, -1, -25],
+                [18, 105, 20, 24, 0, 0, 0],
+                [38, 109, 26, 14, 0, 0, 0],
+                [20, 129, 20, 24, 0, 0, 0],
+                [40, 123, 20, 24, 0, 0, 0],
+                [24, 153, 20, 24, 0, 0, 0],
+                [24, 177, 22, 20, 0, 0, 0],
+                [44, 147, 20, 20, 0, 0, 0],
+                [48, 0, 12, 12, 0, 0, 0]
+            ],
+
+            "animations": {
+                "Items_Hellebore-Flower": {
+                    "frames": [1, 10, 0],
+                    "speed": 0.1
+                },
+                "Items_EctoCooler": {
+                    "frames": [3, 2],
+                    "speed": 0.1
+                },
+                "Items_Key": { "frames": [4] },
+                "Items_Emeralds": { "frames": [5] },
+                "Items_Rubies": { "frames": [6] },
+                "Items_Fifty-Dollars": { "frames": [7] },
+                "Items_Sapphires": { "frames": [8] },
+                "Items_Five-Dollars": { "frames": [9] },
+                "Items_Hellebore-Flower1": { "frames": [10] },
+                "Items_One-Dollar": { "frames": [11] },
+                "Items_Gold-Bar": { "frames": [12] },
+                "Items_One-Hundred-Dollars": { "frames": [13] },
+                "Items_Ten-Dollars": { "frames": [14] },
+                "Items_Twenty-Dollars": { "frames": [15] },
+                "Items_Diamonds": { "frames": [16] },
+                "Items_Pearl": { "frames": [17] },
+                "Items_One-Dollar-Coin": { "frames": [18] }
+            }
+        };
+
+        public static getAtlas__TitleUiMap: any = {
+            "images": [
+                ""
+            ],
+
+            "framerate": 20,
+            "frames": [
+                [0, 0, 292, 650, 0, 0, 0],
+                [292, 0, 564, 110, 0, 0, 0],
+                [292, 110, 482, 180, 0, 0, 0],
+                [292, 290, 482, 134, 0, 0, 0],
+                [292, 424, 454, 108, 0, 0, 0],
+                [292, 532, 392, 92, 0, 0, 0],
+                [774, 110, 104, 144, 0, 0, 0],
+                [774, 254, 128, 128, 0, 0, 0],
+                [774, 382, 162, 86, 0, 0, 0],
+                [746, 468, 162, 86, 0, 0, 0],
+                [684, 554, 162, 86, 0, 0, 0],
+                [856, 0, 60, 52, 0, 0, 0],
+                [846, 554, 60, 52, 0, 0, 0],
+                [856, 52, 60, 52, 0, 0, 0],
+                [916, 0, 60, 52, 0, 0, 0],
+                [916, 52, 60, 52, 0, 0, 0],
+                [908, 468, 16, 86, 0, 0, 0],
+                [924, 468, 16, 86, 0, 0, 0],
+                [878, 104, 16, 86, 0, 0, 0],
+                [894, 104, 16, 86, 0, 0, 0],
+                [910, 104, 16, 86, 0, 0, 0],
+                [926, 104, 16, 86, 0, 0, 0],
+                [878, 190, 38, 38, 0, 0, 0],
+                [846, 606, 38, 38, 0, 0, 0],
+                [906, 554, 38, 38, 0, 0, 0],
+                [942, 104, 38, 38, 0, 0, 0],
+                [942, 142, 38, 38, 0, 0, 0],
+                [944, 180, 38, 38, 0, 0, 0],
+                [944, 218, 38, 38, 0, 0, 0],
+                [944, 256, 38, 38, 0, 0, 0],
+                [944, 294, 38, 38, 0, 0, 0],
+                [944, 332, 38, 38, 0, 0, 0],
+                [944, 370, 38, 38, 0, 0, 0],
+                [944, 408, 38, 38, 0, 0, 0],
+                [944, 446, 38, 38, 0, 0, 0],
+                [944, 484, 38, 38, 0, 0, 0],
+                [944, 522, 38, 38, 0, 0, 0],
+                [944, 560, 38, 38, 0, 0, 0],
+                [746, 424, 26, 38, 0, 0, -3],
+                [916, 190, 25, 39, 0, 0, 0],
+                [906, 592, 38, 34, 0, 0, 0],
+                [944, 598, 38, 34, 0, 0, 0],
+                [292, 624, 20, 21, 0, -1, -23],
+                [902, 229, 38, 34, 0, 0, 0],
+                [902, 263, 38, 34, 0, 0, 0],
+                [902, 297, 38, 34, 0, 0, 0],
+                [902, 331, 38, 34, 0, 0, 0],
+                [684, 532, 12, 12, 0, 0, 0]
+            ],
+
+            "animations": {
+                "GameOver_Spotlight": { "frames": [0] },
+                "UILayout_Placement": { "frames": [1] },
+                "Title": {
+                    "frames": [4, 3, 2],
+                    "speed": 0.05
+                },
+                "GameOver": { "frames": [5] },
+                "FortuneTeller": { "frames": [6] },
+                "Company_Logo": { "frames": [7] },
+                "MapsGraveyard": { "frames": [8] },
+                "MapsHotel": { "frames": [9] },
+                "MapsMansion": { "frames": [10] },
+                "Power_ItemBox_Bite": { "frames": [11] },
+                "Power_ItemBox_Fire": { "frames": [12] },
+                "Power_ItemBox_Ice": { "frames": [13] },
+                "Power_ItemBox_Shadow": { "frames": [14] },
+                "Power_ItemBox_Slime": { "frames": [15] },
+                "Ecto_0": { "frames": [16] },
+                "Ecto_1": { "frames": [17] },
+                "Ecto_2": { "frames": [18] },
+                "Ecto_3": { "frames": [19] },
+                "Ecto_4": { "frames": [20] },
+                "Ecto_5": { "frames": [21] },
+                "HowToPlay_AKey": { "frames": [22] },
+                "HowToPlay_CKey": { "frames": [23] },
+                "HowToPlay_DKey": { "frames": [24] },
+                "HowToPlay_DownArrow": { "frames": [25] },
+                "HowToPlay_JKey": { "frames": [26] },
+                "HowToPlay_KKey": { "frames": [27] },
+                "HowToPlay_LKey": { "frames": [28] },
+                "HowToPlay_LeftArrow": { "frames": [29] },
+                "HowToPlay_RightArrow": { "frames": [30] },
+                "HowToPlay_SKey": { "frames": [31] },
+                "HowToPlay_SemiColonKey": { "frames": [32] },
+                "HowToPlay_UpArrow": { "frames": [33] },
+                "HowToPlay_VKey": { "frames": [34] },
+                "HowToPlay_WKey": { "frames": [35] },
+                "HowToPlay_XKey": { "frames": [36] },
+                "HowToPlay_ZKey": { "frames": [37] },
+                "Life_0": { "frames": [40] },
+                "Life_1": { "frames": [41] },
+                "Effects_FlameHit": {
+                    "frames": [42, 38, 39],
+                    "speed": 0.2
+                },
+                "Life_2": { "frames": [43] },
+                "Life_3": { "frames": [44] },
+                "Life_4": { "frames": [45] },
+                "Life_5": { "frames": [46] },
+                "PlayerLocation": { "frames": [47] },
+                "upIndicator": {
+                    "frames": [33, 35],
+                    "speed": 0.01
+                },
+                "downIndicator": {
+                    "frames": [25, 31],
+                    "speed": 0.01
+                },
+                "leftIndicator": {
+                    "frames": [29, 22],
+                    "speed": 0.01
+                },
+                "rightIndicator": {
+                    "frames": [30, 24],
+                    "speed": 0.01
+                },
+                "attackIndicator": {
+                    "frames": [37, 26],
+                    "speed": 0.01
+                },
+                "stunIndicator": {
+                    "frames": [36, 27],
+                    "speed": 0.01
+                }
+            }
+        };
+
+        public static getAtlas__Enemies: any = {
+
+            "images": [
+                ""
+            ],
+
+            "framerate": 20,
+            "frames": [
+                [0, 0, 175, 197, 0, -1, 0],
+                [0, 197, 175, 195, 0, -1, 0],
+                [175, 0, 145, 197, 0, 0, -1],
+                [0, 392, 152, 174, 0, -13, -11],
+                [320, 0, 152, 172, 0, -13, -11],
+                [175, 197, 100, 150, 0, -39, -23],
+                [0, 566, 120, 122, 0, -25, -41],
+                [472, 0, 68, 150, 0, -55, -23],
+                [0, 688, 116, 102, 0, -31, -47],
+                [540, 0, 64, 148, 0, -57, -25],
+                [604, 0, 64, 148, 0, -57, -25],
+                [668, 0, 154, 58, 0, -11, -69],
+                [668, 58, 152, 52, 0, -13, -71],
+                [275, 197, 46, 158, 0, -65, -19],
+                [0, 790, 62, 66, 0, -57, -65],
+                [321, 172, 112, 96, 0, -33, -51],
+                [321, 268, 98, 102, 0, -39, -47],
+                [152, 392, 46, 158, 0, -65, -17],
+                [198, 347, 76, 130, 0, -51, -33],
+                [274, 355, 46, 148, 0, -65, -25],
+                [320, 370, 96, 102, 0, -41, -47],
+                [120, 566, 60, 130, 0, -59, -33],
+                [116, 696, 90, 104, 0, -43, -47],
+                [180, 550, 38, 146, 0, -69, -25],
+                [822, 0, 90, 104, 0, -43, -47],
+                [912, 0, 86, 104, 0, -45, -47],
+                [668, 110, 114, 34, 0, -31, -81],
+                [198, 477, 72, 72, 0, -53, -63],
+                [218, 549, 46, 154, 0, -65, -21],
+                [264, 549, 48, 138, 0, -65, -29],
+                [206, 703, 60, 130, 0, -59, -33],
+                [266, 687, 54, 138, 0, -61, -29],
+                [433, 172, 84, 106, 0, -47, -45],
+                [419, 278, 84, 102, 0, -47, -47],
+                [416, 380, 80, 84, 0, -49, -57],
+                [270, 503, 66, 46, 0, -55, -75],
+                [312, 549, 48, 134, 0, -65, -31],
+                [320, 683, 40, 134, 0, -69, -31],
+                [517, 150, 48, 134, 0, -65, -31],
+                [565, 148, 64, 124, 0, -57, -37],
+                [629, 148, 64, 122, 0, -57, -37],
+                [693, 144, 58, 122, 0, -59, -37],
+                [751, 144, 54, 122, 0, -61, -39],
+                [503, 284, 60, 106, 0, -59, -45],
+                [496, 390, 72, 76, 0, -53, -59],
+                [336, 472, 82, 76, 0, -47, -61],
+                [360, 548, 56, 122, 0, -61, -37],
+                [360, 670, 56, 116, 0, -61, -41],
+                [360, 786, 88, 70, 0, -45, -63],
+                [418, 464, 68, 84, 0, -55, -57],
+                [416, 548, 58, 110, 0, -63, -45],
+                [416, 658, 58, 110, 0, -59, -43],
+                [486, 466, 72, 76, 0, -53, -61],
+                [474, 548, 44, 122, 0, -67, -37],
+                [518, 542, 44, 122, 0, -67, -37],
+                [474, 670, 58, 98, 0, -59, -47],
+                [532, 664, 38, 116, 0, -69, -41],
+                [448, 780, 58, 76, 0, -59, -61],
+                [506, 780, 50, 76, 0, -65, -61],
+                [556, 780, 50, 76, 0, -63, -61],
+                [62, 790, 48, 62, 0, -65, -67],
+                [110, 800, 66, 48, 0, -59, -85],
+                [176, 800, 30, 52, 0, -73, -71],
+                [820, 104, 100, 34, 0, -37, -81],
+                [805, 138, 46, 122, 0, -59, -37],
+                [851, 138, 44, 122, 0, -67, -37],
+                [895, 138, 44, 122, 0, -67, -37],
+                [939, 104, 46, 120, 0, -65, -39],
+                [985, 104, 32, 122, 0, -71, -37],
+                [563, 284, 56, 100, 0, -59, -47],
+                [568, 384, 54, 82, 0, -61, -57],
+                [558, 466, 72, 72, 0, -53, -63],
+                [562, 538, 40, 122, 0, -73, -37],
+                [602, 538, 34, 122, 0, -71, -37],
+                [570, 660, 40, 116, 0, -69, -41],
+                [610, 660, 36, 116, 0, -71, -41],
+                [606, 776, 48, 76, 0, -65, -59],
+                [619, 272, 34, 110, 0, -73, -43],
+                [653, 270, 48, 108, 0, -65, -45],
+                [701, 266, 48, 108, 0, -65, -45],
+                [749, 266, 34, 114, 0, -71, -41],
+                [783, 266, 34, 114, 0, -71, -41],
+                [817, 260, 34, 122, 0, -73, -37],
+                [851, 260, 34, 122, 0, -71, -37],
+                [885, 260, 34, 114, 0, -71, -41],
+                [919, 260, 24, 114, 0, -73, -41],
+                [622, 382, 46, 84, 0, -65, -57],
+                [668, 378, 36, 90, 0, -71, -53],
+                [704, 374, 42, 94, 0, -67, -51],
+                [746, 380, 56, 84, 0, -61, -57],
+                [802, 382, 72, 72, 0, -53, -63],
+                [943, 224, 34, 114, 0, -71, -41],
+                [977, 226, 34, 114, 0, -71, -41],
+                [630, 466, 38, 62, 0, -69, -67],
+                [636, 528, 26, 122, 0, -75, -37],
+                [668, 468, 72, 72, 0, -53, -63],
+                [662, 540, 72, 72, 0, -53, -63],
+                [646, 650, 34, 114, 0, -71, -41],
+                [680, 612, 34, 114, 0, -71, -41],
+                [714, 612, 24, 114, 0, -73, -41],
+                [654, 764, 44, 84, 0, -67, -57],
+                [698, 726, 34, 114, 0, -71, -41],
+                [732, 726, 34, 110, 0, -73, -43],
+                [732, 836, 58, 20, 0, -59, -89],
+                [874, 382, 42, 72, 0, -67, -63],
+                [916, 374, 44, 82, 0, -67, -57],
+                [734, 540, 72, 72, 0, -53, -63],
+                [740, 468, 72, 72, 0, -53, -63],
+                [738, 612, 72, 72, 0, -53, -63],
+                [812, 454, 72, 72, 0, -53, -63],
+                [884, 456, 72, 72, 0, -53, -63],
+                [812, 526, 72, 72, 0, -51, -63],
+                [884, 528, 72, 72, 0, -51, -63],
+                [810, 598, 50, 74, 0, -63, -61],
+                [860, 600, 48, 76, 0, -65, -59],
+                [908, 600, 48, 70, 0, -65, -63],
+                [738, 684, 44, 40, 0, -67, -79],
+                [766, 724, 44, 74, 0, -67, -61],
+                [782, 684, 44, 40, 0, -67, -77],
+                [790, 798, 44, 58, 0, -67, -69],
+                [810, 724, 48, 62, 0, -65, -67],
+                [826, 672, 30, 52, 0, -73, -71],
+                [856, 676, 40, 44, 0, -69, -77],
+                [858, 720, 34, 60, 0, -71, -69],
+                [834, 786, 26, 60, 0, -75, -69],
+                [860, 780, 26, 60, 0, -75, -69],
+                [943, 338, 32, 32, 0, -73, -83],
+                [960, 370, 52, 52, 0, -63, -73],
+                [960, 422, 52, 52, 0, -63, -73],
+                [956, 474, 60, 50, 0, -59, -73],
+                [956, 524, 52, 52, 0, -63, -73],
+                [956, 576, 52, 52, 0, -63, -73],
+                [956, 628, 52, 52, 0, -63, -73],
+                [886, 780, 46, 52, 0, -65, -71],
+                [782, 110, 26, 28, 0, -75, -85],
+                [896, 676, 30, 46, 0, -73, -75],
+                [892, 722, 52, 52, 0, -63, -73],
+                [926, 670, 30, 46, 0, -73, -75],
+                [956, 680, 52, 52, 0, -61, -73],
+                [944, 732, 26, 44, 0, -75, -77],
+                [970, 732, 32, 32, 0, -73, -83],
+                [975, 340, 14, 30, 0, -81, -83],
+                [989, 340, 28, 26, 0, -75, -85],
+                [416, 768, 18, 18, 0, -79, -89],
+                [932, 776, 32, 32, 0, -73, -83],
+                [932, 808, 32, 32, 0, -73, -83],
+                [970, 764, 32, 32, 0, -73, -83],
+                [964, 796, 32, 32, 0, -73, -83],
+                [964, 828, 26, 28, 0, -75, -85],
+                [472, 150, 30, 14, 0, -73, -91],
+                [206, 833, 30, 14, 0, -73, -91],
+                [175, 347, 14, 30, 0, -81, -83],
+                [320, 817, 32, 32, 0, -71, -83],
+                [266, 825, 28, 26, 0, -75, -85]
+            ],
+
+            "animations": {
+                
+                "GhostWoman_Idle_Front": { "frames": [36] },
+                "GhostWoman_Idle_Left": { "frames": [37] },
+                "GhostWoman_Idle_Back": { "frames": [38] },
+                "GhostWoman_Attack": { "frames": [43] },
+                "GhostWoman_Eaten_Front": { "frames": [44] },
+                "GhostWoman_Eaten_Left": { "frames": [45] },
+                //"GhostWoman_IceAttack1": { "frames": [76] },
+                //"GhostWoman_IceAttackTP1": { "frames": [114] },
+                //"GhostWoman_IceAttack2": { "frames": [3] },
+                //"GhostWoman_IceAttackTP2": { "frames": [4] },
+                //"GhostWoman_IceAttack3": { "frames": [0] },
+                //"GhostWoman_IceAttackTP3": { "frames": [1] },
+                "GhostWoman_Explode": { 
+                    "frames": [144,130,90,95],
+                    "speed":0.1 
+                },
+                "GhostWoman_Eaten_Back": { "frames": [52] },
+                "GhostWoman_Stun": { 
+                    "frames": [89,49],
+                    "speed": 0.1 
+                },
+                
+                "IceAttack":{
+                    "frames": [76,114,3,4,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,3,4,76,114],
+                    "speed": 0.1
+                },
+
+                "GhostMan_Eaten_Left": { "frames": [57] },
+                "GhostMan_Eaten_Front": { "frames": [58] },
+                "GhostMan_Eaten_Back": { "frames": [59] },
+                "GhostMan_Idle_Front": { "frames": [9] },
+                "GhostMan_Idle_Back": { "frames": [10] },
+                "GhostMan_Stun": { 
+                    "frames": [7,5],
+                    "speed": 0.1 
+                },
+                "GhostMan_Attack_Left": { "frames": [18] },
+                "GhostMan_Idle_Left": { "frames": [23] },
+                "GhostMan_Attack_Back": { "frames": [30] },
+                "GhostMan_Attack_Front": { "frames": [21] },
+                "Fireball": { 
+                    "frames": [116,122,118], 
+                    "speed": 0.1
+                },
+
+                "GhostShadow_Opaque": { 
+                    "frames": [22,25,22,16],
+                    "speed": 0.05 
+                },
+                "GhostShadow_Transparent": { 
+                    "frames": [24,33,24,20],
+                    "speed": 0.05 
+                },
+                "GhostShadow_Stun": { 
+                    "frames": [32,8],
+                    "speed": 0.1
+                },
+                "GhostShadow_Attack": { 
+                    "frames": [34,127,6,2,2,2,2,2,6,127,34], 
+                    "speed": 0.1
+                },
+                "GhostShadow_Eaten_Left": { "frames": [115] },
+                "GhostShadow_Eaten_FrontBack": { "frames": [119] },
+                /* 
+                    Works with GhostMan
+                */
+                "GhostShadow_Explode": { 
+                    "frames": [126,128,27,71],
+                    "speed": 0.1 
+                },
+                
+                "GhostTeeth_Attack_Right": { 
+                    "frames": [11,12],
+                    "speed": 0.1 
+                },
+                "GhostTeeth_Attack_Front": { 
+                    "frames": [13,17],
+                    "speed": 0.1 
+                },
+                "GhostTeeth_Attack_Back": { 
+                    "frames": [19,28],
+                    "speed": 0.1 
+                },
+                "GhostTeeth_Idle": { 
+                    "frames": [29,31], 
+                    "speed": 0.05
+                },
+                "GhostTeeth_Stun": { 
+                    "frames": [39,40],
+                    "speed": 0.1 
+                },
+                "GhostTeeth_Eaten_Front": { "frames": [60] },
+                "GhostTeeth_Eaten_Left": { "frames": [14] },
+                "GhostTeeth_Eaten_Back": { "frames": [120] },
+
+                "GhostSlime_Explosion": { "frames": [15] },
+                "SlimePuddle_2": { "frames": [35] },
+                "SlimePuddle_1": { "frames": [48] },
+                "GhostSlime_Idle": { "frames": [56] },
+                "SlimePuddle_3": { "frames": [86] },
+                "GhostSlime_Form2": { "frames": [87] },
+                "GhostSlime_Eaten_Left": { "frames": [93] },
+                "GhostSlime_Form1": { "frames": [104] },
+                "GhostSlime_Stun": { 
+                    "frames": [113,104],
+                    "speed": 0.1 
+                },
+                "GhostSlime_Eaten_Front": { "frames": [124] },
+                "GhostSlime_Eaten_Back": { "frames": [125] },
+                "SlimePuddle_4": { "frames": [129] },
+                "GhostSlime_Travel": { "frames": [140] },
+                "GhostSlime_Emerge": {
+                    "frames": [104,87,56],
+                    "speed": 0.05
+                },
+                "GhostSlime_Hide":{
+                    "frames": [56,87,104,140],
+                    "speed": 0.05
+                },
+                "SlimeBall": { "frames": [143] },
+                
+                "Maggot_Walk_Side": { 
+                    "frames": [26,63],
+                    "speed": 0.05 
+                },
+                "Maggot_Walk_FrontBack": { 
+                    "frames": [117,100],
+                    "speed": 0.05 
+                },
+                "Maggot_SmallWalk_Side": { "frames": [103] },
+                "Maggot_SmallWalk_FrontBack": { "frames": [139] },
+                "Maggot_Explode": { 
+                    "frames": [146,132,107,108],
+                    "speed": 0.1 
+                },
+                
+                "Zombie_Attack_Front": { 
+                    "frames": [53,54],
+                    "speed": 0.08  
+                },
+                "Zombie_Attack_Left": { 
+                    "frames": [64,41],
+                    "speed": 0.08  
+                },
+                "Zombie_Attack_Back": { 
+                    "frames": [65,66],
+                    "speed": 0.08  
+                },
+                "Zombie_Explode": { 
+                    "frames": [152,138,111,112],
+                    "speed": 0.1 
+                },
+                "Zombie_Stun": { 
+                    "frames": [67,47],
+                    "speed": 0.1 
+                },
+                "Zombie_Walk_Front": { 
+                    "frames": [73,82],
+                    "speed": 0.05  
+                },
+                "Zombie_Walk_Back": { 
+                    "frames": [83,68],
+                    "speed": 0.05  
+                },
+                "Zombie_Walk_Left": { 
+                    "frames": [94,72] ,
+                    "speed": 0.05 
+                },
+
+                "Ghost_Idle": { 
+                    "frames": [42,46],
+                    "speed": 0.05 
+                },
+                "Ghost_Stun": { 
+                    "frames": [55,69],
+                    "speed": 0.1
+                },
+                /* 
+                    Works with GhostTeeth, GhostThin, TestEnemy
+                */
+                "Ghost_Explode": { 
+                    "frames": [145,131,96,106],
+                    "speed": 0.1
+                },
+                "Ghost_Eaten_Left": { "frames": [123] },
+                "Ghost_Eaten_Front": { "frames": [135] },
+                "Ghost_Eaten_Back": { "frames": [137] },
+                
+                
+                "RedSkeleton_Dead": { "frames": [61] },
+                "RedSkeleton_Stun": { 
+                    "frames": [78,50],
+                    "speed": 0.1 
+                },
+                "RedSkeleton_Walk_Front": { 
+                    "frames": [80,81],
+                    "speed": 0.1  
+                },
+                "RedSkeleton_Walk_Back": { 
+                    "frames": [84,91] ,
+                    "speed": 0.1 
+                },
+                "RedSkeleton_Walk_Right": { 
+                    "frames": [85,77],
+                    "speed": 0.1  
+                },
+                "RedBone": { 
+                    "frames": [149,142,141,134],
+                    "speed": 0.1 
+                },
+                
+                "GhostThin_Eaten_Front": { "frames": [62] },
+                "GhostThin_Stun": { 
+                    "frames": [70,105],
+                    "speed": 0.1 
+                },
+                "GhostThin_Idle": { 
+                    "frames": [75,74],
+                    "speed": 0.05  
+                },
+                "GhostThin_Eaten_Back": { "frames": [121] },
+                "GhostThin_Eaten_Left": { "frames": [133] },
+                
+                "TestEnemy": { "frames": [88] },
+                
+                "Skeleton_Stun1": { 
+                    "frames": [79,51],
+                    "speed": 0.1  
+                },
+                "Skeleton_Walk_Back": { 
+                    "frames": [98,101] ,
+                    "speed": 0.1 
+                },
+                "Skeleton_Walk_Right": { 
+                    "frames": [99,102],
+                    "speed": 0.1  
+                },
+                "Skeleton_Walk_Front": { 
+                    "frames": [92,97] ,
+                    "speed": 0.1 
+                },
+                "Skeleton_Explode": { 
+                    "frames": [147,136,109,110],
+                    "speed": 0.1 
+                },
+                "Bone": { 
+                    "frames": [150,153,151,148],
+                    "speed": 0.1 
+                }
+            }
+        };
     }
 }

@@ -19,6 +19,9 @@ var objects;
             if (startPosition === void 0) { startPosition = null; }
             var _this = _super.call(this, textureAtlas, enemyName) || this;
             _this.startPosition = startPosition;
+            // Some enemies can be eaten, some enemies cannot.
+            // They will start off as able to be eaten.
+            _this.canBeEaten = true;
             _this.Start();
             _this.stunIndicator = new objects.Indicator("stunIndicator");
             _this.Move();
@@ -40,7 +43,7 @@ var objects;
                 //determine whether a bit is currently happening 
                 if (managers.Game.player.biteSequence == 0) {
                     //if it is currently in contact with player and whether the biting button is pressed, then disable movement
-                    if (managers.Game.keyboardManager.biting && managers.Collision.Check(managers.Game.player, this)) {
+                    if (managers.Game.keyboardManager.biting && managers.Collision.Check(managers.Game.player, this) && this.canBeEaten) {
                         managers.Game.player.SetBitePositionDirection(this.GetPosition());
                         managers.Game.player.EatMessage();
                         this.scaleX = managers.Game.player.halfH / this.height;

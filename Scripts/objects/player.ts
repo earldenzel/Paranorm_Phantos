@@ -35,6 +35,7 @@ module objects {
         public ecto: number;
         public maxHp: number;
         public maxEcto: number;
+        public activatePowers: boolean;
 
         //Constructor
         constructor() {
@@ -46,6 +47,7 @@ module objects {
             this.ecto = 0;
             this.maxEcto = 5;
             this.attackPower = 1;
+            this.activatePowers = false;
             this.walk = ["Phoebe_Walk_Back1", "Phoebe_Walk_Front1", "Phoebe_Walk_Left1", "Phoebe_Walk_Right1"];
             this.stand = ["Phoebe_Walk_Back2", "Phoebe_Walk_Front2", "Phoebe_Walk_Left2", "Phoebe_Walk_Right2"];
             this.run = ["Phoebe_Run_Back", "Phoebe_Run_Front", "Phoebe_Run_Left", "Phoebe_Run_Right"];
@@ -225,6 +227,17 @@ module objects {
                     }
                     managers.Game.keyboardManager.enabled = true;
                     this.bitingTimer++;
+                }
+            }
+
+            if(managers.Game.keyboardManager.powers){
+                this.activatePowers = !this.activatePowers;
+                if(this.activatePowers){
+                    switch(this.powerUp){
+                        case powerUp.SHADOW:
+                            break;
+                        
+                    }
                 }
             }
         }

@@ -29,7 +29,7 @@ var scenes;
             managers.Game.player.sceneOnTop = config.Scene.MANSION_8;
             managers.Game.player.sceneOnBot = config.Scene.MANSION_16;
             _super.prototype.Start.call(this);
-            this.playerInfo.PlayerLocation = new math.Vec2(46, 28);
+            this.playerInfo.PlayerLocation = new math.Vec2(112, 50);
         };
         Mansion_12.prototype.Update = function () {
             _super.prototype.Update.call(this);

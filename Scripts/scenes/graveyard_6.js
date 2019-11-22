@@ -62,7 +62,7 @@ var scenes;
             managers.Game.player.sceneOnTop = config.Scene.GRAVEYARD_5;
             managers.Game.player.sceneOnBot = config.Scene.GRAVEYARD_8;
             _super.prototype.Start.call(this);
-            this.playerInfo.PlayerLocation = new math.Vec2(30, 44);
+            this.playerInfo.PlayerLocation = new math.Vec2(112, 66); // 30,44
         };
         Graveyard_6.prototype.Update = function () {
             if (!this.enemies[0].visible && !this.enemies[1].visible && !this.enemies[2].visible && !this.enemies[3].visible) {

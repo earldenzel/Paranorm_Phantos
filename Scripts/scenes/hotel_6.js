@@ -39,7 +39,7 @@ var scenes;
             managers.Game.player.sceneOnBot = config.Scene.HOTEL_9;
             managers.Game.player.sceneOnTop = config.Scene.HOTEL_1;
             _super.prototype.Start.call(this);
-            this.playerInfo.PlayerLocation = new math.Vec2(46, 28);
+            this.playerInfo.PlayerLocation = new math.Vec2(96, 34);
         };
         Hotel_6.prototype.Update = function () {
             _super.prototype.Update.call(this);

@@ -58,7 +58,7 @@ var scenes;
             managers.Game.player.sceneOnLeft = config.Scene.HOTEL_9;
             managers.Game.player.sceneOnRight = config.Scene.HOTEL_11;
             _super.prototype.Start.call(this);
-            this.playerInfo.PlayerLocation = new math.Vec2(46, 28);
+            this.playerInfo.PlayerLocation = new math.Vec2(112, 50);
         };
         Hotel_10.prototype.Update = function () {
             _super.prototype.Update.call(this);

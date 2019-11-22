@@ -28,7 +28,7 @@ var scenes;
             managers.Game.player.sceneOnLeft = config.Scene.MANSION_16;
             managers.Game.player.sceneOnTop = config.Scene.MANSION_13;
             _super.prototype.Start.call(this);
-            this.playerInfo.PlayerLocation = new math.Vec2(46, 28);
+            this.playerInfo.PlayerLocation = new math.Vec2(128, 66);
         };
         Mansion_17.prototype.Update = function () {
             _super.prototype.Update.call(this);

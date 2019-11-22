@@ -113,7 +113,7 @@ module scenes {
         }
 
         public Main(): void {
-            this.playerInfo.PlayerLocation = new math.Vec2(30,12);
+            this.playerInfo.PlayerLocation = new math.Vec2(112,34); // 30,12
             super.Main();
 
             this.bulletManager.spiderBullets.forEach(bullet => {

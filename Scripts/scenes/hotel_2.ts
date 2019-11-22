@@ -26,7 +26,7 @@ module scenes {
 
             managers.Game.player.sceneOnRight = config.Scene.HOTEL_1;
             super.Start();
-            this.playerInfo.PlayerLocation = new math.Vec2(46,28);
+            this.playerInfo.PlayerLocation = new math.Vec2(80,18);
         }        
 
         public Update(): void {

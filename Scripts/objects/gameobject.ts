@@ -1,4 +1,8 @@
 module objects {
+    export enum powerUp{
+        NONE,
+        SHADOW
+    }
     export abstract class GameObject extends createjs.Sprite {
         // Variables
         protected speedX: number;
@@ -12,6 +16,7 @@ module objects {
         public isTakingDamage: boolean;
         public hp: number;
         public attackPower: number;
+        public powerUp: powerUp;
         public isDead: boolean = false;
 
         // Constructor
@@ -39,6 +44,8 @@ module objects {
 
             this.isColliding = false;
             this.isTakingDamage = false;
+
+            this.powerUp = powerUp.NONE;
         }
 
         public Start():void {}

@@ -8,6 +8,7 @@ module managers {
         public attacking: boolean;
         public biting: boolean;
         public running: boolean;
+        public powers: boolean;
 
         public enabled: boolean;
         public attackEnabled: boolean = true;
@@ -56,6 +57,10 @@ module managers {
                         case config.Keys.C:
                             this.running = true;
                             break;
+                        case config.Keys.V:
+                            case config.Keys.SEMICOLON:
+                                this.powers = true;
+                                break;
                         case config.Keys.ENTER:
                             this.pause = !this.pause;
                             break;
@@ -115,6 +120,10 @@ module managers {
                         case config.Keys.C:
                             this.running = false;
                             break;
+                            case config.Keys.V:
+                            case config.Keys.SEMICOLON:
+                                this.powers = false;
+                                break;
                         case config.Keys.ENTER:
                             this.pause = !this.pause;
                             break;

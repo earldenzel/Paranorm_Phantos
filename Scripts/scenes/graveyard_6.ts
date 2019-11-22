@@ -52,7 +52,7 @@ module scenes {
             managers.Game.player.sceneOnTop = config.Scene.GRAVEYARD_5;
             managers.Game.player.sceneOnBot = config.Scene.GRAVEYARD_8;
             super.Start();
-            this.playerInfo.PlayerLocation = new math.Vec2(30,44);
+            this.playerInfo.PlayerLocation = new math.Vec2(112,66); // 30,44
         }        
 
         public Update(): void {

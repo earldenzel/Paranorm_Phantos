@@ -13,6 +13,11 @@ var __extends = (this && this.__extends) || (function () {
 })();
 var objects;
 (function (objects) {
+    var powerUp;
+    (function (powerUp) {
+        powerUp[powerUp["NONE"] = 0] = "NONE";
+        powerUp[powerUp["SHADOW"] = 1] = "SHADOW";
+    })(powerUp = objects.powerUp || (objects.powerUp = {}));
     var GameObject = /** @class */ (function (_super) {
         __extends(GameObject, _super);
         // Constructor
@@ -37,6 +42,7 @@ var objects;
             this.regY = this.halfH;
             this.isColliding = false;
             this.isTakingDamage = false;
+            this.powerUp = powerUp.NONE;
         };
         GameObject.prototype.Start = function () { };
         GameObject.prototype.Update = function () { };

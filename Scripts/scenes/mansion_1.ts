@@ -5,6 +5,7 @@ module scenes {
         constructor() {
             // hasDoorTop, hasDoorBot, hasDoorLeft, hasDoorRight
             super(false, true, false, false);
+            console.log("Mansion1");
             this.Start();
         }
 
@@ -12,7 +13,7 @@ module scenes {
         public Start(): void {
             managers.Game.player.sceneOnBot = config.Scene.MANSION_7;
             super.Start();
-            this.playerInfo.PlayerLocation = new math.Vec2(46,28);
+            this.playerInfo.PlayerLocation = new math.Vec2(96,18);
         }        
 
         public Update(): void {

@@ -27,7 +27,7 @@ var scenes;
         Mansion_3.prototype.Start = function () {
             managers.Game.player.sceneOnBot = config.Scene.MANSION_8;
             _super.prototype.Start.call(this);
-            this.playerInfo.PlayerLocation = new math.Vec2(46, 28);
+            this.playerInfo.PlayerLocation = new math.Vec2(112, 18);
         };
         Mansion_3.prototype.Update = function () {
             _super.prototype.Update.call(this);

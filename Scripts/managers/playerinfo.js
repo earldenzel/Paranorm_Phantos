@@ -108,14 +108,63 @@ var managers;
         // Methods
         PlayerInfo_UI.prototype.InIt = function () {
             // Create Base
-            this.playerInfo_Base = new createjs.Bitmap(managers.Game.assetManager.getResult("ui_playerinfo"));
+            this.playerInfo_Base = new createjs.Sprite(managers.Game.titleUIMap_TextureAtlas, "UILayout_Placement");
             // Create Labels
             this.moneyLabel = new objects.Label("00000000", "16px", "'Press Start 2P'", "#FFFFFF", 236, 20, false);
             this.keyLabel = new objects.Label("00", "16px", "'Press Start 2P'", "#FFFFFF", 250, 77, false);
-            this.playerInfo_Map = new createjs.Sprite(managers.Game.map_TextureAtlas, "MapsGraveyard_UnlockABC");
+            switch (managers.Game.currentScene) {
+                case config.Scene.HOTEL_1:
+                case config.Scene.HOTEL_2:
+                case config.Scene.HOTEL_3:
+                case config.Scene.HOTEL_4:
+                case config.Scene.HOTEL_5:
+                case config.Scene.HOTEL_6:
+                case config.Scene.HOTEL_7:
+                case config.Scene.HOTEL_8:
+                case config.Scene.HOTEL_9:
+                case config.Scene.HOTEL_10:
+                case config.Scene.HOTEL_11:
+                case config.Scene.HOTEL_12:
+                case config.Scene.HOTEL_13:
+                case config.Scene.HOTEL_14:
+                case config.Scene.HOTEL_15:
+                    this.playerInfo_Map = new createjs.Sprite(managers.Game.titleUIMap_TextureAtlas, "MapsHotel");
+                    break;
+                case config.Scene.MANSION_1:
+                case config.Scene.MANSION_2:
+                case config.Scene.MANSION_3:
+                case config.Scene.MANSION_4:
+                case config.Scene.MANSION_5:
+                case config.Scene.MANSION_6:
+                case config.Scene.MANSION_7:
+                case config.Scene.MANSION_8:
+                case config.Scene.MANSION_9:
+                case config.Scene.MANSION_10:
+                case config.Scene.MANSION_11:
+                case config.Scene.MANSION_12:
+                case config.Scene.MANSION_13:
+                case config.Scene.MANSION_14:
+                case config.Scene.MANSION_15:
+                case config.Scene.MANSION_16:
+                case config.Scene.MANSION_17:
+                case config.Scene.MANSION_18:
+                    this.playerInfo_Map = new createjs.Sprite(managers.Game.titleUIMap_TextureAtlas, "MapsMansion");
+                    break;
+                case config.Scene.GRAVEYARD_1:
+                case config.Scene.GRAVEYARD_2:
+                case config.Scene.GRAVEYARD_3:
+                case config.Scene.GRAVEYARD_4:
+                case config.Scene.GRAVEYARD_5:
+                case config.Scene.GRAVEYARD_6:
+                case config.Scene.GRAVEYARD_7:
+                case config.Scene.GRAVEYARD_8:
+                default:
+                    this.playerInfo_Map = new createjs.Sprite(managers.Game.titleUIMap_TextureAtlas, "MapsGraveyard");
+                    break;
+            }
             this.playerInfo_Map.x = 30;
             this.playerInfo_Map.y = 12;
-            this.playerInfo_Location = new createjs.Sprite(managers.Game.map_TextureAtlas, "MapsGraveyard_PlayerLocation");
+            this.playerInfo_Location = new createjs.Sprite(managers.Game.titleUIMap_TextureAtlas, "PlayerLocation");
             // Set Defaults
             this.playerHealth = 5;
             this.playerEcto = 5;
@@ -140,22 +189,22 @@ var managers;
         PlayerInfo_UI.prototype.ChangeHealthInfo = function () {
             switch (this.playerHealth) {
                 case 0:
-                    this.playerInfo_Health = new createjs.Bitmap(managers.Game.assetManager.getResult("life_0-5"));
+                    this.playerInfo_Health = new createjs.Sprite(managers.Game.titleUIMap_TextureAtlas, "Life_0");
                     break;
                 case 1:
-                    this.playerInfo_Health = new createjs.Bitmap(managers.Game.assetManager.getResult("life_1-5"));
+                    this.playerInfo_Health = new createjs.Sprite(managers.Game.titleUIMap_TextureAtlas, "Life_1");
                     break;
                 case 2:
-                    this.playerInfo_Health = new createjs.Bitmap(managers.Game.assetManager.getResult("life_2-5"));
+                    this.playerInfo_Health = new createjs.Sprite(managers.Game.titleUIMap_TextureAtlas, "Life_2");
                     break;
                 case 3:
-                    this.playerInfo_Health = new createjs.Bitmap(managers.Game.assetManager.getResult("life_3-5"));
+                    this.playerInfo_Health = new createjs.Sprite(managers.Game.titleUIMap_TextureAtlas, "Life_3");
                     break;
                 case 4:
-                    this.playerInfo_Health = new createjs.Bitmap(managers.Game.assetManager.getResult("life_4-5"));
+                    this.playerInfo_Health = new createjs.Sprite(managers.Game.titleUIMap_TextureAtlas, "Life_4");
                     break;
                 case 5:
-                    this.playerInfo_Health = new createjs.Bitmap(managers.Game.assetManager.getResult("life_5-5"));
+                    this.playerInfo_Health = new createjs.Sprite(managers.Game.titleUIMap_TextureAtlas, "Life_5");
                     break;
             }
             this.playerInfo_Health.x = 376;
@@ -164,22 +213,22 @@ var managers;
         PlayerInfo_UI.prototype.ChangeEctoInfo = function () {
             switch (this.playerEcto) {
                 case 0:
-                    this.playerInfo_Ecto = new createjs.Bitmap(managers.Game.assetManager.getResult("ecto_0-5"));
+                    this.playerInfo_Ecto = new createjs.Sprite(managers.Game.titleUIMap_TextureAtlas, "Ecto_0");
                     break;
                 case 1:
-                    this.playerInfo_Ecto = new createjs.Bitmap(managers.Game.assetManager.getResult("ecto_1-5"));
+                    this.playerInfo_Ecto = new createjs.Sprite(managers.Game.titleUIMap_TextureAtlas, "Ecto_1");
                     break;
                 case 2:
-                    this.playerInfo_Ecto = new createjs.Bitmap(managers.Game.assetManager.getResult("ecto_2-5"));
+                    this.playerInfo_Ecto = new createjs.Sprite(managers.Game.titleUIMap_TextureAtlas, "Ecto_2");
                     break;
                 case 3:
-                    this.playerInfo_Ecto = new createjs.Bitmap(managers.Game.assetManager.getResult("ecto_3-5"));
+                    this.playerInfo_Ecto = new createjs.Sprite(managers.Game.titleUIMap_TextureAtlas, "Ecto_3");
                     break;
                 case 4:
-                    this.playerInfo_Ecto = new createjs.Bitmap(managers.Game.assetManager.getResult("ecto_4-5"));
+                    this.playerInfo_Ecto = new createjs.Sprite(managers.Game.titleUIMap_TextureAtlas, "Ecto_4");
                     break;
                 case 5:
-                    this.playerInfo_Ecto = new createjs.Bitmap(managers.Game.assetManager.getResult("ecto_5-5"));
+                    this.playerInfo_Ecto = new createjs.Sprite(managers.Game.titleUIMap_TextureAtlas, "Ecto_5");
                     break;
             }
             this.playerInfo_Ecto.x = 10;

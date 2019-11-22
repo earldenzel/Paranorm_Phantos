@@ -20,6 +20,7 @@ var scenes;
             var _this = 
             // hasDoorTop, hasDoorBot, hasDoorLeft, hasDoorRight
             _super.call(this, false, true, true, true) || this;
+            console.log("Hotel 1");
             _this.Start();
             return _this;
         }
@@ -29,7 +30,7 @@ var scenes;
             managers.Game.player.sceneOnRight = config.Scene.HOTEL_3;
             managers.Game.player.sceneOnBot = config.Scene.HOTEL_6;
             _super.prototype.Start.call(this);
-            this.playerInfo.PlayerLocation = new math.Vec2(46, 28);
+            this.playerInfo.PlayerLocation = new math.Vec2(96, 18);
         };
         Hotel_1.prototype.Update = function () {
             _super.prototype.Update.call(this);
