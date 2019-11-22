@@ -277,6 +277,11 @@ var objects;
                 this.DeathSequence();
             }
         };
+        Player.prototype.GainMaxHealth = function (maxHpGain) {
+            this.maxHp += maxHpGain;
+            this.hp = this.maxHp;
+            this.EchoMessage("MAX HP");
+        };
         //phoebe effects from devour
         Player.prototype.GainHealth = function (healthGain) {
             var oldHp = this.hp;
@@ -328,7 +333,9 @@ var objects;
         };
         Player.prototype.GainDollars = function (dollars) {
             this.money += dollars;
-            this.EchoMessage("GAINED $" + dollars);
+            if (dollars > 0) {
+                this.EchoMessage("GAINED $" + dollars);
+            }
         };
         Player.prototype.GainEcto = function () {
             if (this.ecto < this.maxEcto) {

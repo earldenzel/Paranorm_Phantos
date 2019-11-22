@@ -292,6 +292,13 @@ module objects {
             }
         }
 
+        public GainMaxHealth(maxHpGain: number){
+            this.maxHp += maxHpGain;
+            this.hp = this.maxHp;
+            this.EchoMessage("MAX HP");
+
+        }
+
         //phoebe effects from devour
         public GainHealth(healthGain: number){
             let oldHp: number = this.hp;
@@ -340,7 +347,9 @@ module objects {
 
         public GainDollars(dollars: number){
             this.money += dollars;
-            this.EchoMessage("GAINED $" + dollars);
+            if (dollars > 0){
+                this.EchoMessage("GAINED $" + dollars);
+            }
         }        
 
         public GainEcto(){

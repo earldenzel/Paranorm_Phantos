@@ -26,16 +26,27 @@ module objects{
         public Update():void {
             this.dialog.x = this.x;
             this.dialog.y = this.y - this.halfH - config.Bounds.TEXT_OFFSET;
-
             
             let ticker: number = createjs.Ticker.getTicks();
-
             if (ticker % 100 == 0){
-                if (this.currentDisplay++ < this.dialogMessages.length){
-                    this.dialog.text = this.dialogMessages[this.currentDisplay];
-                    this.dialog.Recenter();
+                if (this.interrupted && managers.Game.keyboardManager.enabled){                                        
+                    let random: number = Math.random() * 100;
+                    if (random > 15){
+                        this.dialog.text = "";
+                    } else if (random > 10){
+                        this.dialog.text = "Buy something, will ya?";
+                    } else if (random > 5){
+                        this.dialog.text = "You know you need these!";
+                    } else {
+                        this.dialog.text = "These wares are da bomb.";
+                    }
                 }
-
+                else{
+                    if (this.currentDisplay++ < this.dialogMessages.length){
+                        this.dialog.text = this.dialogMessages[this.currentDisplay];
+                    }
+                }
+                this.dialog.Recenter();
             }
         }
         public Reset():void {}
@@ -43,7 +54,7 @@ module objects{
         public CheckBound():void {}
 
         public TellItemInformation(shopItem: objects.ShopItem){
-            this.dialog.text = shopItem.name;
+            this.dialog.text = shopItem.description;
             this.dialog.Recenter();
             this.interrupted = true;
         }

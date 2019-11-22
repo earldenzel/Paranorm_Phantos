@@ -16,9 +16,11 @@ var objects;
     var ShopItem = /** @class */ (function (_super) {
         __extends(ShopItem, _super);
         // Constructor
-        function ShopItem(item, price) {
+        function ShopItem(item, price, effect) {
             var _this = _super.call(this, managers.Game.item_TextureAtlas, item) || this;
+            _this.available = true;
             _this.price = price;
+            _this.effect = effect;
             _this.Start();
             return _this;
         }
@@ -34,6 +36,19 @@ var objects;
         };
         ShopItem.prototype.Move = function () { };
         ShopItem.prototype.CheckBound = function () { };
+        ShopItem.prototype.TriggerShopEffect = function () {
+            switch (this.effect) {
+                case config.ShopEffects.INCREASE_MAX_HP:
+                    managers.Game.player.GainMaxHealth(5);
+                    break;
+                case config.ShopEffects.INCREASE_KEY_COUNT:
+                    managers.Game.player.key++;
+                    break;
+                case config.ShopEffects.INCREASE_ATK:
+                    managers.Game.player.GainAttack(10);
+                    break;
+            }
+        };
         return ShopItem;
     }(objects.GameObject));
     objects.ShopItem = ShopItem;
