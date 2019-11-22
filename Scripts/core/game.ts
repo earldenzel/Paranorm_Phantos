@@ -14,6 +14,7 @@
     let currentState: number;
 
     let keyboardManager: managers.Keyboard;
+    let shopManager: managers.Shop;
 
     let mapG_TextureAtlasData: any;
     let mapG_TextureAtlas: createjs.SpriteSheet;
@@ -131,6 +132,10 @@
         keyboardManager = new managers.Keyboard;
         managers.Game.keyboardManager = keyboardManager;
 
+        // Shop Manager
+        shopManager = new managers.Shop;
+        managers.Game.shopManager = shopManager;
+
         // Asset Manager
         managers.Game.assetManager = assetManager;
         managers.Game.map_TextureAtlas = mapG_TextureAtlas;
@@ -153,9 +158,14 @@
             Main();
         }
 
-        currentScene.Update();
+        if (currentScene != undefined){
+            currentScene.Update();
+        }
 
-        stage.update();
+        if (stage != undefined){
+            stage.update();
+        }
+
     }
 
     function Main() {

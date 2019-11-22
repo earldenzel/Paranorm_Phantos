@@ -9,6 +9,7 @@
     var currentScene;
     var currentState;
     var keyboardManager;
+    var shopManager;
     var mapG_TextureAtlasData;
     var mapG_TextureAtlas;
     var item_TextureAtlasData;
@@ -93,6 +94,9 @@
         // Keyboard Manager
         keyboardManager = new managers.Keyboard;
         managers.Game.keyboardManager = keyboardManager;
+        // Shop Manager
+        shopManager = new managers.Shop;
+        managers.Game.shopManager = shopManager;
         // Asset Manager
         managers.Game.assetManager = assetManager;
         managers.Game.map_TextureAtlas = mapG_TextureAtlas;
@@ -113,8 +117,12 @@
             console.log("Changing scenes to" + managers.Game.currentScene);
             Main();
         }
-        currentScene.Update();
-        stage.update();
+        if (currentScene != undefined) {
+            currentScene.Update();
+        }
+        if (stage != undefined) {
+            stage.update();
+        }
     }
     function Main() {
         console.log("Game Start...");

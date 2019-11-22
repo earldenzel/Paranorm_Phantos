@@ -109,8 +109,7 @@ var scenes;
                 this.player.canTraverseRight = !this.isDoorRightLocked;
             }
             if (this.hasShop) {
-                this.shopManager = new managers.Shop();
-                managers.Game.shopManager = this.shopManager;
+                this.shopManager = managers.Game.shopManager;
             }
             //this.playerStatus.shadow = new createjs.Shadow("#000000",0,0,10);
             //this.messageStatus.shadow = new createjs.Shadow("#000000",0,0,10);
@@ -290,9 +289,11 @@ var scenes;
                 this.addChild(this.shopManager.chooseYes);
                 this.addChild(this.shopManager.chooseNo);
                 this.shopManager.shopItems.forEach(function (e) {
-                    _this.addChild(e);
-                    e.Reset();
-                    _this.addChild(e.priceTag);
+                    if (managers.Game.currentScene = e.appearingScene) {
+                        _this.addChild(e);
+                        e.Reset();
+                        _this.addChild(e.priceTag);
+                    }
                 });
             }
             // PLAYER PLACEMENT
