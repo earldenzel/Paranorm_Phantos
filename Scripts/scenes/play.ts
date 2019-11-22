@@ -6,12 +6,11 @@ module scenes {
         protected enemies: Array<objects.Enemy> = new Array<objects.Enemy>();
         protected obstacles: Array<objects.GameObject> = new Array<objects.GameObject>();
         protected cosmetics: Array<objects.GameObject> = new Array<objects.GameObject>();
-        protected shopItems: Array<objects.ShopItem> = new Array<objects.ShopItem>();
         protected key: objects.Key;
         protected design: config.Design;        
         private bulletManager: managers.Bullet;
+        private shopManager: managers.Shop;
         protected hasProjectileShooters: boolean = false;
-        private shop: objects.Shop;
         protected hasShop: boolean = false;
 
         //ceilings, doors and floors
@@ -147,7 +146,8 @@ module scenes {
             }
 
             if (this.hasShop){
-                this.shop = new objects.Shop(this.shopItems);
+                this.shopManager = new managers.Shop();
+                managers.Game.shopManager = this.shopManager;
             }
 
             //this.playerStatus.shadow = new createjs.Shadow("#000000",0,0,10);
@@ -221,13 +221,15 @@ module scenes {
                 this.bulletManager.Update();
             }
             if (this.hasShop){
-                this.shop.Update();
+                this.shopManager.Update();
             }
 
             // KEY AND LOCKED DOORS
-            if(this.getChildByName("Items_Key") && managers.Collision.Check(this.player,this.key) && this.key.visible){
-                this.player.key += 1;
-                this.key.RemoveFromPlay();
+            if (this.key != undefined){
+                if(this.getChildByName("Items_Key") && managers.Collision.Check(this.player,this.key) && this.key.visible){
+                    this.player.key += 1;
+                    this.key.RemoveFromPlay();
+                }
             }
             // TO BE FIXED AND OPTIMIZED.
             //  The position of Phoebe is accordance to the door is off. 
@@ -344,7 +346,15 @@ module scenes {
             });
 
             if (this.hasShop){
-                this.addChild(this.shop);
+                this.addChild(this.shopManager.shopKeeper);
+                this.addChild(this.shopManager.shopKeeper.dialog);
+                this.addChild(this.shopManager.chooseYes);
+                this.addChild(this.shopManager.chooseNo);                
+                this.shopManager.shopItems.forEach(e => {
+                    this.addChild(e);
+                    e.Reset();
+                    this.addChild(e.priceTag);
+                });   
             }
             
             // PLAYER PLACEMENT

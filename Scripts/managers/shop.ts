@@ -1,17 +1,15 @@
-module objects{
-    export class Shop extends createjs.Container{
+module managers{
+    export class Shop{
         // Variables
-        private shopKeeper: objects.ShopKeeper;
-        private shopItems: Array<objects.ShopItem>;
-        private chooseYes: objects.Label;
-        private chooseNo: objects.Label;
-        private selected: objects.ShopItem;
-        private hasItemSelected: boolean;
-        private canChoose: boolean;
+        public shopKeeper: objects.ShopKeeper;
+        public chooseYes: objects.Label;
+        public chooseNo: objects.Label;
+        public selected: objects.ShopItem;
+        public hasItemSelected: boolean;
+        public canChoose: boolean;
+        public shopItems: Array<objects.ShopItem> = new Array<objects.ShopItem>();
         // Constructor
-        constructor(shopItems: Array<objects.ShopItem>){
-            super();
-            this.shopItems = shopItems;
+        constructor(){
             this.Start();
         }
         // Methods
@@ -26,20 +24,42 @@ module objects{
             this.chooseYes.addEventListener("click", this.buyItem.bind(this), false);
             this.chooseNo.addEventListener("click", this.cancelBuy.bind(this), false);
             this.Reset();
-            this.Main();
+            
+            switch (managers.Game.currentScene){
+                case config.Scene.GRAVEYARD_7:
+                    this.shopItems[0] = new objects.ShopItem("Items_Hellebore-Flower1", 500, config.ShopEffects.INCREASE_MAX_HP);     
+                    this.shopItems[0].SetPosition(new math.Vec2(185, 400));
+                    this.shopItems[0].description = "This increases your Max HP. Buy?";
+                    
+                    this.shopItems[1] = new objects.ShopItem("Items_Key", 10, config.ShopEffects.INCREASE_KEY_COUNT); 
+                    this.shopItems[1].SetPosition(new math.Vec2(285, 400));
+                    this.shopItems[1].description = "That'd be ten bucks please.";
+                    
+                    this.shopItems[2] = new objects.ShopItem("Items_Hellebore-Flower2", 1000, config.ShopEffects.INCREASE_ATK);      
+                    this.shopItems[2].SetPosition(new math.Vec2(385, 400));
+                    this.shopItems[2].description = "Concentrated power for $1000";
+                    break;
+            }
+
+            
+            
         }
 
+        public Reset():void {            
+            this.chooseYes.visible = false;
+            this.chooseNo.visible = false;
+        }
 
-        public Update():void {
-            this.shopKeeper.Update();
-            
+        public Update(): void{            
+            this.shopKeeper.Update();        
             this.hasItemSelected = false;
             this.shopItems.forEach(e => {
                 if (!e.available){
                     e.visible = false;
                     e.priceTag.visible = false;
                 }
-                this.hasItemSelected = this.hasItemSelected || managers.Collision.Check(managers.Game.player, e);  
+                this.hasItemSelected = 
+                    this.hasItemSelected || managers.Collision.Check(managers.Game.player, e);  
                 if (managers.Collision.Check(managers.Game.player, e)){  
                     this.selected = e;
                 }
@@ -64,34 +84,13 @@ module objects{
             }
         }
 
-        public Reset():void {            
-            this.chooseYes.visible = false;
-            this.chooseNo.visible = false;
-        }
-        public Move():void {}
-        public CheckBound():void {}
-        public Main(): void{
-            this.addChild(this.shopKeeper);
-            this.addChild(this.shopKeeper.dialog);
-            this.addChild(this.chooseYes);
-            this.addChild(this.chooseNo);
-            this.shopItems.forEach(e => {
-                this.addChild(e);
-                e.Reset();
-                this.addChild(e.priceTag);
-            });   
-        }
-
         public buyItem(){
             if (this.selected != null){
                 if (managers.Game.player.money > this.selected.price){
                     this.selected.TriggerShopEffect();
                     this.shopKeeper.dialog.text = "Thanks for doing business";
                     managers.Game.player.GainDollars(-this.selected.price);
-                    this.selected.priceTag.text = "a";
-                    this.selected.priceTag.Recenter();
                     this.selected.available = false;
-
                 }
                 else{
                     this.shopKeeper.dialog.text = "You don't have enough";
@@ -105,6 +104,10 @@ module objects{
             this.canChoose = false;
             this.shopKeeper.dialog.text = "Okay then!";
             this.shopKeeper.dialog.Recenter();
+        }
+
+        public SetShopItems(): void{
+
         }
     }
 }

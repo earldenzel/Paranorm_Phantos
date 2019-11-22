@@ -1,26 +1,10 @@
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-var objects;
-(function (objects) {
-    var Shop = /** @class */ (function (_super) {
-        __extends(Shop, _super);
+var managers;
+(function (managers) {
+    var Shop = /** @class */ (function () {
         // Constructor
-        function Shop(shopItems) {
-            var _this = _super.call(this) || this;
-            _this.shopItems = shopItems;
-            _this.Start();
-            return _this;
+        function Shop() {
+            this.shopItems = new Array();
+            this.Start();
         }
         // Methods
         Shop.prototype.Start = function () {
@@ -32,7 +16,23 @@ var objects;
             this.chooseYes.addEventListener("click", this.buyItem.bind(this), false);
             this.chooseNo.addEventListener("click", this.cancelBuy.bind(this), false);
             this.Reset();
-            this.Main();
+            switch (managers.Game.currentScene) {
+                case config.Scene.GRAVEYARD_7:
+                    this.shopItems[0] = new objects.ShopItem("Items_Hellebore-Flower1", 500, config.ShopEffects.INCREASE_MAX_HP);
+                    this.shopItems[0].SetPosition(new math.Vec2(185, 400));
+                    this.shopItems[0].description = "This increases your Max HP. Buy?";
+                    this.shopItems[1] = new objects.ShopItem("Items_Key", 10, config.ShopEffects.INCREASE_KEY_COUNT);
+                    this.shopItems[1].SetPosition(new math.Vec2(285, 400));
+                    this.shopItems[1].description = "That'd be ten bucks please.";
+                    this.shopItems[2] = new objects.ShopItem("Items_Hellebore-Flower2", 1000, config.ShopEffects.INCREASE_ATK);
+                    this.shopItems[2].SetPosition(new math.Vec2(385, 400));
+                    this.shopItems[2].description = "Concentrated power for $1000";
+                    break;
+            }
+        };
+        Shop.prototype.Reset = function () {
+            this.chooseYes.visible = false;
+            this.chooseNo.visible = false;
         };
         Shop.prototype.Update = function () {
             var _this = this;
@@ -43,7 +43,8 @@ var objects;
                     e.visible = false;
                     e.priceTag.visible = false;
                 }
-                _this.hasItemSelected = _this.hasItemSelected || managers.Collision.Check(managers.Game.player, e);
+                _this.hasItemSelected =
+                    _this.hasItemSelected || managers.Collision.Check(managers.Game.player, e);
                 if (managers.Collision.Check(managers.Game.player, e)) {
                     _this.selected = e;
                 }
@@ -66,32 +67,12 @@ var objects;
                 this.Reset();
             }
         };
-        Shop.prototype.Reset = function () {
-            this.chooseYes.visible = false;
-            this.chooseNo.visible = false;
-        };
-        Shop.prototype.Move = function () { };
-        Shop.prototype.CheckBound = function () { };
-        Shop.prototype.Main = function () {
-            var _this = this;
-            this.addChild(this.shopKeeper);
-            this.addChild(this.shopKeeper.dialog);
-            this.addChild(this.chooseYes);
-            this.addChild(this.chooseNo);
-            this.shopItems.forEach(function (e) {
-                _this.addChild(e);
-                e.Reset();
-                _this.addChild(e.priceTag);
-            });
-        };
         Shop.prototype.buyItem = function () {
             if (this.selected != null) {
                 if (managers.Game.player.money > this.selected.price) {
                     this.selected.TriggerShopEffect();
                     this.shopKeeper.dialog.text = "Thanks for doing business";
                     managers.Game.player.GainDollars(-this.selected.price);
-                    this.selected.priceTag.text = "a";
-                    this.selected.priceTag.Recenter();
                     this.selected.available = false;
                 }
                 else {
@@ -106,8 +87,10 @@ var objects;
             this.shopKeeper.dialog.text = "Okay then!";
             this.shopKeeper.dialog.Recenter();
         };
+        Shop.prototype.SetShopItems = function () {
+        };
         return Shop;
-    }(createjs.Container));
-    objects.Shop = Shop;
-})(objects || (objects = {}));
+    }());
+    managers.Shop = Shop;
+})(managers || (managers = {}));
 //# sourceMappingURL=shop.js.map
