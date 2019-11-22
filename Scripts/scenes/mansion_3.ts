@@ -10,6 +10,23 @@ module scenes {
 
         // Methods
         public Start(): void {
+            this.enemies[0] = new objects.TestEnemy(2.5, true, true);
+            this.enemies[0].SetPosition(new math.Vec2(260, 200));
+            this.enemies[1] = new objects.Bat(2.5, 100);
+            this.enemies[1].SetPosition(new math.Vec2(100, 200));
+            this.enemies[2] = new objects.Bat(2, 100);
+            this.enemies[2].SetPosition(new math.Vec2(450, 200));
+
+            this.obstacles[0] = new objects.Barriers(managers.Game.mansion_TextureAtlas, "Mansion_Desk_s_ontal");
+            this.obstacles[0].SetPosition(new math.Vec2(180, 300));
+            this.obstacles[1] = new objects.Barriers(managers.Game.mansion_TextureAtlas, "Mansion_Desk_s_ontal");
+            this.obstacles[1].SetPosition(new math.Vec2(380, 300));
+            this.obstacles[2] = new objects.Barriers(managers.Game.mansion_TextureAtlas, "Mansion_Desk_s_ontal");
+            this.obstacles[2].SetPosition(new math.Vec2(180, 550));
+            this.obstacles[3] = new objects.Barriers(managers.Game.mansion_TextureAtlas, "Mansion_Desk_s_ontal");
+            this.obstacles[3].SetPosition(new math.Vec2(380, 550));
+            this.obstacles[4] = new objects.Gap(managers.Game.mansion_TextureAtlas, "Mansion_FloorTile_Hole", new math.Vec2(285, 440));
+
             managers.Game.player.sceneOnBot = config.Scene.MANSION_8;
             super.Start();
             this.playerInfo.PlayerLocation = new math.Vec2(112,18);

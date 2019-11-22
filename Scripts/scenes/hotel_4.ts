@@ -1,13 +1,12 @@
 module scenes {
 
     export class Hotel_4 extends scenes.PlayScene {
-        // Variables
-        private bulletManager: managers.Bullet;
 
         // Constructor
         constructor() {
             // hasDoorTop, hasDoorBot, hasDoorLeft, hasDoorRight
             super(false, false, true, false);
+            this.hasProjectileShooters = true;
             this.Start();
         }
 
@@ -28,10 +27,6 @@ module scenes {
             this.obstacles[5] = new objects.Barriers(managers.Game.hotel_TextureAtlas, "Hotel_Plant_Pot");
             this.obstacles[5].SetPosition(new math.Vec2(350, 420));
 
-            // Initialize bulletManager
-            this.bulletManager = new managers.Bullet();
-            managers.Game.bulletManager = this.bulletManager;
-
             managers.Game.player.sceneOnLeft = config.Scene.HOTEL_3;
             super.Start();
             this.playerInfo.PlayerLocation = new math.Vec2(128,18);
@@ -39,42 +34,10 @@ module scenes {
 
         public Update(): void {
             super.Update();
-
-            this.bulletManager.Update();
-
-            // check if shootingFlowerBullets collides with player
-            this.bulletManager.shootingFLowerBullets.forEach(bullet => {
-                if(managers.Collision.Check(managers.Game.player, bullet)){
-                    let ticker: number = createjs.Ticker.getTicks();
-                    
-                    // use ticker to restrict 1 bullet only hurts 1 hp
-                    if (ticker % 20 == 0)
-                    managers.Game.player.hp -= 1;
-                }
-            });
-
-            // check if spiderBulletsRight collides with player
-            this.bulletManager.spiderBulletsRight.forEach(bullet => {
-                if(managers.Collision.Check(managers.Game.player, bullet)){
-                    let ticker: number = createjs.Ticker.getTicks();
-
-                    // use ticker to restrict 1 bullet only hurts 1 hp
-                    if (ticker % 10 == 0)
-                    managers.Game.player.hp -= 1;
-                }
-            });
         }
 
         public Main(): void {
             super.Main();
-
-            this.bulletManager.shootingFLowerBullets.forEach(bullet => {
-                this.addChild(bullet);
-            });
-
-            this.bulletManager.spiderBulletsRight.forEach(bullet => {
-                this.addChild(bullet);
-            });
         }
     }
 }

@@ -20,6 +20,7 @@ var scenes;
             var _this = 
             // hasDoorTop, hasDoorBot, hasDoorLeft, hasDoorRight
             _super.call(this, false, false, false, true) || this;
+            _this.hasProjectileShooters = true;
             _this.Start();
             return _this;
         }
@@ -35,32 +36,15 @@ var scenes;
             this.obstacles[3] = new objects.Gap(managers.Game.hotel_TextureAtlas, "Hotel_CarpetTile_Hole", new math.Vec2(200, 650));
             this.obstacles[4] = new objects.Gap(managers.Game.hotel_TextureAtlas, "Hotel_CarpetTile_Hole", new math.Vec2(200, 590));
             this.obstacles[5] = new objects.Gap(managers.Game.hotel_TextureAtlas, "Hotel_CarpetTile_Hole", new math.Vec2(200, 530));
-            // Initialize bulletManager
-            this.bulletManager = new managers.Bullet();
-            managers.Game.bulletManager = this.bulletManager;
             managers.Game.player.sceneOnRight = config.Scene.HOTEL_6;
             _super.prototype.Start.call(this);
             this.playerInfo.PlayerLocation = new math.Vec2(80, 34);
         };
         Hotel_5.prototype.Update = function () {
             _super.prototype.Update.call(this);
-            this.bulletManager.Update();
-            // check if spiderBulletsLeft collides with player
-            this.bulletManager.spiderBulletsLeft.forEach(function (bullet) {
-                if (managers.Collision.Check(managers.Game.player, bullet)) {
-                    var ticker = createjs.Ticker.getTicks();
-                    // use ticker to restrict 1 bullet only hurts 1 hp
-                    if (ticker % 10 == 0)
-                        managers.Game.player.hp -= 1;
-                }
-            });
         };
         Hotel_5.prototype.Main = function () {
-            var _this = this;
             _super.prototype.Main.call(this);
-            this.bulletManager.spiderBulletsLeft.forEach(function (bullet) {
-                _this.addChild(bullet);
-            });
         };
         return Hotel_5;
     }(scenes.PlayScene));

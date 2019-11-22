@@ -46,13 +46,7 @@ module objects {
                         managers.Game.player.EatMessage();
                         this.scaleX = managers.Game.player.halfH / this.height;
                         this.scaleY = this.scaleX;
-                        managers.Game.keyboardManager.moveLeft = false;
-                        managers.Game.keyboardManager.moveRight = false;
-                        managers.Game.keyboardManager.moveUp = false;
-                        managers.Game.keyboardManager.moveDown = false;
-                        managers.Game.keyboardManager.enabled = false;
-                        managers.Game.keyboardManager.attacking = false;
-                        managers.Game.keyboardManager.biting = false;
+                        managers.Game.keyboardManager.ControlReset();
                         //after eat timer is done, enable keyboard and reset sequence
                         managers.Game.player.biteSequence = setTimeout(() => {
                             this.DevourEffect();

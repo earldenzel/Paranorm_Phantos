@@ -17,7 +17,7 @@ var objects;
         __extends(ShootingFlowerBullet, _super);
         // Constructor
         function ShootingFlowerBullet() {
-            var _this = _super.call(this, managers.Game.shootingFlower_TextureAtlas, "shootingFlowerBullet") || this;
+            var _this = _super.call(this, managers.Game.shootingFlower_TextureAtlas, "shootingFlowerBullet", 1) || this;
             _this.Start();
             return _this;
         }
@@ -29,6 +29,7 @@ var objects;
             if (this.farPointPosition) {
                 this.Move();
             }
+            _super.prototype.Update.call(this);
         };
         ShootingFlowerBullet.prototype.Reset = function () {
             this.x = -5000;
@@ -45,7 +46,7 @@ var objects;
         ShootingFlowerBullet.prototype.Main = function () { };
         ShootingFlowerBullet.prototype.CheckBounds = function () { };
         return ShootingFlowerBullet;
-    }(objects.GameObject));
+    }(objects.Bullet));
     objects.ShootingFlowerBullet = ShootingFlowerBullet;
 })(objects || (objects = {}));
 //# sourceMappingURL=shootingFlowerBullet.js.map

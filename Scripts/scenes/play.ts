@@ -7,7 +7,11 @@ module scenes {
         protected obstacles: Array<objects.GameObject> = new Array<objects.GameObject>();
         protected cosmetics: Array<objects.GameObject> = new Array<objects.GameObject>();
         protected key: objects.Key;
-        protected design: config.Design;
+        protected design: config.Design;        
+        private bulletManager: managers.Bullet;
+        private shopManager: managers.Shop;
+        protected hasProjectileShooters: boolean = false;
+        protected hasShop: boolean = false;
 
         //ceilings, doors and floors
         //private ceilingVertical:objects.Background;
@@ -141,9 +145,10 @@ module scenes {
                 this.player.canTraverseRight = !this.isDoorRightLocked;
             }
 
-            //this.playerStatus = new objects.Label("PLAYER ", "16px", "'Press Start 2P'", "#FFFFFF", 20, 670, false);
-            //this.messageStatus = new objects.Label("MESSAGES GO HERE", "16px", "'Press Start 2P'", "#FFFFFF", 20, 690, false);
-            //this.controllerHelp = new objects.Label("UP-DOWN-LEFT-RIGHT + Z OR \nW-A-S-D + J", "16px", "'Press Start 2P'", "#FFFFFF", 20, 710, false);
+            if (this.hasShop){
+                this.shopManager = new managers.Shop();
+                managers.Game.shopManager = this.shopManager;
+            }
 
             //this.playerStatus.shadow = new createjs.Shadow("#000000",0,0,10);
             //this.messageStatus.shadow = new createjs.Shadow("#000000",0,0,10);
@@ -157,6 +162,12 @@ module scenes {
             this.player.playerStatus.visible = false;
 
             managers.Game.keyboardManager.playMode = true;
+            
+            // Initialize bulletManager
+            if (this.hasProjectileShooters){
+                this.bulletManager = new managers.Bullet();
+                managers.Game.bulletManager = this.bulletManager;
+            }
 
             this.Main();
         }
@@ -204,13 +215,21 @@ module scenes {
                 if (e instanceof objects.Stairs && managers.Collision.Check(managers.Game.player, e)){
                     managers.Game.currentScene = e.nextScene;
                 }
-
             });
 
+            if (this.hasProjectileShooters){
+                this.bulletManager.Update();
+            }
+            if (this.hasShop){
+                this.shopManager.Update();
+            }
+
             // KEY AND LOCKED DOORS
-            if(this.getChildByName("Items_Key") && managers.Collision.Check(this.player,this.key) && this.key.visible){
-                this.player.key += 1;
-                this.key.RemoveFromPlay();
+            if (this.key != undefined){
+                if(this.getChildByName("Items_Key") && managers.Collision.Check(this.player,this.key) && this.key.visible){
+                    this.player.key += 1;
+                    this.key.RemoveFromPlay();
+                }
             }
             // TO BE FIXED AND OPTIMIZED.
             //  The position of Phoebe is accordance to the door is off. 
@@ -325,6 +344,18 @@ module scenes {
             this.cosmetics.forEach(e => {
                 this.addChild(e);
             });
+
+            if (this.hasShop){
+                this.addChild(this.shopManager.shopKeeper);
+                this.addChild(this.shopManager.shopKeeper.dialog);
+                this.addChild(this.shopManager.chooseYes);
+                this.addChild(this.shopManager.chooseNo);                
+                this.shopManager.shopItems.forEach(e => {
+                    this.addChild(e);
+                    e.Reset();
+                    this.addChild(e.priceTag);
+                });   
+            }
             
             // PLAYER PLACEMENT
             this.addChild(this.player);
@@ -357,7 +388,22 @@ module scenes {
             this.addChild(this.player.playerStatus);
             //this.addChild(this.messageStatus);
             //this.addChild(this.controllerHelp);
-            this.addChild(this.playerInfo);
+            this.addChild(this.playerInfo);            
+
+            if (this.hasProjectileShooters){
+                this.bulletManager.spiderBullets.forEach(bullet => {
+                    this.addChild(bullet);
+                });
+                this.bulletManager.spiderBulletsLeft.forEach(bullet => {
+                    this.addChild(bullet);
+                });
+                this.bulletManager.spiderBulletsRight.forEach(bullet => {
+                    this.addChild(bullet);
+                });
+                this.bulletManager.shootingFLowerBullets.forEach(bullet => {
+                    this.addChild(bullet);
+                });
+            }
         }
     }
 }

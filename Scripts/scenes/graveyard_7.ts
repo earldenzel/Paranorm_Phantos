@@ -5,6 +5,7 @@ module scenes {
         constructor() {
             // hasDoorTop, hasDoorBot, hasDoorLeft, hasDoorRight
             super(false, false, true, false);
+            this.hasShop = true;
             this.Start();
         }
 
@@ -20,7 +21,7 @@ module scenes {
         }
 
         public Main(): void {
-            super.Main();
+            super.Main();            
         }
     }
 }

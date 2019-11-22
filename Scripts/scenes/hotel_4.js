@@ -20,6 +20,7 @@ var scenes;
             var _this = 
             // hasDoorTop, hasDoorBot, hasDoorLeft, hasDoorRight
             _super.call(this, false, false, true, false) || this;
+            _this.hasProjectileShooters = true;
             _this.Start();
             return _this;
         }
@@ -37,44 +38,15 @@ var scenes;
             this.obstacles[4].SetPosition(new math.Vec2(200, 420));
             this.obstacles[5] = new objects.Barriers(managers.Game.hotel_TextureAtlas, "Hotel_Plant_Pot");
             this.obstacles[5].SetPosition(new math.Vec2(350, 420));
-            // Initialize bulletManager
-            this.bulletManager = new managers.Bullet();
-            managers.Game.bulletManager = this.bulletManager;
             managers.Game.player.sceneOnLeft = config.Scene.HOTEL_3;
             _super.prototype.Start.call(this);
             this.playerInfo.PlayerLocation = new math.Vec2(128, 18);
         };
         Hotel_4.prototype.Update = function () {
             _super.prototype.Update.call(this);
-            this.bulletManager.Update();
-            // check if shootingFlowerBullets collides with player
-            this.bulletManager.shootingFLowerBullets.forEach(function (bullet) {
-                if (managers.Collision.Check(managers.Game.player, bullet)) {
-                    var ticker = createjs.Ticker.getTicks();
-                    // use ticker to restrict 1 bullet only hurts 1 hp
-                    if (ticker % 20 == 0)
-                        managers.Game.player.hp -= 1;
-                }
-            });
-            // check if spiderBulletsRight collides with player
-            this.bulletManager.spiderBulletsRight.forEach(function (bullet) {
-                if (managers.Collision.Check(managers.Game.player, bullet)) {
-                    var ticker = createjs.Ticker.getTicks();
-                    // use ticker to restrict 1 bullet only hurts 1 hp
-                    if (ticker % 10 == 0)
-                        managers.Game.player.hp -= 1;
-                }
-            });
         };
         Hotel_4.prototype.Main = function () {
-            var _this = this;
             _super.prototype.Main.call(this);
-            this.bulletManager.shootingFLowerBullets.forEach(function (bullet) {
-                _this.addChild(bullet);
-            });
-            this.bulletManager.spiderBulletsRight.forEach(function (bullet) {
-                _this.addChild(bullet);
-            });
         };
         return Hotel_4;
     }(scenes.PlayScene));

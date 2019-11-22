@@ -16,8 +16,14 @@ var objects;
     var Stairs = /** @class */ (function (_super) {
         __extends(Stairs, _super);
         // Constructor
-        function Stairs(nextScene) {
-            var _this = _super.call(this, managers.Game.graveyard_TextureAtlas, "Graveyard_HoleTile_Stairs") || this;
+        function Stairs(nextScene, up) {
+            var _this = this;
+            if (up) {
+                _this = _super.call(this, managers.Game.graveyard_TextureAtlas, "Graveyard_Stairs_Up") || this;
+            }
+            else {
+                _this = _super.call(this, managers.Game.graveyard_TextureAtlas, "Graveyard_HoleTile_Stairs") || this;
+            }
             _this.nextScene = nextScene;
             _this.Start();
             return _this;

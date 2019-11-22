@@ -1,12 +1,12 @@
 module objects {
-    export class ShootingFlowerBullet extends objects.GameObject{
+    export class ShootingFlowerBullet extends objects.Bullet{
 
         public farPointPosition: math.Vec2;
 
         // Constructor
         constructor()
         {
-            super(managers.Game.shootingFlower_TextureAtlas, "shootingFlowerBullet");
+            super(managers.Game.shootingFlower_TextureAtlas, "shootingFlowerBullet", 1);
 
             this.Start();
         }
@@ -18,6 +18,7 @@ module objects {
             if (this.farPointPosition) {
                 this.Move();
             }
+            super.Update();
         }
         public Reset():void {
             this.x = -5000;
