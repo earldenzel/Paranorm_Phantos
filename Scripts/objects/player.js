@@ -47,7 +47,7 @@ var objects;
             _this.bitedash = ["Phoebe_Bite_Back", "Phoebe_Bite_Front1", "Phoebe_Bite_Left1", "Phoebe_Bite_Right1"];
             _this.bite = ["Phoebe_Bite_Front2", "Phoebe_Bite_Front2", "Phoebe_Bite_Left2", "Phoebe_Bite_Right2"];
             _this.direction = config.Direction.UP;
-            _this.money = 0;
+            _this.money = 9999;
             _this.playerStatus = new objects.Label("1234567890", "16px", "'Press Start 2P'", "#FFFFFF", _this.x, _this.y, true);
             _this.key = 0;
             _this.deadPlayer = [
@@ -289,6 +289,11 @@ var objects;
                 this.DeathSequence();
             }
         };
+        Player.prototype.GainMaxHealth = function (maxHpGain) {
+            this.maxHp += maxHpGain;
+            this.hp = this.maxHp;
+            this.EchoMessage("MAX HP");
+        };
         //phoebe effects from devour
         Player.prototype.GainHealth = function (healthGain) {
             var oldHp = this.hp;
@@ -340,7 +345,9 @@ var objects;
         };
         Player.prototype.GainDollars = function (dollars) {
             this.money += dollars;
-            this.EchoMessage("GAINED $" + dollars);
+            if (dollars > 0) {
+                this.EchoMessage("GAINED $" + dollars);
+            }
         };
         Player.prototype.GainEcto = function () {
             if (this.ecto < this.maxEcto) {

@@ -43,13 +43,7 @@ var objects;
                 //if enemy is entity, and a fall sequence was not defined, then define call sequence
                 //remove all view and keyboard, then after 1 second, transfer to original position
                 if (entity instanceof objects.Player && managers.Game.player.fallSequence == 0) {
-                    managers.Game.keyboardManager.moveLeft = false;
-                    managers.Game.keyboardManager.moveRight = false;
-                    managers.Game.keyboardManager.moveUp = false;
-                    managers.Game.keyboardManager.moveDown = false;
-                    managers.Game.keyboardManager.enabled = false;
-                    managers.Game.keyboardManager.attacking = false;
-                    managers.Game.keyboardManager.biting = false;
+                    managers.Game.keyboardManager.ControlReset();
                     setTimeout(function () {
                         entity.visible = false;
                     }, 200);

@@ -20,6 +20,7 @@ var scenes;
             var _this = 
             // hasDoorTop, hasDoorBot, hasDoorLeft, hasDoorRight
             _super.call(this, true, true, true, true) || this;
+            _this.hasProjectileShooters = true;
             _this.Start();
             return _this;
         }
@@ -31,9 +32,6 @@ var scenes;
             this.enemies[1].attackPower = 1;
             this.enemies[2] = new objects.TestEnemy(3, false, false);
             this.enemies[2].SetPosition(new math.Vec2(280, 380));
-            // Initialize bulletManager
-            this.bulletManager = new managers.Bullet();
-            managers.Game.bulletManager = this.bulletManager;
             managers.Game.player.sceneOnLeft = config.Scene.HOTEL_5;
             managers.Game.player.sceneOnRight = config.Scene.HOTEL_7;
             managers.Game.player.sceneOnBot = config.Scene.HOTEL_9;
@@ -43,23 +41,9 @@ var scenes;
         };
         Hotel_6.prototype.Update = function () {
             _super.prototype.Update.call(this);
-            this.bulletManager.Update();
-            // check if shootingFlowerBullets collides with player
-            this.bulletManager.shootingFLowerBullets.forEach(function (bullet) {
-                if (managers.Collision.Check(managers.Game.player, bullet)) {
-                    var ticker = createjs.Ticker.getTicks();
-                    // use ticker to restrict 1 bullet only hurts 1 hp
-                    if (ticker % 20 == 0)
-                        managers.Game.player.hp -= 1;
-                }
-            });
         };
         Hotel_6.prototype.Main = function () {
-            var _this = this;
             _super.prototype.Main.call(this);
-            this.bulletManager.shootingFLowerBullets.forEach(function (bullet) {
-                _this.addChild(bullet);
-            });
         };
         return Hotel_6;
     }(scenes.PlayScene));

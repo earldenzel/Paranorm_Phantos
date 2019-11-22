@@ -1,10 +1,10 @@
 module objects {
-    export class SpiderBullet extends objects.GameObject{
+    export class SpiderBullet extends objects.Bullet{
         // Variables
         // Constructor
         constructor()
         {
-            super(managers.Game.spider_TextureAtlas, "spiderBullet");
+            super(managers.Game.spider_TextureAtlas, "spiderBullet", 1);
 
             this.Start();
         }
@@ -17,6 +17,7 @@ module objects {
         }
         public Update():void {
             this.Move();
+            super.Update();
         }
         public Reset():void {
             this.x = -5000;

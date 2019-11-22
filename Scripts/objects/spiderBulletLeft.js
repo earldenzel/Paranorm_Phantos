@@ -18,7 +18,7 @@ var objects;
         // Variables
         // Constructor
         function SpiderBulletLeft() {
-            var _this = _super.call(this, managers.Game.spider_TextureAtlas, "spiderBullet") || this;
+            var _this = _super.call(this, managers.Game.spider_TextureAtlas, "spiderBullet", 1) || this;
             _this.Start();
             return _this;
         }
@@ -30,6 +30,7 @@ var objects;
         };
         SpiderBulletLeft.prototype.Update = function () {
             this.Move();
+            _super.prototype.Update.call(this);
         };
         SpiderBulletLeft.prototype.Reset = function () {
             this.x = -5000;
@@ -41,7 +42,7 @@ var objects;
         SpiderBulletLeft.prototype.Main = function () { };
         SpiderBulletLeft.prototype.CheckBounds = function () { };
         return SpiderBulletLeft;
-    }(objects.GameObject));
+    }(objects.Bullet));
     objects.SpiderBulletLeft = SpiderBulletLeft;
 })(objects || (objects = {}));
 //# sourceMappingURL=spiderBulletLeft.js.map
