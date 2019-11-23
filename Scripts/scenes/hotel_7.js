@@ -19,7 +19,7 @@ var scenes;
         function Hotel_7() {
             var _this = 
             // hasDoorTop, hasDoorBot, hasDoorLeft, hasDoorRight
-            _super.call(this, false, false, true, false) || this;
+            _super.call(this, false, false, true, false, config.Design.HOTEL) || this;
             _this.Start();
             return _this;
         }
@@ -33,17 +33,17 @@ var scenes;
             this.enemies[2].SetPosition(new math.Vec2(400, 650));
             this.enemies[3] = new objects.TestEnemy(2.5, true, false);
             this.enemies[3].SetPosition(new math.Vec2(100, 650));
-            this.obstacles[0] = new objects.Gap(managers.Game.hotel_TextureAtlas, "Hotel_CarpetTile_Hole", new math.Vec2(260, 420));
-            this.obstacles[1] = new objects.Gap(managers.Game.hotel_TextureAtlas, "Hotel_CarpetTile_Hole", new math.Vec2(260, 480));
-            this.obstacles[2] = new objects.Gap(managers.Game.hotel_TextureAtlas, "Hotel_CarpetTile_Hole", new math.Vec2(310, 420));
-            this.obstacles[3] = new objects.Gap(managers.Game.hotel_TextureAtlas, "Hotel_CarpetTile_Hole", new math.Vec2(310, 480));
-            this.obstacles[4] = new objects.Gap(managers.Game.hotel_TextureAtlas, "Hotel_CarpetTile_Hole", new math.Vec2(115, 225));
-            this.obstacles[5] = new objects.Gap(managers.Game.hotel_TextureAtlas, "Hotel_CarpetTile_Hole", new math.Vec2(450, 225));
-            this.obstacles[6] = new objects.Gap(managers.Game.hotel_TextureAtlas, "Hotel_CarpetTile_Hole", new math.Vec2(115, 650));
-            this.obstacles[7] = new objects.Gap(managers.Game.hotel_TextureAtlas, "Hotel_CarpetTile_Hole", new math.Vec2(450, 650));
+            this.obstacles[0] = new objects.Gap(managers.Game.hotel_TextureAtlas, "Hole", new math.Vec2(260, 420));
+            this.obstacles[1] = new objects.Gap(managers.Game.hotel_TextureAtlas, "Hole", new math.Vec2(260, 480));
+            this.obstacles[2] = new objects.Gap(managers.Game.hotel_TextureAtlas, "Hole", new math.Vec2(310, 420));
+            this.obstacles[3] = new objects.Gap(managers.Game.hotel_TextureAtlas, "Hole", new math.Vec2(310, 480));
+            this.obstacles[4] = new objects.Gap(managers.Game.hotel_TextureAtlas, "Hole", new math.Vec2(115, 225));
+            this.obstacles[5] = new objects.Gap(managers.Game.hotel_TextureAtlas, "Hole", new math.Vec2(450, 225));
+            this.obstacles[6] = new objects.Gap(managers.Game.hotel_TextureAtlas, "Hole", new math.Vec2(115, 650));
+            this.obstacles[7] = new objects.Gap(managers.Game.hotel_TextureAtlas, "Hole", new math.Vec2(450, 650));
             managers.Game.player.sceneOnLeft = config.Scene.HOTEL_6;
             _super.prototype.Start.call(this);
-            this.playerInfo.PlayerLocation = new math.Vec2(46, 28);
+            this.playerInfo.PlayerLocation = new math.Vec2(112, 34);
         };
         Hotel_7.prototype.Update = function () {
             _super.prototype.Update.call(this);

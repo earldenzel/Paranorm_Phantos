@@ -19,7 +19,7 @@ var scenes;
         function Hotel_2() {
             var _this = 
             // hasDoorTop, hasDoorBot, hasDoorLeft, hasDoorRight
-            _super.call(this, false, false, false, true) || this;
+            _super.call(this, false, false, false, true, config.Design.HOTEL) || this;
             _this.Start();
             return _this;
         }
@@ -29,17 +29,17 @@ var scenes;
             this.enemies[0].SetPosition(new math.Vec2(280, 200));
             this.enemies[1] = new objects.Bat(2, 100);
             this.enemies[1].SetPosition(new math.Vec2(280, 650));
-            this.obstacles[0] = new objects.Barriers(managers.Game.hotel_TextureAtlas, "Hotel_CarpetTile");
+            this.obstacles[0] = new objects.Barriers(managers.Game.hotel_TextureAtlas, "Desk");
             this.obstacles[0].SetPosition(new math.Vec2(180, 300));
-            this.obstacles[1] = new objects.Barriers(managers.Game.hotel_TextureAtlas, "Hotel_CarpetTile");
+            this.obstacles[1] = new objects.Barriers(managers.Game.hotel_TextureAtlas, "Desk");
             this.obstacles[1].SetPosition(new math.Vec2(380, 300));
-            this.obstacles[2] = new objects.Barriers(managers.Game.hotel_TextureAtlas, "Hotel_CarpetTile");
+            this.obstacles[2] = new objects.Barriers(managers.Game.hotel_TextureAtlas, "Desk");
             this.obstacles[2].SetPosition(new math.Vec2(180, 550));
-            this.obstacles[3] = new objects.Barriers(managers.Game.hotel_TextureAtlas, "Hotel_CarpetTile");
+            this.obstacles[3] = new objects.Barriers(managers.Game.hotel_TextureAtlas, "Desk");
             this.obstacles[3].SetPosition(new math.Vec2(380, 550));
             managers.Game.player.sceneOnRight = config.Scene.HOTEL_1;
             _super.prototype.Start.call(this);
-            this.playerInfo.PlayerLocation = new math.Vec2(46, 28);
+            this.playerInfo.PlayerLocation = new math.Vec2(80, 18);
         };
         Hotel_2.prototype.Update = function () {
             _super.prototype.Update.call(this);

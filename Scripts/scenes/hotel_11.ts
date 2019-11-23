@@ -5,7 +5,7 @@ module scenes {
         // Constructor
         constructor() {
             // hasDoorTop, hasDoorBot, hasDoorLeft, hasDoorRight
-            super(false, false, true, false);
+            super(false, false, true, false,config.Design.HOTEL);
             this.hasProjectileShooters = true;
             this.Start();
         }
@@ -19,7 +19,7 @@ module scenes {
             this.enemies[1].attackPower = 1;
             managers.Game.player.sceneOnLeft = config.Scene.HOTEL_10;
             super.Start();
-            this.playerInfo.PlayerLocation = new math.Vec2(46, 28);
+            this.playerInfo.PlayerLocation = new math.Vec2(128,50);
         }
 
         public Update(): void {

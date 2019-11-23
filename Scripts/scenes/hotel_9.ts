@@ -5,7 +5,7 @@ module scenes {
         // Constructor
         constructor() {
             // hasDoorTop, hasDoorBot, hasDoorLeft, hasDoorRight
-            super(true, true, true, true);
+            super(true, true, true, true,config.Design.HOTEL);
             this.hasProjectileShooters = true;
             this.Start();
         }
@@ -20,17 +20,17 @@ module scenes {
             this.enemies[2] = new objects.Bat(2, 100);
             this.enemies[2].SetPosition(new math.Vec2(440, 650));
 
-            this.obstacles[0] = new objects.Gap(managers.Game.hotel_TextureAtlas, "Hotel_CarpetTile_Hole", new math.Vec2(280, 350));
-            this.obstacles[1] = new objects.Gap(managers.Game.hotel_TextureAtlas, "Hotel_CarpetTile_Hole", new math.Vec2(280, 550));
-            this.obstacles[2] = new objects.Gap(managers.Game.hotel_TextureAtlas, "Hotel_CarpetTile_Hole", new math.Vec2(200, 450));
-            this.obstacles[3] = new objects.Gap(managers.Game.hotel_TextureAtlas, "Hotel_CarpetTile_Hole", new math.Vec2(350, 450));
+            this.obstacles[0] = new objects.Gap(managers.Game.hotel_TextureAtlas, "Hole", new math.Vec2(280, 350));
+            this.obstacles[1] = new objects.Gap(managers.Game.hotel_TextureAtlas, "Hole", new math.Vec2(280, 550));
+            this.obstacles[2] = new objects.Gap(managers.Game.hotel_TextureAtlas, "Hole", new math.Vec2(200, 450));
+            this.obstacles[3] = new objects.Gap(managers.Game.hotel_TextureAtlas, "Hole", new math.Vec2(350, 450));
 
             managers.Game.player.sceneOnLeft = config.Scene.HOTEL_8;
             managers.Game.player.sceneOnRight = config.Scene.HOTEL_10;
             managers.Game.player.sceneOnBot = config.Scene.HOTEL_13;
             managers.Game.player.sceneOnTop = config.Scene.HOTEL_6;
             super.Start();
-            this.playerInfo.PlayerLocation = new math.Vec2(46, 28);
+            this.playerInfo.PlayerLocation = new math.Vec2(96,50);
         }
 
         public Update(): void {

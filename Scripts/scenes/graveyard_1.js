@@ -18,7 +18,7 @@ var scenes;
         // Variables
         // Constructor
         function Graveyard_1() {
-            var _this = _super.call(this, false, true, true, true) || this;
+            var _this = _super.call(this, false, true, true, true, config.Design.GRAVEYARD) || this;
             _this.isDoorLeftLocked = managers.GraveyardLocks.graveyard_1_lockLeft;
             _this.isDoorRightLocked = managers.GraveyardLocks.graveyard_1_lockRight;
             _this.isDoorBotLocked = managers.GraveyardLocks.graveyard_1_lockBot;
@@ -41,9 +41,9 @@ var scenes;
             this.cosmetics[2].SetPosition(new math.Vec2(x - this.cosmetics[2].width, y));
             this.cosmetics[3].SetPosition(new math.Vec2(x + this.cosmetics[3].width, y));
             this.cosmetics[4].SetPosition(new math.Vec2(this.enemies[0].x, this.enemies[0].y - 100));
-            this.cosmetics[5] = new objects.Stairs(config.Scene.HOTEL_1, false);
+            //this.cosmetics[5] = new objects.Stairs(config.Scene.HOTEL_1, false);
             this.cosmetics[6] = new objects.Stairs(config.Scene.MANSION_1, true);
-            this.cosmetics[5].SetPosition(new math.Vec2(400, 400));
+            //this.cosmetics[5].SetPosition(new math.Vec2(400, 400));
             this.cosmetics[6].SetPosition(new math.Vec2(400, 500));
             managers.Game.player.sceneOnBot = config.Scene.GRAVEYARD_5;
             managers.Game.player.sceneOnLeft = config.Scene.GRAVEYARD_3;
@@ -70,7 +70,7 @@ var scenes;
             _super.prototype.Update.call(this);
         };
         Graveyard_1.prototype.Main = function () {
-            this.playerInfo.PlayerLocation = new math.Vec2(30, 12);
+            this.playerInfo.PlayerLocation = new math.Vec2(112, 34); // 30,12
             _super.prototype.Main.call(this);
         };
         return Graveyard_1;

@@ -36,6 +36,11 @@
     var shootingFlower_TextureAtlas;
     var chest_TextureAtlasData;
     var chest_TextureAtlas;
+    // kc
+    var enemies_TextureAtlasData;
+    var enemies_TextureAtlas;
+    var titleUIMap_TextureAtlasData;
+    var titleUIMap_TextureAtlas;
     // Gets the asset manifest
     //let request = new Request("./Content/assetManifest.json");
     //fetch(request)
@@ -62,8 +67,9 @@
         item_TextureAtlasData = config.Assets.getAtlas_Items;
         item_TextureAtlasData.images = [assetManager.getResult("tAtlas_Items")];
         item_TextureAtlas = new createjs.SpriteSheet(item_TextureAtlasData);
-        phoebe_TextureAtlasData = config.Assets.getAtlas_Phoebe;
-        phoebe_TextureAtlasData.images = [assetManager.getResult("tAtlas_Phoebe")];
+        // KC
+        phoebe_TextureAtlasData = config.Assets.getAtlas__Phoebe;
+        phoebe_TextureAtlasData.images = [assetManager.getResult("tAtlas__Phoebe")];
         phoebe_TextureAtlas = new createjs.SpriteSheet(phoebe_TextureAtlasData);
         phantos_TextureAtlasData = config.Assets.getAtlas_Phantos;
         phantos_TextureAtlasData.images = [assetManager.getResult("tAtlas_Phantos")];
@@ -92,6 +98,13 @@
         chest_TextureAtlasData = config.Assets.getAtlas_Chest;
         chest_TextureAtlasData.images = [assetManager.getResult("tAtlas_Chest")];
         chest_TextureAtlas = new createjs.SpriteSheet(chest_TextureAtlasData);
+        // KC
+        enemies_TextureAtlasData = config.Assets.getAtlas__Enemies;
+        enemies_TextureAtlasData.images = [assetManager.getResult("tAtlas__Enemies")];
+        enemies_TextureAtlas = new createjs.SpriteSheet(enemies_TextureAtlasData);
+        titleUIMap_TextureAtlasData = config.Assets.getAtlas__TitleUiMap;
+        titleUIMap_TextureAtlasData.images = [assetManager.getResult("tAtlas__TitlesUIMap")];
+        titleUIMap_TextureAtlas = new createjs.SpriteSheet(titleUIMap_TextureAtlasData);
         // Initialize CreateJS
         stage = new createjs.Stage(canvas);
         stage.enableMouseOver(20);
@@ -129,6 +142,9 @@
         managers.Game.chest_TextureAtlas = chest_TextureAtlas;
         managers.Game.phantos_TextureAtlas = phantos_TextureAtlas;
         managers.Game.phantorm_TextureAtlas = phantorm_TextureAtlas;
+        // KC
+        managers.Game.enemies_TextureAtlas = enemies_TextureAtlas;
+        managers.Game.titleUIMap_TextureAtlas = titleUIMap_TextureAtlas;
         Main();
     }
     function Update() {

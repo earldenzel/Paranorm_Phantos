@@ -19,7 +19,7 @@ var scenes;
         function Mansion_18() {
             var _this = 
             // hasDoorTop, hasDoorBot, hasDoorLeft, hasDoorRight
-            _super.call(this, true, false, false, false) || this;
+            _super.call(this, true, false, false, false, config.Design.MANSION) || this;
             _this.Start();
             return _this;
         }
@@ -27,7 +27,7 @@ var scenes;
         Mansion_18.prototype.Start = function () {
             managers.Game.player.sceneOnTop = config.Scene.MANSION_16;
             _super.prototype.Start.call(this);
-            this.playerInfo.PlayerLocation = new math.Vec2(46, 28);
+            this.playerInfo.PlayerLocation = new math.Vec2(112, 82);
         };
         Mansion_18.prototype.Update = function () {
             _super.prototype.Update.call(this);

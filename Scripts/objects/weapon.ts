@@ -5,9 +5,10 @@ module objects {
         private animationEnd: Array<any>;
         // Constructor
         constructor() {
-            super(managers.Game.phantorm_TextureAtlas, "Phoebe_Attack_Back");            
+            super(managers.Game.phoebe_TextureAtlas, "Phoebe_Attack_Back");            
             this.images = ["Phoebe_Attack_Back","Phoebe_Attack_Front", "Phoebe_Attack_Left", "Phoebe_Attack_Right"];
-            this.animationEnd = [15, 12, 18, 28];
+            //this.animationEnd = [15, 12, 18, 28];
+            this.animationEnd = [8, 20, 9, 27];
             this.Start();
         }
         // Methods

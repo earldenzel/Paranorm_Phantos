@@ -19,7 +19,7 @@ var scenes;
         function Hotel_9() {
             var _this = 
             // hasDoorTop, hasDoorBot, hasDoorLeft, hasDoorRight
-            _super.call(this, true, true, true, true) || this;
+            _super.call(this, true, true, true, true, config.Design.HOTEL) || this;
             _this.hasProjectileShooters = true;
             _this.Start();
             return _this;
@@ -32,16 +32,16 @@ var scenes;
             this.enemies[1].SetPosition(new math.Vec2(100, 200));
             this.enemies[2] = new objects.Bat(2, 100);
             this.enemies[2].SetPosition(new math.Vec2(440, 650));
-            this.obstacles[0] = new objects.Gap(managers.Game.hotel_TextureAtlas, "Hotel_CarpetTile_Hole", new math.Vec2(280, 350));
-            this.obstacles[1] = new objects.Gap(managers.Game.hotel_TextureAtlas, "Hotel_CarpetTile_Hole", new math.Vec2(280, 550));
-            this.obstacles[2] = new objects.Gap(managers.Game.hotel_TextureAtlas, "Hotel_CarpetTile_Hole", new math.Vec2(200, 450));
-            this.obstacles[3] = new objects.Gap(managers.Game.hotel_TextureAtlas, "Hotel_CarpetTile_Hole", new math.Vec2(350, 450));
+            this.obstacles[0] = new objects.Gap(managers.Game.hotel_TextureAtlas, "Hole", new math.Vec2(280, 350));
+            this.obstacles[1] = new objects.Gap(managers.Game.hotel_TextureAtlas, "Hole", new math.Vec2(280, 550));
+            this.obstacles[2] = new objects.Gap(managers.Game.hotel_TextureAtlas, "Hole", new math.Vec2(200, 450));
+            this.obstacles[3] = new objects.Gap(managers.Game.hotel_TextureAtlas, "Hole", new math.Vec2(350, 450));
             managers.Game.player.sceneOnLeft = config.Scene.HOTEL_8;
             managers.Game.player.sceneOnRight = config.Scene.HOTEL_10;
             managers.Game.player.sceneOnBot = config.Scene.HOTEL_13;
             managers.Game.player.sceneOnTop = config.Scene.HOTEL_6;
             _super.prototype.Start.call(this);
-            this.playerInfo.PlayerLocation = new math.Vec2(46, 28);
+            this.playerInfo.PlayerLocation = new math.Vec2(96, 50);
         };
         Hotel_9.prototype.Update = function () {
             _super.prototype.Update.call(this);

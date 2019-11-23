@@ -22,6 +22,9 @@ var config;
         // C L Keys
         Keys.C = 67;
         Keys.L = 76;
+        // V ; Keys
+        Keys.V = 86;
+        Keys.SEMICOLON = 186;
         // Enter Escape
         Keys.ENTER = 13;
         Keys.ESCAPE = 27;

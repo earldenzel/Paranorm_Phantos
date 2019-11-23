@@ -4,7 +4,8 @@ module scenes {
         // Constructor
         constructor() {
             // hasDoorTop, hasDoorBot, hasDoorLeft, hasDoorRight
-            super(false, true, true, true);
+            super(false, true, true, true,config.Design.HOTEL);
+            console.log("Hotel 1");
             this.Start();
         }
 
@@ -14,7 +15,7 @@ module scenes {
             managers.Game.player.sceneOnRight = config.Scene.HOTEL_3;
             managers.Game.player.sceneOnBot = config.Scene.HOTEL_6;
             super.Start();
-            this.playerInfo.PlayerLocation = new math.Vec2(46,28);
+            this.playerInfo.PlayerLocation = new math.Vec2(96,18);
         }        
 
         public Update(): void {

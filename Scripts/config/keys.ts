@@ -19,6 +19,10 @@ module config {
         // C L Keys
         public static C: number = 67;
         public static L: number = 76;
+        // V ; Keys
+        public static V: number = 86;
+        public static SEMICOLON: number = 186;
+        
         // Enter Escape
         public static ENTER: number = 13;
         public static ESCAPE: number = 27;

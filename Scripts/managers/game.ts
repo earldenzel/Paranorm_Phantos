@@ -12,6 +12,9 @@ module managers {
         public static spider_TextureAtlas: createjs.SpriteSheet;
         public static shootingFlower_TextureAtlas: createjs.SpriteSheet;
         public static chest_TextureAtlas: createjs.SpriteSheet;
+        // KC
+        public static enemies_TextureAtlas: createjs.SpriteSheet; 
+        public static titleUIMap_TextureAtlas: createjs.SpriteSheet;
         public static bulletManager: managers.Bullet;
         public static shopManager: managers.Shop;
         public static chestManager: managers.Chest;

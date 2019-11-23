@@ -4,7 +4,7 @@ module scenes {
         // Constructor
         constructor() {
             // hasDoorTop, hasDoorBot, hasDoorLeft, hasDoorRight
-            super(true, false, true, false);
+            super(true, false, true, false, config.Design.MANSION);
             this.hasProjectileShooters = true;
             this.Start();
         }
@@ -20,15 +20,15 @@ module scenes {
             this.enemies[3] = new objects.Bat(2, 100);
             this.enemies[3].SetPosition(new math.Vec2(285, 440));
 
-            this.obstacles[0] = new objects.Gap(managers.Game.mansion_TextureAtlas, "Mansion_FloorTile_Hole", new math.Vec2(260, 420));
-            this.obstacles[1] = new objects.Gap(managers.Game.mansion_TextureAtlas, "Mansion_FloorTile_Hole", new math.Vec2(260, 480));
-            this.obstacles[2] = new objects.Gap(managers.Game.mansion_TextureAtlas, "Mansion_FloorTile_Hole", new math.Vec2(310, 420));
-            this.obstacles[3] = new objects.Gap(managers.Game.mansion_TextureAtlas, "Mansion_FloorTile_Hole", new math.Vec2(310, 480));
+            this.obstacles[0] = new objects.Gap(managers.Game.mansion_TextureAtlas, "Hole", new math.Vec2(260, 420));
+            this.obstacles[1] = new objects.Gap(managers.Game.mansion_TextureAtlas, "Hole", new math.Vec2(260, 480));
+            this.obstacles[2] = new objects.Gap(managers.Game.mansion_TextureAtlas, "Hole", new math.Vec2(310, 420));
+            this.obstacles[3] = new objects.Gap(managers.Game.mansion_TextureAtlas, "Hole", new math.Vec2(310, 480));
 
             managers.Game.player.sceneOnLeft = config.Scene.MANSION_14;
             managers.Game.player.sceneOnTop = config.Scene.MANSION_11;
             super.Start();
-            this.playerInfo.PlayerLocation = new math.Vec2(46,28);
+            this.playerInfo.PlayerLocation = new math.Vec2(96,66);
         }        
 
         public Update(): void {

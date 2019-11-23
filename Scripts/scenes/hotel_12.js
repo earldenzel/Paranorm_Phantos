@@ -19,7 +19,7 @@ var scenes;
         function Hotel_12() {
             var _this = 
             // hasDoorTop, hasDoorBot, hasDoorLeft, hasDoorRight
-            _super.call(this, false, false, false, true) || this;
+            _super.call(this, false, false, false, true, config.Design.HOTEL) || this;
             _this.hasProjectileShooters = true;
             _this.Start();
             return _this;
@@ -28,15 +28,15 @@ var scenes;
         Hotel_12.prototype.Start = function () {
             this.enemies[0] = new objects.SpiderUp(new math.Vec2(140, 220), 300);
             this.enemies[0].attackPower = 1;
-            this.enemies[1] = new objects.TestZombie(2);
+            this.enemies[1] = new objects.Zombie(2);
             this.enemies[1].SetPosition(new math.Vec2(100, 450));
             this.enemies[2] = new objects.Bat(2, 100);
             this.enemies[2].SetPosition(new math.Vec2(280, 650));
-            this.obstacles[0] = new objects.Barriers(managers.Game.hotel_TextureAtlas, "Hotel_CarpetTile");
+            this.obstacles[0] = new objects.Barriers(managers.Game.hotel_TextureAtlas, "Desk");
             this.obstacles[0].SetPosition(new math.Vec2(285, 440));
             managers.Game.player.sceneOnRight = config.Scene.HOTEL_13;
             _super.prototype.Start.call(this);
-            this.playerInfo.PlayerLocation = new math.Vec2(46, 28);
+            this.playerInfo.PlayerLocation = new math.Vec2(80, 66);
         };
         Hotel_12.prototype.Update = function () {
             _super.prototype.Update.call(this);

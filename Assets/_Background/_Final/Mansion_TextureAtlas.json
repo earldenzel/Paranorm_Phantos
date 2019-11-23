@@ -1,0 +1,78 @@
+{
+
+"images": [
+    "Mansion_TextureAtlas.png"
+],
+
+"framerate": 20,
+"frames": [
+    [0, 0, 564, 652, 0, 0, 0],
+    [564, 0, 386, 480, 0, 0, 0],
+    [564, 480, 134, 72, 0, 0, 0],
+    [698, 480, 74, 134, 0, 0, 0],
+    [564, 552, 74, 134, 0, 0, 0],
+    [638, 552, 22, 214, 0, 0, 0],
+    [660, 552, 20, 214, 0, 0, 0],
+    [680, 614, 134, 72, 0, 0, 0],
+    [772, 480, 134, 72, 0, 0, 0],
+    [772, 552, 98, 58, 0, 0, 0],
+    [814, 610, 74, 134, 0, 0, 0],
+    [870, 552, 52, 58, 0, 0, 0],
+    [680, 686, 134, 72, 0, 0, 0],
+    [906, 480, 26, 38, 0, 0, 0],
+    [680, 758, 214, 20, 0, 0, 0],
+    [888, 610, 62, 118, 0, 0, 0],
+    [894, 728, 52, 58, 0, 0, 0],
+    [922, 518, 24, 36, 0, 0, 0],
+    [0, 652, 214, 17, 0, 0, 0],
+    [214, 652, 102, 102, 0, 0, 0],
+    [0, 669, 100, 92, 0, 0, 0],
+    [100, 669, 100, 92, 0, 0, 0],
+    [316, 652, 74, 134, 0, 0, 0],
+    [390, 652, 66, 78, 0, 0, 0],
+    [456, 652, 52, 118, 0, 0, 0],
+    [390, 730, 50, 50, 0, 0, 0],
+    [508, 652, 50, 64, 0, 0, 0],
+    [558, 686, 50, 62, 0, 0, 0],
+    [508, 716, 50, 62, 0, 0, 0],
+    [558, 748, 32, 36, 0, 0, 0]
+],
+
+"animations": {
+    "CeilingAndWall": { "frames": [0] },
+    "Floor": { "frames": [1] },
+    "DoorBottom": { "frames": [2] },
+    "DoorLeft": { "frames": [3] },
+    "DoorLeftLocked": { "frames": [4] },
+    "DoorLeftCeiling": { "frames": [5] },
+    "DoorRightCeiling": { "frames": [6] },
+    "DoorBottomLocked": { "frames": [7] },
+    "DoorTop": { "frames": [8] },
+    "Desk_4Tiles_Horizontal": { "frames": [9] },
+    "DoorRight": { "frames": [10] },
+    "Desk": { "frames": [11] },
+    "DoorTopLocked": { "frames": [12] },
+    "Light_On": { "frames": [13, 25] },
+    "DoorTopCeiling": { "frames": [14] },
+    "ParanormalGlow": { "frames": [15] },
+    "Desk_B": { "frames": [16] },
+    "Light_Off": { "frames": [17] },
+    "DoorBottomCeiling": { "frames": [18] },
+    "SpiderWeb": { "frames": [19] },
+    "Bookshelf": { "frames": [20] },
+    "Bookshelf_B": { "frames": [21] },
+    "DoorRightLocked": { "frames": [22] },
+    "PotPlant": { "frames": [23] },
+    "Desk_4Tiles_Vertical": { "frames": [24] },
+    "Downstairs": { "frames": [26] },
+    "Hole": { "frames": [27] },
+    "Upstairs": { "frames": [28] },
+    "Pot": { "frames": [29] }
+},
+
+"texturepacker": [
+        "SmartUpdateHash: $TexturePacker:SmartUpdate:929fada16e47669be5fa98ecd296d46f:0da5571d93956a9303cbf35733901f3a:e557a7e70b4743b4a9d9d84e47f86007$",
+        "Created with TexturePacker (https://www.codeandweb.com/texturepacker) for EaselJS"
+]
+
+}

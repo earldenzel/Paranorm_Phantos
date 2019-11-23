@@ -4,7 +4,7 @@ module scenes {
         // Constructor
         constructor() {
             // hasDoorTop, hasDoorBot, hasDoorLeft, hasDoorRight
-            super(true, false, false, false);
+            super(true, false, false, false, config.Design.MANSION);
             this.Start();
         }
 
@@ -12,7 +12,7 @@ module scenes {
         public Start(): void {
             managers.Game.player.sceneOnTop = config.Scene.MANSION_16;
             super.Start();
-            this.playerInfo.PlayerLocation = new math.Vec2(46,28);
+            this.playerInfo.PlayerLocation = new math.Vec2(112,82);
         }        
 
         public Update(): void {

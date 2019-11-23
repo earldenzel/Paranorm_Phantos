@@ -52,6 +52,10 @@ var managers;
                         case config.Keys.C:
                             this.running = true;
                             break;
+                        case config.Keys.V:
+                        case config.Keys.SEMICOLON:
+                            this.powers = true;
+                            break;
                         case config.Keys.ENTER:
                             this.pause = !this.pause;
                             break;
@@ -110,6 +114,10 @@ var managers;
                         case config.Keys.L:
                         case config.Keys.C:
                             this.running = false;
+                            break;
+                        case config.Keys.V:
+                        case config.Keys.SEMICOLON:
+                            this.powers = false;
                             break;
                         case config.Keys.ENTER:
                             this.pause = !this.pause;
