@@ -19,7 +19,7 @@ var scenes;
         function Mansion_8() {
             var _this = 
             // hasDoorTop, hasDoorBot, hasDoorLeft, hasDoorRight
-            _super.call(this, true, true, true, true) || this;
+            _super.call(this, true, true, true, true, config.Design.MANSION) || this;
             _this.hasProjectileShooters = true;
             _this.Start();
             return _this;

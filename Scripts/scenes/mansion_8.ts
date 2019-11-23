@@ -4,7 +4,7 @@ module scenes {
         // Constructor
         constructor() {
             // hasDoorTop, hasDoorBot, hasDoorLeft, hasDoorRight
-            super(true, true, true, true);
+            super(true, true, true, true, config.Design.MANSION);
             this.hasProjectileShooters = true;
             this.Start();
         }

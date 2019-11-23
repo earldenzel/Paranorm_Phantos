@@ -57,7 +57,7 @@ var objects;
                 }
             }
         };
-        Barriers.prototype.TestZombieCheckBarrierCollision = function (zombie) {
+        Barriers.prototype.ZombieCheckBarrierCollision = function (zombie) {
             var playerPosition = new math.Vec2(managers.Game.player.x, managers.Game.player.y);
             var enemyPosition = new math.Vec2(zombie.x, zombie.y);
             var dirToPlayer = math.Vec2.Subtract(enemyPosition, playerPosition);

@@ -19,7 +19,7 @@ var scenes;
         function Mansion_9() {
             var _this = 
             // hasDoorTop, hasDoorBot, hasDoorLeft, hasDoorRight
-            _super.call(this, true, false, true, false) || this;
+            _super.call(this, true, false, true, false, config.Design.MANSION) || this;
             _this.hasProjectileShooters = true;
             _this.Start();
             return _this;
@@ -30,14 +30,14 @@ var scenes;
             this.enemies[0].attackPower = 1;
             this.enemies[1] = new objects.SpiderRight(new math.Vec2(450, 630), 170);
             this.enemies[1].attackPower = 1;
-            this.enemies[2] = new objects.TestZombie(1.5);
+            this.enemies[2] = new objects.Zombie(1.5);
             this.enemies[2].SetPosition(new math.Vec2(280, 400));
-            this.obstacles[0] = new objects.Gap(managers.Game.mansion_TextureAtlas, "Mansion_FloorTile_Hole", new math.Vec2(400, 225));
-            this.obstacles[1] = new objects.Gap(managers.Game.mansion_TextureAtlas, "Mansion_FloorTile_Hole", new math.Vec2(400, 285));
-            this.obstacles[2] = new objects.Gap(managers.Game.mansion_TextureAtlas, "Mansion_FloorTile_Hole", new math.Vec2(400, 345));
-            this.obstacles[3] = new objects.Gap(managers.Game.mansion_TextureAtlas, "Mansion_FloorTile_Hole", new math.Vec2(400, 650));
-            this.obstacles[4] = new objects.Gap(managers.Game.mansion_TextureAtlas, "Mansion_FloorTile_Hole", new math.Vec2(400, 590));
-            this.obstacles[5] = new objects.Gap(managers.Game.mansion_TextureAtlas, "Mansion_FloorTile_Hole", new math.Vec2(400, 530));
+            this.obstacles[0] = new objects.Gap(managers.Game.mansion_TextureAtlas, "Hole", new math.Vec2(400, 225));
+            this.obstacles[1] = new objects.Gap(managers.Game.mansion_TextureAtlas, "Hole", new math.Vec2(400, 285));
+            this.obstacles[2] = new objects.Gap(managers.Game.mansion_TextureAtlas, "Hole", new math.Vec2(400, 345));
+            this.obstacles[3] = new objects.Gap(managers.Game.mansion_TextureAtlas, "Hole", new math.Vec2(400, 650));
+            this.obstacles[4] = new objects.Gap(managers.Game.mansion_TextureAtlas, "Hole", new math.Vec2(400, 590));
+            this.obstacles[5] = new objects.Gap(managers.Game.mansion_TextureAtlas, "Hole", new math.Vec2(400, 530));
             managers.Game.player.sceneOnLeft = config.Scene.MANSION_8;
             managers.Game.player.sceneOnTop = config.Scene.MANSION_4;
             _super.prototype.Start.call(this);

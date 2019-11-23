@@ -51,7 +51,7 @@ module objects {
 
         }
 
-        public TestZombieCheckBarrierCollision(zombie: objects.TestZombie): void {
+        public ZombieCheckBarrierCollision(zombie: objects.Zombie): void {
             let playerPosition: math.Vec2 = new math.Vec2(managers.Game.player.x, managers.Game.player.y);
             let enemyPosition: math.Vec2 = new math.Vec2(zombie.x, zombie.y);
 

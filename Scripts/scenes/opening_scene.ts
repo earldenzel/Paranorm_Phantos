@@ -70,7 +70,7 @@ module scenes {
 
         private startButtonClick():void {
             // Change our game state to GAME
-             managers.Game.currentScene = config.Scene.GRAVEYARD_1;
+            managers.Game.currentScene = config.Scene.GRAVEYARD_1;
             //managers.Game.currentScene = config.Scene.HOTEL_1;
             // managers.Game.currentScene = config.Scene.MANSION_1;
         }

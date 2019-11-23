@@ -1,0 +1,59 @@
+{
+
+"images": [
+    "Graveyard_TextureAtlas.png"
+],
+
+"framerate": 20,
+"frames": [
+    [0, 0, 564, 652, 0, 0, 0],
+    [0, 652, 564, 652, 0, 0, 0],
+    [0, 1304, 44, 148, 0, 0, 0],
+    [0, 1452, 30, 14, 0, 0, 0],
+    [44, 1304, 62, 140, 0, 0, 0],
+    [44, 1444, 22, 22, 0, 0, 0],
+    [106, 1304, 76, 102, 0, 0, 0],
+    [106, 1406, 50, 62, 0, 0, 0],
+    [156, 1406, 50, 62, 0, 0, 0],
+    [182, 1304, 76, 102, 0, 0, 0],
+    [206, 1406, 50, 62, 0, 0, 0],
+    [256, 1406, 50, 62, 0, 0, 0],
+    [258, 1304, 63, 88, 0, -13, -7],
+    [306, 1392, 90, 76, 0, 0, 0],
+    [321, 1304, 63, 88, 0, 0, -7],
+    [384, 1304, 90, 76, 0, 0, 0],
+    [474, 1304, 88, 63, 0, -4, 0],
+    [474, 1367, 88, 63, 0, -1, -13],
+    [396, 1430, 26, 36, 0, 0, 0],
+    [396, 1380, 22, 42, 0, 0, 0]
+],
+
+"animations": {
+    "CeilingAndWall": { "frames": [0] },
+    "Floor": { "frames": [1] },
+    "Tree": { "frames": [2] },
+    "Flowers": { "frames": [3] },
+    "ParanormalGlow": { "frames": [4] },
+    "GraveTile": { "frames": [5] },
+    "DoorLeftLocked": { "frames": [6] },
+    "Dirt": { "frames": [7] },
+    "Downstairs": { "frames": [8] },
+    "DoorRightLocked": { "frames": [9] },
+    "Hole": { "frames": [10] },
+    "Upstairs": { "frames": [11] },
+    "DoorLeft": { "frames": [12] },
+    "DoorBottom": { "frames": [13] },
+    "DoorRight": { "frames": [14] },
+    "DoorTop": { "frames": [15] },
+    "DoorBottomLocked": { "frames": [16] },
+    "DoorTopLocked": { "frames": [17] },
+    "Grave": { "frames": [18] },
+    "Cross": { "frames": [19] }
+},
+
+"texturepacker": [
+        "SmartUpdateHash: $TexturePacker:SmartUpdate:69b74069d323688a602c6ea2be96a57d:1e6e44726167397a0d6ed2c40eee426b:d49c8c0f8ab3cf5c1e089e088b6b9942$",
+        "Created with TexturePacker (https://www.codeandweb.com/texturepacker) for EaselJS"
+]
+
+}

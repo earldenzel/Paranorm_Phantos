@@ -4,7 +4,7 @@ module scenes {
         //this scene is right of graveyard 1
         // Constructor
         constructor() {
-            super(false, false, true, false);
+            super(false, false, true, false,config.Design.GRAVEYARD);
             this.Start();
         }
 
@@ -14,13 +14,13 @@ module scenes {
             this.enemies[1] = new objects.TestEnemy(3, false, false);
             this.enemies[2] = new objects.ShadowGhost(2,false,true);
 
-            this.obstacles[0] = new objects.Barriers(managers.Game.graveyard_TextureAtlas, "Graveyard_GraveTile");
+            this.obstacles[0] = new objects.Barriers(managers.Game.graveyard_TextureAtlas, "GraveTile");
             this.obstacles[0].SetPosition(new math.Vec2(200, 360));
-            this.obstacles[1] = new objects.Barriers(managers.Game.graveyard_TextureAtlas, "Graveyard_GraveTile");
+            this.obstacles[1] = new objects.Barriers(managers.Game.graveyard_TextureAtlas, "GraveTile");
             this.obstacles[1].SetPosition(new math.Vec2(360, 360));
-            this.obstacles[2] = new objects.Barriers(managers.Game.graveyard_TextureAtlas, "Graveyard_GraveTile");
+            this.obstacles[2] = new objects.Barriers(managers.Game.graveyard_TextureAtlas, "GraveTile");
             this.obstacles[2].SetPosition(new math.Vec2(200, 510));
-            this.obstacles[3] = new objects.Barriers(managers.Game.graveyard_TextureAtlas, "Graveyard_GraveTile");
+            this.obstacles[3] = new objects.Barriers(managers.Game.graveyard_TextureAtlas, "GraveTile");
             this.obstacles[3].SetPosition(new math.Vec2(360, 510));
 
             managers.Game.player.sceneOnLeft = config.Scene.GRAVEYARD_1;

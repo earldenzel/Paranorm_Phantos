@@ -19,7 +19,7 @@ var scenes;
         function Graveyard_7() {
             var _this = 
             // hasDoorTop, hasDoorBot, hasDoorLeft, hasDoorRight
-            _super.call(this, false, false, true, false) || this;
+            _super.call(this, false, false, true, false, config.Design.GRAVEYARD) || this;
             _this.hasShop = true;
             _this.Start();
             return _this;

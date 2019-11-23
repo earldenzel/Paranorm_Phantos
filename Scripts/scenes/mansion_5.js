@@ -19,7 +19,7 @@ var scenes;
         function Mansion_5() {
             var _this = 
             // hasDoorTop, hasDoorBot, hasDoorLeft, hasDoorRight
-            _super.call(this, false, false, false, true) || this;
+            _super.call(this, false, false, false, true, config.Design.MANSION) || this;
             _this.Start();
             return _this;
         }

@@ -4,7 +4,7 @@ module scenes {
         // Variables
         // Constructor
         constructor() {
-            super(false, true, true, true);
+            super(false, true, true, true,config.Design.GRAVEYARD);
             this.isDoorLeftLocked = managers.GraveyardLocks.graveyard_1_lockLeft;
             this.isDoorRightLocked = managers.GraveyardLocks.graveyard_1_lockRight;
             this.isDoorBotLocked = managers.GraveyardLocks.graveyard_1_lockBot;
@@ -29,9 +29,9 @@ module scenes {
             this.cosmetics[2].SetPosition(new math.Vec2(x-this.cosmetics[2].width,y));
             this.cosmetics[3].SetPosition(new math.Vec2(x+this.cosmetics[3].width,y));
             this.cosmetics[4].SetPosition(new math.Vec2(this.enemies[0].x,this.enemies[0].y - 100));
-            this.cosmetics[5] = new objects.Stairs(config.Scene.HOTEL_1, false);
+            //this.cosmetics[5] = new objects.Stairs(config.Scene.HOTEL_1, false);
             this.cosmetics[6] = new objects.Stairs(config.Scene.MANSION_1, true);
-            this.cosmetics[5].SetPosition(new math.Vec2(400, 400));
+            //this.cosmetics[5].SetPosition(new math.Vec2(400, 400));
             this.cosmetics[6].SetPosition(new math.Vec2(400, 500));
 
             managers.Game.player.sceneOnBot = config.Scene.GRAVEYARD_5;

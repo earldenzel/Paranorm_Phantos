@@ -17,7 +17,7 @@ var scenes;
         __extends(Graveyard_8, _super);
         // Constructor
         function Graveyard_8() {
-            var _this = _super.call(this, true, false, false, false) || this;
+            var _this = _super.call(this, true, false, false, false, config.Design.GRAVEYARD) || this;
             _this.Start();
             return _this;
         }
@@ -25,17 +25,17 @@ var scenes;
         Graveyard_8.prototype.Start = function () {
             this.enemies[0] = new objects.Undertaker(0.5);
             this.enemies[0].SetPosition(new math.Vec2(300, 530));
-            this.enemies[1] = new objects.TestZombie(1.5);
+            this.enemies[1] = new objects.Zombie(1.5);
             this.enemies[1].SetPosition(new math.Vec2(375, 500));
-            this.enemies[2] = new objects.TestZombie(1.5);
+            this.enemies[2] = new objects.Zombie(1.5);
             this.enemies[2].SetPosition(new math.Vec2(225, 500));
             this.enemies[3] = new objects.Bat(4.5, 100);
             this.enemies[3].SetPosition(new math.Vec2(500, 500));
             this.enemies[4] = new objects.Bat(4.5, 100);
             this.enemies[4].SetPosition(new math.Vec2(0, 500));
-            this.enemies[5] = new objects.TestZombie(1.5);
+            this.enemies[5] = new objects.Zombie(1.5);
             this.enemies[5].visible = false;
-            this.enemies[6] = new objects.TestZombie(1.5);
+            this.enemies[6] = new objects.Zombie(1.5);
             this.enemies[6].visible = false;
             managers.Game.player.sceneOnTop = config.Scene.GRAVEYARD_6;
             _super.prototype.Start.call(this);

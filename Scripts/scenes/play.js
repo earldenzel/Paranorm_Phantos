@@ -17,7 +17,6 @@ var scenes;
         __extends(PlayScene, _super);
         // Constructor
         function PlayScene(hasDoorTop, hasDoorBot, hasDoorLeft, hasDoorRight, design) {
-            if (design === void 0) { design = config.Design.MANSION; }
             var _this = _super.call(this) || this;
             _this.enemies = new Array();
             _this.obstacles = new Array();
@@ -38,18 +37,27 @@ var scenes;
             this.player = managers.Game.player;
             switch (this.design) {
                 case config.Design.GRAVEYARD:
+                    this.spriteSheet = managers.Game.graveyard_TextureAtlas;
                     break;
                 case config.Design.HOTEL:
+                    this.spriteSheet = managers.Game.hotel_TextureAtlas;
                     break;
                 case config.Design.MANSION:
+                    this.spriteSheet = managers.Game.mansion_TextureAtlas;
                     break;
             }
-            this.ceilingAndWall = new objects.Background("background_c_w_all");
+            this.ceilingAndWall = new createjs.Sprite(this.spriteSheet, "CeilingAndWall");
             this.ceilingAndWall.y = 110;
             //this.ceilingHorizontal =new objects.Background(this.assetManager,"background_c_hori");
             //this.ceilingVertical =new objects.Background(this.assetManager,"background_c_vert");
-            this.floor = new objects.Background("background_f_all");
-            this.floor.y = 110;
+            this.floor = new createjs.Sprite(this.spriteSheet, "Floor");
+            if (this.design != config.Design.GRAVEYARD) {
+                this.floor.x = 90;
+                this.floor.y = 198;
+            }
+            else {
+                this.floor.y = 110;
+            }
             //this.wallHorizontal = new objects.Background(this.assetManager,"background_w_hori");
             //this.wallVertical = new objects.Background(this.assetManager, "background_w_vert");
             this.player.canTraverseTop = false;
@@ -58,54 +66,77 @@ var scenes;
             this.player.canTraverseRight = false;
             if (this.hasDoorTop) {
                 if (this.isDoorTopLocked) {
-                    this.doorTop = new objects.Background("background_d_vertC");
+                    this.doorTop = new createjs.Sprite(this.spriteSheet, "DoorTopLocked");
+                    this.doorTop.name = "DoorTopLocked";
                 }
                 else {
-                    this.doorTop = new objects.Background("background_d_vert");
+                    this.doorTop = new createjs.Sprite(this.spriteSheet, "DoorTop");
+                    this.doorTop.name = "DoorTop";
                 }
-                this.doorTopFrame = new objects.Background("background_d_vertT");
-                this.doorTop.y = 110;
-                this.doorTopFrame.y = 110;
+                if (this.design != config.Design.GRAVEYARD) {
+                    this.doorTopFrame = new createjs.Sprite(this.spriteSheet, "DoorTopCeiling");
+                    this.doorTopFrame.y = 110;
+                    this.doorTopFrame.x = 182;
+                }
+                this.doorTop.x = 224;
+                this.doorTop.y = 126;
                 this.player.canTraverseTop = !this.isDoorTopLocked;
             }
             if (this.hasDoorBot) {
                 if (this.isDoorBotLocked) {
-                    this.doorBot = new objects.Background("background_d_vertC");
+                    this.doorBot = new createjs.Sprite(this.spriteSheet, "DoorBottomLocked");
+                    this.doorBot.name = "DoorBottomLocked";
                 }
                 else {
-                    this.doorBot = new objects.Background("background_d_vert");
+                    this.doorBot = new createjs.Sprite(this.spriteSheet, "DoorBottom");
+                    this.doorBot.name = "DoorBottom";
                 }
-                this.doorBotFrame = new objects.Background("background_d_vertT");
-                this.doorBot.y = 110;
-                this.doorBotFrame.y = 110;
-                this.doorBot.Flip();
-                this.doorBotFrame.Flip();
+                if (this.design != config.Design.GRAVEYARD) {
+                    this.doorBotFrame = new createjs.Sprite(this.spriteSheet, "DoorBottomCeiling");
+                    this.doorBotFrame.x = 183;
+                    this.doorBotFrame.y = 745;
+                }
+                this.doorBot.x = 224;
+                this.doorBot.y = 674;
+                //this.doorBot.Flip();
+                //this.doorBotFrame.Flip();
                 this.player.canTraverseBot = !this.isDoorBotLocked;
             }
             if (this.hasDoorLeft) {
                 if (this.isDoorLeftLocked) {
-                    this.doorLeft = new objects.Background("background_d_horiC");
+                    this.doorLeft = new createjs.Sprite(this.spriteSheet, "DoorLeftLocked");
+                    this.doorLeft.name = "DoorLeftLocked";
                 }
                 else {
-                    this.doorLeft = new objects.Background("background_d_hori");
+                    this.doorLeft = new createjs.Sprite(this.spriteSheet, "DoorLeft");
+                    this.doorLeft.name = "DoorLeft";
                 }
-                this.doorLeftFrame = new objects.Background("background_d_horiT");
-                this.doorLeft.y = 110;
-                this.doorLeftFrame.y = 110;
+                if (this.design != config.Design.GRAVEYARD) {
+                    this.doorLeftFrame = new createjs.Sprite(this.spriteSheet, "DoorLeftCeiling");
+                    this.doorLeftFrame.y = 322;
+                }
+                this.doorLeft.y = 370;
+                this.doorLeft.x = 18;
                 this.player.canTraverseLeft = !this.isDoorLeftLocked;
             }
             if (this.hasDoorRight) {
                 if (this.isDoorRightLocked) {
-                    this.doorRight = new objects.Background("background_d_horiC");
+                    this.doorRight = new createjs.Sprite(this.spriteSheet, "DoorRightLocked");
+                    this.doorRight.name = "DoorRightLocked";
                 }
                 else {
-                    this.doorRight = new objects.Background("background_d_hori");
+                    this.doorRight = new createjs.Sprite(this.spriteSheet, "DoorRight");
+                    this.doorRight.name = "DoorRight";
                 }
-                this.doorRightFrame = new objects.Background("background_d_horiT");
-                this.doorRight.y = 110;
-                this.doorRightFrame.y = 110;
-                this.doorRight.Flip();
-                this.doorRightFrame.Flip();
+                if (this.design != config.Design.GRAVEYARD) {
+                    this.doorRightFrame = new createjs.Sprite(this.spriteSheet, "DoorRightCeiling");
+                    this.doorRightFrame.y = 322;
+                    this.doorRightFrame.x = 545;
+                }
+                this.doorRight.y = 370;
+                this.doorRight.x = 476;
+                //this.doorRight.Flip();
+                //this.doorRightFrame.Flip();
                 this.player.canTraverseRight = !this.isDoorRightLocked;
             }
             if (this.hasShop) {
@@ -149,8 +180,8 @@ var scenes;
                         f.RemoveFromPlay(f.CalculateBounty());
                     }
                     //if enemy is
-                    if (f instanceof objects.TestZombie && e instanceof objects.Barriers) {
-                        e.TestZombieCheckBarrierCollision(f);
+                    if (f instanceof objects.Zombie && e instanceof objects.Barriers) {
+                        e.ZombieCheckBarrierCollision(f);
                     }
                     if (!f.isFlying && e instanceof objects.Gap) {
                         e.CheckGapDamage(f);
@@ -211,36 +242,44 @@ var scenes;
                     }
                 }
             }
-            if (this.hasDoorLeft && !this.isDoorLeftLocked && this.doorLeft.name == "background_d_horiC") {
+            if (this.hasDoorLeft && !this.isDoorLeftLocked && this.doorLeft.name == "DoorLeftLocked") {
                 this.removeChild(this.doorLeft);
-                this.doorLeft = new objects.Background("background_d_hori");
-                this.doorLeft.y = 110;
+                this.doorLeft = new createjs.Sprite(this.spriteSheet, "DoorLeft");
+                this.doorLeft.name = "DoorLeft";
+                this.doorLeft.y = 370;
+                this.doorLeft.x = 18;
                 this.player.canTraverseLeft = !this.isDoorLeftLocked;
                 this.addChild(this.doorLeft);
                 this.setChildIndex(this.doorLeft, this.getChildIndex(this.player) - 1);
             }
-            if (this.hasDoorRight && !this.isDoorRightLocked && this.doorRight.name == "background_d_horiC") {
+            if (this.hasDoorRight && !this.isDoorRightLocked && this.doorRight.name == "DoorRightLocked") {
                 this.removeChild(this.doorRight);
-                this.doorRight = new objects.Background("background_d_hori");
-                this.doorRight.y = 110;
-                this.doorRight.Flip();
+                this.doorRight = new createjs.Sprite(this.spriteSheet, "DoorRight");
+                this.doorRight.name = "DoorRight";
+                this.doorRight.y = 370;
+                this.doorRight.x = 476;
+                //this.doorRight.Flip();
                 this.player.canTraverseRight = !this.isDoorRightLocked;
                 this.addChild(this.doorRight);
                 this.setChildIndex(this.doorRight, this.getChildIndex(this.player) - 1);
             }
-            if (this.hasDoorTop && !this.isDoorTopLocked && this.doorTop.name == "background_d_vertC") {
+            if (this.hasDoorTop && !this.isDoorTopLocked && this.doorTop.name == "DoorTopLocked") {
                 this.removeChild(this.doorTop);
-                this.doorTop = new objects.Background("background_d_vert");
-                this.doorTop.y = 110;
+                this.doorTop = new createjs.Sprite(this.spriteSheet, "DoorTop");
+                this.doorTop.name = "DoorTop";
+                this.doorTop.x = 224;
+                this.doorTop.y = 126;
                 this.player.canTraverseTop = !this.isDoorTopLocked;
                 this.addChild(this.doorTop);
                 this.setChildIndex(this.doorTop, this.getChildIndex(this.player) - 1);
             }
-            if (this.hasDoorBot && !this.isDoorBotLocked && this.doorBot.name == "background_d_vertC") {
+            if (this.hasDoorBot && !this.isDoorBotLocked && this.doorBot.name == "DoorBottomLocked") {
                 this.removeChild(this.doorBot);
-                this.doorBot = new objects.Background("background_d_vert");
-                this.doorBot.y = 110;
-                this.doorBot.Flip();
+                this.doorBot = new createjs.Sprite(this.spriteSheet, "DoorBottom");
+                this.doorBot.name = "DoorBottom";
+                this.doorBot.x = 224;
+                this.doorBot.y = 674;
+                //this.doorBot.Flip();
                 this.player.canTraverseBot = !this.isDoorBotLocked;
                 this.addChild(this.doorBot);
                 this.setChildIndex(this.doorBot, this.getChildIndex(this.player) - 1);

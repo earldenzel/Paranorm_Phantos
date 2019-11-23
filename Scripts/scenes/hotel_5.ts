@@ -4,7 +4,7 @@ module scenes {
         // Constructor
         constructor() {
             // hasDoorTop, hasDoorBot, hasDoorLeft, hasDoorRight
-            super(false, false, false, true);
+            super(false, false, false, true,config.Design.HOTEL);
             this.hasProjectileShooters = true;
             this.Start();
         }
@@ -17,13 +17,13 @@ module scenes {
             this.enemies[1] = new objects.SpiderLeft(new math.Vec2(120, 480), 150);
             this.enemies[1].attackPower = 1;
 
-            this.obstacles[0] = new objects.Gap(managers.Game.hotel_TextureAtlas, "Hotel_CarpetTile_Hole", new math.Vec2(200, 225));
-            this.obstacles[1] = new objects.Gap(managers.Game.hotel_TextureAtlas, "Hotel_CarpetTile_Hole", new math.Vec2(200, 285));
-            this.obstacles[2] = new objects.Gap(managers.Game.hotel_TextureAtlas, "Hotel_CarpetTile_Hole", new math.Vec2(200, 345));
+            this.obstacles[0] = new objects.Gap(managers.Game.hotel_TextureAtlas, "Hole", new math.Vec2(200, 225));
+            this.obstacles[1] = new objects.Gap(managers.Game.hotel_TextureAtlas, "Hole", new math.Vec2(200, 285));
+            this.obstacles[2] = new objects.Gap(managers.Game.hotel_TextureAtlas, "Hole", new math.Vec2(200, 345));
 
-            this.obstacles[3] = new objects.Gap(managers.Game.hotel_TextureAtlas, "Hotel_CarpetTile_Hole", new math.Vec2(200, 650));
-            this.obstacles[4] = new objects.Gap(managers.Game.hotel_TextureAtlas, "Hotel_CarpetTile_Hole", new math.Vec2(200, 590));
-            this.obstacles[5] = new objects.Gap(managers.Game.hotel_TextureAtlas, "Hotel_CarpetTile_Hole", new math.Vec2(200, 530));
+            this.obstacles[3] = new objects.Gap(managers.Game.hotel_TextureAtlas, "Hole", new math.Vec2(200, 650));
+            this.obstacles[4] = new objects.Gap(managers.Game.hotel_TextureAtlas, "Hole", new math.Vec2(200, 590));
+            this.obstacles[5] = new objects.Gap(managers.Game.hotel_TextureAtlas, "Hole", new math.Vec2(200, 530));
 
             managers.Game.player.sceneOnRight = config.Scene.HOTEL_6;
             super.Start();

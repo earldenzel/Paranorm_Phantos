@@ -1,0 +1,76 @@
+{
+
+"images": [
+    "Hotel_TextureAtlas.png"
+],
+
+"framerate": 20,
+"frames": [
+    [0, 0, 564, 652, 0, 0, 0],
+    [564, 0, 386, 482, 0, 0, 0],
+    [0, 652, 66, 78, 0, 0, 0],
+    [0, 730, 26, 38, 0, 0, 0],
+    [26, 730, 80, 36, 0, 0, 0],
+    [66, 652, 134, 72, 0, 0, 0],
+    [106, 724, 36, 42, 0, 0, 0],
+    [142, 724, 32, 36, 0, 0, 0],
+    [174, 724, 24, 36, 0, 0, 0],
+    [198, 724, 214, 20, 0, 0, 0],
+    [200, 652, 134, 72, 0, 0, 0],
+    [334, 652, 134, 72, 0, 0, 0],
+    [198, 744, 214, 20, 0, 0, 0],
+    [468, 652, 134, 72, 0, 0, 0],
+    [564, 482, 74, 134, 0, 0, 0],
+    [602, 616, 74, 134, 0, 0, 0],
+    [638, 482, 74, 134, 0, 0, 0],
+    [676, 616, 74, 134, 0, 0, 0],
+    [712, 482, 62, 118, 0, 0, 0],
+    [750, 600, 52, 118, 0, 0, 0],
+    [750, 718, 50, 50, 0, 0, 0],
+    [774, 482, 82, 72, 0, 0, 0],
+    [802, 554, 22, 214, 0, 0, 0],
+    [824, 554, 18, 214, 0, 0, 0],
+    [842, 554, 98, 58, 0, 0, 0],
+    [856, 482, 50, 62, 0, 0, 0],
+    [842, 612, 52, 58, 0, 0, 0],
+    [894, 612, 50, 62, 0, 0, 0],
+    [842, 670, 50, 62, 0, 0, 0]
+],
+
+"animations": {
+    "CeilingAndWall": { "frames": [0] },
+    "Floor": { "frames": [1] },
+    "PotPlant": { "frames": [2] },
+    "Light_On": { "frames": [3, 20] },
+    "Painting": { "frames": [4] },
+    "DoorBottom": { "frames": [5] },
+    "OvalPainting": { "frames": [6] },
+    "Pot": { "frames": [7] },
+    "Light_Off": { "frames": [8] },
+    "DoorBottomCeiling": { "frames": [9] },
+    "DoorBottomLocked": { "frames": [10] },
+    "DoorTop": { "frames": [11] },
+    "DoorTopCeiling": { "frames": [12] },
+    "DoorTopLocked": { "frames": [13] },
+    "DoorLeft": { "frames": [14] },
+    "DoorLeftLocked": { "frames": [15] },
+    "DoorRight": { "frames": [16] },
+    "DoorRightLocked": { "frames": [17] },
+    "ParanormalGlow": { "frames": [18] },
+    "Desk_4Tiles_Vertical": { "frames": [19] },
+    "ClosedDoor": { "frames": [21] },
+    "DoorLeftCeiling": { "frames": [22] },
+    "DoorRightCeiling": { "frames": [23] },
+    "Desk_4Tiles_Horizontal": { "frames": [24] },
+    "Downstairs": { "frames": [25] },
+    "Desk": { "frames": [26] },
+    "Hole": { "frames": [27] },
+    "Upstairs": { "frames": [28] }
+},
+
+"texturepacker": [
+        "SmartUpdateHash: $TexturePacker:SmartUpdate:0b42cd3298c4b9b3876e191d66462bbb:301d249440e936e05e8335d68737e2d8:296244caf6e3ca0012d10fcba506ebbb$",
+        "Created with TexturePacker (https://www.codeandweb.com/texturepacker) for EaselJS"
+]
+
+}

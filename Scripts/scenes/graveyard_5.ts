@@ -3,7 +3,7 @@ module scenes {
     export class Graveyard_5 extends scenes.PlayScene {
         // Constructor
         constructor() {
-            super(true, true, false, true);
+            super(true, true, false, true,config.Design.GRAVEYARD);
             this.isDoorBotLocked = managers.GraveyardLocks.graveyard_5_lockBot;
             this.Start();
         }
@@ -21,30 +21,30 @@ module scenes {
             this.enemies[3].SetPosition(new math.Vec2(100, 300));
 
 
-            this.obstacles[0] = new objects.Barriers(managers.Game.graveyard_TextureAtlas, "Graveyard_GraveTile");
+            this.obstacles[0] = new objects.Barriers(managers.Game.graveyard_TextureAtlas, "GraveTile");
             this.obstacles[0].SetPosition(new math.Vec2(400, 655));
-            this.obstacles[1] = new objects.Barriers(managers.Game.graveyard_TextureAtlas, "Graveyard_GraveTile");
+            this.obstacles[1] = new objects.Barriers(managers.Game.graveyard_TextureAtlas, "GraveTile");
             this.obstacles[1].SetPosition(new math.Vec2(400, 605));
-            this.obstacles[2] = new objects.Barriers(managers.Game.graveyard_TextureAtlas, "Graveyard_GraveTile");
+            this.obstacles[2] = new objects.Barriers(managers.Game.graveyard_TextureAtlas, "GraveTile");
             this.obstacles[2].SetPosition(new math.Vec2(400, 555));
-            this.obstacles[3] = new objects.Barriers(managers.Game.graveyard_TextureAtlas, "Graveyard_GraveTile");
+            this.obstacles[3] = new objects.Barriers(managers.Game.graveyard_TextureAtlas, "GraveTile");
             this.obstacles[3].SetPosition(new math.Vec2(400, 505));
-            this.obstacles[4] = new objects.Barriers(managers.Game.graveyard_TextureAtlas, "Graveyard_GraveTile");
+            this.obstacles[4] = new objects.Barriers(managers.Game.graveyard_TextureAtlas, "GraveTile");
             this.obstacles[4].SetPosition(new math.Vec2(400, 220));
-            this.obstacles[5] = new objects.Barriers(managers.Game.graveyard_TextureAtlas, "Graveyard_GraveTile");
+            this.obstacles[5] = new objects.Barriers(managers.Game.graveyard_TextureAtlas, "GraveTile");
             this.obstacles[5].SetPosition(new math.Vec2(400, 270));
-            this.obstacles[6] = new objects.Barriers(managers.Game.graveyard_TextureAtlas, "Graveyard_GraveTile");
+            this.obstacles[6] = new objects.Barriers(managers.Game.graveyard_TextureAtlas, "GraveTile");
             this.obstacles[6].SetPosition(new math.Vec2(400, 320));
-            this.obstacles[7] = new objects.Barriers(managers.Game.graveyard_TextureAtlas, "Graveyard_GraveTile");
+            this.obstacles[7] = new objects.Barriers(managers.Game.graveyard_TextureAtlas, "GraveTile");
             this.obstacles[7].SetPosition(new math.Vec2(400, 370));
-            this.obstacles[8] = new objects.Gap(managers.Game.graveyard_TextureAtlas, "Graveyard_HoleTile", new math.Vec2(165, 220));
-            this.obstacles[9] = new objects.Gap(managers.Game.graveyard_TextureAtlas, "Graveyard_HoleTile", new math.Vec2(165, 270));
-            this.obstacles[10] = new objects.Gap(managers.Game.graveyard_TextureAtlas, "Graveyard_HoleTile", new math.Vec2(165, 320));
-            this.obstacles[11] = new objects.Gap(managers.Game.graveyard_TextureAtlas, "Graveyard_HoleTile", new math.Vec2(165, 370));
-            this.obstacles[14] = new objects.Gap(managers.Game.graveyard_TextureAtlas, "Graveyard_HoleTile", new math.Vec2(165, 505));
-            this.obstacles[15] = new objects.Gap(managers.Game.graveyard_TextureAtlas, "Graveyard_HoleTile", new math.Vec2(165, 555));
-            this.obstacles[16] = new objects.Gap(managers.Game.graveyard_TextureAtlas, "Graveyard_HoleTile", new math.Vec2(165, 605));
-            this.obstacles[17] = new objects.Gap(managers.Game.graveyard_TextureAtlas, "Graveyard_HoleTile", new math.Vec2(165, 655));
+            this.obstacles[8] = new objects.Gap(managers.Game.graveyard_TextureAtlas, "Hole", new math.Vec2(165, 220));
+            this.obstacles[9] = new objects.Gap(managers.Game.graveyard_TextureAtlas, "Hole", new math.Vec2(165, 270));
+            this.obstacles[10] = new objects.Gap(managers.Game.graveyard_TextureAtlas, "Hole", new math.Vec2(165, 320));
+            this.obstacles[11] = new objects.Gap(managers.Game.graveyard_TextureAtlas, "Hole", new math.Vec2(165, 370));
+            this.obstacles[14] = new objects.Gap(managers.Game.graveyard_TextureAtlas, "Hole", new math.Vec2(165, 505));
+            this.obstacles[15] = new objects.Gap(managers.Game.graveyard_TextureAtlas, "Hole", new math.Vec2(165, 555));
+            this.obstacles[16] = new objects.Gap(managers.Game.graveyard_TextureAtlas, "Hole", new math.Vec2(165, 605));
+            this.obstacles[17] = new objects.Gap(managers.Game.graveyard_TextureAtlas, "Hole", new math.Vec2(165, 655));
 
 
             managers.Game.player.sceneOnTop = config.Scene.GRAVEYARD_1;

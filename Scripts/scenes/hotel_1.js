@@ -19,7 +19,7 @@ var scenes;
         function Hotel_1() {
             var _this = 
             // hasDoorTop, hasDoorBot, hasDoorLeft, hasDoorRight
-            _super.call(this, false, true, true, true) || this;
+            _super.call(this, false, true, true, true, config.Design.HOTEL) || this;
             console.log("Hotel 1");
             _this.Start();
             return _this;

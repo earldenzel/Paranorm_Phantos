@@ -4,7 +4,7 @@ module scenes {
         // Constructor
         constructor() {
             // hasDoorTop, hasDoorBot, hasDoorLeft, hasDoorRight
-            super(true, false, false, false);
+            super(true, false, false, false,config.Design.HOTEL);
             this.Start();
         }
 
