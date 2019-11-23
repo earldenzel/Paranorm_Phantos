@@ -274,6 +274,10 @@ module config {
                 "id": "tAtlas_ShootingFlower",
                 "src": "./Assets/_Enemies/shootingFlower/ShootingFlower_TextureAtlas.png"
             },
+            {
+                "id": "tAtlas_Chest",
+                "src": "./Assets/_Items/Chest/Chest_TextureAtlas.png"
+            },
 
 
             // SOUND EFFECTS
@@ -1003,7 +1007,6 @@ module config {
             }
         };
 
-
         public static getAtlas_Phantos: any = {
             "images": [
                 ""
@@ -1244,6 +1247,31 @@ module config {
                     "frames": [27, 23, 28],
                     "speed": 0.2
                 }
+            }
+        };        
+
+        public static getAtlas_Chest: any = {
+            "images": [
+                ""
+            ],
+            
+            "framerate": 20,
+            "frames": [
+                [0, 0, 79, 77, 0, 0, 0],
+                [79, 0, 79, 77, 0, 0, 0],
+                [158, 0, 79, 77, 0, 0, 0],
+                [237, 0, 79, 77, 0, 0, 0],
+                [316, 0, 79, 77, 0, 0, 0],
+                [395, 0, 79, 77, 0, 0, 0]
+            ],
+            
+            "animations": {
+                "chestWithBossKey": { "frames": [0] },
+                "chestWithGold": { "frames": [1] },
+                "chestWithKey": { "frames": [2] },
+                "lockedChest": { "frames": [3] },
+                "openedChest": { "frames": [4] },
+                "regularChest": { "frames": [5] }
             }
         };
     }

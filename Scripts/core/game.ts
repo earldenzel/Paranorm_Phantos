@@ -16,6 +16,7 @@
     let keyboardManager: managers.Keyboard;
     let shopManager: managers.Shop;
     let bulletManager: managers.Bullet;
+    let chestManager: managers.Chest;
 
     let mapG_TextureAtlasData: any;
     let mapG_TextureAtlas: createjs.SpriteSheet;
@@ -50,6 +51,9 @@
     let shootingFlower_TextureAtlasData: any;
     let shootingFlower_TextureAtlas: createjs.SpriteSheet;
 
+    let chest_TextureAtlasData: any;
+    let chest_TextureAtlas: createjs.SpriteSheet;
+
     // Gets the asset manifest
     //let request = new Request("./Content/assetManifest.json");
     //fetch(request)
@@ -60,8 +64,6 @@
     //        assetManifest = data; 
     //    });
     assetManifest = config.Assets.getAssets;
-
-
 
     function Init() {
         console.log("Initialization Start");
@@ -120,6 +122,10 @@
         shootingFlower_TextureAtlasData.images = [assetManager.getResult("tAtlas_ShootingFlower")];
         shootingFlower_TextureAtlas = new createjs.SpriteSheet(shootingFlower_TextureAtlasData);
 
+        chest_TextureAtlasData = config.Assets.getAtlas_Chest;
+        chest_TextureAtlasData.images = [assetManager.getResult("tAtlas_Chest")];
+        chest_TextureAtlas = new createjs.SpriteSheet(chest_TextureAtlasData);
+
         // Initialize CreateJS
         stage = new createjs.Stage(canvas);
 
@@ -143,6 +149,10 @@
         // Shop Manager
         shopManager = new managers.Shop;
         managers.Game.shopManager = shopManager;
+        
+        // Shop Manager
+        chestManager = new managers.Chest;
+        managers.Game.chestManager = chestManager;
 
         // Bullet Manager
         bulletManager = new managers.Bullet;
@@ -159,6 +169,7 @@
         managers.Game.bat_TextureAtlas = bat_TextureAtlas;
         managers.Game.spider_TextureAtlas = spider_TextureAtlas;
         managers.Game.shootingFlower_TextureAtlas = shootingFlower_TextureAtlas;
+        managers.Game.chest_TextureAtlas = chest_TextureAtlas;
         managers.Game.phantos_TextureAtlas = phantos_TextureAtlas;
         managers.Game.phantorm_TextureAtlas = phantorm_TextureAtlas;
         Main();

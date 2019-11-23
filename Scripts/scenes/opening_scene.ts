@@ -8,8 +8,6 @@ module scenes {
         private currentMessage: number;
         private messageTimeout: number = 0;
 
-        private player:objects.Player;
-
         // Constructor
         constructor() {
             super();
@@ -35,12 +33,6 @@ module scenes {
                 "And she has three objectives:\n\tsolve this case,\n\tearn sweet, sweet dough,\n\tand devour the rest.",
                 "Let's jump right in..."
             ];
-
-            //initialize new player
-            this.player = new objects.Player();
-            managers.Game.player = this.player;
-            managers.Game.shopManager.Start();
-            managers.Game.bulletManager.Start();
 
             managers.Game.keyboardManager.playMode = false;
             
@@ -73,8 +65,6 @@ module scenes {
         private startButtonClick():void {
             // Change our game state to GAME
              managers.Game.currentScene = config.Scene.GRAVEYARD_1;
-            //managers.Game.currentScene = config.Scene.HOTEL_1;
-            // managers.Game.currentScene = config.Scene.MANSION_1;
         }
 
         public Main():void {

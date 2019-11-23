@@ -112,6 +112,7 @@ var scenes;
             if (this.hasShop) {
                 this.shopManager = managers.Game.shopManager;
             }
+            this.chestManager = managers.Game.chestManager;
             //this.playerStatus.shadow = new createjs.Shadow("#000000",0,0,10);
             //this.messageStatus.shadow = new createjs.Shadow("#000000",0,0,10);
             //this.controllerHelp.shadow = new createjs.Shadow("#000000",0,0,10);
@@ -170,6 +171,7 @@ var scenes;
             if (this.hasShop) {
                 this.shopManager.Update();
             }
+            this.chestManager.Update();
             // KEY AND LOCKED DOORS
             if (this.key != undefined) {
                 if (this.getChildByName("Items_Key") && managers.Collision.Check(this.player, this.key) && this.key.visible) {
@@ -297,6 +299,11 @@ var scenes;
                     }
                 });
             }
+            this.chestManager.chestItems.forEach(function (e) {
+                if (managers.Game.currentScene = e.appearingScene) {
+                    _this.addChild(e);
+                }
+            });
             // PLAYER PLACEMENT
             this.addChild(this.player);
             this.addChild(this.player.weapon);

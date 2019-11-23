@@ -10,6 +10,7 @@ module scenes {
         protected design: config.Design;        
         private bulletManager: managers.Bullet;
         private shopManager: managers.Shop;
+        private chestManager: managers.Chest;
         protected hasProjectileShooters: boolean = false;
         protected hasShop: boolean = false;
 
@@ -149,6 +150,7 @@ module scenes {
             if (this.hasShop){
                 this.shopManager = managers.Game.shopManager;
             }
+            this.chestManager = managers.Game.chestManager;
 
             //this.playerStatus.shadow = new createjs.Shadow("#000000",0,0,10);
             //this.messageStatus.shadow = new createjs.Shadow("#000000",0,0,10);
@@ -222,6 +224,7 @@ module scenes {
             if (this.hasShop){
                 this.shopManager.Update();
             }
+            this.chestManager.Update();
 
             // KEY AND LOCKED DOORS
             if (this.key != undefined){
@@ -358,6 +361,12 @@ module scenes {
                     }
                 });   
             }
+
+            this.chestManager.chestItems.forEach(e => {
+                if (managers.Game.currentScene = e.appearingScene){
+                    this.addChild(e);
+                }
+            });
             
             // PLAYER PLACEMENT
             this.addChild(this.player);

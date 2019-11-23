@@ -40,11 +40,6 @@ var scenes;
                 "And she has three objectives:\n\tsolve this case,\n\tearn sweet, sweet dough,\n\tand devour the rest.",
                 "Let's jump right in..."
             ];
-            //initialize new player
-            this.player = new objects.Player();
-            managers.Game.player = this.player;
-            managers.Game.shopManager.Start();
-            managers.Game.bulletManager.Start();
             managers.Game.keyboardManager.playMode = false;
             this.Main();
         };
@@ -74,8 +69,6 @@ var scenes;
         OpeningScene.prototype.startButtonClick = function () {
             // Change our game state to GAME
             managers.Game.currentScene = config.Scene.GRAVEYARD_1;
-            //managers.Game.currentScene = config.Scene.HOTEL_1;
-            // managers.Game.currentScene = config.Scene.MANSION_1;
         };
         OpeningScene.prototype.Main = function () {
             this.addChild(this.background);

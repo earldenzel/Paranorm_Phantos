@@ -56,6 +56,9 @@ var scenes;
             //initialize player on start play
             var player = new objects.Player();
             managers.Game.player = player;
+            managers.Game.shopManager.Start();
+            managers.Game.bulletManager.Start();
+            managers.Game.chestManager.Start();
             // Change our game state from START to OPENING_SCENE
             managers.Game.currentScene = config.Scene.OPENING_SCENE;
         };

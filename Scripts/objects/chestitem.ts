@@ -1,34 +1,29 @@
 module objects{
-    export class ShopItem extends objects.GameObject{
+    export class ChestItem extends objects.GameObject{
         // Variables
-        public price: number;
-        public priceTag: objects.Label;
-        public description: string;
         public effect: config.Effects;
+        public appearingScene: config.Scene;
         public available: boolean = true;
-        public appearingScene: number;
         // Constructor
-        constructor(item: string, price: number, effect: config.Effects, appearingScene: number){
-            super(managers.Game.item_TextureAtlas, item);
-            this.price = price;
+        constructor(imageString: string, effect: config.Effects, appearingScene: config.Scene){
+            super(managers.Game.chest_TextureAtlas, imageString);
             this.effect = effect;
             this.appearingScene = appearingScene;
             this.Start();
         }
         // Methods
         public Start():void {
-            this.priceTag = new objects.Label(
-                "$" + this.price, "16px", "'Press Start 2P'", "#FFFF00", this.x, this.y, true);
         }
         public Update():void {
+            if (!this.available){
+                this.gotoAndStop("openedChest");
+            }
         }
         public Reset():void {           
-            this.priceTag.x = this.x;
-            this.priceTag.y = this.y - this.halfH - config.Bounds.TEXT_OFFSET;
         }
         public Move():void {}
         public CheckBound():void {}
-        public TriggerShopEffect(){
+        public TriggerChestEffect(){
             switch (this.effect){
                 case config.Effects.INCREASE_MAX_HP:
                     managers.Game.player.GainMaxHealth(5);
@@ -39,7 +34,12 @@ module objects{
                 case config.Effects.INCREASE_ATK:
                     managers.Game.player.GainAttack(10);
                     break;
+                case config.Effects.INCREASE_GOLD:
+                    managers.Game.player.GainDollars(100);
+                    break;
             }
+            this.available = false;
+            this.Update();
         }
     }
 }

@@ -13,31 +13,30 @@ var __extends = (this && this.__extends) || (function () {
 })();
 var objects;
 (function (objects) {
-    var ShopItem = /** @class */ (function (_super) {
-        __extends(ShopItem, _super);
+    var ChestItem = /** @class */ (function (_super) {
+        __extends(ChestItem, _super);
         // Constructor
-        function ShopItem(item, price, effect, appearingScene) {
-            var _this = _super.call(this, managers.Game.item_TextureAtlas, item) || this;
+        function ChestItem(imageString, effect, appearingScene) {
+            var _this = _super.call(this, managers.Game.chest_TextureAtlas, imageString) || this;
             _this.available = true;
-            _this.price = price;
             _this.effect = effect;
             _this.appearingScene = appearingScene;
             _this.Start();
             return _this;
         }
         // Methods
-        ShopItem.prototype.Start = function () {
-            this.priceTag = new objects.Label("$" + this.price, "16px", "'Press Start 2P'", "#FFFF00", this.x, this.y, true);
+        ChestItem.prototype.Start = function () {
         };
-        ShopItem.prototype.Update = function () {
+        ChestItem.prototype.Update = function () {
+            if (!this.available) {
+                this.gotoAndStop("openedChest");
+            }
         };
-        ShopItem.prototype.Reset = function () {
-            this.priceTag.x = this.x;
-            this.priceTag.y = this.y - this.halfH - config.Bounds.TEXT_OFFSET;
+        ChestItem.prototype.Reset = function () {
         };
-        ShopItem.prototype.Move = function () { };
-        ShopItem.prototype.CheckBound = function () { };
-        ShopItem.prototype.TriggerShopEffect = function () {
+        ChestItem.prototype.Move = function () { };
+        ChestItem.prototype.CheckBound = function () { };
+        ChestItem.prototype.TriggerChestEffect = function () {
             switch (this.effect) {
                 case config.Effects.INCREASE_MAX_HP:
                     managers.Game.player.GainMaxHealth(5);
@@ -48,10 +47,15 @@ var objects;
                 case config.Effects.INCREASE_ATK:
                     managers.Game.player.GainAttack(10);
                     break;
+                case config.Effects.INCREASE_GOLD:
+                    managers.Game.player.GainDollars(100);
+                    break;
             }
+            this.available = false;
+            this.Update();
         };
-        return ShopItem;
+        return ChestItem;
     }(objects.GameObject));
-    objects.ShopItem = ShopItem;
+    objects.ChestItem = ChestItem;
 })(objects || (objects = {}));
-//# sourceMappingURL=shopitem.js.map
+//# sourceMappingURL=chestitem.js.map
