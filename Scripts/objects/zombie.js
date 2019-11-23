@@ -17,7 +17,7 @@ var objects;
         __extends(Zombie, _super);
         // Constructors
         function Zombie(moveSpeed) {
-            var _this = _super.call(this, managers.Game.enemies_TextureAtlas, "Zombie_Walk_Back") || this;
+            var _this = _super.call(this, managers.Game.enemies_TextureAtlas, "Zombie_WalkBack") || this;
             _this.Start();
             _this.hp = 3;
             _this.attackPower = 1;
@@ -28,9 +28,9 @@ var objects;
             _this.canBeEaten = false;
             _this.attackingMode = false;
             // Animations
-            _this.walk = ["Zombie_Walk_Back", "Zombie_Walk_Front", "Zombie_Walk_Left", "Zombie_Walk_Left"];
+            _this.walk = ["Zombie_WalkBack", "Zombie_WalkFront", "Zombie_WalkLeft", "Zombie_WalkLeft"];
             console.log(_this.walk);
-            _this.attack = ["Zombie_Attack_Back", "Zombie_Attack_Front", "Zombie_Attack_Left", "Zombie_Walk_Left"];
+            _this.attack = ["Zombie_AttackBack", "Zombie_AttackFront", "Zombie_AttackLeft", "Zombie_AttackLeft"];
             _this.direction = config.Direction.UP;
             console.log(_this.direction);
             return _this;

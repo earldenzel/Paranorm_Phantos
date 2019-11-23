@@ -11,7 +11,7 @@ module objects {
 
         // Constructors
         constructor(moveSpeed: number) {
-            super(managers.Game.enemies_TextureAtlas, "Zombie_Walk_Back");
+            super(managers.Game.enemies_TextureAtlas, "Zombie_WalkBack");
             this.Start();
 
             this.hp = 3;
@@ -25,9 +25,9 @@ module objects {
 
 
             // Animations
-            this.walk = ["Zombie_Walk_Back", "Zombie_Walk_Front", "Zombie_Walk_Left", "Zombie_Walk_Left"];
+            this.walk = ["Zombie_WalkBack", "Zombie_WalkFront", "Zombie_WalkLeft", "Zombie_WalkLeft"];
             console.log(this.walk);
-            this.attack = ["Zombie_Attack_Back", "Zombie_Attack_Front", "Zombie_Attack_Left", "Zombie_Walk_Left"];
+            this.attack = ["Zombie_AttackBack", "Zombie_AttackFront", "Zombie_AttackLeft", "Zombie_AttackLeft"];
 
             this.direction = config.Direction.UP;
             console.log(this.direction);
