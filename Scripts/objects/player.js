@@ -280,7 +280,7 @@ var objects;
         Player.prototype.GainMaxHealth = function (maxHpGain) {
             this.maxHp += maxHpGain;
             this.hp = this.maxHp;
-            this.EchoMessage("MAX HP");
+            this.EchoMessage("MAX HP UP");
         };
         //phoebe effects from devour
         Player.prototype.GainHealth = function (healthGain) {

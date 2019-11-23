@@ -5,7 +5,7 @@ module managers{
 
         public moneyLabel: objects.Label;
         public keyLabel: objects.Label;
-        public playerInfo_Health: createjs.Bitmap;
+        public playerInfo_Health: Array<createjs.Bitmap>;
         public playerInfo_Ecto: createjs.Bitmap;
         public playerInfo_Map: createjs.Sprite;
         public playerInfo_Location: createjs.Sprite;
@@ -14,6 +14,7 @@ module managers{
         private money: number;
         private key: number;
         private playerHealth: number;
+        private playerMaxHealth: number;
         private playerEcto: number;
         private playerLocation: math.Vec2;
 
@@ -59,10 +60,20 @@ module managers{
             return this.playerHealth;
         }
         set PlayerHealth(newPlayerHealth:number){
+            this.removeFlowers();
             this.playerHealth = newPlayerHealth;
-            this.removeChild(this.playerInfo_Health);
             this.ChangeHealthInfo();
-            this.addChild(this.playerInfo_Health);
+            this.addFlowers();
+        }
+        
+        get PlayerMaxHealth():number{
+            return this.playerMaxHealth;
+        }
+        set PlayerMaxHealth(newPlayerMaxHealth:number){
+            this.removeFlowers();
+            this.playerMaxHealth = newPlayerMaxHealth;
+            this.ChangeHealthInfo();
+            this.addFlowers();
         }
         get PlayerEcto():number{
             return this.PlayerEcto;
@@ -106,10 +117,13 @@ module managers{
             this.playerInfo_Map.y = 12;
 
             this.playerInfo_Location = new createjs.Sprite(managers.Game.map_TextureAtlas, "MapsGraveyard_PlayerLocation");
+            
+            this.playerInfo_Health = new Array<createjs.Bitmap>();
 
             // Set Defaults
             this.playerHealth = 5;
             this.playerEcto = 5;
+            this.playerMaxHealth = 5;
             this.money = 0;
             this.key = 0;
             this.playerLocation = new math.Vec2(0,0);
@@ -127,35 +141,45 @@ module managers{
 
             this.addChild(this.moneyLabel);
             this.addChild(this.keyLabel);
-            this.addChild(this.playerInfo_Health);
+            this.playerInfo_Health.forEach(e => {
+                this.addChild(e);
+            });
             this.addChild(this.playerInfo_Ecto);
             this.addChild(this.playerInfo_Map);
             this.addChild(this.playerInfo_Location);
         }
-        private ChangeHealthInfo():void{
-            
-            switch(this.playerHealth){
-                case 0:
-                    this.playerInfo_Health = new createjs.Bitmap(managers.Game.assetManager.getResult("life_0-5"));
-                    break;
-                case 1:
-                    this.playerInfo_Health = new createjs.Bitmap(managers.Game.assetManager.getResult("life_1-5"));
-                    break;
-                case 2:
-                        this.playerInfo_Health = new createjs.Bitmap(managers.Game.assetManager.getResult("life_2-5"));
-                    break;
-                case 3:
-                        this.playerInfo_Health = new createjs.Bitmap(managers.Game.assetManager.getResult("life_3-5"));
-                    break;
-                case 4:
-                        this.playerInfo_Health = new createjs.Bitmap(managers.Game.assetManager.getResult("life_4-5"));
-                    break;
-                case 5:
-                        this.playerInfo_Health = new createjs.Bitmap(managers.Game.assetManager.getResult("life_5-5"));
-                    break;  
-            }
-            this.playerInfo_Health.x = 376;
-            this.playerInfo_Health.y = 36;
+        private ChangeHealthInfo():void{     
+            let maximumFlower: number = this.playerMaxHealth / 5;
+            let currentHp: number = this.playerHealth;            
+            let flower: createjs.Bitmap;
+
+            for (let index = 0; index < maximumFlower; index++) {
+                flower = new createjs.Bitmap(managers.Game.assetManager.getResult("life_0-5"));;
+                if (currentHp >= 5){
+                    flower = new createjs.Bitmap(managers.Game.assetManager.getResult("life_5-5"));
+                    currentHp -= 5;
+                }
+                else{
+                    switch(currentHp){
+                        case 1:
+                            flower = new createjs.Bitmap(managers.Game.assetManager.getResult("life_1-5"));
+                            break;
+                        case 2:
+                            flower = new createjs.Bitmap(managers.Game.assetManager.getResult("life_2-5"));
+                            break;
+                        case 3:
+                            flower = new createjs.Bitmap(managers.Game.assetManager.getResult("life_3-5"));
+                            break;
+                        case 4:
+                            flower = new createjs.Bitmap(managers.Game.assetManager.getResult("life_4-5"));
+                            break;
+                    }
+                    currentHp = 0;
+                }
+                this.playerInfo_Health[index] = flower;
+                this.playerInfo_Health[index].x = 376 + flower.image.width * index;
+                this.playerInfo_Health[index].y = 36                
+            }          
         }
         private ChangeEctoInfo():void{
             
@@ -185,6 +209,17 @@ module managers{
         private ChangePlayerLocation():void{
             this.playerInfo_Location.x = this.playerLocation.x;
             this.playerInfo_Location.y = this.playerLocation.y;
+        }
+        private removeFlowers(): void{
+            this.playerInfo_Health.forEach(e => {
+                this.removeChild(e);
+            });
+            this.playerInfo_Health = new Array<createjs.Bitmap>();
+        }
+        private addFlowers(): void{
+            this.playerInfo_Health.forEach(e => {
+                this.addChild(e);
+            });
         }
     }
 }

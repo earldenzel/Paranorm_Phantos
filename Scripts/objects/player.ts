@@ -295,7 +295,7 @@ module objects {
         public GainMaxHealth(maxHpGain: number){
             this.maxHp += maxHpGain;
             this.hp = this.maxHp;
-            this.EchoMessage("MAX HP");
+            this.EchoMessage("MAX HP UP");
 
         }
 

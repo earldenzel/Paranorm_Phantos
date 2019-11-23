@@ -300,6 +300,7 @@ module scenes {
             //this.playerStatus.text = "PLAYER HP" + this.player.hp + "/5";
             // Sets the Player Health
             this.playerInfo.PlayerHealth = this.player.hp;
+            this.playerInfo.PlayerMaxHealth = this.player.maxHp;
             this.playerInfo.Money = this.player.money;
             this.playerInfo.Key = this.player.key;
 
