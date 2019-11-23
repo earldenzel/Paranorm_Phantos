@@ -65,7 +65,7 @@ var objects;
             var ticker = createjs.Ticker.getTicks();
             // If Spider alive, shoots the bullet
             if (this.hp > 0) {
-                if (ticker % 70 == 0) {
+                if (ticker % this.rateOfFire == 0) {
                     this.bulletSpawn = new math.Vec2(this.x, this.y + this.halfH);
                     var currentBullet = managers.Game.bulletManager.CurrentBullet;
                     var bullet = managers.Game.bulletManager.spiderBullets[currentBullet];

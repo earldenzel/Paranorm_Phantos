@@ -3,7 +3,6 @@ var managers;
     var Bullet = /** @class */ (function () {
         // Constructor
         function Bullet() {
-            this.Start();
         }
         // Methods
         Bullet.prototype.Start = function () {
@@ -37,6 +36,20 @@ var managers;
                 this.spiderBulletsRight[i] = new objects.SpiderBulletRight();
                 this.shootingFLowerBullets[i] = new objects.ShootingFlowerBullet();
             }
+        };
+        Bullet.prototype.Reset = function () {
+            this.spiderBullets.forEach(function (bullet) {
+                bullet.Reset();
+            });
+            this.spiderBulletsLeft.forEach(function (bullet) {
+                bullet.Reset();
+            });
+            this.spiderBulletsRight.forEach(function (bullet) {
+                bullet.Reset();
+            });
+            this.shootingFLowerBullets.forEach(function (bullet) {
+                bullet.Reset();
+            });
         };
         return Bullet;
     }());

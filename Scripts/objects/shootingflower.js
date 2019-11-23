@@ -24,6 +24,7 @@ var objects;
             _this.eatTimer = 500;
             _this.bounty = 3;
             _this.isFlying = false;
+            _this.rateOfFire = 50;
             return _this;
         }
         // methods
@@ -50,7 +51,7 @@ var objects;
             var ticker = createjs.Ticker.getTicks();
             // If Shooting Flower alive, shoots the bullet
             if (this.hp > 0) {
-                if (ticker % 100 == 0) {
+                if (ticker % this.rateOfFire == 0) {
                     this.bulletSpawn = new math.Vec2(this.x + 5, this.y - 20);
                     var playerPosition = new math.Vec2(managers.Game.player.x, managers.Game.player.y);
                     var currentBullet = managers.Game.bulletManager.CurrentBullet;

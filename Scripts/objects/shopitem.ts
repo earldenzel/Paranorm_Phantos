@@ -6,11 +6,13 @@ module objects{
         public description: string;
         public effect: config.ShopEffects;
         public available: boolean = true;
+        public appearingScene: number;
         // Constructor
-        constructor(item: string, price: number, effect: config.ShopEffects){
+        constructor(item: string, price: number, effect: config.ShopEffects, appearingScene: number){
             super(managers.Game.item_TextureAtlas, item);
             this.price = price;
             this.effect = effect;
+            this.appearingScene = appearingScene;
             this.Start();
         }
         // Methods

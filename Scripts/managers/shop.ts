@@ -10,7 +10,6 @@ module managers{
         public shopItems: Array<objects.ShopItem> = new Array<objects.ShopItem>();
         // Constructor
         constructor(){
-            this.Start();
         }
         // Methods
         public Start():void {
@@ -25,24 +24,17 @@ module managers{
             this.chooseNo.addEventListener("click", this.cancelBuy.bind(this), false);
             this.Reset();
             
-            switch (managers.Game.currentScene){
-                case config.Scene.GRAVEYARD_7:
-                    this.shopItems[0] = new objects.ShopItem("Items_Hellebore-Flower1", 500, config.ShopEffects.INCREASE_MAX_HP);     
-                    this.shopItems[0].SetPosition(new math.Vec2(185, 400));
-                    this.shopItems[0].description = "This increases your Max HP. Buy?";
-                    
-                    this.shopItems[1] = new objects.ShopItem("Items_Key", 10, config.ShopEffects.INCREASE_KEY_COUNT); 
-                    this.shopItems[1].SetPosition(new math.Vec2(285, 400));
-                    this.shopItems[1].description = "That'd be ten bucks please.";
-                    
-                    this.shopItems[2] = new objects.ShopItem("Items_Hellebore-Flower2", 1000, config.ShopEffects.INCREASE_ATK);      
-                    this.shopItems[2].SetPosition(new math.Vec2(385, 400));
-                    this.shopItems[2].description = "Concentrated power for $1000";
-                    break;
-            }
-
+            this.shopItems[0] = new objects.ShopItem("Items_Hellebore-Flower1", 500, config.ShopEffects.INCREASE_MAX_HP, config.Scene.GRAVEYARD_7);     
+            this.shopItems[0].SetPosition(new math.Vec2(185, 400));
+            this.shopItems[0].description = "This increases your Max HP. Buy?";
             
+            this.shopItems[1] = new objects.ShopItem("Items_Key", 10, config.ShopEffects.INCREASE_KEY_COUNT, config.Scene.GRAVEYARD_7);  
+            this.shopItems[1].SetPosition(new math.Vec2(285, 400));
+            this.shopItems[1].description = "That'd be ten bucks please.";
             
+            this.shopItems[2] = new objects.ShopItem("Items_Hellebore-Flower2", 1000, config.ShopEffects.INCREASE_ATK, config.Scene.GRAVEYARD_7);    
+            this.shopItems[2].SetPosition(new math.Vec2(385, 400));
+            this.shopItems[2].description = "Concentrated power for $1000";    
         }
 
         public Reset():void {            

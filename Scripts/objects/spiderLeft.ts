@@ -4,6 +4,7 @@ module objects {
         private distance: number;
         private speed: number = 1;
         private isToDown: Boolean = true;
+        private rateOfFire: number;
 
         private bulletSpawn: math.Vec2;
 
@@ -19,6 +20,7 @@ module objects {
             this.eatTimer = 500;
             this.bounty = 4;
             this.isFlying = false;
+            this.rateOfFire = 70;
         }
 
         // methods
@@ -62,7 +64,7 @@ module objects {
 
             // If Spider alive, shoots the bullet
             if (this.hp > 0) {
-                if (ticker % 70 == 0) {
+                if (ticker % this.rateOfFire == 0) {
                     this.bulletSpawn = new math.Vec2(this.x + this.halfW, this.y);
 
                     let currentBullet = managers.Game.bulletManager.CurrentBullet;

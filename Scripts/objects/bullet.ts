@@ -1,8 +1,6 @@
 module objects {
     export abstract class Bullet extends objects.GameObject {
 
-        private projectileTickerTime: number = 10;
-
         // Constructor
         constructor(textureAtlas: createjs.SpriteSheet, imageString:string, attackPower: number) {
             super(textureAtlas, imageString);
@@ -15,11 +13,14 @@ module objects {
         }
 
         public Update(): void {
+            if(managers.Collision.Check(managers.Game.player.weapon, this)){
+                this.Reset();
+            }
             if(managers.Collision.Check(managers.Game.player, this)){
                 let ticker: number = createjs.Ticker.getTicks();
 
-                // use ticker to restrict 1 bullet only hurts 1 hp
-                if (ticker % this.projectileTickerTime == 0){
+                // use ticker to restrict 1 bullet every 10 frames for damage
+                if (ticker % 10 == 0){
                     managers.Game.player.GetDamage(this);
                     this.Reset();
                 }

@@ -11,7 +11,6 @@ module managers {
 
         // Constructor
         constructor() {
-            this.Start();
         }
 
         // Methods
@@ -52,6 +51,24 @@ module managers {
                 this.spiderBulletsRight[i] = new objects.SpiderBulletRight();
                 this.shootingFLowerBullets[i] = new objects.ShootingFlowerBullet();
             }
+        }
+
+        public Reset(): void{
+            this.spiderBullets.forEach(bullet => {
+                bullet.Reset();
+            });
+
+            this.spiderBulletsLeft.forEach(bullet => {
+                bullet.Reset();
+            });
+
+            this.spiderBulletsRight.forEach(bullet => {
+                bullet.Reset();
+            });
+
+            this.shootingFLowerBullets.forEach(bullet => {
+                bullet.Reset();
+            });
         }
     }
 }
