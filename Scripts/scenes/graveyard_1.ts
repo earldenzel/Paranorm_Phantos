@@ -29,10 +29,10 @@ module scenes {
             this.cosmetics[2].SetPosition(new math.Vec2(x-this.cosmetics[2].width,y));
             this.cosmetics[3].SetPosition(new math.Vec2(x+this.cosmetics[3].width,y));
             this.cosmetics[4].SetPosition(new math.Vec2(this.enemies[0].x,this.enemies[0].y - 100));
-            //this.cosmetics[5] = new objects.Stairs(config.Scene.HOTEL_1, false);
+            this.cosmetics[5] = new objects.Stairs(config.Scene.HOTEL_1, false);
             this.cosmetics[6] = new objects.Stairs(config.Scene.MANSION_1, true);
-            //this.cosmetics[5].SetPosition(new math.Vec2(400, 400));
-            this.cosmetics[6].SetPosition(new math.Vec2(400, 500));
+            this.cosmetics[5].SetPosition(new math.Vec2(500, 200));
+            this.cosmetics[6].SetPosition(new math.Vec2(500, 300));
 
             managers.Game.player.sceneOnBot = config.Scene.GRAVEYARD_5;
             managers.Game.player.sceneOnLeft = config.Scene.GRAVEYARD_3;
@@ -45,6 +45,9 @@ module scenes {
             if(!this.enemies[0].visible){
                 setTimeout(() => {
                     this.cosmetics.forEach(cosmetic =>{
+                        if (cosmetic instanceof objects.Stairs){
+                            return;
+                        }
                         cosmetic.visible = false;
                         managers.GraveyardLocks.graveyard_1_lockRight = false;
                         this.isDoorRightLocked = false;
