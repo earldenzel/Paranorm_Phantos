@@ -25,14 +25,12 @@ var objects;
             _this.knockback = 0.75;
             _this.eatTimer = 10;
             _this.isFlying = false;
-            _this.canBeEaten = false;
+            _this.canBeEaten = true;
             _this.attackingMode = false;
             // Animations
             _this.walk = ["Zombie_WalkBack", "Zombie_WalkFront", "Zombie_WalkLeft", "Zombie_WalkLeft"];
-            console.log(_this.walk);
             _this.attack = ["Zombie_AttackBack", "Zombie_AttackFront", "Zombie_AttackLeft", "Zombie_AttackLeft"];
             _this.direction = config.Direction.UP;
-            console.log(_this.direction);
             return _this;
         }
         // Methods
@@ -42,14 +40,7 @@ var objects;
             this.x = 350;
         };
         Zombie.prototype.Update = function () {
-            _super.prototype.Update.call(this);
-            if (this.isStunned) {
-                this.SwitchAnimation("Zombie_Stun");
-            }
-            else if (this.isDead) {
-                this.SwitchAnimation("Zombie_Explode");
-            }
-            else {
+            if (!this.isStunned && !this.isDead) {
                 if (this.attackingMode) {
                     this.SwitchAnimation(this.attack[this.direction]);
                 }
@@ -57,6 +48,17 @@ var objects;
                     this.SwitchAnimation(this.walk[this.direction]);
                 }
             }
+            else if (this.isStunned && !this.isDead) {
+                this.SwitchAnimation("Zombie_Stun");
+            }
+            else {
+                if (this.currentAnimation == "Zombie_Explode" && this.currentAnimationFrame > 3) {
+                    managers.Game.stage.removeChild(this);
+                    this.visible = false;
+                }
+                this.SwitchAnimation("Zombie_Explode");
+            }
+            _super.prototype.Update.call(this);
         };
         Zombie.prototype.Reset = function () { };
         Zombie.prototype.Move = function () {
@@ -74,10 +76,11 @@ var objects;
             }
             var newPos = math.Vec2.Add(enemyPosition, math.Vec2.NormalizeMultiplySpeed(dirToPlayer, distanceToPlayer, this.currentSpeed));
             if (newPos.x < this.x) {
+                this.scaleX = 1;
                 this.direction = config.Direction.LEFT;
             }
             if (newPos.x > this.x) {
-                // To be flipped, requires the change in sprite
+                this.scaleX = -1;
                 this.direction = config.Direction.RIGHT;
             }
             if (newPos.y > this.y) {
@@ -104,10 +107,15 @@ var objects;
                 managers.Game.player.GainHealth(3);
             }
         };
-        Zombie.prototype.SwitchAnimation = function (newAnimation) {
-            if (this.currentAnimation != newAnimation) {
-                this.gotoAndPlay(newAnimation);
+        Zombie.prototype.RemoveFromPlay = function (bounty) {
+            this.isDead = true;
+            managers.Game.player.GainEcto();
+            if (bounty > 0) {
+                managers.Game.SFX = createjs.Sound.play("anyDefeated");
+                managers.Game.SFX.volume = 0.2;
+                managers.Game.player.GainDollars(bounty);
             }
+            this.stunIndicator.visible = false;
         };
         return Zombie;
     }(objects.Enemy));

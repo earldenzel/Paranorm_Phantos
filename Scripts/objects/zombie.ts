@@ -20,17 +20,15 @@ module objects {
             this.knockback = 0.75;
             this.eatTimer = 10;
             this.isFlying = false;
-            this.canBeEaten = false;
+            this.canBeEaten = true;
             this.attackingMode = false;
 
 
             // Animations
             this.walk = ["Zombie_WalkBack", "Zombie_WalkFront", "Zombie_WalkLeft", "Zombie_WalkLeft"];
-            console.log(this.walk);
             this.attack = ["Zombie_AttackBack", "Zombie_AttackFront", "Zombie_AttackLeft", "Zombie_AttackLeft"];
 
             this.direction = config.Direction.UP;
-            console.log(this.direction);
         }
 
         // Methods
@@ -40,20 +38,25 @@ module objects {
             this.x = 350;
         }
         public Update(): void {
-            super.Update();
-            if (this.isStunned) {
-                this.SwitchAnimation("Zombie_Stun");
-            } else if(this.isDead){
-                this.SwitchAnimation("Zombie_Explode");
-            } else {
+            
+            if(!this.isStunned && !this.isDead){
                 if (this.attackingMode) {
                     this.SwitchAnimation(this.attack[this.direction as number]);
                 } else {
                     this.SwitchAnimation(this.walk[this.direction as number]);
                 }
             }
-
-
+            else if (this.isStunned && !this.isDead){
+                this.SwitchAnimation("Zombie_Stun");
+            }
+            else{
+                if (this.currentAnimation == "Zombie_Explode" && this.currentAnimationFrame > 3) {
+                    managers.Game.stage.removeChild(this);
+                    this.visible = false;
+                }
+                this.SwitchAnimation("Zombie_Explode");
+            }
+            super.Update();
         }
         public Reset(): void { }
 
@@ -73,11 +76,13 @@ module objects {
             }
 
             let newPos: math.Vec2 = math.Vec2.Add(enemyPosition, math.Vec2.NormalizeMultiplySpeed(dirToPlayer, distanceToPlayer, this.currentSpeed));
+            
             if (newPos.x < this.x) {
+                this.scaleX = 1;
                 this.direction = config.Direction.LEFT;
             }
             if (newPos.x > this.x) {
-                // To be flipped, requires the change in sprite
+                this.scaleX = -1;
                 this.direction = config.Direction.RIGHT;
             }
             if (newPos.y > this.y) {
@@ -107,11 +112,16 @@ module objects {
                 managers.Game.player.GainHealth(3);
             }
         }
-
-        public SwitchAnimation(newAnimation: string) {
-            if (this.currentAnimation != newAnimation) {
-                this.gotoAndPlay(newAnimation);
+        public RemoveFromPlay(bounty: number): void {
+            this.isDead = true;
+            
+            managers.Game.player.GainEcto();
+            if (bounty > 0) {
+                managers.Game.SFX = createjs.Sound.play("anyDefeated");
+                managers.Game.SFX.volume = 0.2;
+                managers.Game.player.GainDollars(bounty);
             }
+            this.stunIndicator.visible = false;
         }
     }
 }

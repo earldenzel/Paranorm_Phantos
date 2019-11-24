@@ -8,7 +8,7 @@ module objects {
         protected bounty: number;
         public isFlying: boolean;
         public canBeEaten: boolean;
-
+        public canBeAttacked: boolean;
 
         public startPosition: math.Vec2;
 
@@ -19,6 +19,7 @@ module objects {
             // Some enemies can be eaten, some enemies cannot.
             // They will start off as able to be eaten.
             this.canBeEaten = true;
+            this.canBeAttacked = true;
             this.Start();
             this.stunIndicator = new objects.Indicator("stunIndicator");
             this.Move();
@@ -37,11 +38,11 @@ module objects {
             }
 
             //if it is stunned
-            if (this.isStunned) {             
+            if (this.isStunned) {
                 //determine whether a bit is currently happening 
-                if (managers.Game.player.biteSequence == 0){
+                if (managers.Game.player.biteSequence == 0) {
                     //if it is currently in contact with player and whether the biting button is pressed, then disable movement
-                    if (managers.Game.keyboardManager.biting && managers.Collision.Check(managers.Game.player, this) && this.canBeEaten){                        
+                    if (managers.Game.keyboardManager.biting && managers.Collision.Check(managers.Game.player, this) && this.canBeEaten) {
                         managers.Game.player.SetBitePositionDirection(this.GetPosition());
                         managers.Game.player.EatMessage();
                         this.scaleX = managers.Game.player.halfH / this.height;
@@ -56,38 +57,40 @@ module objects {
                             // Sound Effect
                             managers.Game.SFX = createjs.Sound.play("phoebeEat");
                             managers.Game.SFX.volume = 0.2;
-                                               
+
                         }, this.eatTimer);
                     }
                     //else, no contact and therefore, movement enabled
-                    else{
-                        managers.Game.keyboardManager.enabled = true;  
+                    else {
+                        managers.Game.keyboardManager.enabled = true;
                     }
                 }
                 //bite is currently happening, so keyboard is off
-                else{
+                else {
                     managers.Game.keyboardManager.enabled = false;
                 }
             }
             //else, the player is not stunned and can move
-            else{
+            else {
                 this.Move();
             }
 
             //if the player is not taking damage -- check player collision with this (as long as it is not stunned)
             if (!managers.Game.player.isTakingDamage) {
                 if (managers.Collision.Check(managers.Game.player, this) && !this.isStunned) {
-                    managers.Game.player.isTakingDamage = true;
-                    managers.Game.SFX = createjs.Sound.play("phoebeHit");
-                    managers.Game.SFX.volume = 0.5;
-                    managers.Game.player.GetDamage(this);
+                    if (!managers.Game.player.activatePowers && managers.Game.player.powerUp != config.PowerUp.SHADOW) {
+                        managers.Game.player.isTakingDamage = true;
+                        managers.Game.SFX = createjs.Sound.play("phoebeHit");
+                        managers.Game.SFX.volume = 0.5;
+                        managers.Game.player.GetDamage(this);
+                    }
                 }
             }
             //the else for this condition is under play.ts - this is because the player might have other collisions with other enemies
 
             //if enemy is not taking damage -- check collision with weapon
             if (!this.isTakingDamage) {
-                if (managers.Collision.Check(managers.Game.player.weapon, this)) {
+                if ((managers.Collision.Check(managers.Game.player.weapon, this) && this.canBeAttacked) || (managers.Collision.Check(managers.Game.player, this) && this.canBeAttacked && managers.Game.player.activatePowers && managers.Game.player.powerUp == config.PowerUp.BITE)) {
                     this.isTakingDamage = true;
                     this.GetDamage(managers.Game.player);
                 }
@@ -99,11 +102,11 @@ module objects {
                 }
             }
 
-            if (this.isStunned && !this.isDead && managers.Game.player.biteSequence == 0){
+            if (this.isStunned && !this.isDead && managers.Game.player.biteSequence == 0) {
                 this.stunIndicator.SetPosition(math.Vec2.Add(this.GetPosition(), new math.Vec2(0, -this.height)));
-                this.stunIndicator.visible = true;                    
+                this.stunIndicator.visible = true;
             }
-            else{
+            else {
                 this.stunIndicator.visible = false;
             }
         }
@@ -116,15 +119,15 @@ module objects {
 
         public CheckBound(): void {
             // right bound
-            if (this.x >= config.Bounds.RIGHT_BOUND - this.halfW) {    
+            if (this.x >= config.Bounds.RIGHT_BOUND - this.halfW) {
                 this.x = config.Bounds.RIGHT_BOUND - this.halfW;
             }
             // left bound
-            if (this.x <= this.halfW + config.Bounds.LEFT_BOUND) {  
+            if (this.x <= this.halfW + config.Bounds.LEFT_BOUND) {
                 this.x = this.halfW + config.Bounds.LEFT_BOUND;
             }
             // bottom bound
-            if (this.y >= config.Bounds.BOTTOM_BOUND - this.halfH) {    
+            if (this.y >= config.Bounds.BOTTOM_BOUND - this.halfH) {
                 this.y = config.Bounds.BOTTOM_BOUND - this.halfH;
             }
             // top bound
@@ -156,10 +159,10 @@ module objects {
             return 0;
         }
 
-        public RemoveFromPlay(bounty: number): void{
+        public RemoveFromPlay(bounty: number): void {
             this.isDead = true;
             managers.Game.player.GainEcto();
-            if (bounty > 0){
+            if (bounty > 0) {
                 managers.Game.SFX = createjs.Sound.play("anyDefeated");
                 managers.Game.SFX.volume = 0.2;
                 managers.Game.player.GainDollars(bounty);
@@ -170,13 +173,19 @@ module objects {
         }
 
         //this function governs what happens when Phoebe eats enemy
-        public DevourEffect(): void{
+        public DevourEffect(): void {
 
         }
 
         //function governs how much Phoebe earns
-        public CalculateBounty(): number{
-            return this.bounty;         
+        public CalculateBounty(): number {
+            return this.bounty;
+        }
+
+        public SwitchAnimation(newAnimation: string) {
+            if (this.currentAnimation != newAnimation) {
+                this.gotoAndPlay(newAnimation);
+            }
         }
     }
 }

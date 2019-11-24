@@ -85,8 +85,7 @@ module scenes {
             }
 
             this.ceilingAndWall = new createjs.Sprite(this.spriteSheet,"CeilingAndWall");
-            this.ceilingAndWall.y = 110;
-            
+            this.ceilingAndWall.y = 110;            
             
             //this.ceilingHorizontal =new objects.Background(this.assetManager,"background_c_hori");
             //this.ceilingVertical =new objects.Background(this.assetManager,"background_c_vert");
@@ -121,7 +120,12 @@ module scenes {
                     this.doorTopFrame.y = 110;
                     this.doorTopFrame.x = 182;
                 }
-                this.doorTop.x = 224;
+                if(this.design == config.Design.GRAVEYARD){
+                    this.doorTop.x = 238;
+                }
+                else{
+                    this.doorTop.x = 224;
+                }
                 this.doorTop.y = 126;
                 
                 this.player.canTraverseTop = !this.isDoorTopLocked;
@@ -140,7 +144,12 @@ module scenes {
                     this.doorBotFrame.x = 183;
                     this.doorBotFrame.y = 745;
                 }
-                this.doorBot.x = 224;
+                if(this.design == config.Design.GRAVEYARD){
+                    this.doorBot.x = 238;
+                }
+                else{
+                    this.doorBot.x = 224;
+                }
                 this.doorBot.y = 674;
                 
                 //this.doorBot.Flip();
@@ -160,7 +169,12 @@ module scenes {
                     this.doorLeftFrame = new createjs.Sprite(this.spriteSheet,"DoorLeftCeiling");
                     this.doorLeftFrame.y = 322;
                 }
-                this.doorLeft.y = 370;
+                if(this.design == config.Design.GRAVEYARD){
+                    this.doorLeft.y = 384;
+                }
+                else{
+                    this.doorLeft.y = 370;
+                }
                 this.doorLeft.x = 18;
                 
                 this.player.canTraverseLeft = !this.isDoorLeftLocked;
@@ -179,7 +193,12 @@ module scenes {
                     this.doorRightFrame.y = 322;
                     this.doorRightFrame.x = 545;
                 }
-                this.doorRight.y = 370;
+                if(this.design == config.Design.GRAVEYARD){
+                    this.doorRight.y = 384;
+                }
+                else{
+                    this.doorRight.y = 370;
+                }
                 this.doorRight.x = 476;
                 
                 //this.doorRight.Flip();
@@ -310,7 +329,12 @@ module scenes {
                 this.removeChild(this.doorLeft);
                 this.doorLeft = new createjs.Sprite(this.spriteSheet,"DoorLeft");
                 this.doorLeft.name = "DoorLeft";
-                this.doorLeft.y = 370;
+                if(this.design == config.Design.GRAVEYARD){
+                    this.doorLeft.y = 384;
+                }
+                else{
+                    this.doorLeft.y = 370;
+                }
                 this.doorLeft.x = 18;
                 this.player.canTraverseLeft = !this.isDoorLeftLocked;
                 this.addChild(this.doorLeft);
@@ -320,7 +344,12 @@ module scenes {
                 this.removeChild(this.doorRight);
                 this.doorRight = new createjs.Sprite(this.spriteSheet,"DoorRight");
                 this.doorRight.name = "DoorRight";
-                this.doorRight.y = 370;
+                if(this.design == config.Design.GRAVEYARD){
+                    this.doorRight.y = 384;
+                }
+                else{
+                    this.doorRight.y = 370;
+                }
                 this.doorRight.x = 476;
                 //this.doorRight.Flip();
                 this.player.canTraverseRight = !this.isDoorRightLocked;
@@ -331,7 +360,12 @@ module scenes {
                 this.removeChild(this.doorTop);
                 this.doorTop = new createjs.Sprite(this.spriteSheet,"DoorTop");
                 this.doorTop.name = "DoorTop";
-                this.doorTop.x = 224;
+                if(this.design == config.Design.GRAVEYARD){
+                    this.doorTop.x = 238;
+                }
+                else{
+                    this.doorTop.x = 224;
+                }
                 this.doorTop.y = 126;
                 this.player.canTraverseTop = !this.isDoorTopLocked;
                 this.addChild(this.doorTop);
@@ -341,7 +375,12 @@ module scenes {
                 this.removeChild(this.doorBot);
                 this.doorBot = new createjs.Sprite(this.spriteSheet,"DoorBottom");
                 this.doorBot.name = "DoorBottom";
-                this.doorBot.x = 224;
+                if(this.design == config.Design.GRAVEYARD){
+                    this.doorBot.x = 238;
+                }
+                else{
+                    this.doorBot.x = 224;
+                }
                 this.doorBot.y = 674;
                 //this.doorBot.Flip();
                 this.player.canTraverseBot = !this.isDoorBotLocked;
@@ -356,6 +395,7 @@ module scenes {
             this.playerInfo.Key = this.player.key;
 
             this.playerInfo.PlayerEcto = this.player.ecto;
+            this.playerInfo.PlayerPower = this.player.powerUp;
 
         }
 
@@ -463,6 +503,12 @@ module scenes {
                     this.addChild(bullet);
                 });
             }
+        }
+        public AddEnemyToScene(enemyToAdd: objects.Enemy):void{
+            let length = this.enemies.length;
+            this.enemies[length] = enemyToAdd;
+            this.addChild(enemyToAdd);
+            this.setChildIndex(enemyToAdd, this.getChildIndex(this.player) + 1);
         }
     }
 }
