@@ -39,6 +39,8 @@ module scenes {
             //initialize new player
             this.player = new objects.Player();
             managers.Game.player = this.player;
+            managers.Game.shopManager.Start();
+            managers.Game.bulletManager.Start();
 
             managers.Game.keyboardManager.playMode = false;
             

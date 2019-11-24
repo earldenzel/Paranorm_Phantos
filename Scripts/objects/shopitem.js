@@ -16,11 +16,12 @@ var objects;
     var ShopItem = /** @class */ (function (_super) {
         __extends(ShopItem, _super);
         // Constructor
-        function ShopItem(item, price, effect) {
+        function ShopItem(item, price, effect, appearingScene) {
             var _this = _super.call(this, managers.Game.item_TextureAtlas, item) || this;
             _this.available = true;
             _this.price = price;
             _this.effect = effect;
+            _this.appearingScene = appearingScene;
             _this.Start();
             return _this;
         }

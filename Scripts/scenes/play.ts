@@ -69,6 +69,7 @@ module scenes {
         public Start(): void {
             // Initialize our variables
             this.player = managers.Game.player;
+            managers.Game.bulletManager.Reset();
 
             switch(this.design){
                 case config.Design.GRAVEYARD:
@@ -205,8 +206,7 @@ module scenes {
             }
 
             if (this.hasShop){
-                this.shopManager = new managers.Shop();
-                managers.Game.shopManager = this.shopManager;
+                this.shopManager = managers.Game.shopManager;
             }
 
             //this.playerStatus.shadow = new createjs.Shadow("#000000",0,0,10);
@@ -224,8 +224,7 @@ module scenes {
             
             // Initialize bulletManager
             if (this.hasProjectileShooters){
-                this.bulletManager = new managers.Bullet();
-                managers.Game.bulletManager = this.bulletManager;
+                this.bulletManager = managers.Game.bulletManager;
             }
 
             this.Main();
@@ -439,9 +438,11 @@ module scenes {
                 this.addChild(this.shopManager.chooseYes);
                 this.addChild(this.shopManager.chooseNo);                
                 this.shopManager.shopItems.forEach(e => {
-                    this.addChild(e);
-                    e.Reset();
-                    this.addChild(e.priceTag);
+                    if (managers.Game.currentScene = e.appearingScene){
+                        this.addChild(e);
+                        e.Reset();
+                        this.addChild(e.priceTag);
+                    }
                 });   
             }
             

@@ -2,6 +2,7 @@ module objects {
     export class ShootingFLower extends objects.Enemy {
         // variables
         private bulletSpawn: math.Vec2;
+        private rateOfFire: number;
 
         // constructor
         constructor(position: math.Vec2) {
@@ -13,6 +14,7 @@ module objects {
             this.eatTimer = 500;
             this.bounty = 3;
             this.isFlying = false;
+            this.rateOfFire = 50;
         }
 
         // methods
@@ -47,7 +49,7 @@ module objects {
 
             // If Shooting Flower alive, shoots the bullet
             if (this.hp > 0) {
-                if (ticker % 100 == 0) {
+                if (ticker % this.rateOfFire == 0) {
                     this.bulletSpawn = new math.Vec2(this.x + 5, this.y - 20);
 
                     let playerPosition: math.Vec2 = new math.Vec2(managers.Game.player.x, managers.Game.player.y);
