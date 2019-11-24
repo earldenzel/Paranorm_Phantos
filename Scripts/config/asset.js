@@ -1508,11 +1508,11 @@ var config;
                 "MapsGraveyard": { "frames": [8] },
                 "MapsHotel": { "frames": [9] },
                 "MapsMansion": { "frames": [10] },
-                "Power_ItemBox_Bite": { "frames": [11] },
-                "Power_ItemBox_Fire": { "frames": [12] },
-                "Power_ItemBox_Ice": { "frames": [13] },
-                "Power_ItemBox_Shadow": { "frames": [14] },
-                "Power_ItemBox_Slime": { "frames": [15] },
+                "Power_Bite": { "frames": [11] },
+                "Power_Fire": { "frames": [12] },
+                "Power_Ice": { "frames": [13] },
+                "Power_Shadow": { "frames": [14] },
+                "Power_Slime": { "frames": [15] },
                 "Ecto_0": { "frames": [16] },
                 "Ecto_1": { "frames": [17] },
                 "Ecto_2": { "frames": [18] },
@@ -1580,11 +1580,11 @@ var config;
             "frames": [
                 [0, 0, 174, 196, 0, 0, 0],
                 [0, 196, 174, 194, 0, 0, 0],
-                [174, 0, 144, 196, 0, 0, 0],
+                [174, 0, 144, 196, 0, 36, 57],
                 [0, 390, 150, 172, 0, 0, 0],
                 [318, 0, 150, 170, 0, 0, 0],
                 [174, 196, 98, 148, 0, 0, 0],
-                [0, 562, 118, 120, 0, 0, 0],
+                [0, 562, 118, 120, 0, 23, 19],
                 [468, 0, 68, 148, 0, -15, 0],
                 [0, 682, 114, 102, 0, 0, -1],
                 [536, 0, 62, 146, 0, 0, 0],
@@ -1686,7 +1686,7 @@ var config;
                 [572, 736, 70, 70, 0, 0, 0],
                 [318, 170, 28, 26, 0, 0, -1],
                 [598, 354, 26, 28, 0, -1, 0],
-                [484, 810, 50, 50, 0, 0, 0],
+                [484, 810, 50, 50, 0, -22, -32],
                 [534, 806, 70, 70, 0, 0, 0],
                 [462, 876, 42, 74, 0, 0, -4],
                 [504, 876, 70, 70, 0, 0, 0],
@@ -1754,8 +1754,8 @@ var config;
                     "speed": 0.1
                 },
                 "GhostShadow_Attack": {
-                    "frames": [35, 108, 6, 2, 2, 2, 2, 2, 2, 2, 6, 108, 35],
-                    "speed": 0.1
+                    "frames": [35, 108, 6, 2],
+                    "speed": 0.2
                 },
                 "GhostShadow_Stun": {
                     "frames": [31, 8],

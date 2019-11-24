@@ -16,6 +16,7 @@ module managers {
         private playerHealth: number;
         private playerEcto: number;
         private playerLocation: math.Vec2;
+        private playerPower: config.PowerUp;
 
         // Add in Player Location
 
@@ -60,29 +61,35 @@ module managers {
         }
         set PlayerHealth(newPlayerHealth: number) {
             this.playerHealth = newPlayerHealth;
-            this.removeChild(this.playerInfo_Health);
+            //this.removeChild(this.playerInfo_Health);
             this.ChangeHealthInfo();
-            this.addChild(this.playerInfo_Health);
+            //this.addChild(this.playerInfo_Health);
         }
         get PlayerEcto(): number {
             return this.PlayerEcto;
         }
         set PlayerEcto(newPlayerEcto: number) {
             this.playerEcto = newPlayerEcto;
-            this.removeChild(this.playerInfo_Ecto);
+            //this.removeChild(this.playerInfo_Ecto);
             this.ChangeEctoInfo();
-            this.addChild(this.playerInfo_Ecto);
+            //this.addChild(this.playerInfo_Ecto);
         }
         get PlayerLocation(): math.Vec2 {
             return this.playerLocation;
         }
         set PlayerLocation(newCoordinates: math.Vec2) {
             this.playerLocation = newCoordinates;
-            this.removeChild(this.playerInfo_Location);
+            //this.removeChild(this.playerInfo_Location);
             this.ChangePlayerLocation();
-            this.addChild(this.playerInfo_Location);
+            //this.addChild(this.playerInfo_Location);
         }
-
+        get PlayerPower(): config.PowerUp {
+            return this.playerPower;
+        }
+        set PlayerPower(newPower: config.PowerUp) {
+            this.playerPower = newPower;
+            this.ChangePlayerPower();
+        }
 
         // Constructor
         constructor() {
@@ -157,17 +164,28 @@ module managers {
 
             this.playerInfo_Location = new createjs.Sprite(managers.Game.titleUIMap_TextureAtlas, "PlayerLocation");
 
+            this.playerInfo_Power = new createjs.Sprite(managers.Game.titleUIMap_TextureAtlas, "Power_Shadow");
+            this.playerInfo_Power.x = 300;
+            this.playerInfo_Power.y = 46;
+
             // Set Defaults
             this.playerHealth = 5;
             this.playerEcto = 5;
             this.money = 0;
             this.key = 0;
             this.playerLocation = new math.Vec2(0, 0);
+            this.playerPower = config.PowerUp.NONE;
 
             this.ChangePlayerLocation();
+            this.ChangePlayerPower();
 
-            this.ChangeHealthInfo();
-            this.ChangeEctoInfo();
+            this.playerInfo_Ecto = new createjs.Sprite(managers.Game.titleUIMap_TextureAtlas, "Ecto_0");
+            this.playerInfo_Ecto.x = 10;
+            this.playerInfo_Ecto.y = 10;
+
+            this.playerInfo_Health = new createjs.Sprite(managers.Game.titleUIMap_TextureAtlas, "Life_5");
+            this.playerInfo_Health.x = 376;
+            this.playerInfo_Health.y = 36;
 
             this.Main();
         }
@@ -181,60 +199,89 @@ module managers {
             this.addChild(this.playerInfo_Ecto);
             this.addChild(this.playerInfo_Map);
             this.addChild(this.playerInfo_Location);
+            this.addChild(this.playerInfo_Power);
         }
         private ChangeHealthInfo(): void {
 
             switch (this.playerHealth) {
                 case 0:
-                    this.playerInfo_Health = new createjs.Sprite(managers.Game.titleUIMap_TextureAtlas, "Life_0");
+                    this.SwitchAnimation(this.playerInfo_Health, "Life_0");
                     break;
                 case 1:
-                    this.playerInfo_Health = new createjs.Sprite(managers.Game.titleUIMap_TextureAtlas, "Life_1");
+                    this.SwitchAnimation(this.playerInfo_Health, "Life_1");
                     break;
                 case 2:
-                    this.playerInfo_Health = new createjs.Sprite(managers.Game.titleUIMap_TextureAtlas, "Life_2");
+                    this.SwitchAnimation(this.playerInfo_Health, "Life_2");
                     break;
                 case 3:
-                    this.playerInfo_Health = new createjs.Sprite(managers.Game.titleUIMap_TextureAtlas, "Life_3");
+                    this.SwitchAnimation(this.playerInfo_Health, "Life_3");
                     break;
                 case 4:
-                    this.playerInfo_Health = new createjs.Sprite(managers.Game.titleUIMap_TextureAtlas, "Life_4");
+                    this.SwitchAnimation(this.playerInfo_Health, "Life_4");
                     break;
                 case 5:
-                    this.playerInfo_Health = new createjs.Sprite(managers.Game.titleUIMap_TextureAtlas, "Life_5");
+                    this.SwitchAnimation(this.playerInfo_Health, "Life_5");
                     break;
             }
-            this.playerInfo_Health.x = 376;
-            this.playerInfo_Health.y = 36;
+
         }
         private ChangeEctoInfo(): void {
 
             switch (this.playerEcto) {
                 case 0:
-                    this.playerInfo_Ecto = new createjs.Sprite(managers.Game.titleUIMap_TextureAtlas, "Ecto_0");
+                    this.SwitchAnimation(this.playerInfo_Ecto, "Ecto_0");
                     break;
                 case 1:
-                    this.playerInfo_Ecto = new createjs.Sprite(managers.Game.titleUIMap_TextureAtlas, "Ecto_1");
+                    this.SwitchAnimation(this.playerInfo_Ecto, "Ecto_1");
                     break;
                 case 2:
-                    this.playerInfo_Ecto = new createjs.Sprite(managers.Game.titleUIMap_TextureAtlas, "Ecto_2");
+                    this.SwitchAnimation(this.playerInfo_Ecto, "Ecto_2");
                     break;
                 case 3:
-                    this.playerInfo_Ecto = new createjs.Sprite(managers.Game.titleUIMap_TextureAtlas, "Ecto_3");
+                    this.SwitchAnimation(this.playerInfo_Ecto, "Ecto_3");
                     break;
                 case 4:
-                    this.playerInfo_Ecto = new createjs.Sprite(managers.Game.titleUIMap_TextureAtlas, "Ecto_4");
+                    this.SwitchAnimation(this.playerInfo_Ecto, "Ecto_4");
                     break;
                 case 5:
-                    this.playerInfo_Ecto = new createjs.Sprite(managers.Game.titleUIMap_TextureAtlas, "Ecto_5");
+                    this.SwitchAnimation(this.playerInfo_Ecto, "Ecto_5");
                     break;
             }
-            this.playerInfo_Ecto.x = 10;
-            this.playerInfo_Ecto.y = 10;
         }
         private ChangePlayerLocation(): void {
             this.playerInfo_Location.x = this.playerLocation.x;
             this.playerInfo_Location.y = this.playerLocation.y;
+        }
+        private ChangePlayerPower(): void {
+            if (this.playerPower != config.PowerUp.NONE) {
+                this.playerInfo_Power.visible = true;
+                switch (this.playerPower) {
+                    case config.PowerUp.SHADOW:
+                        this.SwitchAnimation(this.playerInfo_Power, "Power_Shadow");
+                        break;
+                    case config.PowerUp.BITE:
+                        this.SwitchAnimation(this.playerInfo_Power, "Power_Bite");
+                        break;
+                    case config.PowerUp.FIRE:
+                        this.SwitchAnimation(this.playerInfo_Power, "Power_Fire");
+                        break;
+                    case config.PowerUp.ICE:
+                        this.SwitchAnimation(this.playerInfo_Power, "Power_Ice");
+                        break;
+                    case config.PowerUp.SLIME:
+                        this.SwitchAnimation(this.playerInfo_Power, "Power_Slime");
+                        break;
+                }
+            }
+            else {
+                this.playerInfo_Power.visible = false;
+            }
+
+        }
+        private SwitchAnimation(animator: createjs.Sprite, newAnimation: string) {
+            if (animator.currentAnimation != newAnimation) {
+                animator.gotoAndPlay(newAnimation);
+            }
         }
     }
 }

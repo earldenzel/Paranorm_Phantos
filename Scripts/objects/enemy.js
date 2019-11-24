@@ -22,6 +22,7 @@ var objects;
             // Some enemies can be eaten, some enemies cannot.
             // They will start off as able to be eaten.
             _this.canBeEaten = true;
+            _this.canBeAttacked = true;
             _this.Start();
             _this.stunIndicator = new objects.Indicator("stunIndicator");
             _this.Move();
@@ -76,7 +77,7 @@ var objects;
             }
             //if the player is not taking damage -- check player collision with this (as long as it is not stunned)
             if (!managers.Game.player.isTakingDamage) {
-                if (managers.Collision.Check(managers.Game.player, this) && !this.isStunned) {
+                if (managers.Collision.Check(managers.Game.player, this) && !this.isStunned && (managers.Game.player.activatePowers && managers.Game.player.powerUp == config.PowerUp.SHADOW)) {
                     managers.Game.player.isTakingDamage = true;
                     managers.Game.SFX = createjs.Sound.play("phoebeHit");
                     managers.Game.SFX.volume = 0.5;
@@ -86,7 +87,7 @@ var objects;
             //the else for this condition is under play.ts - this is because the player might have other collisions with other enemies
             //if enemy is not taking damage -- check collision with weapon
             if (!this.isTakingDamage) {
-                if (managers.Collision.Check(managers.Game.player.weapon, this)) {
+                if (managers.Collision.Check(managers.Game.player.weapon, this) && this.canBeAttacked) {
                     this.isTakingDamage = true;
                     this.GetDamage(managers.Game.player);
                 }

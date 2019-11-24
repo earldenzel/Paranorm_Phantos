@@ -72,9 +72,9 @@ var managers;
             },
             set: function (newPlayerHealth) {
                 this.playerHealth = newPlayerHealth;
-                this.removeChild(this.playerInfo_Health);
+                //this.removeChild(this.playerInfo_Health);
                 this.ChangeHealthInfo();
-                this.addChild(this.playerInfo_Health);
+                //this.addChild(this.playerInfo_Health);
             },
             enumerable: true,
             configurable: true
@@ -85,9 +85,9 @@ var managers;
             },
             set: function (newPlayerEcto) {
                 this.playerEcto = newPlayerEcto;
-                this.removeChild(this.playerInfo_Ecto);
+                //this.removeChild(this.playerInfo_Ecto);
                 this.ChangeEctoInfo();
-                this.addChild(this.playerInfo_Ecto);
+                //this.addChild(this.playerInfo_Ecto);
             },
             enumerable: true,
             configurable: true
@@ -98,9 +98,20 @@ var managers;
             },
             set: function (newCoordinates) {
                 this.playerLocation = newCoordinates;
-                this.removeChild(this.playerInfo_Location);
+                //this.removeChild(this.playerInfo_Location);
                 this.ChangePlayerLocation();
-                this.addChild(this.playerInfo_Location);
+                //this.addChild(this.playerInfo_Location);
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(PlayerInfo_UI.prototype, "PlayerPower", {
+            get: function () {
+                return this.playerPower;
+            },
+            set: function (newPower) {
+                this.playerPower = newPower;
+                this.ChangePlayerPower();
             },
             enumerable: true,
             configurable: true
@@ -165,15 +176,24 @@ var managers;
             this.playerInfo_Map.x = 30;
             this.playerInfo_Map.y = 12;
             this.playerInfo_Location = new createjs.Sprite(managers.Game.titleUIMap_TextureAtlas, "PlayerLocation");
+            this.playerInfo_Power = new createjs.Sprite(managers.Game.titleUIMap_TextureAtlas, "Power_Shadow");
+            this.playerInfo_Power.x = 300;
+            this.playerInfo_Power.y = 46;
             // Set Defaults
             this.playerHealth = 5;
             this.playerEcto = 5;
             this.money = 0;
             this.key = 0;
             this.playerLocation = new math.Vec2(0, 0);
+            this.playerPower = config.PowerUp.NONE;
             this.ChangePlayerLocation();
-            this.ChangeHealthInfo();
-            this.ChangeEctoInfo();
+            this.ChangePlayerPower();
+            this.playerInfo_Ecto = new createjs.Sprite(managers.Game.titleUIMap_TextureAtlas, "Ecto_0");
+            this.playerInfo_Ecto.x = 10;
+            this.playerInfo_Ecto.y = 10;
+            this.playerInfo_Health = new createjs.Sprite(managers.Game.titleUIMap_TextureAtlas, "Life_5");
+            this.playerInfo_Health.x = 376;
+            this.playerInfo_Health.y = 36;
             this.Main();
         };
         PlayerInfo_UI.prototype.Main = function () {
@@ -185,58 +205,85 @@ var managers;
             this.addChild(this.playerInfo_Ecto);
             this.addChild(this.playerInfo_Map);
             this.addChild(this.playerInfo_Location);
+            this.addChild(this.playerInfo_Power);
         };
         PlayerInfo_UI.prototype.ChangeHealthInfo = function () {
             switch (this.playerHealth) {
                 case 0:
-                    this.playerInfo_Health = new createjs.Sprite(managers.Game.titleUIMap_TextureAtlas, "Life_0");
+                    this.SwitchAnimation(this.playerInfo_Health, "Life_0");
                     break;
                 case 1:
-                    this.playerInfo_Health = new createjs.Sprite(managers.Game.titleUIMap_TextureAtlas, "Life_1");
+                    this.SwitchAnimation(this.playerInfo_Health, "Life_1");
                     break;
                 case 2:
-                    this.playerInfo_Health = new createjs.Sprite(managers.Game.titleUIMap_TextureAtlas, "Life_2");
+                    this.SwitchAnimation(this.playerInfo_Health, "Life_2");
                     break;
                 case 3:
-                    this.playerInfo_Health = new createjs.Sprite(managers.Game.titleUIMap_TextureAtlas, "Life_3");
+                    this.SwitchAnimation(this.playerInfo_Health, "Life_3");
                     break;
                 case 4:
-                    this.playerInfo_Health = new createjs.Sprite(managers.Game.titleUIMap_TextureAtlas, "Life_4");
+                    this.SwitchAnimation(this.playerInfo_Health, "Life_4");
                     break;
                 case 5:
-                    this.playerInfo_Health = new createjs.Sprite(managers.Game.titleUIMap_TextureAtlas, "Life_5");
+                    this.SwitchAnimation(this.playerInfo_Health, "Life_5");
                     break;
             }
-            this.playerInfo_Health.x = 376;
-            this.playerInfo_Health.y = 36;
         };
         PlayerInfo_UI.prototype.ChangeEctoInfo = function () {
             switch (this.playerEcto) {
                 case 0:
-                    this.playerInfo_Ecto = new createjs.Sprite(managers.Game.titleUIMap_TextureAtlas, "Ecto_0");
+                    this.SwitchAnimation(this.playerInfo_Ecto, "Ecto_0");
                     break;
                 case 1:
-                    this.playerInfo_Ecto = new createjs.Sprite(managers.Game.titleUIMap_TextureAtlas, "Ecto_1");
+                    this.SwitchAnimation(this.playerInfo_Ecto, "Ecto_1");
                     break;
                 case 2:
-                    this.playerInfo_Ecto = new createjs.Sprite(managers.Game.titleUIMap_TextureAtlas, "Ecto_2");
+                    this.SwitchAnimation(this.playerInfo_Ecto, "Ecto_2");
                     break;
                 case 3:
-                    this.playerInfo_Ecto = new createjs.Sprite(managers.Game.titleUIMap_TextureAtlas, "Ecto_3");
+                    this.SwitchAnimation(this.playerInfo_Ecto, "Ecto_3");
                     break;
                 case 4:
-                    this.playerInfo_Ecto = new createjs.Sprite(managers.Game.titleUIMap_TextureAtlas, "Ecto_4");
+                    this.SwitchAnimation(this.playerInfo_Ecto, "Ecto_4");
                     break;
                 case 5:
-                    this.playerInfo_Ecto = new createjs.Sprite(managers.Game.titleUIMap_TextureAtlas, "Ecto_5");
+                    this.SwitchAnimation(this.playerInfo_Ecto, "Ecto_5");
                     break;
             }
-            this.playerInfo_Ecto.x = 10;
-            this.playerInfo_Ecto.y = 10;
         };
         PlayerInfo_UI.prototype.ChangePlayerLocation = function () {
             this.playerInfo_Location.x = this.playerLocation.x;
             this.playerInfo_Location.y = this.playerLocation.y;
+        };
+        PlayerInfo_UI.prototype.ChangePlayerPower = function () {
+            if (this.playerPower != config.PowerUp.NONE) {
+                this.playerInfo_Power.visible = true;
+                switch (this.playerPower) {
+                    case config.PowerUp.SHADOW:
+                        this.SwitchAnimation(this.playerInfo_Power, "Power_Shadow");
+                        break;
+                    case config.PowerUp.BITE:
+                        this.SwitchAnimation(this.playerInfo_Power, "Power_Bite");
+                        break;
+                    case config.PowerUp.FIRE:
+                        this.SwitchAnimation(this.playerInfo_Power, "Power_Fire");
+                        break;
+                    case config.PowerUp.ICE:
+                        this.SwitchAnimation(this.playerInfo_Power, "Power_Ice");
+                        break;
+                    case config.PowerUp.SLIME:
+                        this.SwitchAnimation(this.playerInfo_Power, "Power_Slime");
+                        break;
+                }
+            }
+            else {
+                this.playerInfo_Power.visible = false;
+            }
+        };
+        PlayerInfo_UI.prototype.SwitchAnimation = function (animator, newAnimation) {
+            if (animator.currentAnimation != newAnimation) {
+                animator.gotoAndPlay(newAnimation);
+            }
         };
         return PlayerInfo_UI;
     }(createjs.Container));

@@ -6,6 +6,7 @@ module objects {
         private downDirection: boolean;
 
         private isTransparent: boolean;
+        private isAttacking: boolean;
         // Constructors
         constructor(moveSpeed: number, rightDirection: boolean, downDirection: boolean) {
             super(managers.Game.enemies_TextureAtlas, "GhostShadow_Transparent");
@@ -21,7 +22,7 @@ module objects {
             this.bounty = 20;
             this.isFlying = true;
             this.isTransparent = true;
-            this.powerUp = powerUp.SHADOW;
+            this.powerUp = config.PowerUp.SHADOW;
         }
         // Methods
         public Start(): void {
@@ -32,10 +33,18 @@ module objects {
         public Update(): void {
             if (!this.isStunned) {
                 if (this.isTransparent) {
-                    this.isTakingDamage = false;
+                    this.canBeAttacked = false;
                     this.SwitchAnimation("GhostShadow_Transparent");
                 }
+                else if(this.isAttacking){
+                    
+                    if(this.currentAnimation == "GhostShadow_Attack" && this.currentAnimationFrame > 2){
+                        this.currentAnimationFrame = 3;
+                    }
+                    this.SwitchAnimation("GhostShadow_Attack");
+                }
                 else {
+                    this.canBeAttacked = true;
                     this.SwitchAnimation("GhostShadow_Opaque");
                 }
             }
@@ -43,30 +52,32 @@ module objects {
                 this.SwitchAnimation("GhostShadow_Stun");
             }
             super.Update();
-            this.Attacking();
         }
         public Reset(): void { }
         public Move(): void {
             let ticker: number = createjs.Ticker.getTicks();
 
-            if (ticker % 20 == 0) {
+            if (ticker % 90 == 1) {
                 this.isTransparent = !this.isTransparent;
             }
+            this.Attacking();
 
-            this.x += this.rightDirection ? this.moveSpeed : -this.moveSpeed;
-            this.y += this.downDirection ? this.moveSpeed : -this.moveSpeed;
-
-            if (this.x > managers.Game.gameWidth && this.rightDirection) {
-                this.rightDirection = false;
-            }
-            else if (this.x < 0 && !this.rightDirection) {
-                this.rightDirection = true;
-            }
-            if (this.y > managers.Game.gameHeight && this.downDirection) {
-                this.downDirection = false;
-            }
-            else if (this.y < 0 && !this.downDirection) {
-                this.downDirection = true;
+            if(!this.isAttacking){
+                this.x += this.rightDirection ? this.moveSpeed : -this.moveSpeed;
+                this.y += this.downDirection ? this.moveSpeed : -this.moveSpeed;
+    
+                if (this.x > managers.Game.gameWidth && this.rightDirection) {
+                    this.rightDirection = false;
+                }
+                else if (this.x < 0 && !this.rightDirection) {
+                    this.rightDirection = true;
+                }
+                if (this.y > managers.Game.gameHeight && this.downDirection) {
+                    this.downDirection = false;
+                }
+                else if (this.y < 0 && !this.downDirection) {
+                    this.downDirection = true;
+                }
             }
         }
         public CheckBound(): void {
@@ -79,12 +90,13 @@ module objects {
 
             let distanceToPlayer: number = math.Vec2.Distance(enemyPosition, playerPosition);
 
-            if (distanceToPlayer < 100) {
+            if (distanceToPlayer < 125) {
                 this.isTransparent = false;
-                let ticker: number = createjs.Ticker.getTicks();
-                if (ticker % 30 == 0) {
-                    this.SwitchAnimation("GhostShadow_Attack");
-                }
+                this.isAttacking = true;
+                this.canBeAttacked = false;
+            }
+            else{
+                this.isAttacking = false;
             }
 
         }
@@ -96,7 +108,7 @@ module objects {
             else {
                 managers.Game.player.GainHealth(2);
             }
-            managers.Game.player.powerUp = powerUp.SHADOW;
+            managers.Game.player.powerUp = config.PowerUp.SHADOW;
         }
         public SwitchAnimation(newAnimation: string) {
             if (this.currentAnimation != newAnimation) {
