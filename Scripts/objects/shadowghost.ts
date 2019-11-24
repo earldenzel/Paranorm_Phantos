@@ -31,14 +31,14 @@ module objects {
             this.x = 320;
         }
         public Update(): void {
-            if (!this.isStunned) {
+            if (!this.isStunned && !this.isDead) {
                 if (this.isTransparent) {
                     this.canBeAttacked = false;
                     this.SwitchAnimation("GhostShadow_Transparent");
                 }
-                else if(this.isAttacking){
-                    
-                    if(this.currentAnimation == "GhostShadow_Attack" && this.currentAnimationFrame > 2){
+                else if (this.isAttacking) {
+
+                    if (this.currentAnimation == "GhostShadow_Attack" && this.currentAnimationFrame > 2) {
                         this.currentAnimationFrame = 3;
                     }
                     this.SwitchAnimation("GhostShadow_Attack");
@@ -48,8 +48,15 @@ module objects {
                     this.SwitchAnimation("GhostShadow_Opaque");
                 }
             }
-            else {
+            else if (this.isStunned && !this.isDead) {
                 this.SwitchAnimation("GhostShadow_Stun");
+            }
+            else {
+                if (this.currentAnimation == "GhostShadow_Explode" && this.currentAnimationFrame > 3) {
+                    managers.Game.stage.removeChild(this);
+                    this.visible = false;
+                }
+                this.SwitchAnimation("GhostShadow_Explode");
             }
             super.Update();
         }
@@ -62,10 +69,10 @@ module objects {
             }
             this.Attacking();
 
-            if(!this.isAttacking){
+            if (!this.isAttacking) {
                 this.x += this.rightDirection ? this.moveSpeed : -this.moveSpeed;
                 this.y += this.downDirection ? this.moveSpeed : -this.moveSpeed;
-    
+
                 if (this.x > managers.Game.gameWidth && this.rightDirection) {
                     this.rightDirection = false;
                 }
@@ -83,7 +90,7 @@ module objects {
         public CheckBound(): void {
             super.CheckBound();
         }
-        // FIX THE ATTACKING
+        
         public Attacking(): void {
             let playerPosition: math.Vec2 = new math.Vec2(managers.Game.player.x, managers.Game.player.y);
             let enemyPosition: math.Vec2 = new math.Vec2(this.x, this.y);
@@ -95,10 +102,9 @@ module objects {
                 this.isAttacking = true;
                 this.canBeAttacked = false;
             }
-            else{
+            else {
                 this.isAttacking = false;
             }
-
         }
         public DevourEffect(): void {
             let random: number = Math.random() * 100;
@@ -110,10 +116,16 @@ module objects {
             }
             managers.Game.player.powerUp = config.PowerUp.SHADOW;
         }
-        public SwitchAnimation(newAnimation: string) {
-            if (this.currentAnimation != newAnimation) {
-                this.gotoAndPlay(newAnimation);
+        public RemoveFromPlay(bounty: number): void {
+            this.isDead = true;
+
+            managers.Game.player.GainEcto();
+            if (bounty > 0) {
+                managers.Game.SFX = createjs.Sound.play("anyDefeated");
+                managers.Game.SFX.volume = 0.2;
+                managers.Game.player.GainDollars(bounty);
             }
+            this.stunIndicator.visible = false;
         }
     }
 }

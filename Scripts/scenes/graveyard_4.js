@@ -24,7 +24,8 @@ var scenes;
         }
         // Methods
         Graveyard_4.prototype.Start = function () {
-            this.enemies[0] = new objects.ShadowGhost(1, true, true);
+            //this.enemies[0] = new objects.ShadowGhost(1, true, true);
+            this.enemies[0] = new objects.Zombie(1.5);
             //this.enemies[1] = new objects.TestEnemy(3, false, false);
             //this.enemies[2] = new objects.TestEnemy(2,false,true);
             this.obstacles[0] = new objects.Barriers(managers.Game.graveyard_TextureAtlas, "GraveTile");

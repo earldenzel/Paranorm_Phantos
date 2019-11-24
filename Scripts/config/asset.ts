@@ -1811,7 +1811,7 @@ module config {
                 "GhostWoman_EatenFront": { "frames": [77] },
                 "GhostWoman_Explode": {
                     "frames": [143, 131, 96, 97],
-                    "speed": 0.1
+                    "speed": 0.2
                 },
 
                 "GhostShadow_Attack": {
@@ -1833,7 +1833,7 @@ module config {
                 // Works with GhostMan
                 "GhostShadow_Explode": {
                     "frames": [133, 130, 52, 69],
-                    "speed": 0.1
+                    "speed": 0.2
                 },
                 "GhostShadow_EatenFrontBack": { "frames": [85] },
                 "GhostShadow_EatenLeft": { "frames": [115] },
@@ -1910,7 +1910,7 @@ module config {
                 },
                 "Zombie_Explode": {
                     "frames": [151, 140, 118, 121],
-                    "speed": 0.1
+                    "speed": 0.2
                 },
 
                 "RedSkeleton_Dead": { "frames": [37] },
@@ -1946,7 +1946,7 @@ module config {
                 },
                 "Maggot_Explode": {
                     "frames": [146, 137, 111, 113],
-                    "speed": 0.1
+                    "speed": 0.2
                 },
                 "Maggot_SmallWalkSide": { "frames": [129] },
 
@@ -1975,7 +1975,7 @@ module config {
                 // Works with GhostTeeth, GhostThin, TestEnemy
                 "Ghost_Explode": {
                     "frames": [144, 136, 105, 109],
-                    "speed": 0.1
+                    "speed": 0.2
                 },
                 "Ghost_EatenLeft": { "frames": [127] },
                 "Ghost_EatenBack": { "frames": [138] },
@@ -1999,7 +1999,7 @@ module config {
                 },
                 "Skeleton_Explode": {
                     "frames": [150, 139, 116, 117],
-                    "speed": 0.1
+                    "speed": 0.2
                 },
                 "Bone": {
                     "frames": [149, 147, 152, 153],

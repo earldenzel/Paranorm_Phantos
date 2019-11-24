@@ -77,11 +77,13 @@ var objects;
             }
             //if the player is not taking damage -- check player collision with this (as long as it is not stunned)
             if (!managers.Game.player.isTakingDamage) {
-                if (managers.Collision.Check(managers.Game.player, this) && !this.isStunned && (managers.Game.player.activatePowers && managers.Game.player.powerUp == config.PowerUp.SHADOW)) {
-                    managers.Game.player.isTakingDamage = true;
-                    managers.Game.SFX = createjs.Sound.play("phoebeHit");
-                    managers.Game.SFX.volume = 0.5;
-                    managers.Game.player.GetDamage(this);
+                if (managers.Collision.Check(managers.Game.player, this) && !this.isStunned) {
+                    if (!managers.Game.player.activatePowers && managers.Game.player.powerUp != config.PowerUp.SHADOW) {
+                        managers.Game.player.isTakingDamage = true;
+                        managers.Game.SFX = createjs.Sound.play("phoebeHit");
+                        managers.Game.SFX.volume = 0.5;
+                        managers.Game.player.GetDamage(this);
+                    }
                 }
             }
             //the else for this condition is under play.ts - this is because the player might have other collisions with other enemies
@@ -167,6 +169,11 @@ var objects;
         //function governs how much Phoebe earns
         Enemy.prototype.CalculateBounty = function () {
             return this.bounty;
+        };
+        Enemy.prototype.SwitchAnimation = function (newAnimation) {
+            if (this.currentAnimation != newAnimation) {
+                this.gotoAndPlay(newAnimation);
+            }
         };
         return Enemy;
     }(objects.GameObject));
