@@ -376,6 +376,7 @@
                 break;
         }
         currentState = managers.Game.currentScene;
+        managers.Game.currentStage = currentScene;
     }
     window.onload = Init;
 })();

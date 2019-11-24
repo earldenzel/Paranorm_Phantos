@@ -494,5 +494,11 @@ module scenes {
                 });
             }
         }
+        public AddEnemyToScene(enemyToAdd: objects.Enemy):void{
+            let length = this.enemies.length;
+            this.enemies[length] = enemyToAdd;
+            this.addChild(enemyToAdd);
+            this.setChildIndex(enemyToAdd, this.getChildIndex(this.player) + 1);
+        }
     }
 }

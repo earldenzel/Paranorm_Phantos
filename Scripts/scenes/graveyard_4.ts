@@ -11,7 +11,7 @@ module scenes {
         // Methods
         public Start(): void {
             //this.enemies[0] = new objects.ShadowGhost(1, true, true);
-            this.enemies[0] = new objects.GhostTeeth(1.5);
+            this.enemies[0] = new objects.Maggot(1,false,true,4);
             //this.enemies[1] = new objects.TestEnemy(3, false, false);
             //this.enemies[2] = new objects.TestEnemy(2,false,true);
 

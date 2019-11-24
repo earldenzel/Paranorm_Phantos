@@ -420,6 +420,12 @@ var scenes;
                 });
             }
         };
+        PlayScene.prototype.AddEnemyToScene = function (enemyToAdd) {
+            var length = this.enemies.length;
+            this.enemies[length] = enemyToAdd;
+            this.addChild(enemyToAdd);
+            this.setChildIndex(enemyToAdd, this.getChildIndex(this.player) + 1);
+        };
         return PlayScene;
     }(objects.Scene));
     scenes.PlayScene = PlayScene;
