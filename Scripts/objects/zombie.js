@@ -80,7 +80,6 @@ var objects;
                 this.direction = config.Direction.LEFT;
             }
             if (newPos.x > this.x) {
-                // To be flipped, requires the change in sprite
                 this.scaleX = -1;
                 this.direction = config.Direction.RIGHT;
             }

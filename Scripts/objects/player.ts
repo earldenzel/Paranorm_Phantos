@@ -367,11 +367,34 @@ module objects {
         }
         public ActivatePowers(): void {
             if (this.activatePowers) {
+                let ticker: number = createjs.Ticker.getTicks();
                 switch (this.powerUp) {
                     case config.PowerUp.SHADOW:
                         this.SwitchAnimation("Phoebe_Shadow");
-                        let ticker: number = createjs.Ticker.getTicks();
                         if(ticker % 90 == 0){
+                            this.ecto -= 1;
+                        }
+                        break;
+                    case config.PowerUp.BITE:
+                            switch (this.direction) {
+                                case config.Direction.UP:
+                                    this.y -= (this.playerMoveSpeed + 26);
+                                    this.SwitchAnimation(this.bitedash[this.direction as number]);
+                                    break;
+                                case config.Direction.DOWN:
+                                    this.y += (this.playerMoveSpeed + 26);
+                                    this.SwitchAnimation(this.bitedash[this.direction as number]);
+                                    break;
+                                case config.Direction.RIGHT:
+                                    this.x += (this.playerMoveSpeed + 26);
+                                    this.SwitchAnimation(this.bitedash[this.direction as number]);
+                                    break;
+                                case config.Direction.LEFT:
+                                    this.x -= (this.playerMoveSpeed + 26);
+                                    this.SwitchAnimation(this.bitedash[this.direction as number]);
+                                    break;
+                            }
+                        if(ticker % 15 == 0){
                             this.ecto -= 1;
                         }
                         break;

@@ -108,14 +108,8 @@ var objects;
             }
         };
         ShadowGhost.prototype.DevourEffect = function () {
-            var random = Math.random() * 100;
-            if (random > 90) {
-                managers.Game.player.GainAttack(1);
-            }
-            else {
-                managers.Game.player.GainHealth(2);
-            }
             managers.Game.player.powerUp = config.PowerUp.SHADOW;
+            _super.prototype.DevourEffect.call(this);
         };
         ShadowGhost.prototype.RemoveFromPlay = function (bounty) {
             this.isDead = true;

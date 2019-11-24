@@ -352,11 +352,34 @@ var objects;
         };
         Player.prototype.ActivatePowers = function () {
             if (this.activatePowers) {
+                var ticker = createjs.Ticker.getTicks();
                 switch (this.powerUp) {
                     case config.PowerUp.SHADOW:
                         this.SwitchAnimation("Phoebe_Shadow");
-                        var ticker = createjs.Ticker.getTicks();
                         if (ticker % 90 == 0) {
+                            this.ecto -= 1;
+                        }
+                        break;
+                    case config.PowerUp.BITE:
+                        switch (this.direction) {
+                            case config.Direction.UP:
+                                this.y -= (this.playerMoveSpeed + 26);
+                                this.SwitchAnimation(this.bitedash[this.direction]);
+                                break;
+                            case config.Direction.DOWN:
+                                this.y += (this.playerMoveSpeed + 26);
+                                this.SwitchAnimation(this.bitedash[this.direction]);
+                                break;
+                            case config.Direction.RIGHT:
+                                this.x += (this.playerMoveSpeed + 26);
+                                this.SwitchAnimation(this.bitedash[this.direction]);
+                                break;
+                            case config.Direction.LEFT:
+                                this.x -= (this.playerMoveSpeed + 26);
+                                this.SwitchAnimation(this.bitedash[this.direction]);
+                                break;
+                        }
+                        if (ticker % 15 == 0) {
                             this.ecto -= 1;
                         }
                         break;

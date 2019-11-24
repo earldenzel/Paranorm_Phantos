@@ -20,7 +20,7 @@ var objects;
             var _this = _super.call(this, managers.Game.enemies_TextureAtlas, "GhostTeeth_Idle") || this;
             _this.Start();
             _this.hp = 3;
-            _this.attackPower = 1;
+            _this.attackPower = 2;
             _this.moveSpeed = moveSpeed;
             _this.knockback = 0.75;
             _this.eatTimer = 600;
@@ -63,21 +63,40 @@ var objects;
             var enemyPosition = new math.Vec2(this.x, this.y);
             var dirToPlayer = math.Vec2.Subtract(enemyPosition, playerPosition);
             var distanceToPlayer = math.Vec2.Distance(enemyPosition, playerPosition);
-            if (distanceToPlayer < 150) {
+            this.isAttacking = (distanceToPlayer < 200);
+            if (this.isAttacking) {
                 this.currentSpeed = this.moveSpeed * 3;
-                this.isAttacking = true;
+                if (dirToPlayer.y < 60 && dirToPlayer.y > -60) {
+                    if (dirToPlayer.x < 0) {
+                        console.log("Charge LEFT");
+                        this.scaleX = -1;
+                        this.direction = config.Direction.LEFT;
+                        this.x -= this.currentSpeed;
+                    }
+                    else if (dirToPlayer.x > 0) {
+                        console.log("Charge RIGHT");
+                        this.scaleX = 1;
+                        this.direction = config.Direction.RIGHT;
+                        this.x += this.currentSpeed;
+                    }
+                }
+                else if (dirToPlayer.x < 40 && dirToPlayer.x > -40) {
+                    if (dirToPlayer.y < 0) {
+                        console.log("Charge UP");
+                        this.direction = config.Direction.UP;
+                        this.y -= this.currentSpeed;
+                    }
+                    else if (dirToPlayer.y > 0) {
+                        console.log("Charge DOWN");
+                        this.direction = config.Direction.DOWN;
+                        this.y += this.currentSpeed;
+                    }
+                }
             }
-            else {
-                this.currentSpeed = this.moveSpeed;
-                this.isAttacking = false;
-            }
-            var newPos = math.Vec2.Add(enemyPosition, math.Vec2.NormalizeMultiplySpeed(dirToPlayer, distanceToPlayer, this.currentSpeed));
-            if (!this.isAttacking) {
-                this.x = newPos.x;
-                this.y = newPos.y;
-            }
-            else {
-            }
+        };
+        GhostTeeth.prototype.DevourEffect = function () {
+            managers.Game.player.powerUp = config.PowerUp.BITE;
+            _super.prototype.DevourEffect.call(this);
         };
         GhostTeeth.prototype.RemoveFromPlay = function (bounty) {
             this.isDead = true;

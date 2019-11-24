@@ -13,7 +13,7 @@ module objects{
             super(managers.Game.enemies_TextureAtlas,"GhostTeeth_Idle");
             this.Start();
             this.hp = 3;
-            this.attackPower = 1;
+            this.attackPower = 2;
 
             this.moveSpeed = moveSpeed;
             this.knockback = 0.75;
@@ -61,24 +61,41 @@ module objects{
             let dirToPlayer: math.Vec2 = math.Vec2.Subtract(enemyPosition, playerPosition);
             let distanceToPlayer: number = math.Vec2.Distance(enemyPosition, playerPosition);
 
-            if(distanceToPlayer < 150){
-                this.currentSpeed = this.moveSpeed * 3;
-                this.isAttacking = true;
-            }
-            else {
-                this.currentSpeed = this.moveSpeed;
-                this.isAttacking = false;
-            }
-            let newPos: math.Vec2 = math.Vec2.Add(enemyPosition, math.Vec2.NormalizeMultiplySpeed(dirToPlayer, distanceToPlayer, this.currentSpeed));
-            if(!this.isAttacking){
-                this.x = newPos.x;
-                this.y = newPos.y;
-            } 
-            else {
-                
-            }
-            
+            this.isAttacking = (distanceToPlayer < 200);
 
+            if(this.isAttacking){
+                this.currentSpeed = this.moveSpeed * 3;
+                if(dirToPlayer.y < 60 && dirToPlayer.y > -60){
+                    if(dirToPlayer.x < 0){
+                        console.log("Charge LEFT");
+                        this.scaleX = -1;
+                        this.direction = config.Direction.LEFT;
+                        this.x -= this.currentSpeed;
+                    }
+                    else if(dirToPlayer.x > 0){
+                        console.log("Charge RIGHT");
+                        this.scaleX = 1;
+                        this.direction = config.Direction.RIGHT;
+                        this.x += this.currentSpeed;
+                    }
+                }
+                else if (dirToPlayer.x < 40 && dirToPlayer.x > -40){
+                    if(dirToPlayer.y < 0){
+                        console.log("Charge UP");
+                        this.direction = config.Direction.UP;
+                        this.y -= this.currentSpeed;
+                    }
+                    else if(dirToPlayer.y > 0){
+                        console.log("Charge DOWN");
+                        this.direction = config.Direction.DOWN;
+                        this.y += this.currentSpeed;
+                    }
+                }
+            }
+        }
+        public DevourEffect(): void {
+            managers.Game.player.powerUp = config.PowerUp.BITE;
+            super.DevourEffect();
         }
         public RemoveFromPlay(bounty: number): void {
             this.isDead = true;

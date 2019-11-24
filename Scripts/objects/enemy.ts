@@ -90,7 +90,7 @@ module objects {
 
             //if enemy is not taking damage -- check collision with weapon
             if (!this.isTakingDamage) {
-                if (managers.Collision.Check(managers.Game.player.weapon, this) && this.canBeAttacked) {
+                if ((managers.Collision.Check(managers.Game.player.weapon, this) && this.canBeAttacked) || (managers.Collision.Check(managers.Game.player, this) && this.canBeAttacked && managers.Game.player.activatePowers && managers.Game.player.powerUp == config.PowerUp.BITE)) {
                     this.isTakingDamage = true;
                     this.GetDamage(managers.Game.player);
                 }

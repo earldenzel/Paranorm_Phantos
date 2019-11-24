@@ -107,14 +107,8 @@ module objects {
             }
         }
         public DevourEffect(): void {
-            let random: number = Math.random() * 100;
-            if (random > 90) {
-                managers.Game.player.GainAttack(1);
-            }
-            else {
-                managers.Game.player.GainHealth(2);
-            }
             managers.Game.player.powerUp = config.PowerUp.SHADOW;
+            super.DevourEffect();
         }
         public RemoveFromPlay(bounty: number): void {
             this.isDead = true;
