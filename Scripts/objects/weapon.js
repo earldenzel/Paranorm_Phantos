@@ -50,9 +50,19 @@ var objects;
             console.log("Attack initiated");
             this.visible = true;
             this.currentAnimationFrame = 0;
+            managers.Game.SFX = createjs.Sound.play("phoebeDash-Swing");
+            managers.Game.SFX.volume = 0.2;
             if (this.currentAnimation != this.images[managers.Game.player.direction]) {
                 this.gotoAndPlay(this.images[managers.Game.player.direction]);
             }
+            this.Delay();
+        };
+        Weapon.prototype.Delay = function () {
+            console.log("Delay initiated");
+            setTimeout(function () {
+                managers.Game.player.delaySequence = 0;
+                console.log("Delay ended");
+            }, managers.Game.player.playerAttackDelay);
         };
         return Weapon;
     }(objects.GameObject));

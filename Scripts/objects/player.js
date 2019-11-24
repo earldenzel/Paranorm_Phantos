@@ -22,11 +22,12 @@ var objects;
             //Variables
             //public playerController: Controller<boolean>;
             _this.attackSequence = 0;
+            _this.delaySequence = 0;
             _this.biteSequence = 0;
             _this.fallSequence = 0;
             _this.textSequence = 0;
             _this.playerMoveSpeed = 4;
-            _this.attackTimer = 0;
+            _this.playerAttackDelay = 1000;
             _this.bitingTimer = 0;
             _this.bitingReset = 0;
             _this.canTraverseTop = false;
@@ -103,11 +104,6 @@ var objects;
                 managers.Game.SFX.volume = 0.2;
                 this.bitingTimer++;
             }
-            if (this.attackTimer == 1) {
-                managers.Game.SFX = createjs.Sound.play("phoebeDash-Swing");
-                managers.Game.SFX.volume = 0.2;
-                this.attackTimer++;
-            }
         };
         Player.prototype.Reset = function () { };
         Player.prototype.Move = function () {
@@ -181,9 +177,10 @@ var objects;
             }
             //if player presses the attack button
             if (managers.Game.keyboardManager.attacking) {
-                if (this.attackSequence == 0 && this.weapon != undefined) {
+                if (this.attackSequence == 0 && this.weapon != undefined && this.delaySequence == 0) {
                     this.alpha = 0;
                     this.attackSequence = 1;
+                    this.delaySequence = 1;
                     this.weapon.Attack();
                 }
             }

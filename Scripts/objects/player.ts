@@ -4,12 +4,13 @@ module objects {
         //Variables
         //public playerController: Controller<boolean>;
         public attackSequence: number = 0;
+        public delaySequence: number = 0;
         public biteSequence: number = 0;
         public fallSequence: number = 0;
         public textSequence: number = 0;
         public playerMoveSpeed: number = 4;
+        public playerAttackDelay: number = 1000;
         public weapon: objects.Weapon;
-        private attackTimer: number = 0;
         private bitingTimer: number = 0;
         private bitingReset: number = 0;
         public canTraverseTop: boolean = false;
@@ -113,11 +114,6 @@ module objects {
                 managers.Game.SFX.volume = 0.2;
                 this.bitingTimer++;
             }
-            if (this.attackTimer == 1) {
-                managers.Game.SFX = createjs.Sound.play("phoebeDash-Swing");
-                managers.Game.SFX.volume = 0.2;
-                this.attackTimer++;
-            }
         }
 
         public Reset(): void { }
@@ -193,12 +189,15 @@ module objects {
             }
             //if player presses the attack button
             if (managers.Game.keyboardManager.attacking) {
-                if (this.attackSequence == 0 && this.weapon != undefined) {
+                if (this.attackSequence == 0 && this.weapon != undefined && this.delaySequence == 0) {
                     this.alpha = 0;
                     this.attackSequence = 1;
+                    this.delaySequence = 1;
                     this.weapon.Attack();
                 }
             }
+
+            
 
             if (this.biteSequence !== 0) {
                 this.SwitchAnimation(this.bite[this.direction as number]);
