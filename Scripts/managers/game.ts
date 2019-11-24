@@ -13,6 +13,7 @@ module managers {
         public static shootingFlower_TextureAtlas: createjs.SpriteSheet;
         public static chest_TextureAtlas: createjs.SpriteSheet;
         // KC
+        public static currentStage: objects.Scene;
         public static enemies_TextureAtlas: createjs.SpriteSheet; 
         public static titleUIMap_TextureAtlas: createjs.SpriteSheet;
         public static bulletManager: managers.Bullet;

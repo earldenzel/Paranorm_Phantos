@@ -1592,11 +1592,11 @@ module config {
                 "MapsGraveyard": { "frames": [8] },
                 "MapsHotel": { "frames": [9] },
                 "MapsMansion": { "frames": [10] },
-                "Power_ItemBox_Bite": { "frames": [11] },
-                "Power_ItemBox_Fire": { "frames": [12] },
-                "Power_ItemBox_Ice": { "frames": [13] },
-                "Power_ItemBox_Shadow": { "frames": [14] },
-                "Power_ItemBox_Slime": { "frames": [15] },
+                "Power_Bite": { "frames": [11] },
+                "Power_Fire": { "frames": [12] },
+                "Power_Ice": { "frames": [13] },
+                "Power_Shadow": { "frames": [14] },
+                "Power_Slime": { "frames": [15] },
                 "Ecto_0": { "frames": [16] },
                 "Ecto_1": { "frames": [17] },
                 "Ecto_2": { "frames": [18] },
@@ -1666,18 +1666,18 @@ module config {
             "framerate": 20,
             "frames": [
                 [0, 0, 174, 196, 0, 0, 0],
-                [0, 196, 174, 194, 0, 0, 0],
-                [174, 0, 144, 196, 0, 0, 0],
+                [0, 196, 174, 194, 0, 0, 0], 
+                [174, 0, 144, 196, 0, 36, 57], // Shadow Ghost Attack 4
                 [0, 390, 150, 172, 0, 0, 0],
                 [318, 0, 150, 170, 0, 0, 0],
                 [174, 196, 98, 148, 0, 0, 0],
-                [0, 562, 118, 120, 0, 0, 0],
+                [0, 562, 118, 120, 0, 23, 19], // Shadow Ghost Attack 3
                 [468, 0, 68, 148, 0, -15, 0],
                 [0, 682, 114, 102, 0, 0, -1],
                 [536, 0, 62, 146, 0, 0, 0],
                 [0, 784, 62, 146, 0, 0, 0],
-                [598, 0, 152, 56, 0, 0, 0],
-                [598, 56, 152, 52, 0, 0, -2],
+                [598, 0, 152, 56, 0, 50, -50], // Ghost Teeth Right
+                [598, 56, 152, 52, 0, 50, -52], // Ghost Teeth Right
                 [750, 0, 110, 94, 0, 0, 0],
                 [272, 196, 44, 148, 0, 0, -2],
                 [62, 784, 44, 152, 0, 0, 0],
@@ -1700,7 +1700,7 @@ module config {
                 [688, 108, 62, 122, 0, 0, 0],
                 [750, 94, 84, 102, 0, -5, 0],
                 [834, 94, 42, 120, 0, 0, 0],
-                [114, 690, 78, 82, 0, 0, 0],
+                [114, 690, 78, 82, 0, 0, 0], // ShadowGhost Attack 1
                 [150, 772, 46, 132, 0, 0, 0],
                 [150, 904, 64, 46, 0, 0, 0],
                 [192, 676, 56, 96, 0, 0, 0],
@@ -1773,7 +1773,7 @@ module config {
                 [572, 736, 70, 70, 0, 0, 0],
                 [318, 170, 28, 26, 0, 0, -1],
                 [598, 354, 26, 28, 0, -1, 0],
-                [484, 810, 50, 50, 0, 0, 0],
+                [484, 810, 50, 50, 0, -22, -32], // Shadow Ghost Attack 2
                 [534, 806, 70, 70, 0, 0, 0],
                 [462, 876, 42, 74, 0, 0, -4],
                 [504, 876, 70, 70, 0, 0, 0],
@@ -1839,12 +1839,12 @@ module config {
                 "GhostWoman_EatenFront": { "frames": [77] },
                 "GhostWoman_Explode": {
                     "frames": [143, 131, 96, 97],
-                    "speed": 0.1
+                    "speed": 0.2
                 },
 
                 "GhostShadow_Attack": {
-                    "frames": [35, 108, 6, 2, 2, 2, 2, 2, 2, 2, 6, 108, 35],
-                    "speed": 0.1
+                    "frames": [35, 108, 6, 2],
+                    "speed": 0.2
                 },
                 "GhostShadow_Stun": {
                     "frames": [31, 8],
@@ -1861,7 +1861,7 @@ module config {
                 // Works with GhostMan
                 "GhostShadow_Explode": {
                     "frames": [133, 130, 52, 69],
-                    "speed": 0.1
+                    "speed": 0.2
                 },
                 "GhostShadow_EatenFrontBack": { "frames": [85] },
                 "GhostShadow_EatenLeft": { "frames": [115] },
@@ -1938,7 +1938,7 @@ module config {
                 },
                 "Zombie_Explode": {
                     "frames": [151, 140, 118, 121],
-                    "speed": 0.1
+                    "speed": 0.2
                 },
 
                 "RedSkeleton_Dead": { "frames": [37] },
@@ -1974,7 +1974,7 @@ module config {
                 },
                 "Maggot_Explode": {
                     "frames": [146, 137, 111, 113],
-                    "speed": 0.1
+                    "speed": 0.2
                 },
                 "Maggot_SmallWalkSide": { "frames": [129] },
 
@@ -2003,7 +2003,7 @@ module config {
                 // Works with GhostTeeth, GhostThin, TestEnemy
                 "Ghost_Explode": {
                     "frames": [144, 136, 105, 109],
-                    "speed": 0.1
+                    "speed": 0.2
                 },
                 "Ghost_EatenLeft": { "frames": [127] },
                 "Ghost_EatenBack": { "frames": [138] },
@@ -2027,7 +2027,7 @@ module config {
                 },
                 "Skeleton_Explode": {
                     "frames": [150, 139, 116, 117],
-                    "speed": 0.1
+                    "speed": 0.2
                 },
                 "Bone": {
                     "frames": [149, 147, 152, 153],

@@ -104,63 +104,76 @@ var objects;
                 managers.Game.SFX.volume = 0.2;
                 this.bitingTimer++;
             }
+            this.ActivatePowers();
         };
         Player.prototype.Reset = function () { };
         Player.prototype.Move = function () {
             //movement implementation
-            if (!managers.Game.keyboardManager.moveUp
-                && !managers.Game.keyboardManager.moveDown
-                && !managers.Game.keyboardManager.moveLeft
-                && !managers.Game.keyboardManager.moveRight
-                && !managers.Game.keyboardManager.attacking
-                && !managers.Game.keyboardManager.biting
-                && this.biteSequence === 0) {
-                this.SwitchAnimation(this.stand[this.direction]);
-            }
-            // Running Implementation
-            if (managers.Game.keyboardManager.running) {
-                var runningSpeed = this.playerMoveSpeed + 1;
-                if (managers.Game.keyboardManager.moveLeft) {
-                    this.x -= runningSpeed;
-                    this.direction = config.Direction.LEFT;
-                    if (!managers.Game.keyboardManager.moveDown &&
-                        !managers.Game.keyboardManager.moveUp) {
+            if (!this.activatePowers) {
+                if (!managers.Game.keyboardManager.moveUp
+                    && !managers.Game.keyboardManager.moveDown
+                    && !managers.Game.keyboardManager.moveLeft
+                    && !managers.Game.keyboardManager.moveRight
+                    && !managers.Game.keyboardManager.attacking
+                    && !managers.Game.keyboardManager.biting
+                    && this.biteSequence === 0) {
+                    this.SwitchAnimation(this.stand[this.direction]);
+                }
+                // Running Implementation
+                if (managers.Game.keyboardManager.running) {
+                    var runningSpeed = this.playerMoveSpeed + 1;
+                    if (managers.Game.keyboardManager.moveLeft) {
+                        this.x -= runningSpeed;
+                        this.direction = config.Direction.LEFT;
+                        if (!managers.Game.keyboardManager.moveDown &&
+                            !managers.Game.keyboardManager.moveUp) {
+                            this.SwitchAnimation(this.run[this.direction]);
+                        }
+                    }
+                    if (managers.Game.keyboardManager.moveRight) {
+                        this.x += runningSpeed;
+                        this.direction = config.Direction.RIGHT;
+                        if (!managers.Game.keyboardManager.moveDown &&
+                            !managers.Game.keyboardManager.moveUp) {
+                            this.SwitchAnimation(this.run[this.direction]);
+                        }
+                    }
+                    if (managers.Game.keyboardManager.moveUp) {
+                        this.y -= runningSpeed;
+                        this.direction = config.Direction.UP;
+                        this.SwitchAnimation(this.run[this.direction]);
+                    }
+                    if (managers.Game.keyboardManager.moveDown) {
+                        this.y += runningSpeed;
+                        this.direction = config.Direction.DOWN;
                         this.SwitchAnimation(this.run[this.direction]);
                     }
                 }
-                if (managers.Game.keyboardManager.moveRight) {
-                    this.x += runningSpeed;
-                    this.direction = config.Direction.RIGHT;
-                    if (!managers.Game.keyboardManager.moveDown &&
-                        !managers.Game.keyboardManager.moveUp) {
-                        this.SwitchAnimation(this.run[this.direction]);
+                else {
+                    if (managers.Game.keyboardManager.moveLeft) {
+                        this.x -= this.playerMoveSpeed;
+                        this.direction = config.Direction.LEFT;
+                        if (!managers.Game.keyboardManager.moveDown &&
+                            !managers.Game.keyboardManager.moveUp) {
+                            this.SwitchAnimation(this.walk[this.direction]);
+                        }
                     }
-                }
-                if (managers.Game.keyboardManager.moveUp) {
-                    this.y -= runningSpeed;
-                    this.direction = config.Direction.UP;
-                    this.SwitchAnimation(this.run[this.direction]);
-                }
-                if (managers.Game.keyboardManager.moveDown) {
-                    this.y += runningSpeed;
-                    this.direction = config.Direction.DOWN;
-                    this.SwitchAnimation(this.run[this.direction]);
-                }
-            }
-            else {
-                if (managers.Game.keyboardManager.moveLeft) {
-                    this.x -= this.playerMoveSpeed;
-                    this.direction = config.Direction.LEFT;
-                    if (!managers.Game.keyboardManager.moveDown &&
-                        !managers.Game.keyboardManager.moveUp) {
+                    if (managers.Game.keyboardManager.moveRight) {
+                        this.x += this.playerMoveSpeed;
+                        this.direction = config.Direction.RIGHT;
+                        if (!managers.Game.keyboardManager.moveDown &&
+                            !managers.Game.keyboardManager.moveUp) {
+                            this.SwitchAnimation(this.walk[this.direction]);
+                        }
+                    }
+                    if (managers.Game.keyboardManager.moveUp) {
+                        this.y -= this.playerMoveSpeed;
+                        this.direction = config.Direction.UP;
                         this.SwitchAnimation(this.walk[this.direction]);
                     }
-                }
-                if (managers.Game.keyboardManager.moveRight) {
-                    this.x += this.playerMoveSpeed;
-                    this.direction = config.Direction.RIGHT;
-                    if (!managers.Game.keyboardManager.moveDown &&
-                        !managers.Game.keyboardManager.moveUp) {
+                    if (managers.Game.keyboardManager.moveDown) {
+                        this.y += this.playerMoveSpeed;
+                        this.direction = config.Direction.DOWN;
                         this.SwitchAnimation(this.walk[this.direction]);
                     }
                 }
@@ -214,13 +227,15 @@ var objects;
                 }
             }
             if (managers.Game.keyboardManager.powers) {
-                this.activatePowers = !this.activatePowers;
-                if (this.activatePowers) {
-                    switch (this.powerUp) {
-                        case objects.powerUp.SHADOW:
-                            break;
-                    }
+                if (this.ecto > 0 && this.powerUp != config.PowerUp.NONE) {
+                    this.activatePowers = true;
                 }
+                else {
+                    this.activatePowers = false;
+                }
+            }
+            else {
+                this.activatePowers = false;
             }
         };
         Player.prototype.CheckBound = function () {
@@ -341,6 +356,42 @@ var objects;
                 }
             }
             this.EchoMessage(message);
+        };
+        Player.prototype.ActivatePowers = function () {
+            if (this.activatePowers) {
+                var ticker = createjs.Ticker.getTicks();
+                switch (this.powerUp) {
+                    case config.PowerUp.SHADOW:
+                        this.SwitchAnimation("Phoebe_Shadow");
+                        if (ticker % 90 == 0) {
+                            this.ecto -= 1;
+                        }
+                        break;
+                    case config.PowerUp.BITE:
+                        switch (this.direction) {
+                            case config.Direction.UP:
+                                this.y -= (this.playerMoveSpeed + 26);
+                                this.SwitchAnimation(this.bitedash[this.direction]);
+                                break;
+                            case config.Direction.DOWN:
+                                this.y += (this.playerMoveSpeed + 26);
+                                this.SwitchAnimation(this.bitedash[this.direction]);
+                                break;
+                            case config.Direction.RIGHT:
+                                this.x += (this.playerMoveSpeed + 26);
+                                this.SwitchAnimation(this.bitedash[this.direction]);
+                                break;
+                            case config.Direction.LEFT:
+                                this.x -= (this.playerMoveSpeed + 26);
+                                this.SwitchAnimation(this.bitedash[this.direction]);
+                                break;
+                        }
+                        if (ticker % 15 == 0) {
+                            this.ecto -= 1;
+                        }
+                        break;
+                }
+            }
         };
         Player.prototype.GainSpeed = function (speedGain) {
             this.playerMoveSpeed += speedGain;

@@ -114,65 +114,80 @@ module objects {
                 managers.Game.SFX.volume = 0.2;
                 this.bitingTimer++;
             }
+
+            this.ActivatePowers();
         }
 
         public Reset(): void { }
 
         public Move(): void {
             //movement implementation
-            if (!managers.Game.keyboardManager.moveUp
-                && !managers.Game.keyboardManager.moveDown
-                && !managers.Game.keyboardManager.moveLeft
-                && !managers.Game.keyboardManager.moveRight
-                && !managers.Game.keyboardManager.attacking
-                && !managers.Game.keyboardManager.biting
-                && this.biteSequence === 0) {
-                this.SwitchAnimation(this.stand[this.direction as number]);
-            }
-            // Running Implementation
-            if (managers.Game.keyboardManager.running) {
-                let runningSpeed: number = this.playerMoveSpeed + 1;
-                if (managers.Game.keyboardManager.moveLeft) {
-                    this.x -= runningSpeed;
-                    this.direction = config.Direction.LEFT;
-                    if (!managers.Game.keyboardManager.moveDown &&
-                        !managers.Game.keyboardManager.moveUp) {
+
+            if (!this.activatePowers) {
+                if (!managers.Game.keyboardManager.moveUp
+                    && !managers.Game.keyboardManager.moveDown
+                    && !managers.Game.keyboardManager.moveLeft
+                    && !managers.Game.keyboardManager.moveRight
+                    && !managers.Game.keyboardManager.attacking
+                    && !managers.Game.keyboardManager.biting
+                    && this.biteSequence === 0) {
+                    this.SwitchAnimation(this.stand[this.direction as number]);
+                }
+                // Running Implementation
+                if (managers.Game.keyboardManager.running) {
+                    let runningSpeed: number = this.playerMoveSpeed + 1;
+                    if (managers.Game.keyboardManager.moveLeft) {
+                        this.x -= runningSpeed;
+                        this.direction = config.Direction.LEFT;
+                        if (!managers.Game.keyboardManager.moveDown &&
+                            !managers.Game.keyboardManager.moveUp) {
+                            this.SwitchAnimation(this.run[this.direction as number]);
+                        }
+                    }
+                    if (managers.Game.keyboardManager.moveRight) {
+                        this.x += runningSpeed;
+                        this.direction = config.Direction.RIGHT;
+                        if (!managers.Game.keyboardManager.moveDown &&
+                            !managers.Game.keyboardManager.moveUp) {
+                            this.SwitchAnimation(this.run[this.direction as number]);
+                        }
+                    }
+                    if (managers.Game.keyboardManager.moveUp) {
+                        this.y -= runningSpeed;
+                        this.direction = config.Direction.UP;
+                        this.SwitchAnimation(this.run[this.direction as number]);
+                    }
+                    if (managers.Game.keyboardManager.moveDown) {
+                        this.y += runningSpeed;
+                        this.direction = config.Direction.DOWN;
                         this.SwitchAnimation(this.run[this.direction as number]);
                     }
                 }
-                if (managers.Game.keyboardManager.moveRight) {
-                    this.x += runningSpeed;
-                    this.direction = config.Direction.RIGHT;
-                    if (!managers.Game.keyboardManager.moveDown &&
-                        !managers.Game.keyboardManager.moveUp) {
-                        this.SwitchAnimation(this.run[this.direction as number]);
+                else {
+                    if (managers.Game.keyboardManager.moveLeft) {
+                        this.x -= this.playerMoveSpeed;
+                        this.direction = config.Direction.LEFT;
+                        if (!managers.Game.keyboardManager.moveDown &&
+                            !managers.Game.keyboardManager.moveUp) {
+                            this.SwitchAnimation(this.walk[this.direction as number]);
+                        }
                     }
-                }
-                if (managers.Game.keyboardManager.moveUp) {
-                    this.y -= runningSpeed;
-                    this.direction = config.Direction.UP;
-                    this.SwitchAnimation(this.run[this.direction as number]);
-                }
-                if (managers.Game.keyboardManager.moveDown) {
-                    this.y += runningSpeed;
-                    this.direction = config.Direction.DOWN;
-                    this.SwitchAnimation(this.run[this.direction as number]);
-                }
-            }
-            else {
-                if (managers.Game.keyboardManager.moveLeft) {
-                    this.x -= this.playerMoveSpeed;
-                    this.direction = config.Direction.LEFT;
-                    if (!managers.Game.keyboardManager.moveDown &&
-                        !managers.Game.keyboardManager.moveUp) {
+                    if (managers.Game.keyboardManager.moveRight) {
+                        this.x += this.playerMoveSpeed;
+                        this.direction = config.Direction.RIGHT;
+                        if (!managers.Game.keyboardManager.moveDown &&
+                            !managers.Game.keyboardManager.moveUp) {
+                            this.SwitchAnimation(this.walk[this.direction as number]);
+                        }
+                    }
+                    if (managers.Game.keyboardManager.moveUp) {
+                        this.y -= this.playerMoveSpeed;
+                        this.direction = config.Direction.UP;
                         this.SwitchAnimation(this.walk[this.direction as number]);
                     }
-                }
-                if (managers.Game.keyboardManager.moveRight) {
-                    this.x += this.playerMoveSpeed;
-                    this.direction = config.Direction.RIGHT;
-                    if (!managers.Game.keyboardManager.moveDown &&
-                        !managers.Game.keyboardManager.moveUp) {
+                    if (managers.Game.keyboardManager.moveDown) {
+                        this.y += this.playerMoveSpeed;
+                        this.direction = config.Direction.DOWN;
                         this.SwitchAnimation(this.walk[this.direction as number]);
                     }
                 }
@@ -229,15 +244,16 @@ module objects {
                 }
             }
 
-            if(managers.Game.keyboardManager.powers){
-                this.activatePowers = !this.activatePowers;
-                if(this.activatePowers){
-                    switch(this.powerUp){
-                        case powerUp.SHADOW:
-                            break;
-                        
-                    }
+            if (managers.Game.keyboardManager.powers) {
+                if (this.ecto > 0 && this.powerUp != config.PowerUp.NONE) {
+                    this.activatePowers = true;
                 }
+                else {
+                    this.activatePowers = false;
+                }
+            }
+            else{
+                this.activatePowers = false;
             }
         }
 
@@ -316,7 +332,7 @@ module objects {
             }
         }
 
-        public GainMaxHealth(maxHpGain: number){
+        public GainMaxHealth(maxHpGain: number) {
             this.maxHp += maxHpGain;
             this.hp = this.maxHp;
             this.EchoMessage("MAX HP UP");
@@ -358,6 +374,42 @@ module objects {
             }
             this.EchoMessage(message);
         }
+        public ActivatePowers(): void {
+            if (this.activatePowers) {
+                let ticker: number = createjs.Ticker.getTicks();
+                switch (this.powerUp) {
+                    case config.PowerUp.SHADOW:
+                        this.SwitchAnimation("Phoebe_Shadow");
+                        if(ticker % 90 == 0){
+                            this.ecto -= 1;
+                        }
+                        break;
+                    case config.PowerUp.BITE:
+                            switch (this.direction) {
+                                case config.Direction.UP:
+                                    this.y -= (this.playerMoveSpeed + 26);
+                                    this.SwitchAnimation(this.bitedash[this.direction as number]);
+                                    break;
+                                case config.Direction.DOWN:
+                                    this.y += (this.playerMoveSpeed + 26);
+                                    this.SwitchAnimation(this.bitedash[this.direction as number]);
+                                    break;
+                                case config.Direction.RIGHT:
+                                    this.x += (this.playerMoveSpeed + 26);
+                                    this.SwitchAnimation(this.bitedash[this.direction as number]);
+                                    break;
+                                case config.Direction.LEFT:
+                                    this.x -= (this.playerMoveSpeed + 26);
+                                    this.SwitchAnimation(this.bitedash[this.direction as number]);
+                                    break;
+                            }
+                        if(ticker % 15 == 0){
+                            this.ecto -= 1;
+                        }
+                        break;
+                }
+            }
+        }
 
         public GainSpeed(speedGain: number) {
             this.playerMoveSpeed += speedGain;
@@ -371,10 +423,10 @@ module objects {
 
         public GainDollars(dollars: number) {
             this.money += dollars;
-            if (dollars > 0){
+            if (dollars > 0) {
                 this.EchoMessage("GAINED $" + dollars);
             }
-        }        
+        }
 
         public GainEcto(gain: number = 1) {
             if (this.ecto < this.maxEcto) {
