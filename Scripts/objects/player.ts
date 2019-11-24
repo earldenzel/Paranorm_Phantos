@@ -54,7 +54,7 @@ module objects {
             this.bitedash = ["Phoebe_Bite_Back", "Phoebe_Bite_Front1", "Phoebe_Bite_Left1", "Phoebe_Bite_Right1"];
             this.bite = ["Phoebe_Bite_Front2", "Phoebe_Bite_Front2", "Phoebe_Bite_Left2", "Phoebe_Bite_Right2"];
             this.direction = config.Direction.UP;
-            this.money = 9999;
+            this.money = 0;
             this.playerStatus = new objects.Label("1234567890", "16px", "'Press Start 2P'", "#FFFFFF", this.x, this.y, true);
             this.key = 0;
             this.deadPlayer = [
@@ -488,10 +488,10 @@ module objects {
                 case config.Direction.UP:
                     this.direction = config.Direction.DOWN;
                 case config.Direction.DOWN:
-                    target = math.Vec2.Add(target, new math.Vec2(0, -this.halfH / 2));
+                    target = math.Vec2.Add(target, new math.Vec2(-this.halfW/2, 0));
                     break;
                 case config.Direction.RIGHT:
-                    target = math.Vec2.Add(target, new math.Vec2(-this.halfW, 0));
+                    target = math.Vec2.Add(target, new math.Vec2(-this.halfW*2, 0));
                     break;
                 case config.Direction.LEFT:
                     target = math.Vec2.Add(target, new math.Vec2(this.halfW, 0));

@@ -41,7 +41,9 @@ module scenes {
         }
 
         public Update(): void {
-            //if(!this.enemies[0].visible && this.cosmetics[0].visible){
+            if (this.enemies[0].isStunned){
+                this.cosmetics[4].visible = false;
+            }
             if(!this.enemies[0].visible){
                 setTimeout(() => {
                     this.cosmetics.forEach(cosmetic =>{

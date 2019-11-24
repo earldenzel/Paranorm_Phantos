@@ -52,7 +52,9 @@ var scenes;
         };
         Graveyard_1.prototype.Update = function () {
             var _this = this;
-            //if(!this.enemies[0].visible && this.cosmetics[0].visible){
+            if (this.enemies[0].isStunned) {
+                this.cosmetics[4].visible = false;
+            }
             if (!this.enemies[0].visible) {
                 setTimeout(function () {
                     _this.cosmetics.forEach(function (cosmetic) {

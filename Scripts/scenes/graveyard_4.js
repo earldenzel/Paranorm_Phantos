@@ -41,7 +41,7 @@ var scenes;
         };
         Graveyard_4.prototype.Update = function () {
             // If all enemies are defeated, make the key appear
-            if (!this.enemies[0].visible && !this.enemies[1].visible && !this.enemies[2].visible) {
+            if (this.AllEnemiesAreDead()) {
                 if (!this.getChildByName("Items_Key") && managers.GraveyardLocks.graveyard_4_key) {
                     this.key = new objects.Key();
                     this.key.x = 250;

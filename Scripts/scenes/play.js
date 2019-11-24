@@ -144,6 +144,7 @@ var scenes;
                 this.shopManager = managers.Game.shopManager;
             }
             this.chestManager = managers.Game.chestManager;
+            this.chestManager.chestsNotSpawned = true;
             //this.playerStatus.shadow = new createjs.Shadow("#000000",0,0,10);
             //this.messageStatus.shadow = new createjs.Shadow("#000000",0,0,10);
             //this.controllerHelp.shadow = new createjs.Shadow("#000000",0,0,10);
@@ -203,6 +204,9 @@ var scenes;
                 this.shopManager.Update();
             }
             this.chestManager.Update();
+            if (this.AllEnemiesAreDead()) {
+                this.chestManager.ShowHiddenChests(managers.Game.currentScene);
+            }
             // KEY AND LOCKED DOORS
             if (this.key != undefined) {
                 if (this.getChildByName("Items_Key") && managers.Collision.Check(this.player, this.key) && this.key.visible) {
@@ -352,7 +356,9 @@ var scenes;
             // ENEMY PLACEMENT
             this.enemies.forEach(function (e) {
                 _this.addChild(e);
-                _this.addChild(e.stunIndicator);
+                if (e.canBeEaten && _this.design == config.Design.GRAVEYARD) {
+                    _this.addChild(e.stunIndicator);
+                }
             });
             //door frames
             if (this.hasDoorTop) {
@@ -384,6 +390,13 @@ var scenes;
                 });
                 this.bulletManager.shootingFLowerBullets.forEach(function (bullet) {
                     _this.addChild(bullet);
+                });
+            }
+        };
+        PlayScene.prototype.AllEnemiesAreDead = function () {
+            if (this.enemies.length > 0) {
+                return this.enemies.every(function (e) {
+                    return e.isDead;
                 });
             }
         };

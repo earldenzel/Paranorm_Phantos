@@ -18,6 +18,7 @@ var objects;
         function Enemy(textureAtlas, enemyName, startPosition) {
             if (startPosition === void 0) { startPosition = null; }
             var _this = _super.call(this, textureAtlas, enemyName) || this;
+            _this.isBeingEaten = false;
             _this.startPosition = startPosition;
             // Some enemies can be eaten, some enemies cannot.
             // They will start off as able to be eaten.
@@ -44,10 +45,9 @@ var objects;
                 if (managers.Game.player.biteSequence == 0) {
                     //if it is currently in contact with player and whether the biting button is pressed, then disable movement
                     if (managers.Game.keyboardManager.biting && managers.Collision.Check(managers.Game.player, this) && this.canBeEaten) {
+                        this.isBeingEaten = true;
                         managers.Game.player.SetBitePositionDirection(this.GetPosition());
                         managers.Game.player.EatMessage();
-                        this.scaleX = managers.Game.player.halfH / this.height;
-                        this.scaleY = this.scaleX;
                         managers.Game.keyboardManager.ControlReset();
                         //after eat timer is done, enable keyboard and reset sequence
                         managers.Game.player.biteSequence = setTimeout(function () {
@@ -73,6 +73,13 @@ var objects;
             //else, the player is not stunned and can move
             else {
                 this.Move();
+            }
+            if (this.isBeingEaten) {
+                this.rotation += 5;
+                if (this.scaleX > 0.02) {
+                    this.scaleX -= 0.01;
+                    this.scaleY = this.scaleX;
+                }
             }
             //if the player is not taking damage -- check player collision with this (as long as it is not stunned)
             if (!managers.Game.player.isTakingDamage) {

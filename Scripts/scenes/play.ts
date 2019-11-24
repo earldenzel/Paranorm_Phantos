@@ -191,6 +191,7 @@ module scenes {
                 this.shopManager = managers.Game.shopManager;
             }
             this.chestManager = managers.Game.chestManager;
+            this.chestManager.chestsNotSpawned = true;
 
             //this.playerStatus.shadow = new createjs.Shadow("#000000",0,0,10);
             //this.messageStatus.shadow = new createjs.Shadow("#000000",0,0,10);
@@ -265,6 +266,9 @@ module scenes {
                 this.shopManager.Update();
             }
             this.chestManager.Update();
+            if (this.AllEnemiesAreDead()){
+                this.chestManager.ShowHiddenChests(managers.Game.currentScene);
+            }
 
             // KEY AND LOCKED DOORS
             if (this.key != undefined){
@@ -426,7 +430,9 @@ module scenes {
             // ENEMY PLACEMENT
             this.enemies.forEach(e => {
                 this.addChild(e);
-                this.addChild(e.stunIndicator);
+                if (e.canBeEaten && this.design == config.Design.GRAVEYARD){
+                  this.addChild(e.stunIndicator);
+                }
             });            
 
             //door frames
@@ -461,6 +467,14 @@ module scenes {
                 });
                 this.bulletManager.shootingFLowerBullets.forEach(bullet => {
                     this.addChild(bullet);
+                });
+            }
+        }
+
+        public AllEnemiesAreDead(): boolean{
+            if (this.enemies.length > 0){
+                return this.enemies.every(e => {
+                    return e.isDead;
                 });
             }
         }

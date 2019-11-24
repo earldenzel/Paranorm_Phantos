@@ -16,12 +16,14 @@ var objects;
     var ChestItem = /** @class */ (function (_super) {
         __extends(ChestItem, _super);
         // Constructor
-        function ChestItem(imageString, effect, appearingScene) {
+        function ChestItem(imageString, effect, appearingScene, initiallyShown) {
+            if (initiallyShown === void 0) { initiallyShown = true; }
             var _this = _super.call(this, managers.Game.chest_TextureAtlas, imageString) || this;
             _this.available = true;
             _this.effect = effect;
             _this.appearingScene = appearingScene;
             _this.Start();
+            _this.visible = initiallyShown;
             return _this;
         }
         // Methods
@@ -29,6 +31,7 @@ var objects;
         };
         ChestItem.prototype.Update = function () {
             if (!this.available) {
+                this.visible = true;
                 this.gotoAndStop("openedChest");
             }
         };
@@ -48,7 +51,10 @@ var objects;
                     managers.Game.player.GainAttack(10);
                     break;
                 case config.Effects.INCREASE_GOLD:
-                    managers.Game.player.GainDollars(100);
+                    managers.Game.player.GainDollars(10);
+                    break;
+                case config.Effects.INCREASE_GOLD_50:
+                    managers.Game.player.GainDollars(50);
                     break;
             }
             this.available = false;

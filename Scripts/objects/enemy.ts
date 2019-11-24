@@ -8,6 +8,7 @@ module objects {
         protected bounty: number;
         public isFlying: boolean;
         public canBeEaten: boolean;
+        private isBeingEaten: boolean = false;
 
 
         public startPosition: math.Vec2;
@@ -41,11 +42,10 @@ module objects {
                 //determine whether a bit is currently happening 
                 if (managers.Game.player.biteSequence == 0){
                     //if it is currently in contact with player and whether the biting button is pressed, then disable movement
-                    if (managers.Game.keyboardManager.biting && managers.Collision.Check(managers.Game.player, this) && this.canBeEaten){                        
+                    if (managers.Game.keyboardManager.biting && managers.Collision.Check(managers.Game.player, this) && this.canBeEaten){      
+                        this.isBeingEaten = true;                  
                         managers.Game.player.SetBitePositionDirection(this.GetPosition());
                         managers.Game.player.EatMessage();
-                        this.scaleX = managers.Game.player.halfH / this.height;
-                        this.scaleY = this.scaleX;
                         managers.Game.keyboardManager.ControlReset();
                         //after eat timer is done, enable keyboard and reset sequence
                         managers.Game.player.biteSequence = setTimeout(() => {
@@ -72,6 +72,14 @@ module objects {
             //else, the player is not stunned and can move
             else{
                 this.Move();
+            }
+
+            if (this.isBeingEaten){
+                this.rotation += 5;
+                if (this.scaleX > 0.02){
+                    this.scaleX -= 0.01;
+                    this.scaleY = this.scaleX;
+                }
             }
 
             //if the player is not taking damage -- check player collision with this (as long as it is not stunned)
