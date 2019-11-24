@@ -20,6 +20,7 @@ var scenes;
             var _this = 
             // hasDoorTop, hasDoorBot, hasDoorLeft, hasDoorRight
             _super.call(this, true, true, false, true, config.Design.MANSION) || this;
+            _this.isDoorBotLocked = managers.MansionLocks.mansion_11_lockBot;
             _this.hasProjectileShooters = true;
             _this.Start();
             return _this;
@@ -45,6 +46,9 @@ var scenes;
             this.playerInfo.PlayerLocation = new math.Vec2(96, 50);
         };
         Mansion_11.prototype.Update = function () {
+            if (!this.isDoorBotLocked) {
+                managers.MansionLocks.mansion_11_lockBot = false;
+            }
             _super.prototype.Update.call(this);
         };
         Mansion_11.prototype.Main = function () {

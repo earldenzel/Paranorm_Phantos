@@ -20,6 +20,8 @@ var scenes;
             var _this = 
             // hasDoorTop, hasDoorBot, hasDoorLeft, hasDoorRight
             _super.call(this, true, true, true, true, config.Design.HOTEL) || this;
+            _this.isDoorLeftLocked = managers.HotelLocks.hotel_9_lockLeft;
+            _this.isDoorRightLocked = managers.HotelLocks.hotel_9_lockRight;
             _this.hasProjectileShooters = true;
             _this.Start();
             return _this;
@@ -44,6 +46,12 @@ var scenes;
             this.playerInfo.PlayerLocation = new math.Vec2(96, 50);
         };
         Hotel_9.prototype.Update = function () {
+            if (!this.isDoorLeftLocked) {
+                managers.HotelLocks.hotel_9_lockLeft = false;
+            }
+            if (!this.isDoorRightLocked) {
+                managers.HotelLocks.hotel_9_lockRight = false;
+            }
             _super.prototype.Update.call(this);
         };
         Hotel_9.prototype.Main = function () {

@@ -30,6 +30,12 @@ module scenes {
             this.phoebe.x = 260;
             this.phoebe.y = 500;
             managers.Game.keyboardManager.playMode = false;
+
+            // Play Music
+            managers.Game.music = createjs.Sound.play("music_gameOver");
+            managers.Game.music.loop = 0;
+            managers.Game.music.volume = 0.1;
+
             this.Main();
         }
 
@@ -50,6 +56,7 @@ module scenes {
         }
 
         private backButtonClick():void {
+            createjs.Sound.stop();
             managers.Game.currentScene = config.Scene.START;
         }
 

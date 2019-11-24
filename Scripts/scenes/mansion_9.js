@@ -20,6 +20,7 @@ var scenes;
             var _this = 
             // hasDoorTop, hasDoorBot, hasDoorLeft, hasDoorRight
             _super.call(this, true, false, true, false, config.Design.MANSION) || this;
+            _this.isDoorTopLocked = managers.MansionLocks.mansion_9_lockTop;
             _this.hasProjectileShooters = true;
             _this.Start();
             return _this;
@@ -44,6 +45,9 @@ var scenes;
             this.playerInfo.PlayerLocation = new math.Vec2(128, 34);
         };
         Mansion_9.prototype.Update = function () {
+            if (!this.isDoorTopLocked) {
+                managers.MansionLocks.mansion_9_lockTop = false;
+            }
             _super.prototype.Update.call(this);
         };
         Mansion_9.prototype.Main = function () {

@@ -7,7 +7,7 @@ module scenes {
         protected obstacles: Array<objects.GameObject> = new Array<objects.GameObject>();
         protected cosmetics: Array<objects.GameObject> = new Array<objects.GameObject>();
         protected key: objects.Key;
-        protected design: config.Design;        
+        protected design: config.Design;
         private bulletManager: managers.Bullet;
         private shopManager: managers.Shop;
         protected hasProjectileShooters: boolean = false;
@@ -62,6 +62,7 @@ module scenes {
             this.hasDoorLeft = hasDoorLeft;
             this.hasDoorRight = hasDoorRight;
             this.design = design;
+
             this.Start();
         }
 
@@ -71,7 +72,7 @@ module scenes {
             this.player = managers.Game.player;
             managers.Game.bulletManager.Reset();
 
-            switch(this.design){
+            switch (this.design) {
                 case config.Design.GRAVEYARD:
                     this.spriteSheet = managers.Game.graveyard_TextureAtlas;
                     break;
@@ -83,20 +84,21 @@ module scenes {
                     break;
             }
 
-            this.ceilingAndWall = new createjs.Sprite(this.spriteSheet,"CeilingAndWall");
-            this.ceilingAndWall.y = 110;            
-            
+
+            this.ceilingAndWall = new createjs.Sprite(this.spriteSheet, "CeilingAndWall");
+            this.ceilingAndWall.y = 110;
+
             //this.ceilingHorizontal =new objects.Background(this.assetManager,"background_c_hori");
             //this.ceilingVertical =new objects.Background(this.assetManager,"background_c_vert");
-            this.floor = new createjs.Sprite(this.spriteSheet,"Floor");
-            if(this.design != config.Design.GRAVEYARD){
+            this.floor = new createjs.Sprite(this.spriteSheet, "Floor");
+            if (this.design != config.Design.GRAVEYARD) {
                 this.floor.x = 90;
                 this.floor.y = 198;
             }
-            else{
+            else {
                 this.floor.y = 110;
             }
-            
+
             //this.wallHorizontal = new objects.Background(this.assetManager,"background_w_hori");
             //this.wallVertical = new objects.Background(this.assetManager, "background_w_vert");
 
@@ -107,105 +109,105 @@ module scenes {
 
             if (this.hasDoorTop) {
                 if (this.isDoorTopLocked) {
-                    this.doorTop = new createjs.Sprite(this.spriteSheet,"DoorTopLocked");
+                    this.doorTop = new createjs.Sprite(this.spriteSheet, "DoorTopLocked");
                     this.doorTop.name = "DoorTopLocked";
                 }
                 else {
-                    this.doorTop = new createjs.Sprite(this.spriteSheet,"DoorTop");
+                    this.doorTop = new createjs.Sprite(this.spriteSheet, "DoorTop");
                     this.doorTop.name = "DoorTop";
                 }
-                if(this.design != config.Design.GRAVEYARD){
-                    this.doorTopFrame = new createjs.Sprite(this.spriteSheet,"DoorTopCeiling");
+                if (this.design != config.Design.GRAVEYARD) {
+                    this.doorTopFrame = new createjs.Sprite(this.spriteSheet, "DoorTopCeiling");
                     this.doorTopFrame.y = 110;
                     this.doorTopFrame.x = 182;
                 }
-                if(this.design == config.Design.GRAVEYARD){
+                if (this.design == config.Design.GRAVEYARD) {
                     this.doorTop.x = 238;
                 }
-                else{
+                else {
                     this.doorTop.x = 224;
                 }
                 this.doorTop.y = 126;
-                
+
                 this.player.canTraverseTop = !this.isDoorTopLocked;
             }
             if (this.hasDoorBot) {
                 if (this.isDoorBotLocked) {
-                    this.doorBot = new createjs.Sprite(this.spriteSheet,"DoorBottomLocked");
+                    this.doorBot = new createjs.Sprite(this.spriteSheet, "DoorBottomLocked");
                     this.doorBot.name = "DoorBottomLocked";
                 }
                 else {
-                    this.doorBot = new createjs.Sprite(this.spriteSheet,"DoorBottom");
+                    this.doorBot = new createjs.Sprite(this.spriteSheet, "DoorBottom");
                     this.doorBot.name = "DoorBottom";
                 }
-                if(this.design != config.Design.GRAVEYARD) {
-                    this.doorBotFrame = new createjs.Sprite(this.spriteSheet,"DoorBottomCeiling");
+                if (this.design != config.Design.GRAVEYARD) {
+                    this.doorBotFrame = new createjs.Sprite(this.spriteSheet, "DoorBottomCeiling");
                     this.doorBotFrame.x = 183;
                     this.doorBotFrame.y = 745;
                 }
-                if(this.design == config.Design.GRAVEYARD){
+                if (this.design == config.Design.GRAVEYARD) {
                     this.doorBot.x = 238;
                 }
-                else{
+                else {
                     this.doorBot.x = 224;
                 }
                 this.doorBot.y = 674;
-                
+
                 //this.doorBot.Flip();
                 //this.doorBotFrame.Flip();
                 this.player.canTraverseBot = !this.isDoorBotLocked;
             }
             if (this.hasDoorLeft) {
                 if (this.isDoorLeftLocked) {
-                    this.doorLeft = new createjs.Sprite(this.spriteSheet,"DoorLeftLocked");
+                    this.doorLeft = new createjs.Sprite(this.spriteSheet, "DoorLeftLocked");
                     this.doorLeft.name = "DoorLeftLocked";
                 }
                 else {
-                    this.doorLeft = new createjs.Sprite(this.spriteSheet,"DoorLeft");
+                    this.doorLeft = new createjs.Sprite(this.spriteSheet, "DoorLeft");
                     this.doorLeft.name = "DoorLeft";
                 }
-                if(this.design != config.Design.GRAVEYARD) {
-                    this.doorLeftFrame = new createjs.Sprite(this.spriteSheet,"DoorLeftCeiling");
+                if (this.design != config.Design.GRAVEYARD) {
+                    this.doorLeftFrame = new createjs.Sprite(this.spriteSheet, "DoorLeftCeiling");
                     this.doorLeftFrame.y = 322;
                 }
-                if(this.design == config.Design.GRAVEYARD){
+                if (this.design == config.Design.GRAVEYARD) {
                     this.doorLeft.y = 384;
                 }
-                else{
+                else {
                     this.doorLeft.y = 370;
                 }
                 this.doorLeft.x = 18;
-                
+
                 this.player.canTraverseLeft = !this.isDoorLeftLocked;
             }
             if (this.hasDoorRight) {
                 if (this.isDoorRightLocked) {
-                    this.doorRight = new createjs.Sprite(this.spriteSheet,"DoorRightLocked");
+                    this.doorRight = new createjs.Sprite(this.spriteSheet, "DoorRightLocked");
                     this.doorRight.name = "DoorRightLocked";
                 }
                 else {
-                    this.doorRight = new createjs.Sprite(this.spriteSheet,"DoorRight");
+                    this.doorRight = new createjs.Sprite(this.spriteSheet, "DoorRight");
                     this.doorRight.name = "DoorRight";
                 }
-                if(this.design != config.Design.GRAVEYARD) {
-                    this.doorRightFrame = new createjs.Sprite(this.spriteSheet,"DoorRightCeiling");
+                if (this.design != config.Design.GRAVEYARD) {
+                    this.doorRightFrame = new createjs.Sprite(this.spriteSheet, "DoorRightCeiling");
                     this.doorRightFrame.y = 322;
                     this.doorRightFrame.x = 545;
                 }
-                if(this.design == config.Design.GRAVEYARD){
+                if (this.design == config.Design.GRAVEYARD) {
                     this.doorRight.y = 384;
                 }
-                else{
+                else {
                     this.doorRight.y = 370;
                 }
                 this.doorRight.x = 476;
-                
+
                 //this.doorRight.Flip();
                 //this.doorRightFrame.Flip();
                 this.player.canTraverseRight = !this.isDoorRightLocked;
             }
 
-            if (this.hasShop){
+            if (this.hasShop) {
                 this.shopManager = managers.Game.shopManager;
             }
 
@@ -221,9 +223,9 @@ module scenes {
             this.player.playerStatus.visible = false;
 
             managers.Game.keyboardManager.playMode = true;
-            
+
             // Initialize bulletManager
-            if (this.hasProjectileShooters){
+            if (this.hasProjectileShooters) {
                 this.bulletManager = managers.Game.bulletManager;
             }
 
@@ -231,6 +233,35 @@ module scenes {
         }
 
         public Update(): void {
+            // Music Check
+            switch (managers.Game.currentScene) {
+                case config.Scene.GRAVEYARD_1:
+                    if (!managers.Music.graveyardMusicPlaying) {
+                        managers.Game.music = createjs.Sound.play("music_graveyard");
+                        managers.Music.graveyardMusicPlaying = true;
+                        managers.Music.hotelMusicPlaying = false;
+                        managers.Music.mansionMusicPlaying = false;
+                    }
+                    break;
+                case config.Scene.HOTEL_1:
+                    if (!managers.Music.hotelMusicPlaying) {
+                        managers.Game.music = createjs.Sound.play("music_hotel");
+                        managers.Music.hotelMusicPlaying = true;
+                        managers.Music.graveyardMusicPlaying = false;
+                        managers.Music.mansionMusicPlaying = false;
+                    }
+                    break;
+                case config.Scene.MANSION_1:
+                    if (!managers.Music.mansionMusicPlaying) {
+                        managers.Game.music = createjs.Sound.play("music_mansion");
+                        managers.Music.mansionMusicPlaying = true;
+                        managers.Music.graveyardMusicPlaying = false;
+                        managers.Music.hotelMusicPlaying = false;
+                    }
+                    break;
+            }
+            managers.Game.music.loop = -1;
+            managers.Game.music.volume = 0.1;
 
             this.player.Update();
             let collectiveCollision: boolean = false;
@@ -269,22 +300,22 @@ module scenes {
                 }
             });
 
-            this.cosmetics.forEach(e =>{
-                if (e instanceof objects.Stairs && managers.Collision.Check(managers.Game.player, e)){
+            this.cosmetics.forEach(e => {
+                if (e instanceof objects.Stairs && managers.Collision.Check(managers.Game.player, e)) {
                     managers.Game.currentScene = e.nextScene;
                 }
             });
 
-            if (this.hasProjectileShooters){
+            if (this.hasProjectileShooters) {
                 this.bulletManager.Update();
             }
-            if (this.hasShop){
+            if (this.hasShop) {
                 this.shopManager.Update();
             }
 
             // KEY AND LOCKED DOORS
-            if (this.key != undefined){
-                if(this.getChildByName("Items_Key") && managers.Collision.Check(this.player,this.key) && this.key.visible){
+            if (this.key != undefined) {
+                if (this.getChildByName("Items_Key") && managers.Collision.Check(this.player, this.key) && this.key.visible) {
                     this.player.key += 1;
                     this.key.RemoveFromPlay();
                 }
@@ -294,29 +325,29 @@ module scenes {
             //  Thus in the beta version there should be a platform that Phoebe collides when a door is locked.
             //  One pressed with a key, it unlocks.
             //  - Kris Campbell
-            if(this.player.y < config.Bounds.DOOR_EASING_TOP || this.player.y > config.Bounds.DOOR_EASING_BOTTOM){
-                if(this.player.x == config.Bounds.LEFT_BOUND + this.player.halfW){
-                    if(this.hasDoorLeft && this.isDoorLeftLocked && this.player.key > 0){
+            if (this.player.y < config.Bounds.DOOR_EASING_TOP || this.player.y > config.Bounds.DOOR_EASING_BOTTOM) {
+                if (this.player.x == config.Bounds.LEFT_BOUND + this.player.halfW) {
+                    if (this.hasDoorLeft && this.isDoorLeftLocked && this.player.key > 0) {
                         this.isDoorLeftLocked = false;
                         this.player.key -= 1;
                     }
                 }
-                if(this.player.x == config.Bounds.RIGHT_BOUND - this.player.halfW){
-                    if(this.hasDoorRight && this.isDoorRightLocked && this.player.key > 0){
+                if (this.player.x == config.Bounds.RIGHT_BOUND - this.player.halfW) {
+                    if (this.hasDoorRight && this.isDoorRightLocked && this.player.key > 0) {
                         this.isDoorRightLocked = false;
                         this.player.key -= 1;
                     }
                 }
             }
-            if(this.player.x < config.Bounds.DOOR_EASING_LEFT || this.player.x > config.Bounds.DOOR_EASING_RIGHT){
-                if(this.player.y == config.Bounds.BOTTOM_BOUND - this.player.halfH){
-                    if(this.hasDoorBot && this.isDoorBotLocked && this.player.key > 0){
+            if (this.player.x < config.Bounds.DOOR_EASING_LEFT || this.player.x > config.Bounds.DOOR_EASING_RIGHT) {
+                if (this.player.y == config.Bounds.BOTTOM_BOUND - this.player.halfH) {
+                    if (this.hasDoorBot && this.isDoorBotLocked && this.player.key > 0) {
                         this.isDoorBotLocked = false;
                         this.player.key -= 1;
                     }
                 }
-                if(this.player.y == this.player.halfH + config.Bounds.TOP_BOUND ){
-                    if(this.hasDoorTop && this.isDoorTopLocked && this.player.key > 0){
+                if (this.player.y == this.player.halfH + config.Bounds.TOP_BOUND) {
+                    if (this.hasDoorTop && this.isDoorTopLocked && this.player.key > 0) {
                         this.isDoorTopLocked = false;
                         this.player.key -= 1;
                     }
@@ -324,12 +355,12 @@ module scenes {
             }
             if (this.hasDoorLeft && !this.isDoorLeftLocked && this.doorLeft.name == "DoorLeftLocked") {
                 this.removeChild(this.doorLeft);
-                this.doorLeft = new createjs.Sprite(this.spriteSheet,"DoorLeft");
+                this.doorLeft = new createjs.Sprite(this.spriteSheet, "DoorLeft");
                 this.doorLeft.name = "DoorLeft";
-                if(this.design == config.Design.GRAVEYARD){
+                if (this.design == config.Design.GRAVEYARD) {
                     this.doorLeft.y = 384;
                 }
-                else{
+                else {
                     this.doorLeft.y = 370;
                 }
                 this.doorLeft.x = 18;
@@ -339,12 +370,12 @@ module scenes {
             }
             if (this.hasDoorRight && !this.isDoorRightLocked && this.doorRight.name == "DoorRightLocked") {
                 this.removeChild(this.doorRight);
-                this.doorRight = new createjs.Sprite(this.spriteSheet,"DoorRight");
+                this.doorRight = new createjs.Sprite(this.spriteSheet, "DoorRight");
                 this.doorRight.name = "DoorRight";
-                if(this.design == config.Design.GRAVEYARD){
+                if (this.design == config.Design.GRAVEYARD) {
                     this.doorRight.y = 384;
                 }
-                else{
+                else {
                     this.doorRight.y = 370;
                 }
                 this.doorRight.x = 476;
@@ -355,12 +386,12 @@ module scenes {
             }
             if (this.hasDoorTop && !this.isDoorTopLocked && this.doorTop.name == "DoorTopLocked") {
                 this.removeChild(this.doorTop);
-                this.doorTop = new createjs.Sprite(this.spriteSheet,"DoorTop");
+                this.doorTop = new createjs.Sprite(this.spriteSheet, "DoorTop");
                 this.doorTop.name = "DoorTop";
-                if(this.design == config.Design.GRAVEYARD){
+                if (this.design == config.Design.GRAVEYARD) {
                     this.doorTop.x = 238;
                 }
-                else{
+                else {
                     this.doorTop.x = 224;
                 }
                 this.doorTop.y = 126;
@@ -370,12 +401,12 @@ module scenes {
             }
             if (this.hasDoorBot && !this.isDoorBotLocked && this.doorBot.name == "DoorBottomLocked") {
                 this.removeChild(this.doorBot);
-                this.doorBot = new createjs.Sprite(this.spriteSheet,"DoorBottom");
+                this.doorBot = new createjs.Sprite(this.spriteSheet, "DoorBottom");
                 this.doorBot.name = "DoorBottom";
-                if(this.design == config.Design.GRAVEYARD){
+                if (this.design == config.Design.GRAVEYARD) {
                     this.doorBot.x = 238;
                 }
-                else{
+                else {
                     this.doorBot.x = 224;
                 }
                 this.doorBot.y = 674;
@@ -432,20 +463,20 @@ module scenes {
                 this.addChild(e);
             });
 
-            if (this.hasShop){
+            if (this.hasShop) {
                 this.addChild(this.shopManager.shopKeeper);
                 this.addChild(this.shopManager.shopKeeper.dialog);
                 this.addChild(this.shopManager.chooseYes);
-                this.addChild(this.shopManager.chooseNo);                
+                this.addChild(this.shopManager.chooseNo);
                 this.shopManager.shopItems.forEach(e => {
-                    if (managers.Game.currentScene = e.appearingScene){
+                    if (managers.Game.currentScene = e.appearingScene) {
                         this.addChild(e);
                         e.Reset();
                         this.addChild(e.priceTag);
                     }
-                });   
+                });
             }
-            
+
             // PLAYER PLACEMENT
             this.addChild(this.player);
             this.addChild(this.player.weapon);
@@ -457,7 +488,7 @@ module scenes {
             this.enemies.forEach(e => {
                 this.addChild(e);
                 this.addChild(e.stunIndicator);
-            });            
+            });
 
             //door frames
             if (this.hasDoorTop) {
@@ -477,9 +508,9 @@ module scenes {
             this.addChild(this.player.playerStatus);
             //this.addChild(this.messageStatus);
             //this.addChild(this.controllerHelp);
-            this.addChild(this.playerInfo);            
+            this.addChild(this.playerInfo);
 
-            if (this.hasProjectileShooters){
+            if (this.hasProjectileShooters) {
                 this.bulletManager.spiderBullets.forEach(bullet => {
                     this.addChild(bullet);
                 });
@@ -494,7 +525,7 @@ module scenes {
                 });
             }
         }
-        public AddEnemyToScene(enemyToAdd: objects.Enemy):void{
+        public AddEnemyToScene(enemyToAdd: objects.Enemy): void {
             let length = this.enemies.length;
             this.enemies[length] = enemyToAdd;
             this.addChild(enemyToAdd);

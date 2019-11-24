@@ -7,6 +7,7 @@ module scenes {
             // hasDoorTop, hasDoorBot, hasDoorLeft, hasDoorRight
             super(true, true, true, true,config.Design.HOTEL);
             this.hasProjectileShooters = true;
+            this.isDoorLeftLocked = managers.HotelLocks.hotel_6_lockLeft;
             this.Start();
         }
 
@@ -29,6 +30,9 @@ module scenes {
         }
 
         public Update(): void {
+            if(!this.isDoorLeftLocked){
+                managers.HotelLocks.hotel_6_lockLeft = false;
+            }
             super.Update();
         }
 

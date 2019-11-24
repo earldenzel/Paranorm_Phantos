@@ -43,7 +43,12 @@ module scenes {
             managers.Game.bulletManager.Start();
 
             managers.Game.keyboardManager.playMode = false;
-            
+
+            // Play Music
+            managers.Game.music = createjs.Sound.play("music_openingScene");
+            managers.Game.music.loop = -1;
+            managers.Game.music.volume = 0.1;
+
             this.Main();
         }
         public Update():void {
@@ -72,9 +77,14 @@ module scenes {
 
         private startButtonClick():void {
             // Change our game state to GAME
+            createjs.Sound.stop();
+            managers.Game.keyboardManager.attacking = false;
+            managers.Music.graveyardMusicPlaying = false;
+            managers.Music.hotelMusicPlaying = false;
+            managers.Music.mansionMusicPlaying = false;
             managers.Game.currentScene = config.Scene.GRAVEYARD_1;
             //managers.Game.currentScene = config.Scene.HOTEL_1;
-            // managers.Game.currentScene = config.Scene.MANSION_1;
+            //managers.Game.currentScene = config.Scene.MANSION_1;
         }
 
         public Main():void {

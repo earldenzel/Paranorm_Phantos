@@ -33,6 +33,10 @@ var scenes;
             this.pressEnterLabel.color = "#FFFFFF";
             this.enterVisibility = true;
             managers.Game.keyboardManager.playMode = false;
+            // Play Music
+            managers.Game.music = createjs.Sound.play("music_title");
+            managers.Game.music.loop = -1;
+            managers.Game.music.volume = 0.1;
             this.Main();
         };
         StartScene.prototype.Update = function () {
@@ -56,6 +60,7 @@ var scenes;
             //initialize player on start play
             var player = new objects.Player();
             managers.Game.player = player;
+            createjs.Sound.stop();
             // Change our game state from START to OPENING_SCENE
             managers.Game.currentScene = config.Scene.OPENING_SCENE;
         };

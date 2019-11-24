@@ -20,6 +20,8 @@ var scenes;
             var _this = 
             // hasDoorTop, hasDoorBot, hasDoorLeft, hasDoorRight
             _super.call(this, true, true, false, true, config.Design.MANSION) || this;
+            _this.isDoorBotLocked = managers.MansionLocks.mansion_16_lockBot;
+            _this.isDoorRightLocked = managers.MansionLocks.mansion_16_lockRight;
             _this.Start();
             return _this;
         }
@@ -44,6 +46,12 @@ var scenes;
             this.playerInfo.PlayerLocation = new math.Vec2(112, 66);
         };
         Mansion_16.prototype.Update = function () {
+            if (!this.isDoorRightLocked) {
+                managers.MansionLocks.mansion_16_lockRight = false;
+            }
+            if (!this.isDoorBotLocked) {
+                managers.MansionLocks.mansion_16_lockBot = false;
+            }
             _super.prototype.Update.call(this);
         };
         Mansion_16.prototype.Main = function () {

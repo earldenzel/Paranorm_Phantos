@@ -65,6 +65,9 @@ module scenes {
                     managers.GraveyardLocks.graveyard_6_key = false;
                 }
             }
+            if(!this.isDoorBotLocked){
+                managers.GraveyardLocks.graveyard_6_lockBot = false;
+            }
             super.Update();
         }
 

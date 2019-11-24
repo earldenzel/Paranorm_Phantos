@@ -292,6 +292,39 @@ var config;
                 "id": "tAtlas_ShootingFlower",
                 "src": "./Assets/_Enemies/shootingFlower/ShootingFlower_TextureAtlas.png"
             },
+            // MUSIC
+            {
+                "id": "music_title",
+                "src": "./Assets/_Music/Title.mp3"
+            },
+            {
+                "id": "music_openingScene",
+                "src": "./Assets/_Music/OpeningScene.mp3"
+            },
+            {
+                "id": "music_gameOver",
+                "src": "./Assets/_Music/GameOver.mp3"
+            },
+            {
+                "id": "music_shop",
+                "src": "./Assets/_Music/Shop.mp3"
+            },
+            {
+                "id": "music_graveyard",
+                "src": "./Assets/_Music/Graveyard.mp3"
+            },
+            {
+                "id": "music_hotel",
+                "src": "./Assets/_Music/Hotel.mp3"
+            },
+            {
+                "id": "music_mansion",
+                "src": "./Assets/_Music/Mansion.mp3"
+            },
+            {
+                "id": "music_boss",
+                "src": "./Assets/_Music/Boss.mp3"
+            },
             // SOUND EFFECTS
             {
                 "id": "enemiesHit",

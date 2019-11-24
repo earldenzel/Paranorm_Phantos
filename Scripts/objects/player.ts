@@ -512,6 +512,8 @@ module objects {
         }
 
         public DeathSequence(): void {
+            createjs.Sound.stop();
+            managers.Game.SFX = createjs.Sound.play("anyDefeated");
             this.SwitchAnimation("Phoebe_Explosion");
             this.on("animationend", this.phoebeDied.bind(this), false, true);
             this.isDead = true;

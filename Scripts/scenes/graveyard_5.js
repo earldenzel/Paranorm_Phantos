@@ -72,6 +72,9 @@ var scenes;
                     managers.GraveyardLocks.graveyard_5_key = false;
                 }
             }
+            if (!this.isDoorBotLocked) {
+                managers.GraveyardLocks.graveyard_5_lockBot = false;
+            }
             _super.prototype.Update.call(this);
         };
         Graveyard_5.prototype.Main = function () {

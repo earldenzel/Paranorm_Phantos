@@ -180,6 +180,35 @@ var scenes;
         };
         PlayScene.prototype.Update = function () {
             var _this = this;
+            // Music Check
+            switch (managers.Game.currentScene) {
+                case config.Scene.GRAVEYARD_1:
+                    if (!managers.Music.graveyardMusicPlaying) {
+                        managers.Game.music = createjs.Sound.play("music_graveyard");
+                        managers.Music.graveyardMusicPlaying = true;
+                        managers.Music.hotelMusicPlaying = false;
+                        managers.Music.mansionMusicPlaying = false;
+                    }
+                    break;
+                case config.Scene.HOTEL_1:
+                    if (!managers.Music.hotelMusicPlaying) {
+                        managers.Game.music = createjs.Sound.play("music_hotel");
+                        managers.Music.hotelMusicPlaying = true;
+                        managers.Music.graveyardMusicPlaying = false;
+                        managers.Music.mansionMusicPlaying = false;
+                    }
+                    break;
+                case config.Scene.MANSION_1:
+                    if (!managers.Music.mansionMusicPlaying) {
+                        managers.Game.music = createjs.Sound.play("music_mansion");
+                        managers.Music.mansionMusicPlaying = true;
+                        managers.Music.graveyardMusicPlaying = false;
+                        managers.Music.hotelMusicPlaying = false;
+                    }
+                    break;
+            }
+            managers.Game.music.loop = -1;
+            managers.Game.music.volume = 0.1;
             this.player.Update();
             var collectiveCollision = false;
             this.enemies.forEach(function (e) {

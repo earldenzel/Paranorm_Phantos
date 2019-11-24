@@ -5,6 +5,7 @@ module scenes {
         constructor() {
             // hasDoorTop, hasDoorBot, hasDoorLeft, hasDoorRight
             super(true, false, true, false, config.Design.MANSION);
+            this.isDoorLeftLocked = managers.MansionLocks.mansion_15_lockLeft;
             this.hasProjectileShooters = true;
             this.Start();
         }
@@ -32,6 +33,9 @@ module scenes {
         }        
 
         public Update(): void {
+            if(!this.isDoorLeftLocked){
+                managers.MansionLocks.mansion_15_lockLeft = false;
+            }
             super.Update();
         }
 

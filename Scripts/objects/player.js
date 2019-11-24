@@ -500,6 +500,8 @@ var objects;
             this.weapon.visible = false;
         };
         Player.prototype.DeathSequence = function () {
+            createjs.Sound.stop();
+            managers.Game.SFX = createjs.Sound.play("anyDefeated");
             this.SwitchAnimation("Phoebe_Explosion");
             this.on("animationend", this.phoebeDied.bind(this), false, true);
             this.isDead = true;
