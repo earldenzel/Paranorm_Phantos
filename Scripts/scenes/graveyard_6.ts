@@ -56,7 +56,7 @@ module scenes {
         }        
 
         public Update(): void {
-            if(!this.enemies[0].visible && !this.enemies[1].visible && !this.enemies[2].visible && !this.enemies[3].visible){
+            if(this.AllEnemiesAreDead()){
                 if(!this.getChildByName("Items_Key") && managers.GraveyardLocks.graveyard_6_key){
                     this.key = new objects.Key();
                     this.key.x = 250;
@@ -65,7 +65,10 @@ module scenes {
                     managers.GraveyardLocks.graveyard_6_key = false;
                 }
             }
-            super.Update();
+            super.Update();            
+            if(!this.isDoorBotLocked){
+                managers.GraveyardLocks.graveyard_6_lockBot = false;
+            }
         }
 
         public Main(): void {

@@ -48,6 +48,13 @@ var objects;
                 case config.Effects.INCREASE_ATK:
                     managers.Game.player.GainAttack(10);
                     break;
+                case config.Effects.INCREASE_SPEED:
+                    managers.Game.player.GainSpeed(1);
+                    break;
+                case config.Effects.FRESHEN_UP:
+                    managers.Game.player.GainHealth(99);
+                    managers.Game.player.GainEcto(5);
+                    break;
             }
         };
         return ShopItem;

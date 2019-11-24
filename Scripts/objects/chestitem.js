@@ -20,6 +20,7 @@ var objects;
             if (initiallyShown === void 0) { initiallyShown = true; }
             var _this = _super.call(this, managers.Game.chest_TextureAtlas, imageString) || this;
             _this.available = true;
+            _this.locked = false;
             _this.effect = effect;
             _this.appearingScene = appearingScene;
             _this.Start();

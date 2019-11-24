@@ -4,6 +4,8 @@ module config{
         INCREASE_KEY_COUNT,
         INCREASE_ATK,
         INCREASE_GOLD,
-        INCREASE_GOLD_50
+        INCREASE_GOLD_50,
+        INCREASE_SPEED,
+        FRESHEN_UP
     }
 }

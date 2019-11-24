@@ -4,6 +4,7 @@ module objects{
         public effect: config.Effects;
         public appearingScene: config.Scene;
         public available: boolean = true;
+        public locked: boolean = false;
         // Constructor
         constructor(imageString: string, effect: config.Effects, appearingScene: config.Scene, initiallyShown: boolean = true){
             super(managers.Game.chest_TextureAtlas, imageString);

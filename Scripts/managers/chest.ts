@@ -28,16 +28,34 @@ module managers{
             this.chestItems[8].SetPosition(new math.Vec2(440, 150));
             this.chestItems[8] = new objects.ChestItem("chestWithGold", config.Effects.INCREASE_GOLD_50, config.Scene.HOTEL_7, false);
             this.chestItems[8].SetPosition(new math.Vec2(385, 440));
+            this.chestItems[9] = new objects.ChestItem("lockedChest", config.Effects.INCREASE_GOLD_50, config.Scene.GRAVEYARD_1);
+            this.chestItems[9].SetPosition(new math.Vec2(185, 150));
+            this.chestItems[9].locked = true;
         }
 
         public Reset():void {            
         }
 
         public Update(): void{   
-            this.chestItems.forEach(e => {
+            let chestItems: Array<objects.ChestItem> = this.chestItems.filter(e => {
+                return (e.appearingScene == managers.Game.currentScene);
+            });
+            chestItems.forEach(e => {
                 e.Update();
-                if (managers.Collision.Check(managers.Game.player, e) && e.available && managers.Game.currentScene == e.appearingScene){  
-                    e.TriggerChestEffect();
+                if (managers.Collision.Check(managers.Game.player, e)){
+                    if (e.locked){
+                        if (managers.Game.player.key > 0){
+                            managers.Game.player.key--;
+                            e.TriggerChestEffect();
+                            e.locked = false;
+                        }
+                        else{
+                            managers.Game.player.EchoMessage("Locked");
+                        }
+                    }
+                    else if (e.available && managers.Game.currentScene == e.appearingScene){  
+                        e.TriggerChestEffect();
+                    }
                 }
             });
         }

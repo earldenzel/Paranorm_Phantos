@@ -5,6 +5,7 @@ module scenes {
         constructor() {
             // hasDoorTop, hasDoorBot, hasDoorLeft, hasDoorRight
             super(false, false, true, false,config.Design.HOTEL);
+            this.hasShop = true;
             this.Start();
         }
 

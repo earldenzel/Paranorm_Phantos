@@ -65,7 +65,7 @@ var scenes;
             this.playerInfo.PlayerLocation = new math.Vec2(112, 66); // 30,44
         };
         Graveyard_6.prototype.Update = function () {
-            if (!this.enemies[0].visible && !this.enemies[1].visible && !this.enemies[2].visible && !this.enemies[3].visible) {
+            if (this.AllEnemiesAreDead()) {
                 if (!this.getChildByName("Items_Key") && managers.GraveyardLocks.graveyard_6_key) {
                     this.key = new objects.Key();
                     this.key.x = 250;
@@ -75,6 +75,9 @@ var scenes;
                 }
             }
             _super.prototype.Update.call(this);
+            if (!this.isDoorBotLocked) {
+                managers.GraveyardLocks.graveyard_6_lockBot = false;
+            }
         };
         Graveyard_6.prototype.Main = function () {
             _super.prototype.Main.call(this);

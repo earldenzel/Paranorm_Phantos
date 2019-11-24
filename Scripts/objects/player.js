@@ -359,9 +359,13 @@ var objects;
                 this.EchoMessage("GAINED $" + dollars);
             }
         };
-        Player.prototype.GainEcto = function () {
+        Player.prototype.GainEcto = function (gain) {
+            if (gain === void 0) { gain = 1; }
             if (this.ecto < this.maxEcto) {
-                this.ecto += 1;
+                this.ecto += gain;
+            }
+            if (this.ecto > this.maxEcto) {
+                this.ecto = this.maxEcto;
             }
         };
         Player.prototype.HurtMessage = function () {
@@ -423,6 +427,14 @@ var objects;
             else {
                 this.EchoMessage("AHHHH...", 3000);
             }
+        };
+        Player.prototype.VictoryMessage = function (nextScene) {
+            managers.Game.keyboardManager.ControlReset();
+            this.EchoMessage("I DID IT!", 3000);
+            setTimeout(function () {
+                managers.Game.keyboardManager.enabled = true;
+                managers.Game.currentScene = nextScene;
+            }, 3000);
         };
         Player.prototype.EchoMessage = function (message, timeout) {
             var _this = this;

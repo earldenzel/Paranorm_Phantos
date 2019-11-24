@@ -377,9 +377,12 @@ module objects {
             }
         }        
 
-        public GainEcto() {
+        public GainEcto(gain: number = 1) {
             if (this.ecto < this.maxEcto) {
-                this.ecto += 1;
+                this.ecto += gain;
+            }
+            if (this.ecto > this.maxEcto){
+                this.ecto = this.maxEcto;
             }
         }
 
@@ -434,6 +437,15 @@ module objects {
             } else {
                 this.EchoMessage("AHHHH...", 3000);
             }
+        }
+
+        public VictoryMessage(nextScene: config.Scene){
+            managers.Game.keyboardManager.ControlReset();
+            this.EchoMessage("I DID IT!", 3000);
+            setTimeout(() => {
+                managers.Game.keyboardManager.enabled = true;
+                managers.Game.currentScene = nextScene;
+            }, 3000);
         }
 
         public EchoMessage(message: string, timeout: number = 1000) {

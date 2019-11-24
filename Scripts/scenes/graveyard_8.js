@@ -38,6 +38,7 @@ var scenes;
             this.enemies[6] = new objects.Zombie(1.5);
             this.enemies[6].visible = false;
             managers.Game.player.sceneOnTop = config.Scene.GRAVEYARD_6;
+            this.isDoorTopLocked = true;
             _super.prototype.Start.call(this);
             this.playerInfo.PlayerLocation = new math.Vec2(112, 82); // 30,60
         };
@@ -48,6 +49,10 @@ var scenes;
                 this.enemies[5].visible = true;
                 this.enemies[5].SetPosition(new math.Vec2(100, 600));
                 this.enemies[6].visible = true;
+            }
+            if (this.enemies[0].isDead) {
+                this.isDoorTopLocked = false;
+                managers.Game.player.VictoryMessage(config.Scene.HOTEL_1);
             }
         };
         Graveyard_8.prototype.Main = function () {

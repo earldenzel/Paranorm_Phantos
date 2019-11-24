@@ -44,7 +44,7 @@ module scenes {
             if (this.enemies[0].isStunned){
                 this.cosmetics[4].visible = false;
             }
-            if(!this.enemies[0].visible){
+            if(this.AllEnemiesAreDead()){
                 setTimeout(() => {
                     this.cosmetics.forEach(cosmetic =>{
                         if (cosmetic instanceof objects.Stairs){
