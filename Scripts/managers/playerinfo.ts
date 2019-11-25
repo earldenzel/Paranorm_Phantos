@@ -6,6 +6,7 @@ module managers {
         public moneyLabel: objects.Label;
         public keyLabel: objects.Label;
         public playerInfo_Health: createjs.Sprite;
+        public playerInfo_Health_x2: createjs.Sprite;
         public playerInfo_Ecto: createjs.Sprite;
         public playerInfo_Map: createjs.Sprite;
         public playerInfo_Location: createjs.Sprite;
@@ -187,6 +188,11 @@ module managers {
             this.playerInfo_Health.x = 376;
             this.playerInfo_Health.y = 36;
 
+            this.playerInfo_Health_x2 = new createjs.Sprite(managers.Game.titleUIMap_TextureAtlas, "Life_0");
+            this.playerInfo_Health_x2.visible = false;
+            this.playerInfo_Health_x2.x = 412;
+            this.playerInfo_Health_x2.y = 52;
+
             this.Main();
         }
         private Main(): void {
@@ -196,13 +202,13 @@ module managers {
             this.addChild(this.moneyLabel);
             this.addChild(this.keyLabel);
             this.addChild(this.playerInfo_Health);
+            this.addChild(this.playerInfo_Health_x2);
             this.addChild(this.playerInfo_Ecto);
             this.addChild(this.playerInfo_Map);
             this.addChild(this.playerInfo_Location);
             this.addChild(this.playerInfo_Power);
         }
         private ChangeHealthInfo(): void {
-
             switch (this.playerHealth) {
                 case 0:
                     this.SwitchAnimation(this.playerInfo_Health, "Life_0");
@@ -221,6 +227,27 @@ module managers {
                     break;
                 case 5:
                     this.SwitchAnimation(this.playerInfo_Health, "Life_5");
+                    this.playerInfo_Health_x2.visible = false;
+                    break;
+                case 6:
+                    this.SwitchAnimation(this.playerInfo_Health_x2, "Life_1");
+                    this.playerInfo_Health_x2.visible = true;
+                    break;
+                case 7:
+                    this.SwitchAnimation(this.playerInfo_Health_x2, "Life_2");
+                    this.playerInfo_Health_x2.visible = true;
+                    break;
+                case 8:
+                    this.SwitchAnimation(this.playerInfo_Health_x2, "Life_3");
+                    this.playerInfo_Health_x2.visible = true;
+                    break;
+                case 9:
+                    this.SwitchAnimation(this.playerInfo_Health_x2, "Life_4");
+                    this.playerInfo_Health_x2.visible = true;
+                    break;
+                case 10:
+                    this.SwitchAnimation(this.playerInfo_Health_x2, "Life_5");
+                    this.playerInfo_Health_x2.visible = true;
                     break;
                 default:
                     this.SwitchAnimation(this.playerInfo_Health, "Life_0");
