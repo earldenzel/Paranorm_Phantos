@@ -40,6 +40,9 @@ module scenes {
             managers.Game.music.volume = 0.1;
 
             this.Main();
+            
+            managers.Game.player.deathCount++;
+            managers.Game.player.Reset();
         }
 
         public Update():void {
@@ -59,8 +62,8 @@ module scenes {
         }
 
         private backButtonClick():void {
-            createjs.Sound.stop();
-            managers.Game.currentScene = config.Scene.START;
+            createjs.Sound.stop();            
+            managers.Game.currentScene = config.Scene.OPENING_SCENE;
         }
 
         public Main():void {

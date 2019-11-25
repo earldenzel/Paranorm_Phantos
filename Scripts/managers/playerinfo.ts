@@ -5,8 +5,7 @@ module managers {
 
         public moneyLabel: objects.Label;
         public keyLabel: objects.Label;
-        public playerInfo_Health: createjs.Sprite;
-        public playerInfo_Health_x2: createjs.Sprite;
+        public playerInfo_Health: Array<createjs.Sprite>;
         public playerInfo_Ecto: createjs.Sprite;
         public playerInfo_Map: createjs.Sprite;
         public playerInfo_Location: createjs.Sprite;
@@ -15,6 +14,7 @@ module managers {
         private money: number;
         private key: number;
         private playerHealth: number;
+        private playerMaxHealth: number;
         private playerEcto: number;
         private playerLocation: math.Vec2;
         private playerPower: config.PowerUp;
@@ -60,11 +60,21 @@ module managers {
         get PlayerHealth(): number {
             return this.playerHealth;
         }
-        set PlayerHealth(newPlayerHealth: number) {
+        set PlayerHealth(newPlayerHealth:number){
+            this.removeFlowers();
             this.playerHealth = newPlayerHealth;
-            //this.removeChild(this.playerInfo_Health);
             this.ChangeHealthInfo();
-            //this.addChild(this.playerInfo_Health);
+            this.addFlowers();
+        }
+        
+        get PlayerMaxHealth():number{
+            return this.playerMaxHealth;
+        }
+        set PlayerMaxHealth(newPlayerMaxHealth:number){
+            this.removeFlowers();
+            this.playerMaxHealth = newPlayerMaxHealth;
+            this.ChangeHealthInfo();
+            this.addFlowers();
         }
         get PlayerEcto(): number {
             return this.PlayerEcto;
@@ -162,7 +172,8 @@ module managers {
 
             this.playerInfo_Map.x = 30;
             this.playerInfo_Map.y = 12;
-
+            
+            this.playerInfo_Health = new Array<createjs.Sprite>();
             this.playerInfo_Location = new createjs.Sprite(managers.Game.titleUIMap_TextureAtlas, "PlayerLocation");
 
             this.playerInfo_Power = new createjs.Sprite(managers.Game.titleUIMap_TextureAtlas, "Power_Shadow");
@@ -172,6 +183,7 @@ module managers {
             // Set Defaults
             this.playerHealth = 5;
             this.playerEcto = 5;
+            this.playerMaxHealth = 5;
             this.money = 0;
             this.key = 0;
             this.playerLocation = new math.Vec2(0, 0);
@@ -184,15 +196,6 @@ module managers {
             this.playerInfo_Ecto.x = 10;
             this.playerInfo_Ecto.y = 10;
 
-            this.playerInfo_Health = new createjs.Sprite(managers.Game.titleUIMap_TextureAtlas, "Life_5");
-            this.playerInfo_Health.x = 376;
-            this.playerInfo_Health.y = 36;
-
-            this.playerInfo_Health_x2 = new createjs.Sprite(managers.Game.titleUIMap_TextureAtlas, "Life_0");
-            this.playerInfo_Health_x2.visible = false;
-            this.playerInfo_Health_x2.x = 412;
-            this.playerInfo_Health_x2.y = 52;
-
             this.Main();
         }
         private Main(): void {
@@ -201,60 +204,48 @@ module managers {
 
             this.addChild(this.moneyLabel);
             this.addChild(this.keyLabel);
-            this.addChild(this.playerInfo_Health);
-            this.addChild(this.playerInfo_Health_x2);
+            this.playerInfo_Health.forEach(e => {
+                this.addChild(e);
+            });
             this.addChild(this.playerInfo_Ecto);
             this.addChild(this.playerInfo_Map);
             this.addChild(this.playerInfo_Location);
             this.addChild(this.playerInfo_Power);
         }
-        private ChangeHealthInfo(): void {
-            switch (this.playerHealth) {
-                case 0:
-                    this.SwitchAnimation(this.playerInfo_Health, "Life_0");
-                    break;
-                case 1:
-                    this.SwitchAnimation(this.playerInfo_Health, "Life_1");
-                    break;
-                case 2:
-                    this.SwitchAnimation(this.playerInfo_Health, "Life_2");
-                    break;
-                case 3:
-                    this.SwitchAnimation(this.playerInfo_Health, "Life_3");
-                    break;
-                case 4:
-                    this.SwitchAnimation(this.playerInfo_Health, "Life_4");
-                    break;
-                case 5:
-                    this.SwitchAnimation(this.playerInfo_Health, "Life_5");
-                    this.playerInfo_Health_x2.visible = false;
-                    break;
-                case 6:
-                    this.SwitchAnimation(this.playerInfo_Health_x2, "Life_1");
-                    this.playerInfo_Health_x2.visible = true;
-                    break;
-                case 7:
-                    this.SwitchAnimation(this.playerInfo_Health_x2, "Life_2");
-                    this.playerInfo_Health_x2.visible = true;
-                    break;
-                case 8:
-                    this.SwitchAnimation(this.playerInfo_Health_x2, "Life_3");
-                    this.playerInfo_Health_x2.visible = true;
-                    break;
-                case 9:
-                    this.SwitchAnimation(this.playerInfo_Health_x2, "Life_4");
-                    this.playerInfo_Health_x2.visible = true;
-                    break;
-                case 10:
-                    this.SwitchAnimation(this.playerInfo_Health_x2, "Life_5");
-                    this.playerInfo_Health_x2.visible = true;
-                    break;
-                default:
-                    this.SwitchAnimation(this.playerInfo_Health, "Life_0");
-                    break;
-            }
+        private ChangeHealthInfo():void{     
+            let maximumFlower: number = this.playerMaxHealth / 5;
+            let currentHp: number = this.playerHealth;            
+            let flower: createjs.Sprite;
 
+            for (let index = 0; index < maximumFlower; index++) {
+                flower = new createjs.Sprite(managers.Game.titleUIMap_TextureAtlas, "Life_0");
+                if (currentHp >= 5){
+                    flower = new createjs.Sprite(managers.Game.titleUIMap_TextureAtlas, "Life_5");
+                    currentHp -= 5;
+                }
+                else{
+                    switch(currentHp){
+                        case 1:
+                            flower = new createjs.Sprite(managers.Game.titleUIMap_TextureAtlas, "Life_1");
+                            break;
+                        case 2:
+                            flower = new createjs.Sprite(managers.Game.titleUIMap_TextureAtlas, "Life_2");
+                            break;
+                        case 3:
+                            flower = new createjs.Sprite(managers.Game.titleUIMap_TextureAtlas, "Life_3");
+                            break;
+                        case 4:
+                            flower = new createjs.Sprite(managers.Game.titleUIMap_TextureAtlas, "Life_4");
+                            break;
+                    }
+                    currentHp = 0;
+                }
+                this.playerInfo_Health[index] = flower;
+                this.playerInfo_Health[index].x = 376 + flower.getBounds().width * index;
+                this.playerInfo_Health[index].y = 36                
+            }
         }
+
         private ChangeEctoInfo(): void {
 
             switch (this.playerEcto) {
@@ -284,6 +275,17 @@ module managers {
         private ChangePlayerLocation(): void {
             this.playerInfo_Location.x = this.playerLocation.x;
             this.playerInfo_Location.y = this.playerLocation.y;
+        }
+        private removeFlowers(): void{
+            this.playerInfo_Health.forEach(e => {
+                this.removeChild(e);
+            });
+            this.playerInfo_Health = new Array<createjs.Sprite>();
+        }
+        private addFlowers(): void{
+            this.playerInfo_Health.forEach(e => {
+                this.addChild(e);
+            });
         }
         private ChangePlayerPower(): void {
             if (this.playerPower != config.PowerUp.NONE) {

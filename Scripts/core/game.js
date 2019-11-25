@@ -11,6 +11,7 @@
     var keyboardManager;
     var shopManager;
     var bulletManager;
+    var chestManager;
     var mapG_TextureAtlasData;
     var mapG_TextureAtlas;
     var item_TextureAtlasData;
@@ -33,6 +34,8 @@
     var spider_TextureAtlas;
     var shootingFlower_TextureAtlasData;
     var shootingFlower_TextureAtlas;
+    var chest_TextureAtlasData;
+    var chest_TextureAtlas;
     // kc
     var enemies_TextureAtlasData;
     var enemies_TextureAtlas;
@@ -92,6 +95,9 @@
         shootingFlower_TextureAtlasData = config.Assets.getAtlas_ShootingFlower;
         shootingFlower_TextureAtlasData.images = [assetManager.getResult("tAtlas_ShootingFlower")];
         shootingFlower_TextureAtlas = new createjs.SpriteSheet(shootingFlower_TextureAtlasData);
+        chest_TextureAtlasData = config.Assets.getAtlas_Chest;
+        chest_TextureAtlasData.images = [assetManager.getResult("tAtlas_Chest")];
+        chest_TextureAtlas = new createjs.SpriteSheet(chest_TextureAtlasData);
         // KC
         enemies_TextureAtlasData = config.Assets.getAtlas__Enemies;
         enemies_TextureAtlasData.images = [assetManager.getResult("tAtlas__Enemies")];
@@ -116,6 +122,9 @@
         // Shop Manager
         shopManager = new managers.Shop;
         managers.Game.shopManager = shopManager;
+        // Shop Manager
+        chestManager = new managers.Chest;
+        managers.Game.chestManager = chestManager;
         // Bullet Manager
         bulletManager = new managers.Bullet;
         managers.Game.bulletManager = bulletManager;
@@ -130,6 +139,7 @@
         managers.Game.bat_TextureAtlas = bat_TextureAtlas;
         managers.Game.spider_TextureAtlas = spider_TextureAtlas;
         managers.Game.shootingFlower_TextureAtlas = shootingFlower_TextureAtlas;
+        managers.Game.chest_TextureAtlas = chest_TextureAtlas;
         managers.Game.phantos_TextureAtlas = phantos_TextureAtlas;
         managers.Game.phantorm_TextureAtlas = phantorm_TextureAtlas;
         // KC

@@ -4,10 +4,10 @@ module objects {
         // Constructor
         constructor(nextScene: config.Scene, up: boolean) {
             if (up){
-                super(managers.Game.graveyard_TextureAtlas, "Graveyard_Stairs_Up");
+                super(managers.Game.graveyard_TextureAtlas, "Upstairs");
             }
             else{
-                super(managers.Game.graveyard_TextureAtlas, "Graveyard_HoleTile_Stairs");
+                super(managers.Game.graveyard_TextureAtlas, "Downstairs");
             }
             this.nextScene = nextScene;
             this.Start();

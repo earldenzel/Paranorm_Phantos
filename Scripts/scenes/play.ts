@@ -10,6 +10,7 @@ module scenes {
         protected design: config.Design;
         private bulletManager: managers.Bullet;
         private shopManager: managers.Shop;
+        private chestManager: managers.Chest;
         protected hasProjectileShooters: boolean = false;
         protected hasShop: boolean = false;
 
@@ -210,6 +211,8 @@ module scenes {
             if (this.hasShop) {
                 this.shopManager = managers.Game.shopManager;
             }
+            this.chestManager = managers.Game.chestManager;
+            this.chestManager.chestsNotSpawned = true;
 
             //this.playerStatus.shadow = new createjs.Shadow("#000000",0,0,10);
             //this.messageStatus.shadow = new createjs.Shadow("#000000",0,0,10);
@@ -221,9 +224,12 @@ module scenes {
             this.playerInfo.PlayerLocation = new math.Vec2(30, 12);
             //this.playerInfo.x = 38;
             this.player.playerStatus.visible = false;
-
-            managers.Game.keyboardManager.playMode = true;
-
+            if (!managers.Game.keyboardManager.playMode){
+                managers.Game.keyboardManager.ControlReset();
+                managers.Game.keyboardManager.enabled = true;
+                managers.Game.keyboardManager.playMode = true;
+            }
+            
             // Initialize bulletManager
             if (this.hasProjectileShooters) {
                 this.bulletManager = managers.Game.bulletManager;
@@ -311,6 +317,10 @@ module scenes {
             }
             if (this.hasShop) {
                 this.shopManager.Update();
+            }
+            this.chestManager.Update();
+            if (this.AllEnemiesAreDead()){
+                this.chestManager.ShowHiddenChests(managers.Game.currentScene);
             }
 
             // KEY AND LOCKED DOORS
@@ -418,6 +428,7 @@ module scenes {
             //this.playerStatus.text = "PLAYER HP" + this.player.hp + "/5";
             // Sets the Player Health
             this.playerInfo.PlayerHealth = this.player.hp;
+            this.playerInfo.PlayerMaxHealth = this.player.maxHp;
             this.playerInfo.Money = this.player.money;
             this.playerInfo.Key = this.player.key;
 
@@ -469,7 +480,7 @@ module scenes {
                 this.addChild(this.shopManager.chooseYes);
                 this.addChild(this.shopManager.chooseNo);
                 this.shopManager.shopItems.forEach(e => {
-                    if (managers.Game.currentScene = e.appearingScene) {
+                    if (managers.Game.currentScene == e.appearingScene){
                         this.addChild(e);
                         e.Reset();
                         this.addChild(e.priceTag);
@@ -477,6 +488,12 @@ module scenes {
                 });
             }
 
+            this.chestManager.chestItems.forEach(e => {
+                if (managers.Game.currentScene == e.appearingScene){
+                    this.addChild(e);
+                }
+            });
+            
             // PLAYER PLACEMENT
             this.addChild(this.player);
             this.addChild(this.player.weapon);
@@ -487,8 +504,10 @@ module scenes {
             // ENEMY PLACEMENT
             this.enemies.forEach(e => {
                 this.addChild(e);
-                this.addChild(e.stunIndicator);
-            });
+                if (e.canBeEaten && this.design == config.Design.GRAVEYARD){
+                  this.addChild(e.stunIndicator);
+                }
+            });            
 
             //door frames
             if (this.hasDoorTop) {
@@ -528,7 +547,16 @@ module scenes {
                 });
             }
         }
-        public AddEnemyToScene(enemyToAdd: objects.Enemy): void {
+
+        public AllEnemiesAreDead(): boolean{
+            if (this.enemies.length > 0){
+                return this.enemies.every(e => {
+                    return e.isDead;
+                });
+            }
+        }
+        
+        public AddEnemyToScene(enemyToAdd: objects.Enemy):void{
             let length = this.enemies.length;
             this.enemies[length] = enemyToAdd;
             this.addChild(enemyToAdd);

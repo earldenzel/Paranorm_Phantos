@@ -42,6 +42,8 @@ var scenes;
             managers.Game.music.loop = 0;
             managers.Game.music.volume = 0.1;
             this.Main();
+            managers.Game.player.deathCount++;
+            managers.Game.player.Reset();
         };
         GameOverScene.prototype.Update = function () {
             var _this = this;
@@ -61,7 +63,7 @@ var scenes;
         };
         GameOverScene.prototype.backButtonClick = function () {
             createjs.Sound.stop();
-            managers.Game.currentScene = config.Scene.START;
+            managers.Game.currentScene = config.Scene.OPENING_SCENE;
         };
         GameOverScene.prototype.Main = function () {
             this.addChild(this.background);

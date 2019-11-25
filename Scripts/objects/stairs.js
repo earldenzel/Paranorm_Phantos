@@ -19,10 +19,10 @@ var objects;
         function Stairs(nextScene, up) {
             var _this = this;
             if (up) {
-                _this = _super.call(this, managers.Game.graveyard_TextureAtlas, "Graveyard_Stairs_Up") || this;
+                _this = _super.call(this, managers.Game.graveyard_TextureAtlas, "Upstairs") || this;
             }
             else {
-                _this = _super.call(this, managers.Game.graveyard_TextureAtlas, "Graveyard_HoleTile_Stairs") || this;
+                _this = _super.call(this, managers.Game.graveyard_TextureAtlas, "Downstairs") || this;
             }
             _this.nextScene = nextScene;
             _this.Start();
