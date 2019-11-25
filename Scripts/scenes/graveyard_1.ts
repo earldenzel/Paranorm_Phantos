@@ -33,6 +33,8 @@ module scenes {
             this.cosmetics[6] = new objects.Stairs(config.Scene.MANSION_1, true);
             this.cosmetics[5].SetPosition(new math.Vec2(500, 200));
             this.cosmetics[6].SetPosition(new math.Vec2(500, 300));
+            this.cosmetics[5].visible = false;
+            this.cosmetics[6].visible = false;
 
             managers.Game.player.sceneOnBot = config.Scene.GRAVEYARD_5;
             managers.Game.player.sceneOnLeft = config.Scene.GRAVEYARD_3;
@@ -41,6 +43,17 @@ module scenes {
         }
 
         public Update(): void {
+            //god mode to unlock all stages and temporarily make phoebe strong
+            if (managers.Game.keyboardManager.powers && 
+                managers.Game.keyboardManager.running && 
+                managers.Game.keyboardManager.biting && 
+                managers.Game.keyboardManager.attacking){
+                this.cosmetics[5].visible = true;
+                this.cosmetics[6].visible = true;
+                managers.Game.player.playerAttackDelay = 0;
+                managers.Game.player.money = 99999;                
+            }
+
             if (this.enemies[0].isStunned){
                 this.cosmetics[4].visible = false;
             }

@@ -9,7 +9,6 @@ module objects {
         public isFlying: boolean;
         public canBeEaten: boolean;
         private isBeingEaten: boolean = false;
-
         public canBeAttacked: boolean;
 
         public startPosition: math.Vec2;
@@ -44,10 +43,12 @@ module objects {
                 //determine whether a bit is currently happening 
                 if (managers.Game.player.biteSequence == 0) {
                     //if it is currently in contact with player and whether the biting button is pressed, then disable movement
-                    if (managers.Game.keyboardManager.biting && managers.Collision.Check(managers.Game.player, this) && this.canBeEaten){      
+                    if (managers.Game.keyboardManager.biting && managers.Collision.Check(managers.Game.player, this) && this.canBeEaten) {   
                         this.isBeingEaten = true;                  
                         managers.Game.player.SetBitePositionDirection(this.GetPosition());
                         managers.Game.player.EatMessage();
+                        this.scaleX = managers.Game.player.halfH / this.height;
+                        this.scaleY = this.scaleX;
                         managers.Game.keyboardManager.ControlReset();
                         //after eat timer is done, enable keyboard and reset sequence
                         managers.Game.player.biteSequence = setTimeout(() => {
@@ -87,7 +88,9 @@ module objects {
             //if the player is not taking damage -- check player collision with this (as long as it is not stunned)
             if (!managers.Game.player.isTakingDamage) {
                 if (managers.Collision.Check(managers.Game.player, this) && !this.isStunned) {
-                    if (!managers.Game.player.activatePowers && managers.Game.player.powerUp != config.PowerUp.SHADOW) {
+                    if (managers.Game.player.activatePowers && managers.Game.player.powerUp == config.PowerUp.SHADOW) {
+                    }
+                    else{
                         managers.Game.player.isTakingDamage = true;
                         managers.Game.SFX = createjs.Sound.play("phoebeHit");
                         managers.Game.SFX.volume = 0.5;

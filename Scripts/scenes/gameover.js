@@ -36,6 +36,8 @@ var scenes;
             this.phoebe.y = 500;
             managers.Game.keyboardManager.playMode = false;
             this.Main();
+            managers.Game.player.deathCount++;
+            managers.Game.player.Reset();
         };
         GameOverScene.prototype.Update = function () {
             var _this = this;
@@ -54,7 +56,7 @@ var scenes;
             }
         };
         GameOverScene.prototype.backButtonClick = function () {
-            managers.Game.currentScene = config.Scene.START;
+            managers.Game.currentScene = config.Scene.OPENING_SCENE;
         };
         GameOverScene.prototype.Main = function () {
             this.addChild(this.background);

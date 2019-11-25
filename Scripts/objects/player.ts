@@ -32,6 +32,8 @@ module objects {
         public lastPosition: math.Vec2;
         public playerStatus: objects.Label;
         public deadPlayer: Array<objects.DeadPlayer> = new Array<objects.DeadPlayer>();
+        public deathCount: number = 0;
+        public stageFinished: number = 0;
 
         public ecto: number;
         public maxHp: number;
@@ -118,7 +120,18 @@ module objects {
             this.ActivatePowers();
         }
 
-        public Reset(): void { }
+        public Reset(): void { 
+            this.visible = true;
+            this.hp = this.maxHp;
+            this.ecto = 0;
+            this.isDead = false;
+            this.SwitchAnimation(this.stand[this.direction as number]);
+            this.deadPlayer.forEach(e => {
+                e.visible = false;
+            });
+            this.Start();
+            this.isTakingDamage = false;
+        }
 
         public Move(): void {
             //movement implementation

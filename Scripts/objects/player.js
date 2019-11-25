@@ -35,6 +35,8 @@ var objects;
             _this.canTraverseLeft = false;
             _this.canTraverseRight = false;
             _this.deadPlayer = new Array();
+            _this.deathCount = 0;
+            _this.stageFinished = 0;
             _this.weapon = new objects.Weapon();
             _this.Start();
             _this.hp = 5;
@@ -106,7 +108,18 @@ var objects;
             }
             this.ActivatePowers();
         };
-        Player.prototype.Reset = function () { };
+        Player.prototype.Reset = function () {
+            this.visible = true;
+            this.hp = this.maxHp;
+            this.ecto = 0;
+            this.isDead = false;
+            this.SwitchAnimation(this.stand[this.direction]);
+            this.deadPlayer.forEach(function (e) {
+                e.visible = false;
+            });
+            this.Start();
+            this.isTakingDamage = false;
+        };
         Player.prototype.Move = function () {
             //movement implementation
             if (!this.activatePowers) {

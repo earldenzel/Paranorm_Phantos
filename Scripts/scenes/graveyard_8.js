@@ -52,6 +52,7 @@ var scenes;
             }
             if (this.enemies[0].isDead) {
                 this.isDoorTopLocked = false;
+                managers.Game.player.stageFinished = 1;
                 managers.Game.player.VictoryMessage(config.Scene.HOTEL_1);
             }
         };

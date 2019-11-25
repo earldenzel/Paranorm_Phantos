@@ -21,18 +21,29 @@ module scenes {
 
             this.pressEnterLabel = new objects.Label("", "16px", "'Press Start 2P'", "#000000", 10, 200, true);
             this.pressEnterLabel.color = "#FFFFFF";
-            this.cutSceneMessages = [
-                "",
-                "Hello, welcome... stranger",
-                "Before we begin, please note you \nmay escape cutscenes via the ESC \nkey.\nThat is, if you already know what \nto do.",
-                "In this game, you play the role of \nPhoebe, who is a paranormal bounty\nhunter.",
-                "This time, her case involves \ninvestigating a graveyard. Eerie \nvoices were reported during the \nwee hours",
-                "Missing persons reports state that \nthe gravekeeper seems to be \nmissing for a month now ",
-                "Graves seem to have been freshly \ntrampled upon, and headstones... \nlet's just say these weren't on \nthe right place.",
-                "Phoebe already knows what it is -\na ghoulish existence that gained a\nfollowing. A spirit horde...",
-                "And she has three objectives:\n\tsolve this case,\n\tearn sweet, sweet dough,\n\tand devour the rest.",
-                "Let's jump right in..."
-            ];
+            console.log(managers.Game.player.deathCount + "times");
+            if (managers.Game.player.deathCount == 0){
+                this.cutSceneMessages = [
+                    "",
+                    "Hello, welcome... stranger",
+                    "Before we begin, please note you \nmay escape cutscenes via the ESC \nkey.\nThat is, if you already know what \nto do.",
+                    "In this game, you play the role of \nPhoebe, who is a paranormal bounty\nhunter.",
+                    "This time, her case involves \ninvestigating a graveyard. Eerie \nvoices were reported during the \nwee hours",
+                    "Missing persons reports state that \nthe gravekeeper seems to be \nmissing for a month now ",
+                    "Graves seem to have been freshly \ntrampled upon, and headstones... \nlet's just say these weren't on \nthe right place.",
+                    "Phoebe already knows what it is -\na ghoulish existence that gained a\nfollowing. A spirit horde...",
+                    "And she has three objectives:\n\tsolve this case,\n\tearn sweet, sweet dough,\n\tand devour the rest.",
+                    "Let's jump right in..."
+                ];
+            }
+            else{
+                this.cutSceneMessages = [
+                    "",
+                    "Welcome back.",
+                    "I see you wanna try again!",
+                    "You died " + managers.Game.player.deathCount + " times." 
+                ]
+            }
 
             managers.Game.keyboardManager.playMode = false;
             
@@ -64,7 +75,16 @@ module scenes {
 
         private startButtonClick():void {
             // Change our game state to GAME
-             managers.Game.currentScene = config.Scene.GRAVEYARD_1;
+            switch(managers.Game.player.stageFinished){
+                case 0:
+                    managers.Game.currentScene = config.Scene.GRAVEYARD_1;
+                    break;
+                case 1:
+                    managers.Game.currentScene = config.Scene.HOTEL_1;
+                    break;
+                case 2:
+                    managers.Game.currentScene = config.Scene.MANSION_1;
+            }
         }
 
         public Main():void {

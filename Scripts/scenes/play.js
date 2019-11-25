@@ -173,7 +173,11 @@ var scenes;
             this.playerInfo.PlayerLocation = new math.Vec2(30, 12);
             //this.playerInfo.x = 38;
             this.player.playerStatus.visible = false;
-            managers.Game.keyboardManager.playMode = true;
+            if (!managers.Game.keyboardManager.playMode) {
+                managers.Game.keyboardManager.ControlReset();
+                managers.Game.keyboardManager.enabled = true;
+                managers.Game.keyboardManager.playMode = true;
+            }
             // Initialize bulletManager
             if (this.hasProjectileShooters) {
                 this.bulletManager = managers.Game.bulletManager;
