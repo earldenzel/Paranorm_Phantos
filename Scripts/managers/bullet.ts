@@ -5,6 +5,7 @@ module managers {
         public spiderBulletsLeft: objects.SpiderBulletLeft[];
         public spiderBulletsRight: objects.SpiderBulletRight[];
         public shootingFLowerBullets: objects.ShootingFlowerBullet[];
+        public redBones: objects.RedBone[];
 
         public CurrentBullet: number;
         private bulletCount: number;
@@ -20,6 +21,7 @@ module managers {
             this.spiderBulletsLeft = new Array<objects.SpiderBulletLeft>();
             this.spiderBulletsRight = new Array<objects.SpiderBulletRight>();
             this.shootingFLowerBullets = new Array<objects.ShootingFlowerBullet>();
+            this.redBones = new Array<objects.RedBone>();
 
             this.buildBulletPool();
             this.CurrentBullet = 0;
@@ -41,6 +43,9 @@ module managers {
             this.shootingFLowerBullets.forEach(bullet => {
                 bullet.Update();
             });
+            this.redBones.forEach(bullet => {
+                bullet.Update();
+            });
         }
 
         // Functions
@@ -50,6 +55,7 @@ module managers {
                 this.spiderBulletsLeft[i] = new objects.SpiderBulletLeft();
                 this.spiderBulletsRight[i] = new objects.SpiderBulletRight();
                 this.shootingFLowerBullets[i] = new objects.ShootingFlowerBullet();
+                this.redBones[i] = new objects.RedBone();
             }
         }
 
@@ -67,6 +73,9 @@ module managers {
             });
 
             this.shootingFLowerBullets.forEach(bullet => {
+                bullet.Reset();
+            });
+            this.redBones.forEach(bullet=>{
                 bullet.Reset();
             });
         }

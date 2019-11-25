@@ -447,6 +447,9 @@ var scenes;
                 this.bulletManager.shootingFLowerBullets.forEach(function (bullet) {
                     _this.addChild(bullet);
                 });
+                this.bulletManager.redBones.forEach(function (bullet) {
+                    _this.addChild(bullet);
+                });
             }
         };
         PlayScene.prototype.AddEnemyToScene = function (enemyToAdd) {

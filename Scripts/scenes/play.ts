@@ -523,6 +523,9 @@ module scenes {
                 this.bulletManager.shootingFLowerBullets.forEach(bullet => {
                     this.addChild(bullet);
                 });
+                this.bulletManager.redBones.forEach(bullet => {
+                    this.addChild(bullet);
+                });
             }
         }
         public AddEnemyToScene(enemyToAdd: objects.Enemy): void {

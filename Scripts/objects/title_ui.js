@@ -20,7 +20,7 @@ var objects;
         function TitleUI(imageString, x, y) {
             if (x === void 0) { x = 0; }
             if (y === void 0) { y = 0; }
-            var _this = _super.call(this, managers.Game.assetManager.getResult(imageString)) || this;
+            var _this = _super.call(this, managers.Game.titleUIMap_TextureAtlas, imageString) || this;
             _this.x = x;
             _this.y = y;
             _this.Start();
@@ -30,7 +30,7 @@ var objects;
         TitleUI.prototype.Start = function () {
         };
         return TitleUI;
-    }(createjs.Bitmap));
+    }(createjs.Sprite));
     objects.TitleUI = TitleUI;
 })(objects || (objects = {}));
 //# sourceMappingURL=title_ui.js.map

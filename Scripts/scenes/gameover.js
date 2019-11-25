@@ -25,7 +25,7 @@ var scenes;
         // Method
         GameOverScene.prototype.Start = function () {
             this.background = new objects.Background("title_background");
-            this.gameOver = new objects.TitleUI("gameover_ui", 90, 240);
+            this.gameOver = new objects.TitleUI("GameOver", 90, 240);
             //this.gameOverLabel = new objects.Label(
             //    "Game Over!", "40px", "Consolas", "#000000", 320, 240, true);
             //
@@ -34,6 +34,8 @@ var scenes;
             this.phoebe = new createjs.Bitmap(managers.Game.assetManager.getResult("player_p_walk7"));
             this.phoebe.x = 260;
             this.phoebe.y = 500;
+            this.pressEnterLabel = new objects.Label("PRESS ENTER TO CONTINUE", "16px", "'Press Start 2P'", "#000000", 300, 700, true);
+            this.pressEnterLabel.color = "#FFFFFF";
             managers.Game.keyboardManager.playMode = false;
             // Play Music
             managers.Game.music = createjs.Sound.play("music_gameOver");
@@ -65,6 +67,7 @@ var scenes;
             this.addChild(this.background);
             this.addChild(this.spotlight);
             this.addChild(this.phoebe);
+            this.addChild(this.pressEnterLabel);
             this.addChild(this.gameOver);
         };
         return GameOverScene;

@@ -5,15 +5,16 @@ module scenes {
         // Constructor
         constructor() {
             super(false, false, true, false,config.Design.GRAVEYARD);
+            //this.hasProjectileShooters = true;
             this.Start();
         }
 
         // Methods
         public Start(): void {
-            //this.enemies[0] = new objects.ShadowGhost(1, true, true);
-            this.enemies[0] = new objects.Maggot(1,false,true,4);
-            //this.enemies[1] = new objects.TestEnemy(3, false, false);
-            //this.enemies[2] = new objects.TestEnemy(2,false,true);
+            this.enemies[0] = new objects.Zombie(1);
+            //this.enemies[0] = new objects.RedSkeleton(new math.Vec2(400, 360),3,false,true);
+            this.enemies[1] = new objects.TestEnemy(3, false, false);
+            this.enemies[2] = new objects.TestEnemy(2,false,true);
 
             this.obstacles[0] = new objects.Barriers(managers.Game.graveyard_TextureAtlas, "GraveTile");
             this.obstacles[0].SetPosition(new math.Vec2(200, 360));
@@ -31,8 +32,8 @@ module scenes {
 
         public Update(): void {
             // If all enemies are defeated, make the key appear
-            if(!this.enemies[0].visible){
-            //if(!this.enemies[0].visible && !this.enemies[1].visible && !this.enemies[2].visible){
+            //if(!this.enemies[0].visible){
+            if(!this.enemies[0].visible && !this.enemies[1].visible && !this.enemies[2].visible){
                 if(!this.getChildByName("Items_Key") && managers.GraveyardLocks.graveyard_4_key){
                     this.key = new objects.Key();
                     this.key.x = 250;

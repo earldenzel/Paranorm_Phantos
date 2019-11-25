@@ -227,6 +227,9 @@ var managers;
                 case 5:
                     this.SwitchAnimation(this.playerInfo_Health, "Life_5");
                     break;
+                default:
+                    this.SwitchAnimation(this.playerInfo_Health, "Life_0");
+                    break;
             }
         };
         PlayerInfo_UI.prototype.ChangeEctoInfo = function () {
@@ -248,6 +251,9 @@ var managers;
                     break;
                 case 5:
                     this.SwitchAnimation(this.playerInfo_Ecto, "Ecto_5");
+                    break;
+                default:
+                    this.SwitchAnimation(this.playerInfo_Ecto, "Ecto_0");
                     break;
             }
         };

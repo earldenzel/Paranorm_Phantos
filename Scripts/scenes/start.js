@@ -27,7 +27,7 @@ var scenes;
             this.background = new objects.Background("title_background");
             //this.welcomeLabel = new objects.Label(
             //    "PARANORM //// PHANTOS", "40px", "Consolas", "#FFFFFF", 320, 240, true);
-            this.title = new objects.TitleUI("title_ui", 40, 240);
+            this.title = new objects.TitleUI("Title", 40, 240);
             //this.startButton = new objects.Button(this.assetManager, "nextButton", 320, 500);
             this.pressEnterLabel = new objects.Label("PRESS ENTER", "16px", "'Press Start 2P'", "#000000", 300, 500, true);
             this.pressEnterLabel.color = "#FFFFFF";
