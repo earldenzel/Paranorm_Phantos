@@ -20,6 +20,7 @@ var scenes;
             var _this = 
             // hasDoorTop, hasDoorBot, hasDoorLeft, hasDoorRight
             _super.call(this, false, false, true, false, config.Design.HOTEL) || this;
+            _this.hasShop = true;
             _this.Start();
             return _this;
         }

@@ -22,11 +22,12 @@ var objects;
             //Variables
             //public playerController: Controller<boolean>;
             _this.attackSequence = 0;
+            _this.delaySequence = 0;
             _this.biteSequence = 0;
             _this.fallSequence = 0;
             _this.textSequence = 0;
             _this.playerMoveSpeed = 4;
-            _this.attackTimer = 0;
+            _this.playerAttackDelay = 1000;
             _this.bitingTimer = 0;
             _this.bitingReset = 0;
             _this.canTraverseTop = false;
@@ -34,6 +35,8 @@ var objects;
             _this.canTraverseLeft = false;
             _this.canTraverseRight = false;
             _this.deadPlayer = new Array();
+            _this.deathCount = 0;
+            _this.stageFinished = 0;
             _this.weapon = new objects.Weapon();
             _this.Start();
             _this.hp = 5;
@@ -48,7 +51,7 @@ var objects;
             _this.bitedash = ["Phoebe_Bite_Back", "Phoebe_Bite_Front1", "Phoebe_Bite_Left1", "Phoebe_Bite_Right1"];
             _this.bite = ["Phoebe_Bite_Front2", "Phoebe_Bite_Front2", "Phoebe_Bite_Left2", "Phoebe_Bite_Right2"];
             _this.direction = config.Direction.UP;
-            _this.money = 9999;
+            _this.money = 0;
             _this.playerStatus = new objects.Label("1234567890", "16px", "'Press Start 2P'", "#FFFFFF", _this.x, _this.y, true);
             _this.key = 0;
             _this.deadPlayer = [
@@ -103,14 +106,20 @@ var objects;
                 managers.Game.SFX.volume = 0.2;
                 this.bitingTimer++;
             }
-            if (this.attackTimer == 1) {
-                managers.Game.SFX = createjs.Sound.play("phoebeDash-Swing");
-                managers.Game.SFX.volume = 0.2;
-                this.attackTimer++;
-            }
             this.ActivatePowers();
         };
-        Player.prototype.Reset = function () { };
+        Player.prototype.Reset = function () {
+            this.visible = true;
+            this.hp = this.maxHp;
+            this.ecto = 0;
+            this.isDead = false;
+            this.SwitchAnimation(this.stand[this.direction]);
+            this.deadPlayer.forEach(function (e) {
+                e.visible = false;
+            });
+            this.Start();
+            this.isTakingDamage = false;
+        };
         Player.prototype.Move = function () {
             //movement implementation
             if (!this.activatePowers) {
@@ -181,13 +190,24 @@ var objects;
                         this.SwitchAnimation(this.walk[this.direction]);
                     }
                 }
-                //if player presses the attack button
-                if (managers.Game.keyboardManager.attacking) {
-                    if (this.attackSequence == 0 && this.weapon != undefined) {
-                        this.alpha = 0;
-                        this.attackSequence = 1;
-                        this.weapon.Attack();
-                    }
+                if (managers.Game.keyboardManager.moveUp) {
+                    this.y -= this.playerMoveSpeed;
+                    this.direction = config.Direction.UP;
+                    this.SwitchAnimation(this.walk[this.direction]);
+                }
+                if (managers.Game.keyboardManager.moveDown) {
+                    this.y += this.playerMoveSpeed;
+                    this.direction = config.Direction.DOWN;
+                    this.SwitchAnimation(this.walk[this.direction]);
+                }
+            }
+            //if player presses the attack button
+            if (managers.Game.keyboardManager.attacking) {
+                if (this.attackSequence == 0 && this.weapon != undefined && this.delaySequence == 0) {
+                    this.alpha = 0;
+                    this.attackSequence = 1;
+                    this.delaySequence = 1;
+                    this.weapon.Attack();
                 }
             }
             if (this.biteSequence !== 0) {
@@ -307,7 +327,7 @@ var objects;
         Player.prototype.GainMaxHealth = function (maxHpGain) {
             this.maxHp += maxHpGain;
             this.hp = this.maxHp;
-            this.EchoMessage("MAX HP");
+            this.EchoMessage("MAX HP UP");
         };
         //phoebe effects from devour
         Player.prototype.GainHealth = function (healthGain) {
@@ -400,9 +420,13 @@ var objects;
                 this.EchoMessage("GAINED $" + dollars);
             }
         };
-        Player.prototype.GainEcto = function () {
+        Player.prototype.GainEcto = function (gain) {
+            if (gain === void 0) { gain = 1; }
             if (this.ecto < this.maxEcto) {
-                this.ecto += 1;
+                this.ecto += gain;
+            }
+            if (this.ecto > this.maxEcto) {
+                this.ecto = this.maxEcto;
             }
         };
         Player.prototype.HurtMessage = function () {
@@ -465,6 +489,14 @@ var objects;
                 this.EchoMessage("AHHHH...", 3000);
             }
         };
+        Player.prototype.VictoryMessage = function (nextScene) {
+            managers.Game.keyboardManager.ControlReset();
+            this.EchoMessage("I DID IT!", 3000);
+            setTimeout(function () {
+                managers.Game.keyboardManager.enabled = true;
+                managers.Game.currentScene = nextScene;
+            }, 3000);
+        };
         Player.prototype.EchoMessage = function (message, timeout) {
             var _this = this;
             if (timeout === void 0) { timeout = 1000; }
@@ -517,10 +549,10 @@ var objects;
                 case config.Direction.UP:
                     this.direction = config.Direction.DOWN;
                 case config.Direction.DOWN:
-                    target = math.Vec2.Add(target, new math.Vec2(0, -this.halfH / 2));
+                    target = math.Vec2.Add(target, new math.Vec2(-this.halfW / 2, 0));
                     break;
                 case config.Direction.RIGHT:
-                    target = math.Vec2.Add(target, new math.Vec2(-this.halfW, 0));
+                    target = math.Vec2.Add(target, new math.Vec2(-this.halfW * 2, 0));
                     break;
                 case config.Direction.LEFT:
                     target = math.Vec2.Add(target, new math.Vec2(this.halfW, 0));

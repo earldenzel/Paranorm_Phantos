@@ -17,6 +17,7 @@ module scenes {
             this.enemies[2].SetPosition(new math.Vec2(275, 600));
             this.enemies[3] = new objects.Bat(2.5, 100);
             this.enemies[3].SetPosition(new math.Vec2(100, 430));
+            this.enemies[4] = new objects.ShadowGhost(1, true, true);
 
             this.obstacles[0] = new objects.Barriers(managers.Game.graveyard_TextureAtlas, "GraveTile");
             this.obstacles[0].SetPosition(new math.Vec2(150, 360));

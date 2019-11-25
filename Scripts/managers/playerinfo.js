@@ -71,10 +71,23 @@ var managers;
                 return this.playerHealth;
             },
             set: function (newPlayerHealth) {
+                this.removeFlowers();
                 this.playerHealth = newPlayerHealth;
-                //this.removeChild(this.playerInfo_Health);
                 this.ChangeHealthInfo();
-                //this.addChild(this.playerInfo_Health);
+                this.addFlowers();
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(PlayerInfo_UI.prototype, "PlayerMaxHealth", {
+            get: function () {
+                return this.playerMaxHealth;
+            },
+            set: function (newPlayerMaxHealth) {
+                this.removeFlowers();
+                this.playerMaxHealth = newPlayerMaxHealth;
+                this.ChangeHealthInfo();
+                this.addFlowers();
             },
             enumerable: true,
             configurable: true
@@ -175,6 +188,7 @@ var managers;
             }
             this.playerInfo_Map.x = 30;
             this.playerInfo_Map.y = 12;
+            this.playerInfo_Health = new Array();
             this.playerInfo_Location = new createjs.Sprite(managers.Game.titleUIMap_TextureAtlas, "PlayerLocation");
             this.playerInfo_Power = new createjs.Sprite(managers.Game.titleUIMap_TextureAtlas, "Power_Shadow");
             this.playerInfo_Power.x = 300;
@@ -182,6 +196,7 @@ var managers;
             // Set Defaults
             this.playerHealth = 5;
             this.playerEcto = 5;
+            this.playerMaxHealth = 5;
             this.money = 0;
             this.key = 0;
             this.playerLocation = new math.Vec2(0, 0);
@@ -191,45 +206,52 @@ var managers;
             this.playerInfo_Ecto = new createjs.Sprite(managers.Game.titleUIMap_TextureAtlas, "Ecto_0");
             this.playerInfo_Ecto.x = 10;
             this.playerInfo_Ecto.y = 10;
-            this.playerInfo_Health = new createjs.Sprite(managers.Game.titleUIMap_TextureAtlas, "Life_5");
-            this.playerInfo_Health.x = 376;
-            this.playerInfo_Health.y = 36;
             this.Main();
         };
         PlayerInfo_UI.prototype.Main = function () {
+            var _this = this;
             // Add to the Player Information Container
             this.addChild(this.playerInfo_Base);
             this.addChild(this.moneyLabel);
             this.addChild(this.keyLabel);
-            this.addChild(this.playerInfo_Health);
+            this.playerInfo_Health.forEach(function (e) {
+                _this.addChild(e);
+            });
             this.addChild(this.playerInfo_Ecto);
             this.addChild(this.playerInfo_Map);
             this.addChild(this.playerInfo_Location);
             this.addChild(this.playerInfo_Power);
         };
         PlayerInfo_UI.prototype.ChangeHealthInfo = function () {
-            switch (this.playerHealth) {
-                case 0:
-                    this.SwitchAnimation(this.playerInfo_Health, "Life_0");
-                    break;
-                case 1:
-                    this.SwitchAnimation(this.playerInfo_Health, "Life_1");
-                    break;
-                case 2:
-                    this.SwitchAnimation(this.playerInfo_Health, "Life_2");
-                    break;
-                case 3:
-                    this.SwitchAnimation(this.playerInfo_Health, "Life_3");
-                    break;
-                case 4:
-                    this.SwitchAnimation(this.playerInfo_Health, "Life_4");
-                    break;
-                case 5:
-                    this.SwitchAnimation(this.playerInfo_Health, "Life_5");
-                    break;
-                default:
-                    this.SwitchAnimation(this.playerInfo_Health, "Life_0");
-                    break;
+            var maximumFlower = this.playerMaxHealth / 5;
+            var currentHp = this.playerHealth;
+            var flower;
+            for (var index = 0; index < maximumFlower; index++) {
+                flower = new createjs.Sprite(managers.Game.titleUIMap_TextureAtlas, "Life_0");
+                if (currentHp >= 5) {
+                    flower = new createjs.Sprite(managers.Game.titleUIMap_TextureAtlas, "Life_5");
+                    currentHp -= 5;
+                }
+                else {
+                    switch (currentHp) {
+                        case 1:
+                            flower = new createjs.Sprite(managers.Game.titleUIMap_TextureAtlas, "Life_1");
+                            break;
+                        case 2:
+                            flower = new createjs.Sprite(managers.Game.titleUIMap_TextureAtlas, "Life_2");
+                            break;
+                        case 3:
+                            flower = new createjs.Sprite(managers.Game.titleUIMap_TextureAtlas, "Life_3");
+                            break;
+                        case 4:
+                            flower = new createjs.Sprite(managers.Game.titleUIMap_TextureAtlas, "Life_4");
+                            break;
+                    }
+                    currentHp = 0;
+                }
+                this.playerInfo_Health[index] = flower;
+                this.playerInfo_Health[index].x = 376 + flower.getBounds().width * index;
+                this.playerInfo_Health[index].y = 36;
             }
         };
         PlayerInfo_UI.prototype.ChangeEctoInfo = function () {
@@ -260,6 +282,19 @@ var managers;
         PlayerInfo_UI.prototype.ChangePlayerLocation = function () {
             this.playerInfo_Location.x = this.playerLocation.x;
             this.playerInfo_Location.y = this.playerLocation.y;
+        };
+        PlayerInfo_UI.prototype.removeFlowers = function () {
+            var _this = this;
+            this.playerInfo_Health.forEach(function (e) {
+                _this.removeChild(e);
+            });
+            this.playerInfo_Health = new Array();
+        };
+        PlayerInfo_UI.prototype.addFlowers = function () {
+            var _this = this;
+            this.playerInfo_Health.forEach(function (e) {
+                _this.addChild(e);
+            });
         };
         PlayerInfo_UI.prototype.ChangePlayerPower = function () {
             if (this.playerPower != config.PowerUp.NONE) {

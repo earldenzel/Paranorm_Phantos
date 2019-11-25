@@ -24,17 +24,29 @@ module managers{
             this.chooseNo.addEventListener("click", this.cancelBuy.bind(this), false);
             this.Reset();
             
-            this.shopItems[0] = new objects.ShopItem("Items_Hellebore-Flower1", 500, config.ShopEffects.INCREASE_MAX_HP, config.Scene.GRAVEYARD_7);     
+            this.shopItems[0] = new objects.ShopItem("Items_Hellebore-Flower1", 500, config.Effects.INCREASE_MAX_HP, config.Scene.GRAVEYARD_7);     
             this.shopItems[0].SetPosition(new math.Vec2(185, 400));
             this.shopItems[0].description = "This increases your Max HP. Buy?";
             
-            this.shopItems[1] = new objects.ShopItem("Items_Key", 10, config.ShopEffects.INCREASE_KEY_COUNT, config.Scene.GRAVEYARD_7);  
+            this.shopItems[1] = new objects.ShopItem("Items_Key", 10, config.Effects.INCREASE_KEY_COUNT, config.Scene.GRAVEYARD_7);  
             this.shopItems[1].SetPosition(new math.Vec2(285, 400));
             this.shopItems[1].description = "That'd be ten bucks please.";
             
-            this.shopItems[2] = new objects.ShopItem("Items_Hellebore-Flower2", 1000, config.ShopEffects.INCREASE_ATK, config.Scene.GRAVEYARD_7);    
+            this.shopItems[2] = new objects.ShopItem("Items_Rubies", 1000, config.Effects.INCREASE_ATK, config.Scene.GRAVEYARD_7);    
             this.shopItems[2].SetPosition(new math.Vec2(385, 400));
-            this.shopItems[2].description = "Concentrated power for $1000";    
+            this.shopItems[2].description = "Power in a gem - just for you";
+            
+            this.shopItems[3] = new objects.ShopItem("Items_Hellebore-Flower1", 500, config.Effects.INCREASE_MAX_HP, config.Scene.HOTEL_14);     
+            this.shopItems[3].SetPosition(new math.Vec2(185, 400));
+            this.shopItems[3].description = "More maximum health for ya. Good?";
+            
+            this.shopItems[4] = new objects.ShopItem("Items_Hellebore-Flower2", 50, config.Effects.FRESHEN_UP, config.Scene.HOTEL_14);  
+            this.shopItems[4].SetPosition(new math.Vec2(285, 400));
+            this.shopItems[4].description = "Pay me fifty, I heal ye.";
+            
+            this.shopItems[5] = new objects.ShopItem("Items_Sapphires", 1000, config.Effects.INCREASE_SPEED, config.Scene.HOTEL_14);    
+            this.shopItems[5].SetPosition(new math.Vec2(385, 400));
+            this.shopItems[5].description = "Speedsters be likin' this one.";    
         }
 
         public Reset():void {            
@@ -45,16 +57,21 @@ module managers{
         public Update(): void{            
             this.shopKeeper.Update();        
             this.hasItemSelected = false;
-            this.shopItems.forEach(e => {
+            let shopItems: Array<objects.ShopItem> = this.shopItems.filter(e => {
+                return (e.appearingScene == managers.Game.currentScene);
+            });
+
+            shopItems.forEach(e => {
                 if (!e.available){
                     e.visible = false;
                     e.priceTag.visible = false;
                 }
                 this.hasItemSelected = 
                     this.hasItemSelected || managers.Collision.Check(managers.Game.player, e);  
-                if (managers.Collision.Check(managers.Game.player, e)){  
+                if (managers.Collision.Check(managers.Game.player, e)){
                     this.selected = e;
                 }
+
             });
 
             if (this.hasItemSelected){
@@ -78,7 +95,7 @@ module managers{
 
         public buyItem(){
             if (this.selected != null){
-                if (managers.Game.player.money > this.selected.price){
+                if (managers.Game.player.money >= this.selected.price){
                     this.selected.TriggerShopEffect();
                     this.shopKeeper.dialog.text = "Thanks for doing business";
                     managers.Game.player.GainDollars(-this.selected.price);
@@ -90,6 +107,7 @@ module managers{
             }
             this.shopKeeper.dialog.Recenter();
             this.canChoose = false;
+            this.selected = null;
         }
 
         public cancelBuy(){

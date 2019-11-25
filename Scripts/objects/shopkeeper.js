@@ -58,6 +58,9 @@ var objects;
                     if (this.currentDisplay++ < this.dialogMessages.length) {
                         this.dialog.text = this.dialogMessages[this.currentDisplay];
                     }
+                    else {
+                        this.interrupted = true;
+                    }
                 }
                 this.dialog.Recenter();
             }
