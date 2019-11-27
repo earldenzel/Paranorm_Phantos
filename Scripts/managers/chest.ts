@@ -31,6 +31,12 @@ module managers{
             this.chestItems[9] = new objects.ChestItem("lockedChest", config.Effects.INCREASE_GOLD_50, config.Scene.GRAVEYARD_1);
             this.chestItems[9].SetPosition(new math.Vec2(185, 150));
             this.chestItems[9].locked = true;
+            this.chestItems[10] = new objects.ChestItem("regularChest", config.Effects.INCREASE_KEY_COUNT, config.Scene.GRAVEYARD_4, false);
+            this.chestItems[10].SetPosition(new math.Vec2(250, 300));
+            this.chestItems[11] = new objects.ChestItem("regularChest", config.Effects.INCREASE_KEY_COUNT, config.Scene.GRAVEYARD_5, false);
+            this.chestItems[11].SetPosition(new math.Vec2(250, 300));
+            this.chestItems[12] = new objects.ChestItem("regularChest", config.Effects.INCREASE_KEY_COUNT, config.Scene.GRAVEYARD_6, false);
+            this.chestItems[12].SetPosition(new math.Vec2(250, 300));
         }
 
         public Reset():void {            

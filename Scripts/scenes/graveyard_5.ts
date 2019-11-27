@@ -55,15 +55,6 @@ module scenes {
         }        
 
         public Update(): void {
-            if(this.AllEnemiesAreDead()){
-                if(!this.getChildByName("Items_Key") && managers.GraveyardLocks.graveyard_5_key){
-                    this.key = new objects.Key();
-                    this.key.x = 250;
-                    this.key.y = 300;
-                    this.addChild(this.key);
-                    managers.GraveyardLocks.graveyard_5_key = false;
-                }
-            }
             if(!this.isDoorBotLocked){
                 managers.GraveyardLocks.graveyard_5_lockBot = false;
             }
