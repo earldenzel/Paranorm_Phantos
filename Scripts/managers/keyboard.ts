@@ -14,6 +14,8 @@ module managers {
         public attackEnabled: boolean = true;
         public pause: boolean;
         public playMode: boolean;
+        public confirming: boolean;
+        public cancelling: boolean;
 
         // Constructor
         constructor() {
@@ -83,14 +85,12 @@ module managers {
                         case config.Keys.J:
                         case config.Keys.Z:
                         case config.Keys.ENTER:
-                            if (this.attackEnabled){
-                                this.attacking = true;
-                            }
+                            this.confirming = true;
                             break;              
                         case config.Keys.X:
                         case config.Keys.K:  
                         case config.Keys.ESCAPE:
-                            this.biting = true;
+                            this.cancelling = true;
                             break;
                     }
                 }
@@ -146,14 +146,12 @@ module managers {
                         case config.Keys.J:
                         case config.Keys.Z:
                         case config.Keys.ENTER:
-                            if (this.attackEnabled){
-                                this.attacking = false;
-                            }
+                            this.confirming = false;
                             break;              
                         case config.Keys.X:
                         case config.Keys.K:  
                         case config.Keys.ESCAPE:
-                            this.biting = false;
+                            this.cancelling = false;
                             break;
                     }
                 }

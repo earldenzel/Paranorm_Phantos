@@ -19,6 +19,7 @@ var scenes;
         function GameOverScene() {
             var _this = _super.call(this) || this;
             _this.messageTimeout = 0;
+            _this.attemptToCancel = false;
             _this.Start();
             return _this;
         }
@@ -26,6 +27,7 @@ var scenes;
         GameOverScene.prototype.Start = function () {
             this.background = new objects.Background("title_background");
             this.gameOver = new objects.TitleUI("GameOver", 90, 240);
+            this.attemptToCancel = false;
             //this.gameOverLabel = new objects.Label(
             //    "Game Over!", "40px", "Consolas", "#000000", 320, 240, true);
             //
@@ -47,7 +49,7 @@ var scenes;
         };
         GameOverScene.prototype.Update = function () {
             var _this = this;
-            if (managers.Game.keyboardManager.attacking) {
+            if (managers.Game.keyboardManager.confirming) {
                 if (this.messageTimeout == 0) {
                     this.messageTimeout = setTimeout(function () {
                         _this.backButtonClick();
@@ -58,6 +60,18 @@ var scenes;
                 if (this.messageTimeout > 0) {
                     this.messageTimeout = 0;
                     clearTimeout(this.messageTimeout);
+                }
+            }
+            if (managers.Game.keyboardManager.cancelling) {
+                if (this.attemptToCancel) {
+                    createjs.Sound.stop();
+                    managers.Game.currentScene = config.Scene.START;
+                }
+                else {
+                    this.pressEnterLabel.text = "PRESS ESC AGAIN TO RESET";
+                    setTimeout(function () {
+                        _this.attemptToCancel = true;
+                    }, 1000);
                 }
             }
         };
