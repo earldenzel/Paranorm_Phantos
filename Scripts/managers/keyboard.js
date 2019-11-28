@@ -8,14 +8,20 @@ var managers;
             document.addEventListener("keydown", this.onKeyDown.bind(this), false);
             document.addEventListener("keyup", this.onKeyUp.bind(this), false);
         }
-        Keyboard.prototype.ControlReset = function () {
+        Keyboard.prototype.ControlReset = function (fullReset) {
+            if (fullReset === void 0) { fullReset = true; }
             this.moveLeft = false;
             this.moveRight = false;
             this.moveUp = false;
             this.moveDown = false;
-            this.enabled = false;
             this.attacking = false;
             this.biting = false;
+            if (fullReset) {
+                this.enabled = false;
+            }
+            else {
+                this.playMode = false;
+            }
         };
         // Methods
         Keyboard.prototype.onKeyDown = function (event) {

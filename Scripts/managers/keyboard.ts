@@ -24,14 +24,19 @@ module managers {
             document.addEventListener("keyup", this.onKeyUp.bind(this), false);
         }
 
-        public ControlReset(): void{            
+        public ControlReset(fullReset: boolean = true): void{            
             this.moveLeft = false;
             this.moveRight = false;
             this.moveUp = false;
             this.moveDown = false;
-            this.enabled = false;
             this.attacking = false;
             this.biting = false;
+            if (fullReset){                
+                this.enabled = false;
+            }
+            else{
+                this.playMode = false;
+            }
         }
 
         // Methods
