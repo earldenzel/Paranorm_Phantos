@@ -420,6 +420,14 @@ var objects;
                 this.EchoMessage("GAINED $" + dollars);
             }
         };
+        Player.prototype.GainKey = function () {
+            this.key += 1;
+            this.EchoMessage("GAINED A SMALL KEY");
+        };
+        Player.prototype.UseKey = function () {
+            this.key -= 1;
+            this.EchoMessage("UNLOCKED");
+        };
         Player.prototype.GainEcto = function (gain) {
             if (gain === void 0) { gain = 1; }
             if (this.ecto < this.maxEcto) {

@@ -499,7 +499,14 @@ module scenes {
             this.addChild(this.player.weapon);
             this.player.deadPlayer.forEach(e => {
                 this.addChild(e);
+            });            
+
+            this.chestManager.chestItems.forEach(e => {
+                if (managers.Game.currentScene == e.appearingScene){
+                    this.addChild(e.showItem);
+                }
             });
+            
 
             // ENEMY PLACEMENT
             this.enemies.forEach(e => {

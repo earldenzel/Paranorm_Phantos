@@ -441,6 +441,16 @@ module objects {
             }
         }
 
+        public GainKey() {
+            this.key += 1;
+            this.EchoMessage("GAINED A SMALL KEY");
+        }        
+
+        public UseKey() {
+            this.key -= 1;
+            this.EchoMessage("UNLOCKED");
+        }
+
         public GainEcto(gain: number = 1) {
             if (this.ecto < this.maxEcto) {
                 this.ecto += gain;

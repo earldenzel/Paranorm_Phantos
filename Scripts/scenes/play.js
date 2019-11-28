@@ -427,6 +427,11 @@ var scenes;
             this.player.deadPlayer.forEach(function (e) {
                 _this.addChild(e);
             });
+            this.chestManager.chestItems.forEach(function (e) {
+                if (managers.Game.currentScene == e.appearingScene) {
+                    _this.addChild(e.showItem);
+                }
+            });
             // ENEMY PLACEMENT
             this.enemies.forEach(function (e) {
                 _this.addChild(e);

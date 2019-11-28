@@ -5,9 +5,12 @@ module objects{
         public appearingScene: config.Scene;
         public available: boolean = true;
         public locked: boolean = false;
+        private triggeredSequence: number = 0;
+        public showItem: objects.ShowItem;
         // Constructor
-        constructor(imageString: string, effect: config.Effects, appearingScene: config.Scene, initiallyShown: boolean = true){
+        constructor(imageString: string, showItemString: string, effect: config.Effects, appearingScene: config.Scene, initiallyShown: boolean = true){
             super(managers.Game.chest_TextureAtlas, imageString);
+            this.showItem = new objects.ShowItem(showItemString);
             this.effect = effect;
             this.appearingScene = appearingScene;
             this.Start();
@@ -15,6 +18,7 @@ module objects{
         }
         // Methods
         public Start():void {
+            this.showItem.Start();
         }
         public Update():void {
             if (!this.available){
@@ -27,25 +31,31 @@ module objects{
         public Move():void {}
         public CheckBound():void {}
         public TriggerChestEffect(){
-            switch (this.effect){
-                case config.Effects.INCREASE_MAX_HP:
-                    managers.Game.player.GainMaxHealth(5);
-                    break;
-                case config.Effects.INCREASE_KEY_COUNT:
-                    managers.Game.player.key++;
-                    break;
-                case config.Effects.INCREASE_ATK:
-                    managers.Game.player.GainAttack(10);
-                    break;
-                case config.Effects.INCREASE_GOLD:
-                    managers.Game.player.GainDollars(10);
-                    break;                
-                case config.Effects.INCREASE_GOLD_50:
-                    managers.Game.player.GainDollars(50);
-                    break;
+            this.showItem.visible = true; 
+            if (this.triggeredSequence == 0){
+                this.triggeredSequence = setTimeout(() => {
+                    switch (this.effect){
+                        case config.Effects.INCREASE_MAX_HP:
+                            managers.Game.player.GainMaxHealth(5);
+                            break;
+                        case config.Effects.INCREASE_KEY_COUNT:
+                            managers.Game.player.GainKey();
+                            break;
+                        case config.Effects.INCREASE_ATK:
+                            managers.Game.player.GainAttack(10);
+                            break;
+                        case config.Effects.INCREASE_GOLD:
+                            managers.Game.player.GainDollars(10);
+                            break;                
+                        case config.Effects.INCREASE_GOLD_50:
+                            managers.Game.player.GainDollars(50);
+                            break;
+                    }                   
+                    this.available = false;
+                    this.triggeredSequence = 0;
+                    this.Update();
+                }, 250);
             }
-            this.available = false;
-            this.Update();
         }
     }
 }
