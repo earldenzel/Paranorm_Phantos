@@ -31,6 +31,8 @@ module objects{
         public Move():void {}
         public CheckBound():void {}
         public TriggerChestEffect(){
+            this.showItem.x = this.x;
+            this.showItem.y = this.y;
             this.showItem.visible = true; 
             if (this.triggeredSequence == 0){
                 this.triggeredSequence = setTimeout(() => {

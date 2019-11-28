@@ -15,7 +15,7 @@ var managers;
             this.chooseYes.addEventListener("click", this.buyItem.bind(this), false);
             this.chooseNo.addEventListener("click", this.cancelBuy.bind(this), false);
             this.Reset();
-            this.shopItems[0] = new objects.ShopItem("Items_Hellebore-Flower1", 500, config.Effects.INCREASE_MAX_HP, config.Scene.GRAVEYARD_7);
+            this.shopItems[0] = new objects.ShopItem("Items_Hellebore-Flower1", 150, config.Effects.INCREASE_MAX_HP, config.Scene.GRAVEYARD_7);
             this.shopItems[0].SetPosition(new math.Vec2(185, 400));
             this.shopItems[0].description = "This increases your Max HP. Buy?";
             this.shopItems[1] = new objects.ShopItem("Items_Key", 10, config.Effects.INCREASE_KEY_COUNT, config.Scene.GRAVEYARD_7);

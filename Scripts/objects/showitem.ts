@@ -30,11 +30,13 @@ module objects {
 
         public Start():void {
             this.visible = false;
+            this.scaleX = 1.5;
+            this.scaleY = 1.5;
         }
         public Update():void {            
             if (this.visible){
-                this.x = managers.Game.player.x + managers.Game.player.halfW;
-                this.y = managers.Game.player.y - managers.Game.player.halfH;
+                this.rotation -= 10;
+                this.y -= 2;
                 setTimeout(() => {
                     this.visible = false;
                     managers.Game.currentStage.removeChild(this);

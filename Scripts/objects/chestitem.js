@@ -45,6 +45,8 @@ var objects;
         ChestItem.prototype.CheckBound = function () { };
         ChestItem.prototype.TriggerChestEffect = function () {
             var _this = this;
+            this.showItem.x = this.x;
+            this.showItem.y = this.y;
             this.showItem.visible = true;
             if (this.triggeredSequence == 0) {
                 this.triggeredSequence = setTimeout(function () {

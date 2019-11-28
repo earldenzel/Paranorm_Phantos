@@ -35,12 +35,14 @@ var objects;
         };
         ShowItem.prototype.Start = function () {
             this.visible = false;
+            this.scaleX = 1.5;
+            this.scaleY = 1.5;
         };
         ShowItem.prototype.Update = function () {
             var _this = this;
             if (this.visible) {
-                this.x = managers.Game.player.x + managers.Game.player.halfW;
-                this.y = managers.Game.player.y - managers.Game.player.halfH;
+                this.rotation -= 10;
+                this.y -= 2;
                 setTimeout(function () {
                     _this.visible = false;
                     managers.Game.currentStage.removeChild(_this);
