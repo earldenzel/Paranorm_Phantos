@@ -11,7 +11,11 @@ var managers;
             this.shopKeeper = new objects.ShopKeeper;
             this.shopKeeper.SetPosition(new math.Vec2(285, 285));
             this.chooseYes = new objects.Label("YES", "16px", "'Press Start 2P'", "#FFFF00", 185, 285, true);
+            this.indicatorYes = new objects.Indicator("attackIndicator");
+            this.indicatorYes.SetPosition(new math.Vec2(185, 315));
             this.chooseNo = new objects.Label("NO", "16px", "'Press Start 2P'", "#FFFF00", 385, 285, true);
+            this.indicatorNo = new objects.Indicator("stunIndicator");
+            this.indicatorNo.SetPosition(new math.Vec2(385, 315));
             //this.chooseYes.addEventListener("click", this.buyItem.bind(this), false);
             //this.chooseNo.addEventListener("click", this.cancelBuy.bind(this), false);
             this.Reset();
@@ -37,6 +41,8 @@ var managers;
         Shop.prototype.Reset = function () {
             this.chooseYes.visible = false;
             this.chooseNo.visible = false;
+            this.indicatorYes.visible = false;
+            this.indicatorNo.visible = false;
         };
         Shop.prototype.Update = function () {
             var _this = this;
@@ -62,6 +68,8 @@ var managers;
                     this.shopKeeper.TellItemInformation(this.selected);
                     this.chooseYes.visible = true;
                     this.chooseNo.visible = true;
+                    this.indicatorYes.visible = true;
+                    this.indicatorNo.visible = true;
                 }
                 else {
                     managers.Game.keyboardManager.playMode = true;
