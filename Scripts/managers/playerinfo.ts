@@ -241,8 +241,18 @@ module managers {
                     currentHp = 0;
                 }
                 this.playerInfo_Health[index] = flower;
-                this.playerInfo_Health[index].x = 376 + flower.getBounds().width * index;
-                this.playerInfo_Health[index].y = 36                
+                if(index == 0){
+                    this.playerInfo_Health[index].x = 376 + flower.getBounds().width * index
+                }
+                else{
+                    this.playerInfo_Health[index].x = (376 + flower.getBounds().width * index) - (index * 10);
+                }
+                if(index % 2 == 0){
+                    this.playerInfo_Health[index].y = 36;   
+                }
+                else{
+                    this.playerInfo_Health[index].y = 64;
+                }
             }
         }
 

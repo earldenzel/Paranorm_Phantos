@@ -11,6 +11,7 @@ var managers;
             this.spiderBulletsLeft = new Array();
             this.spiderBulletsRight = new Array();
             this.shootingFLowerBullets = new Array();
+            this.bones = new Array();
             this.redBones = new Array();
             this.buildBulletPool();
             this.CurrentBullet = 0;
@@ -28,6 +29,9 @@ var managers;
             this.shootingFLowerBullets.forEach(function (bullet) {
                 bullet.Update();
             });
+            this.bones.forEach(function (bullet) {
+                bullet.Update();
+            });
             this.redBones.forEach(function (bullet) {
                 bullet.Update();
             });
@@ -39,6 +43,7 @@ var managers;
                 this.spiderBulletsLeft[i] = new objects.SpiderBulletLeft();
                 this.spiderBulletsRight[i] = new objects.SpiderBulletRight();
                 this.shootingFLowerBullets[i] = new objects.ShootingFlowerBullet();
+                this.bones[i] = new objects.Bone();
                 this.redBones[i] = new objects.RedBone();
             }
         };
@@ -53,6 +58,9 @@ var managers;
                 bullet.Reset();
             });
             this.shootingFLowerBullets.forEach(function (bullet) {
+                bullet.Reset();
+            });
+            this.bones.forEach(function (bullet) {
                 bullet.Reset();
             });
             this.redBones.forEach(function (bullet) {
