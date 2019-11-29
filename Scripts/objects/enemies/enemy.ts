@@ -10,6 +10,7 @@ module objects {
         public canBeEaten: boolean;
         private isBeingEaten: boolean = false;
         public canBeAttacked: boolean;
+        protected expGain: number;
 
         public startPosition: math.Vec2;
 
@@ -154,6 +155,7 @@ module objects {
                 //managers.Game.messageStatus.text = attacker.name + " ended " + this.name + "'s life.";
                 managers.Game.SFX = createjs.Sound.play("anyDefeated");
                 managers.Game.SFX.volume = 0.2;
+                managers.Game.player.GainExperience(this.expGain);
                 this.RemoveFromPlay(this.bounty);
             }
             else {

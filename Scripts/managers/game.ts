@@ -29,5 +29,6 @@ module managers {
         public static keyboardManager: managers.Keyboard;
         public static SFX: createjs.AbstractSoundInstance;
         public static music: createjs.AbstractSoundInstance;
+        public static expConfigurer: config.Experience = new config.Experience();
     }
 }

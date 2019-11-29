@@ -8,6 +8,7 @@ module scenes {
         private spotlight: createjs.Bitmap;
         private phoebe: createjs.Bitmap;
         private messageTimeout: number = 0;
+        private attemptToCancel: boolean = false;
 
         // Constructor
         constructor() {
@@ -20,6 +21,7 @@ module scenes {
         public Start():void {
             this.background = new objects.Background("title_background");
             this.gameOver = new objects.TitleUI("GameOver",90,240);
+            this.attemptToCancel = false;
 
             //this.gameOverLabel = new objects.Label(
             //    "Game Over!", "40px", "Consolas", "#000000", 320, 240, true);
@@ -46,7 +48,7 @@ module scenes {
         }
 
         public Update():void {
-            if(managers.Game.keyboardManager.attacking){
+            if(managers.Game.keyboardManager.confirming){
                 if (this.messageTimeout == 0){
                     this.messageTimeout = setTimeout(() => {
                         this.backButtonClick();
@@ -59,6 +61,18 @@ module scenes {
                     clearTimeout(this.messageTimeout);
                 }
             } 
+            if(managers.Game.keyboardManager.cancelling){
+                if (this.attemptToCancel){
+                    createjs.Sound.stop();
+                    managers.Game.currentScene = config.Scene.START;
+                }
+                else{
+                    this.pressEnterLabel.text = "PRESS ESC AGAIN TO RESET";
+                    setTimeout(() => {                        
+                        this.attemptToCancel = true;
+                    }, 1000);
+                }
+            }
         }
 
         private backButtonClick():void {

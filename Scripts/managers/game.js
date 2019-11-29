@@ -5,6 +5,7 @@ var managers;
         }
         Game.gameHeight = 900;
         Game.gameWidth = 640;
+        Game.expConfigurer = new config.Experience();
         return Game;
     }());
     managers.Game = Game;

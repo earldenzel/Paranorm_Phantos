@@ -61,13 +61,13 @@ var scenes;
         OpeningScene.prototype.Update = function () {
             var _this = this;
             this.pressEnterLabel.text = this.cutSceneMessages[this.currentMessage];
-            if (managers.Game.keyboardManager.biting) {
+            if (managers.Game.keyboardManager.cancelling) {
                 setTimeout(function () {
                     _this.startButtonClick();
                 }, 200);
             }
             //press attack button to show next message
-            if (managers.Game.keyboardManager.attacking) {
+            if (managers.Game.keyboardManager.confirming) {
                 if (this.messageTimeout == 0) {
                     this.messageTimeout = setTimeout(function () {
                         _this.nextMessage();
@@ -84,7 +84,7 @@ var scenes;
         OpeningScene.prototype.startButtonClick = function () {
             // Change our game state to GAME
             createjs.Sound.stop();
-            managers.Game.keyboardManager.attacking = false;
+            managers.Game.keyboardManager.confirming = false;
             managers.Music.graveyardMusicPlaying = false;
             managers.Music.hotelMusicPlaying = false;
             managers.Music.mansionMusicPlaying = false;

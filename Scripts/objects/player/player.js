@@ -61,6 +61,7 @@ var objects;
                 new objects.DeadPlayer("Phoebe_Dead_B", false, true),
                 new objects.DeadPlayer("Phoebe_Dead_B", true, true)
             ];
+            _this.experience = 0;
             return _this;
         }
         // Methods
@@ -324,8 +325,8 @@ var objects;
                 this.DeathSequence();
             }
         };
-        Player.prototype.GainMaxHealth = function (maxHpGain) {
-            this.maxHp += maxHpGain;
+        Player.prototype.GainMaxHealth = function () {
+            this.maxHp += 5;
             this.hp = this.maxHp;
             this.EchoMessage("MAX HP UP");
         };
@@ -419,6 +420,18 @@ var objects;
             if (dollars > 0) {
                 this.EchoMessage("GAINED $" + dollars);
             }
+        };
+        Player.prototype.GainSwingSpeed = function (delayLoss) {
+            this.playerAttackDelay -= delayLoss;
+            this.EchoMessage("I CAN SWING FASTER NOW");
+        };
+        Player.prototype.GainKey = function () {
+            this.key += 1;
+            this.EchoMessage("GAINED A SMALL KEY");
+        };
+        Player.prototype.UseKey = function () {
+            this.key -= 1;
+            this.EchoMessage("UNLOCKED");
         };
         Player.prototype.GainEcto = function (gain) {
             if (gain === void 0) { gain = 1; }
@@ -520,6 +533,10 @@ var objects;
                     _this.textSequence = 0;
                 }, timeout);
             }
+        };
+        Player.prototype.GainExperience = function (experience) {
+            this.experience += experience;
+            console.log("i am level " + managers.Game.expConfigurer.DetermineLevel(this.experience));
         };
         Player.prototype.phoebeDied = function () {
             var _this = this;

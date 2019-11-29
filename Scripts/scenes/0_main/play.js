@@ -408,6 +408,8 @@ var scenes;
                 this.addChild(this.shopManager.shopKeeper.dialog);
                 this.addChild(this.shopManager.chooseYes);
                 this.addChild(this.shopManager.chooseNo);
+                this.addChild(this.shopManager.indicatorYes);
+                this.addChild(this.shopManager.indicatorNo);
                 this.shopManager.shopItems.forEach(function (e) {
                     if (managers.Game.currentScene == e.appearingScene) {
                         _this.addChild(e);
@@ -426,6 +428,11 @@ var scenes;
             this.addChild(this.player.weapon);
             this.player.deadPlayer.forEach(function (e) {
                 _this.addChild(e);
+            });
+            this.chestManager.chestItems.forEach(function (e) {
+                if (managers.Game.currentScene == e.appearingScene) {
+                    _this.addChild(e.showItem);
+                }
             });
             // ENEMY PLACEMENT
             this.enemies.forEach(function (e) {

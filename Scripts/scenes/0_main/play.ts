@@ -479,6 +479,8 @@ module scenes {
                 this.addChild(this.shopManager.shopKeeper.dialog);
                 this.addChild(this.shopManager.chooseYes);
                 this.addChild(this.shopManager.chooseNo);
+                this.addChild(this.shopManager.indicatorYes);
+                this.addChild(this.shopManager.indicatorNo);
                 this.shopManager.shopItems.forEach(e => {
                     if (managers.Game.currentScene == e.appearingScene){
                         this.addChild(e);
@@ -499,7 +501,14 @@ module scenes {
             this.addChild(this.player.weapon);
             this.player.deadPlayer.forEach(e => {
                 this.addChild(e);
+            });            
+
+            this.chestManager.chestItems.forEach(e => {
+                if (managers.Game.currentScene == e.appearingScene){
+                    this.addChild(e.showItem);
+                }
             });
+            
 
             // ENEMY PLACEMENT
             this.enemies.forEach(e => {

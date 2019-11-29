@@ -42,7 +42,7 @@ var scenes;
         StartScene.prototype.Update = function () {
             var _this = this;
             //press attack button to show next message
-            if (managers.Game.keyboardManager.attacking) {
+            if (managers.Game.keyboardManager.confirming) {
                 if (this.messageTimeout == 0) {
                     this.messageTimeout = setTimeout(function () {
                         _this.startButtonClick();

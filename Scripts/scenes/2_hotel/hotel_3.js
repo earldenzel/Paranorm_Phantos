@@ -25,11 +25,11 @@ var scenes;
         }
         // Methods
         Hotel_3.prototype.Start = function () {
-            this.enemies[0] = new objects.TestEnemy(2.5, true, true);
+            this.enemies[0] = new objects.DetachedGhost(2.5, true, true);
             this.enemies[0].SetPosition(new math.Vec2(100, 200));
             this.enemies[1] = new objects.Zombie(2);
             this.enemies[1].SetPosition(new math.Vec2(400, 200));
-            this.enemies[2] = new objects.TestEnemy(3, true, true);
+            this.enemies[2] = new objects.DetachedGhost(3, true, true);
             this.enemies[2].SetPosition(new math.Vec2(400, 650));
             this.enemies[3] = new objects.Zombie(2.5);
             this.enemies[3].SetPosition(new math.Vec2(100, 650));
