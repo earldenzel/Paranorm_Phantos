@@ -39,6 +39,7 @@ module objects {
         public maxHp: number;
         public maxEcto: number;
         public activatePowers: boolean;
+        public experience: number;
 
         //Constructor
         constructor() {
@@ -67,6 +68,7 @@ module objects {
                 new objects.DeadPlayer("Phoebe_Dead_B", false, true),
                 new objects.DeadPlayer("Phoebe_Dead_B", true, true)
             ];
+            this.experience = 0;
         }
 
         // Methods
@@ -345,8 +347,8 @@ module objects {
             }
         }
 
-        public GainMaxHealth(maxHpGain: number) {
-            this.maxHp += maxHpGain;
+        public GainMaxHealth() {
+            this.maxHp += 5;
             this.hp = this.maxHp;
             this.EchoMessage("MAX HP UP");
 
@@ -439,6 +441,11 @@ module objects {
             if (dollars > 0) {
                 this.EchoMessage("GAINED $" + dollars);
             }
+        }
+
+        public GainSwingSpeed(delayLoss: number){
+            this.playerAttackDelay -= delayLoss;
+            this.EchoMessage("I CAN SWING FASTER NOW");
         }
 
         public GainKey() {
@@ -545,6 +552,11 @@ module objects {
             }
         }
 
+        public GainExperience(experience: number): void{
+            this.experience += experience;
+            console.log("i am level " + managers.Game.expConfigurer.DetermineLevel(this.experience));
+        }
+
         private phoebeDied(): void {
             this.off("animationend", null);
             this.deadPlayer.forEach(e => {
@@ -588,5 +600,7 @@ module objects {
             this.SetPosition(target);
 
         }
+
+        
     }
 }

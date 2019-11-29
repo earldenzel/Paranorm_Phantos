@@ -13,11 +13,11 @@ var __extends = (this && this.__extends) || (function () {
 })();
 var objects;
 (function (objects) {
-    var TestEnemy = /** @class */ (function (_super) {
-        __extends(TestEnemy, _super);
+    var DetachedGhost = /** @class */ (function (_super) {
+        __extends(DetachedGhost, _super);
         // constructors
-        function TestEnemy(moveSpeed, rightDirection, downDirection) {
-            var _this = _super.call(this, managers.Game.bat_TextureAtlas, "bat") || this;
+        function DetachedGhost(moveSpeed, rightDirection, downDirection) {
+            var _this = _super.call(this, managers.Game.enemies_TextureAtlas, "Ghost_Idle") || this;
             _this.Start();
             _this.hp = 2;
             _this.attackPower = 1;
@@ -31,16 +31,29 @@ var objects;
             return _this;
         }
         // methods
-        TestEnemy.prototype.Start = function () {
+        DetachedGhost.prototype.Start = function () {
             // set the initial position
             this.y = 400;
             this.x = 320;
         };
-        TestEnemy.prototype.Update = function () {
+        DetachedGhost.prototype.Update = function () {
+            if (!this.isStunned && !this.isDead) {
+                this.SwitchAnimation("Ghost_Idle");
+            }
+            else if (this.isStunned && !this.isDead) {
+                this.SwitchAnimation("Ghost_Stun");
+            }
+            else {
+                if (this.currentAnimation == "Ghost_Explode" && this.currentAnimationFrame > 3) {
+                    managers.Game.stage.removeChild(this);
+                    this.visible = false;
+                }
+                this.SwitchAnimation("Ghost_Explode");
+            }
             _super.prototype.Update.call(this);
         };
-        TestEnemy.prototype.Reset = function () { };
-        TestEnemy.prototype.Move = function () {
+        DetachedGhost.prototype.Reset = function () { };
+        DetachedGhost.prototype.Move = function () {
             this.x += this.rightDirection ? this.moveSpeed : -this.moveSpeed;
             this.y += this.downDirection ? this.moveSpeed : -this.moveSpeed;
             if (this.x > managers.Game.gameWidth && this.rightDirection) {
@@ -56,10 +69,10 @@ var objects;
                 this.downDirection = true;
             }
         };
-        TestEnemy.prototype.CheckBound = function () {
+        DetachedGhost.prototype.CheckBound = function () {
             _super.prototype.CheckBound.call(this);
         };
-        TestEnemy.prototype.DevourEffect = function () {
+        DetachedGhost.prototype.DevourEffect = function () {
             var random = Math.random() * 100;
             if (random > 90) {
                 managers.Game.player.GainAttack(1);
@@ -68,8 +81,8 @@ var objects;
                 managers.Game.player.GainHealth(2);
             }
         };
-        return TestEnemy;
+        return DetachedGhost;
     }(objects.Enemy));
-    objects.TestEnemy = TestEnemy;
+    objects.DetachedGhost = DetachedGhost;
 })(objects || (objects = {}));
-//# sourceMappingURL=testenemy.js.map
+//# sourceMappingURL=detachedghost.js.map

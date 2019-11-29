@@ -24,9 +24,9 @@ var scenes;
         }
         // Methods
         Graveyard_5.prototype.Start = function () {
-            this.enemies[0] = new objects.TestEnemy(1, true, true);
+            this.enemies[0] = new objects.DetachedGhost(1, true, true);
             this.enemies[0].SetPosition(new math.Vec2(450, 600));
-            this.enemies[1] = new objects.TestEnemy(1, true, false);
+            this.enemies[1] = new objects.DetachedGhost(1, true, false);
             this.enemies[1].SetPosition(new math.Vec2(450, 300));
             this.enemies[2] = new objects.Bat(1, 100);
             this.enemies[2].SetPosition(new math.Vec2(100, 550));

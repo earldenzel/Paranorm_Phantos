@@ -38,7 +38,7 @@ module objects{
                 this.triggeredSequence = setTimeout(() => {
                     switch (this.effect){
                         case config.Effects.INCREASE_MAX_HP:
-                            managers.Game.player.GainMaxHealth(5);
+                            managers.Game.player.GainMaxHealth();
                             break;
                         case config.Effects.INCREASE_KEY_COUNT:
                             managers.Game.player.GainKey();
