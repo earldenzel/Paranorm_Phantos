@@ -8,6 +8,8 @@ module objects {
         public biteSequence: number = 0;
         public fallSequence: number = 0;
         public textSequence: number = 0;
+        public contactDamageTimer: number;
+        public projectileDamageTimer: number;
         public playerMoveSpeed: number = 4;
         public playerAttackDelay: number = 1000;
         public weapon: objects.Weapon;
@@ -73,6 +75,8 @@ module objects {
             ];
             this.experience = 0;
             this.level = 0;
+            this.contactDamageTimer = 0;
+            this.projectileDamageTimer = 0;
         }
 
         // Methods
@@ -86,6 +90,27 @@ module objects {
             managers.Game.player = this;
             this.x = Math.round(this.x);
             this.y = Math.round(this.y);
+
+            //player should take damage again in 200ms
+            if (this.isTakingDamage){
+                this.contactDamageTimer++;
+            }
+            else{
+                this.contactDamageTimer = 0;
+            }
+            if (this.contactDamageTimer > 200){
+                this.contactDamageTimer = 0;
+                this.isTakingDamage = false;
+            }
+
+            if (this.isTakingProjectileDamage){
+                this.projectileDamageTimer++;
+            }
+            if (this.projectileDamageTimer > 20){
+                this.projectileDamageTimer = 0;
+                this.isTakingProjectileDamage = false;
+            }
+
             if (this.hp > 0) {
                 this.Move();
                 this.weapon.Update();
@@ -142,7 +167,6 @@ module objects {
 
         public Move(): void {
             //movement implementation
-
             if (!this.activatePowers) {
                 if (!managers.Game.keyboardManager.moveUp
                     && !managers.Game.keyboardManager.moveDown
@@ -231,8 +255,6 @@ module objects {
                     this.weapon.Attack();
                 }
             }
-
-            
 
             if (this.biteSequence !== 0) {
                 this.SwitchAnimation(this.bite[this.direction as number]);
@@ -346,7 +368,6 @@ module objects {
 
         public GetDamage(attacker: objects.GameObject) {
             super.GetDamage(attacker);
-            //this.SwitchAnimation("Phoebe_Hurt1");
             this.HurtMessage();
             if (this.hp <= 0) {
                 this.DeathSequence();
@@ -596,6 +617,10 @@ module objects {
         public SwitchAnimation(newAnimation: string) {
             if (this.currentAnimation != newAnimation) {
                 this.gotoAndPlay(newAnimation);
+            }
+            if ((this.isTakingDamage && this.contactDamageTimer <20)
+                || (this.isTakingProjectileDamage && this.projectileDamageTimer < 20)){
+                this.gotoAndPlay("Phoebe_Hurt");
             }
         }
 

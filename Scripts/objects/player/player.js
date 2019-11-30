@@ -64,6 +64,8 @@ var objects;
             ];
             _this.experience = 0;
             _this.level = 0;
+            _this.contactDamageTimer = 0;
+            _this.projectileDamageTimer = 0;
             return _this;
         }
         // Methods
@@ -76,6 +78,24 @@ var objects;
             managers.Game.player = this;
             this.x = Math.round(this.x);
             this.y = Math.round(this.y);
+            //player should take damage again in 200ms
+            if (this.isTakingDamage) {
+                this.contactDamageTimer++;
+            }
+            else {
+                this.contactDamageTimer = 0;
+            }
+            if (this.contactDamageTimer > 200) {
+                this.contactDamageTimer = 0;
+                this.isTakingDamage = false;
+            }
+            if (this.isTakingProjectileDamage) {
+                this.projectileDamageTimer++;
+            }
+            if (this.projectileDamageTimer > 20) {
+                this.projectileDamageTimer = 0;
+                this.isTakingProjectileDamage = false;
+            }
             if (this.hp > 0) {
                 this.Move();
                 this.weapon.Update();
@@ -323,7 +343,6 @@ var objects;
         };
         Player.prototype.GetDamage = function (attacker) {
             _super.prototype.GetDamage.call(this, attacker);
-            //this.SwitchAnimation("Phoebe_Hurt1");
             this.HurtMessage();
             if (this.hp <= 0) {
                 this.DeathSequence();
@@ -573,6 +592,10 @@ var objects;
         Player.prototype.SwitchAnimation = function (newAnimation) {
             if (this.currentAnimation != newAnimation) {
                 this.gotoAndPlay(newAnimation);
+            }
+            if ((this.isTakingDamage && this.contactDamageTimer < 20)
+                || (this.isTakingProjectileDamage && this.projectileDamageTimer < 20)) {
+                this.gotoAndPlay("Phoebe_Hurt");
             }
         };
         Player.prototype.SetBitePositionDirection = function (target) {

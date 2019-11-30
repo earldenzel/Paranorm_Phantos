@@ -38,14 +38,12 @@ module objects {
             if (!this.isDead) {
                 this.SwitchAnimation(this.walk[this.direction as number]);
             }
-            else {
-                if (managers.Game.player.biteSequence != 0) {
-                    if (this.currentAnimation == "Maggot_Explode" && this.currentAnimationFrame > 3) {
-                        managers.Game.stage.removeChild(this);
-                        this.visible = false;
-                    }
-                    this.SwitchAnimation("Maggot_Explode");
-                }
+            else {                    
+                this.SwitchAnimation("Maggot_Explode");
+            }
+            if (this.currentAnimation == "Maggot_Explode" && this.currentAnimationFrame > 3) {
+                managers.Game.stage.removeChild(this);
+                this.visible = false;
             }
             super.Update();
         }

@@ -1416,7 +1416,10 @@ module config {
                     "frames": [83, 84, 70, 3],
                     "speed": 0.1
                 },
-                "Phoebe_Hurt": { "frames": [78] },
+                "Phoebe_Hurt": { 
+                    "frames": [78],
+                    "speed": 0.1
+                },
                 "Phoebe_Run_Left": {
                     "frames": [47, 74],
                     "speed": 0.2

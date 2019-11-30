@@ -37,6 +37,7 @@ var objects;
             this.regY = this.halfH;
             this.isColliding = false;
             this.isTakingDamage = false;
+            this.isTakingProjectileDamage = false;
             this.powerUp = config.PowerUp.NONE;
         };
         GameObject.prototype.Start = function () { };
