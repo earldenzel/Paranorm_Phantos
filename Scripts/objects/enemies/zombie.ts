@@ -22,6 +22,8 @@ module objects {
             this.isFlying = false;
             this.canBeEaten = true;
             this.attackingMode = false;
+            this.bounty = 5;
+            this.expGain = 5;
 
 
             // Animations
@@ -38,25 +40,25 @@ module objects {
             this.x = 350;
         }
         public Update(): void {
-            
-            if(!this.isStunned && !this.isDead){
-                if (this.attackingMode) {
-                    this.SwitchAnimation(this.attack[this.direction as number]);
-                } else {
-                    this.SwitchAnimation(this.walk[this.direction as number]);
-                }
-            }
-            else if (this.isStunned && !this.isDead){
-                this.SwitchAnimation("Zombie_Stun");
+            if (this.isDead){                
+                this.SwitchAnimation("Zombie_Explode");
             }
             else{
-                if(managers.Game.player.biteSequence != 0){
-                    if (this.currentAnimation == "Zombie_Explode" && this.currentAnimationFrame > 3) {
-                        managers.Game.stage.removeChild(this);
-                        this.visible = false;
-                    }
-                    this.SwitchAnimation("Zombie_Explode");
+                if (this.isStunned){
+                    this.SwitchAnimation("Zombie_Stun");
                 }
+                else{
+                    if (this.attackingMode) {
+                        this.SwitchAnimation(this.attack[this.direction as number]);
+                    } else {
+                        this.SwitchAnimation(this.walk[this.direction as number]);
+                    }
+                }
+            }
+
+            if (this.currentAnimation == "Zombie_Explode" && this.currentAnimationFrame > 3) {
+                managers.Game.stage.removeChild(this);
+                this.visible = false;
             }
             super.Update();
         }

@@ -129,12 +129,31 @@ var managers;
             enumerable: true,
             configurable: true
         });
+        Object.defineProperty(PlayerInfo_UI.prototype, "PlayerLevel", {
+            get: function () {
+                return this.level;
+            },
+            set: function (newLevel) {
+                this.level = newLevel;
+                var newText;
+                if (newLevel < 10) {
+                    newText = "LV.0" + newLevel;
+                }
+                else {
+                    newText = "LV." + newLevel;
+                }
+                this.levelLabel.text = newText;
+            },
+            enumerable: true,
+            configurable: true
+        });
         // Methods
         PlayerInfo_UI.prototype.InIt = function () {
             // Create Base
             this.playerInfo_Base = new createjs.Sprite(managers.Game.titleUIMap_TextureAtlas, "UILayout_Placement");
             // Create Labels
             this.moneyLabel = new objects.Label("00000000", "16px", "'Press Start 2P'", "#FFFFFF", 236, 20, false);
+            this.levelLabel = new objects.Label("LV.99", "16px", "'Press Start 2P'", "#FFFFFF", 200, 48, false);
             this.keyLabel = new objects.Label("00", "16px", "'Press Start 2P'", "#FFFFFF", 250, 77, false);
             switch (managers.Game.currentScene) {
                 case config.Scene.HOTEL_1:
@@ -214,6 +233,7 @@ var managers;
             this.addChild(this.playerInfo_Base);
             this.addChild(this.moneyLabel);
             this.addChild(this.keyLabel);
+            this.addChild(this.levelLabel);
             this.playerInfo_Health.forEach(function (e) {
                 _this.addChild(e);
             });

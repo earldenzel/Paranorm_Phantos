@@ -434,6 +434,7 @@ module scenes {
 
             this.playerInfo.PlayerEcto = this.player.ecto;
             this.playerInfo.PlayerPower = this.player.powerUp;
+            this.playerInfo.PlayerLevel = this.player.level;
 
         }
 

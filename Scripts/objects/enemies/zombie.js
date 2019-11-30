@@ -27,6 +27,8 @@ var objects;
             _this.isFlying = false;
             _this.canBeEaten = true;
             _this.attackingMode = false;
+            _this.bounty = 5;
+            _this.expGain = 5;
             // Animations
             _this.walk = ["Zombie_WalkBack", "Zombie_WalkFront", "Zombie_WalkLeft", "Zombie_WalkLeft"];
             _this.attack = ["Zombie_AttackBack", "Zombie_AttackFront", "Zombie_AttackLeft", "Zombie_AttackLeft"];
@@ -40,25 +42,25 @@ var objects;
             this.x = 350;
         };
         Zombie.prototype.Update = function () {
-            if (!this.isStunned && !this.isDead) {
-                if (this.attackingMode) {
-                    this.SwitchAnimation(this.attack[this.direction]);
-                }
-                else {
-                    this.SwitchAnimation(this.walk[this.direction]);
-                }
-            }
-            else if (this.isStunned && !this.isDead) {
-                this.SwitchAnimation("Zombie_Stun");
+            if (this.isDead) {
+                this.SwitchAnimation("Zombie_Explode");
             }
             else {
-                if (managers.Game.player.biteSequence != 0) {
-                    if (this.currentAnimation == "Zombie_Explode" && this.currentAnimationFrame > 3) {
-                        managers.Game.stage.removeChild(this);
-                        this.visible = false;
-                    }
-                    this.SwitchAnimation("Zombie_Explode");
+                if (this.isStunned) {
+                    this.SwitchAnimation("Zombie_Stun");
                 }
+                else {
+                    if (this.attackingMode) {
+                        this.SwitchAnimation(this.attack[this.direction]);
+                    }
+                    else {
+                        this.SwitchAnimation(this.walk[this.direction]);
+                    }
+                }
+            }
+            if (this.currentAnimation == "Zombie_Explode" && this.currentAnimationFrame > 3) {
+                managers.Game.stage.removeChild(this);
+                this.visible = false;
             }
             _super.prototype.Update.call(this);
         };

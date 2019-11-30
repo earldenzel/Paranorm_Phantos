@@ -19,7 +19,7 @@ var objects;
         function Maggot(moveSpeed, rightDirection, downDirection, spawnNumber) {
             var _this = _super.call(this, managers.Game.enemies_TextureAtlas, "Maggot_WalkForward") || this;
             _this.Start();
-            _this.hp = 2;
+            _this.hp = 4;
             _this.attackPower = 1;
             _this.moveSpeed = moveSpeed;
             _this.rightDirection = rightDirection;
@@ -29,6 +29,7 @@ var objects;
             _this.canBeEaten = false;
             _this.bounty = 20;
             _this.isFlying = false;
+            _this.expGain = 8;
             _this.walk = ["Maggot_WalkForward", "Maggot_WalkForward", "Maggot_WalkSide", "Maggot_WalkSide"];
             _this.direction = config.Direction.DOWN;
             _this.SpawnCreation();

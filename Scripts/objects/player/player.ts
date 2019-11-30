@@ -40,6 +40,7 @@ module objects {
         public maxEcto: number;
         public activatePowers: boolean;
         public experience: number;
+        public level: number;
 
         //Constructor
         constructor() {
@@ -69,6 +70,7 @@ module objects {
                 new objects.DeadPlayer("Phoebe_Dead_B", true, true)
             ];
             this.experience = 0;
+            this.level = 0;
         }
 
         // Methods
@@ -341,6 +343,7 @@ module objects {
 
         public GetDamage(attacker: objects.GameObject) {
             super.GetDamage(attacker);
+            //this.SwitchAnimation("Phoebe_Hurt1");
             this.HurtMessage();
             if (this.hp <= 0) {
                 this.DeathSequence();
@@ -553,8 +556,18 @@ module objects {
         }
 
         public GainExperience(experience: number): void{
+            if (experience == null){
+                experience = 0;
+            }
             this.experience += experience;
-            console.log("i am level " + managers.Game.expConfigurer.DetermineLevel(this.experience));
+            let calculatedLevel : number = managers.Game.expConfigurer.DetermineLevel(this.experience);
+            if (calculatedLevel > this.level){
+                for (let index = this.level+1; index <= calculatedLevel; index++) {                    
+                    managers.Game.expConfigurer.LevelUpEffects(index);           
+                }
+                this.level = calculatedLevel;
+                this.EchoMessage("I REACHED LV." + this.level);
+            }
         }
 
         private phoebeDied(): void {

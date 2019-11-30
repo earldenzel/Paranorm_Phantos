@@ -370,6 +370,7 @@ var scenes;
             this.playerInfo.Key = this.player.key;
             this.playerInfo.PlayerEcto = this.player.ecto;
             this.playerInfo.PlayerPower = this.player.powerUp;
+            this.playerInfo.PlayerLevel = this.player.level;
         };
         PlayScene.prototype.Main = function () {
             // BACKGROUND PLACEMENT

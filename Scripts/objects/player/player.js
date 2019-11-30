@@ -62,6 +62,7 @@ var objects;
                 new objects.DeadPlayer("Phoebe_Dead_B", true, true)
             ];
             _this.experience = 0;
+            _this.level = 0;
             return _this;
         }
         // Methods
@@ -320,6 +321,7 @@ var objects;
         };
         Player.prototype.GetDamage = function (attacker) {
             _super.prototype.GetDamage.call(this, attacker);
+            //this.SwitchAnimation("Phoebe_Hurt1");
             this.HurtMessage();
             if (this.hp <= 0) {
                 this.DeathSequence();
@@ -535,8 +537,18 @@ var objects;
             }
         };
         Player.prototype.GainExperience = function (experience) {
+            if (experience == null) {
+                experience = 0;
+            }
             this.experience += experience;
-            console.log("i am level " + managers.Game.expConfigurer.DetermineLevel(this.experience));
+            var calculatedLevel = managers.Game.expConfigurer.DetermineLevel(this.experience);
+            if (calculatedLevel > this.level) {
+                for (var index = this.level + 1; index <= calculatedLevel; index++) {
+                    managers.Game.expConfigurer.LevelUpEffects(index);
+                }
+                this.level = calculatedLevel;
+                this.EchoMessage("I REACHED LV." + this.level);
+            }
         };
         Player.prototype.phoebeDied = function () {
             var _this = this;
