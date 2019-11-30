@@ -15,7 +15,7 @@ module scenes {
             this.enemies[0].SetPosition(new math.Vec2(100, 200));
             this.enemies[1] = new objects.Bat(2, 100);
             this.enemies[1].SetPosition(new math.Vec2(280, 650));
-            this.enemies[2] = new objects.TestEnemy(3, true, true);
+            this.enemies[2] = new objects.DetachedGhost(3, true, true);
             this.enemies[2].SetPosition(new math.Vec2(300, 200));
 
             this.obstacles[0] = new objects.Barriers(managers.Game.hotel_TextureAtlas, "Desk");

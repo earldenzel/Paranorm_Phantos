@@ -39,7 +39,7 @@ module scenes {
         }
         public Update():void {
             //press attack button to show next message
-            if (managers.Game.keyboardManager.attacking){
+            if (managers.Game.keyboardManager.confirming){
                 if (this.messageTimeout == 0){
                     this.messageTimeout = setTimeout(() => {
                         this.startButtonClick();

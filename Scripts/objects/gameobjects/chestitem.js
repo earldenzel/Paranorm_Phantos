@@ -16,11 +16,13 @@ var objects;
     var ChestItem = /** @class */ (function (_super) {
         __extends(ChestItem, _super);
         // Constructor
-        function ChestItem(imageString, effect, appearingScene, initiallyShown) {
+        function ChestItem(imageString, showItemString, effect, appearingScene, initiallyShown) {
             if (initiallyShown === void 0) { initiallyShown = true; }
             var _this = _super.call(this, managers.Game.chest_TextureAtlas, imageString) || this;
             _this.available = true;
             _this.locked = false;
+            _this.triggeredSequence = 0;
+            _this.showItem = new objects.ShowItem(showItemString);
             _this.effect = effect;
             _this.appearingScene = appearingScene;
             _this.Start();
@@ -29,6 +31,7 @@ var objects;
         }
         // Methods
         ChestItem.prototype.Start = function () {
+            this.showItem.Start();
         };
         ChestItem.prototype.Update = function () {
             if (!this.available) {
@@ -41,25 +44,34 @@ var objects;
         ChestItem.prototype.Move = function () { };
         ChestItem.prototype.CheckBound = function () { };
         ChestItem.prototype.TriggerChestEffect = function () {
-            switch (this.effect) {
-                case config.Effects.INCREASE_MAX_HP:
-                    managers.Game.player.GainMaxHealth(5);
-                    break;
-                case config.Effects.INCREASE_KEY_COUNT:
-                    managers.Game.player.key++;
-                    break;
-                case config.Effects.INCREASE_ATK:
-                    managers.Game.player.GainAttack(10);
-                    break;
-                case config.Effects.INCREASE_GOLD:
-                    managers.Game.player.GainDollars(10);
-                    break;
-                case config.Effects.INCREASE_GOLD_50:
-                    managers.Game.player.GainDollars(50);
-                    break;
+            var _this = this;
+            this.showItem.x = this.x;
+            this.showItem.y = this.y;
+            this.showItem.visible = true;
+            if (this.triggeredSequence == 0) {
+                this.triggeredSequence = setTimeout(function () {
+                    switch (_this.effect) {
+                        case config.Effects.INCREASE_MAX_HP:
+                            managers.Game.player.GainMaxHealth();
+                            break;
+                        case config.Effects.INCREASE_KEY_COUNT:
+                            managers.Game.player.GainKey();
+                            break;
+                        case config.Effects.INCREASE_ATK:
+                            managers.Game.player.GainAttack(10);
+                            break;
+                        case config.Effects.INCREASE_GOLD:
+                            managers.Game.player.GainDollars(10);
+                            break;
+                        case config.Effects.INCREASE_GOLD_50:
+                            managers.Game.player.GainDollars(50);
+                            break;
+                    }
+                    _this.available = false;
+                    _this.triggeredSequence = 0;
+                    _this.Update();
+                }, 250);
             }
-            this.available = false;
-            this.Update();
         };
         return ChestItem;
     }(objects.GameObject));

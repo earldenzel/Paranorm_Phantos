@@ -24,9 +24,9 @@ var scenes;
         }
         // Methods
         Graveyard_5.prototype.Start = function () {
-            this.enemies[0] = new objects.TestEnemy(1, true, true);
+            this.enemies[0] = new objects.DetachedGhost(1, true, true);
             this.enemies[0].SetPosition(new math.Vec2(450, 600));
-            this.enemies[1] = new objects.TestEnemy(1, true, false);
+            this.enemies[1] = new objects.DetachedGhost(1, true, false);
             this.enemies[1].SetPosition(new math.Vec2(450, 300));
             this.enemies[2] = new objects.Bat(1, 100);
             this.enemies[2].SetPosition(new math.Vec2(100, 550));
@@ -63,15 +63,6 @@ var scenes;
             this.playerInfo.PlayerLocation = new math.Vec2(112, 50); // 30,28
         };
         Graveyard_5.prototype.Update = function () {
-            if (this.AllEnemiesAreDead()) {
-                if (!this.getChildByName("Items_Key") && managers.GraveyardLocks.graveyard_5_key) {
-                    this.key = new objects.Key();
-                    this.key.x = 250;
-                    this.key.y = 300;
-                    this.addChild(this.key);
-                    managers.GraveyardLocks.graveyard_5_key = false;
-                }
-            }
             if (!this.isDoorBotLocked) {
                 managers.GraveyardLocks.graveyard_5_lockBot = false;
             }

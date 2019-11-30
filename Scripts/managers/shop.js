@@ -11,11 +11,15 @@ var managers;
             this.shopKeeper = new objects.ShopKeeper;
             this.shopKeeper.SetPosition(new math.Vec2(285, 285));
             this.chooseYes = new objects.Label("YES", "16px", "'Press Start 2P'", "#FFFF00", 185, 285, true);
+            this.indicatorYes = new objects.Indicator("attackIndicator");
+            this.indicatorYes.SetPosition(new math.Vec2(185, 315));
             this.chooseNo = new objects.Label("NO", "16px", "'Press Start 2P'", "#FFFF00", 385, 285, true);
-            this.chooseYes.addEventListener("click", this.buyItem.bind(this), false);
-            this.chooseNo.addEventListener("click", this.cancelBuy.bind(this), false);
+            this.indicatorNo = new objects.Indicator("stunIndicator");
+            this.indicatorNo.SetPosition(new math.Vec2(385, 315));
+            //this.chooseYes.addEventListener("click", this.buyItem.bind(this), false);
+            //this.chooseNo.addEventListener("click", this.cancelBuy.bind(this), false);
             this.Reset();
-            this.shopItems[0] = new objects.ShopItem("Items_Hellebore-Flower1", 500, config.Effects.INCREASE_MAX_HP, config.Scene.GRAVEYARD_7);
+            this.shopItems[0] = new objects.ShopItem("Items_Hellebore-Flower1", 150, config.Effects.INCREASE_MAX_HP, config.Scene.GRAVEYARD_7);
             this.shopItems[0].SetPosition(new math.Vec2(185, 400));
             this.shopItems[0].description = "This increases your Max HP. Buy?";
             this.shopItems[1] = new objects.ShopItem("Items_Key", 10, config.Effects.INCREASE_KEY_COUNT, config.Scene.GRAVEYARD_7);
@@ -37,6 +41,8 @@ var managers;
         Shop.prototype.Reset = function () {
             this.chooseYes.visible = false;
             this.chooseNo.visible = false;
+            this.indicatorYes.visible = false;
+            this.indicatorNo.visible = false;
         };
         Shop.prototype.Update = function () {
             var _this = this;
@@ -58,20 +64,28 @@ var managers;
             });
             if (this.hasItemSelected) {
                 if (this.canChoose) {
-                    managers.Game.keyboardManager.ControlReset();
+                    managers.Game.keyboardManager.ControlReset(false);
                     this.shopKeeper.TellItemInformation(this.selected);
                     this.chooseYes.visible = true;
                     this.chooseNo.visible = true;
+                    this.indicatorYes.visible = true;
+                    this.indicatorNo.visible = true;
                 }
                 else {
-                    managers.Game.keyboardManager.enabled = true;
+                    managers.Game.keyboardManager.playMode = true;
                     this.Reset();
                 }
             }
             else {
                 this.canChoose = true;
-                managers.Game.keyboardManager.enabled = true;
+                managers.Game.keyboardManager.playMode = true;
                 this.Reset();
+            }
+            if (managers.Game.keyboardManager.confirming) {
+                this.buyItem();
+            }
+            if (managers.Game.keyboardManager.cancelling) {
+                this.cancelBuy();
             }
         };
         Shop.prototype.buyItem = function () {
@@ -89,11 +103,13 @@ var managers;
             this.shopKeeper.dialog.Recenter();
             this.canChoose = false;
             this.selected = null;
+            managers.Game.keyboardManager.confirming = false;
         };
         Shop.prototype.cancelBuy = function () {
             this.canChoose = false;
             this.shopKeeper.dialog.text = "Okay then!";
             this.shopKeeper.dialog.Recenter();
+            managers.Game.keyboardManager.cancelling = false;
         };
         Shop.prototype.SetShopItems = function () {
         };

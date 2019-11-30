@@ -35,5 +35,6 @@ module managers {
         //  This array must be declared within the Start function
         //  The enemy will teleport between the slime puddles.
         public static slimePuddles: objects.SlimePuddle[];
+        public static expConfigurer: config.Experience = new config.Experience();
     }
 }

@@ -6,6 +6,7 @@ module config{
         INCREASE_GOLD,
         INCREASE_GOLD_50,
         INCREASE_SPEED,
-        FRESHEN_UP
+        FRESHEN_UP,
+        INCREASE_SWING_SPEED
     }
 }

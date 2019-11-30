@@ -20,6 +20,7 @@ module objects{
             this.currentTime = updateTime;
             this.bounty = 2;
             this.isFlying = true;
+            this.expGain = 3;
         }
         // methods
 

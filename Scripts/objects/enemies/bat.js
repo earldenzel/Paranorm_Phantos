@@ -28,6 +28,7 @@ var objects;
             _this.currentTime = updateTime;
             _this.bounty = 2;
             _this.isFlying = true;
+            _this.expGain = 3;
             return _this;
         }
         // methods

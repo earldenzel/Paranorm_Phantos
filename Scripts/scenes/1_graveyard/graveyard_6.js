@@ -28,7 +28,7 @@ var scenes;
             this.enemies[0].SetPosition(new math.Vec2(430, 240));
             this.enemies[1] = new objects.Zombie(1);
             this.enemies[1].SetPosition(new math.Vec2(230, 600));
-            this.enemies[2] = new objects.TestEnemy(2, true, true);
+            this.enemies[2] = new objects.DetachedGhost(2, true, true);
             this.enemies[2].SetPosition(new math.Vec2(100, 240));
             this.enemies[3] = new objects.Bat(2, 100);
             this.enemies[3].SetPosition(new math.Vec2(100, 600));
@@ -65,15 +65,6 @@ var scenes;
             this.playerInfo.PlayerLocation = new math.Vec2(112, 66); // 30,44
         };
         Graveyard_6.prototype.Update = function () {
-            if (this.AllEnemiesAreDead()) {
-                if (!this.getChildByName("Items_Key") && managers.GraveyardLocks.graveyard_6_key) {
-                    this.key = new objects.Key();
-                    this.key.x = 250;
-                    this.key.y = 300;
-                    this.addChild(this.key);
-                    managers.GraveyardLocks.graveyard_6_key = false;
-                }
-            }
             if (!this.isDoorBotLocked) {
                 managers.GraveyardLocks.graveyard_6_lockBot = false;
             }

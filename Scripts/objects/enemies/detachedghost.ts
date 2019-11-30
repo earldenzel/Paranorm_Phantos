@@ -1,5 +1,5 @@
 module objects{
-    export class TestEnemy extends objects.Enemy{
+    export class DetachedGhost extends objects.Enemy{
         // variables
         private rightDirection: boolean;
         private downDirection : boolean;
@@ -7,7 +7,7 @@ module objects{
         // constructors
         
         constructor(moveSpeed:number, rightDirection:boolean, downDirection:boolean){
-            super(managers.Game.bat_TextureAtlas, "bat");
+            super(managers.Game.enemies_TextureAtlas,"Ghost_Idle");
             this.Start();
             this.hp = 2;
             this.attackPower = 1;
@@ -28,6 +28,19 @@ module objects{
             this.x = 320;
         }
         public Update(): void {
+            if(!this.isStunned && !this.isDead){
+                this.SwitchAnimation("Ghost_Idle");
+            }
+            else if (this.isStunned && !this.isDead){
+                this.SwitchAnimation("Ghost_Stun");
+            }
+            else{
+                if (this.currentAnimation == "Ghost_Explode" && this.currentAnimationFrame > 3) {
+                    managers.Game.stage.removeChild(this);
+                    this.visible = false;
+                }
+                this.SwitchAnimation("Ghost_Explode");
+            }
             super.Update();
         }
         public Reset(): void {}
