@@ -405,7 +405,7 @@ var objects;
                             this.ecto -= 1;
                         }
                         break;
-                    case config.PowerUp.SLIME:
+                    case config.PowerUp.SLIME: // KC
                         managers.Game.currentStage.hasProjectileShooters = true;
                         var rateOfFire = 80;
                         if (ticker % rateOfFire == 0) {
