@@ -425,6 +425,8 @@ module objects {
                             this.ecto -= 1;
                         }
                         break;
+
+                        // TO BE TESTED ALONG WITH GHOST SLIME, SLIME PUDDLE, AND SLIME BALL
                     case config.PowerUp.SLIME: // KC
                         (managers.Game.currentStage as scenes.PlayScene).hasProjectileShooters = true;
                         let rateOfFire = 80;
