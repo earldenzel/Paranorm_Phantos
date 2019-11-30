@@ -27,6 +27,7 @@ var objects;
             _this.fallSequence = 0;
             _this.textSequence = 0;
             _this.playerMoveSpeed = 4;
+            _this.playerHalfSpeed = _this.playerMoveSpeed / 2;
             _this.playerAttackDelay = 1000;
             _this.bitingTimer = 0;
             _this.bitingReset = 0;
@@ -50,6 +51,7 @@ var objects;
             _this.run = ["Phoebe_Run_Back", "Phoebe_Run_Front", "Phoebe_Run_Left", "Phoebe_Run_Right"];
             _this.bitedash = ["Phoebe_Bite_Back", "Phoebe_Bite_Front1", "Phoebe_Bite_Left1", "Phoebe_Bite_Right1"];
             _this.bite = ["Phoebe_Bite_Front2", "Phoebe_Bite_Front2", "Phoebe_Bite_Left2", "Phoebe_Bite_Right2"];
+            _this.specialAttack = ["Phoebe_SpecialAttack_Back", "Phoebe_SpecialAttack_Front", "Phoebe_SpecialAttack_Left", "Phoebe_SpecialAttack_Right"];
             _this.direction = config.Direction.UP;
             _this.money = 0;
             _this.playerStatus = new objects.Label("1234567890", "16px", "'Press Start 2P'", "#FFFFFF", _this.x, _this.y, true);
@@ -403,12 +405,40 @@ var objects;
                             this.ecto -= 1;
                         }
                         break;
+                    case config.PowerUp.SLIME:
+                        managers.Game.currentStage.hasProjectileShooters = true;
+                        var rateOfFire = 80;
+                        if (ticker % rateOfFire == 0) {
+                            var bulletSpawn = new math.Vec2(this.x + this.halfW, this.y);
+                            var currentBullet = managers.Game.bulletManager.CurrentBullet;
+                            var bullet = managers.Game.bulletManager.slimeBalls[currentBullet];
+                            bullet.staticNotPositional = true;
+                            bullet.direction = this.direction;
+                            bullet.x = bulletSpawn.x;
+                            bullet.y = bulletSpawn.y;
+                            managers.Game.bulletManager.CurrentBullet++;
+                            if (managers.Game.bulletManager.CurrentBullet > 49) {
+                                managers.Game.bulletManager.CurrentBullet = 0;
+                            }
+                        }
+                        this.SwitchAnimation(this.specialAttack[this.direction]);
+                        this.ecto -= 1;
+                        break;
                 }
             }
         };
         Player.prototype.GainSpeed = function (speedGain) {
             this.playerMoveSpeed += speedGain;
+            this.playerHalfSpeed = this.playerMoveSpeed / 2;
             this.EchoMessage("+" + speedGain + " MOVE SPD");
+        };
+        Player.prototype.AlterSpeed = function (reduceSpeed) {
+            if (reduceSpeed) {
+                this.playerMoveSpeed = this.playerHalfSpeed;
+            }
+            else {
+                this.playerMoveSpeed = this.playerHalfSpeed * 2;
+            }
         };
         Player.prototype.GainAttack = function (attackGain) {
             this.attackPower += attackGain;

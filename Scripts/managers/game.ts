@@ -29,5 +29,11 @@ module managers {
         public static keyboardManager: managers.Keyboard;
         public static SFX: createjs.AbstractSoundInstance;
         public static music: createjs.AbstractSoundInstance;
+
+        // For each scene with a slime enemy, add a slime puddle(s)
+        //  The slime puddles should be within this array
+        //  This array must be declared within the Start function
+        //  The enemy will teleport between the slime puddles.
+        public static slimePuddles: objects.SlimePuddle[];
     }
 }

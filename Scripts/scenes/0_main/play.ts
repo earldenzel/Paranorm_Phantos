@@ -11,7 +11,7 @@ module scenes {
         private bulletManager: managers.Bullet;
         private shopManager: managers.Shop;
         private chestManager: managers.Chest;
-        protected hasProjectileShooters: boolean = false;
+        public hasProjectileShooters: boolean = false;
         protected hasShop: boolean = false;
 
         protected spriteSheet: createjs.SpriteSheet;
@@ -546,6 +546,9 @@ module scenes {
                     this.addChild(bullet);
                 });
                 this.bulletManager.redBones.forEach(bullet => {
+                    this.addChild(bullet);
+                });
+                this.bulletManager.slimeBalls.forEach(bullet => {
                     this.addChild(bullet);
                 });
             }

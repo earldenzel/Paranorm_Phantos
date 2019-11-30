@@ -13,6 +13,7 @@ var managers;
             this.shootingFLowerBullets = new Array();
             this.bones = new Array();
             this.redBones = new Array();
+            this.slimeBalls = new Array();
             this.buildBulletPool();
             this.CurrentBullet = 0;
         };
@@ -35,6 +36,9 @@ var managers;
             this.redBones.forEach(function (bullet) {
                 bullet.Update();
             });
+            this.slimeBalls.forEach(function (bullet) {
+                bullet.Update();
+            });
         };
         // Functions
         Bullet.prototype.buildBulletPool = function () {
@@ -45,6 +49,7 @@ var managers;
                 this.shootingFLowerBullets[i] = new objects.ShootingFlowerBullet();
                 this.bones[i] = new objects.Bone();
                 this.redBones[i] = new objects.RedBone();
+                this.slimeBalls[i] = new objects.SlimeBall();
             }
         };
         Bullet.prototype.Reset = function () {
@@ -64,6 +69,9 @@ var managers;
                 bullet.Reset();
             });
             this.redBones.forEach(function (bullet) {
+                bullet.Reset();
+            });
+            this.slimeBalls.forEach(function (bullet) {
                 bullet.Reset();
             });
         };

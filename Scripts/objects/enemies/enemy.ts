@@ -4,6 +4,8 @@ module objects {
         public isStunned: boolean;
         protected knockback: number;
         protected eatTimer: number;
+        protected moveSpeed: number;
+        protected halfSpeed: number;
         public stunIndicator: objects.Indicator;
         protected bounty: number;
         public isFlying: boolean;
@@ -15,7 +17,7 @@ module objects {
 
         constructor(textureAtlas: createjs.SpriteSheet, enemyName: string, startPosition: math.Vec2 = null) {
             super(textureAtlas, enemyName);
-
+            this.moveSpeed = 0;
             this.startPosition = startPosition;
             // Some enemies can be eaten, some enemies cannot.
             // They will start off as able to be eaten.
@@ -32,6 +34,7 @@ module objects {
         }
 
         public Update(): void {
+
             //if current hp  of enemy = 0, then it is stunned           
             if (this.hp <= 0) {
                 this.isStunned = true;
@@ -169,6 +172,14 @@ module objects {
 
         public GetObjectSpeed(): number {
             return 0;
+        }
+        public AlterSpeed(reduceSpeed: boolean){
+            if(reduceSpeed){
+                this.moveSpeed = this.halfSpeed;
+            }
+            else{
+                this.moveSpeed = this.halfSpeed * 2;
+            }
         }
 
         public RemoveFromPlay(bounty: number): void {

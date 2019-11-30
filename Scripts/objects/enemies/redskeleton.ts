@@ -3,8 +3,7 @@ module objects {
         // Variables
         private bulletSpawn: math.Vec2;
         private rateOfFire: number;
-
-        private moveSpeed: number;
+        
         private rightDirection: boolean;
         private downDirection: boolean;
         private walk: Array<any>;
@@ -24,6 +23,7 @@ module objects {
             this.canBeEaten = false;
             this.bounty = 0;
             this.isFlying = false;
+            this.halfSpeed = moveSpeed / 2;
             this.rateOfFire = 50;
 
             this.walk = ["RedSkeleton_WalkBack", "RedSkeleton_WalkFront", "RedSkeleton_WalkRight", "RedSkeleton_WalkRight"];

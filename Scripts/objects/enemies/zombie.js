@@ -25,6 +25,7 @@ var objects;
             _this.knockback = 0.75;
             _this.eatTimer = 300;
             _this.isFlying = false;
+            _this.halfSpeed = moveSpeed / 2;
             _this.canBeEaten = true;
             _this.attackingMode = false;
             // Animations

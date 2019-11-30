@@ -1,7 +1,6 @@
 module objects {
     export class GhostThin extends objects.Enemy {
         // Variable
-        private moveSpeed: number;
         private rightDirection: boolean;
         private downDirection: boolean;
 

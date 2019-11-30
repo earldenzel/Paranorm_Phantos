@@ -1,7 +1,6 @@
 module objects {
     export class Zombie extends objects.Enemy {
         // Variables
-        private moveSpeed: number;
         private currentSpeed: number;
         private attackingMode: boolean;
         // Animation Variables
@@ -20,6 +19,7 @@ module objects {
             this.knockback = 0.75;
             this.eatTimer = 300;
             this.isFlying = false;
+            this.halfSpeed = moveSpeed / 2;
             this.canBeEaten = true;
             this.attackingMode = false;
 

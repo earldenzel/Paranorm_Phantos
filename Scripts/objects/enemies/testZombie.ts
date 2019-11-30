@@ -1,7 +1,6 @@
 module objects {
     export class TestZombie extends objects.Enemy {
         // variables
-        private moveSpeed: number;
         private currentSpeed: number;
 
         // constructors

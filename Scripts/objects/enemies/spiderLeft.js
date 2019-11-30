@@ -18,15 +18,16 @@ var objects;
         // constructor
         function SpiderLeft(startPosition, distance) {
             var _this = _super.call(this, managers.Game.spider_TextureAtlas, "spiderLeft", startPosition) || this;
-            _this.speed = 1;
             _this.isToDown = true;
             _this.distance = distance;
             _this.hp = 1;
+            _this.moveSpeed = 1;
             _this.attackPower = 1;
             _this.knockback = 0.75;
             _this.eatTimer = 500;
             _this.bounty = 4;
             _this.isFlying = false;
+            _this.halfSpeed = _this.moveSpeed / 2;
             _this.rateOfFire = 70;
             return _this;
         }
@@ -44,13 +45,13 @@ var objects;
         };
         SpiderLeft.prototype.Move = function () {
             if (this.isToDown && !(this.y == this.startPosition.y + this.distance)) {
-                this.y += this.speed;
+                this.y += this.moveSpeed;
             }
             else if (this.isToDown && (this.y == this.startPosition.y + this.distance)) {
                 this.isToDown = false;
             }
             else if (!this.isToDown && !(this.y == this.startPosition.y)) {
-                this.y -= this.speed;
+                this.y -= this.moveSpeed;
             }
             else if (!this.isToDown && (this.y == this.startPosition.y)) {
                 this.isToDown = true;

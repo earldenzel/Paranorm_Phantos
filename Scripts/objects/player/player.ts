@@ -9,6 +9,7 @@ module objects {
         public fallSequence: number = 0;
         public textSequence: number = 0;
         public playerMoveSpeed: number = 4;
+        public playerHalfSpeed: number = this.playerMoveSpeed / 2;
         public playerAttackDelay: number = 1000;
         public weapon: objects.Weapon;
         private bitingTimer: number = 0;
@@ -26,6 +27,7 @@ module objects {
         private stand: Array<any>;
         private bitedash: Array<any>;
         private bite: Array<any>;
+        private specialAttack: Array<any>;
         public direction: config.Direction;
         public money: number;
         public key: number;
@@ -56,6 +58,7 @@ module objects {
             this.run = ["Phoebe_Run_Back", "Phoebe_Run_Front", "Phoebe_Run_Left", "Phoebe_Run_Right"];
             this.bitedash = ["Phoebe_Bite_Back", "Phoebe_Bite_Front1", "Phoebe_Bite_Left1", "Phoebe_Bite_Right1"];
             this.bite = ["Phoebe_Bite_Front2", "Phoebe_Bite_Front2", "Phoebe_Bite_Left2", "Phoebe_Bite_Right2"];
+            this.specialAttack = ["Phoebe_SpecialAttack_Back", "Phoebe_SpecialAttack_Front", "Phoebe_SpecialAttack_Left", "Phoebe_SpecialAttack_Right"];
             this.direction = config.Direction.UP;
             this.money = 0;
             this.playerStatus = new objects.Label("1234567890", "16px", "'Press Start 2P'", "#FFFFFF", this.x, this.y, true);
@@ -120,7 +123,7 @@ module objects {
             this.ActivatePowers();
         }
 
-        public Reset(): void { 
+        public Reset(): void {
             this.visible = true;
             this.hp = this.maxHp;
             this.ecto = 0;
@@ -225,7 +228,7 @@ module objects {
                 }
             }
 
-            
+
 
             if (this.biteSequence !== 0) {
                 this.SwitchAnimation(this.bite[this.direction as number]);
@@ -265,7 +268,7 @@ module objects {
                     this.activatePowers = false;
                 }
             }
-            else{
+            else {
                 this.activatePowers = false;
             }
         }
@@ -393,32 +396,53 @@ module objects {
                 switch (this.powerUp) {
                     case config.PowerUp.SHADOW:
                         this.SwitchAnimation("Phoebe_Shadow");
-                        if(ticker % 90 == 0){
+                        if (ticker % 90 == 0) {
                             this.ecto -= 1;
                         }
                         break;
                     case config.PowerUp.BITE:
-                            switch (this.direction) {
-                                case config.Direction.UP:
-                                    this.y -= (this.playerMoveSpeed + 26);
-                                    this.SwitchAnimation(this.bitedash[this.direction as number]);
-                                    break;
-                                case config.Direction.DOWN:
-                                    this.y += (this.playerMoveSpeed + 26);
-                                    this.SwitchAnimation(this.bitedash[this.direction as number]);
-                                    break;
-                                case config.Direction.RIGHT:
-                                    this.x += (this.playerMoveSpeed + 26);
-                                    this.SwitchAnimation(this.bitedash[this.direction as number]);
-                                    break;
-                                case config.Direction.LEFT:
-                                    this.x -= (this.playerMoveSpeed + 26);
-                                    this.SwitchAnimation(this.bitedash[this.direction as number]);
-                                    break;
-                            }
-                        if(ticker % 15 == 0){
+                        switch (this.direction) {
+                            case config.Direction.UP:
+                                this.y -= (this.playerMoveSpeed + 26);
+                                this.SwitchAnimation(this.bitedash[this.direction as number]);
+                                break;
+                            case config.Direction.DOWN:
+                                this.y += (this.playerMoveSpeed + 26);
+                                this.SwitchAnimation(this.bitedash[this.direction as number]);
+                                break;
+                            case config.Direction.RIGHT:
+                                this.x += (this.playerMoveSpeed + 26);
+                                this.SwitchAnimation(this.bitedash[this.direction as number]);
+                                break;
+                            case config.Direction.LEFT:
+                                this.x -= (this.playerMoveSpeed + 26);
+                                this.SwitchAnimation(this.bitedash[this.direction as number]);
+                                break;
+                        }
+                        if (ticker % 15 == 0) {
                             this.ecto -= 1;
                         }
+                        break;
+                    case config.PowerUp.SLIME: // KC
+                        (managers.Game.currentStage as scenes.PlayScene).hasProjectileShooters = true;
+                        let rateOfFire = 80;
+                        if (ticker % rateOfFire == 0) {
+                            let bulletSpawn = new math.Vec2(this.x + this.halfW, this.y);
+                            let currentBullet = managers.Game.bulletManager.CurrentBullet;
+                            let bullet = managers.Game.bulletManager.slimeBalls[currentBullet];
+                            bullet.staticNotPositional = true;
+                            bullet.direction = this.direction;
+
+                            bullet.x = bulletSpawn.x;
+                            bullet.y = bulletSpawn.y;
+
+                            managers.Game.bulletManager.CurrentBullet++;
+                            if (managers.Game.bulletManager.CurrentBullet > 49) {
+                                managers.Game.bulletManager.CurrentBullet = 0;
+                            }
+                        }
+                        this.SwitchAnimation(this.specialAttack[this.direction as number]);
+                        this.ecto -= 1;
                         break;
                 }
             }
@@ -426,7 +450,16 @@ module objects {
 
         public GainSpeed(speedGain: number) {
             this.playerMoveSpeed += speedGain;
+            this.playerHalfSpeed = this.playerMoveSpeed / 2;
             this.EchoMessage("+" + speedGain + " MOVE SPD");
+        }
+        public AlterSpeed(reduceSpeed: boolean) {
+            if (reduceSpeed) {
+                this.playerMoveSpeed = this.playerHalfSpeed;
+            }
+            else {
+                this.playerMoveSpeed = this.playerHalfSpeed * 2;
+            }
         }
 
         public GainAttack(attackGain: number) {
@@ -445,7 +478,7 @@ module objects {
             if (this.ecto < this.maxEcto) {
                 this.ecto += gain;
             }
-            if (this.ecto > this.maxEcto){
+            if (this.ecto > this.maxEcto) {
                 this.ecto = this.maxEcto;
             }
         }
@@ -503,7 +536,7 @@ module objects {
             }
         }
 
-        public VictoryMessage(nextScene: config.Scene){
+        public VictoryMessage(nextScene: config.Scene) {
             managers.Game.keyboardManager.ControlReset();
             this.EchoMessage("I DID IT!", 3000);
             setTimeout(() => {
@@ -566,10 +599,10 @@ module objects {
                 case config.Direction.UP:
                     this.direction = config.Direction.DOWN;
                 case config.Direction.DOWN:
-                    target = math.Vec2.Add(target, new math.Vec2(-this.halfW/2, 0));
+                    target = math.Vec2.Add(target, new math.Vec2(-this.halfW / 2, 0));
                     break;
                 case config.Direction.RIGHT:
-                    target = math.Vec2.Add(target, new math.Vec2(-this.halfW*2, 0));
+                    target = math.Vec2.Add(target, new math.Vec2(-this.halfW * 2, 0));
                     break;
                 case config.Direction.LEFT:
                     target = math.Vec2.Add(target, new math.Vec2(this.halfW, 0));

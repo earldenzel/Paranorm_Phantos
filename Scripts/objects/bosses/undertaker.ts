@@ -1,7 +1,6 @@
 module objects {
     export class Undertaker extends objects.Enemy {
         // variables
-        private moveSpeed: number;
         private currentSpeed: number;
 
         // constructors

@@ -1,7 +1,6 @@
 module objects {
     export class ShadowGhost extends objects.Enemy {
         // Variables
-        private moveSpeed: number;
         private rightDirection: boolean;
         private downDirection: boolean;
 

@@ -18,15 +18,16 @@ var objects;
         // constructor
         function SpiderUp(startPosition, distance) {
             var _this = _super.call(this, managers.Game.spider_TextureAtlas, "spiderUp", startPosition) || this;
-            _this.speed = 1;
             _this.isToRight = true;
             _this.distance = distance;
             _this.hp = 1;
+            _this.moveSpeed = 1;
             _this.attackPower = 1;
             _this.knockback = 0.75;
             _this.eatTimer = 500;
             _this.bounty = 4;
             _this.isFlying = false;
+            _this.halfSpeed = _this.moveSpeed / 2;
             return _this;
         }
         // methods
@@ -43,13 +44,13 @@ var objects;
         };
         SpiderUp.prototype.Move = function () {
             if (this.isToRight && !(this.x == this.startPosition.x + this.distance)) {
-                this.x += this.speed;
+                this.x += this.moveSpeed;
             }
             else if (this.isToRight && (this.x == this.startPosition.x + this.distance)) {
                 this.isToRight = false;
             }
             else if (!this.isToRight && !(this.x == this.startPosition.x)) {
-                this.x -= this.speed;
+                this.x -= this.moveSpeed;
             }
             else if (!this.isToRight && (this.x == this.startPosition.x)) {
                 this.isToRight = true;
