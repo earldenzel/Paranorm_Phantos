@@ -11,6 +11,7 @@ module objects {
         public playerMoveSpeed: number = 4;
         public playerAttackDelay: number = 1000;
         public weapon: objects.Weapon;
+        public swing: objects.Swing;
         private bitingTimer: number = 0;
         private bitingReset: number = 0;
         public canTraverseTop: boolean = false;
@@ -46,6 +47,7 @@ module objects {
         constructor() {
             super(managers.Game.phoebe_TextureAtlas, "Phoebe_Walk_Back1");
             this.weapon = new objects.Weapon();
+            this.swing = new objects.Swing();
             this.Start();
             this.hp = 5;
             this.maxHp = this.hp;
@@ -87,6 +89,7 @@ module objects {
             if (this.hp > 0) {
                 this.Move();
                 this.weapon.Update();
+                this.swing.Update();
             }
             if (this.isDead) {
                 this.deadPlayer.forEach(e => {

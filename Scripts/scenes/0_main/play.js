@@ -425,6 +425,7 @@ var scenes;
                 }
             });
             // PLAYER PLACEMENT
+            this.addChild(this.player.swing);
             this.addChild(this.player);
             this.addChild(this.player.weapon);
             this.player.deadPlayer.forEach(function (e) {

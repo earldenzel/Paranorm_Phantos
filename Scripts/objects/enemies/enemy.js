@@ -100,14 +100,15 @@ var objects;
             //the else for this condition is under play.ts - this is because the player might have other collisions with other enemies
             //if enemy is not taking damage -- check collision with weapon
             if (!this.isTakingDamage) {
-                if ((managers.Collision.Check(managers.Game.player.weapon, this) && this.canBeAttacked) || (managers.Collision.Check(managers.Game.player, this) && this.canBeAttacked && managers.Game.player.activatePowers && managers.Game.player.powerUp == config.PowerUp.BITE)) {
+                if ((managers.Collision.Check(managers.Game.player.swing, this) && this.canBeAttacked)
+                    || (managers.Collision.Check(managers.Game.player, this) && this.canBeAttacked && managers.Game.player.activatePowers && managers.Game.player.powerUp == config.PowerUp.BITE)) {
                     this.isTakingDamage = true;
                     this.GetDamage(managers.Game.player);
                 }
             }
             //else, only remove the flag for taking damage when collision with weapon has ended
             else {
-                if (!managers.Collision.Check(managers.Game.player.weapon, this)) {
+                if (!managers.Collision.Check(managers.Game.player.swing, this)) {
                     this.isTakingDamage = false;
                 }
             }

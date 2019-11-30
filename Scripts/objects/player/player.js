@@ -38,6 +38,7 @@ var objects;
             _this.deathCount = 0;
             _this.stageFinished = 0;
             _this.weapon = new objects.Weapon();
+            _this.swing = new objects.Swing();
             _this.Start();
             _this.hp = 5;
             _this.maxHp = _this.hp;
@@ -78,6 +79,7 @@ var objects;
             if (this.hp > 0) {
                 this.Move();
                 this.weapon.Update();
+                this.swing.Update();
             }
             if (this.isDead) {
                 this.deadPlayer.forEach(function (e) {

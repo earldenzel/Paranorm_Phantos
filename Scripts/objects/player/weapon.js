@@ -39,6 +39,9 @@ var objects;
                 managers.Game.player.alpha = 1;
                 console.log("Attack ended");
             }
+            if (this.visible) {
+                console.log(this.x + " " + this.y + " " + managers.Game.player.x + " " + managers.Game.player.y);
+            }
         };
         // Resets the position of the object
         Weapon.prototype.Reset = function () {
@@ -49,6 +52,7 @@ var objects;
         Weapon.prototype.Attack = function () {
             console.log("Attack initiated");
             this.visible = true;
+            this.direction = managers.Game.player.direction;
             this.currentAnimationFrame = 0;
             managers.Game.SFX = createjs.Sound.play("phoebeDash-Swing");
             managers.Game.SFX.volume = 0.2;
