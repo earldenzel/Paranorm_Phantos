@@ -28,6 +28,7 @@ var objects;
             _this.bounty = 4;
             _this.isFlying = false;
             _this.halfSpeed = _this.moveSpeed / 2;
+            _this.rateOfFire = 70;
             return _this;
         }
         // methods

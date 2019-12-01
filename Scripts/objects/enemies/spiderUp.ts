@@ -22,6 +22,7 @@ module objects {
             this.bounty = 4;
             this.isFlying = false;
             this.halfSpeed = this.moveSpeed / 2;
+            this.rateOfFire = 70;
         }
 
         // methods
