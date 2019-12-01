@@ -65,6 +65,51 @@ var managers;
             // HOTEL_12
             this.chestItems[18] = new objects.ChestItem("regularChest", "Items_Ten-Dollars", config.Effects.INCREASE_GOLD, config.Scene.HOTEL_12, false);
             this.chestItems[18].SetPosition(new math.Vec2(140, 630));
+            // MANSION_2
+            this.chestItems[19] = new objects.ChestItem("chestWithGold", "Items_Fifty-Dollars", config.Effects.INCREASE_GOLD_50, config.Scene.MANSION_2, false);
+            this.chestItems[19].SetPosition(new math.Vec2(140, 200));
+            // MANSION_3
+            this.chestItems[20] = new objects.ChestItem("chestWithGold", "Items_Fifty-Dollars", config.Effects.INCREASE_GOLD_50, config.Scene.MANSION_3, false);
+            this.chestItems[20].SetPosition(new math.Vec2(440, 630));
+            // MANSION_4
+            this.chestItems[21] = new objects.ChestItem("chestWithGold", "Items_Fifty-Dollars", config.Effects.INCREASE_GOLD_50, config.Scene.MANSION_4, false);
+            this.chestItems[21].SetPosition(new math.Vec2(140, 200));
+            // MANSION_6
+            this.chestItems[22] = new objects.ChestItem("regularChest", "Items_Key", config.Effects.INCREASE_KEY_COUNT, config.Scene.MANSION_6, false);
+            this.chestItems[22].SetPosition(new math.Vec2(285, 630));
+            // MANSION_7
+            this.chestItems[23] = new objects.ChestItem("regularChest", "Items_Key", config.Effects.INCREASE_KEY_COUNT, config.Scene.MANSION_7, false);
+            this.chestItems[23].SetPosition(new math.Vec2(285, 440));
+            // MANSION_8
+            this.chestItems[24] = new objects.ChestItem("regularChest", "Items_Key", config.Effects.INCREASE_KEY_COUNT, config.Scene.MANSION_8, false);
+            this.chestItems[24].SetPosition(new math.Vec2(140, 200));
+            // MANSION_9
+            this.chestItems[25] = new objects.ChestItem("regularChest", "Items_Key", config.Effects.INCREASE_KEY_COUNT, config.Scene.MANSION_9, false);
+            this.chestItems[25].SetPosition(new math.Vec2(285, 440));
+            // MANSION_10
+            this.chestItems[26] = new objects.ChestItem("chestWithGold", "Items_Fifty-Dollars", config.Effects.INCREASE_GOLD_50, config.Scene.MANSION_10, false);
+            this.chestItems[26].SetPosition(new math.Vec2(285, 440));
+            // MANSION_11
+            this.chestItems[27] = new objects.ChestItem("regularChest", "Items_Key", config.Effects.INCREASE_KEY_COUNT, config.Scene.MANSION_11, false);
+            this.chestItems[27].SetPosition(new math.Vec2(140, 200));
+            // MANSION_12
+            this.chestItems[28] = new objects.ChestItem("regularChest", "Items_Key", config.Effects.INCREASE_KEY_COUNT, config.Scene.MANSION_12, false);
+            this.chestItems[28].SetPosition(new math.Vec2(285, 440));
+            // MANSION_13
+            this.chestItems[29] = new objects.ChestItem("regularChest", "Items_Key", config.Effects.INCREASE_KEY_COUNT, config.Scene.MANSION_13, false);
+            this.chestItems[29].SetPosition(new math.Vec2(285, 200));
+            // MANSION_14
+            this.chestItems[30] = new objects.ChestItem("regularChest", "Items_Key", config.Effects.INCREASE_KEY_COUNT, config.Scene.MANSION_14, false);
+            this.chestItems[30].SetPosition(new math.Vec2(285, 630));
+            // MANSION_15
+            this.chestItems[31] = new objects.ChestItem("regularChest", "Items_Key", config.Effects.INCREASE_KEY_COUNT, config.Scene.MANSION_15, false);
+            this.chestItems[31].SetPosition(new math.Vec2(285, 630));
+            // MANSION_16
+            this.chestItems[32] = new objects.ChestItem("regularChest", "Items_Key", config.Effects.INCREASE_KEY_COUNT, config.Scene.MANSION_16, false);
+            this.chestItems[32].SetPosition(new math.Vec2(140, 300));
+            // MANSION_17
+            this.chestItems[33] = new objects.ChestItem("regularChest", "Items_Key", config.Effects.INCREASE_KEY_COUNT, config.Scene.MANSION_17, false);
+            this.chestItems[33].SetPosition(new math.Vec2(285, 440));
         };
         Chest.prototype.Reset = function () {
         };
