@@ -30,6 +30,7 @@ var objects;
             _this.bounty = 5;
             _this.isFlying = false;
             _this.expGain = 1;
+            _this.halfSpeed = moveSpeed / 2;
             _this.walk = ["Maggot_SmallWalkForward", "Maggot_SmallWalkForward", "Maggot_SmallWalkSide", "Maggot_SmallWalkSide"];
             _this.direction = config.Direction.DOWN;
             return _this;

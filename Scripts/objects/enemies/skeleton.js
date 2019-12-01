@@ -29,6 +29,7 @@ var objects;
             _this.canBeEaten = false;
             _this.bounty = 20;
             _this.isFlying = false;
+            _this.halfSpeed = moveSpeed / 2;
             _this.rateOfFire = 100;
             _this.walk = ["Skeleton_WalkBack", "Skeleton_WalkFront", "Skeleton_WalkRight", "Skeleton_WalkRight"];
             _this.direction = config.Direction.DOWN;
@@ -98,7 +99,6 @@ var objects;
         };
         Skeleton.prototype.BulletFire = function () {
             var ticker = createjs.Ticker.getTicks();
-            // If Shooting Flower alive, shoots the bullet
             if (this.hp > 0) {
                 if (ticker % this.rateOfFire == 0) {
                     this.bulletSpawn = new math.Vec2(this.x, this.y);

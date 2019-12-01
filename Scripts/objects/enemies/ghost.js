@@ -15,6 +15,7 @@ var objects;
 (function (objects) {
     var Ghost = /** @class */ (function (_super) {
         __extends(Ghost, _super);
+        // Variable
         // Constructors
         function Ghost(moveSpeed) {
             var _this = _super.call(this, managers.Game.enemies_TextureAtlas, "Ghost_Idle") || this;

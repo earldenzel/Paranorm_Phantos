@@ -2,7 +2,6 @@ module objects {
     export class SpiderRight extends objects.Enemy {
         // variables
         private distance: number;
-        private speed: number = 1;
         private isToUp: Boolean = true;
         private rateOfFire: number;
 
@@ -15,11 +14,13 @@ module objects {
             this.distance = distance;
 
             this.hp = 1;
+            this.moveSpeed = 1;
             this.attackPower = 1;
             this.knockback = 0.75;
             this.eatTimer = 500;
             this.bounty = 4;
             this.isFlying = false;
+            this.halfSpeed = this.moveSpeed / 2;
             this.rateOfFire = 70;
         }
 
@@ -41,11 +42,11 @@ module objects {
         public Move(): void {
 
             if (this.isToUp && !(this.y == this.startPosition.y - this.distance)) {
-                this.y -= this.speed;
+                this.y -= this.moveSpeed;
             } else if (this.isToUp && (this.y == this.startPosition.y - this.distance)) {
                 this.isToUp = false;
             } else if (!this.isToUp && !(this.y == this.startPosition.y)) {
-                this.y += this.speed;
+                this.y += this.moveSpeed;
             } else if (!this.isToUp && (this.y == this.startPosition.y)) {
                 this.isToUp = true;
             }

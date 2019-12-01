@@ -1,7 +1,6 @@
 module objects {
     export class MaggotSmall extends objects.Enemy {
         // Variable
-        private moveSpeed: number;
         private rightDirection: boolean;
         private downDirection: boolean;
         private walk: Array<any>;
@@ -23,6 +22,7 @@ module objects {
             this.bounty = 5;
             this.isFlying = false;
             this.expGain = 1;
+            this.halfSpeed = moveSpeed / 2;
 
             this.walk = ["Maggot_SmallWalkForward", "Maggot_SmallWalkForward", "Maggot_SmallWalkSide", "Maggot_SmallWalkSide"];
 

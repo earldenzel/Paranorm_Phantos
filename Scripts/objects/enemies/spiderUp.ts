@@ -2,7 +2,7 @@ module objects {
     export class SpiderUp extends objects.Enemy {
         // variables
         private distance: number;
-        private speed: number = 1;
+
         private isToRight: Boolean = true;
         private rateOfFire: number;
 
@@ -15,11 +15,13 @@ module objects {
             this.distance = distance;
 
             this.hp = 1;
+            this.moveSpeed = 1;
             this.attackPower = 1;
             this.knockback = 0.75;
             this.eatTimer = 500;
             this.bounty = 4;
             this.isFlying = false;
+            this.halfSpeed = this.moveSpeed / 2;
         }
 
         // methods
@@ -40,11 +42,11 @@ module objects {
         public Move(): void {
 
             if (this.isToRight && !(this.x == this.startPosition.x + this.distance)) {
-                this.x += this.speed;
+                this.x += this.moveSpeed;
             } else if (this.isToRight && (this.x == this.startPosition.x + this.distance)) {
                 this.isToRight = false;
             } else if (!this.isToRight && !(this.x == this.startPosition.x)) {
-                this.x -= this.speed;
+                this.x -= this.moveSpeed;
             } else if (!this.isToRight && (this.x == this.startPosition.x)) {
                 this.isToRight = true;
             }

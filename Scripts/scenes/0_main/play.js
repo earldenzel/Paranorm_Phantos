@@ -479,6 +479,9 @@ var scenes;
                 this.bulletManager.redBones.forEach(function (bullet) {
                     _this.addChild(bullet);
                 });
+                this.bulletManager.slimeBalls.forEach(function (bullet) {
+                    _this.addChild(bullet);
+                });
             }
         };
         PlayScene.prototype.AllEnemiesAreDead = function () {

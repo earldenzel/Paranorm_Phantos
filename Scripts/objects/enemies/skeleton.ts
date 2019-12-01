@@ -4,7 +4,6 @@ module objects{
         private bulletSpawn: math.Vec2;
         private rateOfFire: number;
 
-        private moveSpeed: number;
         private rightDirection: boolean;
         private downDirection: boolean;
         private walk: Array<any>;
@@ -24,6 +23,7 @@ module objects{
             this.canBeEaten = false;
             this.bounty = 20;
             this.isFlying = false;
+            this.halfSpeed = moveSpeed / 2;
             this.rateOfFire = 100;
 
             this.walk = ["Skeleton_WalkBack", "Skeleton_WalkFront", "Skeleton_WalkRight", "Skeleton_WalkRight"];
@@ -99,7 +99,6 @@ module objects{
         public BulletFire(): void {
             let ticker: number = createjs.Ticker.getTicks();
 
-            // If Shooting Flower alive, shoots the bullet
             if (this.hp > 0) {
                 if (ticker % this.rateOfFire == 0) {
                     this.bulletSpawn = new math.Vec2(this.x, this.y);

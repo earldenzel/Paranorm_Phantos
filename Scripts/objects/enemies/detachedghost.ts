@@ -3,7 +3,6 @@ module objects{
         // variables
         private rightDirection: boolean;
         private downDirection : boolean;
-        private moveSpeed: number;
 
         // constructors
         

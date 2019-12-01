@@ -19,6 +19,7 @@ var objects;
             if (startPosition === void 0) { startPosition = null; }
             var _this = _super.call(this, textureAtlas, enemyName) || this;
             _this.isBeingEaten = false;
+            _this.moveSpeed = 0;
             _this.startPosition = startPosition;
             // Some enemies can be eaten, some enemies cannot.
             // They will start off as able to be eaten.
@@ -168,6 +169,14 @@ var objects;
         };
         Enemy.prototype.GetObjectSpeed = function () {
             return 0;
+        };
+        Enemy.prototype.AlterSpeed = function (reduceSpeed) {
+            if (reduceSpeed) {
+                this.moveSpeed = this.halfSpeed;
+            }
+            else {
+                this.moveSpeed = this.halfSpeed * 2;
+            }
         };
         Enemy.prototype.RemoveFromPlay = function (bounty) {
             this.isDead = true;

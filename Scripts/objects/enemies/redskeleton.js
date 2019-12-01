@@ -29,6 +29,7 @@ var objects;
             _this.canBeEaten = false;
             _this.bounty = 0;
             _this.isFlying = false;
+            _this.halfSpeed = moveSpeed / 2;
             _this.rateOfFire = 50;
             _this.walk = ["RedSkeleton_WalkBack", "RedSkeleton_WalkFront", "RedSkeleton_WalkRight", "RedSkeleton_WalkRight"];
             _this.direction = config.Direction.DOWN;

@@ -1,7 +1,6 @@
 module objects {
     export class Ghost extends objects.Enemy {
         // Variable
-        private moveSpeed: number;
 
         // Constructors
         constructor(moveSpeed: number) {

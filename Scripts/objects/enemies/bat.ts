@@ -1,7 +1,6 @@
 module objects{
     export class Bat extends objects.Enemy{
         // variables
-        private moveSpeed: number;
         private updateTime: number;
         private currentTime: number;
         private trajectory: math.Vec2;

@@ -7,6 +7,7 @@ module managers {
         public shootingFLowerBullets: objects.ShootingFlowerBullet[];
         public bones: objects.Bone[];
         public redBones: objects.RedBone[];
+        public slimeBalls: objects.SlimeBall[];
 
         public CurrentBullet: number;
         private bulletCount: number;
@@ -24,6 +25,7 @@ module managers {
             this.shootingFLowerBullets = new Array<objects.ShootingFlowerBullet>();
             this.bones = new Array<objects.Bone>();
             this.redBones = new Array<objects.RedBone>();
+            this.slimeBalls = new Array<objects.SlimeBall>();
 
             this.buildBulletPool();
             this.CurrentBullet = 0;
@@ -51,6 +53,9 @@ module managers {
             this.redBones.forEach(bullet => {
                 bullet.Update();
             });
+            this.slimeBalls.forEach(bullet => {
+                bullet.Update();
+            });
         }
 
         // Functions
@@ -62,6 +67,7 @@ module managers {
                 this.shootingFLowerBullets[i] = new objects.ShootingFlowerBullet();
                 this.bones[i] = new objects.Bone();
                 this.redBones[i] = new objects.RedBone();
+                this.slimeBalls[i] = new objects.SlimeBall();
             }
         }
 
@@ -85,6 +91,9 @@ module managers {
                 bullet.Reset();
             });
             this.redBones.forEach(bullet=>{
+                bullet.Reset();
+            });
+            this.slimeBalls.forEach(bullet=>{
                 bullet.Reset();
             });
         }

@@ -1,7 +1,6 @@
 module objects {
     export class GhostTeeth extends objects.Enemy {
         // Variable
-        private moveSpeed: number;
         private currentSpeed: number;
 
         private isAttacking: boolean;
