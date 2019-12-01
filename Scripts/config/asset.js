@@ -7,360 +7,360 @@ var config;
             // SPRITES
             {
                 "id": "backButton",
-                "src": "/Assets/Old/BackButton.png"
+                "src": "./Assets/Old/BackButton.png"
             },
             {
                 "id": "nextButton",
-                "src": "/Assets/Old/NextButton.png"
+                "src": "./Assets/Old/NextButton.png"
             },
             {
                 "id": "background",
-                "src": "/Assets/Old/background.png"
+                "src": "./Assets/Old/background.png"
             },
             {
                 "id": "player",
-                "src": "/Assets/Old/player.png"
+                "src": "./Assets/Old/player.png"
             },
             {
                 "id": "weapon",
-                "src": "/Assets/Old/phantos.png"
+                "src": "./Assets/Old/phantos.png"
             },
             {
                 "id": "testEnemy",
-                "src": "/Assets/Old/ship.png"
+                "src": "./Assets/Old/ship.png"
             },
             {
                 "id": "title_background",
-                "src": "/Assets/_Background/_TestStage/Placeholder_BlackBackground.png"
+                "src": "./Assets/_Background/_TestStage/Placeholder_BlackBackground.png"
             },
             {
                 "id": "title_ui",
-                "src": "/Assets/_UI/Title/Title_3.png"
+                "src": "./Assets/_UI/Title/Title_3.png"
             },
             {
                 "id": "gameover_ui",
-                "src": "/Assets/_UI/GameOver/GameOver.png"
+                "src": "./Assets/_UI/GameOver/GameOver.png"
             },
             {
                 "id": "gameover_spotlight",
-                "src": "/Assets/_UI/GameOver/GameOver_Spotlight.png"
+                "src": "./Assets/_UI/GameOver/GameOver_Spotlight.png"
             },
             {
                 "id": "player_p_walk1",
-                "src": "/Assets/_Player/Phoebe/Phoebe_Walk1.png"
+                "src": "./Assets/_Player/Phoebe/Phoebe_Walk1.png"
             },
             {
                 "id": "player_p_walk3",
-                "src": "/Assets/_Player/Phoebe/Phoebe_Walk3.png"
+                "src": "./Assets/_Player/Phoebe/Phoebe_Walk3.png"
             },
             {
                 "id": "player_p_walk5",
-                "src": "/Assets/_Player/Phoebe/Phoebe_Walk5.png"
+                "src": "./Assets/_Player/Phoebe/Phoebe_Walk5.png"
             },
             {
                 "id": "player_p_walk7",
-                "src": "/Assets/_Player/Phoebe/Phoebe_Walk7.png"
+                "src": "./Assets/_Player/Phoebe/Phoebe_Walk7.png"
             },
             {
                 "id": "item_p_front2",
-                "src": "/Assets/_Items/Phantos/Phantos_Front2.png"
+                "src": "./Assets/_Items/Phantos/Phantos_Front2.png"
             },
             {
                 "id": "item_p_left2",
-                "src": "/Assets/_Items/Phantos/Phantos_Left2.png"
+                "src": "./Assets/_Items/Phantos/Phantos_Left2.png"
             },
             {
                 "id": "item_p_right2",
-                "src": "/Assets/_Items/Phantos/Phantos_Right2.png"
+                "src": "./Assets/_Items/Phantos/Phantos_Right2.png"
             },
             {
                 "id": "enemy_test",
-                "src": "/Assets/_Enemies/_Test/Test_Enemy.png"
+                "src": "./Assets/_Enemies/_Test/Test_Enemy.png"
             },
             {
                 "id": "enemy_bat",
-                "src": "/Assets/_Enemies/bat/bat1.png"
+                "src": "./Assets/_Enemies/bat/bat1.png"
             },
             {
                 "id": "enemy_zombieTest",
-                "src": "/Assets/_Enemies/zombieTest.png"
+                "src": "./Assets/_Enemies/zombieTest.png"
             },
             {
                 "id": "background_c_hori",
-                "src": "/Assets/_Background/_TestStage/Placeholder_CEILING-Horizontal.png"
+                "src": "./Assets/_Background/_TestStage/Placeholder_CEILING-Horizontal.png"
             },
             {
                 "id": "background_c_vert",
-                "src": "/Assets/_Background/_TestStage/Placeholder_CEILING-Vertical.png"
+                "src": "./Assets/_Background/_TestStage/Placeholder_CEILING-Vertical.png"
             },
             {
                 // NEW
                 "id": "background_c_w_all",
-                "src": "/Assets/_Background/_TestStageB/PlaceholderB_Ceiling_Walls.png"
+                "src": "./Assets/_Background/_TestStageB/PlaceholderB_Ceiling_Walls.png"
             },
             {
                 // EDIT
                 "id": "background_d_vertT",
-                "src": "/Assets/_Background/_TestStageB/PlaceholderB_DoorV_Top.png"
-                //"./Assets/_Background/_TestStage/Placeholder_DOOR-VerticalTop.png"
+                "src": "./Assets/_Background/_TestStageB/PlaceholderB_DoorV_Top.png"
+                //"../Assets/_Background/_TestStage/Placeholder_DOOR-VerticalTop.png"
             },
             {
                 // NEW
                 "id": "background_d_horiT",
-                "src": "/Assets/_Background/_TestStageB/PlaceholderB_DoorH_Top.png"
+                "src": "./Assets/_Background/_TestStageB/PlaceholderB_DoorH_Top.png"
             },
             {
                 // EDIT
                 "id": "background_d_vert",
-                "src": "/Assets/_Background/_TestStageB/PlaceholderB_DoorV.png"
-                //"./Assets/_Background/_TestStage/Placeholder_DOOR-Vertical.png"
+                "src": "./Assets/_Background/_TestStageB/PlaceholderB_DoorV.png"
+                //"../Assets/_Background/_TestStage/Placeholder_DOOR-Vertical.png"
             },
             {
                 "id": "background_d_vertC",
-                "src": "/Assets/_Background/_TestStageB/PlaceholderB_DoorV_Closed.png"
+                "src": "./Assets/_Background/_TestStageB/PlaceholderB_DoorV_Closed.png"
             },
             {
                 // EDIT
                 "id": "background_d_hori",
-                "src": "/Assets/_Background/_TestStageB/PlaceholderB_DoorH.png"
-                //"./Assets/_Background/_TestStage/Placeholder_DOOR-Horizontal.png"
+                "src": "./Assets/_Background/_TestStageB/PlaceholderB_DoorH.png"
+                //"../Assets/_Background/_TestStage/Placeholder_DOOR-Horizontal.png"
             },
             {
                 "id": "background_d_horiC",
-                "src": "/Assets/_Background/_TestStageB/PlaceholderB_DoorH_Closed.png"
+                "src": "./Assets/_Background/_TestStageB/PlaceholderB_DoorH_Closed.png"
             },
             {
                 // EDIT 
                 "id": "background_f_all",
-                "src": "/Assets/_Background/_TestStageB/PlaceholderB_Background_Floor.png"
-                //"./Assets/_Background/_TestStage/Placeholder_FLOOR-All.png"
+                "src": "./Assets/_Background/_TestStageB/PlaceholderB_Background_Floor.png"
+                //"../Assets/_Background/_TestStage/Placeholder_FLOOR-All.png"
             },
             {
                 "id": "background_w_hori",
-                "src": "/Assets/_Background/_TestStage/Placeholder_WALL-Horizontal.png"
+                "src": "./Assets/_Background/_TestStage/Placeholder_WALL-Horizontal.png"
             },
             {
                 "id": "background_w_vert",
-                "src": "/Assets/_Background/_TestStage/Placeholder_WALL-Vertical.png"
+                "src": "./Assets/_Background/_TestStage/Placeholder_WALL-Vertical.png"
             },
             {
                 "id": "ui_playerinfo",
-                "src": "/Assets/_UI/PlayerInfo/UILayout_Placement.png"
+                "src": "./Assets/_UI/PlayerInfo/UILayout_Placement.png"
             },
             {
                 "id": "life_0-5",
-                "src": "/Assets/_UI/PlayerInfo/_Life/Life_0-5.png"
+                "src": "./Assets/_UI/PlayerInfo/_Life/Life_0-5.png"
             },
             {
                 "id": "life_1-5",
-                "src": "/Assets/_UI/PlayerInfo/_Life/Life_1-5.png"
+                "src": "./Assets/_UI/PlayerInfo/_Life/Life_1-5.png"
             },
             {
                 "id": "life_2-5",
-                "src": "/Assets/_UI/PlayerInfo/_Life/Life_2-5.png"
+                "src": "./Assets/_UI/PlayerInfo/_Life/Life_2-5.png"
             },
             {
                 "id": "life_3-5",
-                "src": "/Assets/_UI/PlayerInfo/_Life/Life_3-5.png"
+                "src": "./Assets/_UI/PlayerInfo/_Life/Life_3-5.png"
             },
             {
                 "id": "life_4-5",
-                "src": "/Assets/_UI/PlayerInfo/_Life/Life_4-5.png"
+                "src": "./Assets/_UI/PlayerInfo/_Life/Life_4-5.png"
             },
             {
                 "id": "life_5-5",
-                "src": "/Assets/_UI/PlayerInfo/_Life/Life_5-5.png"
+                "src": "./Assets/_UI/PlayerInfo/_Life/Life_5-5.png"
             },
             {
                 "id": "ecto_0-5",
-                "src": "/Assets/_UI/PlayerInfo/_Ecto/Ecto_0-5.png"
+                "src": "./Assets/_UI/PlayerInfo/_Ecto/Ecto_0-5.png"
             },
             {
                 "id": "ecto_1-5",
-                "src": "/Assets/_UI/PlayerInfo/_Ecto/Ecto_1-5.png"
+                "src": "./Assets/_UI/PlayerInfo/_Ecto/Ecto_1-5.png"
             },
             {
                 "id": "ecto_2-5",
-                "src": "/Assets/_UI/PlayerInfo/_Ecto/Ecto_2-5.png"
+                "src": "./Assets/_UI/PlayerInfo/_Ecto/Ecto_2-5.png"
             },
             {
                 "id": "ecto_3-5",
-                "src": "/Assets/_UI/PlayerInfo/_Ecto/Ecto_3-5.png"
+                "src": "./Assets/_UI/PlayerInfo/_Ecto/Ecto_3-5.png"
             },
             {
                 "id": "ecto_4-5",
-                "src": "/Assets/_UI/PlayerInfo/_Ecto/Ecto_4-5.png"
+                "src": "./Assets/_UI/PlayerInfo/_Ecto/Ecto_4-5.png"
             },
             {
                 "id": "ecto_5-5",
-                "src": "/Assets/_UI/PlayerInfo/_Ecto/Ecto_5-5.png"
+                "src": "./Assets/_UI/PlayerInfo/_Ecto/Ecto_5-5.png"
             },
             {
                 "id": "background_barrierTest",
-                "src": "/Assets/_Background/_TestStage/barrierTest.png"
+                "src": "./Assets/_Background/_TestStage/barrierTest.png"
             },
             {
                 "id": "background_gapTest",
-                "src": "/Assets/_Background/_TestStage/gapTest.png"
+                "src": "./Assets/_Background/_TestStage/gapTest.png"
             },
             {
                 "id": "kKeyIndicator",
-                "src": "/Assets/_UI/HowToPlay/HowToPlay_KKey.png"
+                "src": "./Assets/_UI/HowToPlay/HowToPlay_KKey.png"
             },
             {
                 "id": "wKeyIndicator",
-                "src": "/Assets/_UI/HowToPlay/HowToPlay_WKey.png"
+                "src": "./Assets/_UI/HowToPlay/HowToPlay_WKey.png"
             },
             {
                 "id": "aKeyIndicator",
-                "src": "/Assets/_UI/HowToPlay/HowToPlay_AKey.png"
+                "src": "./Assets/_UI/HowToPlay/HowToPlay_AKey.png"
             },
             {
                 "id": "sKeyIndicator",
-                "src": "/Assets/_UI/HowToPlay/HowToPlay_SKey.png"
+                "src": "./Assets/_UI/HowToPlay/HowToPlay_SKey.png"
             },
             {
                 "id": "dKeyIndicator",
-                "src": "/Assets/_UI/HowToPlay/HowToPlay_DKey.png"
+                "src": "./Assets/_UI/HowToPlay/HowToPlay_DKey.png"
             },
             {
                 "id": "jKeyIndicator",
-                "src": "/Assets/_UI/HowToPlay/HowToPlay_JKey.png"
+                "src": "./Assets/_UI/HowToPlay/HowToPlay_JKey.png"
             },
             {
                 "id": "item_key",
-                "src": "/Assets/_Items/Key.png"
+                "src": "./Assets/_Items/Key.png"
             },
             // SPRITE SHEETS
             {
                 "id": "tAtlas_Graveyard",
-                "src": "/Assets/_Background/_Final/Graveyard_TextureAtlas.png"
+                "src": "./Assets/_Background/_Final/Graveyard_TextureAtlas.png"
             },
             {
                 "id": "tAtlas_MapG",
-                "src": "/Assets/_UI/PlayerInfo/_Map/Map_Graveyard_TextureAtlas.png"
+                "src": "./Assets/_UI/PlayerInfo/_Map/Map_Graveyard_TextureAtlas.png"
             },
             {
                 "id": "tAtlas_Hotel",
-                "src": "/Assets/_Background/_Final/Hotel_TextureAtlas.png"
+                "src": "./Assets/_Background/_Final/Hotel_TextureAtlas.png"
             },
             {
                 "id": "tAtlas_Mansion",
-                "src": "/Assets/_Background/_Final/Mansion_TextureAtlas.png"
+                "src": "./Assets/_Background/_Final/Mansion_TextureAtlas.png"
             },
             {
                 "id": "tAtlas_Items",
-                "src": "/Assets/_UI/TitleUiItemsMap_TextureAtlas.png"
+                "src": "./Assets/_UI/TitleUiItemsMap_TextureAtlas.png"
             },
             {
                 "id": "tAtlas__TitlesUIMap",
-                "src": "/Assets/_UI/_Final/TitleUiMap_TextureAtlas.png"
+                "src": "./Assets/_UI/_Final/TitleUiMap_TextureAtlas.png"
             },
             {
                 "id": "tAtlas__Items",
-                "src": "/Assets/_Items/_Final/Items_TextureAtlas.png"
+                "src": "./Assets/_Items/_Final/Items_TextureAtlas.png"
             },
             {
                 "id": "tAtlas_Phoebe",
-                "src": "/Assets/_Player/Phoebe_TextureAtlas.png"
+                "src": "./Assets/_Player/Phoebe_TextureAtlas.png"
             },
             {
                 "id": "tAtlas_Phantos",
-                "src": "/Assets/_Items/Phantos_TextureAtlas.png"
+                "src": "./Assets/_Items/Phantos_TextureAtlas.png"
             },
             {
                 "id": "tAtlas_Phantorm",
-                "src": "/Assets/_Player/Phoebe+Phantos_TextureAtlas.png"
+                "src": "./Assets/_Player/Phoebe+Phantos_TextureAtlas.png"
             },
             {
                 "id": "tAtlas__Phoebe",
-                "src": "/Assets/_Player/_Final/Phoebe__TextureAtlas.png"
+                "src": "./Assets/_Player/_Final/Phoebe__TextureAtlas.png"
             },
             {
                 "id": "tAtlas__Enemies",
-                "src": "/Assets/_Enemies/_Final/Enemies__TextureAtlas.png"
+                "src": "./Assets/_Enemies/_Final/Enemies__TextureAtlas.png"
             },
             {
                 "id": "tAtlas_Bat",
-                "src": "/Assets/_Enemies/bat/Bat_TextureAtlas.png"
+                "src": "./Assets/_Enemies/bat/Bat_TextureAtlas.png"
             },
             {
                 "id": "tAtlas_Spider",
-                "src": "/Assets/_Enemies/spider/Spider_TextureAtlas.png"
+                "src": "./Assets/_Enemies/spider/Spider_TextureAtlas.png"
             },
             {
                 "id": "tAtlas_ShootingFlower",
-                "src": "/Assets/_Enemies/shootingFlower/ShootingFlower_TextureAtlas.png"
+                "src": "./Assets/_Enemies/shootingFlower/ShootingFlower_TextureAtlas.png"
             },
             {
                 "id": "tAtlas_Chest",
-                "src": "/Assets/_Items/Chest/Chest_TextureAtlas.png"
+                "src": "./Assets/_Items/Chest/Chest_TextureAtlas.png"
             },
             // MUSIC
             {
                 "id": "music_title",
-                "src": "/Assets/_Music/Title.mp3"
+                "src": "./Assets/_Music/Title.mp3"
             },
             {
                 "id": "music_openingScene",
-                "src": "/Assets/_Music/OpeningScene.mp3"
+                "src": "./Assets/_Music/OpeningScene.mp3"
             },
             {
                 "id": "music_gameOver",
-                "src": "/Assets/_Music/GameOver.mp3"
+                "src": "./Assets/_Music/GameOver.mp3"
             },
             {
                 "id": "music_shop",
-                "src": "/Assets/_Music/Shop.mp3"
+                "src": "./Assets/_Music/Shop.mp3"
             },
             {
                 "id": "music_graveyard",
-                "src": "/Assets/_Music/Graveyard.mp3"
+                "src": "./Assets/_Music/Graveyard.mp3"
             },
             {
                 "id": "music_hotel",
-                "src": "/Assets/_Music/Hotel.mp3"
+                "src": "./Assets/_Music/Hotel.mp3"
             },
             {
                 "id": "music_mansion",
-                "src": "/Assets/_Music/Mansion.mp3"
+                "src": "./Assets/_Music/Mansion.mp3"
             },
             {
                 "id": "music_boss",
-                "src": "/Assets/_Music/Boss.mp3"
+                "src": "./Assets/_Music/Boss.mp3"
             },
             // SOUND EFFECTS
             {
                 "id": "enemiesHit",
-                "src": "/Assets/_SoundEffects/Enemies_Hit.wav"
+                "src": "./Assets/_SoundEffects/Enemies_Hit.wav"
             },
             {
                 "id": "itemCollect",
-                "src": "/Assets/_SoundEffects/Item_Collect.wav"
+                "src": "./Assets/_SoundEffects/Item_Collect.wav"
             },
             {
                 "id": "doorUnlock",
-                "src": "/Assets/_SoundEffects/Door_Unlock.wav"
+                "src": "./Assets/_SoundEffects/Door_Unlock.wav"
             },
             {
                 "id": "phoebeDash-Swing",
-                "src": "/Assets/_SoundEffects/Phoebe_DashOrSwing.wav"
+                "src": "./Assets/_SoundEffects/Phoebe_DashOrSwing.wav"
             },
             {
                 "id": "phoebeEat",
-                "src": "/Assets/_SoundEffects/Phoebe_Eat.wav"
+                "src": "./Assets/_SoundEffects/Phoebe_Eat.wav"
             },
             {
                 "id": "phoebeHit",
-                "src": "/Assets/_SoundEffects/Phoebe_Hit.wav"
+                "src": "./Assets/_SoundEffects/Phoebe_Hit.wav"
             },
             {
                 "id": "phoebeTransform",
-                "src": "/Assets/_SoundEffects/Phoebe_Transform.wav"
+                "src": "./Assets/_SoundEffects/Phoebe_Transform.wav"
             },
             {
                 "id": "anyDefeated",
-                "src": "/Assets/_SoundEffects/Defeat.wav"
+                "src": "./Assets/_SoundEffects/Defeat.wav"
             }
         ];
         Assets.getAtlas_Bat = {
