@@ -37,10 +37,6 @@ var objects;
                 this.visible = false;
                 managers.Game.player.attackSequence = 0;
                 managers.Game.player.alpha = 1;
-                console.log("Attack ended");
-            }
-            if (this.visible) {
-                console.log(this.x + " " + this.y + " " + managers.Game.player.x + " " + managers.Game.player.y);
             }
         };
         // Resets the position of the object
@@ -50,7 +46,6 @@ var objects;
         Weapon.prototype.CheckBound = function () {
         };
         Weapon.prototype.Attack = function () {
-            console.log("Attack initiated");
             this.visible = true;
             this.direction = managers.Game.player.direction;
             this.currentAnimationFrame = 0;
@@ -62,10 +57,8 @@ var objects;
             this.Delay();
         };
         Weapon.prototype.Delay = function () {
-            console.log("Delay initiated");
             setTimeout(function () {
                 managers.Game.player.delaySequence = 0;
-                console.log("Delay ended");
             }, managers.Game.player.playerAttackDelay);
         };
         return Weapon;

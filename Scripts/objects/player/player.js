@@ -24,7 +24,6 @@ var objects;
             _this.attackSequence = 0;
             _this.delaySequence = 0;
             _this.biteSequence = 0;
-            _this.fallSequence = 0;
             _this.textSequence = 0;
             _this.playerMoveSpeed = 4;
             _this.playerAttackDelay = 1000;
@@ -72,6 +71,7 @@ var objects;
         Player.prototype.Start = function () {
             this.x = 320;
             this.y = 700;
+            this.lastPosition = this.GetPosition();
             //this.playerController = { "W": false, "A": false, "S": false, "D": false, "Z": false };
         };
         Player.prototype.Update = function () {
@@ -95,6 +95,13 @@ var objects;
             if (this.projectileDamageTimer > 20) {
                 this.projectileDamageTimer = 0;
                 this.isTakingProjectileDamage = false;
+            }
+            if (this.fallSequence > 0) {
+                this.FallIntoHole();
+            }
+            else {
+                this.scaleX = 1;
+                this.scaleY = 1;
             }
             if (this.hp > 0) {
                 this.Move();
@@ -594,7 +601,8 @@ var objects;
                 this.gotoAndPlay(newAnimation);
             }
             if ((this.isTakingDamage && this.contactDamageTimer < 20)
-                || (this.isTakingProjectileDamage && this.projectileDamageTimer < 20)) {
+                || (this.isTakingProjectileDamage && this.projectileDamageTimer < 20)
+                || this.fallSequence !== 0) {
                 this.gotoAndPlay("Phoebe_Hurt");
             }
         };
@@ -613,6 +621,10 @@ var objects;
                     break;
             }
             this.SetPosition(target);
+        };
+        Player.prototype.FallIntoHole = function () {
+            this.scaleX -= 0.04;
+            this.scaleY -= 0.06;
         };
         return Player;
     }(objects.GameObject));

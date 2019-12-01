@@ -11,6 +11,7 @@ module objects {
         public isColliding: boolean;
         public isTakingDamage: boolean;
         public isTakingProjectileDamage: boolean;
+        public fallSequence: number = 0;
         public hp: number;
         public attackPower: number;
         public powerUp: config.PowerUp;

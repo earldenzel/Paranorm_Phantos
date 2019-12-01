@@ -6,7 +6,6 @@ module objects {
         public attackSequence: number = 0;
         public delaySequence: number = 0;
         public biteSequence: number = 0;
-        public fallSequence: number = 0;
         public textSequence: number = 0;
         public contactDamageTimer: number;
         public projectileDamageTimer: number;
@@ -83,6 +82,7 @@ module objects {
         public Start(): void {
             this.x = 320;
             this.y = 700;
+            this.lastPosition = this.GetPosition();
             //this.playerController = { "W": false, "A": false, "S": false, "D": false, "Z": false };
         }
 
@@ -109,6 +109,13 @@ module objects {
             if (this.projectileDamageTimer > 20){
                 this.projectileDamageTimer = 0;
                 this.isTakingProjectileDamage = false;
+            }
+            if (this.fallSequence > 0){
+                this.FallIntoHole();
+            }
+            else{
+                this.scaleX = 1;
+                this.scaleY = 1;
             }
 
             if (this.hp > 0) {
@@ -619,7 +626,8 @@ module objects {
                 this.gotoAndPlay(newAnimation);
             }
             if ((this.isTakingDamage && this.contactDamageTimer <20)
-                || (this.isTakingProjectileDamage && this.projectileDamageTimer < 20)){
+                || (this.isTakingProjectileDamage && this.projectileDamageTimer < 20)
+                || this.fallSequence !== 0){
                 this.gotoAndPlay("Phoebe_Hurt");
             }
         }
@@ -639,9 +647,11 @@ module objects {
                     break;
             }
             this.SetPosition(target);
+        } 
 
+        public FallIntoHole(){
+            this.scaleX -= 0.04;
+            this.scaleY -= 0.06;
         }
-
-        
     }
 }

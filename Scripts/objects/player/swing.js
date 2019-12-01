@@ -32,6 +32,12 @@ var objects;
         // Updated 60 times per second (60FPS)
         Swing.prototype.Update = function () {
             this.visible = managers.Game.player.weapon.visible;
+            if (this.visible) {
+                this.alpha -= 0.02;
+            }
+            else {
+                this.alpha = 0.3;
+            }
             this.x = managers.Game.player.x;
             this.y = managers.Game.player.y;
             if (this.currentAnimation != this.images[managers.Game.player.weapon.direction]) {

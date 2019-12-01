@@ -72,9 +72,12 @@ module objects {
                 else {
                     managers.Game.keyboardManager.enabled = false;
                 }
+            }       
+            else if (this.fallSequence > 0){
+                this.FallIntoHole();
             }
             //else, the player is not stunned and can move
-            else {
+            else{
                 this.Move();
             }
 
@@ -201,6 +204,11 @@ module objects {
             if (this.currentAnimation != newAnimation) {
                 this.gotoAndPlay(newAnimation);
             }
+        }               
+
+        public FallIntoHole(){
+            this.scaleX -= 0.01;
+            this.scaleY -= 0.01;
         }
     }
 }

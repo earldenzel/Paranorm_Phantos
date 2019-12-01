@@ -73,6 +73,9 @@ var objects;
                     managers.Game.keyboardManager.enabled = false;
                 }
             }
+            else if (this.fallSequence > 0) {
+                this.FallIntoHole();
+            }
             //else, the player is not stunned and can move
             else {
                 this.Move();
@@ -187,6 +190,10 @@ var objects;
             if (this.currentAnimation != newAnimation) {
                 this.gotoAndPlay(newAnimation);
             }
+        };
+        Enemy.prototype.FallIntoHole = function () {
+            this.scaleX -= 0.01;
+            this.scaleY -= 0.01;
         };
         return Enemy;
     }(objects.GameObject));
