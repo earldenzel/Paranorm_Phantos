@@ -288,16 +288,14 @@ module scenes {
             this.obstacles.forEach(e => {
                 e.CheckBound();
                 this.enemies.forEach(f => {
-                    //if enemy is stunned and knocked back on a gap, then enemy dies
-                    if (f.isStunned && e instanceof objects.Gap && managers.Collision.Check(e, f)) {
-                        f.RemoveFromPlay(f.CalculateBounty());
-                    }
-                    //if enemy is
+                    //if enemy is a zombie
                     if (f instanceof objects.Zombie && e instanceof objects.Barriers) {
                         e.ZombieCheckBarrierCollision(f);
                     }
-
-                    if (!f.isFlying && e instanceof objects.Gap) {
+                    if (e instanceof objects.Gap && managers.Collision.Check(e, f)){
+                        if (!f.isStunned && f.isFlying){
+                            return;
+                        }
                         e.CheckGapDamage(f);
                     }
                 });

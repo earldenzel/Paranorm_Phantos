@@ -7,6 +7,7 @@ module objects {
         public delaySequence: number = 0;
         public biteSequence: number = 0;
         public textSequence: number = 0;
+        public transitSequence: number = 0;
         public contactDamageTimer: number;
         public projectileDamageTimer: number;
         public playerMoveSpeed: number = 4;
@@ -313,10 +314,9 @@ module objects {
                     if (this.y < config.Bounds.DOOR_EASING_TOP || this.y > config.Bounds.DOOR_EASING_BOTTOM) {
                         this.x = config.Bounds.RIGHT_BOUND - this.halfW;
                     }
-                    if (this.x >= config.Bounds.RIGHT_BOUND + this.width) {
-                        managers.Game.currentScene = this.sceneOnRight;
+                    if (this.x >= config.Bounds.RIGHT_BOUND + this.width && this.transitSequence == 0) {
                         this.lastPosition = new math.Vec2(config.Bounds.LEFT_BOUND - this.halfW, this.y);
-                        this.SetPosition(this.lastPosition);
+                        this.SetTransit(this.lastPosition, this.sceneOnRight);
                     }
                 }
                 else {
@@ -329,10 +329,9 @@ module objects {
                     if (this.y < config.Bounds.DOOR_EASING_TOP || this.y > config.Bounds.DOOR_EASING_BOTTOM) {
                         this.x = this.halfW + config.Bounds.LEFT_BOUND;
                     }
-                    if (this.x <= 0) {
-                        managers.Game.currentScene = this.sceneOnLeft;
+                    if (this.x <= 0 && this.transitSequence == 0) {
                         this.lastPosition = new math.Vec2(config.Bounds.RIGHT_BOUND + this.halfW, this.y);
-                        this.SetPosition(this.lastPosition);
+                        this.SetTransit(this.lastPosition, this.sceneOnLeft);
                     }
                 }
                 else {
@@ -345,10 +344,9 @@ module objects {
                     if (this.x < config.Bounds.DOOR_EASING_LEFT || this.x > config.Bounds.DOOR_EASING_RIGHT) {
                         this.y = config.Bounds.BOTTOM_BOUND - this.halfH;
                     }
-                    if (this.y >= config.Bounds.BOTTOM_BOUND + this.height) {
-                        managers.Game.currentScene = this.sceneOnBot;
+                    if (this.y >= config.Bounds.BOTTOM_BOUND + this.height && this.transitSequence == 0) {
                         this.lastPosition = new math.Vec2(this.x, this.halfH + config.Bounds.TOP_BOUND)
-                        this.SetPosition(this.lastPosition);
+                        this.SetTransit(this.lastPosition, this.sceneOnBot);
                     }
                 }
                 else {
@@ -361,10 +359,9 @@ module objects {
                     if (this.x < config.Bounds.DOOR_EASING_LEFT || this.x > config.Bounds.DOOR_EASING_RIGHT) {
                         this.y = this.halfH + config.Bounds.TOP_BOUND;
                     }
-                    if (this.y <= config.Bounds.TOP_BOUND - (this.height / 2)) {
-                        managers.Game.currentScene = this.sceneOnTop;
-                        this.lastPosition = new math.Vec2(this.x, config.Bounds.BOTTOM_BOUND + this.height);
-                        this.SetPosition(this.lastPosition);
+                    if (this.y <= config.Bounds.TOP_BOUND && this.transitSequence == 0) {
+                        this.lastPosition = new math.Vec2(this.x, config.Bounds.BOTTOM_BOUND + this.halfH);
+                        this.SetTransit(this.lastPosition, this.sceneOnTop);
                     }
                 }
                 else {
@@ -652,6 +649,16 @@ module objects {
         public FallIntoHole(){
             this.scaleX -= 0.04;
             this.scaleY -= 0.06;
+        }
+
+        public SetTransit(nextPosition: math.Vec2, nextScene: config.Scene): void{
+            this.visible = false;
+            this.transitSequence = setTimeout(() =>{
+                this.visible = true;
+                managers.Game.currentScene = nextScene;
+                this.SetPosition(nextPosition);
+                this.transitSequence = 0;
+            }, 200);
         }
     }
 }

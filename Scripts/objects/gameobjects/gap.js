@@ -41,7 +41,8 @@ var objects;
             var botY = this.y + this.halfH;
             var entityFeetX = entity.x + entity.halfW;
             var entityFeetY = entity.y + entity.halfH;
-            if (entityFeetX > leftX && entityFeetX < rightX && entityFeetY > topY && entityFeetY < botY) {
+            if ((entityFeetX > leftX && entityFeetX < rightX && entityFeetY > topY && entityFeetY < botY)
+                || (entity instanceof objects.Enemy && entity.isStunned && entity.isFlying)) {
                 entity.SetPosition(new math.Vec2(leftX, this.y));
                 //if enemy is entity, and a fall sequence was not defined, then define call sequence
                 //remove all view and keyboard, then after 1 second, transfer to original position
@@ -68,7 +69,7 @@ var objects;
                         // Not Defined yet                                
                     }, 1000);
                 }
-                else if (entity instanceof objects.Enemy && !entity.isFlying && entity.fallSequence == 0) {
+                else if (entity instanceof objects.Enemy && entity.fallSequence == 0) {
                     entity.fallSequence = setTimeout(function () {
                         entity.fallSequence = 0;
                         entity.RemoveFromPlay(entity.CalculateBounty());

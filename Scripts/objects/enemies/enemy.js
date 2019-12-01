@@ -40,8 +40,13 @@ var objects;
                 this.isStunned = true;
                 this.CheckBound();
             }
-            //if it is stunned
-            if (this.isStunned) {
+            if (this.fallSequence !== 0) {
+                this.stunIndicator.visible = false;
+                this.canBeEaten = false;
+                this.canBeAttacked = false;
+                this.FallIntoHole();
+            }
+            else if (this.isStunned) {
                 //determine whether a bit is currently happening 
                 if (managers.Game.player.biteSequence == 0) {
                     //if it is currently in contact with player and whether the biting button is pressed, then disable movement
@@ -72,9 +77,6 @@ var objects;
                 else {
                     managers.Game.keyboardManager.enabled = false;
                 }
-            }
-            else if (this.fallSequence > 0) {
-                this.FallIntoHole();
             }
             //else, the player is not stunned and can move
             else {
