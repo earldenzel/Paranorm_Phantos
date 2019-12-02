@@ -42,6 +42,10 @@ var objects;
             this.x = 320;
         };
         GhostWoman.prototype.Update = function () {
+            if (this.iceShield == null) {
+                this.IceShieldCreation();
+            }
+            this.iceShield.Update();
             if (!this.isStunned && !this.isDead) {
                 if (this.defenseMode) {
                     this.SwitchAnimation("GhostWoman_Attack");
@@ -63,9 +67,7 @@ var objects;
                 }
             }
             _super.prototype.Update.call(this);
-            if (this.defenseMode) {
-                this.ShieldFire();
-            }
+            this.iceShield.isActivated = this.defenseMode;
         };
         GhostWoman.prototype.Reset = function () { };
         GhostWoman.prototype.Move = function () {
@@ -73,7 +75,7 @@ var objects;
             var enemyPosition = new math.Vec2(this.x, this.y);
             var dirToPlayer = math.Vec2.Subtract(enemyPosition, playerPosition);
             var distanceToPlayer = math.Vec2.Distance(enemyPosition, playerPosition);
-            if (distanceToPlayer < 120) {
+            if (distanceToPlayer < 115) {
                 this.canBeAttacked = false;
                 this.defenseMode = true;
             }
@@ -100,26 +102,23 @@ var objects;
                 }
             }
         };
-        GhostWoman.prototype.ShieldFire = function () {
-            var ticker = createjs.Ticker.getTicks();
-            if (this.hp > 0) {
-                if (ticker % this.rateOfFire == 0) {
-                    this.shieldSpawn = new math.Vec2(this.x, this.y);
-                    var currentBullet = managers.Game.bulletManager.CurrentBullet;
-                    var bullet = managers.Game.bulletManager.iceAttacks[currentBullet];
-                    bullet.x = this.shieldSpawn.x;
-                    bullet.y = this.shieldSpawn.y;
-                    bullet.enemyNotPlayer = true;
-                    bullet.isActivated = this.defenseMode;
-                    managers.Game.bulletManager.CurrentBullet++;
-                    if (managers.Game.bulletManager.CurrentBullet > 49) {
-                        managers.Game.bulletManager.CurrentBullet = 0;
-                    }
-                }
+        GhostWoman.prototype.IceShieldCreation = function () {
+            this.iceShield = new objects.IceShield(this);
+            managers.Game.currentStage.AddIceShieldToScene(this.iceShield);
+        };
+        GhostWoman.prototype.DevourEffect = function () {
+            managers.Game.player.powerUp = this.powerUp;
+            _super.prototype.DevourEffect.call(this);
+        };
+        GhostWoman.prototype.RemoveFromPlay = function (bounty) {
+            this.isDead = true;
+            managers.Game.player.GainEcto();
+            if (bounty > 0) {
+                managers.Game.SFX = createjs.Sound.play("anyDefeated");
+                managers.Game.SFX.volume = 0.2;
+                managers.Game.player.GainDollars(bounty);
             }
-            else {
-                this.shieldSpawn = new math.Vec2(-5000, -5000);
-            }
+            this.stunIndicator.visible = false;
         };
         return GhostWoman;
     }(objects.Enemy));

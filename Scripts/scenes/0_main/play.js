@@ -240,6 +240,9 @@ var scenes;
                     if (!f.isFlying && e instanceof objects.Gap) {
                         e.CheckGapDamage(f);
                     }
+                    if (e instanceof objects.IceShield) {
+                        e.CheckShieldDamage(f);
+                    }
                     //if(!f.isFlying && e instanceof objects.SlimePuddle){
                     //    e.CheckSlowMovement(f);
                     //}
@@ -250,6 +253,9 @@ var scenes;
                 //if(e instanceof objects.SlimePuddle){
                 //    e.CheckSlowMovement(this.player);
                 //}
+                if (e instanceof objects.IceShield) {
+                    e.CheckShieldDamage(_this.player);
+                }
             });
             this.cosmetics.forEach(function (e) {
                 if (e instanceof objects.Stairs && managers.Collision.Check(managers.Game.player, e)) {
@@ -268,13 +274,6 @@ var scenes;
                 this.bulletManager.fireBalls.forEach(function (bullet) {
                     _this.enemies.forEach(function (e) {
                         if (managers.Collision.Check(bullet, e) && bullet.staticNotPositional) {
-                            e.GetDamage(bullet);
-                        }
-                    });
-                });
-                this.bulletManager.iceAttacks.forEach(function (bullet) {
-                    _this.enemies.forEach(function (e) {
-                        if (managers.Collision.Check(bullet, e) && !bullet.enemyNotPlayer) {
                             e.GetDamage(bullet);
                         }
                     });
@@ -511,9 +510,6 @@ var scenes;
                 this.bulletManager.fireBalls.forEach(function (bullet) {
                     _this.addChild(bullet);
                 });
-                this.bulletManager.iceAttacks.forEach(function (bullet) {
-                    _this.addChild(bullet);
-                });
             }
         };
         PlayScene.prototype.AllEnemiesAreDead = function () {
@@ -522,6 +518,12 @@ var scenes;
                     return e.isDead;
                 });
             }
+        };
+        PlayScene.prototype.AddIceShieldToScene = function (shield) {
+            var length = this.obstacles.length;
+            this.obstacles[length] = shield;
+            this.addChild(shield);
+            this.setChildIndex(shield, this.getChildIndex(shield.Host()) + 2);
         };
         PlayScene.prototype.AddEnemyToScene = function (enemyToAdd) {
             var length = this.enemies.length;

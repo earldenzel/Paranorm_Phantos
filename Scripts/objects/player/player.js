@@ -74,6 +74,10 @@ var objects;
         };
         Player.prototype.Update = function () {
             managers.Game.player = this;
+            if (this.iceShield != null) {
+                this.iceShield.Update();
+                this.iceShield.isActivated = this.activatePowers;
+            }
             this.x = Math.round(this.x);
             this.y = Math.round(this.y);
             if (this.hp > 0) {
@@ -411,8 +415,18 @@ var objects;
                         }
                         break;
                     // TO BE TESTED ALONG WITH GHOST SLIME, SLIME PUDDLE, AND SLIME BALL
+                    case config.PowerUp.FIRE:
                     case config.PowerUp.SLIME: // KC
                         managers.Game.currentStage.hasProjectileShooters = true;
+                        break;
+                    case config.PowerUp.ICE:
+                        this.SwitchAnimation("Phoebe_Special");
+                        if (ticker % 90 == 0) {
+                            this.ecto -= 1;
+                        }
+                        if (this.iceShield == null) {
+                            this.IceShieldCreation();
+                        }
                         break;
                 }
             }
@@ -620,6 +634,11 @@ var objects;
                 }
                 this.ecto -= 1;
             }
+        };
+        Player.prototype.IceShieldCreation = function () {
+            this.iceShield = new objects.IceShield(this);
+            this.iceShield.playerNotEnemy = true;
+            managers.Game.currentStage.AddIceShieldToScene(this.iceShield);
         };
         return Player;
     }(objects.GameObject));

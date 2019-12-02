@@ -1698,11 +1698,11 @@ module config {
 
             "framerate": 20,
             "frames": [
-                [0, 0, 174, 196, 0, 0, 0], // 0
-                [0, 196, 174, 194, 0, 0, 0], 
+                [0, 0, 174, 196, 0, 64, 61], // Ice Attack Full
+                [0, 196, 174, 194, 0, 64, 61], // Ice Attack Full
                 [174, 0, 144, 196, 0, 36, 57], // Shadow Ghost Attack 4
-                [0, 390, 150, 172, 0, 0, 0],
-                [318, 0, 150, 170, 0, 0, 0],
+                [0, 390, 150, 172, 0, 52, 49], // Ice Attack Mid
+                [318, 0, 150, 170, 0, 52, 49], // Ice Attack Mid
                 [174, 196, 98, 148, 0, 0, 0],
                 [0, 562, 118, 120, 0, 23, 19], // Shadow Ghost Attack 3
                 [468, 0, 68, 148, 0, -15, 0],
@@ -1855,13 +1855,9 @@ module config {
             ],
 
             "animations": {
-                "IceAttack": {
-                    "frames": [84, 90, 3, 4, 3, 4, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 3, 4, 3, 4, 84, 90],
-                    "speed": 0.1
-                },
                 "IceAttackStart": {
                     "frames": [84, 90, 3, 4, 3, 4, 0, 1],
-                    "speed": 0.1
+                    "speed": 0.2
                 },
                 "IceAttackIdle": {
                     "frames": [0, 1],
@@ -1869,7 +1865,7 @@ module config {
                 },
                 "IceAttackFinish": {
                     "frames": [0, 1, 3, 4, 3, 4, 84, 90],
-                    "speed": 0.1
+                    "speed": 0.2
                 },
                 "GhostWoman_IdleBack": { "frames": [36] },
                 "GhostWoman_IdleFront": { "frames": [39] },

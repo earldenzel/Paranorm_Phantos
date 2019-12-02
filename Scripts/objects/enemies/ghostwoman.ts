@@ -8,6 +8,7 @@ module objects {
         private defenseMode: boolean;
         private walk: Array<any>;
         public direction: config.Direction;
+        private iceShield: objects.IceShield;
 
         // Constructor
         constructor(moveSpeed: number, rightDirection: boolean, downDirection: boolean) {
@@ -31,13 +32,20 @@ module objects {
             this.walk = ["GhostWoman_IdleBack", "GhostWoman_IdleFront", "GhostWoman_IdleLeft", "GhostWoman_IdleLeft"];
 
             this.direction = config.Direction.DOWN;
+
+            
         }
         // Methods
         public Start(): void {
             this.y = 400;
             this.x = 320;
+            
         }
         public Update(): void {
+            if(this.iceShield == null){
+                this.IceShieldCreation();
+            }
+            this.iceShield.Update();
             if (!this.isStunned && !this.isDead) {
                 if (this.defenseMode) {
                     this.SwitchAnimation("GhostWoman_Attack");
@@ -58,9 +66,7 @@ module objects {
                 }
             }
             super.Update();
-            if (this.defenseMode) {
-                this.ShieldFire();
-            }
+            this.iceShield.isActivated = this.defenseMode;
         }
         public Reset(): void { }
         public Move(): void {
@@ -70,7 +76,7 @@ module objects {
             let dirToPlayer: math.Vec2 = math.Vec2.Subtract(enemyPosition, playerPosition);
             let distanceToPlayer: number = math.Vec2.Distance(enemyPosition, playerPosition);
 
-            if (distanceToPlayer < 120) {
+            if (distanceToPlayer < 115) {
                 this.canBeAttacked = false;
                 this.defenseMode = true;
             } else {
@@ -98,29 +104,25 @@ module objects {
                 }
             }
         }
-        public ShieldFire(): void {
-            let ticker: number = createjs.Ticker.getTicks();
+        public IceShieldCreation():void{
+            this.iceShield = new objects.IceShield(this);
+            (managers.Game.currentStage as scenes.PlayScene).AddIceShieldToScene(this.iceShield);
+        }
+        public DevourEffect(): void {
+            managers.Game.player.powerUp = this.powerUp;
+            super.DevourEffect();
+        }
 
-            if (this.hp > 0) {
-                if (ticker % this.rateOfFire == 0) {
-                this.shieldSpawn = new math.Vec2(this.x, this.y);
-                    let currentBullet = managers.Game.bulletManager.CurrentBullet;
-                    let bullet = managers.Game.bulletManager.iceAttacks[currentBullet];
-                    bullet.x = this.shieldSpawn.x;
-                    bullet.y = this.shieldSpawn.y;
-                    bullet.enemyNotPlayer = true;
-                    bullet.isActivated = this.defenseMode;
+        public RemoveFromPlay(bounty: number): void {
+            this.isDead = true;
 
-                    managers.Game.bulletManager.CurrentBullet++;
-
-                    if (managers.Game.bulletManager.CurrentBullet > 49) {
-                        managers.Game.bulletManager.CurrentBullet = 0;
-                    }
-                }
+            managers.Game.player.GainEcto();
+            if (bounty > 0) {
+                managers.Game.SFX = createjs.Sound.play("anyDefeated");
+                managers.Game.SFX.volume = 0.2;
+                managers.Game.player.GainDollars(bounty);
             }
-            else {
-                this.shieldSpawn = new math.Vec2(-5000, -5000);
-            }
+            this.stunIndicator.visible = false;
         }
     }
 }

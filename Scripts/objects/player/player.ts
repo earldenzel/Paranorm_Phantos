@@ -36,6 +36,7 @@ module objects {
         public deadPlayer: Array<objects.DeadPlayer> = new Array<objects.DeadPlayer>();
         public deathCount: number = 0;
         public stageFinished: number = 0;
+        private iceShield: objects.IceShield;
 
         public ecto: number;
         public maxHp: number;
@@ -83,6 +84,10 @@ module objects {
 
         public Update(): void {
             managers.Game.player = this;
+            if(this.iceShield != null){
+                this.iceShield.Update();
+                this.iceShield.isActivated = this.activatePowers;
+            }
             this.x = Math.round(this.x);
             this.y = Math.round(this.y);
             if (this.hp > 0) {
@@ -123,7 +128,7 @@ module objects {
             }
 
             this.ActivatePowers();
-            if(this.activatePowers && (this.powerUp == config.PowerUp.SLIME || this.powerUp == config.PowerUp.FIRE)){
+            if (this.activatePowers && (this.powerUp == config.PowerUp.SLIME || this.powerUp == config.PowerUp.FIRE)) {
                 this.SwitchAnimation(this.specialAttack[this.direction as number]);
                 this.ProjectileAttack(this.powerUp);
             }
@@ -431,8 +436,18 @@ module objects {
                         break;
 
                     // TO BE TESTED ALONG WITH GHOST SLIME, SLIME PUDDLE, AND SLIME BALL
+                    case config.PowerUp.FIRE:
                     case config.PowerUp.SLIME: // KC
                         (managers.Game.currentStage as scenes.PlayScene).hasProjectileShooters = true;
+                        break;
+                    case config.PowerUp.ICE:
+                        this.SwitchAnimation("Phoebe_Special");
+                        if (ticker % 90 == 0) {
+                            this.ecto -= 1;
+                        }
+                        if(this.iceShield == null){
+                            this.IceShieldCreation();
+                        }
                         break;
                 }
             }
@@ -631,11 +646,11 @@ module objects {
                 let bulletSpawn = new math.Vec2(this.x + this.halfW, this.y);
                 let currentBullet = managers.Game.bulletManager.CurrentBullet;
                 let bullet;
-                if(bulletType == config.PowerUp.SLIME){
+                if (bulletType == config.PowerUp.SLIME) {
                     bullet = managers.Game.bulletManager.slimeBalls[currentBullet];
 
                 }
-                else if(bulletType == config.PowerUp.FIRE){
+                else if (bulletType == config.PowerUp.FIRE) {
                     bullet = managers.Game.bulletManager.fireBalls[currentBullet];
 
                 }
@@ -651,6 +666,11 @@ module objects {
                 }
                 this.ecto -= 1;
             }
+        }
+        public IceShieldCreation(): void {
+            this.iceShield = new objects.IceShield(this);
+            this.iceShield.playerNotEnemy = true;
+            (managers.Game.currentStage as scenes.PlayScene).AddIceShieldToScene(this.iceShield);
         }
 
 

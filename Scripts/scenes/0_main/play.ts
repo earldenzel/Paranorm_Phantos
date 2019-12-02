@@ -300,6 +300,9 @@ module scenes {
                     if (!f.isFlying && e instanceof objects.Gap) {
                         e.CheckGapDamage(f);
                     }
+                    if(e instanceof objects.IceShield){
+                        e.CheckShieldDamage(f);
+                    }
                     //if(!f.isFlying && e instanceof objects.SlimePuddle){
                     //    e.CheckSlowMovement(f);
                     //}
@@ -310,6 +313,9 @@ module scenes {
                 //if(e instanceof objects.SlimePuddle){
                 //    e.CheckSlowMovement(this.player);
                 //}
+                if(e instanceof objects.IceShield){
+                    e.CheckShieldDamage(this.player);
+                }
                 
             });
 
@@ -331,13 +337,6 @@ module scenes {
                 this.bulletManager.fireBalls.forEach(bullet => {
                     this.enemies.forEach(e => {
                         if(managers.Collision.Check(bullet,e) && bullet.staticNotPositional){
-                            e.GetDamage(bullet);
-                        }
-                    });
-                });
-                this.bulletManager.iceAttacks.forEach(bullet => {
-                    this.enemies.forEach(e => {
-                        if(managers.Collision.Check(bullet,e) && !bullet.enemyNotPlayer){
                             e.GetDamage(bullet);
                         }
                     });
@@ -591,9 +590,6 @@ module scenes {
                 this.bulletManager.fireBalls.forEach(bullet => {
                     this.addChild(bullet);
                 });
-                this.bulletManager.iceAttacks.forEach(bullet => {
-                    this.addChild(bullet);
-                });
             }
         }
 
@@ -604,6 +600,12 @@ module scenes {
                 });
             }
         }
+        public AddIceShieldToScene(shield: objects.IceShield):void{
+            let length = this.obstacles.length;
+            this.obstacles[length] = shield;
+            this.addChild(shield);
+            this.setChildIndex(shield,this.getChildIndex(shield.Host()) + 2);
+        }
         
         public AddEnemyToScene(enemyToAdd: objects.Enemy):void{
             let length = this.enemies.length;
@@ -611,5 +613,7 @@ module scenes {
             this.addChild(enemyToAdd);
             this.setChildIndex(enemyToAdd, this.getChildIndex(this.player) + 1);
         }
+
+        
     }
 }
