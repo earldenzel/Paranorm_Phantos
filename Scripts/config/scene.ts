@@ -45,6 +45,7 @@ module config {
         MANSION_18,
         STAGE_PICKER,
         SHOP,
+        ENEMYTEST_LEVEL,
         OVER = -1
     }
 }
