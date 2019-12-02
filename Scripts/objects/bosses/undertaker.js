@@ -24,6 +24,7 @@ var objects;
             _this.Start();
             //
             _this.hp = 20;
+            _this.maxHp = _this.hp;
             _this.attackPower = 1;
             _this.moveSpeed = moveSpeed;
             _this.knockback = 0.75;
@@ -45,7 +46,7 @@ var objects;
         Undertaker.prototype.Update = function () {
             if (!this.isStunned && !this.isDead) {
                 if (this.attackingMode) {
-                    if (this.hp > 10) {
+                    if (this.hp > (this.maxHp / 2)) {
                         this.SwitchAnimation(this.attack[this.direction]);
                     }
                     else {
@@ -67,7 +68,7 @@ var objects;
                     }
                 }
                 else {
-                    if (this.hp > 10) {
+                    if (this.hp > (this.maxHp / 2)) {
                         this.SwitchAnimation(this.walk[this.direction]);
                     }
                     else {
@@ -118,7 +119,7 @@ var objects;
             var enemyPosition = new math.Vec2(this.x, this.y);
             var dirToPlayer = math.Vec2.Subtract(enemyPosition, playerPosition);
             var distanceToPlayer = math.Vec2.Distance(enemyPosition, playerPosition);
-            if (this.hp > 10) {
+            if (this.hp > (this.maxHp / 2)) {
                 if (distanceToPlayer < 120) {
                     this.attackingMode = true;
                     this.attackPower = 2;
@@ -144,13 +145,13 @@ var objects;
             var newPos = math.Vec2.Add(enemyPosition, math.Vec2.NormalizeMultiplySpeed(dirToPlayer, distanceToPlayer, this.currentSpeed));
             if (!this.attackingMode) {
                 if (newPos.x < this.x) {
-                    if (this.hp > 10) {
+                    if (this.hp > (this.maxHp / 2)) {
                         this.scaleX = -1;
                     }
                     this.direction = config.Direction.LEFT;
                 }
                 if (newPos.x > this.x) {
-                    if (this.hp > 10) {
+                    if (this.hp > (this.maxHp / 2)) {
                         this.scaleX = 1;
                     }
                     this.direction = config.Direction.RIGHT;

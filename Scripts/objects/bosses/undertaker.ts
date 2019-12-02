@@ -4,6 +4,7 @@ module objects {
         // Phase 1
         private currentSpeed: number;
         private attackingMode: boolean;
+        private maxHp: number;
         private walk: Array<any>;
         private attack: Array<any>;
         public direction: config.Direction;
@@ -17,6 +18,7 @@ module objects {
             this.Start();
             //
             this.hp = 20;
+            this.maxHp = this.hp;
             this.attackPower = 1;
             this.moveSpeed = moveSpeed;
             this.knockback = 0.75;
@@ -40,7 +42,7 @@ module objects {
         public Update(): void {
             if (!this.isStunned && !this.isDead) {
                 if (this.attackingMode) {
-                    if (this.hp > 10) {
+                    if (this.hp > (this.maxHp / 2)) {
                         this.SwitchAnimation(this.attack[this.direction as number]);
                     }
                     else{
@@ -61,7 +63,7 @@ module objects {
                         }
                     }
                 } else {
-                    if (this.hp > 10) {
+                    if (this.hp > (this.maxHp / 2)) {
                         this.SwitchAnimation(this.walk[this.direction as number]);
                     }
                     else{
@@ -115,7 +117,7 @@ module objects {
             let dirToPlayer: math.Vec2 = math.Vec2.Subtract(enemyPosition, playerPosition);
             let distanceToPlayer: number = math.Vec2.Distance(enemyPosition, playerPosition);
 
-            if(this.hp > 10){
+            if(this.hp > (this.maxHp / 2)){
                 if (distanceToPlayer < 120) {
                     this.attackingMode = true;
                     this.attackPower = 2;
@@ -143,13 +145,13 @@ module objects {
 
             if (!this.attackingMode) {
                 if (newPos.x < this.x) {
-                    if(this.hp > 10){
+                    if(this.hp > (this.maxHp / 2)){
                         this.scaleX = -1;
                     }
                     this.direction = config.Direction.LEFT;
                 }
                 if (newPos.x > this.x) {
-                    if(this.hp > 10){
+                    if(this.hp > (this.maxHp / 2)){
                         this.scaleX = 1;
                     }
                     this.direction = config.Direction.RIGHT;
