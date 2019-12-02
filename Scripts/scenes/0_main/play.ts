@@ -300,10 +300,17 @@ module scenes {
                     if (!f.isFlying && e instanceof objects.Gap) {
                         e.CheckGapDamage(f);
                     }
+                    //if(!f.isFlying && e instanceof objects.SlimePuddle){
+                    //    e.CheckSlowMovement(f);
+                    //}
                 });
                 if (e instanceof objects.Gap) {
                     e.CheckGapDamage(this.player);
                 }
+                //if(e instanceof objects.SlimePuddle){
+                //    e.CheckSlowMovement(this.player);
+                //}
+                
             });
 
             this.cosmetics.forEach(e => {
@@ -314,6 +321,27 @@ module scenes {
 
             if (this.hasProjectileShooters) {
                 this.bulletManager.Update();
+                this.bulletManager.slimeBalls.forEach(bullet => {
+                    this.enemies.forEach(e => {
+                        if(managers.Collision.Check(bullet,e) && bullet.staticNotPositional){
+                            e.GetDamage(bullet);
+                        }
+                    });
+                });
+                this.bulletManager.fireBalls.forEach(bullet => {
+                    this.enemies.forEach(e => {
+                        if(managers.Collision.Check(bullet,e) && bullet.staticNotPositional){
+                            e.GetDamage(bullet);
+                        }
+                    });
+                });
+                this.bulletManager.iceAttacks.forEach(bullet => {
+                    this.enemies.forEach(e => {
+                        if(managers.Collision.Check(bullet,e) && !bullet.enemyNotPlayer){
+                            e.GetDamage(bullet);
+                        }
+                    });
+                });
             }
             if (this.hasShop) {
                 this.shopManager.Update();
@@ -558,6 +586,12 @@ module scenes {
                     this.addChild(bullet);
                 });
                 this.bulletManager.slimeBalls.forEach(bullet => {
+                    this.addChild(bullet);
+                });
+                this.bulletManager.fireBalls.forEach(bullet => {
+                    this.addChild(bullet);
+                });
+                this.bulletManager.iceAttacks.forEach(bullet => {
                     this.addChild(bullet);
                 });
             }

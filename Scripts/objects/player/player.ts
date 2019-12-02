@@ -9,7 +9,7 @@ module objects {
         public fallSequence: number = 0;
         public textSequence: number = 0;
         public playerMoveSpeed: number = 4;
-        public playerHalfSpeed: number = this.playerMoveSpeed / 2;
+        public playerHalfSpeed: number = this.playerMoveSpeed / 4;
         public playerAttackDelay: number = 1000;
         public weapon: objects.Weapon;
         private bitingTimer: number = 0;
@@ -123,6 +123,10 @@ module objects {
             }
 
             this.ActivatePowers();
+            if(this.activatePowers && (this.powerUp == config.PowerUp.SLIME || this.powerUp == config.PowerUp.FIRE)){
+                this.SwitchAnimation(this.specialAttack[this.direction as number]);
+                this.ProjectileAttack(this.powerUp);
+            }
         }
 
         public Reset(): void {
@@ -426,27 +430,9 @@ module objects {
                         }
                         break;
 
-                        // TO BE TESTED ALONG WITH GHOST SLIME, SLIME PUDDLE, AND SLIME BALL
+                    // TO BE TESTED ALONG WITH GHOST SLIME, SLIME PUDDLE, AND SLIME BALL
                     case config.PowerUp.SLIME: // KC
                         (managers.Game.currentStage as scenes.PlayScene).hasProjectileShooters = true;
-                        let rateOfFire = 80;
-                        if (ticker % rateOfFire == 0) {
-                            let bulletSpawn = new math.Vec2(this.x + this.halfW, this.y);
-                            let currentBullet = managers.Game.bulletManager.CurrentBullet;
-                            let bullet = managers.Game.bulletManager.slimeBalls[currentBullet];
-                            bullet.staticNotPositional = true;
-                            bullet.direction = this.direction;
-
-                            bullet.x = bulletSpawn.x;
-                            bullet.y = bulletSpawn.y;
-
-                            managers.Game.bulletManager.CurrentBullet++;
-                            if (managers.Game.bulletManager.CurrentBullet > 49) {
-                                managers.Game.bulletManager.CurrentBullet = 0;
-                            }
-                        }
-                        this.SwitchAnimation(this.specialAttack[this.direction as number]);
-                        this.ecto -= 1;
                         break;
                 }
             }
@@ -458,12 +444,14 @@ module objects {
             this.EchoMessage("+" + speedGain + " MOVE SPD");
         }
         public AlterSpeed(reduceSpeed: boolean) {
-            if (reduceSpeed) {
+            if (!reduceSpeed && this.playerMoveSpeed == this.playerHalfSpeed) {
+                this.playerMoveSpeed = this.playerHalfSpeed * 4;
+            }
+            else if (reduceSpeed) {
                 this.playerMoveSpeed = this.playerHalfSpeed;
             }
-            else {
-                this.playerMoveSpeed = this.playerHalfSpeed * 2;
-            }
+
+            //console.log(this.playerMoveSpeed);
         }
 
         public GainAttack(attackGain: number) {
@@ -478,7 +466,7 @@ module objects {
             }
         }
 
-        public GainSwingSpeed(delayLoss: number){
+        public GainSwingSpeed(delayLoss: number) {
             this.playerAttackDelay -= delayLoss;
             this.EchoMessage("I CAN SWING FASTER NOW");
         }
@@ -486,7 +474,7 @@ module objects {
         public GainKey() {
             this.key += 1;
             this.EchoMessage("GAINED A SMALL KEY");
-        }        
+        }
 
         public UseKey() {
             this.key -= 1;
@@ -587,7 +575,7 @@ module objects {
             }
         }
 
-        public GainExperience(experience: number): void{
+        public GainExperience(experience: number): void {
             this.experience += experience;
             console.log("i am level " + managers.Game.expConfigurer.DetermineLevel(this.experience));
         }
@@ -636,6 +624,35 @@ module objects {
 
         }
 
-        
+        public ProjectileAttack(bulletType: config.PowerUp): void {
+            let ticker = createjs.Ticker.getTicks();
+            let rateOfFire = 10;
+            if (ticker % rateOfFire == 0) {
+                let bulletSpawn = new math.Vec2(this.x + this.halfW, this.y);
+                let currentBullet = managers.Game.bulletManager.CurrentBullet;
+                let bullet;
+                if(bulletType == config.PowerUp.SLIME){
+                    bullet = managers.Game.bulletManager.slimeBalls[currentBullet];
+
+                }
+                else if(bulletType == config.PowerUp.FIRE){
+                    bullet = managers.Game.bulletManager.fireBalls[currentBullet];
+
+                }
+                bullet.staticNotPositional = true;
+                bullet.direction = this.direction;
+
+                bullet.x = bulletSpawn.x;
+                bullet.y = bulletSpawn.y;
+
+                managers.Game.bulletManager.CurrentBullet++;
+                if (managers.Game.bulletManager.CurrentBullet > 49) {
+                    managers.Game.bulletManager.CurrentBullet = 0;
+                }
+                this.ecto -= 1;
+            }
+        }
+
+
     }
 }

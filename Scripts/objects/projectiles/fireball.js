@@ -13,19 +13,20 @@ var __extends = (this && this.__extends) || (function () {
 })();
 var objects;
 (function (objects) {
-    var SlimeBall = /** @class */ (function (_super) {
-        __extends(SlimeBall, _super);
+    var FireBall = /** @class */ (function (_super) {
+        __extends(FireBall, _super);
         // Constructor
-        function SlimeBall() {
-            var _this = _super.call(this, managers.Game.enemies_TextureAtlas, "SlimeBall", 1) || this;
+        function FireBall() {
+            var _this = _super.call(this, managers.Game.enemies_TextureAtlas, "Fireball", 2) || this;
             _this.staticNotPositional = false;
             _this.Start();
             return _this;
         }
-        SlimeBall.prototype.Start = function () {
+        // Methods
+        FireBall.prototype.Start = function () {
             this.Reset();
         };
-        SlimeBall.prototype.Update = function () {
+        FireBall.prototype.Update = function () {
             if (this.farPointPosition || this.staticNotPositional) {
                 this.Move();
             }
@@ -43,40 +44,40 @@ var objects;
                 }
             }
         };
-        SlimeBall.prototype.Reset = function () {
+        FireBall.prototype.Reset = function () {
             this.x = -5000;
             this.y = -5000;
         };
-        SlimeBall.prototype.Move = function () {
+        FireBall.prototype.Move = function () {
             if (!this.staticNotPositional) {
-                var slimeBallPosition = new math.Vec2(this.x, this.y);
-                var dirToFarPoint = math.Vec2.Subtract(slimeBallPosition, this.farPointPosition);
-                var distanceToFarPoint = math.Vec2.Distance(slimeBallPosition, this.farPointPosition);
-                var newPos = math.Vec2.Add(slimeBallPosition, math.Vec2.NormalizeMultiplySpeed(dirToFarPoint, distanceToFarPoint, 2));
+                var fireBallPosition = new math.Vec2(this.x, this.y);
+                var dirToFarPoint = math.Vec2.Subtract(fireBallPosition, this.farPointPosition);
+                var distanceToFarPoint = math.Vec2.Distance(fireBallPosition, this.farPointPosition);
+                var newPos = math.Vec2.Add(fireBallPosition, math.Vec2.NormalizeMultiplySpeed(dirToFarPoint, distanceToFarPoint, 6));
                 this.x = newPos.x;
                 this.y = newPos.y;
             }
             else {
                 switch (this.direction) {
                     case config.Direction.UP:
-                        this.y -= 2;
+                        this.y -= 6;
                         break;
                     case config.Direction.DOWN:
-                        this.y += 2;
+                        this.y += 6;
                         break;
                     case config.Direction.RIGHT:
-                        this.x += 2;
+                        this.x += 6;
                         break;
                     case config.Direction.LEFT:
-                        this.x -= 2;
+                        this.x -= 6;
                         break;
                 }
             }
         };
-        SlimeBall.prototype.Main = function () { };
-        SlimeBall.prototype.CheckBounds = function () { };
-        return SlimeBall;
+        FireBall.prototype.Main = function () { };
+        FireBall.prototype.CheckBounds = function () { };
+        return FireBall;
     }(objects.Bullet));
-    objects.SlimeBall = SlimeBall;
+    objects.FireBall = FireBall;
 })(objects || (objects = {}));
-//# sourceMappingURL=slimeball.js.map
+//# sourceMappingURL=fireball.js.map

@@ -18,6 +18,8 @@ var objects;
         // Constructor
         function SlimePuddle(imageNumber, position) {
             var _this = _super.call(this, managers.Game.enemies_TextureAtlas, "SlimePuddle1") || this;
+            //private playerSlowdown: boolean = false;
+            //private enemySlowdown: boolean = false;
             _this.types = [
                 "SlimePuddle1",
                 "SlimePuddle2",
@@ -37,34 +39,6 @@ var objects;
         SlimePuddle.prototype.Reset = function () { };
         SlimePuddle.prototype.Move = function () { };
         SlimePuddle.prototype.CheckBound = function () {
-        };
-        SlimePuddle.prototype.CheckEntity = function (entity) {
-            // This checks the entity position and the puddle position
-            // Similar to the Gap gameObject but it reduces the speed of the entities by half
-            // Doesn't affect any of the flying entities
-            var offset = -config.Bounds.OBSTACLE_OFFSET;
-            var gapTopLeftX = this.x - this.halfW - offset;
-            var gapTopLeftY = this.y - this.halfH - offset;
-            var gapBotRightX = gapTopLeftX + this.width + offset;
-            var gapBotRightY = this.y + this.width + offset;
-            var entityFeetX = entity.x;
-            var entityFeetY = entity.y + entity.halfH;
-            if (entityFeetX > gapTopLeftX && entityFeetX < gapBotRightX && entityFeetY > gapTopLeftY && entityFeetY < gapBotRightY) {
-                if (entity instanceof objects.Player) {
-                    entity.AlterSpeed(true);
-                }
-                else if (entity instanceof objects.Enemy && !entity.isFlying) {
-                    entity.AlterSpeed(true);
-                }
-            }
-            else {
-                if (entity instanceof objects.Player) {
-                    entity.AlterSpeed(false);
-                }
-                else if (entity instanceof objects.Enemy && !entity.isFlying) {
-                    entity.AlterSpeed(false);
-                }
-            }
         };
         return SlimePuddle;
     }(objects.GameObject));

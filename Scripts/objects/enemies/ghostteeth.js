@@ -97,7 +97,7 @@ var objects;
             }
         };
         GhostTeeth.prototype.DevourEffect = function () {
-            managers.Game.player.powerUp = config.PowerUp.BITE;
+            managers.Game.player.powerUp = this.powerUp;
             _super.prototype.DevourEffect.call(this);
         };
         GhostTeeth.prototype.RemoveFromPlay = function (bounty) {

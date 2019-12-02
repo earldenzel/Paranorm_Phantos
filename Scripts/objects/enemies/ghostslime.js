@@ -17,7 +17,6 @@ var objects;
     (function (GhostSlimeState) {
         GhostSlimeState[GhostSlimeState["IDLE"] = 0] = "IDLE";
         GhostSlimeState[GhostSlimeState["TELEPORT"] = 1] = "TELEPORT";
-        GhostSlimeState[GhostSlimeState["ATTACK"] = 2] = "ATTACK";
     })(GhostSlimeState = objects.GhostSlimeState || (objects.GhostSlimeState = {}));
     var GhostSlime = /** @class */ (function (_super) {
         __extends(GhostSlime, _super);
@@ -32,14 +31,16 @@ var objects;
             _this.bounty = 20;
             _this.isFlying = true;
             _this.state = GhostSlimeState.IDLE;
-            _this.rateOfFire = 100;
+            _this.rateOfFire = 35;
             _this.puddleCount = managers.Game.slimePuddles.length;
             _this.powerUp = config.PowerUp.SLIME;
             return _this;
         }
         // Methods
         GhostSlime.prototype.Start = function () {
-            this.SetPosition(managers.Game.slimePuddles[0].position);
+            var slimeX = managers.Game.slimePuddles[0].position.x;
+            var slimeY = managers.Game.slimePuddles[0].position.y;
+            this.SetPosition(new math.Vec2(slimeX, slimeY));
         };
         GhostSlime.prototype.Update = function () {
             if (!this.isStunned && !this.isDead) {
@@ -62,12 +63,10 @@ var objects;
                         case GhostSlimeState.TELEPORT:
                             this.SwitchAnimation("GhostSlime_Hide");
                             break;
-                        case GhostSlimeState.ATTACK:
-                            this.BulletFire();
-                            break;
                         default:
                             break;
                     }
+                    console.log(this.state);
                 }
                 else if (ticker % 60 == 1 && !this.canBeAttacked) {
                     this.visible = true;
@@ -87,6 +86,9 @@ var objects;
                 }
             }
             _super.prototype.Update.call(this);
+            if (this.state != GhostSlimeState.TELEPORT) {
+                this.BulletFire();
+            }
         };
         GhostSlime.prototype.Reset = function () {
             _super.prototype.CheckBound.call(this);
@@ -104,7 +106,9 @@ var objects;
         };
         GhostSlime.prototype.SlimeTeleportation = function () {
             var teleportRand = Math.floor(Math.random() * Math.floor(this.puddleCount));
-            this.SetPosition(managers.Game.slimePuddles[teleportRand].position);
+            var slimeX = managers.Game.slimePuddles[teleportRand].position.x;
+            var slimeY = managers.Game.slimePuddles[teleportRand].position.y;
+            this.SetPosition(new math.Vec2(slimeX, slimeY));
         };
         GhostSlime.prototype.BulletFire = function () {
             var ticker = createjs.Ticker.getTicks();
@@ -134,7 +138,7 @@ var objects;
             }
         };
         GhostSlime.prototype.DevourEffect = function () {
-            managers.Game.player.powerUp = config.PowerUp.SLIME;
+            managers.Game.player.powerUp = this.powerUp;
             _super.prototype.DevourEffect.call(this);
         };
         GhostSlime.prototype.RemoveFromPlay = function (bounty) {
