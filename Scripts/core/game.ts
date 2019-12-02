@@ -430,6 +430,12 @@
                 currentScene = new scenes.Mansion_18();
                 stage.addChild(currentScene);
                 break;
+            // Debug Level
+            case config.Scene.ENEMYTEST_LEVEL:
+                stage.removeAllChildren();
+                currentScene = new scenes.EnemyTest_Level();
+                stage.addChild(currentScene);
+                break;
             case config.Scene.OVER:
                 stage.removeAllChildren();
                 currentScene = new scenes.GameOverScene();

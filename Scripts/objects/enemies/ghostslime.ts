@@ -1,8 +1,7 @@
 module objects{
     export enum GhostSlimeState{
         IDLE,
-        TELEPORT,
-        ATTACK
+        TELEPORT
     }
     export class GhostSlime extends objects.Enemy{
         // Variables
@@ -23,13 +22,15 @@ module objects{
             this.bounty = 20;
             this.isFlying = true;
             this.state = GhostSlimeState.IDLE;
-            this.rateOfFire = 100;
+            this.rateOfFire = 35;
             this.puddleCount = managers.Game.slimePuddles.length;
             this.powerUp = config.PowerUp.SLIME;
         }
         // Methods
         public Start():void{
-            this.SetPosition(managers.Game.slimePuddles[0].position);
+            let slimeX = managers.Game.slimePuddles[0].position.x;
+            let slimeY = managers.Game.slimePuddles[0].position.y;
+            this.SetPosition(new math.Vec2(slimeX,slimeY));
         }
         public Update():void{
             if(!this.isStunned && !this.isDead){
@@ -54,13 +55,11 @@ module objects{
                         case GhostSlimeState.TELEPORT:
                             this.SwitchAnimation("GhostSlime_Hide");
                             break;
-                        case GhostSlimeState.ATTACK:
-                            this.BulletFire();
-                            break;
                         
                         default:
                             break;
                     }
+                    console.log(this.state);
                 }
                 else if(ticker % 60 == 1 && !this.canBeAttacked){
                     this.visible = true;
@@ -80,6 +79,9 @@ module objects{
                 }
             }
             super.Update();
+            if(this.state != GhostSlimeState.TELEPORT){
+                this.BulletFire();
+            }
         }
         public Reset(): void {
             super.CheckBound();
@@ -98,8 +100,9 @@ module objects{
         }
         public SlimeTeleportation():void{
             let teleportRand = Math.floor(Math.random() * Math.floor(this.puddleCount));
-            this.SetPosition(managers.Game.slimePuddles[teleportRand].position);
-        }
+            let slimeX = managers.Game.slimePuddles[teleportRand].position.x;
+            let slimeY = managers.Game.slimePuddles[teleportRand].position.y;
+            this.SetPosition(new math.Vec2(slimeX,slimeY));        }
         
         public BulletFire(): void {
             let ticker: number = createjs.Ticker.getTicks();
@@ -137,7 +140,7 @@ module objects{
         }
 
         public DevourEffect(): void {
-            managers.Game.player.powerUp = config.PowerUp.SLIME;
+            managers.Game.player.powerUp = this.powerUp;
             super.DevourEffect();
         }
 

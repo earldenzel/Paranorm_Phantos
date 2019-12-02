@@ -110,7 +110,7 @@ var objects;
             }
         };
         ShadowGhost.prototype.DevourEffect = function () {
-            managers.Game.player.powerUp = config.PowerUp.SHADOW;
+            managers.Game.player.powerUp = this.powerUp;
             _super.prototype.DevourEffect.call(this);
         };
         ShadowGhost.prototype.RemoveFromPlay = function (bounty) {

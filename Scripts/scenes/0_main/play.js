@@ -239,10 +239,16 @@ var scenes;
                         }
                         e.CheckGapDamage(f);
                     }
+                    //if(!f.isFlying && e instanceof objects.SlimePuddle){
+                    //    e.CheckSlowMovement(f);
+                    //}
                 });
                 if (e instanceof objects.Gap) {
                     e.CheckGapDamage(_this.player);
                 }
+                //if(e instanceof objects.SlimePuddle){
+                //    e.CheckSlowMovement(this.player);
+                //}
             });
             this.cosmetics.forEach(function (e) {
                 if (e instanceof objects.Stairs && managers.Collision.Check(managers.Game.player, e)) {
@@ -251,6 +257,27 @@ var scenes;
             });
             if (this.hasProjectileShooters) {
                 this.bulletManager.Update();
+                this.bulletManager.slimeBalls.forEach(function (bullet) {
+                    _this.enemies.forEach(function (e) {
+                        if (managers.Collision.Check(bullet, e) && bullet.staticNotPositional) {
+                            e.GetDamage(bullet);
+                        }
+                    });
+                });
+                this.bulletManager.fireBalls.forEach(function (bullet) {
+                    _this.enemies.forEach(function (e) {
+                        if (managers.Collision.Check(bullet, e) && bullet.staticNotPositional) {
+                            e.GetDamage(bullet);
+                        }
+                    });
+                });
+                this.bulletManager.iceAttacks.forEach(function (bullet) {
+                    _this.enemies.forEach(function (e) {
+                        if (managers.Collision.Check(bullet, e) && !bullet.enemyNotPlayer) {
+                            e.GetDamage(bullet);
+                        }
+                    });
+                });
             }
             if (this.hasShop) {
                 this.shopManager.Update();
@@ -480,6 +507,12 @@ var scenes;
                     _this.addChild(bullet);
                 });
                 this.bulletManager.slimeBalls.forEach(function (bullet) {
+                    _this.addChild(bullet);
+                });
+                this.bulletManager.fireBalls.forEach(function (bullet) {
+                    _this.addChild(bullet);
+                });
+                this.bulletManager.iceAttacks.forEach(function (bullet) {
                     _this.addChild(bullet);
                 });
             }

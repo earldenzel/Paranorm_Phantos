@@ -27,7 +27,7 @@ var objects;
             _this.textSequence = 0;
             _this.transitSequence = 0;
             _this.playerMoveSpeed = 4;
-            _this.playerHalfSpeed = _this.playerMoveSpeed / 2;
+            _this.playerHalfSpeed = _this.playerMoveSpeed / 4;
             _this.playerAttackDelay = 1000;
             _this.bitingTimer = 0;
             _this.bitingReset = 0;
@@ -141,6 +141,10 @@ var objects;
                 this.bitingTimer++;
             }
             this.ActivatePowers();
+            if (this.activatePowers && (this.powerUp == config.PowerUp.SLIME || this.powerUp == config.PowerUp.FIRE)) {
+                this.SwitchAnimation(this.specialAttack[this.direction]);
+                this.ProjectileAttack(this.powerUp);
+            }
         };
         Player.prototype.Reset = function () {
             this.visible = true;
@@ -436,22 +440,6 @@ var objects;
                     // TO BE TESTED ALONG WITH GHOST SLIME, SLIME PUDDLE, AND SLIME BALL
                     case config.PowerUp.SLIME: // KC
                         managers.Game.currentStage.hasProjectileShooters = true;
-                        var rateOfFire = 80;
-                        if (ticker % rateOfFire == 0) {
-                            var bulletSpawn = new math.Vec2(this.x + this.halfW, this.y);
-                            var currentBullet = managers.Game.bulletManager.CurrentBullet;
-                            var bullet = managers.Game.bulletManager.slimeBalls[currentBullet];
-                            bullet.staticNotPositional = true;
-                            bullet.direction = this.direction;
-                            bullet.x = bulletSpawn.x;
-                            bullet.y = bulletSpawn.y;
-                            managers.Game.bulletManager.CurrentBullet++;
-                            if (managers.Game.bulletManager.CurrentBullet > 49) {
-                                managers.Game.bulletManager.CurrentBullet = 0;
-                            }
-                        }
-                        this.SwitchAnimation(this.specialAttack[this.direction]);
-                        this.ecto -= 1;
                         break;
                 }
             }
@@ -462,12 +450,13 @@ var objects;
             this.EchoMessage("+" + speedGain + " MOVE SPD");
         };
         Player.prototype.AlterSpeed = function (reduceSpeed) {
-            if (reduceSpeed) {
+            if (!reduceSpeed && this.playerMoveSpeed == this.playerHalfSpeed) {
+                this.playerMoveSpeed = this.playerHalfSpeed * 4;
+            }
+            else if (reduceSpeed) {
                 this.playerMoveSpeed = this.playerHalfSpeed;
             }
-            else {
-                this.playerMoveSpeed = this.playerHalfSpeed * 2;
-            }
+            //console.log(this.playerMoveSpeed);
         };
         Player.prototype.GainAttack = function (attackGain) {
             this.attackPower += attackGain;
@@ -663,6 +652,30 @@ var objects;
                 _this.SetPosition(nextPosition);
                 _this.transitSequence = 0;
             }, 200);
+        };
+        Player.prototype.ProjectileAttack = function (bulletType) {
+            var ticker = createjs.Ticker.getTicks();
+            var rateOfFire = 10;
+            if (ticker % rateOfFire == 0) {
+                var bulletSpawn = new math.Vec2(this.x + this.halfW, this.y);
+                var currentBullet = managers.Game.bulletManager.CurrentBullet;
+                var bullet = void 0;
+                if (bulletType == config.PowerUp.SLIME) {
+                    bullet = managers.Game.bulletManager.slimeBalls[currentBullet];
+                }
+                else if (bulletType == config.PowerUp.FIRE) {
+                    bullet = managers.Game.bulletManager.fireBalls[currentBullet];
+                }
+                bullet.staticNotPositional = true;
+                bullet.direction = this.direction;
+                bullet.x = bulletSpawn.x;
+                bullet.y = bulletSpawn.y;
+                managers.Game.bulletManager.CurrentBullet++;
+                if (managers.Game.bulletManager.CurrentBullet > 49) {
+                    managers.Game.bulletManager.CurrentBullet = 0;
+                }
+                this.ecto -= 1;
+            }
         };
         return Player;
     }(objects.GameObject));

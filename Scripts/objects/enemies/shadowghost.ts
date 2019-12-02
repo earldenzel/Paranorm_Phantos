@@ -108,7 +108,7 @@ module objects {
             }
         }
         public DevourEffect(): void {
-            managers.Game.player.powerUp = config.PowerUp.SHADOW;
+            managers.Game.player.powerUp = this.powerUp;
             super.DevourEffect();
         }
         public RemoveFromPlay(bounty: number): void {
