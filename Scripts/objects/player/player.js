@@ -18,7 +18,7 @@ var objects;
         __extends(Player, _super);
         //Constructor
         function Player() {
-            var _this = _super.call(this, managers.Game.phoebe_TextureAtlas, "Phoebe_Walk_Back1") || this;
+            var _this = _super.call(this, managers.Game.phoebe_TextureAtlas, "Phoebe_Walk_Front1") || this;
             //Variables
             //public playerController: Controller<boolean>;
             _this.attackSequence = 0;
@@ -26,6 +26,7 @@ var objects;
             _this.biteSequence = 0;
             _this.textSequence = 0;
             _this.transitSequence = 0;
+            _this.victorySequence = 0;
             _this.playerMoveSpeed = 4;
             _this.playerHalfSpeed = _this.playerMoveSpeed / 2;
             _this.playerAttackDelay = 1000;
@@ -53,7 +54,7 @@ var objects;
             _this.bitedash = ["Phoebe_Bite_Back", "Phoebe_Bite_Front1", "Phoebe_Bite_Left1", "Phoebe_Bite_Right1"];
             _this.bite = ["Phoebe_Bite_Front2", "Phoebe_Bite_Front2", "Phoebe_Bite_Left2", "Phoebe_Bite_Right2"];
             _this.specialAttack = ["Phoebe_SpecialAttack_Back", "Phoebe_SpecialAttack_Front", "Phoebe_SpecialAttack_Left", "Phoebe_SpecialAttack_Right"];
-            _this.direction = config.Direction.UP;
+            _this.direction = config.Direction.DOWN;
             _this.money = 0;
             _this.playerStatus = new objects.Label("1234567890", "16px", "'Press Start 2P'", "#FFFFFF", _this.x, _this.y, true);
             _this.key = 0;
@@ -72,8 +73,8 @@ var objects;
         }
         // Methods
         Player.prototype.Start = function () {
-            this.x = 320;
-            this.y = 700;
+            this.x = 285;
+            this.y = 600;
             this.lastPosition = this.GetPosition();
             //this.playerController = { "W": false, "A": false, "S": false, "D": false, "Z": false };
         };
@@ -163,8 +164,12 @@ var objects;
                     && !managers.Game.keyboardManager.moveRight
                     && !managers.Game.keyboardManager.attacking
                     && !managers.Game.keyboardManager.biting
-                    && this.biteSequence === 0) {
+                    && this.biteSequence === 0
+                    && this.victorySequence == 0) {
                     this.SwitchAnimation(this.stand[this.direction]);
+                }
+                if (this.victorySequence !== 0) {
+                    this.SwitchAnimation("Phoebe_Victory");
                 }
                 // Running Implementation
                 if (managers.Game.keyboardManager.running) {
@@ -560,13 +565,15 @@ var objects;
                 this.EchoMessage("AHHHH...", 3000);
             }
         };
-        Player.prototype.VictoryMessage = function (nextScene) {
+        Player.prototype.VictoryDance = function () {
+            var _this = this;
+            this.EchoMessage("I DID IT!", 1000);
             managers.Game.keyboardManager.ControlReset();
-            this.EchoMessage("I DID IT!", 3000);
-            setTimeout(function () {
+            this.victorySequence = setTimeout(function () {
+                _this.victorySequence = 0;
                 managers.Game.keyboardManager.enabled = true;
-                managers.Game.currentScene = nextScene;
-            }, 3000);
+                _this.direction = config.Direction.DOWN;
+            }, 2000);
         };
         Player.prototype.EchoMessage = function (message, timeout) {
             var _this = this;

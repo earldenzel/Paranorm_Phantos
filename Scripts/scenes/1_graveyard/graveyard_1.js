@@ -27,25 +27,27 @@ var scenes;
         }
         // Methods
         Graveyard_1.prototype.Start = function () {
-            this.enemies[0] = new objects.DetachedGhost(0, true, true);
-            this.enemies[0].attackPower = 0; // you will never die from starter enemy
-            var x = (config.Bounds.LEFT_BOUND + config.Bounds.RIGHT_BOUND) / 2;
-            var y = (config.Bounds.TOP_BOUND + config.Bounds.BOTTOM_BOUND) / 2 + 150;
-            this.cosmetics[0] = new objects.Indicator("upIndicator");
-            this.cosmetics[1] = new objects.Indicator("downIndicator");
-            this.cosmetics[2] = new objects.Indicator("leftIndicator");
-            this.cosmetics[3] = new objects.Indicator("rightIndicator");
-            this.cosmetics[4] = new objects.Indicator("attackIndicator");
-            this.cosmetics[0].SetPosition(new math.Vec2(x, y - this.cosmetics[0].height));
-            this.cosmetics[1].SetPosition(new math.Vec2(x, y + this.cosmetics[1].height));
-            this.cosmetics[2].SetPosition(new math.Vec2(x - this.cosmetics[2].width, y));
-            this.cosmetics[3].SetPosition(new math.Vec2(x + this.cosmetics[3].width, y));
-            this.cosmetics[4].SetPosition(new math.Vec2(this.enemies[0].x, this.enemies[0].y - 100));
+            if (managers.Game.player.stageFinished == 0) {
+                this.enemies[0] = new objects.DetachedGhost(0, true, true);
+                this.enemies[0].attackPower = 0; // you will never die from starter enemy
+                var x = (config.Bounds.LEFT_BOUND + config.Bounds.RIGHT_BOUND) / 2;
+                var y = (config.Bounds.TOP_BOUND + config.Bounds.BOTTOM_BOUND) / 2 + 150;
+                this.cosmetics[0] = new objects.Indicator("upIndicator");
+                this.cosmetics[1] = new objects.Indicator("downIndicator");
+                this.cosmetics[2] = new objects.Indicator("leftIndicator");
+                this.cosmetics[3] = new objects.Indicator("rightIndicator");
+                this.cosmetics[4] = new objects.Indicator("attackIndicator");
+                this.cosmetics[0].SetPosition(new math.Vec2(x, y - this.cosmetics[0].height));
+                this.cosmetics[1].SetPosition(new math.Vec2(x, y + this.cosmetics[1].height));
+                this.cosmetics[2].SetPosition(new math.Vec2(x - this.cosmetics[2].width, y));
+                this.cosmetics[3].SetPosition(new math.Vec2(x + this.cosmetics[3].width, y));
+                this.cosmetics[4].SetPosition(new math.Vec2(this.enemies[0].x, this.enemies[0].y - 100));
+            }
             this.cosmetics[5] = new objects.Stairs(config.Scene.HOTEL_1, false);
             this.cosmetics[6] = new objects.Stairs(config.Scene.MANSION_1, true);
-            this.cosmetics[5].SetPosition(new math.Vec2(500, 200));
-            this.cosmetics[6].SetPosition(new math.Vec2(500, 300));
-            this.cosmetics[5].visible = false;
+            this.cosmetics[5].SetPosition(new math.Vec2(500, 550));
+            this.cosmetics[6].SetPosition(new math.Vec2(500, 650));
+            this.cosmetics[5].visible = (managers.Game.player.stageFinished > 0);
             this.cosmetics[6].visible = false;
             managers.Game.player.sceneOnBot = config.Scene.GRAVEYARD_5;
             managers.Game.player.sceneOnLeft = config.Scene.GRAVEYARD_3;
@@ -64,8 +66,10 @@ var scenes;
                 managers.Game.player.playerAttackDelay = 0;
                 managers.Game.player.money = 99999;
             }
-            if (this.enemies[0].isStunned) {
-                this.cosmetics[4].visible = false;
+            if (managers.Game.player.stageFinished == 0) {
+                if (this.enemies[0].isStunned) {
+                    this.cosmetics[4].visible = false;
+                }
             }
             if (this.AllEnemiesAreDead()) {
                 setTimeout(function () {

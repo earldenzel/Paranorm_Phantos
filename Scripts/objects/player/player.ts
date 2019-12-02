@@ -8,6 +8,7 @@ module objects {
         public biteSequence: number = 0;
         public textSequence: number = 0;
         public transitSequence: number = 0;
+        public victorySequence: number = 0;
         public contactDamageTimer: number;
         public projectileDamageTimer: number;
         public playerMoveSpeed: number = 4;
@@ -49,7 +50,7 @@ module objects {
 
         //Constructor
         constructor() {
-            super(managers.Game.phoebe_TextureAtlas, "Phoebe_Walk_Back1");
+            super(managers.Game.phoebe_TextureAtlas, "Phoebe_Walk_Front1");
             this.weapon = new objects.Weapon();
             this.swing = new objects.Swing();
             this.Start();
@@ -65,7 +66,7 @@ module objects {
             this.bitedash = ["Phoebe_Bite_Back", "Phoebe_Bite_Front1", "Phoebe_Bite_Left1", "Phoebe_Bite_Right1"];
             this.bite = ["Phoebe_Bite_Front2", "Phoebe_Bite_Front2", "Phoebe_Bite_Left2", "Phoebe_Bite_Right2"];
             this.specialAttack = ["Phoebe_SpecialAttack_Back", "Phoebe_SpecialAttack_Front", "Phoebe_SpecialAttack_Left", "Phoebe_SpecialAttack_Right"];
-            this.direction = config.Direction.UP;
+            this.direction = config.Direction.DOWN;
             this.money = 0;
             this.playerStatus = new objects.Label("1234567890", "16px", "'Press Start 2P'", "#FFFFFF", this.x, this.y, true);
             this.key = 0;
@@ -84,8 +85,8 @@ module objects {
 
         // Methods
         public Start(): void {
-            this.x = 320;
-            this.y = 700;
+            this.x = 285;
+            this.y = 600;
             this.lastPosition = this.GetPosition();
             //this.playerController = { "W": false, "A": false, "S": false, "D": false, "Z": false };
         }
@@ -185,9 +186,15 @@ module objects {
                     && !managers.Game.keyboardManager.moveRight
                     && !managers.Game.keyboardManager.attacking
                     && !managers.Game.keyboardManager.biting
-                    && this.biteSequence === 0) {
-                    this.SwitchAnimation(this.stand[this.direction as number]);
+                    && this.biteSequence === 0
+                    && this.victorySequence == 0){
+                        this.SwitchAnimation(this.stand[this.direction as number]);
                 }
+
+                if (this.victorySequence !== 0){
+                    this.SwitchAnimation("Phoebe_Victory");
+                }
+
                 // Running Implementation
                 if (managers.Game.keyboardManager.running) {
                     let runningSpeed: number = this.playerMoveSpeed + 2;
@@ -586,13 +593,14 @@ module objects {
             }
         }
 
-        public VictoryMessage(nextScene: config.Scene) {
-            managers.Game.keyboardManager.ControlReset();
-            this.EchoMessage("I DID IT!", 3000);
-            setTimeout(() => {
+        public VictoryDance() {
+            this.EchoMessage("I DID IT!", 1000);
+            managers.Game.keyboardManager.ControlReset();    
+            this.victorySequence = setTimeout(() => {
+                this.victorySequence = 0;
                 managers.Game.keyboardManager.enabled = true;
-                managers.Game.currentScene = nextScene;
-            }, 3000);
+                this.direction = config.Direction.DOWN;
+            }, 2000);
         }
 
         public EchoMessage(message: string, timeout: number = 1000) {
@@ -694,6 +702,6 @@ module objects {
                 this.SetPosition(nextPosition);
                 this.transitSequence = 0;
             }, 200);
-        }
+        }        
     }
 }

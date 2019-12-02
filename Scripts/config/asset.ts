@@ -1477,7 +1477,10 @@ module config {
                     "frames": [69, 73],
                     "speed": 0.1
                 },
-                "Phoebe_Victory": { "frames": [2] }, // DONE
+                "Phoebe_Victory": { 
+                    "frames": [22, 11, 20, 15, 26, 14, 27, 10, 22, 11, 2],
+                    "speed": 0.1
+                 }, // DONE
 
                 "PhoebeSoul_Attack_Left": { "frames": [0] }, // DONE
                 "PhoebeSoul_Attack_Front": { "frames": [4] }, // DONE

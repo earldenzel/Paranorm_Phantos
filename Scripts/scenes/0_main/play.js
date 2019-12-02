@@ -245,8 +245,8 @@ var scenes;
                 }
             });
             this.cosmetics.forEach(function (e) {
-                if (e instanceof objects.Stairs && managers.Collision.Check(managers.Game.player, e)) {
-                    managers.Game.currentScene = e.nextScene;
+                if (e instanceof objects.Stairs && managers.Collision.Check(managers.Game.player, e) && _this.player.victorySequence == 0) {
+                    _this.player.SetTransit(_this.player.GetPosition(), e.nextScene);
                 }
             });
             if (this.hasProjectileShooters) {
