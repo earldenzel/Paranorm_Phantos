@@ -23,7 +23,7 @@ module objects {
             this.canBeEaten = true;
             this.attackingMode = false;
             this.bounty = 5;
-            this.expGain = 5;
+            this.expGain = 2;
 
 
             // Animations

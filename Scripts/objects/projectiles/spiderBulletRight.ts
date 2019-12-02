@@ -4,7 +4,7 @@ module objects {
         // Constructor
         constructor()
         {
-            super(managers.Game.spider_TextureAtlas, "spiderBullet", 1);
+            super(managers.Game.spider_TextureAtlas, "spiderBullet", 2);
 
             this.Start();
         }

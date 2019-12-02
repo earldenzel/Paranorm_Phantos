@@ -513,7 +513,7 @@ module scenes {
             // ENEMY PLACEMENT
             this.enemies.forEach(e => {
                 this.addChild(e);
-                if (e.canBeEaten && this.design == config.Design.GRAVEYARD){
+                if (e.canBeEaten){
                   this.addChild(e.stunIndicator);
                 }
             });            

@@ -29,7 +29,7 @@ var objects;
             _this.canBeEaten = true;
             _this.attackingMode = false;
             _this.bounty = 5;
-            _this.expGain = 5;
+            _this.expGain = 2;
             // Animations
             _this.walk = ["Zombie_WalkBack", "Zombie_WalkFront", "Zombie_WalkLeft", "Zombie_WalkLeft"];
             _this.attack = ["Zombie_AttackBack", "Zombie_AttackFront", "Zombie_AttackLeft", "Zombie_AttackLeft"];

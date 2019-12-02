@@ -17,7 +17,7 @@ var objects;
         __extends(RedBone, _super);
         // Constructor
         function RedBone() {
-            var _this = _super.call(this, managers.Game.enemies_TextureAtlas, "RedBone", 2) || this;
+            var _this = _super.call(this, managers.Game.enemies_TextureAtlas, "RedBone", 3) || this;
             _this.Start();
             return _this;
         }

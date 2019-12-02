@@ -40,6 +40,7 @@ module objects {
         public deadPlayer: Array<objects.DeadPlayer> = new Array<objects.DeadPlayer>();
         public deathCount: number = 0;
         public stageFinished: number = 0;
+        public godMode: boolean = false;
 
         public ecto: number;
         public maxHp: number;
@@ -309,6 +310,7 @@ module objects {
                     this.activatePowers = true;
                 }
                 else {
+                    this.EchoMessage("I HAVE NO POWERS YET");
                     this.activatePowers = false;
                 }
             }

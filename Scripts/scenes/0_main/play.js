@@ -438,7 +438,7 @@ var scenes;
             // ENEMY PLACEMENT
             this.enemies.forEach(function (e) {
                 _this.addChild(e);
-                if (e.canBeEaten && _this.design == config.Design.GRAVEYARD) {
+                if (e.canBeEaten) {
                     _this.addChild(e.stunIndicator);
                 }
             });

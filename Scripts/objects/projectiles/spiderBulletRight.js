@@ -18,7 +18,7 @@ var objects;
         // Variables
         // Constructor
         function SpiderBulletRight() {
-            var _this = _super.call(this, managers.Game.spider_TextureAtlas, "spiderBullet", 1) || this;
+            var _this = _super.call(this, managers.Game.spider_TextureAtlas, "spiderBullet", 2) || this;
             _this.Start();
             return _this;
         }

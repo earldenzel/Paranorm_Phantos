@@ -6,7 +6,7 @@ module objects {
         // Constructor
         constructor()
         {
-            super(managers.Game.shootingFlower_TextureAtlas, "shootingFlowerBullet", 1);
+            super(managers.Game.shootingFlower_TextureAtlas, "shootingFlowerBullet", 2);
 
             this.Start();
         }

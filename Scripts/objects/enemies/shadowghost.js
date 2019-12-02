@@ -30,6 +30,7 @@ var objects;
             _this.isFlying = true;
             _this.isTransparent = true;
             _this.powerUp = config.PowerUp.SHADOW;
+            _this.expGain = 5;
             return _this;
         }
         // Methods

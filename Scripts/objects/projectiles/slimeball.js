@@ -17,7 +17,7 @@ var objects;
         __extends(SlimeBall, _super);
         // Constructor
         function SlimeBall() {
-            var _this = _super.call(this, managers.Game.enemies_TextureAtlas, "SlimeBall", 1) || this;
+            var _this = _super.call(this, managers.Game.enemies_TextureAtlas, "SlimeBall", 2) || this;
             _this.staticNotPositional = false;
             _this.Start();
             return _this;

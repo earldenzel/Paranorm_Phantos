@@ -37,11 +37,15 @@ var scenes;
                 this.cosmetics[2] = new objects.Indicator("leftIndicator");
                 this.cosmetics[3] = new objects.Indicator("rightIndicator");
                 this.cosmetics[4] = new objects.Indicator("attackIndicator");
+                this.cosmetics[7] = new objects.Indicator("runIndicator");
+                this.cosmetics[8] = new objects.Indicator("powersIndicator");
                 this.cosmetics[0].SetPosition(new math.Vec2(x, y - this.cosmetics[0].height));
                 this.cosmetics[1].SetPosition(new math.Vec2(x, y + this.cosmetics[1].height));
                 this.cosmetics[2].SetPosition(new math.Vec2(x - this.cosmetics[2].width, y));
                 this.cosmetics[3].SetPosition(new math.Vec2(x + this.cosmetics[3].width, y));
                 this.cosmetics[4].SetPosition(new math.Vec2(this.enemies[0].x, this.enemies[0].y - 100));
+                this.cosmetics[7].SetPosition(new math.Vec2(x, y));
+                this.cosmetics[8].SetPosition(new math.Vec2(110, 670));
             }
             this.cosmetics[5] = new objects.Stairs(config.Scene.HOTEL_1, false);
             this.cosmetics[6] = new objects.Stairs(config.Scene.MANSION_1, true);
@@ -55,16 +59,20 @@ var scenes;
             _super.prototype.Start.call(this);
         };
         Graveyard_1.prototype.Update = function () {
-            var _this = this;
             //god mode to unlock all stages and temporarily make phoebe strong
             if (managers.Game.keyboardManager.powers &&
                 managers.Game.keyboardManager.running &&
                 managers.Game.keyboardManager.biting &&
-                managers.Game.keyboardManager.attacking) {
-                this.cosmetics[5].visible = true;
-                this.cosmetics[6].visible = true;
+                managers.Game.keyboardManager.attacking &&
+                !managers.Game.player.godMode) {
                 managers.Game.player.playerAttackDelay = 0;
                 managers.Game.player.money = 99999;
+                managers.Game.player.godMode = true;
+                managers.Game.player.key = 99;
+            }
+            if (managers.Game.player.godMode) {
+                this.cosmetics[5].visible = true;
+                this.cosmetics[6].visible = true;
             }
             if (managers.Game.player.stageFinished == 0) {
                 if (this.enemies[0].isStunned) {
@@ -72,18 +80,10 @@ var scenes;
                 }
             }
             if (this.AllEnemiesAreDead()) {
-                setTimeout(function () {
-                    _this.cosmetics.forEach(function (cosmetic) {
-                        if (cosmetic instanceof objects.Stairs) {
-                            return;
-                        }
-                        cosmetic.visible = false;
-                        managers.GraveyardLocks.graveyard_1_lockRight = false;
-                        _this.isDoorRightLocked = false;
-                        managers.GraveyardLocks.graveyard_1_lockBot = false;
-                        _this.isDoorBotLocked = false;
-                    });
-                }, 1500);
+                managers.GraveyardLocks.graveyard_1_lockRight = false;
+                this.isDoorRightLocked = false;
+                managers.GraveyardLocks.graveyard_1_lockBot = false;
+                this.isDoorBotLocked = false;
             }
             if (!this.isDoorLeftLocked) {
                 managers.GraveyardLocks.graveyard_1_lockLeft = false;

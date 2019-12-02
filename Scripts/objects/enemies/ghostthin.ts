@@ -26,20 +26,21 @@ module objects {
             this.x = 320;
         }
         public Update(): void {
-            if (!this.isStunned && !this.isDead) {
-                this.SwitchAnimation("GhostThin_Idle");
+            if (this.isDead){                
+                this.SwitchAnimation("Ghost_Explode");
             }
-            else if (this.isStunned && !this.isDead) {
-                this.SwitchAnimation("GhostThin_Stun");
-            }
-            else {
-                if (managers.Game.player.biteSequence != 0) {
-                    if (this.currentAnimation == "Ghost_Explode" && this.currentAnimationFrame > 3) {
-                        managers.Game.stage.removeChild(this);
-                        this.visible = false;
-                    }
-                    this.SwitchAnimation("Ghost_Explode");
+            else{
+                if (this.isStunned){
+                    this.SwitchAnimation("GhostThin_Stun");
+
                 }
+                else{
+                    this.SwitchAnimation("GhostThin_Idle");
+                }
+            }            
+            if (this.currentAnimation == "Ghost_Explode" && this.currentAnimationFrame > 3) {
+                managers.Game.stage.removeChild(this);
+                this.visible = false;
             }
             super.Update();
         }

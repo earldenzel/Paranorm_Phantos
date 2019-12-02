@@ -22,6 +22,7 @@ module objects {
             this.isFlying = true;
             this.isTransparent = true;
             this.powerUp = config.PowerUp.SHADOW;
+            this.expGain = 5;
         }
         // Methods
         public Start(): void {

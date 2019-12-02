@@ -39,6 +39,7 @@ var objects;
             _this.deadPlayer = new Array();
             _this.deathCount = 0;
             _this.stageFinished = 0;
+            _this.godMode = false;
             _this.weapon = new objects.Weapon();
             _this.swing = new objects.Swing();
             _this.Start();
@@ -283,6 +284,7 @@ var objects;
                     this.activatePowers = true;
                 }
                 else {
+                    this.EchoMessage("I HAVE NO POWERS YET");
                     this.activatePowers = false;
                 }
             }

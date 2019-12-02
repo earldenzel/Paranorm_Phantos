@@ -17,7 +17,7 @@ var objects;
         __extends(Bone, _super);
         // Constructor
         function Bone() {
-            var _this = _super.call(this, managers.Game.enemies_TextureAtlas, "Bone", 1) || this;
+            var _this = _super.call(this, managers.Game.enemies_TextureAtlas, "Bone", 2) || this;
             _this.Start();
             return _this;
         }
