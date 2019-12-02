@@ -39,6 +39,8 @@
     // kc
     var enemies_TextureAtlasData;
     var enemies_TextureAtlas;
+    var bosses_TextureAtlasData;
+    var bosses_TextureAtlas;
     var titleUIMap_TextureAtlasData;
     var titleUIMap_TextureAtlas;
     // Gets the asset manifest
@@ -102,6 +104,10 @@
         enemies_TextureAtlasData = config.Assets.getAtlas__Enemies;
         enemies_TextureAtlasData.images = [assetManager.getResult("tAtlas__Enemies")];
         enemies_TextureAtlas = new createjs.SpriteSheet(enemies_TextureAtlasData);
+        // KC
+        bosses_TextureAtlasData = config.Assets.getAtlas_Bosses;
+        bosses_TextureAtlasData.images = [assetManager.getResult("tAtlas_Bosses")];
+        bosses_TextureAtlas = new createjs.SpriteSheet(bosses_TextureAtlasData);
         titleUIMap_TextureAtlasData = config.Assets.getAtlas__TitleUiMap;
         titleUIMap_TextureAtlasData.images = [assetManager.getResult("tAtlas__TitlesUIMap")];
         titleUIMap_TextureAtlas = new createjs.SpriteSheet(titleUIMap_TextureAtlasData);
@@ -144,6 +150,7 @@
         managers.Game.phantorm_TextureAtlas = phantorm_TextureAtlas;
         // KC
         managers.Game.enemies_TextureAtlas = enemies_TextureAtlas;
+        managers.Game.bosses_TextureAtlas = bosses_TextureAtlas;
         managers.Game.titleUIMap_TextureAtlas = titleUIMap_TextureAtlas;
         Main();
     }

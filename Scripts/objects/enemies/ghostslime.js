@@ -75,6 +75,9 @@ var objects;
             }
             else if (this.isStunned && !this.isDead) {
                 this.SwitchAnimation("GhostSlime_Stun");
+                if (managers.Game.player.biteSequence == 0) {
+                    this.isDead = true;
+                }
             }
             else {
                 if (managers.Game.player.biteSequence != 0) {

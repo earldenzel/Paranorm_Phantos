@@ -34,8 +34,13 @@ module objects {
             this.x = 320;
         }
         public Update(): void {
-            if (!this.isDead) {
+            if (!this.isDead && !this.isStunned) {
                 this.SwitchAnimation(this.walk[this.direction as number]);
+            }
+            else if(!this.isDead && this.isStunned){
+                if (managers.Game.player.biteSequence == 0) {
+                    this.isDead = true;
+                }
             }
             else {
                 if (managers.Game.player.biteSequence != 0) {

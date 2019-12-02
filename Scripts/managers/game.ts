@@ -15,6 +15,7 @@ module managers {
         // KC
         public static currentStage: objects.Scene;
         public static enemies_TextureAtlas: createjs.SpriteSheet; 
+        public static bosses_TextureAtlas: createjs.SpriteSheet; 
         public static titleUIMap_TextureAtlas: createjs.SpriteSheet;
         public static bulletManager: managers.Bullet;
         public static shopManager: managers.Shop;

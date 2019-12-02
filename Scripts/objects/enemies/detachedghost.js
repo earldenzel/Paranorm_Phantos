@@ -42,13 +42,18 @@ var objects;
             }
             else if (this.isStunned && !this.isDead) {
                 this.SwitchAnimation("Ghost_Stun");
+                if (managers.Game.player.biteSequence == 0) {
+                    this.isDead = true;
+                }
             }
             else {
-                if (this.currentAnimation == "Ghost_Explode" && this.currentAnimationFrame > 3) {
-                    managers.Game.stage.removeChild(this);
-                    this.visible = false;
+                if (managers.Game.player.biteSequence != 0) {
+                    if (this.currentAnimation == "Ghost_Explode" && this.currentAnimationFrame > 3) {
+                        managers.Game.stage.removeChild(this);
+                        this.visible = false;
+                    }
+                    this.SwitchAnimation("Ghost_Explode");
                 }
-                this.SwitchAnimation("Ghost_Explode");
             }
             _super.prototype.Update.call(this);
         };

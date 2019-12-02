@@ -21,7 +21,8 @@ var scenes;
         function EnemyTest_Level() {
             var _this = _super.call(this, false, false, false, false, config.Design.HOTEL) || this;
             _this.hasProjectileShooters = true;
-            _this.player.ecto = _this.player.maxEcto;
+            //this.player.ecto = this.player.maxEcto;
+            //this.player.GainMaxHealth();
             _this.Start();
             return _this;
         }
@@ -38,7 +39,8 @@ var scenes;
             //    (this.obstacles[2] as objects.SlimePuddle),
             //    (this.obstacles[3] as objects.SlimePuddle)
             //];
-            this.enemies[0] = new objects.GhostWoman(2, true, false);
+            this.enemies[0] = new objects.Undertaker(2);
+            //this.enemies[0].hp = 1;
             //this.enemies[0] = new objects.GhostSlime();
             //this.enemies[1] = new objects.GhostSlime();
             //this.enemies[0] = new objects.GhostMan(2);
