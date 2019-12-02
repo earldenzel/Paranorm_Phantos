@@ -694,11 +694,14 @@ module objects {
             this.scaleY -= 0.06;
         }
 
-        public SetTransit(nextPosition: math.Vec2, nextScene: config.Scene): void{
+        public SetTransit(nextPosition: math.Vec2, nextScene: config.Scene, changeMusic: boolean = false): void{
             this.visible = false;
             this.transitSequence = setTimeout(() =>{
                 this.visible = true;
                 managers.Game.currentScene = nextScene;
+                if (changeMusic){
+                    managers.Game.music.stop();
+                }
                 this.SetPosition(nextPosition);
                 this.transitSequence = 0;
             }, 200);

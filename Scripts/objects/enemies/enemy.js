@@ -106,7 +106,7 @@ var objects;
             //the else for this condition is under play.ts - this is because the player might have other collisions with other enemies
             //if enemy is not taking damage -- check collision with weapon
             if (!this.isTakingDamage) {
-                if ((managers.Collision.Check(managers.Game.player.swing, this) && this.canBeAttacked)
+                if ((managers.Collision.CheckWithOffsetAndDirection(this, managers.Game.player.swing, -19.5, -19.5, -9.5, -9.5, managers.Game.player.direction) && this.canBeAttacked)
                     || (managers.Collision.Check(managers.Game.player, this) && this.canBeAttacked && managers.Game.player.activatePowers && managers.Game.player.powerUp == config.PowerUp.BITE)) {
                     this.isTakingDamage = true;
                     this.GetDamage(managers.Game.player);

@@ -87,6 +87,9 @@ var objects;
             }
             this.stunIndicator.visible = false;
         };
+        MaggotSmall.prototype.DevourEffect = function () {
+            managers.Game.player.GainHealth(1);
+        };
         return MaggotSmall;
     }(objects.Enemy));
     objects.MaggotSmall = MaggotSmall;

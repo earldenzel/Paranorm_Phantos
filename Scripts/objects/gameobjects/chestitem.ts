@@ -30,11 +30,12 @@ module objects{
         }
         public Move():void {}
         public CheckBound():void {}
+        
         public TriggerChestEffect(){
             this.showItem.x = this.x;
             this.showItem.y = this.y;
             this.showItem.visible = true; 
-            if (this.triggeredSequence == 0){
+            if (this.triggeredSequence == 0){  
                 this.triggeredSequence = setTimeout(() => {
                     switch (this.effect){
                         case config.Effects.INCREASE_MAX_HP:
@@ -55,7 +56,9 @@ module objects{
                     }                   
                     this.available = false;
                     this.triggeredSequence = 0;
-                    this.Update();
+                    this.Update();                     
+                    managers.Game.SFX = createjs.Sound.play("itemCollect");
+                    managers.Game.SFX.volume = 0.2;
                 }, 250);
             }
         }

@@ -38,7 +38,7 @@ module objects {
             if (!this.isDead) {
                 this.SwitchAnimation(this.walk[this.direction as number]);
             }
-            else {                    
+            else{                 
                 this.SwitchAnimation("Maggot_Explode");
             }
             if (this.currentAnimation == "Maggot_Explode" && this.currentAnimationFrame > 3) {
@@ -83,6 +83,9 @@ module objects {
                 managers.Game.player.GainDollars(bounty);
             }
             this.stunIndicator.visible = false;
+        }
+        public DevourEffect(): void{
+            managers.Game.player.GainHealth(1);
         }
     }
 }

@@ -24,7 +24,7 @@ module objects{
             this.canBeEaten = false;
             this.bounty = 20;
             this.isFlying = false;
-            this.expGain = 8;
+            this.expGain = 3;
             this.halfSpeed = moveSpeed / 2;
 
             this.walk = ["Maggot_WalkForward","Maggot_WalkForward","Maggot_WalkSide","Maggot_WalkSide"];

@@ -10,7 +10,7 @@ module objects {
         constructor(moveSpeed: number, rightDirection: boolean, downDirection: boolean) {
             super(managers.Game.enemies_TextureAtlas, "GhostShadow_Transparent");
             this.Start();
-            this.hp = 3;
+            this.hp = 10;
             this.attackPower = 2;
 
             this.moveSpeed = moveSpeed;
@@ -30,34 +30,35 @@ module objects {
             this.x = 320;
         }
         public Update(): void {
-            if (!this.isStunned && !this.isDead) {
-                if (this.isTransparent) {
-                    this.canBeAttacked = false;
-                    this.SwitchAnimation("GhostShadow_Transparent");
-                }
-                else if (this.isAttacking) {
-
-                    if (this.currentAnimation == "GhostShadow_Attack" && this.currentAnimationFrame > 2) {
-                        this.currentAnimationFrame = 3;
-                    }
-                    this.SwitchAnimation("GhostShadow_Attack");
-                }
-                else {
-                    this.canBeAttacked = true;
-                    this.SwitchAnimation("GhostShadow_Opaque");
-                }
+            if (this.isDead){                
+                this.SwitchAnimation("GhostShadow_Explode");
             }
-            else if (this.isStunned && !this.isDead) {
-                this.SwitchAnimation("GhostShadow_Stun");
-            }
-            else {
-                if (managers.Game.player.biteSequence != 0) {
-                    if (this.currentAnimation == "GhostShadow_Explode" && this.currentAnimationFrame > 3) {
-                        managers.Game.stage.removeChild(this);
-                        this.visible = false;
-                    }
-                    this.SwitchAnimation("GhostShadow_Explode");
+            else{
+                if (this.isStunned){
+                    this.SwitchAnimation("GhostShadow_Stun");
                 }
+                else{                    
+                    if (this.isTransparent) {
+                        this.canBeAttacked = false;
+                        this.SwitchAnimation("GhostShadow_Transparent");
+                    }
+                    else if (this.isAttacking) {
+                        if (this.currentAnimation == "GhostShadow_Attack" && this.currentAnimationFrame > 2) {
+                            this.currentAnimationFrame = 3;
+                        }
+                        this.SwitchAnimation("GhostShadow_Attack");
+                    }
+                    else {
+                        this.canBeAttacked = true;
+                        this.SwitchAnimation("GhostShadow_Opaque");
+                    }
+                }
+                
+            }
+            
+            if (this.currentAnimation == "GhostShadow_Explode" && this.currentAnimationFrame > 3) {
+                managers.Game.stage.removeChild(this);
+                this.visible = false;
             }
             super.Update();
         }

@@ -34,5 +34,30 @@ module managers {
                     object2TopLeftY < object1TopLeftY - bottomOffset  + object1.height;
             }
         }
+
+        public static CheckWithOffsetAndDirection(object1: objects.GameObject, 
+                                        object2: objects.GameObject, 
+                                        topOffset: number,
+                                        bottomOffset: number,
+                                        rightOffset: number,
+                                        leftOffset: number,
+                                        direction: config.Direction
+                                        ): boolean  {
+            switch(direction){
+                case config.Direction.UP:
+                    topOffset += object2.height;
+                    break;
+                case config.Direction.DOWN:
+                    bottomOffset += object2.height;
+                    break;
+                case config.Direction.LEFT:
+                    rightOffset += object2.width;
+                    break;
+                case config.Direction.RIGHT:
+                    leftOffset += object2.width;
+                    break;
+            }
+            return this.CheckWithOffset(object1, object2, topOffset, bottomOffset, rightOffset, leftOffset);
+        }
     }
 }

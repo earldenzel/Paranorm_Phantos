@@ -3,8 +3,8 @@ var managers;
     var Game = /** @class */ (function () {
         function Game() {
         }
-        Game.gameHeight = 900;
-        Game.gameWidth = 640;
+        Game.gameHeight = 650;
+        Game.gameWidth = 530;
         Game.expConfigurer = new config.Experience();
         return Game;
     }());

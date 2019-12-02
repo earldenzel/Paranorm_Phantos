@@ -10,9 +10,9 @@ module managers {
         public Start(): void {
             // GRAVEYARD_1
             this.chestItems[0] = new objects.ChestItem("regularChest", "Items_Ten-Dollars", config.Effects.INCREASE_GOLD, config.Scene.GRAVEYARD_1);
-            this.chestItems[0].SetPosition(new math.Vec2(285, 150));
+            this.chestItems[0].SetPosition(new math.Vec2(420, 150));
             this.chestItems[1] = new objects.ChestItem("lockedChest", "Items_Fifty-Dollars", config.Effects.INCREASE_GOLD_50, config.Scene.GRAVEYARD_1);
-            this.chestItems[1].SetPosition(new math.Vec2(185, 150));
+            this.chestItems[1].SetPosition(new math.Vec2(285, 150));
             this.chestItems[1].locked = true;
             // GRAVEYARD_2
             this.chestItems[2] = new objects.ChestItem("chestWithGold", "Items_Fifty-Dollars", config.Effects.INCREASE_GOLD_50, config.Scene.GRAVEYARD_2, false);
@@ -22,16 +22,15 @@ module managers {
             this.chestItems[3].SetPosition(new math.Vec2(285, 150));
             // GRAVEYARD_4
             this.chestItems[4] = new objects.ChestItem("regularChest", "Items_Key", config.Effects.INCREASE_KEY_COUNT, config.Scene.GRAVEYARD_4, false);
-            this.chestItems[4].SetPosition(new math.Vec2(250, 300));
+            this.chestItems[4].SetPosition(new math.Vec2(285, 440));
             // GRAVEYARD_5
             this.chestItems[5] = new objects.ChestItem("regularChest", "Items_Key", config.Effects.INCREASE_KEY_COUNT, config.Scene.GRAVEYARD_5, false);
-            this.chestItems[5].SetPosition(new math.Vec2(250, 300));
+            this.chestItems[5].SetPosition(new math.Vec2(80, 420));
             // GRAVEYARD_6
-            this.chestItems[6] = new objects.ChestItem("regularChest", "Items_Ten-Dollars", config.Effects.INCREASE_GOLD, config.Scene.GRAVEYARD_6);
-            this.chestItems[6].SetPosition(new math.Vec2(400, 630));
-            this.chestItems[7] = new objects.ChestItem("regularChest", "Items_Key", config.Effects.INCREASE_KEY_COUNT, config.Scene.GRAVEYARD_6, false);
-            this.chestItems[7].SetPosition(new math.Vec2(250, 300));
-
+            this.chestItems[6] = new objects.ChestItem("regularChest", "Items_Key", config.Effects.INCREASE_KEY_COUNT, config.Scene.GRAVEYARD_6, false);
+            this.chestItems[6].SetPosition(new math.Vec2(80, 420));
+            this.chestItems[7] = new objects.ChestItem("regularChest", "Items_Ten-Dollars", config.Effects.INCREASE_GOLD, config.Scene.GRAVEYARD_6);
+            this.chestItems[7].SetPosition(new math.Vec2(480, 420));
             // HOTEL_2
             this.chestItems[8] = new objects.ChestItem("regularChest", "Items_Key", config.Effects.INCREASE_KEY_COUNT, config.Scene.HOTEL_2, false);
             this.chestItems[8].SetPosition(new math.Vec2(140, 630));
@@ -111,7 +110,6 @@ module managers {
             // MANSION_17
             this.chestItems[33] = new objects.ChestItem("regularChest", "Items_Key", config.Effects.INCREASE_KEY_COUNT, config.Scene.MANSION_17, false);
             this.chestItems[33].SetPosition(new math.Vec2(285, 440));
-
         }
 
         public Reset(): void {
@@ -126,7 +124,9 @@ module managers {
                 e.showItem.Update();
                 if (managers.Collision.Check(managers.Game.player, e)) {
                     if (e.locked) {
-                        if (managers.Game.player.key > 0) {
+                        if (managers.Game.player.key > 0) {                       
+                            managers.Game.SFX = createjs.Sound.play("doorUnlock");
+                            managers.Game.SFX.volume = 0.5;
                             managers.Game.player.UseKey();
                             e.TriggerChestEffect();
                             e.locked = false;
@@ -135,7 +135,7 @@ module managers {
                             managers.Game.player.EchoMessage("Locked");
                         }
                     }
-                    else if (e.available && managers.Game.currentScene == e.appearingScene) {
+                    else if (e.available && managers.Game.currentScene == e.appearingScene) { 
                         e.TriggerChestEffect();
                     }
                 }

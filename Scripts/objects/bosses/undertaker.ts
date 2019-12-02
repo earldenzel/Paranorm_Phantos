@@ -18,6 +18,7 @@ module objects {
             this.eatTimer = 5000;            
             this.bounty = 100;
             this.isFlying = false;
+            this.expGain = 20;
         }
         // methods
 
@@ -39,7 +40,7 @@ module objects {
             let distanceToPlayer: number = math.Vec2.Distance(enemyPosition, playerPosition);
 
             if (distanceToPlayer < 200) {
-                this.currentSpeed = this.moveSpeed * 2;
+                this.currentSpeed = this.moveSpeed * 3;
             } else {
                 this.currentSpeed = this.moveSpeed;
             }
@@ -58,7 +59,7 @@ module objects {
         }
 
         public DevourEffect(): void{
-            managers.Game.player.GainAttack(10);            
+            managers.Game.player.GainAttack(5);            
         }
     }
 }

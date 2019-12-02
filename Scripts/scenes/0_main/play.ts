@@ -306,7 +306,7 @@ module scenes {
 
             this.cosmetics.forEach(e => {
                 if (e instanceof objects.Stairs && managers.Collision.Check(managers.Game.player, e) && this.player.victorySequence == 0) {
-                    this.player.SetTransit(this.player.GetPosition(), e.nextScene);
+                    this.player.SetTransit(this.player.GetPosition(), e.nextScene, true);
                 }
             });
 

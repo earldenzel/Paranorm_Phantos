@@ -661,12 +661,16 @@ var objects;
             this.scaleX -= 0.04;
             this.scaleY -= 0.06;
         };
-        Player.prototype.SetTransit = function (nextPosition, nextScene) {
+        Player.prototype.SetTransit = function (nextPosition, nextScene, changeMusic) {
             var _this = this;
+            if (changeMusic === void 0) { changeMusic = false; }
             this.visible = false;
             this.transitSequence = setTimeout(function () {
                 _this.visible = true;
                 managers.Game.currentScene = nextScene;
+                if (changeMusic) {
+                    managers.Game.music.stop();
+                }
                 _this.SetPosition(nextPosition);
                 _this.transitSequence = 0;
             }, 200);

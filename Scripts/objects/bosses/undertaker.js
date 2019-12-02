@@ -28,6 +28,7 @@ var objects;
             _this.eatTimer = 5000;
             _this.bounty = 100;
             _this.isFlying = false;
+            _this.expGain = 20;
             return _this;
         }
         // methods
@@ -46,7 +47,7 @@ var objects;
             var dirToPlayer = math.Vec2.Subtract(enemyPosition, playerPosition);
             var distanceToPlayer = math.Vec2.Distance(enemyPosition, playerPosition);
             if (distanceToPlayer < 200) {
-                this.currentSpeed = this.moveSpeed * 2;
+                this.currentSpeed = this.moveSpeed * 3;
             }
             else {
                 this.currentSpeed = this.moveSpeed;
@@ -62,7 +63,7 @@ var objects;
             return this.currentSpeed;
         };
         Undertaker.prototype.DevourEffect = function () {
-            managers.Game.player.GainAttack(10);
+            managers.Game.player.GainAttack(5);
         };
         return Undertaker;
     }(objects.Enemy));

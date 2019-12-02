@@ -18,9 +18,9 @@ module scenes {
                 this.enemies[1].SetPosition(new math.Vec2(375, 500));
                 this.enemies[2] = new objects.Zombie(1.5);
                 this.enemies[2].SetPosition(new math.Vec2(225, 500));
-                this.enemies[3] = new objects.Bat(4.5, 100);
+                this.enemies[3] = new objects.Bat(10, 400);
                 this.enemies[3].SetPosition(new math.Vec2(500, 500));
-                this.enemies[4] = new objects.Bat(4.5, 100);
+                this.enemies[4] = new objects.Bat(10, 400);
                 this.enemies[4].SetPosition(new math.Vec2(0, 500));
 
                 this.enemies[5] = new objects.Zombie(1.5);

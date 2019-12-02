@@ -19,7 +19,7 @@ module scenes {
             this.playerInfo.PlayerLocation = new math.Vec2(96,18);
 
             this.cosmetics[0] = new objects.Stairs(config.Scene.GRAVEYARD_1, false);
-            this.cosmetics[0].SetPosition(new math.Vec2(185, 420));
+            this.cosmetics[0].SetPosition(new math.Vec2(125, 235));
         }        
 
         public Update(): void {
