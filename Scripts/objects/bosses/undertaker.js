@@ -28,7 +28,7 @@ var objects;
             _this.attackPower = 1;
             _this.moveSpeed = moveSpeed;
             _this.knockback = 0.75;
-            _this.eatTimer = 5000;
+            _this.eatTimer = 2000;
             _this.bounty = 100;
             _this.isFlying = false;
             _this.attackingMode = false;
@@ -104,13 +104,11 @@ var objects;
                 }
             }
             else {
-                if (managers.Game.player.biteSequence != 0) {
-                    if (this.currentAnimation == "Boss1_Explode" && this.currentAnimationFrame > 3) {
-                        managers.Game.stage.removeChild(this);
-                        this.visible = false;
-                    }
-                    this.SwitchAnimation("Boss1_Explode");
+                if (this.currentAnimation == "Boss1_Explode" && this.currentAnimationFrame > 3) {
+                    managers.Game.stage.removeChild(this);
+                    this.visible = false;
                 }
+                this.SwitchAnimation("Boss1_Explode");
             }
             _super.prototype.Update.call(this);
         };

@@ -104,13 +104,7 @@ var objects;
             return this.currentSpeed;
         };
         Zombie.prototype.DevourEffect = function () {
-            var random = Math.random() * 100;
-            if (random > 98) {
-                managers.Game.player.GainSpeed(1);
-            }
-            else {
-                managers.Game.player.GainHealth(3);
-            }
+            managers.Game.player.GainHealth(3);
         };
         Zombie.prototype.RemoveFromPlay = function (bounty) {
             this.isDead = true;

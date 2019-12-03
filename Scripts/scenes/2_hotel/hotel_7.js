@@ -25,13 +25,13 @@ var scenes;
         }
         // Methods
         Hotel_7.prototype.Start = function () {
-            this.enemies[0] = new objects.DetachedGhost(2.5, true, true);
+            this.enemies[0] = new objects.GhostThin(2.5, true, true);
             this.enemies[0].SetPosition(new math.Vec2(100, 200));
-            this.enemies[1] = new objects.DetachedGhost(2.5, false, true);
+            this.enemies[1] = new objects.GhostThin(2.5, false, true);
             this.enemies[1].SetPosition(new math.Vec2(400, 200));
-            this.enemies[2] = new objects.DetachedGhost(2.5, false, false);
+            this.enemies[2] = new objects.GhostThin(2.5, false, false);
             this.enemies[2].SetPosition(new math.Vec2(400, 650));
-            this.enemies[3] = new objects.DetachedGhost(2.5, true, false);
+            this.enemies[3] = new objects.GhostThin(2.5, true, false);
             this.enemies[3].SetPosition(new math.Vec2(100, 650));
             this.obstacles[0] = new objects.Gap(managers.Game.hotel_TextureAtlas, "Hole", new math.Vec2(260, 420));
             this.obstacles[1] = new objects.Gap(managers.Game.hotel_TextureAtlas, "Hole", new math.Vec2(260, 480));

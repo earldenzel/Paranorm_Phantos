@@ -115,14 +115,16 @@ module objects {
                 this.iceShield.Update();
                 this.iceShield.isActivated = this.activatePowers;
             }
-            if(this.activateSoul && this.soulCounter > 0){
-                this.soulCounter -= 1;
-                console.log(this.soulCounter);
+            if(this.activateSoul && this.soulCounter > 0){ 
+                this.soulCounter -= 1;               
+                if (this.soulCounter % 100 == 99){
+                    console.log(this.soulCounter);
+                }
             }
             else if(this.activateSoul && this.soulCounter <= 0){
                 this.soulCounter = 0;
                 this.activateSoul = false;
-                this.attackPower = this.soulAttackPower - 2;
+                this.DeactivateSoulMode();
             }
             this.x = Math.round(this.x);
             this.y = Math.round(this.y);
@@ -940,11 +942,19 @@ module objects {
             this.activateSoul = true;
             this.isFlying = true;
             this.attackSequence = 0;
-            this.attackPower = this.soulAttackPower;
+            this.attackPower += 2;
             //this.weapon.alpha = 0;
             this.weapon.visible = false;
             this.alpha = 1;
             this.SwitchAnimation(this.soulIdle[this.direction as number]);
+        }
+        public DeactivateSoulMode(): void {
+            this.isFlying = false;
+            this.attackSequence = 0;
+            this.attackPower -= 2;
+            //this.weapon.alpha = 0;
+            this.weapon.visible = false;
+            this.alpha = 1;
         }
     }
 }

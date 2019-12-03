@@ -6,8 +6,9 @@ module scenes {
         protected enemies: Array<objects.Enemy> = new Array<objects.Enemy>();
         protected obstacles: Array<objects.GameObject> = new Array<objects.GameObject>();
         protected cosmetics: Array<objects.GameObject> = new Array<objects.GameObject>();
+        protected floatingDamages: Array<objects.Label> = new Array<objects.Label>();
         protected key: objects.Key;
-        protected design: config.Design;
+        public design: config.Design;
         private bulletManager: managers.Bullet;
         private shopManager: managers.Shop;
         private chestManager: managers.Chest;
@@ -285,6 +286,7 @@ module scenes {
             if (managers.Game.player.isTakingDamage && !collectiveCollision) {
                 managers.Game.player.isTakingDamage = false;
             }
+
             this.obstacles.forEach(e => {
                 e.CheckBound();
                 this.enemies.forEach(f => {
@@ -543,6 +545,7 @@ module scenes {
                 if (e.canBeEaten){
                   this.addChild(e.stunIndicator);
                 }
+                console.log("spawned " + e.name + " with " + e.hp);
             });            
 
             //door frames
@@ -612,6 +615,16 @@ module scenes {
             this.enemies[length] = enemyToAdd;
             this.addChild(enemyToAdd);
             this.setChildIndex(enemyToAdd, this.getChildIndex(this.player) + 1);
+        }
+
+        public AddFloatingDamagesToScene(floatingDamageToAdd: objects.Label): void{
+            let length = this.floatingDamages.length;
+            this.floatingDamages[length] = floatingDamageToAdd;
+            this.addChild(floatingDamageToAdd);
+            setTimeout(() =>{
+                floatingDamageToAdd.visible = false;
+                this.removeChild(floatingDamageToAdd);
+            }, floatingDamageToAdd.airTime);
         }
 
         

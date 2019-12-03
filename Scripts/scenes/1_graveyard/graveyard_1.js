@@ -28,7 +28,7 @@ var scenes;
         // Methods
         Graveyard_1.prototype.Start = function () {
             if (managers.Game.player.stageFinished == 0) {
-                this.enemies[0] = new objects.DetachedGhost(0, true, true);
+                this.enemies[0] = new objects.Ghost(0);
                 this.enemies[0].attackPower = 0; // you will never die from starter enemy
                 var x = (config.Bounds.LEFT_BOUND + config.Bounds.RIGHT_BOUND) / 2;
                 var y = (config.Bounds.TOP_BOUND + config.Bounds.BOTTOM_BOUND) / 2 + 150;

@@ -15,9 +15,9 @@ module scenes {
             this.enemies[0].attackPower = 1;
             this.enemies[1] = new objects.SpiderRight(new math.Vec2(430, 630), 400);
             this.enemies[1].attackPower = 1;
-            this.enemies[2] = new objects.DetachedGhost(2.5, false, true);
+            this.enemies[2] = new objects.GhostThin(2.5, false, true);
             this.enemies[2].SetPosition(new math.Vec2(400, 200));
-            this.enemies[3] = new objects.DetachedGhost(2.5, true, false);
+            this.enemies[3] = new objects.GhostThin(2.5, true, false);
             this.enemies[3].SetPosition(new math.Vec2(100, 650));
 
             this.obstacles[0] = new objects.Gap(managers.Game.mansion_TextureAtlas, "Hole", new math.Vec2(380, 225));

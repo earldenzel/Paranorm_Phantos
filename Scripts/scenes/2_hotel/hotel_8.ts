@@ -13,9 +13,9 @@ module scenes {
         // Methods
         public Start(): void {
 
-            this.enemies[0] = new objects.DetachedGhost(1.5, true, false);
+            this.enemies[0] = new objects.GhostThin(1.5, true, false);
             this.enemies[0].SetPosition(new math.Vec2(100, 650));
-            this.enemies[1] = new objects.DetachedGhost(1.5, false, true);
+            this.enemies[1] = new objects.GhostThin(1.5, false, true);
             this.enemies[1].SetPosition(new math.Vec2(400, 200));
             this.enemies[2] = new objects.SpiderLeft(new math.Vec2(120, 250), 370);
             this.enemies[2].attackPower = 1;

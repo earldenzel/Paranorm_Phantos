@@ -10,17 +10,13 @@ module objects{
         constructor(moveSpeed:number, updateTime: number){
             super(managers.Game.bat_TextureAtlas, "bat");
             this.Start();
-
-            this.hp = 3;
-            this.attackPower = 1;         
+      
             this.moveSpeed = moveSpeed;
             this.knockback = 0.75;
             this.eatTimer = 500;
             this.updateTime = updateTime;
             this.currentTime = updateTime;
-            this.bounty = 2;
             this.isFlying = true;
-            this.expGain = 3;
         }
         // methods
 
@@ -29,6 +25,27 @@ module objects{
             this.y = 200;
             this.x = 320;
             this.trajectory = new math.Vec2(0,0);
+            let stageOfSpawn: config.Design = (managers.Game.currentStage as scenes.PlayScene).design;
+            switch(stageOfSpawn){
+                case config.Design.GRAVEYARD:
+                    this.hp = 3;
+                    this.attackPower = 1;   
+                    this.bounty = 2;
+                    this.expGain = 3;
+                    break;
+                case config.Design.HOTEL:
+                    this.hp = 13;
+                    this.attackPower = 1;   
+                    this.bounty = 9;
+                    this.expGain = 5;
+                    break;
+                case config.Design.MANSION:
+                    this.hp = 23;
+                    this.attackPower = 2;   
+                    this.bounty = 15;
+                    this.expGain = 7;
+                    break;
+            }
         }
         public Update(): void {
             super.Update();

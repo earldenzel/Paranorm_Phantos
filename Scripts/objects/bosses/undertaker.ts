@@ -22,7 +22,7 @@ module objects {
             this.attackPower = 1;
             this.moveSpeed = moveSpeed;
             this.knockback = 0.75;
-            this.eatTimer = 5000;
+            this.eatTimer = 2000;
             this.bounty = 100;
             this.isFlying = false;
             this.attackingMode = false;
@@ -99,13 +99,11 @@ module objects {
                 }
             }
             else{
-                if(managers.Game.player.biteSequence != 0){
-                    if (this.currentAnimation == "Boss1_Explode" && this.currentAnimationFrame > 3) {
-                        managers.Game.stage.removeChild(this);
-                        this.visible = false;
-                    }
-                    this.SwitchAnimation("Boss1_Explode");
+                if (this.currentAnimation == "Boss1_Explode" && this.currentAnimationFrame > 3) {
+                    managers.Game.stage.removeChild(this);
+                    this.visible = false;
                 }
+                this.SwitchAnimation("Boss1_Explode");
             }
             super.Update();
         }

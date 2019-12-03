@@ -1,6 +1,7 @@
 module objects {    // Module == Namespace
     export class Label extends createjs.Text {    // export == public
         // Variables
+        public airTime: number = 150;
         // Constructor
         constructor(labelString:string, fontSize:string, fontFamily:string = "'Press Start 2P'", 
             fontColor:string, x:number = 0, y:number = 0, isCentered:boolean = false)  {

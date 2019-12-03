@@ -20,20 +20,38 @@ var objects;
         function Ghost(moveSpeed) {
             var _this = _super.call(this, managers.Game.enemies_TextureAtlas, "Ghost_Idle") || this;
             _this.Start();
-            _this.hp = 3;
-            _this.attackPower = 2;
             _this.moveSpeed = moveSpeed;
             _this.knockback = 0.75;
             _this.eatTimer = 300;
-            _this.bounty = 5;
             _this.isFlying = true;
-            _this.expGain = 3;
             return _this;
         }
         // Methods
         Ghost.prototype.Start = function () {
             this.y = 400;
             this.x = 320;
+            var stageOfSpawn = managers.Game.currentStage.design;
+            switch (stageOfSpawn) {
+                case config.Design.MANSION:
+                    this.hp = 25;
+                    this.attackPower = 2;
+                    this.bounty = 15;
+                    this.expGain = 7;
+                    break;
+                case config.Design.HOTEL:
+                    this.hp = 8;
+                    this.attackPower = 1;
+                    this.bounty = 9;
+                    this.expGain = 5;
+                    break;
+                case config.Design.GRAVEYARD:
+                default:
+                    this.hp = 2;
+                    this.attackPower = 1;
+                    this.bounty = 5;
+                    this.expGain = 2;
+                    break;
+            }
         };
         Ghost.prototype.Update = function () {
             if (!this.isStunned && !this.isDead) {
@@ -41,9 +59,6 @@ var objects;
             }
             else if (this.isStunned && !this.isDead) {
                 this.SwitchAnimation("Ghost_Stun");
-                if (managers.Game.player.biteSequence == 0) {
-                    this.isDead = true;
-                }
             }
             else {
                 if (this.currentAnimation == "Ghost_Explode" && this.currentAnimationFrame > 3) {
@@ -73,6 +88,9 @@ var objects;
                 managers.Game.player.GainDollars(bounty);
             }
             this.stunIndicator.visible = false;
+        };
+        Ghost.prototype.DevourEffect = function () {
+            managers.Game.player.GainHealth(2);
         };
         return Ghost;
     }(objects.Enemy));
