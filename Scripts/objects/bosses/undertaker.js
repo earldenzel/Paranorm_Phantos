@@ -35,6 +35,7 @@ var objects;
             _this.walk = ["Boss1_WalkBack", "Boss1_WalkFront", "Boss1_WalkRight", "Boss1_WalkRight"];
             _this.attack = ["Boss1_AttackBack", "Boss1_AttackFront", "Boss1_AttackRight", "Boss1_AttackRight"];
             _this.direction = config.Direction.DOWN;
+            _this.expGain = 20;
             return _this;
         }
         // methods
@@ -175,7 +176,7 @@ var objects;
             return this.currentSpeed;
         };
         Undertaker.prototype.DevourEffect = function () {
-            managers.Game.player.GainAttack(10);
+            managers.Game.player.GainAttack(5);
         };
         Undertaker.prototype.RemoveFromPlay = function (bounty) {
             this.isDead = true;

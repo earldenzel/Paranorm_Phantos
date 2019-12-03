@@ -25,10 +25,18 @@ var scenes;
         }
         // Methods
         Hotel_2.prototype.Start = function () {
-            this.enemies[0] = new objects.Bat(2.5, 100);
+            this.enemies[0] = new objects.Bat(5, 200);
             this.enemies[0].SetPosition(new math.Vec2(280, 200));
-            this.enemies[1] = new objects.Bat(2, 100);
+            this.enemies[1] = new objects.Bat(5, 250);
             this.enemies[1].SetPosition(new math.Vec2(280, 650));
+            this.enemies[2] = new objects.Bat(10, 300);
+            this.enemies[2].SetPosition(new math.Vec2(0, 0));
+            this.enemies[3] = new objects.Bat(11, 270);
+            this.enemies[3].SetPosition(new math.Vec2(700, 0));
+            this.enemies[4] = new objects.Bat(8, 200);
+            this.enemies[4].SetPosition(new math.Vec2(0, 700));
+            this.enemies[5] = new objects.Bat(14, 250);
+            this.enemies[5].SetPosition(new math.Vec2(700, 900));
             this.obstacles[0] = new objects.Barriers(managers.Game.hotel_TextureAtlas, "Desk");
             this.obstacles[0].SetPosition(new math.Vec2(180, 300));
             this.obstacles[1] = new objects.Barriers(managers.Game.hotel_TextureAtlas, "Desk");

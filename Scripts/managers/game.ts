@@ -24,8 +24,8 @@ module managers {
         public static phantorm_TextureAtlas: createjs.SpriteSheet;
         public static currentScene: number;
         public static player: objects.Player;
-        public static gameHeight: number = 900;
-        public static gameWidth: number = 640;
+        public static gameHeight: number = 650;
+        public static gameWidth: number = 530;
         //public static messageStatus: objects.Label
         public static keyboardManager: managers.Keyboard;
         public static SFX: createjs.AbstractSoundInstance;

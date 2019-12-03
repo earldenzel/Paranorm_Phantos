@@ -18,13 +18,14 @@ var objects;
         // constructor
         function ShootingFLower(position) {
             var _this = _super.call(this, managers.Game.shootingFlower_TextureAtlas, "shootingFlower", position) || this;
-            _this.hp = 1;
+            _this.hp = 10;
             _this.attackPower = 1;
             _this.knockback = 0;
             _this.eatTimer = 500;
-            _this.bounty = 3;
+            _this.bounty = 5;
             _this.isFlying = false;
             _this.rateOfFire = 50;
+            _this.expGain = 3;
             return _this;
         }
         // methods

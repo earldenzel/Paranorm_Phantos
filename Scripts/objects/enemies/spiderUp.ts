@@ -14,7 +14,7 @@ module objects {
 
             this.distance = distance;
 
-            this.hp = 1;
+            this.hp = 10;
             this.moveSpeed = 1;
             this.attackPower = 1;
             this.knockback = 0.75;
@@ -22,6 +22,8 @@ module objects {
             this.bounty = 4;
             this.isFlying = false;
             this.halfSpeed = this.moveSpeed / 2;
+            this.rateOfFire = 70;
+            this.expGain = 3;
         }
 
         // methods

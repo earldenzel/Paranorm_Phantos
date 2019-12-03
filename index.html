@@ -5,6 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script type="text/javascript">
+        if (!document.location.host.includes("localhost")){
+            console.log(document.location.host);
+            document.write("<base href='/Paranorm_Phantos/'/>");
+        }
+    </script>
     <title>PHANTORM : A Game by KEY</title>
     <!--CSS Section-->
     <link rel="stylesheet" href="./Content/game.css">
@@ -14,9 +20,14 @@
 <body>
     <canvas id="canvas" width="564" height="762"></canvas>
     <!-- Dependencies -->
+    <!-- 
     <script src="./node_modules/easeljs/lib/easeljs.min.js"></script>
     <script src="./node_modules/soundjs/lib/soundjs.min.js"></script>
     <script src="./node_modules/preloadjs/lib/preloadjs.min.js"></script>
+    -->
+    <script src="https://code.createjs.com/1.0.0/easeljs.min.js"></script>
+    <script src="https://code.createjs.com/1.0.0/soundjs.min.js"></script>
+    <script src="https://code.createjs.com/1.0.0/preloadjs.min.js"></script>
     <script type="text/javascript" src="./Content/assetManifest.json"></script>
 
     <!--GAME SCRIPTS-->
@@ -44,6 +55,7 @@
     <script src="./Scripts/objects/gameobjects/barriers.js"></script>
     <script src="./Scripts/objects/gameobjects/gap.js"></script>
     <script src="./Scripts/objects/ui/title_ui.js"></script>
+    <script src="./Scripts/objects/player/swing.js"></script>
     <script src="./Scripts/objects/player/weapon.js"></script>
     <script src="./Scripts/objects/player/player.js"></script>
     <script src="./Scripts/objects/player/deadplayer.js"></script>
@@ -57,7 +69,6 @@
     <script src="./Scripts/objects/enemies/ghostteeth.js"></script>
     <script src="./Scripts/objects/enemies/maggot.js"></script>
     <script src="./Scripts/objects/enemies/maggotsmall.js"></script>
-    <script src="./Scripts/objects/enemies/testZombie.js"></script>
     <script src="./Scripts/objects/bosses/undertaker.js"></script>
     <script src="./Scripts/objects/enemies/spiderUp.js"></script>
     <script src="./Scripts/objects/enemies/spiderLeft.js"></script>

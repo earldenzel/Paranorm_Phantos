@@ -41,8 +41,13 @@ var objects;
                 this.isStunned = true;
                 this.CheckBound();
             }
-            //if it is stunned
-            if (this.isStunned) {
+            if (this.fallSequence !== 0) {
+                this.stunIndicator.visible = false;
+                this.canBeEaten = false;
+                this.canBeAttacked = false;
+                this.FallIntoHole();
+            }
+            else if (this.isStunned) {
                 //determine whether a bit is currently happening 
                 if (managers.Game.player.biteSequence == 0) {
                     //if it is currently in contact with player and whether the biting button is pressed, then disable movement
@@ -101,14 +106,15 @@ var objects;
             //the else for this condition is under play.ts - this is because the player might have other collisions with other enemies
             //if enemy is not taking damage -- check collision with weapon
             if (!this.isTakingDamage) {
-                if ((managers.Collision.Check(managers.Game.player.weapon, this) && this.canBeAttacked) || (managers.Collision.Check(managers.Game.player, this) && this.canBeAttacked && managers.Game.player.activatePowers && managers.Game.player.powerUp == config.PowerUp.BITE)) {
+                if ((managers.Collision.CheckWithOffsetAndDirection(this, managers.Game.player.swing, -19.5, -19.5, -9.5, -9.5, managers.Game.player.direction) && this.canBeAttacked)
+                    || (managers.Collision.Check(managers.Game.player, this) && this.canBeAttacked && managers.Game.player.activatePowers && managers.Game.player.powerUp == config.PowerUp.BITE)) {
                     this.isTakingDamage = true;
                     this.GetDamage(managers.Game.player);
                 }
             }
             //else, only remove the flag for taking damage when collision with weapon has ended
             else {
-                if (!managers.Collision.Check(managers.Game.player.weapon, this)) {
+                if (!managers.Collision.Check(managers.Game.player.swing, this)) {
                     this.isTakingDamage = false;
                 }
             }
@@ -195,6 +201,10 @@ var objects;
             if (this.currentAnimation != newAnimation) {
                 this.gotoAndPlay(newAnimation);
             }
+        };
+        Enemy.prototype.FallIntoHole = function () {
+            this.scaleX -= 0.01;
+            this.scaleY -= 0.01;
         };
         return Enemy;
     }(objects.GameObject));

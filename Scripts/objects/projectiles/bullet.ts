@@ -13,6 +13,7 @@ module objects {
         }
 
         public Update(): void {
+            //intentional change: please do not set this to weapon swing
             if(managers.Collision.Check(managers.Game.player.weapon, this)){
                 this.Reset();
             }
@@ -21,6 +22,7 @@ module objects {
 
                 // use ticker to restrict 1 bullet every 10 frames for damage
                 if (ticker % 10 == 0){
+                    managers.Game.player.isTakingProjectileDamage = true;
                     managers.Game.player.GetDamage(this);
                     this.Reset();
                 }

@@ -288,16 +288,14 @@ module scenes {
             this.obstacles.forEach(e => {
                 e.CheckBound();
                 this.enemies.forEach(f => {
-                    //if enemy is stunned and knocked back on a gap, then enemy dies
-                    if (f.isStunned && e instanceof objects.Gap && managers.Collision.Check(e, f)) {
-                        f.RemoveFromPlay(f.CalculateBounty());
-                    }
-                    //if enemy is
+                    //if enemy is a zombie
                     if (f instanceof objects.Zombie && e instanceof objects.Barriers) {
                         e.ZombieCheckBarrierCollision(f);
                     }
-
-                    if (!f.isFlying && e instanceof objects.Gap) {
+                    if (e instanceof objects.Gap && managers.Collision.Check(e, f)){
+                        if (!f.isStunned && f.isFlying){
+                            return;
+                        }
                         e.CheckGapDamage(f);
                     }
                     if(e instanceof objects.IceShield){
@@ -320,8 +318,8 @@ module scenes {
             });
 
             this.cosmetics.forEach(e => {
-                if (e instanceof objects.Stairs && managers.Collision.Check(managers.Game.player, e)) {
-                    managers.Game.currentScene = e.nextScene;
+                if (e instanceof objects.Stairs && managers.Collision.Check(managers.Game.player, e) && this.player.victorySequence == 0) {
+                    this.player.SetTransit(this.player.GetPosition(), e.nextScene, true);
                 }
             });
 
@@ -461,6 +459,7 @@ module scenes {
 
             this.playerInfo.PlayerEcto = this.player.ecto;
             this.playerInfo.PlayerPower = this.player.powerUp;
+            this.playerInfo.PlayerLevel = this.player.level;
 
         }
 
@@ -524,6 +523,7 @@ module scenes {
             });
             
             // PLAYER PLACEMENT
+            this.addChild(this.player.swing);
             this.addChild(this.player);
             this.addChild(this.player.weapon);
             this.player.deadPlayer.forEach(e => {
@@ -540,7 +540,7 @@ module scenes {
             // ENEMY PLACEMENT
             this.enemies.forEach(e => {
                 this.addChild(e);
-                if (e.canBeEaten && this.design == config.Design.GRAVEYARD){
+                if (e.canBeEaten){
                   this.addChild(e.stunIndicator);
                 }
             });            

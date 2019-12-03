@@ -70,6 +70,8 @@ var objects;
                     _this.available = false;
                     _this.triggeredSequence = 0;
                     _this.Update();
+                    managers.Game.SFX = createjs.Sound.play("itemCollect");
+                    managers.Game.SFX.volume = 0.2;
                 }, 250);
             }
         };

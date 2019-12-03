@@ -20,13 +20,14 @@ var objects;
         function Ghost(moveSpeed) {
             var _this = _super.call(this, managers.Game.enemies_TextureAtlas, "Ghost_Idle") || this;
             _this.Start();
-            _this.hp = 2;
-            _this.attackPower = 1;
+            _this.hp = 3;
+            _this.attackPower = 2;
             _this.moveSpeed = moveSpeed;
             _this.knockback = 0.75;
             _this.eatTimer = 300;
             _this.bounty = 5;
             _this.isFlying = true;
+            _this.expGain = 3;
             return _this;
         }
         // Methods
@@ -45,13 +46,11 @@ var objects;
                 }
             }
             else {
-                if (managers.Game.player.biteSequence != 0) {
-                    if (this.currentAnimation == "Ghost_Explode" && this.currentAnimationFrame > 3) {
-                        managers.Game.stage.removeChild(this);
-                        this.visible = false;
-                    }
-                    this.SwitchAnimation("Ghost_Explode");
+                if (this.currentAnimation == "Ghost_Explode" && this.currentAnimationFrame > 3) {
+                    managers.Game.stage.removeChild(this);
+                    this.visible = false;
                 }
+                this.SwitchAnimation("Ghost_Explode");
             }
             _super.prototype.Update.call(this);
         };

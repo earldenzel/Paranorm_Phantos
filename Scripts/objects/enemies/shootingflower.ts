@@ -8,13 +8,14 @@ module objects {
         constructor(position: math.Vec2) {
             super(managers.Game.shootingFlower_TextureAtlas, "shootingFlower", position);
 
-            this.hp = 1;
+            this.hp = 10;
             this.attackPower = 1;
             this.knockback = 0;
             this.eatTimer = 500;
-            this.bounty = 3;
+            this.bounty = 5;
             this.isFlying = false;
             this.rateOfFire = 50;
+            this.expGain = 3;
         }
 
         // methods

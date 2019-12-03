@@ -58,8 +58,8 @@ var objects;
         Weapon.prototype.CheckBound = function () {
         };
         Weapon.prototype.Attack = function () {
-            //console.log("Attack initiated");
             this.visible = true;
+            this.direction = managers.Game.player.direction;
             this.currentAnimationFrame = 0;
             managers.Game.SFX = createjs.Sound.play("phoebeDash-Swing");
             managers.Game.SFX.volume = 0.2;

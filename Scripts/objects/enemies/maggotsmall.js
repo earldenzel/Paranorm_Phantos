@@ -29,6 +29,7 @@ var objects;
             _this.eatTimer = 100;
             _this.bounty = 5;
             _this.isFlying = false;
+            _this.expGain = 1;
             _this.halfSpeed = moveSpeed / 2;
             _this.walk = ["Maggot_SmallWalkForward", "Maggot_SmallWalkForward", "Maggot_SmallWalkSide", "Maggot_SmallWalkSide"];
             _this.direction = config.Direction.DOWN;
@@ -40,22 +41,15 @@ var objects;
             this.x = 320;
         };
         MaggotSmall.prototype.Update = function () {
-            if (!this.isDead && !this.isStunned) {
+            if (!this.isDead) {
                 this.SwitchAnimation(this.walk[this.direction]);
             }
-            else if (!this.isDead && this.isStunned) {
-                if (managers.Game.player.biteSequence == 0) {
-                    this.isDead = true;
-                }
-            }
             else {
-                if (managers.Game.player.biteSequence != 0) {
-                    if (this.currentAnimation == "Maggot_Explode" && this.currentAnimationFrame > 3) {
-                        managers.Game.stage.removeChild(this);
-                        this.visible = false;
-                    }
-                    this.SwitchAnimation("Maggot_Explode");
-                }
+                this.SwitchAnimation("Maggot_Explode");
+            }
+            if (this.currentAnimation == "Maggot_Explode" && this.currentAnimationFrame > 3) {
+                managers.Game.stage.removeChild(this);
+                this.visible = false;
             }
             _super.prototype.Update.call(this);
         };
@@ -92,6 +86,9 @@ var objects;
                 managers.Game.player.GainDollars(bounty);
             }
             this.stunIndicator.visible = false;
+        };
+        MaggotSmall.prototype.DevourEffect = function () {
+            managers.Game.player.GainHealth(1);
         };
         return MaggotSmall;
     }(objects.Enemy));

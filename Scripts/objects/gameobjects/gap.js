@@ -32,14 +32,18 @@ var objects;
         Gap.prototype.CheckBound = function () {
         };
         Gap.prototype.CheckGapDamage = function (entity) {
-            var offset = -config.Bounds.OBSTACLE_OFFSET;
-            var gapTopLeftX = this.x - this.halfW - offset;
-            var gapTopLeftY = this.y - this.halfH - offset;
-            var gapBotRightX = gapTopLeftX + this.width + offset;
-            var gapBotRightY = this.y + this.width + offset;
-            var entityFeetX = entity.x;
+            if (entity.fallSequence > 0) {
+                return;
+            }
+            var leftX = this.x - this.halfW + config.Bounds.OBSTACLE_OFFSET;
+            var rightX = this.x + this.halfW + config.Bounds.OBSTACLE_OFFSET;
+            var topY = this.y - this.halfH + config.Bounds.OBSTACLE_OFFSET;
+            var botY = this.y + this.halfH;
+            var entityFeetX = entity.x + entity.halfW;
             var entityFeetY = entity.y + entity.halfH;
-            if (entityFeetX > gapTopLeftX && entityFeetX < gapBotRightX && entityFeetY > gapTopLeftY && entityFeetY < gapBotRightY) {
+            if ((entityFeetX > leftX && entityFeetX < rightX && entityFeetY > topY && entityFeetY < botY)
+                || (entity instanceof objects.Enemy && entity.isStunned && entity.isFlying)) {
+                entity.SetPosition(new math.Vec2(leftX, this.y));
                 //if enemy is entity, and a fall sequence was not defined, then define call sequence
                 //remove all view and keyboard, then after 1 second, transfer to original position
                 if (entity instanceof objects.Player && managers.Game.player.fallSequence == 0) {
@@ -65,8 +69,13 @@ var objects;
                         // Not Defined yet                                
                     }, 1000);
                 }
-                else if (entity instanceof objects.Enemy && !entity.isFlying) {
-                    entity.RemoveFromPlay(entity.CalculateBounty());
+                else if (entity instanceof objects.Enemy && entity.fallSequence == 0) {
+                    entity.fallSequence = setTimeout(function () {
+                        entity.fallSequence = 0;
+                        entity.RemoveFromPlay(entity.CalculateBounty());
+                        // Sound Effect
+                        // Not Defined yet                                
+                    }, 1000);
                 }
             }
         };

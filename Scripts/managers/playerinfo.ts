@@ -5,6 +5,7 @@ module managers {
 
         public moneyLabel: objects.Label;
         public keyLabel: objects.Label;
+        public levelLabel: objects.Label;
         public playerInfo_Health: Array<createjs.Sprite>;
         public playerInfo_Ecto: createjs.Sprite;
         public playerInfo_Map: createjs.Sprite;
@@ -18,6 +19,7 @@ module managers {
         private playerEcto: number;
         private playerLocation: math.Vec2;
         private playerPower: config.PowerUp;
+        private level: number;
 
         // Add in Player Location
 
@@ -101,6 +103,21 @@ module managers {
             this.playerPower = newPower;
             this.ChangePlayerPower();
         }
+        get PlayerLevel(): number {
+            return this.level;
+        }
+        set PlayerLevel(newLevel: number) {
+            this.level = newLevel;
+            let newText: string;
+            if (newLevel < 10){
+                newText = "LV.0" + newLevel;
+            }
+            else{
+                newText = "LV." + newLevel
+            }
+            this.levelLabel.text = newText;
+        }
+
 
         // Constructor
         constructor() {
@@ -115,6 +132,9 @@ module managers {
             // Create Labels
             this.moneyLabel = new objects.Label(
                 "00000000", "16px", "'Press Start 2P'", "#FFFFFF", 236, 20, false
+            );
+            this.levelLabel = new objects.Label(
+                "LV.99", "16px", "'Press Start 2P'", "#FFFFFF", 200, 48, false
             );
             this.keyLabel = new objects.Label(
                 "00", "16px", "'Press Start 2P'", "#FFFFFF", 250, 77, false
@@ -204,6 +224,7 @@ module managers {
 
             this.addChild(this.moneyLabel);
             this.addChild(this.keyLabel);
+            this.addChild(this.levelLabel);
             this.playerInfo_Health.forEach(e => {
                 this.addChild(e);
             });

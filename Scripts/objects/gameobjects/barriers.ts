@@ -5,9 +5,14 @@ module objects {
         // Constructor
         constructor(textureAtlas: createjs.SpriteSheet, imageString: string) {
             super(textureAtlas, imageString);
+            this.Start();
         }
         // Methods
         public Start(): void {
+            if (this.name == "GraveTile"){
+                this.scaleX = 2;
+                this.scaleY = 2;
+            }
         }
         public Update(): void { }
         public Reset(): void { }
@@ -15,9 +20,9 @@ module objects {
         public CheckBound(): void {
             if (managers.Collision.CheckWithOffset(
                 this, managers.Game.player,
-                0,
+                -config.Bounds.OBSTACLE_OFFSET,
                 managers.Game.player.height - config.Bounds.OBSTACLE_OFFSET,
-                managers.Game.player.halfW - config.Bounds.OBSTACLE_OFFSET,
+                -config.Bounds.OBSTACLE_OFFSET,
                 managers.Game.player.halfW - config.Bounds.OBSTACLE_OFFSET
             )) {
                 if (managers.Game.keyboardManager.moveLeft) {

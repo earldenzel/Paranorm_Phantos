@@ -99,7 +99,7 @@ module config {
                 // EDIT
                 "id": "background_d_vertT",
                 "src": "./Assets/_Background/_TestStageB/PlaceholderB_DoorV_Top.png"
-                //"./Assets/_Background/_TestStage/Placeholder_DOOR-VerticalTop.png"
+                //"../Assets/_Background/_TestStage/Placeholder_DOOR-VerticalTop.png"
             },
             {
                 // NEW
@@ -110,7 +110,7 @@ module config {
                 // EDIT
                 "id": "background_d_vert",
                 "src": "./Assets/_Background/_TestStageB/PlaceholderB_DoorV.png"
-                //"./Assets/_Background/_TestStage/Placeholder_DOOR-Vertical.png"
+                //"../Assets/_Background/_TestStage/Placeholder_DOOR-Vertical.png"
             },
             {
                 "id": "background_d_vertC",
@@ -120,7 +120,7 @@ module config {
                 // EDIT
                 "id": "background_d_hori",
                 "src": "./Assets/_Background/_TestStageB/PlaceholderB_DoorH.png"
-                //"./Assets/_Background/_TestStage/Placeholder_DOOR-Horizontal.png"
+                //"../Assets/_Background/_TestStage/Placeholder_DOOR-Horizontal.png"
             },
             {
                 "id": "background_d_horiC",
@@ -130,7 +130,7 @@ module config {
                 // EDIT 
                 "id": "background_f_all",
                 "src": "./Assets/_Background/_TestStageB/PlaceholderB_Background_Floor.png"
-                //"./Assets/_Background/_TestStage/Placeholder_FLOOR-All.png"
+                //"../Assets/_Background/_TestStage/Placeholder_FLOOR-All.png"
             },
             {
                 "id": "background_w_hori",
@@ -792,27 +792,35 @@ module config {
                 "Items_Rubies": { "frames": [54] },
                 "Items_Sapphires": { "frames": [55] },
                 "upIndicator": {
-                    "frames": [28, 28, 28, 30, 30, 30],
+                    "frames": [28, 28, 28, 28, 28, 28, 28, 28, 28, 30, 30, 30, 30, 30, 30, 30, 30, 30],
                     "speed": 0.1
                 },
                 "downIndicator": {
-                    "frames": [20, 20, 20, 26, 26, 26],
+                    "frames": [20, 20, 20, 20, 20, 20, 20, 20, 20, 26, 26, 26, 26, 26, 26, 26, 26, 26],
                     "speed": 0.1
                 },
                 "leftIndicator": {
-                    "frames": [24, 24, 24, 17, 17, 17],
+                    "frames": [24, 24, 24, 24, 24, 24, 24, 24, 24, 17, 17, 17, 17, 17, 17, 17, 17, 17],
                     "speed": 0.1
                 },
                 "rightIndicator": {
-                    "frames": [25, 25, 25, 19, 19, 19],
+                    "frames": [25, 25, 25, 25, 25, 25, 25, 25, 25, 19, 19, 19, 19, 19, 19, 19, 19, 19],
                     "speed": 0.1
                 },
                 "attackIndicator": {
-                    "frames": [21, 21, 21, 32, 32, 32],
+                    "frames": [21, 21, 21, 21, 21, 21, 21, 21, 21, 32, 32, 32, 32, 32, 32, 32, 32, 32],
                     "speed": 0.1
                 },
                 "stunIndicator": {
-                    "frames": [22, 22, 22, 31, 31, 31],
+                    "frames": [22, 22, 22, 22, 22, 22, 22, 22, 22, 31, 31, 31, 31, 31, 31, 31, 31, 31],
+                    "speed": 0.1
+                },
+                "runIndicator": {
+                    "frames": [18, 18, 18, 18, 18, 18, 18, 18, 18, 23, 23, 23, 23, 23, 23, 23, 23, 23],
+                    "speed": 0.1
+                },
+                "powersIndicator": {
+                    "frames": [29, 29, 29, 29, 29, 29, 29, 29, 29, 27, 27, 27, 27, 27, 27, 27, 27, 27],
                     "speed": 0.1
                 }
             }
@@ -1420,7 +1428,10 @@ module config {
                     "frames": [83, 84, 70, 3],
                     "speed": 0.1
                 },
-                "Phoebe_Hurt": { "frames": [78] },
+                "Phoebe_Hurt": { 
+                    "frames": [78],
+                    "speed": 0.1
+                },
                 "Phoebe_Run_Left": {
                     "frames": [47, 74],
                     "speed": 0.2
@@ -1478,7 +1489,10 @@ module config {
                     "frames": [69, 73],
                     "speed": 0.1
                 },
-                "Phoebe_Victory": { "frames": [2] }, // DONE
+                "Phoebe_Victory": { 
+                    "frames": [22, 11, 20, 15, 26, 14, 27, 10, 22, 11, 2],
+                    "speed": 0.1
+                 }, // DONE
 
                 "PhoebeSoul_Attack_Left": {
                     "frames": [0, 0],

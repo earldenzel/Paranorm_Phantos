@@ -6,12 +6,16 @@ module objects {
         public attackSequence: number = 0;
         public delaySequence: number = 0;
         public biteSequence: number = 0;
-        public fallSequence: number = 0;
         public textSequence: number = 0;
+        public transitSequence: number = 0;
+        public victorySequence: number = 0;
+        public contactDamageTimer: number;
+        public projectileDamageTimer: number;
         public playerMoveSpeed: number = 4;
         public playerHalfSpeed: number = this.playerMoveSpeed / 4;
         public playerAttackDelay: number = 1000;
         public weapon: objects.Weapon;
+        public swing: objects.Swing;
         private bitingTimer: number = 0;
         private bitingReset: number = 0;
         public canTraverseTop: boolean = false;
@@ -37,12 +41,14 @@ module objects {
         public deathCount: number = 0;
         public stageFinished: number = 0;
         private iceShield: objects.IceShield;
+        public godMode: boolean = false;
 
         public ecto: number;
         public maxHp: number;
         public maxEcto: number;
         public activatePowers: boolean;
         public experience: number;
+        public level: number;
 
         // Soul Activation
         public activateSoul: boolean;
@@ -60,8 +66,9 @@ module objects {
 
         //Constructor
         constructor() {
-            super(managers.Game.phoebe_TextureAtlas, "Phoebe_Walk_Back1");
+            super(managers.Game.phoebe_TextureAtlas, "Phoebe_Walk_Front1");
             this.weapon = new objects.Weapon();
+            this.swing = new objects.Swing();
             this.Start();
             this.hp = 5;
             this.maxHp = this.hp;
@@ -75,7 +82,7 @@ module objects {
             this.bitedash = ["Phoebe_Bite_Back", "Phoebe_Bite_Front1", "Phoebe_Bite_Left1", "Phoebe_Bite_Right1"];
             this.bite = ["Phoebe_Bite_Front2", "Phoebe_Bite_Front2", "Phoebe_Bite_Left2", "Phoebe_Bite_Right2"];
             this.specialAttack = ["Phoebe_SpecialAttack_Back", "Phoebe_SpecialAttack_Front", "Phoebe_SpecialAttack_Left", "Phoebe_SpecialAttack_Right"];
-            this.direction = config.Direction.UP;
+            this.direction = config.Direction.DOWN;
             this.money = 0;
             this.playerStatus = new objects.Label("1234567890", "16px", "'Press Start 2P'", "#FFFFFF", this.x, this.y, true);
             this.key = 0;
@@ -89,12 +96,16 @@ module objects {
             this.experience = 0;
 
             this.SoulSetup();
+            this.level = 0;
+            this.contactDamageTimer = 0;
+            this.projectileDamageTimer = 0;
         }
 
         // Methods
         public Start(): void {
-            this.x = 320;
-            this.y = 700;
+            this.x = 285;
+            this.y = 600;
+            this.lastPosition = this.GetPosition();
             //this.playerController = { "W": false, "A": false, "S": false, "D": false, "Z": false };
         }
 
@@ -115,9 +126,38 @@ module objects {
             }
             this.x = Math.round(this.x);
             this.y = Math.round(this.y);
+
+            //player should take damage again in 200ms
+            if (this.isTakingDamage){
+                this.contactDamageTimer++;
+            }
+            else{
+                this.contactDamageTimer = 0;
+            }
+            if (this.contactDamageTimer > 200){
+                this.contactDamageTimer = 0;
+                this.isTakingDamage = false;
+            }
+
+            if (this.isTakingProjectileDamage){
+                this.projectileDamageTimer++;
+            }
+            if (this.projectileDamageTimer > 20){
+                this.projectileDamageTimer = 0;
+                this.isTakingProjectileDamage = false;
+            }
+            if (this.fallSequence > 0){
+                this.FallIntoHole();
+            }
+            else{
+                this.scaleX = 1;
+                this.scaleY = 1;
+            }
+
             if (this.hp > 0) {
                 this.Move();
                 this.weapon.Update();
+                this.swing.Update();
             }
             if (this.isDead) {
                 this.deadPlayer.forEach(e => {
@@ -218,9 +258,15 @@ module objects {
                     && !managers.Game.keyboardManager.moveRight
                     && !managers.Game.keyboardManager.attacking
                     && !managers.Game.keyboardManager.biting
-                    && this.biteSequence === 0) {
-                    this.SwitchAnimation(this.stand[this.direction as number]);
+                    && this.biteSequence === 0
+                    && this.victorySequence == 0){
+                        this.SwitchAnimation(this.stand[this.direction as number]);
                 }
+
+                if (this.victorySequence !== 0){
+                    this.SwitchAnimation("Phoebe_Victory");
+                }
+
                 // Running Implementation
                 if (managers.Game.keyboardManager.running) {
                     let runningSpeed: number = this.playerMoveSpeed + 2;
@@ -325,6 +371,7 @@ module objects {
                     this.activatePowers = true;
                 }
                 else {
+                    this.EchoMessage("I HAVE NO POWERS YET");
                     this.activatePowers = false;
                 }
             }
@@ -462,10 +509,9 @@ module objects {
                     if (this.y < config.Bounds.DOOR_EASING_TOP || this.y > config.Bounds.DOOR_EASING_BOTTOM) {
                         this.x = config.Bounds.RIGHT_BOUND - this.halfW;
                     }
-                    if (this.x >= config.Bounds.RIGHT_BOUND + this.width) {
-                        managers.Game.currentScene = this.sceneOnRight;
+                    if (this.x >= config.Bounds.RIGHT_BOUND + this.width && this.transitSequence == 0) {
                         this.lastPosition = new math.Vec2(config.Bounds.LEFT_BOUND - this.halfW, this.y);
-                        this.SetPosition(this.lastPosition);
+                        this.SetTransit(this.lastPosition, this.sceneOnRight);
                     }
                 }
                 else {
@@ -478,10 +524,9 @@ module objects {
                     if (this.y < config.Bounds.DOOR_EASING_TOP || this.y > config.Bounds.DOOR_EASING_BOTTOM) {
                         this.x = this.halfW + config.Bounds.LEFT_BOUND;
                     }
-                    if (this.x <= 0) {
-                        managers.Game.currentScene = this.sceneOnLeft;
+                    if (this.x <= 0 && this.transitSequence == 0) {
                         this.lastPosition = new math.Vec2(config.Bounds.RIGHT_BOUND + this.halfW, this.y);
-                        this.SetPosition(this.lastPosition);
+                        this.SetTransit(this.lastPosition, this.sceneOnLeft);
                     }
                 }
                 else {
@@ -494,10 +539,9 @@ module objects {
                     if (this.x < config.Bounds.DOOR_EASING_LEFT || this.x > config.Bounds.DOOR_EASING_RIGHT) {
                         this.y = config.Bounds.BOTTOM_BOUND - this.halfH;
                     }
-                    if (this.y >= config.Bounds.BOTTOM_BOUND + this.height) {
-                        managers.Game.currentScene = this.sceneOnBot;
+                    if (this.y >= config.Bounds.BOTTOM_BOUND + this.height && this.transitSequence == 0) {
                         this.lastPosition = new math.Vec2(this.x, this.halfH + config.Bounds.TOP_BOUND)
-                        this.SetPosition(this.lastPosition);
+                        this.SetTransit(this.lastPosition, this.sceneOnBot);
                     }
                 }
                 else {
@@ -510,10 +554,9 @@ module objects {
                     if (this.x < config.Bounds.DOOR_EASING_LEFT || this.x > config.Bounds.DOOR_EASING_RIGHT) {
                         this.y = this.halfH + config.Bounds.TOP_BOUND;
                     }
-                    if (this.y <= config.Bounds.TOP_BOUND - (this.height / 2)) {
-                        managers.Game.currentScene = this.sceneOnTop;
-                        this.lastPosition = new math.Vec2(this.x, config.Bounds.BOTTOM_BOUND + this.height);
-                        this.SetPosition(this.lastPosition);
+                    if (this.y <= config.Bounds.TOP_BOUND && this.transitSequence == 0) {
+                        this.lastPosition = new math.Vec2(this.x, config.Bounds.BOTTOM_BOUND + this.halfH);
+                        this.SetTransit(this.lastPosition, this.sceneOnTop);
                     }
                 }
                 else {
@@ -735,13 +778,14 @@ module objects {
             }
         }
 
-        public VictoryMessage(nextScene: config.Scene) {
-            managers.Game.keyboardManager.ControlReset();
-            this.EchoMessage("I DID IT!", 3000);
-            setTimeout(() => {
+        public VictoryDance() {
+            this.EchoMessage("I DID IT!", 1000);
+            managers.Game.keyboardManager.ControlReset();    
+            this.victorySequence = setTimeout(() => {
+                this.victorySequence = 0;
                 managers.Game.keyboardManager.enabled = true;
-                managers.Game.currentScene = nextScene;
-            }, 3000);
+                this.direction = config.Direction.DOWN;
+            }, 2000);
         }
 
         public EchoMessage(message: string, timeout: number = 1000) {
@@ -767,9 +811,19 @@ module objects {
             }
         }
 
-        public GainExperience(experience: number): void {
+        public GainExperience(experience: number): void{
+            if (experience == null){
+                experience = 0;
+            }
             this.experience += experience;
-            console.log("i am level " + managers.Game.expConfigurer.DetermineLevel(this.experience));
+            let calculatedLevel : number = managers.Game.expConfigurer.DetermineLevel(this.experience);
+            if (calculatedLevel > this.level){
+                for (let index = this.level+1; index <= calculatedLevel; index++) {                    
+                    managers.Game.expConfigurer.LevelUpEffects(index);           
+                }
+                this.level = calculatedLevel;
+                this.EchoMessage("I REACHED LV." + this.level);
+            }
         }
 
         private phoebeDied(): void {
@@ -796,6 +850,11 @@ module objects {
             if (this.currentAnimation != newAnimation) {
                 this.gotoAndPlay(newAnimation);
             }
+            if ((this.isTakingDamage && this.contactDamageTimer <20)
+                || (this.isTakingProjectileDamage && this.projectileDamageTimer < 20)
+                || this.fallSequence !== 0){
+                this.gotoAndPlay("Phoebe_Hurt");
+            }
         }
 
         public SetBitePositionDirection(target: math.Vec2): void {
@@ -813,9 +872,26 @@ module objects {
                     break;
             }
             this.SetPosition(target);
+        } 
 
+        public FallIntoHole(){
+            this.scaleX -= 0.04;
+            this.scaleY -= 0.06;
         }
 
+        public SetTransit(nextPosition: math.Vec2, nextScene: config.Scene, changeMusic: boolean = false): void{
+            this.visible = false;
+            this.transitSequence = setTimeout(() =>{
+                this.visible = true;
+                managers.Game.currentScene = nextScene;
+                if (changeMusic){
+                    managers.Game.music.stop();
+                }
+                this.SetPosition(nextPosition);
+                this.transitSequence = 0;
+            }, 200);
+        }
+        
         public ProjectileAttack(bulletType: config.PowerUp): void {
             let ticker = createjs.Ticker.getTicks();
             let rateOfFire = 10;

@@ -21,6 +21,7 @@ module objects {
             this.eatTimer = 100;
             this.bounty = 5;
             this.isFlying = false;
+            this.expGain = 1;
             this.halfSpeed = moveSpeed / 2;
 
             this.walk = ["Maggot_SmallWalkForward", "Maggot_SmallWalkForward", "Maggot_SmallWalkSide", "Maggot_SmallWalkSide"];
@@ -34,22 +35,15 @@ module objects {
             this.x = 320;
         }
         public Update(): void {
-            if (!this.isDead && !this.isStunned) {
+            if (!this.isDead) {
                 this.SwitchAnimation(this.walk[this.direction as number]);
             }
-            else if(!this.isDead && this.isStunned){
-                if (managers.Game.player.biteSequence == 0) {
-                    this.isDead = true;
-                }
+            else{                 
+                this.SwitchAnimation("Maggot_Explode");
             }
-            else {
-                if (managers.Game.player.biteSequence != 0) {
-                    if (this.currentAnimation == "Maggot_Explode" && this.currentAnimationFrame > 3) {
-                        managers.Game.stage.removeChild(this);
-                        this.visible = false;
-                    }
-                    this.SwitchAnimation("Maggot_Explode");
-                }
+            if (this.currentAnimation == "Maggot_Explode" && this.currentAnimationFrame > 3) {
+                managers.Game.stage.removeChild(this);
+                this.visible = false;
             }
             super.Update();
         }
@@ -89,6 +83,9 @@ module objects {
                 managers.Game.player.GainDollars(bounty);
             }
             this.stunIndicator.visible = false;
+        }
+        public DevourEffect(): void{
+            managers.Game.player.GainHealth(1);
         }
     }
 }
