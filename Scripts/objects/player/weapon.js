@@ -19,6 +19,7 @@ var objects;
         function Weapon() {
             var _this = _super.call(this, managers.Game.phoebe_TextureAtlas, "Phoebe_Attack_Back") || this;
             _this.images = ["Phoebe_Attack_Back", "Phoebe_Attack_Front", "Phoebe_Attack_Left", "Phoebe_Attack_Right"];
+            _this.soulImages = ["PhoebeSoul_Attack_Back", "PhoebeSoul_Attack_Front", "PhoebeSoul_Attack_Left", "PhoebeSoul_Attack_Right"];
             //this.animationEnd = [15, 12, 18, 28];
             _this.animationEnd = [8, 20, 9, 27];
             _this.Start();
@@ -33,11 +34,21 @@ var objects;
         Weapon.prototype.Update = function () {
             this.x = managers.Game.player.x;
             this.y = managers.Game.player.y;
-            if (this.currentAnimationFrame > 2.8) {
-                this.visible = false;
-                managers.Game.player.attackSequence = 0;
-                managers.Game.player.alpha = 1;
-                console.log("Attack ended");
+            if (!managers.Game.player.activateSoul) {
+                if (this.currentAnimationFrame > 2.8) {
+                    this.visible = false;
+                    managers.Game.player.attackSequence = 0;
+                    managers.Game.player.alpha = 1;
+                    //console.log("Attack ended");
+                }
+            }
+            else {
+                if (this.currentAnimationFrame > 1.4) {
+                    this.visible = false;
+                    managers.Game.player.attackSequence = 0;
+                    managers.Game.player.alpha = 1;
+                    //console.log("Attack ended");
+                }
             }
         };
         // Resets the position of the object
@@ -47,7 +58,7 @@ var objects;
         Weapon.prototype.CheckBound = function () {
         };
         Weapon.prototype.Attack = function () {
-            console.log("Attack initiated");
+            //console.log("Attack initiated");
             this.visible = true;
             this.currentAnimationFrame = 0;
             managers.Game.SFX = createjs.Sound.play("phoebeDash-Swing");
@@ -57,12 +68,31 @@ var objects;
             }
             this.Delay();
         };
+        Weapon.prototype.SoulAttack = function () {
+            console.log("Soul Attack initiated");
+            this.visible = true;
+            this.currentAnimationFrame = 0;
+            managers.Game.SFX = createjs.Sound.play("phoebeDash-Swing");
+            managers.Game.SFX.volume = 0.2;
+            if (this.currentAnimation != this.soulImages[managers.Game.player.direction]) {
+                this.gotoAndPlay(this.soulImages[managers.Game.player.direction]);
+            }
+            this.Delay();
+        };
         Weapon.prototype.Delay = function () {
-            console.log("Delay initiated");
-            setTimeout(function () {
-                managers.Game.player.delaySequence = 0;
-                console.log("Delay ended");
-            }, managers.Game.player.playerAttackDelay);
+            //console.log("Delay initiated");
+            if (!managers.Game.player.activateSoul) {
+                setTimeout(function () {
+                    managers.Game.player.delaySequence = 0;
+                    //console.log("Delay ended");
+                }, managers.Game.player.playerAttackDelay);
+            }
+            else {
+                setTimeout(function () {
+                    managers.Game.player.delaySequence = 0;
+                    //console.log("Delay ended");
+                }, managers.Game.player.soulAttackDelay);
+            }
         };
         return Weapon;
     }(objects.GameObject));

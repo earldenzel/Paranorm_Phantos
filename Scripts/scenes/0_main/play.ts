@@ -307,7 +307,7 @@ module scenes {
                     //    e.CheckSlowMovement(f);
                     //}
                 });
-                if (e instanceof objects.Gap) {
+                if (e instanceof objects.Gap && !this.player.isFlying) {
                     e.CheckGapDamage(this.player);
                 }
                 //if(e instanceof objects.SlimePuddle){

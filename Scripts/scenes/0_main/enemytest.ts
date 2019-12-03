@@ -6,7 +6,7 @@ module scenes{
         constructor(){
             super(false,false,false,false,config.Design.HOTEL);
             this.hasProjectileShooters = true;
-            //this.player.ecto = this.player.maxEcto;
+            this.player.ecto = this.player.maxEcto;
             //this.player.GainMaxHealth();
             this.Start();
         }
@@ -23,11 +23,11 @@ module scenes{
             //    (this.obstacles[2] as objects.SlimePuddle),
             //    (this.obstacles[3] as objects.SlimePuddle)
             //];
-            this.enemies[0] = new objects.Undertaker(2);
+            //this.enemies[0] = new objects.Undertaker(2);
             //this.enemies[0].hp = 1;
             //this.enemies[0] = new objects.GhostSlime();
             //this.enemies[1] = new objects.GhostSlime();
-            //this.enemies[0] = new objects.GhostMan(2);
+            this.enemies[0] = new objects.GhostMan(2);
             //this.enemies[0] = new objects.Skeleton(new math.Vec2(300,300),2,true,false);
             super.Start();
         }

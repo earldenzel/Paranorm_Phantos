@@ -44,6 +44,20 @@ module objects {
         public activatePowers: boolean;
         public experience: number;
 
+        // Soul Activation
+        public activateSoul: boolean;
+        public soulCounter: number = 2500;
+        public isFlying: boolean;
+        public soulMoveSpeed: number;
+        public soulAttackPower: number;
+        public soulAttackDelay: number = 500;
+        private soulIdle: Array<any>;
+        private soulRun: Array<any>;
+        private soulDodge: Array<any>;
+        private dodgeTimer: number = 0;
+        private dodgeReset: number = 0;
+        private soulSpecialAttack: Array<any>;
+
         //Constructor
         constructor() {
             super(managers.Game.phoebe_TextureAtlas, "Phoebe_Walk_Back1");
@@ -73,6 +87,8 @@ module objects {
                 new objects.DeadPlayer("Phoebe_Dead_B", true, true)
             ];
             this.experience = 0;
+
+            this.SoulSetup();
         }
 
         // Methods
@@ -84,9 +100,17 @@ module objects {
 
         public Update(): void {
             managers.Game.player = this;
-            if(this.iceShield != null){
+            if (this.iceShield != null) {
                 this.iceShield.Update();
                 this.iceShield.isActivated = this.activatePowers;
+            }
+            if(this.activateSoul && this.soulCounter > 0){
+                this.soulCounter -= 1;
+                console.log(this.soulCounter);
+            }
+            else if(this.activateSoul && this.soulCounter <= 0){
+                this.soulCounter = 0;
+                this.activateSoul = false;
             }
             this.x = Math.round(this.x);
             this.y = Math.round(this.y);
@@ -111,25 +135,50 @@ module objects {
                 this.playerStatus.y = this.y - this.halfH - config.Bounds.TEXT_OFFSET;
             }
 
-            if (this.bitingTimer == 4) {
-                this.bitingReset++;
+            if(!this.activateSoul){
+                if (this.bitingTimer == 4) {
+                    this.bitingReset++;
+                }
+                if (this.bitingReset == 40) {
+                    console.log("BITING RESET");
+                    this.bitingTimer = 0;
+                    this.bitingReset = 0;
+                }
+    
+                // SOUND EFFECTS
+                if (this.bitingTimer == 1) {
+                    managers.Game.SFX = createjs.Sound.play("phoebeDash-Swing");
+                    managers.Game.SFX.volume = 0.2;
+                    this.bitingTimer++;
+                }
             }
-            if (this.bitingReset == 40) {
-                console.log("BITING RESET");
-                this.bitingTimer = 0;
-                this.bitingReset = 0;
+            else{
+                if (this.dodgeTimer == 4) {
+                    this.dodgeReset++;
+                }
+                if (this.dodgeReset == 40) {
+                    console.log("BITING RESET");
+                    this.dodgeTimer = 0;
+                    this.dodgeReset = 0;
+                }
+    
+                // SOUND EFFECTS
+                if (this.dodgeTimer == 1) {
+                    managers.Game.SFX = createjs.Sound.play("phoebeDash-Swing");
+                    managers.Game.SFX.volume = 0.2;
+                    this.dodgeTimer++;
+                }
             }
-
-            // SOUND EFFECTS
-            if (this.bitingTimer == 1) {
-                managers.Game.SFX = createjs.Sound.play("phoebeDash-Swing");
-                managers.Game.SFX.volume = 0.2;
-                this.bitingTimer++;
-            }
+            
 
             this.ActivatePowers();
             if (this.activatePowers && (this.powerUp == config.PowerUp.SLIME || this.powerUp == config.PowerUp.FIRE)) {
-                this.SwitchAnimation(this.specialAttack[this.direction as number]);
+                if(!this.activateSoul){
+                    this.SwitchAnimation(this.specialAttack[this.direction as number]);
+                }
+                else{
+                    this.SwitchAnimation(this.soulSpecialAttack[this.direction as number]);
+                }
                 this.ProjectileAttack(this.powerUp);
             }
         }
@@ -148,8 +197,19 @@ module objects {
         }
 
         public Move(): void {
+            if(!this.activateSoul){
+                this.PlayerMove();
+            }
+            else{
+                this.SoulMove()
+            }
+        }
+        public PlayerMove(): void {
             //movement implementation
 
+            if(managers.Game.keyboardManager.attacking && managers.Game.keyboardManager.biting){
+                this.ActivateSoulMode();
+            }
             if (!this.activatePowers) {
                 if (!managers.Game.keyboardManager.moveUp
                     && !managers.Game.keyboardManager.moveDown
@@ -218,19 +278,9 @@ module objects {
                         this.SwitchAnimation(this.walk[this.direction as number]);
                     }
                 }
-                //if (managers.Game.keyboardManager.moveUp) {
-                //    this.y -= this.playerMoveSpeed / 2;
-                //    this.direction = config.Direction.UP;
-                //    this.SwitchAnimation(this.walk[this.direction as number]);
-                //}
-                //if (managers.Game.keyboardManager.moveDown) {
-                //    this.y += this.playerMoveSpeed / 2;
-                //    this.direction = config.Direction.DOWN;
-                //    this.SwitchAnimation(this.walk[this.direction as number]);
-                //}
             }
             //if player presses the attack button
-            if (managers.Game.keyboardManager.attacking) {
+            if (managers.Game.keyboardManager.attacking && !managers.Game.keyboardManager.biting) {
                 if (this.attackSequence == 0 && this.weapon != undefined && this.delaySequence == 0) {
                     this.alpha = 0;
                     this.attackSequence = 1;
@@ -239,13 +289,11 @@ module objects {
                 }
             }
 
-
-
             if (this.biteSequence !== 0) {
                 this.SwitchAnimation(this.bite[this.direction as number]);
             }
             // Biting/Dash Implementation
-            if (managers.Game.keyboardManager.biting) {
+            if (managers.Game.keyboardManager.biting && !managers.Game.keyboardManager.attacking) {
                 if (this.bitingTimer <= 3) {
                     managers.Game.keyboardManager.enabled = false;
                     switch (this.direction) {
@@ -268,6 +316,128 @@ module objects {
                     }
                     managers.Game.keyboardManager.enabled = true;
                     this.bitingTimer++;
+                }
+            }
+
+            if (managers.Game.keyboardManager.powers) {
+                if (this.ecto > 0 && this.powerUp != config.PowerUp.NONE) {
+                    this.activatePowers = true;
+                }
+                else {
+                    this.activatePowers = false;
+                }
+            }
+            else {
+                this.activatePowers = false;
+            }
+
+            
+        }
+        public SoulMove():void{
+            if (!this.activatePowers) {
+                if (!managers.Game.keyboardManager.moveUp
+                    && !managers.Game.keyboardManager.moveDown
+                    && !managers.Game.keyboardManager.moveLeft
+                    && !managers.Game.keyboardManager.moveRight
+                    && !managers.Game.keyboardManager.attacking
+                    && !managers.Game.keyboardManager.biting
+                    && this.biteSequence === 0) {
+                    this.SwitchAnimation(this.soulIdle[this.direction as number]);
+                }
+                // Running Implementation
+                if (managers.Game.keyboardManager.running) {
+                    let runningSpeed: number = this.soulMoveSpeed + 2;
+                    if (managers.Game.keyboardManager.moveLeft) {
+                        this.x -= runningSpeed;
+                        this.direction = config.Direction.LEFT;
+                        if (!managers.Game.keyboardManager.moveDown &&
+                            !managers.Game.keyboardManager.moveUp) {
+                            this.SwitchAnimation(this.soulRun[this.direction as number]);
+                        }
+                    }
+                    if (managers.Game.keyboardManager.moveRight) {
+                        this.x += runningSpeed;
+                        this.direction = config.Direction.RIGHT;
+                        if (!managers.Game.keyboardManager.moveDown &&
+                            !managers.Game.keyboardManager.moveUp) {
+                            this.SwitchAnimation(this.soulRun[this.direction as number]);
+                        }
+                    }
+                    if (managers.Game.keyboardManager.moveUp) {
+                        this.y -= runningSpeed;
+                        this.direction = config.Direction.UP;
+                        this.SwitchAnimation(this.soulRun[this.direction as number]);
+                    }
+                    if (managers.Game.keyboardManager.moveDown) {
+                        this.y += runningSpeed;
+                        this.direction = config.Direction.DOWN;
+                        this.SwitchAnimation(this.soulRun[this.direction as number]);
+                    }
+                }
+                else {
+                    if (managers.Game.keyboardManager.moveLeft) {
+                        this.x -= this.soulMoveSpeed;
+                        this.direction = config.Direction.LEFT;
+                        if (!managers.Game.keyboardManager.moveDown &&
+                            !managers.Game.keyboardManager.moveUp) {
+                            this.SwitchAnimation(this.soulIdle[this.direction as number]);
+                        }
+                    }
+                    if (managers.Game.keyboardManager.moveRight) {
+                        this.x += this.soulMoveSpeed;
+                        this.direction = config.Direction.RIGHT;
+                        if (!managers.Game.keyboardManager.moveDown &&
+                            !managers.Game.keyboardManager.moveUp) {
+                            this.SwitchAnimation(this.soulIdle[this.direction as number]);
+                        }
+                    }
+                    if (managers.Game.keyboardManager.moveUp) {
+                        this.y -= this.soulMoveSpeed;
+                        this.direction = config.Direction.UP;
+                        this.SwitchAnimation(this.soulIdle[this.direction as number]);
+                    }
+                    if (managers.Game.keyboardManager.moveDown) {
+                        this.y += this.soulMoveSpeed;
+                        this.direction = config.Direction.DOWN;
+                        this.SwitchAnimation(this.soulIdle[this.direction as number]);
+                    }
+                }
+            }
+            //if player presses the attack button
+            if (managers.Game.keyboardManager.attacking) {
+                if (this.attackSequence == 0 && this.weapon != undefined && this.delaySequence == 0) {
+                    this.alpha = 0;
+                    this.attackSequence = 1;
+                    this.delaySequence = 1;
+                    this.weapon.SoulAttack();
+                }
+            }
+
+            // Biting/Dash Implementation
+            if (managers.Game.keyboardManager.biting) {
+                if (this.dodgeTimer <= 3) {
+                    managers.Game.keyboardManager.enabled = false;
+                    let dodgeSpeed = this.soulMoveSpeed + 32;
+                    switch (this.direction) {
+                        case config.Direction.UP:
+                            this.y -= dodgeSpeed;
+                            this.SwitchAnimation(this.soulDodge[this.direction as number]);
+                            break;
+                        case config.Direction.DOWN:
+                            this.y += dodgeSpeed;
+                            this.SwitchAnimation(this.soulDodge[this.direction as number]);
+                            break;
+                        case config.Direction.RIGHT:
+                            this.x += dodgeSpeed;
+                            this.SwitchAnimation(this.soulDodge[this.direction as number]);
+                            break;
+                        case config.Direction.LEFT:
+                            this.x -= dodgeSpeed;
+                            this.SwitchAnimation(this.soulDodge[this.direction as number]);
+                            break;
+                    }
+                    managers.Game.keyboardManager.enabled = true;
+                    this.dodgeTimer++;
                 }
             }
 
@@ -354,6 +524,12 @@ module objects {
         public GetDamage(attacker: objects.GameObject) {
             super.GetDamage(attacker);
             this.HurtMessage();
+            if(!this.activateSoul){
+                this.SwitchAnimation("Phoebe_Hurt");
+            }
+            else {
+                this.SwitchAnimation("PhoebeSoul_Hit");
+            }
             if (this.hp <= 0) {
                 this.DeathSequence();
             }
@@ -445,7 +621,7 @@ module objects {
                         if (ticker % 90 == 0) {
                             this.ecto -= 1;
                         }
-                        if(this.iceShield == null){
+                        if (this.iceShield == null) {
                             this.IceShieldCreation();
                         }
                         break;
@@ -455,7 +631,7 @@ module objects {
 
         public GainSpeed(speedGain: number) {
             this.playerMoveSpeed += speedGain;
-            this.playerHalfSpeed = this.playerMoveSpeed / 2;
+            this.playerHalfSpeed = this.playerMoveSpeed / 4;
             this.EchoMessage("+" + speedGain + " MOVE SPD");
         }
         public AlterSpeed(reduceSpeed: boolean) {
@@ -673,6 +849,24 @@ module objects {
             (managers.Game.currentStage as scenes.PlayScene).AddIceShieldToScene(this.iceShield);
         }
 
-
+        public SoulSetup(): void {
+            this.activateSoul = false;
+            this.isFlying = false;
+            this.soulMoveSpeed = this.playerMoveSpeed + 1;
+            this.soulAttackPower = this.attackPower + 2;
+            this.soulIdle = ["PhoebeSoul_Walk_Back", "PhoebeSoul_Walk_Front", "PhoebeSoul_Walk_Left", "PhoebeSoul_Walk_Right"];
+            this.soulRun = ["PhoebeSoul_Run_Back", "PhoebeSoul_Run_Front", "PhoebeSoul_Run_Left", "PhoebeSoul_Run_Right"];
+            this.soulDodge = ["PhoebeSoul_Dodge_Back", "PhoebeSoul_Dodge_Front", "PhoebeSoul_Dodge_Left", "PhoebeSoul_Dodge_Right"];
+            this.soulSpecialAttack = ["PhoebeSoul_SpecialAttack_Back", "PhoebeSoul_SpecialAttack_Front", "PhoebeSoul_SpecialAttack_Left", "PhoebeSoul_SpecialAttack_Right"];
+        }
+        public ActivateSoulMode(): void {
+            this.activateSoul = true;
+            this.isFlying = true;
+            this.attackSequence = 0;
+            //this.weapon.alpha = 0;
+            this.weapon.visible = false;
+            this.alpha = 1;
+            this.SwitchAnimation(this.soulIdle[this.direction as number]);
+        }
     }
 }

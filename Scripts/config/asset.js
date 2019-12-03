@@ -1428,19 +1428,31 @@ var config;
                     "speed": 0.1
                 },
                 "Phoebe_Victory": { "frames": [2] },
-                "PhoebeSoul_Attack_Left": { "frames": [0] },
-                "PhoebeSoul_Attack_Front": { "frames": [4] },
-                "PhoebeSoul_Attack_Right": { "frames": [1] },
-                "PhoebeSoul_Attack_Back": { "frames": [13] },
+                "PhoebeSoul_Attack_Left": {
+                    "frames": [0, 0],
+                    "speed": 0.1
+                },
+                "PhoebeSoul_Attack_Front": {
+                    "frames": [4, 4],
+                    "speed": 0.1
+                },
+                "PhoebeSoul_Attack_Right": {
+                    "frames": [1, 1],
+                    "speed": 0.1
+                },
+                "PhoebeSoul_Attack_Back": {
+                    "frames": [13, 13],
+                    "speed": 0.1
+                },
                 "PhoebeSoul_Dodge_Left": { "frames": [6] },
                 "PhoebeSoul_Dodge_Right": { "frames": [5] },
                 "PhoebeSoul_Dodge_Front": { "frames": [80] },
                 "PhoebeSoul_Dodge_Back": { "frames": [72] },
                 "PhoebeSoul_Hit": { "frames": [79] },
-                "PhoebeSoul_Run_Left": { "frames": [57] },
+                "PhoebeSoul_Run_Left": { "frames": [68] },
                 "PhoebeSoul_Run_Right": { "frames": [7] },
                 "PhoebeSoul_Run_Front": { "frames": [82] },
-                "PhoebeSoul_Run_Back": { "frames": [68] },
+                "PhoebeSoul_Run_Back": { "frames": [81] },
                 "PhoebeSoul_Walk_Front": { "frames": [28] },
                 "PhoebeSoul_Walk_Left": { "frames": [29] },
                 "PhoebeSoul_Walk_Right": { "frames": [25] },

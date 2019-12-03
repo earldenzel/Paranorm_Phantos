@@ -247,7 +247,7 @@ var scenes;
                     //    e.CheckSlowMovement(f);
                     //}
                 });
-                if (e instanceof objects.Gap) {
+                if (e instanceof objects.Gap && !_this.player.isFlying) {
                     e.CheckGapDamage(_this.player);
                 }
                 //if(e instanceof objects.SlimePuddle){
