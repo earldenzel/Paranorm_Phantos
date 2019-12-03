@@ -111,6 +111,7 @@ module objects {
             else if(this.activateSoul && this.soulCounter <= 0){
                 this.soulCounter = 0;
                 this.activateSoul = false;
+                this.attackPower = this.soulAttackPower - 2;
             }
             this.x = Math.round(this.x);
             this.y = Math.round(this.y);
@@ -863,6 +864,7 @@ module objects {
             this.activateSoul = true;
             this.isFlying = true;
             this.attackSequence = 0;
+            this.attackPower = this.soulAttackPower;
             //this.weapon.alpha = 0;
             this.weapon.visible = false;
             this.alpha = 1;
