@@ -36,10 +36,10 @@ var managers;
                     bottomOffset += object2.height;
                     break;
                 case config.Direction.LEFT:
-                    rightOffset += object2.width;
+                    rightOffset += (object2.width - object2.halfW / 2);
                     break;
                 case config.Direction.RIGHT:
-                    leftOffset += object2.width;
+                    leftOffset += (object2.width - object2.halfW / 2);
                     break;
             }
             return this.CheckWithOffset(object1, object2, topOffset, bottomOffset, rightOffset, leftOffset);
