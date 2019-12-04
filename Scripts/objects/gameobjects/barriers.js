@@ -18,16 +18,22 @@ var objects;
         // Variables
         // Constructor
         function Barriers(textureAtlas, imageString) {
-            return _super.call(this, textureAtlas, imageString) || this;
+            var _this = _super.call(this, textureAtlas, imageString) || this;
+            _this.Start();
+            return _this;
         }
         // Methods
         Barriers.prototype.Start = function () {
+            if (this.name == "GraveTile") {
+                this.scaleX = 2;
+                this.scaleY = 2;
+            }
         };
         Barriers.prototype.Update = function () { };
         Barriers.prototype.Reset = function () { };
         Barriers.prototype.Move = function () { };
         Barriers.prototype.CheckBound = function () {
-            if (managers.Collision.CheckWithOffset(this, managers.Game.player, 0, managers.Game.player.height - config.Bounds.OBSTACLE_OFFSET, managers.Game.player.halfW - config.Bounds.OBSTACLE_OFFSET, managers.Game.player.halfW - config.Bounds.OBSTACLE_OFFSET)) {
+            if (managers.Collision.CheckWithOffset(this, managers.Game.player, -config.Bounds.OBSTACLE_OFFSET, managers.Game.player.height - config.Bounds.OBSTACLE_OFFSET, -config.Bounds.OBSTACLE_OFFSET, managers.Game.player.halfW - config.Bounds.OBSTACLE_OFFSET)) {
                 if (managers.Game.keyboardManager.moveLeft) {
                     managers.Game.player.x += managers.Game.player.playerMoveSpeed;
                 }

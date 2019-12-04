@@ -17,7 +17,7 @@ var objects;
         __extends(ShootingFlowerBullet, _super);
         // Constructor
         function ShootingFlowerBullet() {
-            var _this = _super.call(this, managers.Game.shootingFlower_TextureAtlas, "shootingFlowerBullet", 1) || this;
+            var _this = _super.call(this, managers.Game.shootingFlower_TextureAtlas, "shootingFlowerBullet", 2) || this;
             _this.Start();
             return _this;
         }

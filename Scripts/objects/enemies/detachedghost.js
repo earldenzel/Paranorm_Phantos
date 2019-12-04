@@ -28,6 +28,7 @@ var objects;
             _this.eatTimer = 600;
             _this.bounty = 5;
             _this.isFlying = true;
+            _this.expGain = 2;
             return _this;
         }
         // methods

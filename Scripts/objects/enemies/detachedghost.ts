@@ -19,6 +19,7 @@ module objects {
             this.eatTimer = 600;
             this.bounty = 5;
             this.isFlying = true;
+            this.expGain = 2;
         }
         // methods
 

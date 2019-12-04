@@ -3,6 +3,7 @@ module objects {
         // Variables
         private images: Array<any>;
         private soulImages: Array<any>;
+        public direction: config.Direction;
         private animationEnd: Array<any>;
         // Constructor
         constructor() {
@@ -47,9 +48,9 @@ module objects {
         public CheckBound(): void {
         }
 
-        public Attack(): void {
-            //console.log("Attack initiated");
+        public Attack(): void{            
             this.visible = true;
+            this.direction = managers.Game.player.direction;
             this.currentAnimationFrame = 0;
             managers.Game.SFX = createjs.Sound.play("phoebeDash-Swing");
             managers.Game.SFX.volume = 0.2;

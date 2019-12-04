@@ -14,7 +14,7 @@ var config;
                 this.experienceDictionary[index] = 3 * index * index - index * 10 + 3; //l                
             }
             for (var index = 1; index <= 30; index++) {
-                if (index == 7) {
+                if (index == 13) {
                     this.powerDictionary[index] = config.Effects.INCREASE_MAX_HP;
                 }
                 else if (index % 10 == 0) {

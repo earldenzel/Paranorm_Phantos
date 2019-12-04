@@ -5,7 +5,7 @@ module objects {
 
         // Constructor
         constructor(){
-            super(managers.Game.enemies_TextureAtlas,"RedBone", 2);
+            super(managers.Game.enemies_TextureAtlas,"RedBone", 3);
 
             this.Start();
         }

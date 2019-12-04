@@ -30,6 +30,7 @@ module objects {
             this.attack = ["Boss1_AttackBack", "Boss1_AttackFront", "Boss1_AttackRight", "Boss1_AttackRight"];
 
             this.direction = config.Direction.DOWN;
+            this.expGain = 20;
         }
         // methods
 
@@ -177,7 +178,7 @@ module objects {
         }
 
         public DevourEffect(): void {
-            managers.Game.player.GainAttack(10);
+            managers.Game.player.GainAttack(5);
         }
         public RemoveFromPlay(bounty: number): void {
             this.isDead = true;
@@ -188,7 +189,7 @@ module objects {
                 managers.Game.SFX.volume = 0.2;
                 managers.Game.player.GainDollars(bounty);
             }
-            this.stunIndicator.visible = false;
+            this.stunIndicator.visible = false;    
         }
     }
 }

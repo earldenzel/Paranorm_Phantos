@@ -7,7 +7,7 @@ module objects {
         public direction: config.Direction;
         // Constructor
         constructor() {
-            super(managers.Game.enemies_TextureAtlas, "SlimeBall", 1);
+            super(managers.Game.enemies_TextureAtlas, "SlimeBall", 2);
 
             this.Start();
         }

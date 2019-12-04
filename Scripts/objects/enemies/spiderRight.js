@@ -20,7 +20,7 @@ var objects;
             var _this = _super.call(this, managers.Game.spider_TextureAtlas, "spiderRight", startPosition) || this;
             _this.isToUp = true;
             _this.distance = distance;
-            _this.hp = 1;
+            _this.hp = 10;
             _this.moveSpeed = 1;
             _this.attackPower = 1;
             _this.knockback = 0.75;
@@ -29,6 +29,7 @@ var objects;
             _this.isFlying = false;
             _this.halfSpeed = _this.moveSpeed / 2;
             _this.rateOfFire = 70;
+            _this.expGain = 3;
             return _this;
         }
         // methods

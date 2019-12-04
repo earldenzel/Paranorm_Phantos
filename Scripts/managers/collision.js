@@ -27,6 +27,23 @@ var managers;
                     object2TopLeftY < object1TopLeftY - bottomOffset + object1.height;
             }
         };
+        Collision.CheckWithOffsetAndDirection = function (object1, object2, topOffset, bottomOffset, rightOffset, leftOffset, direction) {
+            switch (direction) {
+                case config.Direction.UP:
+                    topOffset += object2.height;
+                    break;
+                case config.Direction.DOWN:
+                    bottomOffset += object2.height;
+                    break;
+                case config.Direction.LEFT:
+                    rightOffset += object2.width;
+                    break;
+                case config.Direction.RIGHT:
+                    leftOffset += object2.width;
+                    break;
+            }
+            return this.CheckWithOffset(object1, object2, topOffset, bottomOffset, rightOffset, leftOffset);
+        };
         return Collision;
     }());
     managers.Collision = Collision;

@@ -10,6 +10,8 @@ module objects {
         public halfH: number;   // Half-height
         public isColliding: boolean;
         public isTakingDamage: boolean;
+        public isTakingProjectileDamage: boolean;
+        public fallSequence: number = 0;
         public hp: number;
         public attackPower: number;
         public powerUp: config.PowerUp;
@@ -40,6 +42,7 @@ module objects {
 
             this.isColliding = false;
             this.isTakingDamage = false;
+            this.isTakingProjectileDamage = false;
 
             this.powerUp = config.PowerUp.NONE;
         }

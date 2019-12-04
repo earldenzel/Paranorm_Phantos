@@ -6,14 +6,15 @@ module objects {
         constructor(moveSpeed: number) {
             super(managers.Game.enemies_TextureAtlas, "Ghost_Idle");
             this.Start();
-            this.hp = 2;
-            this.attackPower = 1;
+            this.hp = 3;
+            this.attackPower = 2;
 
             this.moveSpeed = moveSpeed;
             this.knockback = 0.75;
             this.eatTimer = 300;
             this.bounty = 5;
             this.isFlying = true;
+            this.expGain = 3;
         }
 
         // Methods
@@ -32,13 +33,11 @@ module objects {
                 }
             }
             else {
-                if (managers.Game.player.biteSequence != 0) {
-                    if (this.currentAnimation == "Ghost_Explode" && this.currentAnimationFrame > 3) {
-                        managers.Game.stage.removeChild(this);
-                        this.visible = false;
-                    }
-                    this.SwitchAnimation("Ghost_Explode");
+                if (this.currentAnimation == "Ghost_Explode" && this.currentAnimationFrame > 3) {
+                    managers.Game.stage.removeChild(this);
+                    this.visible = false;
                 }
+                this.SwitchAnimation("Ghost_Explode");
             }
             super.Update();
         }

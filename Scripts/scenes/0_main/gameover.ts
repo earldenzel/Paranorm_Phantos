@@ -9,6 +9,7 @@ module scenes {
         private phoebe: createjs.Bitmap;
         private messageTimeout: number = 0;
         private attemptToCancel: boolean = false;
+        private retryingAgain: boolean = false;
 
         // Constructor
         constructor() {
@@ -48,7 +49,8 @@ module scenes {
         }
 
         public Update():void {
-            if(managers.Game.keyboardManager.confirming){
+            if(managers.Game.keyboardManager.confirming && !this.retryingAgain){
+                this.retryingAgain = true;
                 if (this.messageTimeout == 0){
                     this.messageTimeout = setTimeout(() => {
                         this.backButtonClick();

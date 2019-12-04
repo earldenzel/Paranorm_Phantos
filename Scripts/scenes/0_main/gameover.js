@@ -20,6 +20,7 @@ var scenes;
             var _this = _super.call(this) || this;
             _this.messageTimeout = 0;
             _this.attemptToCancel = false;
+            _this.retryingAgain = false;
             _this.Start();
             return _this;
         }
@@ -49,7 +50,8 @@ var scenes;
         };
         GameOverScene.prototype.Update = function () {
             var _this = this;
-            if (managers.Game.keyboardManager.confirming) {
+            if (managers.Game.keyboardManager.confirming && !this.retryingAgain) {
+                this.retryingAgain = true;
                 if (this.messageTimeout == 0) {
                     this.messageTimeout = setTimeout(function () {
                         _this.backButtonClick();

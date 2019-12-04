@@ -52,13 +52,11 @@ var objects;
                 }
             }
             else {
-                if (managers.Game.player.biteSequence != 0) {
-                    if (this.currentAnimation == "Ghost_Explode" && this.currentAnimationFrame > 3) {
-                        managers.Game.stage.removeChild(this);
-                        this.visible = false;
-                    }
-                    this.SwitchAnimation("Ghost_Explode");
+                if (this.currentAnimation == "Ghost_Explode" && this.currentAnimationFrame > 3) {
+                    managers.Game.stage.removeChild(this);
+                    this.visible = false;
                 }
+                this.SwitchAnimation("Ghost_Explode");
             }
             _super.prototype.Update.call(this);
         };

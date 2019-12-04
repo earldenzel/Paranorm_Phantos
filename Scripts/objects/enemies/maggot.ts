@@ -13,7 +13,7 @@ module objects{
         constructor(moveSpeed: number, rightDirection: boolean, downDirection: boolean, spawnNumber: number) {
             super(managers.Game.enemies_TextureAtlas,"Maggot_WalkForward");
             this.Start();
-            this.hp = 2;
+            this.hp = 4;
             this.attackPower = 1;
 
             this.moveSpeed = moveSpeed;
@@ -24,6 +24,7 @@ module objects{
             this.canBeEaten = false;
             this.bounty = 20;
             this.isFlying = false;
+            this.expGain = 3;
             this.halfSpeed = moveSpeed / 2;
 
             this.walk = ["Maggot_WalkForward","Maggot_WalkForward","Maggot_WalkSide","Maggot_WalkSide"];
