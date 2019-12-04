@@ -9,6 +9,7 @@ module managers {
         public redBones: objects.RedBone[];
         public slimeBalls: objects.SlimeBall[];
         public fireBalls: objects.FireBall[];
+        public giantWormBullets: objects.GiantWormBullet[];
 
         public CurrentBullet: number;
         private bulletCount: number;
@@ -28,6 +29,7 @@ module managers {
             this.redBones = new Array<objects.RedBone>();
             this.slimeBalls = new Array<objects.SlimeBall>();
             this.fireBalls = new Array<objects.FireBall>();
+            this.giantWormBullets = new Array<objects.GiantWormBullet>();
 
             this.buildBulletPool();
             this.CurrentBullet = 0;
@@ -61,6 +63,9 @@ module managers {
             this.fireBalls.forEach(bullet => {
                 bullet.Update();
             });
+            this.giantWormBullets.forEach(bullet => {
+                bullet.Update();
+            });
         }
 
         // Functions
@@ -74,6 +79,7 @@ module managers {
                 this.redBones[i] = new objects.RedBone();
                 this.slimeBalls[i] = new objects.SlimeBall();
                 this.fireBalls[i] = new objects.FireBall();
+                this.giantWormBullets[i] = new objects.GiantWormBullet();
             }
         }
 
@@ -103,6 +109,9 @@ module managers {
                 bullet.Reset();
             });
             this.fireBalls.forEach(bullet=>{
+                bullet.Reset();
+            });
+            this.giantWormBullets.forEach(bullet=>{
                 bullet.Reset();
             });
         }

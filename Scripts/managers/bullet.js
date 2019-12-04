@@ -15,6 +15,7 @@ var managers;
             this.redBones = new Array();
             this.slimeBalls = new Array();
             this.fireBalls = new Array();
+            this.giantWormBullets = new Array();
             this.buildBulletPool();
             this.CurrentBullet = 0;
         };
@@ -43,6 +44,9 @@ var managers;
             this.fireBalls.forEach(function (bullet) {
                 bullet.Update();
             });
+            this.giantWormBullets.forEach(function (bullet) {
+                bullet.Update();
+            });
         };
         // Functions
         Bullet.prototype.buildBulletPool = function () {
@@ -55,6 +59,7 @@ var managers;
                 this.redBones[i] = new objects.RedBone();
                 this.slimeBalls[i] = new objects.SlimeBall();
                 this.fireBalls[i] = new objects.FireBall();
+                this.giantWormBullets[i] = new objects.GiantWormBullet();
             }
         };
         Bullet.prototype.Reset = function () {
@@ -80,6 +85,9 @@ var managers;
                 bullet.Reset();
             });
             this.fireBalls.forEach(function (bullet) {
+                bullet.Reset();
+            });
+            this.giantWormBullets.forEach(function (bullet) {
                 bullet.Reset();
             });
         };

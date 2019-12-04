@@ -513,6 +513,9 @@ var scenes;
                 this.bulletManager.fireBalls.forEach(function (bullet) {
                     _this.addChild(bullet);
                 });
+                this.bulletManager.giantWormBullets.forEach(function (bullet) {
+                    _this.addChild(bullet);
+                });
             }
         };
         PlayScene.prototype.AllEnemiesAreDead = function () {
