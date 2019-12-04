@@ -590,6 +590,9 @@ module scenes {
                 this.bulletManager.fireBalls.forEach(bullet => {
                     this.addChild(bullet);
                 });
+                this.bulletManager.giantWormBullets.forEach(bullet => {
+                    this.addChild(bullet);
+                });
             }
         }
 
