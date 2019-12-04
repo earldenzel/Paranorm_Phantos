@@ -13,6 +13,7 @@ var __extends = (this && this.__extends) || (function () {
 })();
 var objects;
 (function (objects) {
+    // To Be Tested
     var HotelManager = /** @class */ (function (_super) {
         __extends(HotelManager, _super);
         // Constructor

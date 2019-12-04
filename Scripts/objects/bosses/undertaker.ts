@@ -7,8 +7,8 @@ module objects {
         private walk: Array<any>;
         private attack: Array<any>;
         public direction: config.Direction;
-        // constructors
 
+        // constructors
         constructor(moveSpeed: number) {
             super(managers.Game.bosses_TextureAtlas, "Boss1_WalkFront");
             //super(managers.Game.bat_TextureAtlas, "bat");
@@ -32,8 +32,8 @@ module objects {
             this.direction = config.Direction.DOWN;
             this.expGain = 20;
         }
+        
         // methods
-
         public Start(): void {
             // set the initial position
             this.y = 300;

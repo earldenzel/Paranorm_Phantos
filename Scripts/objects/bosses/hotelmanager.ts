@@ -1,4 +1,5 @@
 module objects {
+    // To Be Tested
     export class HotelManager extends objects.Enemy{
         // Variables
         private currentSpeed: number;
