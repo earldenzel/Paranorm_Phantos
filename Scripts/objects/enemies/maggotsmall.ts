@@ -72,6 +72,7 @@ module objects {
             else if (this.y < 0 && !this.downDirection) {
                 this.downDirection = true;
             }
+            this.CheckBound();
         }
         public RemoveFromPlay(bounty: number): void {
             this.isDead = true;

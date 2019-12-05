@@ -180,7 +180,7 @@ var scenes;
                 managers.Game.keyboardManager.playMode = true;
             }
             // Initialize bulletManager
-            if (this.hasProjectileShooters) {
+            if (this.hasProjectileShooters || managers.Game.player.powerUp == config.PowerUp.FIRE) {
                 this.bulletManager = managers.Game.bulletManager;
             }
             this.Main();
@@ -488,7 +488,7 @@ var scenes;
             //this.addChild(this.messageStatus);
             //this.addChild(this.controllerHelp);
             this.addChild(this.playerInfo);
-            if (this.hasProjectileShooters) {
+            if (this.hasProjectileShooters || managers.Game.player.powerUp == config.PowerUp.FIRE) {
                 this.bulletManager.spiderBullets.forEach(function (bullet) {
                     _this.addChild(bullet);
                 });

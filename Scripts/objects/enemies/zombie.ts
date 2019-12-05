@@ -12,9 +12,6 @@ module objects {
         constructor(moveSpeed: number) {
             super(managers.Game.enemies_TextureAtlas, "Zombie_WalkBack");
             this.Start();
-
-            this.hp = 3;
-            this.attackPower = 1;
             this.moveSpeed = moveSpeed;
             this.knockback = 0.75;
             this.eatTimer = 300;
@@ -22,9 +19,6 @@ module objects {
             this.halfSpeed = moveSpeed / 2;
             this.canBeEaten = true;
             this.attackingMode = false;
-            this.bounty = 5;
-            this.expGain = 2;
-
 
             // Animations
             this.walk = ["Zombie_WalkBack", "Zombie_WalkFront", "Zombie_WalkLeft", "Zombie_WalkLeft"];
@@ -38,6 +32,27 @@ module objects {
             // set the initial position
             this.y = 300;
             this.x = 350;
+            let stageOfSpawn: config.Design = (managers.Game.currentStage as scenes.PlayScene).design;
+            switch(stageOfSpawn){
+                case config.Design.GRAVEYARD:
+                    this.hp = 3;
+                    this.attackPower = 1;   
+                    this.bounty = 5;
+                    this.expGain = 2;
+                    break;
+                case config.Design.HOTEL:
+                    this.hp = 18;
+                    this.attackPower = 2;   
+                    this.bounty = 9;
+                    this.expGain = 4;
+                    break;
+                case config.Design.MANSION:
+                    this.hp = 25;
+                    this.attackPower = 2;   
+                    this.bounty = 15;
+                    this.expGain = 7;
+                    break;
+            }
         }
         public Update(): void {
             if (this.isDead){                

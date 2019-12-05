@@ -18,16 +18,18 @@ var objects;
         // Constructor
         function GhostTeeth(moveSpeed) {
             var _this = _super.call(this, managers.Game.enemies_TextureAtlas, "GhostTeeth_Idle") || this;
+            _this.chargeSequence = 0;
             _this.Start();
-            _this.hp = 3;
-            _this.attackPower = 2;
+            _this.hp = 25;
+            _this.attackPower = 3;
             _this.moveSpeed = moveSpeed;
+            _this.currentSpeed = moveSpeed * 3;
             _this.knockback = 0.75;
             _this.eatTimer = 600;
             _this.bounty = 30;
             _this.isFlying = true;
             _this.powerUp = config.PowerUp.BITE;
-            _this.attack = ["GhostTeeth_AttackBack", "GhostTeeth_AttackFront", "GhostTeeth_AttackRight", "GhostTeeth_AttackRight"];
+            _this.attack = ["GhostTeeth_AttackFront", "GhostTeeth_AttackBack", "GhostTeeth_AttackRight", "GhostTeeth_AttackRight"];
             _this.direction = config.Direction.UP;
             return _this;
         }
@@ -37,69 +39,92 @@ var objects;
             this.x = 320;
         };
         GhostTeeth.prototype.Update = function () {
-            if (!this.isStunned && !this.isDead) {
-                if (this.isAttacking) {
-                    this.SwitchAnimation(this.attack[this.direction]);
-                }
-                else {
-                    this.SwitchAnimation("GhostTeeth_Idle");
-                }
-            }
-            else if (this.isStunned && !this.isDead) {
-                this.SwitchAnimation("GhostTeeth_Stun");
-                if (managers.Game.player.biteSequence == 0) {
-                    this.isDead = true;
-                }
-            }
-            else {
-                if (this.currentAnimation == "Ghost_Explode" && this.currentAnimationFrame > 3) {
-                    managers.Game.stage.removeChild(this);
-                    this.visible = false;
-                }
+            if (this.isDead) {
                 this.SwitchAnimation("Ghost_Explode");
             }
+            else {
+                if (this.isStunned) {
+                    this.SwitchAnimation("GhostTeeth_Stun");
+                }
+                else {
+                    if (this.isAttacking && this.chargeSequence > 0) {
+                        this.SwitchAnimation(this.attack[this.direction]);
+                    }
+                    else {
+                        this.SwitchAnimation("GhostTeeth_Idle");
+                    }
+                }
+            }
+            if (this.currentAnimation == "Ghost_Explode" && this.currentAnimationFrame > 3) {
+                managers.Game.stage.removeChild(this);
+                this.visible = false;
+            }
+            console.log(this.x + " " + this.y);
             _super.prototype.Update.call(this);
         };
         GhostTeeth.prototype.Reset = function () { };
         GhostTeeth.prototype.Move = function () {
+            var _this = this;
             var playerPosition = new math.Vec2(managers.Game.player.x, managers.Game.player.y);
             var enemyPosition = new math.Vec2(this.x, this.y);
             var dirToPlayer = math.Vec2.Subtract(enemyPosition, playerPosition);
             var distanceToPlayer = math.Vec2.Distance(enemyPosition, playerPosition);
             this.isAttacking = (distanceToPlayer < 200);
-            if (this.isAttacking) {
-                this.currentSpeed = this.moveSpeed * 3;
-                if (dirToPlayer.y < 60 && dirToPlayer.y > -60) {
-                    if (dirToPlayer.x < 0) {
-                        console.log("Charge LEFT");
-                        this.scaleX = -1;
-                        this.direction = config.Direction.LEFT;
-                        this.x -= this.currentSpeed;
+            if (this.isAttacking && this.chargeSequence == 0) {
+                this.chargeSequence = setTimeout(function () {
+                    _this.currentSpeed = _this.moveSpeed * 3;
+                    //if (dirToPlayer.y < 60 && dirToPlayer.y > -60) {
+                    if (Math.abs(dirToPlayer.x) >= Math.abs(dirToPlayer.y)) {
+                        if (enemyPosition.x < playerPosition.x) {
+                            console.log("Charge LEFT");
+                            _this.direction = config.Direction.LEFT;
+                        }
+                        else {
+                            console.log("Charge RIGHT");
+                            _this.direction = config.Direction.RIGHT;
+                        }
                     }
-                    else if (dirToPlayer.x > 0) {
-                        console.log("Charge RIGHT");
-                        this.scaleX = 1;
-                        this.direction = config.Direction.RIGHT;
-                        this.x += this.currentSpeed;
+                    //else if (dirToPlayer.x < 40 && dirToPlayer.x > -40) {
+                    else {
+                        if (enemyPosition.y < playerPosition.y) {
+                            _this.direction = config.Direction.DOWN;
+                        }
+                        else {
+                            _this.direction = config.Direction.UP;
+                        }
                     }
-                }
-                else if (dirToPlayer.x < 40 && dirToPlayer.x > -40) {
-                    if (dirToPlayer.y < 0) {
-                        console.log("Charge UP");
-                        this.direction = config.Direction.UP;
-                        this.y -= this.currentSpeed;
-                    }
-                    else if (dirToPlayer.y > 0) {
-                        console.log("Charge DOWN");
-                        this.direction = config.Direction.DOWN;
+                    _this.chargeSequence = 0;
+                }, 1000);
+            }
+            if (this.chargeSequence > 0) {
+                switch (this.direction) {
+                    case config.Direction.UP:
                         this.y += this.currentSpeed;
-                    }
+                        this.scaleX = 1;
+                        break;
+                    case config.Direction.DOWN:
+                        this.y -= this.currentSpeed;
+                        this.scaleX = 1;
+                        break;
+                    case config.Direction.LEFT:
+                        this.x += this.currentSpeed;
+                        this.scaleX = 1;
+                        break;
+                    case config.Direction.RIGHT:
+                        this.x -= this.currentSpeed;
+                        this.scaleX = -1;
+                        break;
                 }
             }
+            this.CheckBound();
         };
         GhostTeeth.prototype.DevourEffect = function () {
-            managers.Game.player.powerUp = this.powerUp;
-            _super.prototype.DevourEffect.call(this);
+            if (managers.Game.player.powerUp == this.powerUp) {
+                managers.Game.player.GainHealth(3);
+            }
+            else {
+                managers.Game.player.powerUp = this.powerUp;
+            }
         };
         GhostTeeth.prototype.RemoveFromPlay = function (bounty) {
             this.isDead = true;

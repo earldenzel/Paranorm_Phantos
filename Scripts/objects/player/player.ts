@@ -250,7 +250,7 @@ module objects {
         public PlayerMove(): void {
             //movement implementation
 
-            if(managers.Game.keyboardManager.attacking && managers.Game.keyboardManager.biting){
+            if(managers.Game.keyboardManager.attacking && managers.Game.keyboardManager.biting && !managers.Game.keyboardManager.running){
                 this.ActivateSoulMode();
             }
             if (!this.activatePowers) {
@@ -373,7 +373,12 @@ module objects {
                     this.activatePowers = true;
                 }
                 else {
-                    this.EchoMessage("I HAVE NO POWERS YET");
+                    if (this.powerUp == config.PowerUp.NONE){
+                        this.EchoMessage("I HAVE NO POWERS YET");
+                    }
+                    else{
+                        this.EchoMessage("I NEED MORE ECTO");
+                    }
                     this.activatePowers = false;
                 }
             }
@@ -568,6 +573,11 @@ module objects {
         }
 
         public GetDamage(attacker: objects.GameObject) {
+            /*
+            if (managers.Game.player.activatePowers && managers.Game.player.powerUp == config.PowerUp.BITE){
+                return;
+            }
+            */
             super.GetDamage(attacker);
             this.HurtMessage();
             if(!this.activateSoul){

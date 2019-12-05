@@ -20,7 +20,7 @@ module objects {
             this.maxHp = this.hp;
             this.attackPower = 1;
             this.moveSpeed = moveSpeed;
-            this.knockback = 0.75;
+            this.knockback = 0;
             this.eatTimer = 2000;
             this.bounty = 100;
             this.isFlying = false;

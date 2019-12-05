@@ -80,6 +80,7 @@ var objects;
             else if (this.y < 0 && !this.downDirection) {
                 this.downDirection = true;
             }
+            this.CheckBound();
         };
         Maggot.prototype.RemoveFromPlay = function (bounty) {
             this.isDead = true;

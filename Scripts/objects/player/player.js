@@ -213,7 +213,7 @@ var objects;
         };
         Player.prototype.PlayerMove = function () {
             //movement implementation
-            if (managers.Game.keyboardManager.attacking && managers.Game.keyboardManager.biting) {
+            if (managers.Game.keyboardManager.attacking && managers.Game.keyboardManager.biting && !managers.Game.keyboardManager.running) {
                 this.ActivateSoulMode();
             }
             if (!this.activatePowers) {
@@ -332,7 +332,12 @@ var objects;
                     this.activatePowers = true;
                 }
                 else {
-                    this.EchoMessage("I HAVE NO POWERS YET");
+                    if (this.powerUp == config.PowerUp.NONE) {
+                        this.EchoMessage("I HAVE NO POWERS YET");
+                    }
+                    else {
+                        this.EchoMessage("I NEED MORE ECTO");
+                    }
                     this.activatePowers = false;
                 }
             }
@@ -521,6 +526,11 @@ var objects;
             }
         };
         Player.prototype.GetDamage = function (attacker) {
+            /*
+            if (managers.Game.player.activatePowers && managers.Game.player.powerUp == config.PowerUp.BITE){
+                return;
+            }
+            */
             _super.prototype.GetDamage.call(this, attacker);
             this.HurtMessage();
             if (!this.activateSoul) {

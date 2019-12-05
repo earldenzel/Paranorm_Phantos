@@ -232,7 +232,7 @@ module scenes {
             }
             
             // Initialize bulletManager
-            if (this.hasProjectileShooters) {
+            if (this.hasProjectileShooters || managers.Game.player.powerUp == config.PowerUp.FIRE) {
                 this.bulletManager = managers.Game.bulletManager;
             }
 
@@ -568,7 +568,7 @@ module scenes {
             //this.addChild(this.controllerHelp);
             this.addChild(this.playerInfo);
 
-            if (this.hasProjectileShooters) {
+            if (this.hasProjectileShooters || managers.Game.player.powerUp == config.PowerUp.FIRE) {
                 this.bulletManager.spiderBullets.forEach(bullet => {
                     this.addChild(bullet);
                 });

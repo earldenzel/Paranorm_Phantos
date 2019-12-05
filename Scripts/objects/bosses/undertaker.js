@@ -27,7 +27,7 @@ var objects;
             _this.maxHp = _this.hp;
             _this.attackPower = 1;
             _this.moveSpeed = moveSpeed;
-            _this.knockback = 0.75;
+            _this.knockback = 0;
             _this.eatTimer = 2000;
             _this.bounty = 100;
             _this.isFlying = false;

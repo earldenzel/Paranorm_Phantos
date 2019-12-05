@@ -111,8 +111,12 @@ var objects;
             }
         };
         ShadowGhost.prototype.DevourEffect = function () {
-            managers.Game.player.powerUp = this.powerUp;
-            _super.prototype.DevourEffect.call(this);
+            if (managers.Game.player.powerUp == this.powerUp) {
+                managers.Game.player.GainHealth(3);
+            }
+            else {
+                managers.Game.player.powerUp = this.powerUp;
+            }
         };
         ShadowGhost.prototype.RemoveFromPlay = function (bounty) {
             this.isDead = true;

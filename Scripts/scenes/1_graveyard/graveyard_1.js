@@ -65,6 +65,7 @@ var scenes;
                 managers.Game.keyboardManager.biting &&
                 managers.Game.keyboardManager.attacking &&
                 !managers.Game.player.godMode) {
+                managers.Game.player.powerUp = config.PowerUp.BITE;
                 managers.Game.player.playerAttackDelay = 0;
                 managers.Game.player.money = 99999;
                 managers.Game.player.godMode = true;
