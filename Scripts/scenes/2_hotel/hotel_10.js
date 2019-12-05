@@ -20,7 +20,6 @@ var scenes;
             var _this = 
             // hasDoorTop, hasDoorBot, hasDoorLeft, hasDoorRight
             _super.call(this, false, false, true, true, config.Design.HOTEL) || this;
-            _this.hasProjectileShooters = true;
             _this.Start();
             return _this;
         }
