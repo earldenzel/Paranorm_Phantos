@@ -19,7 +19,7 @@ var objects;
         function Skeleton(position, moveSpeed, rightDirection, downDirection) {
             var _this = _super.call(this, managers.Game.enemies_TextureAtlas, "Skeleton_WalkFront", position) || this;
             _this.Start();
-            _this.hp = 3;
+            _this.hp = 7;
             _this.attackPower = 1;
             _this.moveSpeed = moveSpeed;
             _this.rightDirection = rightDirection;
@@ -93,6 +93,7 @@ var objects;
             else if (this.y < 0 && !this.downDirection) {
                 this.downDirection = true;
             }
+            this.CheckBound();
         };
         Skeleton.prototype.CheckBound = function () {
             _super.prototype.CheckBound.call(this);

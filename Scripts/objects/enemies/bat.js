@@ -19,16 +19,12 @@ var objects;
         function Bat(moveSpeed, updateTime) {
             var _this = _super.call(this, managers.Game.bat_TextureAtlas, "bat") || this;
             _this.Start();
-            _this.hp = 3;
-            _this.attackPower = 1;
             _this.moveSpeed = moveSpeed;
             _this.knockback = 0.75;
             _this.eatTimer = 500;
             _this.updateTime = updateTime;
             _this.currentTime = updateTime;
-            _this.bounty = 2;
             _this.isFlying = true;
-            _this.expGain = 3;
             return _this;
         }
         // methods
@@ -37,6 +33,27 @@ var objects;
             this.y = 200;
             this.x = 320;
             this.trajectory = new math.Vec2(0, 0);
+            var stageOfSpawn = managers.Game.currentStage.design;
+            switch (stageOfSpawn) {
+                case config.Design.GRAVEYARD:
+                    this.hp = 3;
+                    this.attackPower = 1;
+                    this.bounty = 2;
+                    this.expGain = 3;
+                    break;
+                case config.Design.HOTEL:
+                    this.hp = 13;
+                    this.attackPower = 1;
+                    this.bounty = 9;
+                    this.expGain = 5;
+                    break;
+                case config.Design.MANSION:
+                    this.hp = 23;
+                    this.attackPower = 2;
+                    this.bounty = 15;
+                    this.expGain = 7;
+                    break;
+            }
         };
         Bat.prototype.Update = function () {
             _super.prototype.Update.call(this);

@@ -110,8 +110,12 @@ module objects {
             }
         }
         public DevourEffect(): void {
-            managers.Game.player.powerUp = this.powerUp;
-            super.DevourEffect();
+            if (managers.Game.player.powerUp == this.powerUp){
+                managers.Game.player.GainHealth(3);
+            }
+            else{
+                managers.Game.player.powerUp = this.powerUp;
+            }
         }
         public RemoveFromPlay(bounty: number): void {
             this.isDead = true;

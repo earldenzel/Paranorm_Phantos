@@ -25,7 +25,7 @@ var scenes;
         }
         // Methods
         Mansion_3.prototype.Start = function () {
-            this.enemies[0] = new objects.DetachedGhost(2.5, true, true);
+            this.enemies[0] = new objects.GhostThin(2.5, true, true);
             this.enemies[0].SetPosition(new math.Vec2(260, 200));
             this.enemies[1] = new objects.Bat(2.5, 100);
             this.enemies[1].SetPosition(new math.Vec2(100, 200));

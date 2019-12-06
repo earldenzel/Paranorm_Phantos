@@ -21,6 +21,7 @@ var scenes;
             _this.enemies = new Array();
             _this.obstacles = new Array();
             _this.cosmetics = new Array();
+            _this.floatingDamages = new Array();
             _this.hasProjectileShooters = false;
             _this.hasShop = false;
             _this.hasDoorTop = hasDoorTop;
@@ -179,7 +180,7 @@ var scenes;
                 managers.Game.keyboardManager.playMode = true;
             }
             // Initialize bulletManager
-            if (this.hasProjectileShooters) {
+            if (this.hasProjectileShooters || managers.Game.player.powerUp == config.PowerUp.FIRE) {
                 this.bulletManager = managers.Game.bulletManager;
             }
             this.Main();
@@ -467,6 +468,7 @@ var scenes;
                 if (e.canBeEaten) {
                     _this.addChild(e.stunIndicator);
                 }
+                console.log("spawned " + e.name + " with " + e.hp);
             });
             //door frames
             if (this.hasDoorTop) {
@@ -481,7 +483,7 @@ var scenes;
             if (this.hasDoorRight) {
                 this.addChild(this.doorRightFrame);
             }
-            if (this.hasProjectileShooters) {
+            if (this.hasProjectileShooters || managers.Game.player.powerUp == config.PowerUp.FIRE) {
                 this.bulletManager.spiderBullets.forEach(function (bullet) {
                     _this.addChild(bullet);
                 });
@@ -537,6 +539,16 @@ var scenes;
             this.enemies[length] = enemyToAdd;
             this.addChild(enemyToAdd);
             this.setChildIndex(enemyToAdd, this.getChildIndex(this.player) + 1);
+        };
+        PlayScene.prototype.AddFloatingDamagesToScene = function (floatingDamageToAdd) {
+            var _this = this;
+            var length = this.floatingDamages.length;
+            this.floatingDamages[length] = floatingDamageToAdd;
+            this.addChild(floatingDamageToAdd);
+            setTimeout(function () {
+                floatingDamageToAdd.visible = false;
+                _this.removeChild(floatingDamageToAdd);
+            }, floatingDamageToAdd.airTime);
         };
         return PlayScene;
     }(objects.Scene));

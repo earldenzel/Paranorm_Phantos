@@ -31,7 +31,7 @@ var scenes;
             this.enemies[0].attackPower = 1;
             this.enemies[1] = new objects.ShootingFLower(new math.Vec2(420, 630));
             this.enemies[1].attackPower = 1;
-            this.enemies[2] = new objects.DetachedGhost(3, false, false);
+            this.enemies[2] = new objects.GhostThin(3, false, false);
             this.enemies[2].SetPosition(new math.Vec2(280, 380));
             managers.Game.player.sceneOnLeft = config.Scene.HOTEL_5;
             managers.Game.player.sceneOnRight = config.Scene.HOTEL_7;

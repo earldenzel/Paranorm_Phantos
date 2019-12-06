@@ -28,7 +28,7 @@ var scenes;
             this.enemies[0].SetPosition(new math.Vec2(430, 240));
             this.enemies[1] = new objects.Zombie(1);
             this.enemies[1].SetPosition(new math.Vec2(230, 600));
-            this.enemies[2] = new objects.DetachedGhost(2, true, true);
+            this.enemies[2] = new objects.GhostThin(2, true, true);
             this.enemies[2].SetPosition(new math.Vec2(100, 240));
             this.enemies[3] = new objects.Bat(2, 100);
             this.enemies[3].SetPosition(new math.Vec2(100, 600));

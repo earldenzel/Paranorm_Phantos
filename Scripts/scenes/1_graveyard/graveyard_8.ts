@@ -27,6 +27,11 @@ module scenes {
                 this.enemies[5].visible = false;
                 this.enemies[6] = new objects.Zombie(1.5);
                 this.enemies[6].visible = false;
+                
+                this.cosmetics[1] = new objects.Indicator("attackIndicator");
+                this.cosmetics[1].SetPosition(new math.Vec2(150, 150));
+                this.cosmetics[2] = new objects.Indicator("stunIndicator");
+                this.cosmetics[2].SetPosition(new math.Vec2(180, 150));
             }
             
             this.cosmetics[0] = new objects.Stairs(config.Scene.HOTEL_1, false);
@@ -44,6 +49,8 @@ module scenes {
             super.Update();
             
             if (managers.Game.player.stageFinished == 0){
+                this.cosmetics[1].visible = (!managers.Game.player.activateSoul && managers.Game.player.soulCounter > 0);
+                this.cosmetics[2].visible = (!managers.Game.player.activateSoul && managers.Game.player.soulCounter > 0);
                 if (this.enemies[1].hp <= 0 && this.enemies[2].hp <= 0 && this.enemies[5].hp > 0 && this.enemies[6].hp> 0){                
                     this.enemies[5].SetPosition(new math.Vec2(500, 600));
                     this.enemies[5].visible = true;
@@ -52,6 +59,8 @@ module scenes {
                 }
                 if (this.AllEnemiesAreDead()){
                     this.isDoorTopLocked = false;
+                    this.cosmetics[1].visible = false;
+                    this.cosmetics[2].visible = false;
                     managers.Game.player.stageFinished = 1;
                     if (!this.victoryDanced){
                         managers.Game.player.VictoryDance();

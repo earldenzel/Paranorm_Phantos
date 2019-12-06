@@ -159,6 +159,9 @@ module objects {
         }
 
         public GetDamage(attacker: objects.GameObject) {
+            let damageLabel: objects.Label = new objects.Label(attacker.attackPower.toString(), "30px", "'Press Start 2P'", "#FFFF00", this.x, this.y - this.halfH, true);
+            (managers.Game.currentStage as scenes.PlayScene).AddFloatingDamagesToScene(damageLabel);
+
             //enemy state = stunned
             if (this.isStunned) {
                 //managers.Game.messageStatus.text = attacker.name + " ended " + this.name + "'s life.";

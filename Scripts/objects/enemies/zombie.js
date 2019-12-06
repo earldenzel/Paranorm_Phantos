@@ -19,8 +19,6 @@ var objects;
         function Zombie(moveSpeed) {
             var _this = _super.call(this, managers.Game.enemies_TextureAtlas, "Zombie_WalkBack") || this;
             _this.Start();
-            _this.hp = 3;
-            _this.attackPower = 1;
             _this.moveSpeed = moveSpeed;
             _this.knockback = 0.75;
             _this.eatTimer = 300;
@@ -28,8 +26,6 @@ var objects;
             _this.halfSpeed = moveSpeed / 2;
             _this.canBeEaten = true;
             _this.attackingMode = false;
-            _this.bounty = 5;
-            _this.expGain = 2;
             // Animations
             _this.walk = ["Zombie_WalkBack", "Zombie_WalkFront", "Zombie_WalkLeft", "Zombie_WalkLeft"];
             _this.attack = ["Zombie_AttackBack", "Zombie_AttackFront", "Zombie_AttackLeft", "Zombie_AttackLeft"];
@@ -41,6 +37,27 @@ var objects;
             // set the initial position
             this.y = 300;
             this.x = 350;
+            var stageOfSpawn = managers.Game.currentStage.design;
+            switch (stageOfSpawn) {
+                case config.Design.GRAVEYARD:
+                    this.hp = 3;
+                    this.attackPower = 1;
+                    this.bounty = 5;
+                    this.expGain = 2;
+                    break;
+                case config.Design.HOTEL:
+                    this.hp = 18;
+                    this.attackPower = 2;
+                    this.bounty = 9;
+                    this.expGain = 4;
+                    break;
+                case config.Design.MANSION:
+                    this.hp = 25;
+                    this.attackPower = 2;
+                    this.bounty = 15;
+                    this.expGain = 7;
+                    break;
+            }
         };
         Zombie.prototype.Update = function () {
             if (this.isDead) {
@@ -104,13 +121,7 @@ var objects;
             return this.currentSpeed;
         };
         Zombie.prototype.DevourEffect = function () {
-            var random = Math.random() * 100;
-            if (random > 98) {
-                managers.Game.player.GainSpeed(1);
-            }
-            else {
-                managers.Game.player.GainHealth(3);
-            }
+            managers.Game.player.GainHealth(3);
         };
         Zombie.prototype.RemoveFromPlay = function (bounty) {
             this.isDead = true;

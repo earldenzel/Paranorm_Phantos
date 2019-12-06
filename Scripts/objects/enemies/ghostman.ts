@@ -13,7 +13,7 @@ module objects{
             super(managers.Game.enemies_TextureAtlas, "GhostMan_IdleFront");
             this.Start();
 
-            this.hp = 5;
+            this.hp = 45;
             this.attackPower = 1;
             this.moveSpeed = moveSpeed;
             this.knockback = 0.75;
@@ -49,18 +49,13 @@ module objects{
             }
             else if (this.isStunned && !this.isDead){
                 this.SwitchAnimation("GhostMan_Stun");
-                if (managers.Game.player.biteSequence == 0) {
-                    this.isDead = true;
-                }
             }
             else{
-                if(managers.Game.player.biteSequence != 0){
-                    if (this.currentAnimation == "GhostShadow_Explode" && this.currentAnimationFrame > 3) {
-                        managers.Game.stage.removeChild(this);
-                        this.visible = false;
-                    }
-                    this.SwitchAnimation("GhostShadow_Explode");
+                if (this.currentAnimation == "GhostShadow_Explode" && this.currentAnimationFrame > 3) {
+                    managers.Game.stage.removeChild(this);
+                    this.visible = false;
                 }
+                this.SwitchAnimation("GhostShadow_Explode");
             }
             super.Update();
             if(this.attackingMode){

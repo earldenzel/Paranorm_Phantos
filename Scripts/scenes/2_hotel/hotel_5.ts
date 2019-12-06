@@ -16,6 +16,12 @@ module scenes {
             this.enemies[0].attackPower = 1;
             this.enemies[1] = new objects.SpiderLeft(new math.Vec2(120, 480), 150);
             this.enemies[1].attackPower = 1;
+            this.enemies[2] = new objects.Maggot(0,true,false,3);
+            this.enemies[2].SetPosition(new math.Vec2(420,250));
+            this.enemies[3] = new objects.Maggot(0,false,true,3);
+            this.enemies[3].SetPosition(new math.Vec2(420,630));
+            this.enemies[4] = new objects.SpiderLeft(new math.Vec2(120, 365), 150);
+            this.enemies[4].attackPower = 1;
 
             this.obstacles[0] = new objects.Gap(managers.Game.hotel_TextureAtlas, "Hole", new math.Vec2(200, 225));
             this.obstacles[1] = new objects.Gap(managers.Game.hotel_TextureAtlas, "Hole", new math.Vec2(200, 285));

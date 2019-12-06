@@ -13,7 +13,7 @@ module objects{
         constructor(position: math.Vec2, moveSpeed: number, rightDirection: boolean, downDirection: boolean) {
             super(managers.Game.enemies_TextureAtlas, "Skeleton_WalkFront", position);
             this.Start();
-            this.hp = 3;
+            this.hp = 7;
             this.attackPower = 1;
             this.moveSpeed = moveSpeed;
             this.rightDirection = rightDirection;
@@ -90,6 +90,7 @@ module objects{
             else if (this.y < 0 && !this.downDirection) {
                 this.downDirection = true;
             }
+            this.CheckBound();
             
         }
         public CheckBound(): void {

@@ -19,7 +19,7 @@ var objects;
         function GhostMan(moveSpeed) {
             var _this = _super.call(this, managers.Game.enemies_TextureAtlas, "GhostMan_IdleFront") || this;
             _this.Start();
-            _this.hp = 5;
+            _this.hp = 45;
             _this.attackPower = 1;
             _this.moveSpeed = moveSpeed;
             _this.knockback = 0.75;
@@ -52,18 +52,13 @@ var objects;
             }
             else if (this.isStunned && !this.isDead) {
                 this.SwitchAnimation("GhostMan_Stun");
-                if (managers.Game.player.biteSequence == 0) {
-                    this.isDead = true;
-                }
             }
             else {
-                if (managers.Game.player.biteSequence != 0) {
-                    if (this.currentAnimation == "GhostShadow_Explode" && this.currentAnimationFrame > 3) {
-                        managers.Game.stage.removeChild(this);
-                        this.visible = false;
-                    }
-                    this.SwitchAnimation("GhostShadow_Explode");
+                if (this.currentAnimation == "GhostShadow_Explode" && this.currentAnimationFrame > 3) {
+                    managers.Game.stage.removeChild(this);
+                    this.visible = false;
                 }
+                this.SwitchAnimation("GhostShadow_Explode");
             }
             _super.prototype.Update.call(this);
             if (this.attackingMode) {

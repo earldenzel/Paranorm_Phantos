@@ -14,7 +14,7 @@ module scenes {
         // Methods
         public Start(): void {
             if (managers.Game.player.stageFinished == 0){
-                this.enemies[0] = new objects.DetachedGhost(0, true, true);
+                this.enemies[0] = new objects.Ghost(0);
                 this.enemies[0].attackPower = 0; // you will never die from starter enemy
 
                 let x : number = (config.Bounds.LEFT_BOUND + config.Bounds.RIGHT_BOUND)/2;
@@ -55,6 +55,7 @@ module scenes {
                 managers.Game.keyboardManager.biting && 
                 managers.Game.keyboardManager.attacking &&
                 !managers.Game.player.godMode){
+                managers.Game.player.powerUp = config.PowerUp.BITE;
                 managers.Game.player.playerAttackDelay = 0;
                 managers.Game.player.money = 99999;
                 managers.Game.player.godMode = true;

@@ -17,7 +17,7 @@ module objects {
             this.hp = 10;
             this.moveSpeed = 1;
             this.attackPower = 1;
-            this.knockback = 0.75;
+            this.knockback = 0;
             this.eatTimer = 500;
             this.bounty = 4;
             this.isFlying = false;

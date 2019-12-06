@@ -92,12 +92,14 @@ var objects;
             }
             if (this.activateSoul && this.soulCounter > 0) {
                 this.soulCounter -= 1;
-                console.log(this.soulCounter);
+                if (this.soulCounter % 100 == 99) {
+                    console.log(this.soulCounter);
+                }
             }
             else if (this.activateSoul && this.soulCounter <= 0) {
                 this.soulCounter = 0;
                 this.activateSoul = false;
-                this.attackPower = this.soulAttackPower - 2;
+                this.DeactivateSoulMode();
             }
             this.x = Math.round(this.x);
             this.y = Math.round(this.y);
@@ -211,7 +213,7 @@ var objects;
         };
         Player.prototype.PlayerMove = function () {
             //movement implementation
-            if (managers.Game.keyboardManager.attacking && managers.Game.keyboardManager.biting) {
+            if (managers.Game.keyboardManager.attacking && managers.Game.keyboardManager.biting && !managers.Game.keyboardManager.running) {
                 this.ActivateSoulMode();
             }
             if (!this.activatePowers) {
@@ -330,7 +332,12 @@ var objects;
                     this.activatePowers = true;
                 }
                 else {
-                    this.EchoMessage("I HAVE NO POWERS YET");
+                    if (this.powerUp == config.PowerUp.NONE) {
+                        this.EchoMessage("I HAVE NO POWERS YET");
+                    }
+                    else {
+                        this.EchoMessage("I NEED MORE ECTO");
+                    }
                     this.activatePowers = false;
                 }
             }
@@ -519,6 +526,11 @@ var objects;
             }
         };
         Player.prototype.GetDamage = function (attacker) {
+            /*
+            if (managers.Game.player.activatePowers && managers.Game.player.powerUp == config.PowerUp.BITE){
+                return;
+            }
+            */
             _super.prototype.GetDamage.call(this, attacker);
             this.HurtMessage();
             if (!this.activateSoul) {
@@ -885,11 +897,19 @@ var objects;
             this.activateSoul = true;
             this.isFlying = true;
             this.attackSequence = 0;
-            this.attackPower = this.soulAttackPower;
+            this.attackPower += 2;
             //this.weapon.alpha = 0;
             this.weapon.visible = false;
             this.alpha = 1;
             this.SwitchAnimation(this.soulIdle[this.direction]);
+        };
+        Player.prototype.DeactivateSoulMode = function () {
+            this.isFlying = false;
+            this.attackSequence = 0;
+            this.attackPower -= 2;
+            //this.weapon.alpha = 0;
+            this.weapon.visible = false;
+            this.alpha = 1;
         };
         return Player;
     }(objects.GameObject));

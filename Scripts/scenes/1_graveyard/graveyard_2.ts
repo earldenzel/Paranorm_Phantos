@@ -9,7 +9,7 @@ module scenes {
 
         // Methods
         public Start(): void {
-            this.enemies[0] = new objects.DetachedGhost(1, true, true);
+            this.enemies[0] = new objects.Ghost(1);
             this.enemies[0].SetPosition(new math.Vec2(275, 430));
             this.enemies[1] = new objects.Zombie(0.5);
             this.enemies[1].SetPosition(new math.Vec2(275, 200));

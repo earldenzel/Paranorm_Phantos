@@ -27,8 +27,8 @@ var scenes;
         Graveyard_4.prototype.Start = function () {
             //this.enemies[0] = new objects.RedSkeleton(new math.Vec2(400, 360),3,false,true);
             this.enemies[0] = new objects.Maggot(1, false, true, 4);
-            this.enemies[1] = new objects.DetachedGhost(3, false, false);
-            this.enemies[2] = new objects.DetachedGhost(2, false, true);
+            this.enemies[1] = new objects.GhostThin(3, false, false);
+            this.enemies[2] = new objects.GhostThin(2, false, true);
             this.enemies[3] = new objects.Zombie(1);
             this.obstacles[0] = new objects.Barriers(managers.Game.graveyard_TextureAtlas, "GraveTile");
             this.obstacles[0].SetPosition(new math.Vec2(200, 360));

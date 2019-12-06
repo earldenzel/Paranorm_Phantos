@@ -15,7 +15,6 @@ var objects;
 (function (objects) {
     var Label = /** @class */ (function (_super) {
         __extends(Label, _super);
-        // Variables
         // Constructor
         function Label(labelString, fontSize, fontFamily, fontColor, x, y, isCentered) {
             if (fontFamily === void 0) { fontFamily = "'Press Start 2P'"; }
@@ -23,6 +22,8 @@ var objects;
             if (y === void 0) { y = 0; }
             if (isCentered === void 0) { isCentered = false; }
             var _this = _super.call(this, labelString, fontSize + " " + fontFamily, fontColor) || this;
+            // Variables
+            _this.airTime = 150;
             // Set initial position
             _this.x = x;
             _this.y = y;

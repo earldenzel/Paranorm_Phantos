@@ -6,21 +6,38 @@ module objects {
         constructor(moveSpeed: number) {
             super(managers.Game.enemies_TextureAtlas, "Ghost_Idle");
             this.Start();
-            this.hp = 3;
-            this.attackPower = 2;
-
             this.moveSpeed = moveSpeed;
             this.knockback = 0.75;
             this.eatTimer = 300;
-            this.bounty = 5;
             this.isFlying = true;
-            this.expGain = 3;
         }
 
         // Methods
         public Start(): void {
             this.y = 400;
             this.x = 320;
+            let stageOfSpawn: config.Design = (managers.Game.currentStage as scenes.PlayScene).design;
+            switch(stageOfSpawn){
+                case config.Design.MANSION:
+                    this.hp = 25;
+                    this.attackPower = 2;   
+                    this.bounty = 15;
+                    this.expGain = 7;
+                    break;
+                case config.Design.HOTEL:
+                    this.hp = 8;
+                    this.attackPower = 1;   
+                    this.bounty = 9;
+                    this.expGain = 5;
+                    break;                
+                case config.Design.GRAVEYARD:
+                default:
+                    this.hp = 2;
+                    this.attackPower = 1;   
+                    this.bounty = 5;
+                    this.expGain = 2;
+                    break;
+            }
         }
         public Update(): void {
             if (!this.isStunned && !this.isDead) {
@@ -28,9 +45,6 @@ module objects {
             }
             else if (this.isStunned && !this.isDead) {
                 this.SwitchAnimation("Ghost_Stun");
-                if (managers.Game.player.biteSequence == 0) {
-                    this.isDead = true;
-                }
             }
             else {
                 if (this.currentAnimation == "Ghost_Explode" && this.currentAnimationFrame > 3) {
@@ -63,6 +77,10 @@ module objects {
                 managers.Game.player.GainDollars(bounty);
             }
             this.stunIndicator.visible = false;
+        }               
+
+        public DevourEffect(): void{
+            managers.Game.player.GainHealth(2);
         }
     }
 }

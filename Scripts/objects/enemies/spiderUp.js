@@ -23,7 +23,7 @@ var objects;
             _this.hp = 10;
             _this.moveSpeed = 1;
             _this.attackPower = 1;
-            _this.knockback = 0.75;
+            _this.knockback = 0;
             _this.eatTimer = 500;
             _this.bounty = 4;
             _this.isFlying = false;

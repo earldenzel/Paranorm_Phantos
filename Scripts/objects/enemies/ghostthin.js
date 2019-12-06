@@ -18,22 +18,40 @@ var objects;
         // Constructor
         function GhostThin(moveSpeed, rightDirection, downDirection) {
             var _this = _super.call(this, managers.Game.enemies_TextureAtlas, "GhostThin_Idle") || this;
-            _this.Start();
-            _this.hp = 2;
-            _this.attackPower = 1;
             _this.moveSpeed = moveSpeed;
             _this.rightDirection = rightDirection;
             _this.downDirection = downDirection;
             _this.knockback = 0.75;
             _this.eatTimer = 300;
-            _this.bounty = 5;
             _this.isFlying = true;
+            _this.Start();
             return _this;
         }
         // Methods
         GhostThin.prototype.Start = function () {
             this.y = 400;
             this.x = 320;
+            var stageOfSpawn = managers.Game.currentStage.design;
+            switch (stageOfSpawn) {
+                case config.Design.GRAVEYARD:
+                    this.hp = 2;
+                    this.attackPower = 1;
+                    this.bounty = 5;
+                    this.expGain = 2;
+                    break;
+                case config.Design.HOTEL:
+                    this.hp = 8;
+                    this.attackPower = 1;
+                    this.bounty = 9;
+                    this.expGain = 5;
+                    break;
+                case config.Design.MANSION:
+                    this.hp = 25;
+                    this.attackPower = 2;
+                    this.bounty = 15;
+                    this.expGain = 7;
+                    break;
+            }
         };
         GhostThin.prototype.Update = function () {
             if (this.isDead) {
@@ -79,6 +97,9 @@ var objects;
                 managers.Game.player.GainDollars(bounty);
             }
             this.stunIndicator.visible = false;
+        };
+        GhostThin.prototype.DevourEffect = function () {
+            managers.Game.player.GainHealth(2);
         };
         return GhostThin;
     }(objects.Enemy));
