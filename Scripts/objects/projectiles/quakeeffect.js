@@ -19,6 +19,7 @@ var objects;
         function QuakeEffect() {
             var _this = _super.call(this, managers.Game.bosses_TextureAtlas, "Boss3_QuakeStraight", 2) || this;
             _this.Start();
+            _this.activation = false;
             return _this;
         }
         // Methods
@@ -26,7 +27,9 @@ var objects;
             this.Reset();
         };
         QuakeEffect.prototype.Update = function () {
-            this.Move();
+            if (this.activation) {
+                this.Move();
+            }
             _super.prototype.Update.call(this);
         };
         QuakeEffect.prototype.Reset = function () {

@@ -11,7 +11,7 @@ module objects {
 
             this.Start();
 
-            this.hp = 20;
+            this.hp = 60;
             this.attackPower = 2;
             this.moveSpeed = 0;
             this.knockback = 0;
@@ -24,7 +24,7 @@ module objects {
         // Methods
         public Start(): void {
             // Change the position.
-            this.SetPosition(new math.Vec2(170, 438));
+            this.SetPosition(new math.Vec2(282, 662));
         }
         public Update(): void {
             let ticker = createjs.Ticker.getTicks();
@@ -42,33 +42,38 @@ module objects {
                     this.visible = false;
                 }
             }
+            console.log(this.hp);
             super.Update();
         }
         public Reset(): void { }
         public Move(): void {
             // Not necessarily move but its method path.
-            if (this.currentAnimation == "Boss2_Worm") {
+            let ticker = createjs.Ticker.getTicks();
+            if(ticker % 60 == 0) {
+                if (this.currentAnimation == "Boss2_Worm") {
                 let command: number = Math.floor(Math.random() * Math.floor(4)); // Between 0 to 3
                 let pos: math.Vec2;
+                pos = new math.Vec2(this.x + 18, this.y + 34);
+                this.BulletFire(pos);
                 switch (command) {
                     case 0:
-                        pos = new math.Vec2(this.x + 94, this.y + 110);
+                        pos = new math.Vec2(this.x - 106, this.y - 54);
                         this.SpawnCreateAndActivate(pos);
                         break;
                     case 1:
-                        pos = new math.Vec2(this.x + 307, this.y + 98);
+                        pos = new math.Vec2(this.x - 68, this.y + 26);
                         this.BulletFire(pos);
                         break;
                     case 2:
-                        pos = new math.Vec2(this.x + 307, this.y + 98);
+                        pos = new math.Vec2(this.x + 77, this.y - 17);
                         this.SpawnCreateAndActivate(pos);
                         break;
                     case 3:
-                        pos = new math.Vec2(this.x + 94, this.y + 110);
+                        pos = new math.Vec2(this.x + 109, this.y - 70);
                         this.BulletFire(pos);
                         break;
                 }
-            }
+            }}
         }
         public CheckBound(): void {
             super.CheckBound();
@@ -97,7 +102,6 @@ module objects {
 
                     bullet.x = this.bulletSpawn.x;
                     bullet.y = this.bulletSpawn.y;
-                    console.log(bullet);
 
                     // get the direction when the bullet shoots
                     let bulletPosition: math.Vec2 = new math.Vec2(bullet.x, bullet.y);

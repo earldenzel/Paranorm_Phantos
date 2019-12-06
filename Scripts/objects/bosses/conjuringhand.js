@@ -123,6 +123,7 @@ var objects;
                         bullet.SetupEffect(i);
                         bullet.x = this.bulletSpawn.x;
                         bullet.y = this.bulletSpawn.y;
+                        bullet.activation = true;
                         managers.Game.bulletManager.CurrentBullet++;
                         if (managers.Game.bulletManager.CurrentBullet > 49) {
                             managers.Game.bulletManager.CurrentBullet = 0;

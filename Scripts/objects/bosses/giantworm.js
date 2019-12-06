@@ -19,7 +19,7 @@ var objects;
         function GiantWorm() {
             var _this = _super.call(this, managers.Game.bosses_TextureAtlas, "Boss2_Worm_Alpha") || this;
             _this.Start();
-            _this.hp = 20;
+            _this.hp = 60;
             _this.attackPower = 2;
             _this.moveSpeed = 0;
             _this.knockback = 0;
@@ -33,7 +33,7 @@ var objects;
         // Methods
         GiantWorm.prototype.Start = function () {
             // Change the position.
-            this.SetPosition(new math.Vec2(170, 438));
+            this.SetPosition(new math.Vec2(282, 662));
         };
         GiantWorm.prototype.Update = function () {
             var ticker = createjs.Ticker.getTicks();
@@ -51,31 +51,37 @@ var objects;
                     this.visible = false;
                 }
             }
+            console.log(this.hp);
             _super.prototype.Update.call(this);
         };
         GiantWorm.prototype.Reset = function () { };
         GiantWorm.prototype.Move = function () {
             // Not necessarily move but its method path.
-            if (this.currentAnimation == "Boss2_Worm") {
-                var command = Math.floor(Math.random() * Math.floor(4)); // Between 0 to 3
-                var pos = void 0;
-                switch (command) {
-                    case 0:
-                        pos = new math.Vec2(this.x + 94, this.y + 110);
-                        this.SpawnCreateAndActivate(pos);
-                        break;
-                    case 1:
-                        pos = new math.Vec2(this.x + 307, this.y + 98);
-                        this.BulletFire(pos);
-                        break;
-                    case 2:
-                        pos = new math.Vec2(this.x + 307, this.y + 98);
-                        this.SpawnCreateAndActivate(pos);
-                        break;
-                    case 3:
-                        pos = new math.Vec2(this.x + 94, this.y + 110);
-                        this.BulletFire(pos);
-                        break;
+            var ticker = createjs.Ticker.getTicks();
+            if (ticker % 60 == 0) {
+                if (this.currentAnimation == "Boss2_Worm") {
+                    var command = Math.floor(Math.random() * Math.floor(4)); // Between 0 to 3
+                    var pos = void 0;
+                    pos = new math.Vec2(this.x + 18, this.y + 34);
+                    this.BulletFire(pos);
+                    switch (command) {
+                        case 0:
+                            pos = new math.Vec2(this.x - 106, this.y - 54);
+                            this.SpawnCreateAndActivate(pos);
+                            break;
+                        case 1:
+                            pos = new math.Vec2(this.x - 68, this.y + 26);
+                            this.BulletFire(pos);
+                            break;
+                        case 2:
+                            pos = new math.Vec2(this.x + 77, this.y - 17);
+                            this.SpawnCreateAndActivate(pos);
+                            break;
+                        case 3:
+                            pos = new math.Vec2(this.x + 109, this.y - 70);
+                            this.BulletFire(pos);
+                            break;
+                    }
                 }
             }
         };
@@ -102,7 +108,6 @@ var objects;
                     var bullet = managers.Game.bulletManager.giantWormBullets[currentBullet];
                     bullet.x = this.bulletSpawn.x;
                     bullet.y = this.bulletSpawn.y;
-                    console.log(bullet);
                     // get the direction when the bullet shoots
                     var bulletPosition = new math.Vec2(bullet.x, bullet.y);
                     var dirToPlayer = math.Vec2.Subtract(bulletPosition, playerPosition);

@@ -125,6 +125,7 @@ module objects {
                         bullet.SetupEffect(i as config.Direction);
                         bullet.x = this.bulletSpawn.x;
                         bullet.y = this.bulletSpawn.y;
+                        bullet.activation = true;
 
                         managers.Game.bulletManager.CurrentBullet++;
                         if (managers.Game.bulletManager.CurrentBullet > 49) {

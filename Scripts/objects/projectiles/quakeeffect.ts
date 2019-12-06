@@ -2,18 +2,22 @@ module objects {
     export class QuakeEffect extends objects.Bullet {
         // Variables
         private direction: config.Direction;
+        public activation: boolean;
 
         // Constructor
         constructor() {
             super(managers.Game.bosses_TextureAtlas, "Boss3_QuakeStraight", 2);
             this.Start();
+            this.activation = false;
         }
         // Methods
         public Start(): void {
             this.Reset();
         }
         public Update(): void {
-            this.Move();
+            if(this.activation){
+                this.Move();
+            }
             super.Update();
         }
         public Reset(): void {
