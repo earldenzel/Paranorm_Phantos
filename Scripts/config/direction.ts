@@ -3,6 +3,10 @@ module config {
         UP,
         DOWN,
         LEFT,
-        RIGHT
+        RIGHT,
+        UP_LEFT,
+        UP_RIGHT,
+        DOWN_LEFT,
+        DOWN_RIGHT
     }
 }

@@ -593,6 +593,9 @@ module scenes {
                 this.bulletManager.giantWormBullets.forEach(bullet => {
                     this.addChild(bullet);
                 });
+                this.bulletManager.quakeEffects.forEach(bullet => {
+                    this.addChild(bullet);
+                });
             }
         }
 

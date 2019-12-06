@@ -10,6 +10,7 @@ module managers {
         public slimeBalls: objects.SlimeBall[];
         public fireBalls: objects.FireBall[];
         public giantWormBullets: objects.GiantWormBullet[];
+        public quakeEffects: objects.QuakeEffect[];
 
         public CurrentBullet: number;
         private bulletCount: number;
@@ -30,6 +31,7 @@ module managers {
             this.slimeBalls = new Array<objects.SlimeBall>();
             this.fireBalls = new Array<objects.FireBall>();
             this.giantWormBullets = new Array<objects.GiantWormBullet>();
+            this.quakeEffects = new Array<objects.QuakeEffect>();
 
             this.buildBulletPool();
             this.CurrentBullet = 0;
@@ -66,6 +68,9 @@ module managers {
             this.giantWormBullets.forEach(bullet => {
                 bullet.Update();
             });
+            this.quakeEffects.forEach(bullet => {
+                bullet.Update();
+            });
         }
 
         // Functions
@@ -80,6 +85,7 @@ module managers {
                 this.slimeBalls[i] = new objects.SlimeBall();
                 this.fireBalls[i] = new objects.FireBall();
                 this.giantWormBullets[i] = new objects.GiantWormBullet();
+                this.quakeEffects[i] = new objects.QuakeEffect();
             }
         }
 
@@ -112,6 +118,9 @@ module managers {
                 bullet.Reset();
             });
             this.giantWormBullets.forEach(bullet=>{
+                bullet.Reset();
+            });
+            this.quakeEffects.forEach(bullet=>{
                 bullet.Reset();
             });
         }

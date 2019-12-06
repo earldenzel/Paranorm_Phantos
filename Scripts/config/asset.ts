@@ -2289,6 +2289,10 @@ module config {
                     "frames": [20, 22],
                     "speed": 0.1
                 },
+                "Boss3_Slap": {
+                    "frames": [20, 18, 21, 19],
+                    "speed": 0.1
+                },
                 "Boss3_Quake": {
                     "frames": [28, 23, 24],
                     "speed": 0.1
@@ -2307,7 +2311,7 @@ module config {
                     "speed": 0.1
                 },
                 "Boss3_Idle": {
-                    "frames": [57, 52, 51],
+                    "frames": [57, 52, 51, 52],
                     "speed": 0.1
                 },
                 "Boss3_Stun": {
