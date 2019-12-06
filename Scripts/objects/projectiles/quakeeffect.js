@@ -43,24 +43,29 @@ var objects;
         QuakeEffect.prototype.Main = function () { };
         QuakeEffect.prototype.CheckBounds = function () { };
         QuakeEffect.prototype.SetupEffect = function (direction) {
+            this.EffectReset();
             this.direction = direction;
             switch (this.direction) {
                 case config.Direction.UP:
+                    this.gotoAndPlay("Boss3_QuakeStraight");
                     this.scaleY = -1;
                     this.speedX = 0;
                     this.speedY = -3;
                     break;
                 case config.Direction.DOWN:
+                    this.gotoAndPlay("Boss3_QuakeStraight");
                     this.speedX = 0;
                     this.speedY = 3;
                     break;
                 case config.Direction.LEFT:
-                    this.rotation += 90;
+                    this.gotoAndPlay("Boss3_QuakeStraight");
+                    this.rotation = 90;
                     this.speedX = -3;
                     this.speedY = 0;
                     break;
                 case config.Direction.RIGHT:
-                    this.rotation -= 90;
+                    this.gotoAndPlay("Boss3_QuakeStraight");
+                    this.rotation = -90;
                     this.speedX = 3;
                     this.speedY = 0;
                     break;
@@ -89,6 +94,14 @@ var objects;
                     this.speedY = 3;
                     break;
             }
+        };
+        QuakeEffect.prototype.EffectReset = function () {
+            this.gotoAndPlay("Boss3_QuakeStraight");
+            this.rotation = 0;
+            this.scaleX = 1;
+            this.scaleY = 1;
+            this.speedX = 0;
+            this.speedY = 0;
         };
         return QuakeEffect;
     }(objects.Bullet));

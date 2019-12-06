@@ -7,7 +7,8 @@ module objects {
         private isTeleporting: boolean;
         private maxHp: number;
         private teleportLimit: number;
-        public spawn: objects.ConjuringHand;
+        public spawnA: objects.ConjuringHand;
+        public spawnB: objects.ConjuringHand;
         private spawnCount: number;
         private spawnLimit: number;
 
@@ -39,15 +40,18 @@ module objects {
             this.x = 320;
         }
         public Update(): void {
+            let ticker: number = createjs.Ticker.getTicks();
+
             if (this.isStunned) {
                 this.visible = true;
+                this.canBeAttacked = true;
                 this.SwitchAnimation("Boss3_Stun");
             }
             else if (this.isTeleporting) {
                 this.SwitchAnimation("Boss3_Disappear");
                 this.visible = false;
+                this.canBeAttacked = false;
 
-                let ticker: number = createjs.Ticker.getTicks();
                 if (ticker % 90 == 0) {
                     this.isTeleporting = false;
                     this.teleportLimit = 60;
@@ -55,15 +59,17 @@ module objects {
             }
             else {
                 this.visible = true;
+                this.canBeAttacked = true;
                 this.SwitchAnimation("Boss3_Idle");
-                if((managers.Game.currentStage as scenes.PlayScene).getChildIndex(this.spawn) == null){
-                    this.spawnCount = 0;
-                }
+                
                 // If 2/3rds of its life is gone
                 if (this.hp < this.maxHp &&
                     this.hp >= (this.maxHp * (2 / 3))) {
                     if (this.spawnCount != this.spawnLimit) {
-                        this.ConjureHandAndActivate(true, new math.Vec2(this.x + 10, this.y));
+                        this.ConjureHandAndActivate(true);
+                    }
+                    if(this.spawnA.isDead && ticker % 150 == 0){
+                        this.spawnCount = 0;
                     }
                 }
                 // If 1/3rds of its life is gone
@@ -71,14 +77,16 @@ module objects {
                     this.hp >= (this.maxHp * (1 / 3))) {
                         this.spawnLimit = 2
                     if(this.spawnCount != this.spawnLimit){
-                        switch(this.spawnCount){
-                            case 0:
-                                this.ConjureHandAndActivate(true, new math.Vec2(this.x + 10, this.y));
-                            break;
-                            case 1:
-                                this.ConjureHandAndActivate(false, new math.Vec2(this.x - 10, this.y));
-                            break;
-                        }
+                        this.ConjureHandAndActivate(true);
+                        this.ConjureHandAndActivate(false);
+                    }
+                    if(this.spawnA.isDead && ticker % 150 == 0){
+                        this.spawnCount--;
+                        this.ConjureHandAndActivate(true);
+                    }
+                    if(this.spawnB.isDead && ticker % 150 == 0){
+                        this.spawnCount--;
+                        this.ConjureHandAndActivate(false);
                     }
                 }
             }
@@ -88,6 +96,7 @@ module objects {
             else {
                 this.teleportLimit = 0;
             }
+            //console.log("Teleport Limit", this.teleportLimit);
             super.Update();
         }
         public Reset(): void { }
@@ -95,12 +104,14 @@ module objects {
             let playerPosition: math.Vec2 = new math.Vec2(managers.Game.player.x, managers.Game.player.y);
             let enemyPosition: math.Vec2 = new math.Vec2(this.x, this.y);
             let distanceToPlayer: number = math.Vec2.Distance(enemyPosition, playerPosition);
-            if (distanceToPlayer < 130 && !this.isTeleporting && this.teleportLimit == 0) {
+            if (distanceToPlayer <= 140 && this.teleportLimit == 0) {
                 this.isTeleporting = true;
-                this.currentSpeed = this.moveSpeed * 4;
+            }
+
+            if(this.isTeleporting){
+                this.currentSpeed = this.moveSpeed * 8;
             }
             else {
-                this.isTeleporting = false;
                 this.currentSpeed = this.moveSpeed;
             }
 
@@ -121,10 +132,15 @@ module objects {
             }
         }
 
-        public ConjureHandAndActivate(leftNotRight: boolean, position: math.Vec2): void {
-            this.spawn = new objects.ConjuringHand(leftNotRight, position);
-
-            (managers.Game.currentStage as scenes.PlayScene).AddEnemyToScene(this.spawn);
+        public ConjureHandAndActivate(leftNotRight: boolean): void {
+            if(leftNotRight){
+                this.spawnA = new objects.ConjuringHand(leftNotRight);
+                (managers.Game.currentStage as scenes.PlayScene).AddEnemyToScene(this.spawnA);
+            }
+            else{
+                this.spawnB = new objects.ConjuringHand(leftNotRight);
+                (managers.Game.currentStage as scenes.PlayScene).AddEnemyToScene(this.spawnB);
+            }
             this.spawnCount += 1;
         }
     }

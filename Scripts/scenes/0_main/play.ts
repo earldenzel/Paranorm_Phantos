@@ -559,11 +559,7 @@ module scenes {
                 this.addChild(this.doorRightFrame);
             }
 
-            //UI PLACEMENT
-            this.addChild(this.player.playerStatus);
-            //this.addChild(this.messageStatus);
-            //this.addChild(this.controllerHelp);
-            this.addChild(this.playerInfo);
+            
 
             if (this.hasProjectileShooters) {
                 this.bulletManager.spiderBullets.forEach(bullet => {
@@ -597,6 +593,12 @@ module scenes {
                     this.addChild(bullet);
                 });
             }
+            
+            //UI PLACEMENT
+            this.addChild(this.player.playerStatus);
+            //this.addChild(this.messageStatus);
+            //this.addChild(this.controllerHelp);
+            this.addChild(this.playerInfo);
         }
 
         public AllEnemiesAreDead(): boolean{

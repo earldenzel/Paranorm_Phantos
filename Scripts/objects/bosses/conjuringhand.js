@@ -22,10 +22,9 @@ var objects;
     var ConjuringHand = /** @class */ (function (_super) {
         __extends(ConjuringHand, _super);
         // Constructor
-        function ConjuringHand(leftNotRight, startPosition) {
+        function ConjuringHand(leftNotRight) {
             var _this = _super.call(this, managers.Game.bosses_TextureAtlas, "Boss3_OpenHand") || this;
             _this.leftNotRight = leftNotRight;
-            _this.startPosition = startPosition;
             _this.Start();
             _this.hp = 10;
             _this.attackPower = 2;
@@ -35,14 +34,15 @@ var objects;
             _this.bounty = 50;
             _this.isFlying = true;
             _this.currentAttackPower = _this.attackPower;
-            _this.rateOfFire = 150;
+            _this.rateOfFire = 5;
             _this.attackingMode = HandAttackMode.CHASE;
             _this.quakingCounter = 0;
             return _this;
         }
         // Methods
         ConjuringHand.prototype.Start = function () {
-            this.SetPosition(this.startPosition);
+            this.y = 400;
+            this.x = 320;
             if (!this.leftNotRight) {
                 this.scaleX = -1;
             }
@@ -74,12 +74,14 @@ var objects;
                         this.scaleX = 1;
                     }
                     this.SwitchAnimation("Boss3_ClosedHand");
+                    this.quakingCounter++;
+                    if (this.quakingCounter > 30) {
+                        this.BulletFire();
+                    }
                     break;
             }
             _super.prototype.Update.call(this);
-            if (this.quakingCounter > 2) {
-                this.BulletFire();
-            }
+            console.log("Quake Counter: ", this.quakingCounter);
         };
         ConjuringHand.prototype.Reset = function () { };
         ConjuringHand.prototype.Move = function () {
@@ -91,7 +93,7 @@ var objects;
                 this.attackingMode = HandAttackMode.SLAP;
                 this.currentAttackPower = this.attackingMode + 1;
             }
-            else if (distanceToPlayer > 400) {
+            else if (distanceToPlayer > 200) {
                 this.attackingMode = HandAttackMode.QUAKE;
                 this.currentAttackPower = this.attackingMode + 1;
             }
@@ -103,10 +105,6 @@ var objects;
             if (this.attackingMode == HandAttackMode.CHASE) {
                 this.x = newPos.x;
                 this.y = newPos.y;
-            }
-            else if (this.attackingMode == HandAttackMode.QUAKE && this.quakingCounter <= 3) {
-                this.y -= 1;
-                this.quakingCounter += 1;
             }
         };
         ConjuringHand.prototype.CheckBound = function () {

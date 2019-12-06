@@ -15,10 +15,9 @@ module objects {
         private rateOfFire: number;
 
         // Constructor
-        constructor(leftNotRight: boolean, startPosition: math.Vec2) {
+        constructor(leftNotRight: boolean) {
             super(managers.Game.bosses_TextureAtlas, "Boss3_OpenHand");
             this.leftNotRight = leftNotRight;
-            this.startPosition = startPosition;
             this.Start();
 
             this.hp = 10;
@@ -29,14 +28,15 @@ module objects {
             this.bounty = 50;
             this.isFlying = true;
             this.currentAttackPower = this.attackPower;
-            this.rateOfFire = 150;
+            this.rateOfFire = 5;
             this.attackingMode = HandAttackMode.CHASE;
             this.quakingCounter = 0;
         }
 
         // Methods
         public Start(): void {
-            this.SetPosition(this.startPosition);
+            this.y = 400;
+            this.x = 320;
             if (!this.leftNotRight) {
                 this.scaleX = -1;
             }
@@ -68,12 +68,15 @@ module objects {
                         this.scaleX = 1;
                     }
                     this.SwitchAnimation("Boss3_ClosedHand");
+                    this.quakingCounter++;
+                    if (this.quakingCounter > 30) {
+                        this.BulletFire();
+                    }
                     break;
             }
             super.Update();
-            if (this.quakingCounter > 2) {
-                this.BulletFire();
-            }
+            console.log("Quake Counter: ",this.quakingCounter);
+            
         }
         public Reset(): void { }
         public Move(): void {
@@ -87,7 +90,7 @@ module objects {
                 this.attackingMode = HandAttackMode.SLAP;
                 this.currentAttackPower = this.attackingMode + 1;
             }
-            else if (distanceToPlayer > 400) {
+            else if (distanceToPlayer > 200) {
                 this.attackingMode = HandAttackMode.QUAKE;
                 this.currentAttackPower = this.attackingMode + 1;
             }
@@ -101,12 +104,6 @@ module objects {
                 this.x = newPos.x;
                 this.y = newPos.y;
             }
-            else if (this.attackingMode == HandAttackMode.QUAKE && this.quakingCounter <= 3) {
-                this.y -= 1;
-                this.quakingCounter += 1;
-            }
-
-
         }
         public CheckBound(): void {
             super.CheckBound();
@@ -122,7 +119,7 @@ module objects {
                         let currentBullet = managers.Game.bulletManager.CurrentBullet;
                         let bullet = managers.Game.bulletManager.quakeEffects[currentBullet];
                         
-                        bullet.SetupEffect(i as config.Direction);
+                        bullet.SetupEffect(i);
                         bullet.x = this.bulletSpawn.x;
                         bullet.y = this.bulletSpawn.y;
                         bullet.activation = true;

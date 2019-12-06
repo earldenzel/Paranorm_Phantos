@@ -15,7 +15,7 @@ module objects {
             this.Reset();
         }
         public Update(): void {
-            if(this.activation){
+            if (this.activation) {
                 this.Move();
             }
             super.Update();
@@ -30,25 +30,30 @@ module objects {
         }
         public Main(): void { }
         public CheckBounds(): void { }
-        public SetupEffect(direction: config.Direction):void{
+        public SetupEffect(direction: number): void {
+            this.EffectReset();
             this.direction = direction;
             switch (this.direction) {
                 case config.Direction.UP:
+                    this.gotoAndPlay("Boss3_QuakeStraight");
                     this.scaleY = -1;
                     this.speedX = 0;
                     this.speedY = -3;
                     break;
                 case config.Direction.DOWN:
+                    this.gotoAndPlay("Boss3_QuakeStraight");
                     this.speedX = 0;
                     this.speedY = 3;
                     break;
                 case config.Direction.LEFT:
-                    this.rotation += 90;
+                    this.gotoAndPlay("Boss3_QuakeStraight");
+                    this.rotation = 90;
                     this.speedX = -3;
                     this.speedY = 0;
                     break;
                 case config.Direction.RIGHT:
-                    this.rotation -= 90;
+                    this.gotoAndPlay("Boss3_QuakeStraight");
+                    this.rotation = -90;
                     this.speedX = 3;
                     this.speedY = 0;
                     break;
@@ -77,6 +82,14 @@ module objects {
                     this.speedY = 3;
                     break;
             }
+        }
+        public EffectReset():void{
+            this.gotoAndPlay("Boss3_QuakeStraight");
+            this.rotation = 0;
+            this.scaleX = 1;
+            this.scaleY = 1;
+            this.speedX = 0;
+            this.speedY = 0;
         }
     }
 }

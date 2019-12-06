@@ -481,11 +481,6 @@ var scenes;
             if (this.hasDoorRight) {
                 this.addChild(this.doorRightFrame);
             }
-            //UI PLACEMENT
-            this.addChild(this.player.playerStatus);
-            //this.addChild(this.messageStatus);
-            //this.addChild(this.controllerHelp);
-            this.addChild(this.playerInfo);
             if (this.hasProjectileShooters) {
                 this.bulletManager.spiderBullets.forEach(function (bullet) {
                     _this.addChild(bullet);
@@ -518,6 +513,11 @@ var scenes;
                     _this.addChild(bullet);
                 });
             }
+            //UI PLACEMENT
+            this.addChild(this.player.playerStatus);
+            //this.addChild(this.messageStatus);
+            //this.addChild(this.controllerHelp);
+            this.addChild(this.playerInfo);
         };
         PlayScene.prototype.AllEnemiesAreDead = function () {
             if (this.enemies.length > 0) {

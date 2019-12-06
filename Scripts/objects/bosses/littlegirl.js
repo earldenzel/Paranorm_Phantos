@@ -42,14 +42,16 @@ var objects;
             this.x = 320;
         };
         LittleGirl.prototype.Update = function () {
+            var ticker = createjs.Ticker.getTicks();
             if (this.isStunned) {
                 this.visible = true;
+                this.canBeAttacked = true;
                 this.SwitchAnimation("Boss3_Stun");
             }
             else if (this.isTeleporting) {
                 this.SwitchAnimation("Boss3_Disappear");
                 this.visible = false;
-                var ticker = createjs.Ticker.getTicks();
+                this.canBeAttacked = false;
                 if (ticker % 90 == 0) {
                     this.isTeleporting = false;
                     this.teleportLimit = 60;
@@ -57,15 +59,16 @@ var objects;
             }
             else {
                 this.visible = true;
+                this.canBeAttacked = true;
                 this.SwitchAnimation("Boss3_Idle");
-                if (managers.Game.currentStage.getChildIndex(this.spawn) == null) {
-                    this.spawnCount = 0;
-                }
                 // If 2/3rds of its life is gone
                 if (this.hp < this.maxHp &&
                     this.hp >= (this.maxHp * (2 / 3))) {
                     if (this.spawnCount != this.spawnLimit) {
-                        this.ConjureHandAndActivate(true, new math.Vec2(this.x + 10, this.y));
+                        this.ConjureHandAndActivate(true);
+                    }
+                    if (this.spawnA.isDead && ticker % 150 == 0) {
+                        this.spawnCount = 0;
                     }
                 }
                 // If 1/3rds of its life is gone
@@ -73,14 +76,16 @@ var objects;
                     this.hp >= (this.maxHp * (1 / 3))) {
                     this.spawnLimit = 2;
                     if (this.spawnCount != this.spawnLimit) {
-                        switch (this.spawnCount) {
-                            case 0:
-                                this.ConjureHandAndActivate(true, new math.Vec2(this.x + 10, this.y));
-                                break;
-                            case 1:
-                                this.ConjureHandAndActivate(false, new math.Vec2(this.x - 10, this.y));
-                                break;
-                        }
+                        this.ConjureHandAndActivate(true);
+                        this.ConjureHandAndActivate(false);
+                    }
+                    if (this.spawnA.isDead && ticker % 150 == 0) {
+                        this.spawnCount--;
+                        this.ConjureHandAndActivate(true);
+                    }
+                    if (this.spawnB.isDead && ticker % 150 == 0) {
+                        this.spawnCount--;
+                        this.ConjureHandAndActivate(false);
                     }
                 }
             }
@@ -90,6 +95,7 @@ var objects;
             else {
                 this.teleportLimit = 0;
             }
+            //console.log("Teleport Limit", this.teleportLimit);
             _super.prototype.Update.call(this);
         };
         LittleGirl.prototype.Reset = function () { };
@@ -97,12 +103,13 @@ var objects;
             var playerPosition = new math.Vec2(managers.Game.player.x, managers.Game.player.y);
             var enemyPosition = new math.Vec2(this.x, this.y);
             var distanceToPlayer = math.Vec2.Distance(enemyPosition, playerPosition);
-            if (distanceToPlayer < 130 && !this.isTeleporting && this.teleportLimit == 0) {
+            if (distanceToPlayer <= 140 && this.teleportLimit == 0) {
                 this.isTeleporting = true;
-                this.currentSpeed = this.moveSpeed * 4;
+            }
+            if (this.isTeleporting) {
+                this.currentSpeed = this.moveSpeed * 8;
             }
             else {
-                this.isTeleporting = false;
                 this.currentSpeed = this.moveSpeed;
             }
             this.x += this.rightDirection ? this.currentSpeed : -this.currentSpeed;
@@ -120,9 +127,15 @@ var objects;
                 this.downDirection = true;
             }
         };
-        LittleGirl.prototype.ConjureHandAndActivate = function (leftNotRight, position) {
-            this.spawn = new objects.ConjuringHand(leftNotRight, position);
-            managers.Game.currentStage.AddEnemyToScene(this.spawn);
+        LittleGirl.prototype.ConjureHandAndActivate = function (leftNotRight) {
+            if (leftNotRight) {
+                this.spawnA = new objects.ConjuringHand(leftNotRight);
+                managers.Game.currentStage.AddEnemyToScene(this.spawnA);
+            }
+            else {
+                this.spawnB = new objects.ConjuringHand(leftNotRight);
+                managers.Game.currentStage.AddEnemyToScene(this.spawnB);
+            }
             this.spawnCount += 1;
         };
         return LittleGirl;
