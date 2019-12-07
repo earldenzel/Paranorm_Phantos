@@ -93,9 +93,7 @@ var objects;
             //if the player is not taking damage -- check player collision with this (as long as it is not stunned)
             if (!managers.Game.player.isTakingDamage) {
                 if (managers.Collision.Check(managers.Game.player, this) && !this.isStunned) {
-                    if (managers.Game.player.activatePowers && managers.Game.player.powerUp == config.PowerUp.SHADOW) {
-                    }
-                    else {
+                    if (!managers.Game.player.activatePowers && managers.Game.player.powerUp != config.PowerUp.SHADOW) {
                         managers.Game.player.isTakingDamage = true;
                         managers.Game.SFX = createjs.Sound.play("phoebeHit");
                         managers.Game.SFX.volume = 0.5;

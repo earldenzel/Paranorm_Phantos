@@ -31,12 +31,14 @@ var objects;
                 this.Reset();
             }
             if (managers.Collision.Check(managers.Game.player, this)) {
-                var ticker = createjs.Ticker.getTicks();
-                // use ticker to restrict 1 bullet every 10 frames for damage
-                if (ticker % 10 == 0) {
-                    managers.Game.player.isTakingProjectileDamage = true;
-                    managers.Game.player.GetDamage(this);
-                    this.Reset();
+                if (!managers.Game.player.activatePowers && managers.Game.player.powerUp != config.PowerUp.SHADOW) {
+                    var ticker = createjs.Ticker.getTicks();
+                    // use ticker to restrict 1 bullet every 10 frames for damage
+                    if (ticker % 10 == 0) {
+                        managers.Game.player.isTakingProjectileDamage = true;
+                        managers.Game.player.GetDamage(this);
+                        this.Reset();
+                    }
                 }
             }
         };

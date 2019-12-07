@@ -88,17 +88,17 @@ var scenes;
             managers.Music.graveyardMusicPlaying = false;
             managers.Music.hotelMusicPlaying = false;
             managers.Music.mansionMusicPlaying = false;
-            managers.Game.currentScene = config.Scene.ENEMYTEST_LEVEL;
-            //switch(managers.Game.player.stageFinished){
-            //    case 0:
-            //        managers.Game.currentScene = config.Scene.GRAVEYARD_1;
-            //        break;
-            //    case 1:
-            //        managers.Game.currentScene = config.Scene.HOTEL_1;
-            //        break;
-            //    case 2:
-            //        managers.Game.currentScene = config.Scene.MANSION_1;
-            //}
+            //managers.Game.currentScene = config.Scene.ENEMYTEST_LEVEL;
+            switch (managers.Game.player.stageFinished) {
+                case 0:
+                    managers.Game.currentScene = config.Scene.GRAVEYARD_1;
+                    break;
+                case 1:
+                    managers.Game.currentScene = config.Scene.HOTEL_1;
+                    break;
+                case 2:
+                    managers.Game.currentScene = config.Scene.MANSION_1;
+            }
         };
         OpeningScene.prototype.Main = function () {
             this.addChild(this.background);

@@ -4,5 +4,10 @@
     margin-left: auto;
     margin-right: auto;
     display:block;
-    border: 1px black dotted;
+    border: 2px rgb(88,248,152) dashed;
+}
+
+body{
+    background-image: url("./GhostWallpaper.png");
+    background-color: black;
 }
