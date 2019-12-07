@@ -16,7 +16,7 @@ module objects {
             //this.scaleY = 2;
             this.Start();
             //
-            this.hp = 20;
+            this.hp = 40;
             this.maxHp = this.hp;
             this.attackPower = 1;
             this.moveSpeed = moveSpeed;
@@ -40,69 +40,70 @@ module objects {
             this.x = 350;
         }
         public Update(): void {
-            if (!this.isStunned && !this.isDead) {
-                if (this.attackingMode) {
-                    if (this.hp > (this.maxHp / 2)) {
-                        this.SwitchAnimation(this.attack[this.direction as number]);
-                    }
-                    else{
-                        let ticker:number = createjs.Ticker.getTicks();
-                        if(this.currentAnimation == "Boss1_Idle"){
-                            switch (ticker % 3) {
-                                case 0:
-                                    this.SwitchAnimation("Boss1_ShovelAttack");
-                                    break;
-                                case 1:
-                                    this.SwitchAnimation("Boss1_CrossAttack");
-                                    break;
-                                default:
-                                    this.SwitchAnimation("Boss1_BothAttack");
-                                    break;
-                            }
-                            this.height = 384;
-                        }
-                    }
-                } else {
-                    if (this.hp > (this.maxHp / 2)) {
-                        this.SwitchAnimation(this.walk[this.direction as number]);
-                    }
-                    else{
-                        if(this.currentAnimation == "Boss1_BothAttack" || this.currentAnimation == "Boss1_ShovelAttack" ||this.currentAnimation == "Boss1_CrossAttack"){
-                            this.SwitchAnimation("Boss1_Idle");
-                            this.height = 280;
-                        }
-                        if(this.currentAnimation == "Boss1_Explode" && this.currentAnimationFrame > 3){
-                            this.SwitchAnimation("Boss1_Idle");
-                            this.width = 326;
-                            this.height = 280;
-                            this.attackPower = 1;
-                            this.scaleX = 1;
-                        }
-                        if(this.currentAnimation == this.attack[this.direction as number] || this.currentAnimation == this.walk[this.direction as number]){
-                            this.SwitchAnimation("Boss1_Explode");
-                            this.attackPower = 0;
-                        }
-                    }
-                }
-            }
-            else if(this.isStunned && !this.isDead){
-                this.attackingMode = false;
-                if(this.currentAnimation != "Boss1_Stun"){
-                    this.SwitchAnimation("Boss1_Destroy");
-                }
-                if(this.currentAnimation == "Boss1_Destroy" && this.currentAnimationFrame > 10){
-                    this.SwitchAnimation("Boss1_Stun");
-                }
-                if(managers.Game.player.biteSequence == 0 && this.currentAnimation == "Boss1_Stun"){
-                    this.isDead = true;
-                }
+            if (this.isDead){
+                this.SwitchAnimation("Boss1_Explode");
             }
             else{
-                if (this.currentAnimation == "Boss1_Explode" && this.currentAnimationFrame > 3) {
-                    managers.Game.stage.removeChild(this);
-                    this.visible = false;
+                if (this.isStunned){
+                    this.attackingMode = false;
+                    if(this.currentAnimation != "Boss1_Stun"){
+                        this.SwitchAnimation("Boss1_Destroy");
+                    }
+                    if(this.currentAnimation == "Boss1_Destroy" && this.currentAnimationFrame > 10){
+                        this.SwitchAnimation("Boss1_Stun");
+                    }
                 }
-                this.SwitchAnimation("Boss1_Explode");
+                else{
+                    if (this.attackingMode) {
+                        if (this.hp > (this.maxHp / 2)) {
+                            this.SwitchAnimation(this.attack[this.direction as number]);
+                        }
+                        else{
+                            let ticker:number = createjs.Ticker.getTicks();
+                            if(this.currentAnimation == "Boss1_Idle"){
+                                switch (ticker % 3) {
+                                    case 0:
+                                        this.SwitchAnimation("Boss1_ShovelAttack");
+                                        break;
+                                    case 1:
+                                        this.SwitchAnimation("Boss1_CrossAttack");
+                                        break;
+                                    default:
+                                        this.SwitchAnimation("Boss1_BothAttack");
+                                        break;
+                                }
+                                this.height = 384;
+                            }
+                        }
+                    } else {
+                        if (this.hp > (this.maxHp / 2)) {
+                            this.SwitchAnimation(this.walk[this.direction as number]);
+                        }
+                        else{
+                            if((this.currentAnimation == "Boss1_BothAttack" || this.currentAnimation == "Boss1_ShovelAttack" ||this.currentAnimation == "Boss1_CrossAttack")
+                                    && this.currentAnimationFrame > 2.8){
+                                this.SwitchAnimation("Boss1_Idle");
+                                this.height = 280;
+                            }
+                            if(this.currentAnimation == "Boss1_Explode" && this.currentAnimationFrame > 2.8){
+                                this.SwitchAnimation("Boss1_Idle");
+                                this.width = 326;
+                                this.height = 280;
+                                this.attackPower = 1;
+                                this.scaleX = 1;
+                            }
+                            if(this.currentAnimation == this.attack[this.direction as number] || this.currentAnimation == this.walk[this.direction as number]){
+                                this.SwitchAnimation("Boss1_Explode");
+                                this.attackPower = 0;
+                            }
+                        }
+                    }
+
+                }
+            }            
+            if (this.currentAnimation == "Boss1_Explode" && this.currentAnimationFrame > 3) {
+                managers.Game.stage.removeChild(this);
+                this.visible = false;
             }
             super.Update();
         }

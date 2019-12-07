@@ -19,6 +19,7 @@ var scenes;
         function Graveyard_8() {
             var _this = _super.call(this, true, false, false, false, config.Design.GRAVEYARD) || this;
             _this.victoryDanced = false;
+            _this.onlyTheBossIsLeft = false;
             _this.Start();
             return _this;
         }
@@ -62,6 +63,10 @@ var scenes;
                     this.enemies[5].visible = true;
                     this.enemies[5].SetPosition(new math.Vec2(100, 600));
                     this.enemies[6].visible = true;
+                }
+                if (this.enemies[0].isStunned && !this.onlyTheBossIsLeft) {
+                    this.DestroyOthers(this.enemies[0]);
+                    this.onlyTheBossIsLeft = true;
                 }
                 if (this.AllEnemiesAreDead()) {
                     this.isDoorTopLocked = false;

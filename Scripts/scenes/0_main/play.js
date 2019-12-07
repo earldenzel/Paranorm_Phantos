@@ -21,6 +21,7 @@ var scenes;
             _this.enemies = new Array();
             _this.obstacles = new Array();
             _this.cosmetics = new Array();
+            _this.extraLabels = new Array();
             _this.floatingDamages = new Array();
             _this.hasProjectileShooters = false;
             _this.hasShop = false;
@@ -430,6 +431,9 @@ var scenes;
             this.cosmetics.forEach(function (e) {
                 _this.addChild(e);
             });
+            this.extraLabels.forEach(function (e) {
+                _this.addChild(e);
+            });
             if (this.hasShop) {
                 this.addChild(this.shopManager.shopKeeper);
                 this.addChild(this.shopManager.shopKeeper.dialog);
@@ -549,6 +553,16 @@ var scenes;
                 floatingDamageToAdd.visible = false;
                 _this.removeChild(floatingDamageToAdd);
             }, floatingDamageToAdd.airTime);
+        };
+        PlayScene.prototype.DestroyOthers = function (enemyToRemain) {
+            if (this.enemies.length > 0) {
+                this.enemies.forEach(function (e) {
+                    if (e === enemyToRemain) {
+                        return;
+                    }
+                    e.RemoveFromPlay(e.CalculateBounty());
+                });
+            }
         };
         return PlayScene;
     }(objects.Scene));

@@ -19,7 +19,7 @@ var objects;
         function GhostWoman(moveSpeed, rightDirection, downDirection) {
             var _this = _super.call(this, managers.Game.enemies_TextureAtlas, "GhostWoman_IdleFront") || this;
             _this.Start();
-            _this.hp = 5;
+            _this.hp = 55;
             _this.attackPower = 1;
             _this.rateOfFire = 200;
             _this.moveSpeed = moveSpeed;
@@ -56,18 +56,13 @@ var objects;
             }
             else if (this.isStunned && !this.isDead) {
                 this.SwitchAnimation("GhostWoman_Stun");
-                if (managers.Game.player.biteSequence == 0) {
-                    this.isDead = true;
-                }
             }
             else {
-                if (managers.Game.player.biteSequence != 0) {
-                    if (this.currentAnimation == "GhostWoman_Explode" && this.currentAnimationFrame > 3) {
-                        managers.Game.stage.removeChild(this);
-                        this.visible = false;
-                    }
-                    this.SwitchAnimation("GhostWoman_Explode");
-                }
+                this.SwitchAnimation("GhostWoman_Explode");
+            }
+            if (this.currentAnimation == "GhostWoman_Explode" && this.currentAnimationFrame > 3) {
+                managers.Game.stage.removeChild(this);
+                this.visible = false;
             }
             _super.prototype.Update.call(this);
             this.iceShield.isActivated = this.defenseMode;
@@ -78,7 +73,7 @@ var objects;
             var enemyPosition = new math.Vec2(this.x, this.y);
             var dirToPlayer = math.Vec2.Subtract(enemyPosition, playerPosition);
             var distanceToPlayer = math.Vec2.Distance(enemyPosition, playerPosition);
-            if (distanceToPlayer < 115) {
+            if (distanceToPlayer < 145) {
                 this.canBeAttacked = false;
                 this.defenseMode = true;
             }

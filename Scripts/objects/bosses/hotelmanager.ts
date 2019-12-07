@@ -13,14 +13,15 @@ module objects {
 
             this.Start();
 
-            this.hp = 10;
-            this.attackPower = 1;
+            this.hp = 40;
+            this.attackPower = 2;
             this.moveSpeed = moveSpeed;
             this.rightDirection = rightDirection;
             this.downDirection = downDirection;
             this.knockback = 0.55;
             this.eatTimer = 5000;
             this.isFlying = true;
+            this.bounty = 1;
         }
         // Methods
         public Start():void{
@@ -30,11 +31,11 @@ module objects {
         }
         public Update(): void {
             if(!this.isStunned && !this.isDead){
-                if(this.hp > 1){
+                if(this.hp > 20){
                     this.currentSpeed = this.moveSpeed;
                     this.SwitchAnimation("Boss2_Idle");
                 }
-                else if (this.hp == 1) {
+                else if (this.hp <= 20) {
                     this.currentSpeed = this.moveSpeed / 2;
                     this.SwitchAnimation("Boss2_IdleB");
                     if(this.spawn == null){
@@ -92,6 +93,10 @@ module objects {
             this.spawn = new objects.GiantWorm();
             // Activate the spawn
             (managers.Game.currentStage as scenes.PlayScene).AddEnemyToScene(this.spawn);
+        }
+
+        public DevourEffect(): void {
+            managers.Game.player.GainSwingSpeed(100);
         }
     }
 }

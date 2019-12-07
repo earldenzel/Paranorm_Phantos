@@ -6,6 +6,7 @@ module scenes {
         protected enemies: Array<objects.Enemy> = new Array<objects.Enemy>();
         protected obstacles: Array<objects.GameObject> = new Array<objects.GameObject>();
         protected cosmetics: Array<objects.GameObject> = new Array<objects.GameObject>();
+        protected extraLabels: Array<objects.Label> = new Array<objects.Label>();
         protected floatingDamages: Array<objects.Label> = new Array<objects.Label>();
         protected key: objects.Key;
         public design: config.Design;
@@ -502,6 +503,10 @@ module scenes {
                 this.addChild(e);
             });
 
+            this.extraLabels.forEach(e => {
+                this.addChild(e);
+            });
+
             if (this.hasShop) {
                 this.addChild(this.shopManager.shopKeeper);
                 this.addChild(this.shopManager.shopKeeper.dialog);
@@ -635,6 +640,16 @@ module scenes {
             }, floatingDamageToAdd.airTime);
         }
 
-        
+        public DestroyOthers(enemyToRemain: objects.Enemy){
+            if (this.enemies.length > 0){
+                this.enemies.forEach(e => {
+                    if (e === enemyToRemain){
+                        return;
+                    }
+                    e.RemoveFromPlay(e.CalculateBounty());
+                });
+            }
+
+        }        
     }
 }

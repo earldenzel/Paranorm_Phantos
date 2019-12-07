@@ -13,6 +13,7 @@ module objects {
         private isBeingEaten: boolean = false;
         public canBeAttacked: boolean;
         protected expGain: number;
+        public bountyTaken: boolean = false;
 
         public startPosition: math.Vec2;
 
@@ -199,7 +200,10 @@ module objects {
             if (bounty > 0) {
                 managers.Game.SFX = createjs.Sound.play("anyDefeated");
                 managers.Game.SFX.volume = 0.2;
-                managers.Game.player.GainDollars(bounty);
+                if (!this.bountyTaken){
+                    managers.Game.player.GainDollars(bounty);
+                    this.bountyTaken = true;
+                }
             }
             this.stunIndicator.visible = false;
             managers.Game.stage.removeChild(this);

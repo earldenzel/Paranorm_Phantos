@@ -11,7 +11,7 @@ module objects {
 
             this.Start();
 
-            this.hp = 60;
+            this.hp = 100;
             this.attackPower = 2;
             this.moveSpeed = 0;
             this.knockback = 0;

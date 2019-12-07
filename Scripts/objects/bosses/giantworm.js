@@ -19,7 +19,7 @@ var objects;
         function GiantWorm() {
             var _this = _super.call(this, managers.Game.bosses_TextureAtlas, "Boss2_Worm_Alpha") || this;
             _this.Start();
-            _this.hp = 60;
+            _this.hp = 100;
             _this.attackPower = 2;
             _this.moveSpeed = 0;
             _this.knockback = 0;

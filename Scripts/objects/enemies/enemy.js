@@ -19,6 +19,7 @@ var objects;
             if (startPosition === void 0) { startPosition = null; }
             var _this = _super.call(this, textureAtlas, enemyName) || this;
             _this.isBeingEaten = false;
+            _this.bountyTaken = false;
             _this.moveSpeed = 0;
             _this.startPosition = startPosition;
             // Some enemies can be eaten, some enemies cannot.
@@ -186,7 +187,10 @@ var objects;
             if (bounty > 0) {
                 managers.Game.SFX = createjs.Sound.play("anyDefeated");
                 managers.Game.SFX.volume = 0.2;
-                managers.Game.player.GainDollars(bounty);
+                if (!this.bountyTaken) {
+                    managers.Game.player.GainDollars(bounty);
+                    this.bountyTaken = true;
+                }
             }
             this.stunIndicator.visible = false;
             managers.Game.stage.removeChild(this);

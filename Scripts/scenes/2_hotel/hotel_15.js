@@ -20,17 +20,37 @@ var scenes;
             var _this = 
             // hasDoorTop, hasDoorBot, hasDoorLeft, hasDoorRight
             _super.call(this, true, false, false, false, config.Design.HOTEL) || this;
+            _this.victoryDanced = false;
+            _this.onlyTheBossIsLeft = false;
             _this.Start();
             return _this;
         }
         // Methods
         Hotel_15.prototype.Start = function () {
+            this.enemies[0] = new objects.HotelManager(2, false, false);
+            this.cosmetics[0] = new objects.Stairs(config.Scene.MANSION_1, true);
+            this.cosmetics[0].SetPosition(new math.Vec2(285, 420));
             managers.Game.player.sceneOnTop = config.Scene.HOTEL_13;
+            this.isDoorTopLocked = (managers.Game.player.stageFinished == 1);
+            this.cosmetics[0].visible = (managers.Game.player.stageFinished > 1);
             _super.prototype.Start.call(this);
             this.playerInfo.PlayerLocation = new math.Vec2(96, 82);
         };
         Hotel_15.prototype.Update = function () {
             _super.prototype.Update.call(this);
+            if (this.enemies[0].isStunned && !this.onlyTheBossIsLeft) {
+                this.DestroyOthers(this.enemies[0]);
+                this.onlyTheBossIsLeft = true;
+            }
+            if (this.AllEnemiesAreDead()) {
+                this.isDoorTopLocked = false;
+                managers.Game.player.stageFinished = 2;
+                if (!this.victoryDanced) {
+                    managers.Game.player.VictoryDance();
+                    this.victoryDanced = true;
+                }
+                this.cosmetics[0].visible = true;
+            }
         };
         Hotel_15.prototype.Main = function () {
             _super.prototype.Main.call(this);

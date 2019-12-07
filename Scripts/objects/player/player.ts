@@ -53,6 +53,7 @@ module objects {
         // Soul Activation
         public activateSoul: boolean;
         public soulCounter: number = 2500;
+        public soulReplenishTimer: number = 0;
         public isFlying: boolean;
         public soulMoveSpeed: number;
         public soulAttackPower: number;
@@ -103,7 +104,7 @@ module objects {
 
         // Methods
         public Start(): void {
-            this.x = 285;
+            this.x = 455;
             this.y = 600;
             this.lastPosition = this.GetPosition();
             //this.playerController = { "W": false, "A": false, "S": false, "D": false, "Z": false };
@@ -113,19 +114,35 @@ module objects {
             managers.Game.player = this;
             if (this.iceShield != null) {
                 this.iceShield.Update();
-                this.iceShield.isActivated = this.activatePowers;
             }
-            if(this.activateSoul && this.soulCounter > 0){ 
-                this.soulCounter -= 1;               
-                if (this.soulCounter % 100 == 99){
-                    console.log(this.soulCounter);
+            if(this.activateSoul){
+                if (this.soulCounter > 0){ 
+                    this.soulCounter -= 1;               
+                    if (this.soulCounter % 100 == 99){
+                        console.log(this.soulCounter);
+                    }
+                }
+                else{
+                    this.soulCounter = 0;
+                    this.activateSoul = false;
+                    this.DeactivateSoulMode();
+                }
+                this.soulReplenishTimer = 0;
+            }
+            else{
+                this.soulReplenishTimer++;
+            }
+
+            if (this.soulReplenishTimer > 6000 && this.soulCounter == 0){
+                this.soulCounter = 2500;
+            }
+
+            if (this.soulCounter == 2500){
+                if (this.soulReplenishTimer % 1000 == 0){
+                    this.EchoMessage("MY SOUL IS READY");
                 }
             }
-            else if(this.activateSoul && this.soulCounter <= 0){
-                this.soulCounter = 0;
-                this.activateSoul = false;
-                this.DeactivateSoulMode();
-            }
+
             this.x = Math.round(this.x);
             this.y = Math.round(this.y);
 
@@ -211,8 +228,7 @@ module objects {
                     managers.Game.SFX.volume = 0.2;
                     this.dodgeTimer++;
                 }
-            }
-            
+            }            
 
             this.ActivatePowers();
             if (this.activatePowers && (this.powerUp == config.PowerUp.SLIME || this.powerUp == config.PowerUp.FIRE)) {
@@ -680,6 +696,9 @@ module objects {
                         if (this.iceShield == null) {
                             this.IceShieldCreation();
                         }
+                        else{
+                            this.iceShield.isActivated = true;                            
+                        }
                         break;
                 }
             }
@@ -950,13 +969,16 @@ module objects {
         }
         public ActivateSoulMode(): void {
             this.activateSoul = true;
-            this.isFlying = true;
             this.attackSequence = 0;
             this.attackPower += 2;
             //this.weapon.alpha = 0;
             this.weapon.visible = false;
             this.alpha = 1;
             this.SwitchAnimation(this.soulIdle[this.direction as number]);
+            if (this.soulCounter > 0){            
+                this.isFlying = true;
+                this.EchoMessage("SOUL MODE!!");
+            }
         }
         public DeactivateSoulMode(): void {
             this.isFlying = false;

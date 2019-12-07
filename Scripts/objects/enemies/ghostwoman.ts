@@ -15,7 +15,7 @@ module objects {
             super(managers.Game.enemies_TextureAtlas, "GhostWoman_IdleFront");
             this.Start();
 
-            this.hp = 5;
+            this.hp = 55;
             this.attackPower = 1;
             this.rateOfFire = 200;
             this.moveSpeed = moveSpeed;
@@ -55,19 +55,16 @@ module objects {
             }
             else if (this.isStunned && !this.isDead) {
                 this.SwitchAnimation("GhostWoman_Stun");
-                if (managers.Game.player.biteSequence == 0) {
-                    this.isDead = true;
-                }
             }
             else {
-                if (managers.Game.player.biteSequence != 0) {
-                    if (this.currentAnimation == "GhostWoman_Explode" && this.currentAnimationFrame > 3) {
-                        managers.Game.stage.removeChild(this);
-                        this.visible = false;
-                    }
-                    this.SwitchAnimation("GhostWoman_Explode");
-                }
+                this.SwitchAnimation("GhostWoman_Explode");
             }
+            
+            if (this.currentAnimation == "GhostWoman_Explode" && this.currentAnimationFrame > 3) {
+                managers.Game.stage.removeChild(this);
+                this.visible = false;
+            }
+
             super.Update();
             this.iceShield.isActivated = this.defenseMode;
         }
@@ -79,7 +76,7 @@ module objects {
             let dirToPlayer: math.Vec2 = math.Vec2.Subtract(enemyPosition, playerPosition);
             let distanceToPlayer: number = math.Vec2.Distance(enemyPosition, playerPosition);
 
-            if (distanceToPlayer < 115) {
+            if (distanceToPlayer < 145) {
                 this.canBeAttacked = false;
                 this.defenseMode = true;
             } else {

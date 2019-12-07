@@ -10,12 +10,7 @@ module scenes {
 
         // Methods
         public Start(): void {
-            this.enemies[0] = new objects.GhostThin(2.5, true, true);
-            this.enemies[0].SetPosition(new math.Vec2(260, 200));
-            this.enemies[1] = new objects.Bat(2.5, 100);
-            this.enemies[1].SetPosition(new math.Vec2(100, 200));
-            this.enemies[2] = new objects.Bat(2, 100);
-            this.enemies[2].SetPosition(new math.Vec2(450, 200));
+            this.enemies[0] = new objects.GhostWoman(2, false, false);
 
             this.obstacles[0] = new objects.Barriers(managers.Game.mansion_TextureAtlas, "Desk_4Tiles_Horizontal");
             this.obstacles[0].SetPosition(new math.Vec2(180, 300));

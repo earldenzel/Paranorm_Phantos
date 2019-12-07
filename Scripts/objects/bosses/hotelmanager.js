@@ -20,14 +20,15 @@ var objects;
         function HotelManager(moveSpeed, rightDirection, downDirection) {
             var _this = _super.call(this, managers.Game.bosses_TextureAtlas, "Boss2_Idle") || this;
             _this.Start();
-            _this.hp = 10;
-            _this.attackPower = 1;
+            _this.hp = 40;
+            _this.attackPower = 2;
             _this.moveSpeed = moveSpeed;
             _this.rightDirection = rightDirection;
             _this.downDirection = downDirection;
             _this.knockback = 0.55;
             _this.eatTimer = 5000;
             _this.isFlying = true;
+            _this.bounty = 1;
             return _this;
         }
         // Methods
@@ -38,11 +39,11 @@ var objects;
         };
         HotelManager.prototype.Update = function () {
             if (!this.isStunned && !this.isDead) {
-                if (this.hp > 1) {
+                if (this.hp > 20) {
                     this.currentSpeed = this.moveSpeed;
                     this.SwitchAnimation("Boss2_Idle");
                 }
-                else if (this.hp == 1) {
+                else if (this.hp <= 20) {
                     this.currentSpeed = this.moveSpeed / 2;
                     this.SwitchAnimation("Boss2_IdleB");
                     if (this.spawn == null) {
@@ -98,6 +99,9 @@ var objects;
             this.spawn = new objects.GiantWorm();
             // Activate the spawn
             managers.Game.currentStage.AddEnemyToScene(this.spawn);
+        };
+        HotelManager.prototype.DevourEffect = function () {
+            managers.Game.player.GainSwingSpeed(100);
         };
         return HotelManager;
     }(objects.Enemy));
