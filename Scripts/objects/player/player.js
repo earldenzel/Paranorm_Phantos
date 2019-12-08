@@ -37,6 +37,7 @@ var objects;
             _this.canTraverseLeft = false;
             _this.canTraverseRight = false;
             _this.deadPlayer = new Array();
+            _this.eatCount = 0;
             _this.deathCount = 0;
             _this.stageFinished = 0;
             _this.godMode = false;

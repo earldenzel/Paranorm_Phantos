@@ -392,6 +392,11 @@
                 currentScene = new scenes.EnemyTest_Level();
                 stage.addChild(currentScene);
                 break;
+            case config.Scene.CONGRATULATIONS:
+                stage.removeAllChildren();
+                currentScene = new scenes.CongratulationScene();
+                stage.addChild(currentScene);
+                break;
             case config.Scene.OVER:
                 stage.removeAllChildren();
                 currentScene = new scenes.GameOverScene();

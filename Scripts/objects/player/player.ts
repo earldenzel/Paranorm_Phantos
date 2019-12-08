@@ -38,6 +38,7 @@ module objects {
         public lastPosition: math.Vec2;
         public playerStatus: objects.Label;
         public deadPlayer: Array<objects.DeadPlayer> = new Array<objects.DeadPlayer>();
+        public eatCount: number = 0;
         public deathCount: number = 0;
         public stageFinished: number = 0;
         public iceShield: objects.IceShield;
