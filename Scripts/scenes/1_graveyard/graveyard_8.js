@@ -25,7 +25,7 @@ var scenes;
         }
         // Methods
         Graveyard_8.prototype.Start = function () {
-            if (managers.Game.player.stageFinished == 0) {
+            if (managers.Game.player.stageFinished <= 0) {
                 this.enemies[0] = new objects.Undertaker(0.5);
                 this.enemies[0].SetPosition(new math.Vec2(300, 530));
                 this.enemies[1] = new objects.Zombie(1.5);
@@ -55,7 +55,7 @@ var scenes;
         };
         Graveyard_8.prototype.Update = function () {
             _super.prototype.Update.call(this);
-            if (managers.Game.player.stageFinished == 0) {
+            if (managers.Game.player.stageFinished <= 0) {
                 this.cosmetics[1].visible = (!managers.Game.player.activateSoul && managers.Game.player.soulCounter > 0);
                 this.cosmetics[2].visible = (!managers.Game.player.activateSoul && managers.Game.player.soulCounter > 0);
                 if (this.enemies[1].hp <= 0 && this.enemies[2].hp <= 0 && this.enemies[5].hp > 0 && this.enemies[6].hp > 0) {

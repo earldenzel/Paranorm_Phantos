@@ -13,8 +13,10 @@ module scenes {
         }
 
         // Methods
-        public Start(): void {
-            this.enemies[0] = new objects.LittleGirl(2, true, false);           
+        public Start(): void {            
+            if (managers.Game.player.stageFinished <= 2){    
+                this.enemies[0] = new objects.LittleGirl(2, true, false);
+            }     
             
             this.cosmetics[0] = new objects.Stairs(config.Scene.GRAVEYARD_1, true); //end
             this.cosmetics[0].SetPosition(new math.Vec2(285, 420));
@@ -27,18 +29,21 @@ module scenes {
 
         public Update(): void {
             super.Update();
-            if (this.enemies[0].isStunned && !this.onlyTheBossIsLeft){
-                this.DestroyOthers(this.enemies[0]);
-                this.onlyTheBossIsLeft = true;
-            }
-            if (this.AllEnemiesAreDead()){
-                this.isDoorTopLocked = false;
-                managers.Game.player.stageFinished = 3;
-                if (!this.victoryDanced){
-                    managers.Game.player.VictoryDance();
-                    this.victoryDanced = true;
+
+            if (managers.Game.player.stageFinished <= 2){    
+                if (this.enemies[0].isStunned && !this.onlyTheBossIsLeft){
+                    this.DestroyOthers(this.enemies[0]);
+                    this.onlyTheBossIsLeft = true;
                 }
-                this.cosmetics[0].visible = true;
+                if (this.AllEnemiesAreDead()){
+                    this.isDoorTopLocked = false;
+                    managers.Game.player.stageFinished = 3;
+                    if (!this.victoryDanced){
+                        managers.Game.player.VictoryDance();
+                        this.victoryDanced = true;
+                    }
+                    this.cosmetics[0].visible = true;
+                }
             }
         }
 

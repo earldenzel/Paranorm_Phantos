@@ -27,7 +27,9 @@ var scenes;
         }
         // Methods
         Hotel_15.prototype.Start = function () {
-            this.enemies[0] = new objects.HotelManager(2, false, false);
+            if (managers.Game.player.stageFinished <= 1) {
+                this.enemies[0] = new objects.HotelManager(2, false, false);
+            }
             this.cosmetics[0] = new objects.Stairs(config.Scene.MANSION_1, true);
             this.cosmetics[0].SetPosition(new math.Vec2(285, 420));
             managers.Game.player.sceneOnTop = config.Scene.HOTEL_13;
@@ -38,18 +40,20 @@ var scenes;
         };
         Hotel_15.prototype.Update = function () {
             _super.prototype.Update.call(this);
-            if (this.enemies[0].isStunned && !this.onlyTheBossIsLeft) {
-                this.DestroyOthers(this.enemies[0]);
-                this.onlyTheBossIsLeft = true;
-            }
-            if (this.AllEnemiesAreDead()) {
-                this.isDoorTopLocked = false;
-                managers.Game.player.stageFinished = 2;
-                if (!this.victoryDanced) {
-                    managers.Game.player.VictoryDance();
-                    this.victoryDanced = true;
+            if (managers.Game.player.stageFinished <= 1) {
+                if (this.enemies[0].isStunned && !this.onlyTheBossIsLeft) {
+                    this.DestroyOthers(this.enemies[0]);
+                    this.onlyTheBossIsLeft = true;
                 }
-                this.cosmetics[0].visible = true;
+                if (this.AllEnemiesAreDead()) {
+                    this.isDoorTopLocked = false;
+                    managers.Game.player.stageFinished = 2;
+                    if (!this.victoryDanced) {
+                        managers.Game.player.VictoryDance();
+                        this.victoryDanced = true;
+                    }
+                    this.cosmetics[0].visible = true;
+                }
             }
         };
         Hotel_15.prototype.Main = function () {
