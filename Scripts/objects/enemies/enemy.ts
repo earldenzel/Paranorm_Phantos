@@ -56,7 +56,12 @@ module objects {
                     if (managers.Game.keyboardManager.biting && managers.Collision.Check(managers.Game.player, this) && this.canBeEaten) {   
                         this.isBeingEaten = true;                  
                         managers.Game.player.SetBitePositionDirection(this.GetPosition());
-                        managers.Game.player.EatMessage();
+                        if (this.powerUp != null && managers.Game.player.powerUp != this.powerUp){
+                            managers.Game.player.EatMessage(this.powerUp);
+                        }
+                        else{
+                            managers.Game.player.EatMessage();
+                        }
                         this.scaleX = managers.Game.player.halfH / this.height;
                         this.scaleY = this.scaleX;
                         managers.Game.keyboardManager.ControlReset();

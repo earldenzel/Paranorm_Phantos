@@ -17,7 +17,7 @@ module objects {
             super(managers.Game.bosses_TextureAtlas, "Boss3_Idle");
             this.Start();
 
-            this.hp = 30;
+            this.hp = 90;
             this.maxHp = this.hp;
             this.attackPower = 1;
             this.moveSpeed = moveSpeed;
@@ -25,12 +25,13 @@ module objects {
             this.rightDirection = rightDirection;
             this.downDirection = downDirection;
             this.knockback = 0.75;
-            this.eatTimer = 5000;
+            this.eatTimer = 3000;
             this.isFlying = true;
             this.isTeleporting = false;
             this.teleportLimit = 0;
             this.spawnCount = 0;
             this.spawnLimit = 1;
+            this.bounty = 1;
         }
 
         // Methods
@@ -41,61 +42,67 @@ module objects {
         }
         public Update(): void {
             let ticker: number = createjs.Ticker.getTicks();
-
-            if (this.isStunned) {
-                this.visible = true;
-                this.canBeAttacked = true;
-                this.SwitchAnimation("Boss3_Stun");
-            }
-            else if (this.isTeleporting) {
-                this.SwitchAnimation("Boss3_Disappear");
+            if (this.isDead){
                 this.visible = false;
-                this.canBeAttacked = false;
+            }
+            else{
+                if (this.isStunned) {
+                    this.visible = true;
+                    this.canBeAttacked = true;
+                    this.SwitchAnimation("Boss3_Stun");
+                }
+                else if (this.isTeleporting) {
+                    this.SwitchAnimation("Boss3_Disappear");
+                    this.visible = false;
+                    this.canBeAttacked = false;
+    
+                    if (ticker % 90 == 0) {
+                        this.isTeleporting = false;
+                        this.teleportLimit = 60;
+                    }
+                }
+                else {
+                    this.visible = true;
+                    this.canBeAttacked = true;
+                    this.SwitchAnimation("Boss3_Idle");
+                    
+                    // If 2/3rds of its life is gone
+                    if (this.hp < this.maxHp &&
+                        this.hp >= (this.maxHp * (2 / 3))) {
+                        if (this.spawnCount != this.spawnLimit) {
+                            this.ConjureHandAndActivate(true);
+                        }
+                        if(this.spawnA.isDead && ticker % 150 == 0){
+                            this.spawnCount = 0;
+                        }
+                    }
+                    // If 1/3rds of its life is gone
+                    else if (this.hp < (this.maxHp * (2 / 3)) &&
+                        this.hp >= (this.maxHp * (1 / 3))) {
+                            this.spawnLimit = 2
+                        if(this.spawnCount <= this.spawnLimit){
+                            this.ConjureHandAndActivate(true);
+                            this.ConjureHandAndActivate(false);
+                        }
+                        if(this.spawnA.isDead && ticker % 150 == 0){
+                            this.spawnCount--;
+                            this.ConjureHandAndActivate(true);
+                        }
+                        if(this.spawnB.isDead && ticker % 150 == 0){
+                            this.spawnCount--;
+                            this.ConjureHandAndActivate(false);
+                        }
+                    }
+                }
+                if (this.teleportLimit > 0) {
+                    this.teleportLimit--;
+                }
+                else {
+                    this.teleportLimit = 0;
+                }
+            }
 
-                if (ticker % 90 == 0) {
-                    this.isTeleporting = false;
-                    this.teleportLimit = 60;
-                }
-            }
-            else {
-                this.visible = true;
-                this.canBeAttacked = true;
-                this.SwitchAnimation("Boss3_Idle");
-                
-                // If 2/3rds of its life is gone
-                if (this.hp < this.maxHp &&
-                    this.hp >= (this.maxHp * (2 / 3))) {
-                    if (this.spawnCount != this.spawnLimit) {
-                        this.ConjureHandAndActivate(true);
-                    }
-                    if(this.spawnA.isDead && ticker % 150 == 0){
-                        this.spawnCount = 0;
-                    }
-                }
-                // If 1/3rds of its life is gone
-                else if (this.hp < (this.maxHp * (2 / 3)) &&
-                    this.hp >= (this.maxHp * (1 / 3))) {
-                        this.spawnLimit = 2
-                    if(this.spawnCount != this.spawnLimit){
-                        this.ConjureHandAndActivate(true);
-                        this.ConjureHandAndActivate(false);
-                    }
-                    if(this.spawnA.isDead && ticker % 150 == 0){
-                        this.spawnCount--;
-                        this.ConjureHandAndActivate(true);
-                    }
-                    if(this.spawnB.isDead && ticker % 150 == 0){
-                        this.spawnCount--;
-                        this.ConjureHandAndActivate(false);
-                    }
-                }
-            }
-            if (this.teleportLimit > 0) {
-                this.teleportLimit--;
-            }
-            else {
-                this.teleportLimit = 0;
-            }
+            
             //console.log("Teleport Limit", this.teleportLimit);
             super.Update();
         }

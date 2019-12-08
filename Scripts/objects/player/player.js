@@ -20,13 +20,13 @@ var objects;
         function Player() {
             var _this = _super.call(this, managers.Game.phoebe_TextureAtlas, "Phoebe_Walk_Front1") || this;
             //Variables
-            //public playerController: Controller<boolean>;
             _this.attackSequence = 0;
             _this.delaySequence = 0;
             _this.biteSequence = 0;
             _this.textSequence = 0;
             _this.transitSequence = 0;
             _this.victorySequence = 0;
+            _this.playerIceDamageSequence = 0;
             _this.playerMoveSpeed = 4;
             _this.playerHalfSpeed = _this.playerMoveSpeed / 4;
             _this.playerAttackDelay = 1000;
@@ -73,6 +73,7 @@ var objects;
             ];
             _this.experience = 0;
             _this.SoulSetup();
+            _this.IceShieldCreation();
             _this.level = 0;
             _this.contactDamageTimer = 0;
             _this.projectileDamageTimer = 0;
@@ -80,14 +81,14 @@ var objects;
         }
         // Methods
         Player.prototype.Start = function () {
-            this.x = 455;
+            this.x = 405;
             this.y = 600;
             this.lastPosition = this.GetPosition();
             //this.playerController = { "W": false, "A": false, "S": false, "D": false, "Z": false };
         };
         Player.prototype.Update = function () {
             managers.Game.player = this;
-            if (this.iceShield != null) {
+            if (this.powerUp == config.PowerUp.ICE) {
                 this.iceShield.Update();
             }
             if (this.activateSoul) {
@@ -646,12 +647,14 @@ var objects;
                         if (ticker % 90 == 0) {
                             this.ecto -= 1;
                         }
-                        if (this.iceShield == null) {
-                            this.IceShieldCreation();
-                        }
-                        else {
-                            this.iceShield.isActivated = true;
-                        }
+                        this.iceShield.isActivated = true;
+                        break;
+                }
+            }
+            else {
+                switch (this.powerUp) {
+                    case config.PowerUp.ICE:
+                        this.iceShield.isActivated = false;
                         break;
                 }
             }
@@ -746,19 +749,39 @@ var objects;
                 this.EchoMessage("BYE BYE", 3000);
             }
         };
-        Player.prototype.EatMessage = function () {
-            var random = Math.random() * 100;
-            if (random > 75) {
-                this.EchoMessage("MUNCH MUNCH", 3000);
-            }
-            else if (random > 50) {
-                this.EchoMessage("CHOMP CHOMP", 3000);
-            }
-            else if (random > 25) {
-                this.EchoMessage("MMMMMM...", 3000);
-            }
-            else {
-                this.EchoMessage("AHHHH...", 3000);
+        Player.prototype.EatMessage = function (powerup) {
+            if (powerup === void 0) { powerup = config.PowerUp.NONE; }
+            switch (powerup) {
+                case config.PowerUp.NONE:
+                    var random = Math.random() * 100;
+                    if (random > 75) {
+                        this.EchoMessage("MUNCH MUNCH", 3000);
+                    }
+                    else if (random > 50) {
+                        this.EchoMessage("CHOMP CHOMP", 3000);
+                    }
+                    else if (random > 25) {
+                        this.EchoMessage("MMMMMM...", 3000);
+                    }
+                    else {
+                        this.EchoMessage("AHHHH...", 3000);
+                    }
+                    break;
+                case config.PowerUp.SHADOW:
+                    this.EchoMessage("DARK POWER!", 3000);
+                    break;
+                case config.PowerUp.BITE:
+                    this.EchoMessage("DASH POWER!", 3000);
+                    break;
+                case config.PowerUp.FIRE:
+                    this.EchoMessage("FIRE POWER!", 3000);
+                    break;
+                case config.PowerUp.ICE:
+                    this.EchoMessage("FROST POWER!", 3000);
+                    break;
+                case config.PowerUp.SLIME:
+                    this.EchoMessage("ECTO POWER!", 3000);
+                    break;
             }
         };
         Player.prototype.VictoryDance = function () {
@@ -884,6 +907,7 @@ var objects;
                 else if (bulletType == config.PowerUp.FIRE) {
                     bullet = managers.Game.bulletManager.fireBalls[currentBullet];
                 }
+                bullet.attackPower = Math.floor(this.attackPower / 2);
                 bullet.staticNotPositional = true;
                 bullet.direction = this.direction;
                 bullet.x = bulletSpawn.x;
@@ -898,7 +922,7 @@ var objects;
         Player.prototype.IceShieldCreation = function () {
             this.iceShield = new objects.IceShield(this);
             this.iceShield.playerNotEnemy = true;
-            managers.Game.currentStage.AddIceShieldToScene(this.iceShield);
+            this.iceShield.visible = false;
         };
         Player.prototype.SoulSetup = function () {
             this.activateSoul = false;

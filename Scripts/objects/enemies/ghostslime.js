@@ -142,17 +142,6 @@ var objects;
         };
         GhostSlime.prototype.DevourEffect = function () {
             managers.Game.player.powerUp = this.powerUp;
-            _super.prototype.DevourEffect.call(this);
-        };
-        GhostSlime.prototype.RemoveFromPlay = function (bounty) {
-            this.isDead = true;
-            managers.Game.player.GainEcto();
-            if (bounty > 0) {
-                managers.Game.SFX = createjs.Sound.play("anyDefeated");
-                managers.Game.SFX.volume = 0.2;
-                managers.Game.player.GainDollars(bounty);
-            }
-            this.stunIndicator.visible = false;
         };
         return GhostSlime;
     }(objects.Enemy));

@@ -21,7 +21,7 @@ module objects {
             this.attackPower = 1;
             this.moveSpeed = moveSpeed;
             this.knockback = 0;
-            this.eatTimer = 2000;
+            this.eatTimer = 3000;
             this.bounty = 100;
             this.isFlying = false;
             this.attackingMode = false;
@@ -178,17 +178,6 @@ module objects {
 
         public DevourEffect(): void {
             managers.Game.player.GainAttack(5);
-        }
-        public RemoveFromPlay(bounty: number): void {
-            this.isDead = true;
-            
-            managers.Game.player.GainEcto();
-            if (bounty > 0) {
-                managers.Game.SFX = createjs.Sound.play("anyDefeated");
-                managers.Game.SFX.volume = 0.2;
-                managers.Game.player.GainDollars(bounty);
-            }
-            this.stunIndicator.visible = false;    
         }
     }
 }

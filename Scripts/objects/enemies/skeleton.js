@@ -125,16 +125,6 @@ var objects;
                 this.bulletSpawn = new math.Vec2(-5000, -5000);
             }
         };
-        Skeleton.prototype.RemoveFromPlay = function (bounty) {
-            this.isDead = true;
-            managers.Game.player.GainEcto();
-            if (bounty > 0) {
-                managers.Game.SFX = createjs.Sound.play("anyDefeated");
-                managers.Game.SFX.volume = 0.2;
-                managers.Game.player.GainDollars(bounty);
-            }
-            this.stunIndicator.visible = false;
-        };
         return Skeleton;
     }(objects.Enemy));
     objects.Skeleton = Skeleton;

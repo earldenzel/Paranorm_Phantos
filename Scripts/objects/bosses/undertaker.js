@@ -28,7 +28,7 @@ var objects;
             _this.attackPower = 1;
             _this.moveSpeed = moveSpeed;
             _this.knockback = 0;
-            _this.eatTimer = 2000;
+            _this.eatTimer = 3000;
             _this.bounty = 100;
             _this.isFlying = false;
             _this.attackingMode = false;
@@ -175,16 +175,6 @@ var objects;
         };
         Undertaker.prototype.DevourEffect = function () {
             managers.Game.player.GainAttack(5);
-        };
-        Undertaker.prototype.RemoveFromPlay = function (bounty) {
-            this.isDead = true;
-            managers.Game.player.GainEcto();
-            if (bounty > 0) {
-                managers.Game.SFX = createjs.Sound.play("anyDefeated");
-                managers.Game.SFX.volume = 0.2;
-                managers.Game.player.GainDollars(bounty);
-            }
-            this.stunIndicator.visible = false;
         };
         return Undertaker;
     }(objects.Enemy));

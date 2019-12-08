@@ -26,7 +26,7 @@ var objects;
             _this.rightDirection = rightDirection;
             _this.downDirection = downDirection;
             _this.knockback = 0.55;
-            _this.eatTimer = 5000;
+            _this.eatTimer = 3000;
             _this.isFlying = true;
             _this.bounty = 1;
             return _this;

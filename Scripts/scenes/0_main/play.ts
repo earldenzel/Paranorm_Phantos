@@ -283,6 +283,9 @@ module scenes {
                         -config.Bounds.ENEMY_COLLISION_OFFSET,
                         -config.Bounds.ENEMY_COLLISION_OFFSET,
                         -config.Bounds.ENEMY_COLLISION_OFFSET);
+                if (this.player.powerUp == config.PowerUp.ICE){
+                    this.player.iceShield.CheckShieldDamage(e);
+                }
             });
             if (managers.Game.player.isTakingDamage && !collectiveCollision) {
                 managers.Game.player.isTakingDamage = false;
@@ -301,14 +304,14 @@ module scenes {
                         }
                         e.CheckGapDamage(f);
                     }
-                    if(e instanceof objects.IceShield){
-                        e.CheckShieldDamage(f);
-                    }
                     //if(!f.isFlying && e instanceof objects.SlimePuddle){
                     //    e.CheckSlowMovement(f);
                     //}
                 });
                 if (e instanceof objects.Gap && !this.player.isFlying) {
+                    if (this.player.activatePowers && this.player.powerUp == config.PowerUp.BITE){
+                        return;
+                    }
                     e.CheckGapDamage(this.player);
                 }
                 //if(e instanceof objects.SlimePuddle){
@@ -530,6 +533,7 @@ module scenes {
             });
             
             // PLAYER PLACEMENT
+            this.addChild(this.player.iceShield);
             this.addChild(this.player.swing);
             this.addChild(this.player);
             this.addChild(this.player.weapon);
@@ -565,9 +569,7 @@ module scenes {
             }
             if (this.hasDoorRight) {
                 this.addChild(this.doorRightFrame);
-            }
-
-            
+            }            
 
             if (this.hasProjectileShooters || managers.Game.player.powerUp == config.PowerUp.FIRE) {
                 this.bulletManager.spiderBullets.forEach(bullet => {

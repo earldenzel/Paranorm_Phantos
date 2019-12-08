@@ -16,6 +16,8 @@ var managers;
             this.moveDown = false;
             this.attacking = false;
             this.biting = false;
+            this.running = false;
+            this.powers = false;
             if (fullReset) {
                 this.enabled = false;
             }

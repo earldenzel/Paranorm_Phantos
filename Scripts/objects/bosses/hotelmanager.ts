@@ -19,7 +19,7 @@ module objects {
             this.rightDirection = rightDirection;
             this.downDirection = downDirection;
             this.knockback = 0.55;
-            this.eatTimer = 5000;
+            this.eatTimer = 3000;
             this.isFlying = true;
             this.bounty = 1;
         }

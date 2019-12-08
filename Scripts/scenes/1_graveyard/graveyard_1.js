@@ -19,6 +19,7 @@ var scenes;
         // Constructor
         function Graveyard_1() {
             var _this = _super.call(this, false, true, true, true, config.Design.GRAVEYARD) || this;
+            _this.hasProjectileShooters = true; //do not remove
             _this.isDoorLeftLocked = managers.GraveyardLocks.graveyard_1_lockLeft;
             _this.isDoorRightLocked = managers.GraveyardLocks.graveyard_1_lockRight;
             _this.isDoorBotLocked = managers.GraveyardLocks.graveyard_1_lockBot;
@@ -53,13 +54,16 @@ var scenes;
                 this.cosmetics[9].SetPosition(new math.Vec2(200, 450));
                 this.cosmetics[10].SetPosition(new math.Vec2(180, 500));
                 this.cosmetics[11].SetPosition(new math.Vec2(220, 500));
-                this.extraLabels[0] = new objects.Label("MOVEMENT", "16px", "'Press Start 2P'", "#FFFF00", 350, 250, true),
-                    this.extraLabels[1] = new objects.Label("HOLD TO RUN", "16px", "'Press Start 2P'", "#FFFF00", 350, 300, true),
-                    this.extraLabels[2] = new objects.Label("ATTACK", "16px", "'Press Start 2P'", "#FFFF00", 350, 350, true),
-                    this.extraLabels[3] = new objects.Label("POWERS", "16px", "'Press Start 2P'", "#FFFF00", 350, 400, true),
-                    this.extraLabels[4] = new objects.Label("DEVOUR/DASH", "16px", "'Press Start 2P'", "#FFFF00", 350, 450, true),
-                    this.extraLabels[5] = new objects.Label("SOUL MODE", "16px", "'Press Start 2P'", "#FFFF00", 350, 500, true),
-                    this.extraLabels[6] = new objects.Label("USE SPARINGLY", "16px", "'Press Start 2P'", "#FFFF00", 350, 520, true);
+                this.extraLabels[0] = new objects.Label("MOVEMENT", "16px", "'Press Start 2P'", "#FFFF00", 350, 250, true);
+                this.extraLabels[1] = new objects.Label("HOLD TO RUN", "16px", "'Press Start 2P'", "#FFFF00", 350, 300, true);
+                this.extraLabels[2] = new objects.Label("ATTACK", "16px", "'Press Start 2P'", "#FFFF00", 350, 350, true);
+                this.extraLabels[3] = new objects.Label("POWERS", "16px", "'Press Start 2P'", "#FFFF00", 350, 400, true);
+                this.extraLabels[4] = new objects.Label("DEVOUR/DASH", "16px", "'Press Start 2P'", "#FFFF00", 350, 440, true);
+                this.extraLabels[5] = new objects.Label("SOUL MODE", "16px", "'Press Start 2P'", "#FFFF00", 350, 490, true);
+                this.extraLabels[6] = new objects.Label("USE SPARINGLY", "16px", "'Press Start 2P'", "#FFFF00", 350, 510, true);
+                this.extraLabels[9] = new objects.Label("GET OFF/ON THINGS", "16px", "'Press Start 2P'", "#FFFF00", 350, 460, true);
+                this.obstacles[0] = new objects.Barriers(managers.Game.graveyard_TextureAtlas, "GraveTile");
+                this.obstacles[0].SetPosition(new math.Vec2(320, 600));
             }
             this.cosmetics[5] = new objects.Stairs(config.Scene.HOTEL_1, true);
             this.cosmetics[6] = new objects.Stairs(config.Scene.MANSION_1, true);
@@ -83,7 +87,7 @@ var scenes;
                 managers.Game.keyboardManager.biting &&
                 managers.Game.keyboardManager.attacking &&
                 !managers.Game.player.godMode) {
-                managers.Game.player.powerUp = config.PowerUp.ICE;
+                managers.Game.player.powerUp = config.PowerUp.FIRE;
                 managers.Game.player.playerAttackDelay = 0;
                 managers.Game.player.money = 99999;
                 managers.Game.player.godMode = true;

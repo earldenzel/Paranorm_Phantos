@@ -20,12 +20,17 @@ var scenes;
             var _this = 
             // hasDoorTop, hasDoorBot, hasDoorLeft, hasDoorRight
             _super.call(this, false, true, false, false, config.Design.MANSION) || this;
+            _this.extraEnemyHasSpawned = false;
+            _this.hasProjectileShooters = true;
             _this.Start();
             return _this;
         }
         // Methods
         Mansion_3.prototype.Start = function () {
-            this.enemies[0] = new objects.GhostWoman(2, false, false);
+            this.enemies[0] = new objects.GhostWoman(5, false, false);
+            this.enemies[1] = new objects.Skeleton(new math.Vec2(150, 150), 3, false, true);
+            this.enemies[2] = new objects.Skeleton(new math.Vec2(650, 150), 3, true, true);
+            this.enemies[3] = new objects.Skeleton(new math.Vec2(400, 150), 3, false, false);
             this.obstacles[0] = new objects.Barriers(managers.Game.mansion_TextureAtlas, "Desk_4Tiles_Horizontal");
             this.obstacles[0].SetPosition(new math.Vec2(180, 300));
             this.obstacles[1] = new objects.Barriers(managers.Game.mansion_TextureAtlas, "Desk_4Tiles_Horizontal");
@@ -40,6 +45,10 @@ var scenes;
             this.playerInfo.PlayerLocation = new math.Vec2(112, 18);
         };
         Mansion_3.prototype.Update = function () {
+            if (this.enemies[1].isDead && this.enemies[2].isDead && this.enemies[3].isDead && !this.extraEnemyHasSpawned) {
+                this.extraEnemyHasSpawned = true;
+                this.AddEnemyToScene(new objects.GhostMan(2));
+            }
             _super.prototype.Update.call(this);
         };
         Mansion_3.prototype.Main = function () {

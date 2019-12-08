@@ -26,7 +26,7 @@ var objects;
             var _this = _super.call(this, managers.Game.bosses_TextureAtlas, "Boss3_OpenHand") || this;
             _this.leftNotRight = leftNotRight;
             _this.Start();
-            _this.hp = 10;
+            _this.hp = 50;
             _this.attackPower = 2;
             _this.moveSpeed = 2;
             _this.knockback = 0.25;

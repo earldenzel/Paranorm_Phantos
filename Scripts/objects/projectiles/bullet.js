@@ -39,6 +39,16 @@ var objects;
                     this.Reset();
                 }
             }
+            this.CheckBound();
+        };
+        Bullet.prototype.CheckBound = function () {
+            // right bound
+            if (this.x >= config.Bounds.RIGHT_BOUND - this.halfW
+                || this.x <= this.halfW + config.Bounds.LEFT_BOUND
+                || this.y >= config.Bounds.BOTTOM_BOUND - this.halfH
+                || this.y <= this.halfH + config.Bounds.TOP_BOUND) {
+                this.Reset();
+            }
         };
         return Bullet;
     }(objects.GameObject));

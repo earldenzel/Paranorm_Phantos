@@ -59,40 +59,25 @@ module objects {
         public Main(): void { }
         public CheckBounds(): void { }
         public CheckShieldDamage(entity: objects.GameObject) {
-            //let offset = -config.Bounds.OBSTACLE_OFFSET;
-            //let gapTopLeftX = this.x - this.halfW - offset;
-            //let gapTopLeftY = this.y - this.halfH - offset;
-            //let gapBotRightX = gapTopLeftX + this.width + offset;
-            //let gapBotRightY = this.y + this.width + offset;
-            //let entityFeetX = entity.x;
-            //let entityFeetY = entity.y + entity.halfH;
             if(this.x >= entity.x + entity.width || this.x + this.width <= entity.x || this.y >= entity.y + entity.height || this.y + this.height <= entity.y){
                 //console.log(this.width, this.height);
             }
             else{
                 if (entity.hp > 0) {
                     if (entity instanceof objects.Player && !this.playerNotEnemy) {
-                        //console.log("Player gets hit");
-                        (entity as objects.Player).GetDamage(this);
+                        //player will be hit by ice from ghostwoman's attack every 1s
+                        if (managers.Game.player.playerIceDamageSequence == 0){
+                            managers.Game.player.playerIceDamageSequence = setTimeout(() => {                                
+                                (entity as objects.Player).GetDamage(this);
+                                managers.Game.player.playerIceDamageSequence = 0;
+                            }, 1000);
+                        }
                     }
                     else if (entity instanceof objects.Enemy && this.playerNotEnemy) {
-                        entity.hp -= this.attackPower;
+                        entity.GetDamage(this.Host());
                     }
                 }
             }
-            //if (managers.Collision.Check(this, entity)) {
-            //if (entityFeetX > gapTopLeftX && entityFeetX < gapBotRightX && entityFeetY > gapTopLeftY && entityFeetY < gapBotRightY) {
-            //    console.log(this.getBounds());
-            //    if (entity.hp > 0) {
-            //        if (entity instanceof objects.Player && !this.playerNotEnemy) {
-            //            console.log("Player gets hit");
-            //            (entity as objects.Player).GetDamage(this);
-            //        }
-            //        else if (entity instanceof objects.Enemy && this.playerNotEnemy) {
-            //            entity.hp -= this.attackPower;
-            //        }
-            //    }
-            //}
         }
     }
 }

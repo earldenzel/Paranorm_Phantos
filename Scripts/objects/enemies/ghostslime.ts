@@ -144,19 +144,6 @@ module objects{
 
         public DevourEffect(): void {
             managers.Game.player.powerUp = this.powerUp;
-            super.DevourEffect();
-        }
-
-        public RemoveFromPlay(bounty: number): void {
-            this.isDead = true;
-
-            managers.Game.player.GainEcto();
-            if (bounty > 0) {
-                managers.Game.SFX = createjs.Sound.play("anyDefeated");
-                managers.Game.SFX.volume = 0.2;
-                managers.Game.player.GainDollars(bounty);
-            }
-            this.stunIndicator.visible = false;
         }
     }
 }

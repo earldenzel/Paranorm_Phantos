@@ -20,7 +20,7 @@ module objects {
             this.leftNotRight = leftNotRight;
             this.Start();
 
-            this.hp = 10;
+            this.hp = 50;
             this.attackPower = 2;
             this.moveSpeed = 2;
             this.knockback = 0.25;

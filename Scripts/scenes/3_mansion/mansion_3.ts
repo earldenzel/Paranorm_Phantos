@@ -1,16 +1,21 @@
 module scenes {
 
     export class Mansion_3 extends scenes.PlayScene {
+        private extraEnemyHasSpawned: boolean = false;
         // Constructor
         constructor() {
             // hasDoorTop, hasDoorBot, hasDoorLeft, hasDoorRight
             super(false, true, false, false,config.Design.MANSION);
+            this.hasProjectileShooters = true;
             this.Start();
         }
 
         // Methods
         public Start(): void {
-            this.enemies[0] = new objects.GhostWoman(2, false, false);
+            this.enemies[0] = new objects.GhostWoman(5, false, false);
+            this.enemies[1] = new objects.Skeleton(new math.Vec2(150, 150), 3, false, true);
+            this.enemies[2] = new objects.Skeleton(new math.Vec2(650, 150), 3, true, true);
+            this.enemies[3] = new objects.Skeleton(new math.Vec2(400, 150), 3, false, false);
 
             this.obstacles[0] = new objects.Barriers(managers.Game.mansion_TextureAtlas, "Desk_4Tiles_Horizontal");
             this.obstacles[0].SetPosition(new math.Vec2(180, 300));
@@ -28,6 +33,10 @@ module scenes {
         }        
 
         public Update(): void {
+            if (this.enemies[1].isDead && this.enemies[2].isDead && this.enemies[3].isDead && !this.extraEnemyHasSpawned){
+                this.extraEnemyHasSpawned = true;
+                this.AddEnemyToScene(new objects.GhostMan(2));
+            }
             super.Update();
         }
 

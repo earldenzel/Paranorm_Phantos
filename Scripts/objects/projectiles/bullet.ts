@@ -27,6 +27,18 @@ module objects {
                     this.Reset();
                 }
             }
+            this.CheckBound();
+        }
+
+        public CheckBound(){
+            // right bound
+            if (this.x >= config.Bounds.RIGHT_BOUND - this.halfW
+                ||this.x <= this.halfW + config.Bounds.LEFT_BOUND
+                ||this.y >= config.Bounds.BOTTOM_BOUND - this.halfH
+                ||this.y <= this.halfH + config.Bounds.TOP_BOUND) {
+                    this.Reset();
+            }
+            
         }
     }
 }

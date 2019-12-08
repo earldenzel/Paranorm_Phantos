@@ -123,16 +123,6 @@ var objects;
         Zombie.prototype.DevourEffect = function () {
             managers.Game.player.GainHealth(3);
         };
-        Zombie.prototype.RemoveFromPlay = function (bounty) {
-            this.isDead = true;
-            managers.Game.player.GainEcto();
-            if (bounty > 0) {
-                managers.Game.SFX = createjs.Sound.play("anyDefeated");
-                managers.Game.SFX.volume = 0.2;
-                managers.Game.player.GainDollars(bounty);
-            }
-            this.stunIndicator.visible = false;
-        };
         return Zombie;
     }(objects.Enemy));
     objects.Zombie = Zombie;

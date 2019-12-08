@@ -82,17 +82,7 @@ module objects{
             }
             this.CheckBound();
         }
-        public RemoveFromPlay(bounty: number): void {
-            this.isDead = true;
-            
-            managers.Game.player.GainEcto();
-            if (bounty > 0) {
-                managers.Game.SFX = createjs.Sound.play("anyDefeated");
-                managers.Game.SFX.volume = 0.2;
-                managers.Game.player.GainDollars(bounty);
-            }
-            this.stunIndicator.visible = false;
-        }
+
         private SpawnCreation():void{
             this.spawns = new Array<objects.MaggotSmall>();
             for (let i = 0; i < this.spawnNumber; i++) {
@@ -103,6 +93,7 @@ module objects{
             }
             console.log(this.spawns);
         }
+        
         public ActivateSpawns():void{
             for (let i = 0; i < this.spawnNumber; i++) {
                 this.spawns[i].x = this.x;

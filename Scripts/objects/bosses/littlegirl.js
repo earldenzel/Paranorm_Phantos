@@ -19,7 +19,7 @@ var objects;
         function LittleGirl(moveSpeed, rightDirection, downDirection) {
             var _this = _super.call(this, managers.Game.bosses_TextureAtlas, "Boss3_Idle") || this;
             _this.Start();
-            _this.hp = 30;
+            _this.hp = 90;
             _this.maxHp = _this.hp;
             _this.attackPower = 1;
             _this.moveSpeed = moveSpeed;
@@ -27,12 +27,13 @@ var objects;
             _this.rightDirection = rightDirection;
             _this.downDirection = downDirection;
             _this.knockback = 0.75;
-            _this.eatTimer = 5000;
+            _this.eatTimer = 3000;
             _this.isFlying = true;
             _this.isTeleporting = false;
             _this.teleportLimit = 0;
             _this.spawnCount = 0;
             _this.spawnLimit = 1;
+            _this.bounty = 1;
             return _this;
         }
         // Methods
@@ -43,57 +44,62 @@ var objects;
         };
         LittleGirl.prototype.Update = function () {
             var ticker = createjs.Ticker.getTicks();
-            if (this.isStunned) {
-                this.visible = true;
-                this.canBeAttacked = true;
-                this.SwitchAnimation("Boss3_Stun");
-            }
-            else if (this.isTeleporting) {
-                this.SwitchAnimation("Boss3_Disappear");
+            if (this.isDead) {
                 this.visible = false;
-                this.canBeAttacked = false;
-                if (ticker % 90 == 0) {
-                    this.isTeleporting = false;
-                    this.teleportLimit = 60;
-                }
             }
             else {
-                this.visible = true;
-                this.canBeAttacked = true;
-                this.SwitchAnimation("Boss3_Idle");
-                // If 2/3rds of its life is gone
-                if (this.hp < this.maxHp &&
-                    this.hp >= (this.maxHp * (2 / 3))) {
-                    if (this.spawnCount != this.spawnLimit) {
-                        this.ConjureHandAndActivate(true);
-                    }
-                    if (this.spawnA.isDead && ticker % 150 == 0) {
-                        this.spawnCount = 0;
+                if (this.isStunned) {
+                    this.visible = true;
+                    this.canBeAttacked = true;
+                    this.SwitchAnimation("Boss3_Stun");
+                }
+                else if (this.isTeleporting) {
+                    this.SwitchAnimation("Boss3_Disappear");
+                    this.visible = false;
+                    this.canBeAttacked = false;
+                    if (ticker % 90 == 0) {
+                        this.isTeleporting = false;
+                        this.teleportLimit = 60;
                     }
                 }
-                // If 1/3rds of its life is gone
-                else if (this.hp < (this.maxHp * (2 / 3)) &&
-                    this.hp >= (this.maxHp * (1 / 3))) {
-                    this.spawnLimit = 2;
-                    if (this.spawnCount != this.spawnLimit) {
-                        this.ConjureHandAndActivate(true);
-                        this.ConjureHandAndActivate(false);
+                else {
+                    this.visible = true;
+                    this.canBeAttacked = true;
+                    this.SwitchAnimation("Boss3_Idle");
+                    // If 2/3rds of its life is gone
+                    if (this.hp < this.maxHp &&
+                        this.hp >= (this.maxHp * (2 / 3))) {
+                        if (this.spawnCount != this.spawnLimit) {
+                            this.ConjureHandAndActivate(true);
+                        }
+                        if (this.spawnA.isDead && ticker % 150 == 0) {
+                            this.spawnCount = 0;
+                        }
                     }
-                    if (this.spawnA.isDead && ticker % 150 == 0) {
-                        this.spawnCount--;
-                        this.ConjureHandAndActivate(true);
-                    }
-                    if (this.spawnB.isDead && ticker % 150 == 0) {
-                        this.spawnCount--;
-                        this.ConjureHandAndActivate(false);
+                    // If 1/3rds of its life is gone
+                    else if (this.hp < (this.maxHp * (2 / 3)) &&
+                        this.hp >= (this.maxHp * (1 / 3))) {
+                        this.spawnLimit = 2;
+                        if (this.spawnCount <= this.spawnLimit) {
+                            this.ConjureHandAndActivate(true);
+                            this.ConjureHandAndActivate(false);
+                        }
+                        if (this.spawnA.isDead && ticker % 150 == 0) {
+                            this.spawnCount--;
+                            this.ConjureHandAndActivate(true);
+                        }
+                        if (this.spawnB.isDead && ticker % 150 == 0) {
+                            this.spawnCount--;
+                            this.ConjureHandAndActivate(false);
+                        }
                     }
                 }
-            }
-            if (this.teleportLimit > 0) {
-                this.teleportLimit--;
-            }
-            else {
-                this.teleportLimit = 0;
+                if (this.teleportLimit > 0) {
+                    this.teleportLimit--;
+                }
+                else {
+                    this.teleportLimit = 0;
+                }
             }
             //console.log("Teleport Limit", this.teleportLimit);
             _super.prototype.Update.call(this);

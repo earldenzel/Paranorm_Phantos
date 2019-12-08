@@ -20,17 +20,38 @@ var scenes;
             var _this = 
             // hasDoorTop, hasDoorBot, hasDoorLeft, hasDoorRight
             _super.call(this, true, false, false, false, config.Design.MANSION) || this;
+            _this.victoryDanced = false;
+            _this.onlyTheBossIsLeft = false;
+            _this.hasProjectileShooters = true;
             _this.Start();
             return _this;
         }
         // Methods
         Mansion_18.prototype.Start = function () {
+            this.enemies[0] = new objects.LittleGirl(2, true, false);
+            this.cosmetics[0] = new objects.Stairs(config.Scene.GRAVEYARD_1, true); //end
+            this.cosmetics[0].SetPosition(new math.Vec2(285, 420));
             managers.Game.player.sceneOnTop = config.Scene.MANSION_16;
+            this.isDoorTopLocked = (managers.Game.player.stageFinished == 2);
+            this.cosmetics[0].visible = (managers.Game.player.stageFinished > 2);
             _super.prototype.Start.call(this);
             this.playerInfo.PlayerLocation = new math.Vec2(112, 82);
         };
         Mansion_18.prototype.Update = function () {
             _super.prototype.Update.call(this);
+            if (this.enemies[0].isStunned && !this.onlyTheBossIsLeft) {
+                this.DestroyOthers(this.enemies[0]);
+                this.onlyTheBossIsLeft = true;
+            }
+            if (this.AllEnemiesAreDead()) {
+                this.isDoorTopLocked = false;
+                managers.Game.player.stageFinished = 3;
+                if (!this.victoryDanced) {
+                    managers.Game.player.VictoryDance();
+                    this.victoryDanced = true;
+                }
+                this.cosmetics[0].visible = true;
+            }
         };
         Mansion_18.prototype.Main = function () {
             _super.prototype.Main.call(this);

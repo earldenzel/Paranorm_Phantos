@@ -224,6 +224,9 @@ var scenes;
                 //collectiveCollision = collectiveCollision || managers.Collision.Check(managers.Game.player,e);
                 collectiveCollision = collectiveCollision ||
                     managers.Collision.CheckWithOffset(managers.Game.player, e, 0, -config.Bounds.ENEMY_COLLISION_OFFSET, -config.Bounds.ENEMY_COLLISION_OFFSET, -config.Bounds.ENEMY_COLLISION_OFFSET);
+                if (_this.player.powerUp == config.PowerUp.ICE) {
+                    _this.player.iceShield.CheckShieldDamage(e);
+                }
             });
             if (managers.Game.player.isTakingDamage && !collectiveCollision) {
                 managers.Game.player.isTakingDamage = false;
@@ -241,14 +244,14 @@ var scenes;
                         }
                         e.CheckGapDamage(f);
                     }
-                    if (e instanceof objects.IceShield) {
-                        e.CheckShieldDamage(f);
-                    }
                     //if(!f.isFlying && e instanceof objects.SlimePuddle){
                     //    e.CheckSlowMovement(f);
                     //}
                 });
                 if (e instanceof objects.Gap && !_this.player.isFlying) {
+                    if (_this.player.activatePowers && _this.player.powerUp == config.PowerUp.BITE) {
+                        return;
+                    }
                     e.CheckGapDamage(_this.player);
                 }
                 //if(e instanceof objects.SlimePuddle){
@@ -455,6 +458,7 @@ var scenes;
                 }
             });
             // PLAYER PLACEMENT
+            this.addChild(this.player.iceShield);
             this.addChild(this.player.swing);
             this.addChild(this.player);
             this.addChild(this.player.weapon);

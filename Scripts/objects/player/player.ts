@@ -2,13 +2,13 @@ module objects {
     //export interface Controller<T> { [key: string]: T };
     export class Player extends objects.GameObject {
         //Variables
-        //public playerController: Controller<boolean>;
         public attackSequence: number = 0;
         public delaySequence: number = 0;
         public biteSequence: number = 0;
         public textSequence: number = 0;
         public transitSequence: number = 0;
         public victorySequence: number = 0;
+        public playerIceDamageSequence: number = 0;
         public contactDamageTimer: number;
         public projectileDamageTimer: number;
         public playerMoveSpeed: number = 4;
@@ -40,7 +40,7 @@ module objects {
         public deadPlayer: Array<objects.DeadPlayer> = new Array<objects.DeadPlayer>();
         public deathCount: number = 0;
         public stageFinished: number = 0;
-        private iceShield: objects.IceShield;
+        public iceShield: objects.IceShield;
         public godMode: boolean = false;
 
         public ecto: number;
@@ -97,6 +97,7 @@ module objects {
             this.experience = 0;
 
             this.SoulSetup();
+            this.IceShieldCreation();
             this.level = 0;
             this.contactDamageTimer = 0;
             this.projectileDamageTimer = 0;
@@ -104,7 +105,7 @@ module objects {
 
         // Methods
         public Start(): void {
-            this.x = 455;
+            this.x = 405;
             this.y = 600;
             this.lastPosition = this.GetPosition();
             //this.playerController = { "W": false, "A": false, "S": false, "D": false, "Z": false };
@@ -112,7 +113,7 @@ module objects {
 
         public Update(): void {
             managers.Game.player = this;
-            if (this.iceShield != null) {
+            if (this.powerUp == config.PowerUp.ICE) {
                 this.iceShield.Update();
             }
             if(this.activateSoul){
@@ -165,6 +166,7 @@ module objects {
                 this.projectileDamageTimer = 0;
                 this.isTakingProjectileDamage = false;
             }
+
             if (this.fallSequence > 0){
                 this.FallIntoHole();
             }
@@ -606,7 +608,6 @@ module objects {
                 this.DeathSequence();
             }
         }
-
         public GainMaxHealth() {
             this.maxHp += 5;
             this.hp = this.maxHp;
@@ -693,12 +694,14 @@ module objects {
                         if (ticker % 90 == 0) {
                             this.ecto -= 1;
                         }
-                        if (this.iceShield == null) {
-                            this.IceShieldCreation();
-                        }
-                        else{
-                            this.iceShield.isActivated = true;                            
-                        }
+                        this.iceShield.isActivated = true;
+                        break;
+                }
+            }
+            else{
+                switch (this.powerUp) {
+                    case config.PowerUp.ICE:
+                        this.iceShield.isActivated = false;
                         break;
                 }
             }
@@ -796,16 +799,35 @@ module objects {
             }
         }
 
-        public EatMessage() {
-            let random: number = Math.random() * 100;
-            if (random > 75) {
-                this.EchoMessage("MUNCH MUNCH", 3000);
-            } else if (random > 50) {
-                this.EchoMessage("CHOMP CHOMP", 3000);
-            } else if (random > 25) {
-                this.EchoMessage("MMMMMM...", 3000);
-            } else {
-                this.EchoMessage("AHHHH...", 3000);
+        public EatMessage(powerup: config.PowerUp = config.PowerUp.NONE) {
+            switch (powerup){
+                case config.PowerUp.NONE:
+                    let random: number = Math.random() * 100;
+                    if (random > 75) {
+                        this.EchoMessage("MUNCH MUNCH", 3000);
+                    } else if (random > 50) {
+                        this.EchoMessage("CHOMP CHOMP", 3000);
+                    } else if (random > 25) {
+                        this.EchoMessage("MMMMMM...", 3000);
+                    } else {
+                        this.EchoMessage("AHHHH...", 3000);
+                    }
+                    break;
+                case config.PowerUp.SHADOW:
+                    this.EchoMessage("DARK POWER!", 3000);
+                    break;
+                case config.PowerUp.BITE:
+                    this.EchoMessage("DASH POWER!", 3000);
+                    break;
+                case config.PowerUp.FIRE:
+                    this.EchoMessage("FIRE POWER!", 3000);
+                    break;
+                case config.PowerUp.ICE:
+                    this.EchoMessage("FROST POWER!", 3000);
+                    break;
+                case config.PowerUp.SLIME:
+                    this.EchoMessage("ECTO POWER!", 3000);
+                    break;
             }
         }
 
@@ -936,8 +958,8 @@ module objects {
                 }
                 else if (bulletType == config.PowerUp.FIRE) {
                     bullet = managers.Game.bulletManager.fireBalls[currentBullet];
-
                 }
+                bullet.attackPower = Math.floor(this.attackPower/2);
                 bullet.staticNotPositional = true;
                 bullet.direction = this.direction;
 
@@ -954,7 +976,7 @@ module objects {
         public IceShieldCreation(): void {
             this.iceShield = new objects.IceShield(this);
             this.iceShield.playerNotEnemy = true;
-            (managers.Game.currentStage as scenes.PlayScene).AddIceShieldToScene(this.iceShield);
+            this.iceShield.visible = false;
         }
 
         public SoulSetup(): void {
