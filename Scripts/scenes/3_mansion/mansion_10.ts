@@ -33,12 +33,37 @@ module scenes {
             this.obstacles[10] = new objects.Gap(managers.Game.mansion_TextureAtlas, "Hole", new math.Vec2(180, 590));
             this.obstacles[11] = new objects.Gap(managers.Game.mansion_TextureAtlas, "Hole", new math.Vec2(180, 530));
 
+            this.obstacles[12] = new objects.SlimePuddle(1,new math.Vec2(165,520));
+            this.obstacles[13] = new objects.SlimePuddle(3,new math.Vec2(455,320));
+            this.obstacles[14] = new objects.SlimePuddle(0,new math.Vec2(326,600));
+            this.obstacles[15] = new objects.SlimePuddle(2,new math.Vec2(320,200));
+            this.obstacles[16] = new objects.SlimePuddle(0,new math.Vec2(220,480));
+            this.obstacles[17] = new objects.SlimePuddle(3,new math.Vec2(350,630));
+
+            managers.Game.slimePuddles = [
+                (this.obstacles[12] as objects.SlimePuddle),
+                (this.obstacles[13] as objects.SlimePuddle),
+                (this.obstacles[14] as objects.SlimePuddle),
+                (this.obstacles[15] as objects.SlimePuddle),
+                (this.obstacles[16] as objects.SlimePuddle),
+                (this.obstacles[17] as objects.SlimePuddle)
+            ];
+
+            this.enemies[4] = new objects.GhostSlime();
+            this.enemies[5] = new objects.GhostSlime();
+
             managers.Game.player.sceneOnBot = config.Scene.MANSION_14;
             super.Start();
             this.playerInfo.PlayerLocation = new math.Vec2(80,50);
         }        
 
         public Update(): void {
+            this.player.AlterSpeed(managers.SlimePuddles.CheckEntitySlowdown(this.player));
+            this.enemies.forEach(e => {
+                if(!e.isFlying){
+                    e.AlterSpeed(managers.SlimePuddles.CheckEntitySlowdown(e));
+                }
+            });
             super.Update();
         }
 
