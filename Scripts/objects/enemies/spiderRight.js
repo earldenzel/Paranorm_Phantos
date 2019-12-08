@@ -74,6 +74,8 @@ var objects;
                     var bullet = managers.Game.bulletManager.spiderBulletsRight[currentBullet];
                     bullet.x = this.bulletSpawn.x;
                     bullet.y = this.bulletSpawn.y;
+                    managers.Game.SFX = createjs.Sound.play("bullet");
+                    managers.Game.SFX.volume = 0.4;
                     managers.Game.bulletManager.CurrentBullet++;
                     if (managers.Game.bulletManager.CurrentBullet > 49) {
                         managers.Game.bulletManager.CurrentBullet = 0;

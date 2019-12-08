@@ -81,7 +81,8 @@ module managers {
                 new createjs.Sprite(managers.Game.bosses_TextureAtlas, "Boss3_OpenHand"),
 
                 new createjs.Sprite(managers.Game.titleUIMap_TextureAtlas, "FortuneTeller"),
-                new createjs.Sprite(managers.Game.phoebe_TextureAtlas, "Phoebe_Victory")
+                new createjs.Sprite(managers.Game.phoebe_TextureAtlas, "Phoebe_Victory"),
+                new createjs.Sprite(managers.Game.titleUIMap_TextureAtlas, "Company_Logo")
             ];
             for (let i = 0; i < popGraphics.length; i++) {
                 const element = popGraphics[i];
@@ -89,6 +90,9 @@ module managers {
                 if(i == 0){
                     //element.y = (150 * (i + 1)) + (element.getBounds().height); 
                     element.y = 150;
+                }
+                else if(i == 23){
+                    element.y = (popGraphics[i - 1].y  + popGraphics[i-1].getBounds().height) + 610;
                 }
                 else{
                     //element.y = (180 * (i + 1)) + popGraphics[i - 1].getBounds().height + 20; 
@@ -137,7 +141,7 @@ module managers {
                 "Death Count: " + managers.Game.player.deathCount,
                 "",
                 "Thank You For Playing Our Game!",
-                "Kris, Earl, Yizhi are KEY"
+                "Kris, Earl, Yizhi are"
             ];
             for (let i = 0; i < labels.length; i++) {
                 if(i < 23){

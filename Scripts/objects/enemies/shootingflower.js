@@ -59,6 +59,8 @@ var objects;
                     var bullet = managers.Game.bulletManager.shootingFLowerBullets[currentBullet];
                     bullet.x = this.bulletSpawn.x;
                     bullet.y = this.bulletSpawn.y;
+                    managers.Game.SFX = createjs.Sound.play("bullet");
+                    managers.Game.SFX.volume = 0.4;
                     // get the direction when the bullet shoots
                     var bulletPosition = new math.Vec2(bullet.x, bullet.y);
                     var dirToPlayer = math.Vec2.Subtract(bulletPosition, playerPosition);

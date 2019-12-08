@@ -113,6 +113,8 @@ module objects{
 
                     bullet.x = this.bulletSpawn.x;
                     bullet.y = this.bulletSpawn.y;
+                    managers.Game.SFX = createjs.Sound.play("fireball");
+                    managers.Game.SFX.volume = 0.4;
 
                     // get the direction when the bullet shoots
                     let bulletPosition: math.Vec2 = new math.Vec2(bullet.x, bullet.y);
@@ -138,6 +140,8 @@ module objects{
             }
             else{
                 managers.Game.player.powerUp = this.powerUp;
+                managers.Game.SFX = createjs.Sound.play("phoebeTransform");
+                managers.Game.SFX.volume = 0.6;
             }
         }
     }

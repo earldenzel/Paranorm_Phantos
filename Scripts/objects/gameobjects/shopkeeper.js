@@ -17,7 +17,7 @@ var objects;
         __extends(ShopKeeper, _super);
         // Constructor
         function ShopKeeper() {
-            var _this = _super.call(this, managers.Game.item_TextureAtlas, "FortuneTeller") || this;
+            var _this = _super.call(this, managers.Game.titleUIMap_TextureAtlas, "FortuneTeller") || this;
             _this.currentDisplay = 0;
             _this.Start();
             return _this;

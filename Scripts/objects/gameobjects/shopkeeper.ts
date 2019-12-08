@@ -7,7 +7,7 @@ module objects{
         public interrupted: boolean;
         // Constructor
         constructor(){
-            super(managers.Game.item_TextureAtlas, "FortuneTeller");
+            super(managers.Game.titleUIMap_TextureAtlas, "FortuneTeller");
             this.Start();
         }
         // Methods

@@ -108,6 +108,8 @@ var objects;
                     var bullet = managers.Game.bulletManager.fireBalls[currentBullet];
                     bullet.x = this.bulletSpawn.x;
                     bullet.y = this.bulletSpawn.y;
+                    managers.Game.SFX = createjs.Sound.play("fireball");
+                    managers.Game.SFX.volume = 0.4;
                     // get the direction when the bullet shoots
                     var bulletPosition = new math.Vec2(bullet.x, bullet.y);
                     var dirToPlayer = math.Vec2.Subtract(bulletPosition, playerPosition);
@@ -130,6 +132,8 @@ var objects;
             }
             else {
                 managers.Game.player.powerUp = this.powerUp;
+                managers.Game.SFX = createjs.Sound.play("phoebeTransform");
+                managers.Game.SFX.volume = 0.6;
             }
         };
         return GhostMan;

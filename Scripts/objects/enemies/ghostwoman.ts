@@ -49,6 +49,8 @@ module objects {
             if (!this.isStunned && !this.isDead) {
                 if (this.defenseMode) {
                     this.SwitchAnimation("GhostWoman_Attack");
+                    managers.Game.SFX = createjs.Sound.play("iceShield");
+                    managers.Game.SFX.volume = 0.1;
                 } else {
                     this.SwitchAnimation(this.walk[this.direction as number]);
                 }
@@ -114,6 +116,8 @@ module objects {
             }
             else{
                 managers.Game.player.powerUp = this.powerUp;
+                managers.Game.SFX = createjs.Sound.play("phoebeTransform");
+                managers.Game.SFX.volume = 0.6;
             }
         }
     }

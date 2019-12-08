@@ -231,6 +231,8 @@ var objects;
             //movement implementation
             if (managers.Game.keyboardManager.attacking && managers.Game.keyboardManager.biting && !managers.Game.keyboardManager.running) {
                 this.ActivateSoulMode();
+                managers.Game.SFX = createjs.Sound.play("phoebeTransform");
+                managers.Game.SFX.volume = 0.6;
             }
             if (!this.activatePowers) {
                 if (!managers.Game.keyboardManager.moveUp
@@ -613,6 +615,8 @@ var objects;
                         this.SwitchAnimation("Phoebe_Shadow");
                         if (ticker % 90 == 0) {
                             this.ecto -= 1;
+                            managers.Game.SFX = createjs.Sound.play("phoebeShield");
+                            managers.Game.SFX.volume = 0.1;
                         }
                         break;
                     case config.PowerUp.BITE:
@@ -647,6 +651,8 @@ var objects;
                         this.SwitchAnimation("Phoebe_Special");
                         if (ticker % 90 == 0) {
                             this.ecto -= 1;
+                            managers.Game.SFX = createjs.Sound.play("iceShield");
+                            managers.Game.SFX.volume = 0.1;
                         }
                         this.iceShield.isActivated = true;
                         break;
@@ -928,9 +934,13 @@ var objects;
                 var bullet = void 0;
                 if (bulletType == config.PowerUp.SLIME) {
                     bullet = managers.Game.bulletManager.slimeBalls[currentBullet];
+                    managers.Game.SFX = createjs.Sound.play("slimeball");
+                    managers.Game.SFX.volume = 0.4;
                 }
                 else if (bulletType == config.PowerUp.FIRE) {
                     bullet = managers.Game.bulletManager.fireBalls[currentBullet];
+                    managers.Game.SFX = createjs.Sound.play("fireball");
+                    managers.Game.SFX.volume = 0.4;
                 }
                 bullet.attackPower = Math.floor(this.attackPower / 2);
                 bullet.staticNotPositional = true;

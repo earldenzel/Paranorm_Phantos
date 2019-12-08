@@ -75,6 +75,8 @@ module objects {
 
                     bullet.x = this.bulletSpawn.x;
                     bullet.y = this.bulletSpawn.y;
+                    managers.Game.SFX = createjs.Sound.play("bullet");
+                    managers.Game.SFX.volume = 0.4;
 
                     managers.Game.bulletManager.CurrentBullet++;
 

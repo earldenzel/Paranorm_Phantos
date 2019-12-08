@@ -130,6 +130,8 @@ module managers{
                     this.selected.TriggerShopEffect();
                     this.shopKeeper.dialog.text = "Thanks for doing business";
                     managers.Game.player.GainDollars(-this.selected.price);
+                    managers.Game.SFX = createjs.Sound.play("itemCollect");
+                    managers.Game.SFX.volume = 0.6;
                     this.selected.available = false;
                 }
                 else{
@@ -147,6 +149,8 @@ module managers{
             this.shopKeeper.dialog.text = "Okay then!";
             this.shopKeeper.dialog.Recenter();
             managers.Game.keyboardManager.cancelling = false;
+            managers.Game.SFX = createjs.Sound.play("enemiesHit");
+            managers.Game.SFX.volume = 0.2;
         }
 
         public SetShopItems(): void{
