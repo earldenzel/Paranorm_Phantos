@@ -33,6 +33,12 @@ module objects{
                     }
                 }
             }
+            else{
+                if(this.x > config.Bounds.RIGHT_BOUND + this.width || this.x < config.Bounds.LEFT_BOUND - this.width || 
+                    this.y < config.Bounds.TOP_BOUND - this.height || this.y > config.Bounds.BOTTOM_BOUND + this.height){
+                    this.Reset();
+                }
+            }
         }
         public Reset(): void {
             this.x = -5000;

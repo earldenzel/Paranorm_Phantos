@@ -18,18 +18,26 @@ module objects {
             if (this.farPointPosition || this.staticNotPositional) {
                 this.Move();
             }
-            if(managers.Collision.Check(managers.Game.player.weapon, this)){
+            if (managers.Collision.Check(managers.Game.player.weapon, this)) {
                 this.Reset();
             }
-            if(!this.staticNotPositional){
-                if(managers.Collision.Check(managers.Game.player, this)){
-                    let ticker: number = createjs.Ticker.getTicks();
-    
-                    // use ticker to restrict 1 bullet every 10 frames for damage
-                    if (ticker % 10 == 0){
-                        managers.Game.player.GetDamage(this);
-                        this.Reset();
+            if (!this.staticNotPositional) {
+                if (managers.Collision.Check(managers.Game.player, this)) {
+                    if (!managers.Game.player.activatePowers && managers.Game.player.powerUp != config.PowerUp.SHADOW) {
+                        let ticker: number = createjs.Ticker.getTicks();
+
+                        // use ticker to restrict 1 bullet every 10 frames for damage
+                        if (ticker % 10 == 0) {
+                            managers.Game.player.GetDamage(this);
+                            this.Reset();
+                        }
                     }
+                }
+            }
+            else{
+                if(this.x > config.Bounds.RIGHT_BOUND + this.width || this.x < config.Bounds.LEFT_BOUND - this.width || 
+                    this.y < config.Bounds.TOP_BOUND - this.height || this.y > config.Bounds.BOTTOM_BOUND + this.height){
+                    this.Reset();
                 }
             }
         }
@@ -50,12 +58,12 @@ module objects {
                 this.y = newPos.y;
             }
             else {
-                switch(this.direction){
+                switch (this.direction) {
                     case config.Direction.UP:
                         this.y -= 2;
                         break;
                     case config.Direction.DOWN:
-                            this.y += 2;
+                        this.y += 2;
                         break;
                     case config.Direction.RIGHT:
                         this.x += 2;

@@ -8,6 +8,7 @@ module scenes {
         private pressEnterLabel: objects.Label;
         private messageTimeout: number = 0;
         private enterVisibility: boolean;
+        private copyright: objects.Label;
 
         // Constructor
         constructor() {
@@ -27,6 +28,8 @@ module scenes {
             this.pressEnterLabel = new objects.Label("PRESS ENTER", "16px", "'Press Start 2P'", "#000000", 300, 500, true);
             this.pressEnterLabel.color = "#FFFFFF";
             this.enterVisibility = true;
+
+            this.copyright = new objects.Label("(C) TO KEY, MMXIX", "16px", "'Press Start 2P'", "#FFFFFF", 400, 700, true);
 
             managers.Game.keyboardManager.playMode = false;
 
@@ -71,6 +74,7 @@ module scenes {
             this.addChild(this.background);
             this.addChild(this.title);
             this.addChild(this.pressEnterLabel);
+            this.addChild(this.copyright);
             //this.addChild(this.startButton);
             //this.startButton.on("click", this.startButtonClick);
         }

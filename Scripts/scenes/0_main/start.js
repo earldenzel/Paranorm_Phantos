@@ -32,6 +32,7 @@ var scenes;
             this.pressEnterLabel = new objects.Label("PRESS ENTER", "16px", "'Press Start 2P'", "#000000", 300, 500, true);
             this.pressEnterLabel.color = "#FFFFFF";
             this.enterVisibility = true;
+            this.copyright = new objects.Label("(C) TO KEY, MMXIX", "16px", "'Press Start 2P'", "#FFFFFF", 400, 700, true);
             managers.Game.keyboardManager.playMode = false;
             // Play Music
             managers.Game.music = createjs.Sound.play("music_title");
@@ -72,6 +73,7 @@ var scenes;
             this.addChild(this.background);
             this.addChild(this.title);
             this.addChild(this.pressEnterLabel);
+            this.addChild(this.copyright);
             //this.addChild(this.startButton);
             //this.startButton.on("click", this.startButtonClick);
         };
