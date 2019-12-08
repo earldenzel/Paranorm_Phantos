@@ -115,6 +115,8 @@ module objects {
             }
             else{
                 managers.Game.player.powerUp = this.powerUp;
+                managers.Game.SFX = createjs.Sound.play("phoebeTransform");
+                managers.Game.SFX.volume = 0.6;
             }
         }
         public RemoveFromPlay(bounty: number): void {

@@ -243,25 +243,65 @@ module scenes {
             // Music Check
             switch (managers.Game.currentScene) {
                 case config.Scene.GRAVEYARD_1:
+                case config.Scene.GRAVEYARD_5:
+                case config.Scene.GRAVEYARD_6:
                     if (!managers.Music.graveyardMusicPlaying) {
+                        createjs.Sound.stop();
                         managers.Game.music = createjs.Sound.play("music_graveyard");
                         managers.Music.graveyardMusicPlaying = true;
                         managers.Music.hotelMusicPlaying = false;
                         managers.Music.mansionMusicPlaying = false;
+                        managers.Music.shopMusicPlaying = false;
+                        managers.Music.bossMusicPlaying = false;
                     }
                     break;
                 case config.Scene.HOTEL_1:
+                case config.Scene.HOTEL_13:
                     if (!managers.Music.hotelMusicPlaying) {
+                        createjs.Sound.stop();
                         managers.Game.music = createjs.Sound.play("music_hotel");
                         managers.Music.hotelMusicPlaying = true;
                         managers.Music.graveyardMusicPlaying = false;
                         managers.Music.mansionMusicPlaying = false;
+                        managers.Music.shopMusicPlaying = false;
+                        managers.Music.bossMusicPlaying = false;
                     }
                     break;
                 case config.Scene.MANSION_1:
+                case config.Scene.MANSION_13:
+                case config.Scene.MANSION_16:
                     if (!managers.Music.mansionMusicPlaying) {
+                        createjs.Sound.stop();
                         managers.Game.music = createjs.Sound.play("music_mansion");
                         managers.Music.mansionMusicPlaying = true;
+                        managers.Music.graveyardMusicPlaying = false;
+                        managers.Music.hotelMusicPlaying = false;
+                        managers.Music.shopMusicPlaying = false;
+                        managers.Music.bossMusicPlaying = false;
+                    }
+                    break;
+                case config.Scene.GRAVEYARD_7:
+                case config.Scene.HOTEL_14:
+                case config.Scene.MANSION_5:
+                    if(!managers.Music.shopMusicPlaying){
+                        createjs.Sound.stop();
+                        managers.Game.music = createjs.Sound.play("music_shop");
+                        managers.Music.shopMusicPlaying = true;
+                        managers.Music.mansionMusicPlaying = false;
+                        managers.Music.graveyardMusicPlaying = false;
+                        managers.Music.hotelMusicPlaying = false;
+                        managers.Music.bossMusicPlaying = false;
+                    }
+                    break;
+                case config.Scene.GRAVEYARD_8:
+                case config.Scene.HOTEL_15:
+                case config.Scene.MANSION_18:
+                    if(!managers.Music.bossMusicPlaying){
+                        createjs.Sound.stop();
+                        managers.Game.music = createjs.Sound.play("music_boss");
+                        managers.Music.bossMusicPlaying = true;
+                        managers.Music.shopMusicPlaying = false;
+                        managers.Music.mansionMusicPlaying = false;
                         managers.Music.graveyardMusicPlaying = false;
                         managers.Music.hotelMusicPlaying = false;
                     }
@@ -367,12 +407,16 @@ module scenes {
                     if (this.hasDoorLeft && this.isDoorLeftLocked && this.player.key > 0) {
                         this.isDoorLeftLocked = false;
                         this.player.key -= 1;
+                        managers.Game.SFX = createjs.Sound.play("doorUnlock");
+                        managers.Game.SFX.volume = 1.0;
                     }
                 }
                 if (this.player.x == config.Bounds.RIGHT_BOUND - this.player.halfW) {
                     if (this.hasDoorRight && this.isDoorRightLocked && this.player.key > 0) {
                         this.isDoorRightLocked = false;
                         this.player.key -= 1;
+                        managers.Game.SFX = createjs.Sound.play("doorUnlock");
+                        managers.Game.SFX.volume = 1.0;
                     }
                 }
             }
@@ -381,12 +425,16 @@ module scenes {
                     if (this.hasDoorBot && this.isDoorBotLocked && this.player.key > 0) {
                         this.isDoorBotLocked = false;
                         this.player.key -= 1;
+                        managers.Game.SFX = createjs.Sound.play("doorUnlock");
+                        managers.Game.SFX.volume = 1.0;
                     }
                 }
                 if (this.player.y == this.player.halfH + config.Bounds.TOP_BOUND) {
                     if (this.hasDoorTop && this.isDoorTopLocked && this.player.key > 0) {
                         this.isDoorTopLocked = false;
                         this.player.key -= 1;
+                        managers.Game.SFX = createjs.Sound.play("doorUnlock");
+                        managers.Game.SFX.volume = 1.0;
                     }
                 }
             }

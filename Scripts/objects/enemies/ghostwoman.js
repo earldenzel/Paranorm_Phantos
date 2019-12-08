@@ -49,6 +49,8 @@ var objects;
             if (!this.isStunned && !this.isDead) {
                 if (this.defenseMode) {
                     this.SwitchAnimation("GhostWoman_Attack");
+                    managers.Game.SFX = createjs.Sound.play("iceShield");
+                    managers.Game.SFX.volume = 0.1;
                 }
                 else {
                     this.SwitchAnimation(this.walk[this.direction]);
@@ -111,6 +113,8 @@ var objects;
         };
         GhostWoman.prototype.DevourEffect = function () {
             managers.Game.player.powerUp = this.powerUp;
+            managers.Game.SFX = createjs.Sound.play("phoebeTransform");
+            managers.Game.SFX.volume = 0.6;
             _super.prototype.DevourEffect.call(this);
         };
         GhostWoman.prototype.RemoveFromPlay = function (bounty) {

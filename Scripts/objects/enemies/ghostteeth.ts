@@ -71,6 +71,8 @@ module objects {
             if (this.isAttacking && this.chargeSequence == 0) {
                 this.chargeSequence = setTimeout(() => {
                     this.currentSpeed = this.moveSpeed * 3;
+                    managers.Game.SFX = createjs.Sound.play("phoebeDash-Swing");
+                    managers.Game.SFX.volume = 0.1;
                     //if (dirToPlayer.y < 60 && dirToPlayer.y > -60) {
                     if (Math.abs(dirToPlayer.x) >= Math.abs(dirToPlayer.y)) {
                         if (enemyPosition.x < playerPosition.x) {
@@ -124,6 +126,8 @@ module objects {
             }
             else{
                 managers.Game.player.powerUp = this.powerUp;
+                managers.Game.SFX = createjs.Sound.play("phoebeTransform");
+                managers.Game.SFX.volume = 0.6;
             }
         }
         public RemoveFromPlay(bounty: number): void {

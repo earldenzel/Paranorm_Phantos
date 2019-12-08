@@ -6,6 +6,8 @@ var managers;
         Music.graveyardMusicPlaying = false;
         Music.hotelMusicPlaying = false;
         Music.mansionMusicPlaying = false;
+        Music.shopMusicPlaying = false;
+        Music.bossMusicPlaying = false;
         return Music;
     }());
     managers.Music = Music;

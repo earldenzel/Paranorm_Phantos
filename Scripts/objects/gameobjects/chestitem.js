@@ -71,7 +71,7 @@ var objects;
                     _this.triggeredSequence = 0;
                     _this.Update();
                     managers.Game.SFX = createjs.Sound.play("itemCollect");
-                    managers.Game.SFX.volume = 0.2;
+                    managers.Game.SFX.volume = 0.6;
                 }, 250);
             }
         };

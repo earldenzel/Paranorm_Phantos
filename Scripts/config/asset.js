@@ -351,6 +351,26 @@ var config;
                 "src": "./Assets/_SoundEffects/Phoebe_Transform.wav"
             },
             {
+                "id": "phoebeShield",
+                "src": "./Assets/_SoundEffects/Shield_Activate.wav"
+            },
+            {
+                "id": "bullet",
+                "src": "./Assets/_SoundEffects/Bullet_Shoot.wav"
+            },
+            {
+                "id": "fireball",
+                "src": "./Assets/_SoundEffects/Fireball_Attack.wav"
+            },
+            {
+                "id": "slimeball",
+                "src": "./Assets/_SoundEffects/Slimeball_Attack.wav"
+            },
+            {
+                "id": "iceShield",
+                "src": "./Assets/_SoundEffects/IceShield_Attack.wav"
+            },
+            {
                 "id": "anyDefeated",
                 "src": "./Assets/_SoundEffects/Defeat.wav"
             }
