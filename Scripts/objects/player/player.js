@@ -688,6 +688,30 @@ var objects;
             this.playerAttackDelay -= delayLoss;
             this.EchoMessage("I CAN SWING FASTER NOW");
         };
+        Player.prototype.GainRandomPower = function () {
+            var random = Math.random() * 100;
+            if (random > 80) {
+                this.powerUp = config.PowerUp.BITE;
+            }
+            else if (random > 60) {
+                this.powerUp = config.PowerUp.FIRE;
+            }
+            else if (random > 40) {
+                this.powerUp = config.PowerUp.ICE;
+            }
+            else if (random > 20) {
+                this.powerUp = config.PowerUp.SLIME;
+            }
+            else {
+                this.powerUp = config.PowerUp.SHADOW;
+            }
+            this.EatMessage(this.powerUp);
+        };
+        Player.prototype.ResetLevelToZero = function () {
+            this.experience = 0;
+            this.level = 0;
+            this.EchoMessage("I AM BORN ANEW");
+        };
         Player.prototype.GainKey = function () {
             this.key += 1;
             this.EchoMessage("GAINED A SMALL KEY");

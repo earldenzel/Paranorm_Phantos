@@ -9,6 +9,7 @@ module scenes {
             // hasDoorTop, hasDoorBot, hasDoorLeft, hasDoorRight
             super(true, false, false, false, config.Design.MANSION);
             this.hasProjectileShooters = true;
+            this.isBossRoom = true;
             this.Start();
         }
 
@@ -18,7 +19,7 @@ module scenes {
                 this.enemies[0] = new objects.LittleGirl(2, true, false);
             }     
             
-            this.cosmetics[0] = new objects.Stairs(config.Scene.GRAVEYARD_1, true); //end
+            this.cosmetics[0] = new objects.Stairs(config.Scene.CONGRATULATIONS, true); 
             this.cosmetics[0].SetPosition(new math.Vec2(285, 420));
             managers.Game.player.sceneOnTop = config.Scene.MANSION_16;
             this.isDoorTopLocked =  (managers.Game.player.stageFinished == 2);

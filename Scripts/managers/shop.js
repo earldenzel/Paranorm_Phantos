@@ -36,7 +36,16 @@ var managers;
             this.shopItems[4].description = "Pay me fifty, I heal ye.";
             this.shopItems[5] = new objects.ShopItem("Items_Sapphires", 1000, config.Effects.INCREASE_SPEED, config.Scene.HOTEL_14);
             this.shopItems[5].SetPosition(new math.Vec2(385, 400));
-            this.shopItems[5].description = "Speedsters be likin' this one.";
+            this.shopItems[5].description = "Literally makes you more agile";
+            this.shopItems[6] = new objects.ShopItem("Items_Emeralds", 3000, config.Effects.INCREASE_SWING_SPEED, config.Scene.MANSION_5);
+            this.shopItems[6].SetPosition(new math.Vec2(185, 400));
+            this.shopItems[6].description = "Make your mean swing meaner";
+            this.shopItems[7] = new objects.ShopItem("Items_Pearl", 500, config.Effects.RANDOM_POWER, config.Scene.MANSION_5);
+            this.shopItems[7].SetPosition(new math.Vec2(285, 400));
+            this.shopItems[7].description = "A random power for $500";
+            this.shopItems[8] = new objects.ShopItem("Items_Diamonds", 5000, config.Effects.LEVEL_RESETTER, config.Scene.MANSION_5);
+            this.shopItems[8].SetPosition(new math.Vec2(385, 400));
+            this.shopItems[8].description = "Reset your level to 0 but keep progress";
         };
         Shop.prototype.Reset = function () {
             this.chooseYes.visible = false;

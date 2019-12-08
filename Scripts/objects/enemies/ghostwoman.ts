@@ -109,7 +109,12 @@ module objects {
             (managers.Game.currentStage as scenes.PlayScene).AddIceShieldToScene(this.iceShield);
         }
         public DevourEffect(): void {
-            managers.Game.player.powerUp = this.powerUp;
+            if (managers.Game.player.powerUp == this.powerUp){
+                managers.Game.player.GainHealth(3);
+            }
+            else{
+                managers.Game.player.powerUp = this.powerUp;
+            }
         }
     }
 }

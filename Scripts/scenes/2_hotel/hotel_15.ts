@@ -8,6 +8,7 @@ module scenes {
         constructor() {
             // hasDoorTop, hasDoorBot, hasDoorLeft, hasDoorRight
             super(true, false, false, false,config.Design.HOTEL);
+            this.isBossRoom = true;
             this.Start();
         }
 

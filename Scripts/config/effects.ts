@@ -7,6 +7,8 @@ module config{
         INCREASE_GOLD_50,
         INCREASE_SPEED,
         FRESHEN_UP,
-        INCREASE_SWING_SPEED
+        INCREASE_SWING_SPEED,
+        RANDOM_POWER,
+        LEVEL_RESETTER
     }
 }

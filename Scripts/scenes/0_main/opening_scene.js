@@ -91,6 +91,7 @@ var scenes;
             //managers.Game.currentScene = config.Scene.ENEMYTEST_LEVEL;
             switch (managers.Game.player.stageFinished) {
                 case 0:
+                case 3:
                     managers.Game.currentScene = config.Scene.GRAVEYARD_1;
                     break;
                 case 1:

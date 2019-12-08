@@ -20,6 +20,7 @@ var scenes;
             var _this = _super.call(this, true, false, false, false, config.Design.GRAVEYARD) || this;
             _this.victoryDanced = false;
             _this.onlyTheBossIsLeft = false;
+            _this.isBossRoom = true;
             _this.Start();
             return _this;
         }

@@ -133,7 +133,12 @@ module objects{
             }
         }
         public DevourEffect(): void {
-            managers.Game.player.powerUp = this.powerUp;
+            if (managers.Game.player.powerUp == this.powerUp){
+                managers.Game.player.GainHealth(3);
+            }
+            else{
+                managers.Game.player.powerUp = this.powerUp;
+            }
         }
     }
 }

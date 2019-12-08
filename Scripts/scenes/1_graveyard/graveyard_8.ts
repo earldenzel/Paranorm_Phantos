@@ -7,6 +7,7 @@ module scenes {
         // Constructor
         constructor() {
             super(true, false, false, false,config.Design.GRAVEYARD);
+            this.isBossRoom = true;
             this.Start();
         }
 

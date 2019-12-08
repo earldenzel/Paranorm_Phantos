@@ -105,7 +105,12 @@ var objects;
             managers.Game.currentStage.AddIceShieldToScene(this.iceShield);
         };
         GhostWoman.prototype.DevourEffect = function () {
-            managers.Game.player.powerUp = this.powerUp;
+            if (managers.Game.player.powerUp == this.powerUp) {
+                managers.Game.player.GainHealth(3);
+            }
+            else {
+                managers.Game.player.powerUp = this.powerUp;
+            }
         };
         return GhostWoman;
     }(objects.Enemy));

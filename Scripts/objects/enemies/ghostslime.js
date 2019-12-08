@@ -24,7 +24,7 @@ var objects;
         function GhostSlime() {
             var _this = _super.call(this, managers.Game.enemies_TextureAtlas, "GhostSlime_Travel") || this;
             _this.Start();
-            _this.hp = 4;
+            _this.hp = 40;
             _this.attackPower = 1;
             _this.knockback = 0;
             _this.eatTimer = 700;
@@ -141,7 +141,12 @@ var objects;
             }
         };
         GhostSlime.prototype.DevourEffect = function () {
-            managers.Game.player.powerUp = this.powerUp;
+            if (managers.Game.player.powerUp == this.powerUp) {
+                managers.Game.player.GainHealth(3);
+            }
+            else {
+                managers.Game.player.powerUp = this.powerUp;
+            }
         };
         return GhostSlime;
     }(objects.Enemy));

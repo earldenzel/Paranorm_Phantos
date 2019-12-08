@@ -741,6 +741,28 @@ module objects {
             this.EchoMessage("I CAN SWING FASTER NOW");
         }
 
+        public GainRandomPower(){
+            let random: number = Math.random() * 100;
+            if (random > 80) {
+                this.powerUp = config.PowerUp.BITE;
+            } else if (random > 60) {
+                this.powerUp = config.PowerUp.FIRE;
+            } else if (random > 40) {
+                this.powerUp = config.PowerUp.ICE;
+            } else if (random > 20) {
+                this.powerUp = config.PowerUp.SLIME;
+            } else {
+                this.powerUp = config.PowerUp.SHADOW;
+            }            
+            this.EatMessage(this.powerUp);            
+        }
+
+        public ResetLevelToZero(){
+            this.experience = 0;
+            this.level = 0;
+            this.EchoMessage("I AM BORN ANEW");
+        }
+
         public GainKey() {
             this.key += 1;
             this.EchoMessage("GAINED A SMALL KEY");
@@ -759,7 +781,6 @@ module objects {
                 this.ecto = this.maxEcto;
             }
         }
-
 
         public HurtMessage() {
             let random: number = Math.random() * 100;

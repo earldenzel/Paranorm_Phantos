@@ -55,6 +55,15 @@ var objects;
                     managers.Game.player.GainHealth(99);
                     managers.Game.player.GainEcto(5);
                     break;
+                case config.Effects.INCREASE_SWING_SPEED:
+                    managers.Game.player.GainSwingSpeed(200);
+                    break;
+                case config.Effects.RANDOM_POWER:
+                    managers.Game.player.GainRandomPower();
+                    break;
+                case config.Effects.LEVEL_RESETTER:
+                    managers.Game.player.ResetLevelToZero();
+                    break;
             }
         };
         return ShopItem;

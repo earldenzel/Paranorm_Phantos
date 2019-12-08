@@ -15,6 +15,7 @@ module scenes {
         private chestManager: managers.Chest;
         public hasProjectileShooters: boolean = false;
         protected hasShop: boolean = false;
+        protected isBossRoom: boolean = false;
 
         protected spriteSheet: createjs.SpriteSheet;
 
@@ -86,7 +87,6 @@ module scenes {
                     this.spriteSheet = managers.Game.mansion_TextureAtlas;
                     break;
             }
-
 
             this.ceilingAndWall = new createjs.Sprite(this.spriteSheet, "CeilingAndWall");
             this.ceilingAndWall.y = 110;
@@ -233,7 +233,7 @@ module scenes {
             }
             
             // Initialize bulletManager
-            if (this.hasProjectileShooters || managers.Game.player.powerUp == config.PowerUp.FIRE) {
+            if (this.hasProjectileShooters || managers.Game.player.powerUp == config.PowerUp.FIRE || managers.Game.player.powerUp == config.PowerUp.SLIME) {
                 this.bulletManager = managers.Game.bulletManager;
             }
 
@@ -275,7 +275,6 @@ module scenes {
             let collectiveCollision: boolean = false;
             this.enemies.forEach(e => {
                 e.Update();
-                //collectiveCollision = collectiveCollision || managers.Collision.Check(managers.Game.player,e);
                 collectiveCollision = collectiveCollision ||
                     managers.Collision.CheckWithOffset(managers.Game.player,
                         e,
@@ -294,7 +293,6 @@ module scenes {
             this.obstacles.forEach(e => {
                 e.CheckBound();
                 this.enemies.forEach(f => {
-                    //if enemy is a zombie
                     if (f instanceof objects.Zombie && e instanceof objects.Barriers) {
                         e.ZombieCheckBarrierCollision(f);
                     }
@@ -304,9 +302,6 @@ module scenes {
                         }
                         e.CheckGapDamage(f);
                     }
-                    //if(!f.isFlying && e instanceof objects.SlimePuddle){
-                    //    e.CheckSlowMovement(f);
-                    //}
                 });
                 if (e instanceof objects.Gap && !this.player.isFlying) {
                     if (this.player.activatePowers && this.player.powerUp == config.PowerUp.BITE){
@@ -361,34 +356,29 @@ module scenes {
                     this.key.RemoveFromPlay();
                 }
             }
-            // TO BE FIXED AND OPTIMIZED.
-            //  The position of Phoebe is accordance to the door is off. 
-            //  Thus in the beta version there should be a platform that Phoebe collides when a door is locked.
-            //  One pressed with a key, it unlocks.
-            //  - Kris Campbell
-            if (this.player.y < config.Bounds.DOOR_EASING_TOP || this.player.y > config.Bounds.DOOR_EASING_BOTTOM) {
+            if (this.player.y > config.Bounds.DOOR_EASING_TOP && this.player.y < config.Bounds.DOOR_EASING_BOTTOM) {
                 if (this.player.x == config.Bounds.LEFT_BOUND + this.player.halfW) {
-                    if (this.hasDoorLeft && this.isDoorLeftLocked && this.player.key > 0) {
+                    if (this.hasDoorLeft && this.isDoorLeftLocked && this.player.key > 0 && !this.isBossRoom) {
                         this.isDoorLeftLocked = false;
                         this.player.key -= 1;
                     }
                 }
                 if (this.player.x == config.Bounds.RIGHT_BOUND - this.player.halfW) {
-                    if (this.hasDoorRight && this.isDoorRightLocked && this.player.key > 0) {
+                    if (this.hasDoorRight && this.isDoorRightLocked && this.player.key > 0 && !this.isBossRoom) {
                         this.isDoorRightLocked = false;
                         this.player.key -= 1;
                     }
                 }
             }
-            if (this.player.x < config.Bounds.DOOR_EASING_LEFT || this.player.x > config.Bounds.DOOR_EASING_RIGHT) {
+            if (this.player.x > config.Bounds.DOOR_EASING_LEFT && this.player.x < config.Bounds.DOOR_EASING_RIGHT) {
                 if (this.player.y == config.Bounds.BOTTOM_BOUND - this.player.halfH) {
-                    if (this.hasDoorBot && this.isDoorBotLocked && this.player.key > 0) {
+                    if (this.hasDoorBot && this.isDoorBotLocked && this.player.key > 0 && !this.isBossRoom) {
                         this.isDoorBotLocked = false;
                         this.player.key -= 1;
                     }
                 }
                 if (this.player.y == this.player.halfH + config.Bounds.TOP_BOUND) {
-                    if (this.hasDoorTop && this.isDoorTopLocked && this.player.key > 0) {
+                    if (this.hasDoorTop && this.isDoorTopLocked && this.player.key > 0 && !this.isBossRoom) {
                         this.isDoorTopLocked = false;
                         this.player.key -= 1;
                     }
@@ -451,12 +441,10 @@ module scenes {
                     this.doorBot.x = 224;
                 }
                 this.doorBot.y = 674;
-                //this.doorBot.Flip();
                 this.player.canTraverseBot = !this.isDoorBotLocked;
                 this.addChild(this.doorBot);
                 this.setChildIndex(this.doorBot, this.getChildIndex(this.player) - 1);
             }
-            //this.playerStatus.text = "PLAYER HP" + this.player.hp + "/5";
             // Sets the Player Health
             this.playerInfo.PlayerHealth = this.player.hp;
             this.playerInfo.PlayerMaxHealth = this.player.maxHp;
@@ -475,8 +463,6 @@ module scenes {
             //floor and walls
             this.addChild(this.floor);
             this.addChild(this.ceilingAndWall);
-            //this.addChild(this.wallHorizontal);
-            //this.addChild(this.wallVertical);
 
             //door holes
             if (this.hasDoorTop) {
@@ -491,10 +477,6 @@ module scenes {
             if (this.hasDoorRight) {
                 this.addChild(this.doorRight);
             }
-
-            //ceiling
-            //this.addChild(this.ceilingHorizontal);
-            //this.addChild(this.ceilingVertical);
 
             // ITEM PLACEMENT - barriers
             this.obstacles.forEach(e => {
@@ -546,7 +528,6 @@ module scenes {
                     this.addChild(e.showItem);
                 }
             });
-            
 
             // ENEMY PLACEMENT
             this.enemies.forEach(e => {
@@ -554,7 +535,6 @@ module scenes {
                 if (e.canBeEaten){
                   this.addChild(e.stunIndicator);
                 }
-                console.log("spawned " + e.name + " with " + e.hp);
             });            
 
             //door frames
@@ -571,7 +551,7 @@ module scenes {
                 this.addChild(this.doorRightFrame);
             }            
 
-            if (this.hasProjectileShooters || managers.Game.player.powerUp == config.PowerUp.FIRE) {
+            if (this.hasProjectileShooters || managers.Game.player.powerUp == config.PowerUp.FIRE || managers.Game.player.powerUp == config.PowerUp.SLIME) {
                 this.bulletManager.spiderBullets.forEach(bullet => {
                     this.addChild(bullet);
                 });
@@ -606,8 +586,6 @@ module scenes {
             
             //UI PLACEMENT
             this.addChild(this.player.playerStatus);
-            //this.addChild(this.messageStatus);
-            //this.addChild(this.controllerHelp);
             this.addChild(this.playerInfo);
         }
 

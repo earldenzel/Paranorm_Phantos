@@ -22,6 +22,7 @@ var scenes;
             _super.call(this, true, false, false, false, config.Design.HOTEL) || this;
             _this.victoryDanced = false;
             _this.onlyTheBossIsLeft = false;
+            _this.isBossRoom = true;
             _this.Start();
             return _this;
         }

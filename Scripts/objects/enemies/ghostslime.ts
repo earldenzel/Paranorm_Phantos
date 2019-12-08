@@ -14,7 +14,7 @@ module objects{
         constructor(){
             super(managers.Game.enemies_TextureAtlas,"GhostSlime_Travel");
             this.Start();
-            this.hp = 4;
+            this.hp = 40;
             this.attackPower = 1;
 
             this.knockback = 0;
@@ -143,7 +143,12 @@ module objects{
         }
 
         public DevourEffect(): void {
-            managers.Game.player.powerUp = this.powerUp;
+            if (managers.Game.player.powerUp == this.powerUp){
+                managers.Game.player.GainHealth(3);
+            }
+            else{
+                managers.Game.player.powerUp = this.powerUp;
+            }
         }
     }
 }
