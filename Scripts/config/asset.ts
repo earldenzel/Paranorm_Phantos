@@ -3,28 +3,8 @@ module config {
         public static getAssets: any[] = [
             // SPRITES
             {
-                "id": "backButton",
-                "src": "./Assets/Old/BackButton.png"
-            },
-            {
-                "id": "nextButton",
-                "src": "./Assets/Old/NextButton.png"
-            },
-            {
                 "id": "background",
-                "src": "./Assets/Old/background.png"
-            },
-            {
-                "id": "player",
-                "src": "./Assets/Old/player.png"
-            },
-            {
-                "id": "weapon",
-                "src": "./Assets/Old/phantos.png"
-            },
-            {
-                "id": "testEnemy",
-                "src": "./Assets/Old/ship.png"
+                "src": "./Assets/_Background/scene_background.png"
             },
             {
                 "id": "title_background",
@@ -37,6 +17,10 @@ module config {
             {
                 "id": "gameover_ui",
                 "src": "./Assets/_UI/GameOver/GameOver.png"
+            },
+            {
+                "id": "congratulation_ui",
+                "src": "./Assets/_UI/Congratulations/Congratulations.png"
             },
             {
                 "id": "gameover_spotlight",
@@ -331,6 +315,10 @@ module config {
             {
                 "id": "music_boss",
                 "src": "./Assets/_Music/Boss.mp3"
+            },
+            {
+                "id": "music_credits",
+                "src": "./Assets/_Music/Credits.mp3"
             },
 
             // SOUND EFFECTS
@@ -1490,7 +1478,7 @@ module config {
                     "speed": 0.1
                 },
                 "Phoebe_Victory": { 
-                    "frames": [22, 11, 20, 15, 26, 14, 27, 10, 22, 11, 2],
+                    "frames": [22, 11, 20, 15, 26, 14, 27, 10, 22, 11, 2, 2, 2, 2, 2, 2, 2, 2],
                     "speed": 0.1
                  }, // DONE
 

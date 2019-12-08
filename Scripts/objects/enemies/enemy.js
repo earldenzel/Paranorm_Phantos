@@ -61,6 +61,7 @@ var objects;
                         //after eat timer is done, enable keyboard and reset sequence
                         managers.Game.player.biteSequence = setTimeout(function () {
                             _this.DevourEffect();
+                            managers.Game.player.eatCount += 1;
                             _this.RemoveFromPlay(0);
                             managers.Game.player.biteSequence = 0;
                             managers.Game.keyboardManager.enabled = true;

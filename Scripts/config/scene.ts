@@ -46,6 +46,7 @@ module config {
         STAGE_PICKER,
         SHOP,
         ENEMYTEST_LEVEL,
+        CONGRATULATIONS,
         OVER = -1
     }
 }

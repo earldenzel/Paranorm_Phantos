@@ -48,6 +48,7 @@ var config;
         Scene[Scene["STAGE_PICKER"] = 43] = "STAGE_PICKER";
         Scene[Scene["SHOP"] = 44] = "SHOP";
         Scene[Scene["ENEMYTEST_LEVEL"] = 45] = "ENEMYTEST_LEVEL";
+        Scene[Scene["CONGRATULATIONS"] = 46] = "CONGRATULATIONS";
         Scene[Scene["OVER"] = -1] = "OVER";
     })(Scene = config.Scene || (config.Scene = {}));
 })(config || (config = {}));
