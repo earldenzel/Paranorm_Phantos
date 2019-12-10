@@ -31,7 +31,7 @@ var scenes;
             if (managers.Game.player.stageFinished <= 1) {
                 this.enemies[0] = new objects.HotelManager(2, false, false);
             }
-            this.cosmetics[0] = new objects.Stairs(config.Scene.MANSION_1, true);
+            this.cosmetics[0] = new objects.Stairs(config.Scene.MANSION_1, this.design, true);
             this.cosmetics[0].SetPosition(new math.Vec2(285, 420));
             managers.Game.player.sceneOnTop = config.Scene.HOTEL_13;
             this.isDoorTopLocked = (managers.Game.player.stageFinished == 1);

@@ -36,7 +36,7 @@ module scenes {
                 this.cosmetics[2].SetPosition(new math.Vec2(180, 150));
             }
             
-            this.cosmetics[0] = new objects.Stairs(config.Scene.HOTEL_1, false);
+            this.cosmetics[0] = new objects.Stairs(config.Scene.HOTEL_1,this.design, false);
             this.cosmetics[0].SetPosition(new math.Vec2(285, 420));
 
             managers.Game.player.sceneOnTop = config.Scene.GRAVEYARD_6;

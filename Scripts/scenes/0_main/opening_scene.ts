@@ -87,6 +87,7 @@ module scenes {
             managers.Music.mansionMusicPlaying = false;
 
             //managers.Game.currentScene = config.Scene.ENEMYTEST_LEVEL;
+            //managers.Game.currentScene = config.Scene.CONGRATULATIONS;
             switch(managers.Game.player.stageFinished){
                 case 0:
                 case 3:

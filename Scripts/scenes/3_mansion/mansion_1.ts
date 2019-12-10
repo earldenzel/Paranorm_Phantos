@@ -15,7 +15,7 @@ module scenes {
             super.Start();
             this.playerInfo.PlayerLocation = new math.Vec2(96,18);
 
-            this.cosmetics[0] = new objects.Stairs(config.Scene.HOTEL_1, false);
+            this.cosmetics[0] = new objects.Stairs(config.Scene.HOTEL_1,this.design, false);
             this.cosmetics[0].SetPosition(new math.Vec2(125, 235));
         }        
 

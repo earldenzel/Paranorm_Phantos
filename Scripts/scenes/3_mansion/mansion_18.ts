@@ -19,7 +19,7 @@ module scenes {
                 this.enemies[0] = new objects.LittleGirl(2, true, false);
             }     
             
-            this.cosmetics[0] = new objects.Stairs(config.Scene.CONGRATULATIONS, true); 
+            this.cosmetics[0] = new objects.Stairs(config.Scene.CONGRATULATIONS,this.design, true); 
             this.cosmetics[0].SetPosition(new math.Vec2(285, 420));
             managers.Game.player.sceneOnTop = config.Scene.MANSION_16;
             this.isDoorTopLocked =  (managers.Game.player.stageFinished == 2);
