@@ -16,6 +16,7 @@ module objects {
             this.isFlying = false;
             this.rateOfFire = 50;
             this.expGain = 3;
+            this.explosion = new objects.Explosion(ExplodeTypes.MAGGOT,this.GetPosition(),0);
         }
 
         // methods

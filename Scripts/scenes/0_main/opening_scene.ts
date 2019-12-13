@@ -86,18 +86,18 @@ module scenes {
             managers.Music.hotelMusicPlaying = false;
             managers.Music.mansionMusicPlaying = false;
 
-            managers.Game.currentScene = config.Scene.ENEMYTEST_LEVEL;
-            //switch(managers.Game.player.stageFinished){
-            //    case 0:
-            //    case 3:
-            //        managers.Game.currentScene = config.Scene.GRAVEYARD_1;
-            //        break;
-            //    case 1:
-            //        managers.Game.currentScene = config.Scene.HOTEL_1;
-            //        break;
-            //    case 2:
-            //        managers.Game.currentScene = config.Scene.MANSION_1;
-            //}
+            //managers.Game.currentScene = config.Scene.ENEMYTEST_LEVEL;
+            switch(managers.Game.player.stageFinished){
+                case 0:
+                case 3:
+                    managers.Game.currentScene = config.Scene.GRAVEYARD_1;
+                    break;
+                case 1:
+                    managers.Game.currentScene = config.Scene.HOTEL_1;
+                    break;
+                case 2:
+                    managers.Game.currentScene = config.Scene.MANSION_1;
+            }
         }
 
         public Main():void {

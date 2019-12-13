@@ -23,6 +23,7 @@ module objects {
             this.isTransparent = true;
             this.powerUp = config.PowerUp.SHADOW;
             this.expGain = 5;
+            this.explosion = new objects.Explosion(ExplodeTypes.GHOSTSHADOW,this.GetPosition(),2);
         }
         // Methods
         public Start(): void {

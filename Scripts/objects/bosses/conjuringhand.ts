@@ -13,16 +13,21 @@ module objects {
 
         private bulletSpawn: math.Vec2;
         private rateOfFire: number;
+        private explosions: objects.Explosion[];
 
         // Constructor
-        constructor(leftNotRight: boolean) {
+        constructor(leftNotRight: boolean, moveSpeed?:number) {
             super(managers.Game.bosses_TextureAtlas, "Boss3_OpenHand");
             this.leftNotRight = leftNotRight;
             this.Start();
 
             this.hp = 50;
             this.attackPower = 2;
-            this.moveSpeed = 2;
+            if(moveSpeed == null){
+                this.moveSpeed = 2;
+            } else {
+                this.moveSpeed = moveSpeed;
+            }
             this.knockback = 0.25;
             this.eatTimer = 1000;
             this.bounty = 50;
@@ -31,6 +36,12 @@ module objects {
             this.rateOfFire = 5;
             this.attackingMode = HandAttackMode.CHASE;
             this.quakingCounter = 0;
+            this.explosion = new objects.Explosion(ExplodeTypes.DEFAULT, this.GetPosition(), 2);
+            this.explosions = [
+                new objects.Explosion(ExplodeTypes.DEFAULT, this.GetPosition(), 3),
+                new objects.Explosion(ExplodeTypes.DEFAULT, this.GetPosition(), 3),
+                new objects.Explosion(ExplodeTypes.DEFAULT, this.GetPosition(), 3)
+            ];
         }
 
         // Methods
@@ -42,6 +53,33 @@ module objects {
             }
         }
         public Update(): void {
+            let ticker = createjs.Ticker.getTicks();
+            if(this.isDead){
+                for (let i = 0; i < this.explosions.length; i++) {
+                    const e = this.explosions[i];
+                    switch (i) {
+                        case 0:
+                            e.x = (this.x - this.halfW);
+                            e.y = (this.y - this.halfH) - 100;
+                            break;
+                        case 1:
+                            e.x = (this.x - this.halfW);
+                            e.y = (this.y - this.halfH) - 150;
+                            break;
+                        case 2:
+                            e.x = (this.x - this.halfW);
+                            e.y = (this.y - this.halfH) + 100;
+                            break;
+                    }
+                }
+                managers.Game.stage.addChild(this.explosions[0]);
+                if(ticker % 60 == 0){
+                    managers.Game.stage.addChild(this.explosions[1]);
+                }
+                if(ticker % 60 == 0){
+                    managers.Game.stage.addChild(this.explosions[2]);
+                }
+            }
             if (this.attackingMode != HandAttackMode.QUAKE) {
                 if (this.leftNotRight) {
                     this.scaleX = 1;

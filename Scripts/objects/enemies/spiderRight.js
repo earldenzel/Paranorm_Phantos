@@ -30,6 +30,7 @@ var objects;
             _this.halfSpeed = _this.moveSpeed / 2;
             _this.rateOfFire = 70;
             _this.expGain = 3;
+            _this.explosion = new objects.Explosion(objects.ExplodeTypes.GHOSTSHADOW, _this.GetPosition(), 0);
             return _this;
         }
         // methods

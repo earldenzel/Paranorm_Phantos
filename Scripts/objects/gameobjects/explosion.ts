@@ -17,7 +17,7 @@ module objects {
         private type: ExplodeTypes;
         private ExplosionB: objects.Explosion;
         // Constructor
-        constructor(type:ExplodeTypes ,x:number, y:number, repeatCount: number){
+        constructor(type:ExplodeTypes ,position: math.Vec2, repeatCount: number){
             switch(type) {
                 case ExplodeTypes.DEFAULT:
                     super(managers.Game.phoebe_TextureAtlas,"Phoebe_Explosion");
@@ -50,18 +50,22 @@ module objects {
                     super(managers.Game.bosses_TextureAtlas,"Boss1_Explode");
                     break;
             }
-            this.x = x;
-            this.y = y;
+            this.x = position.x;
+            this.y = position.y;
             this.type = type;
             this.repeatCount = repeatCount;
             this.Start();
         }
         // Methods
         public Start(): void {
+            managers.Game.SFX = createjs.Sound.play("anyDefeated");
+            managers.Game.SFX.volume = 0.4;
             this.on("animationend",this.animationEnded.bind(this),false);
         }
 
-        public Update(): void { }
+        public Update(): void {
+
+        }
         public Reset(): void { }
         public Move(): void { }
         public CheckBound(): void { }
@@ -69,13 +73,15 @@ module objects {
         private animationEnded():void {
             this.alpha = 0;
             this.off("animationend", this.animationEnded.bind(this),false);
-            if(this.repeatCount > 0){
-                this.ExplosionB = new objects.Explosion(this.type,this.x,this.y,this.repeatCount - 1);
-                managers.Game.stage.addChild(this.ExplosionB);
-                managers.Game.stage.setChildIndex(this.ExplosionB,managers.Game.stage.getChildIndex(managers.Game.player) + 1);
-            }
             managers.Game.stage.removeChild(this);
             this.visible = false;
+
+            if(this.repeatCount > 0){
+                console.log("REPEAT");
+                this.ExplosionB = new objects.Explosion(this.type,this.GetPosition(),this.repeatCount - 1);
+                managers.Game.stage.addChild(this.ExplosionB);
+                this.repeatCount -= 1;
+            }
         }
     }
 }

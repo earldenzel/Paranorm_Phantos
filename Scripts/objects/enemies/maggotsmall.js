@@ -33,6 +33,7 @@ var objects;
             _this.halfSpeed = moveSpeed / 2;
             _this.walk = ["Maggot_SmallWalkForward", "Maggot_SmallWalkForward", "Maggot_SmallWalkSide", "Maggot_SmallWalkSide"];
             _this.direction = config.Direction.DOWN;
+            _this.explosion = new objects.Explosion(objects.ExplodeTypes.MAGGOT, _this.GetPosition(), 0);
             return _this;
         }
         // Methods

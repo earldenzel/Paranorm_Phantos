@@ -33,6 +33,7 @@ module objects {
 
             this.direction = config.Direction.DOWN;
 
+            this.explosion = new objects.Explosion(ExplodeTypes.GHOSTWOMAN,this.GetPosition(),2);
             
         }
         // Methods

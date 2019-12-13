@@ -4,6 +4,7 @@ module objects {
         private bulletSpawn: math.Vec2;
         private rateOfFire: number;
         public spawn: objects.MaggotSmall;
+        private explosions: objects.Explosion[];
 
         // Constructor
         constructor() {
@@ -20,6 +21,13 @@ module objects {
             this.bounty = 200;
             this.isFlying = false;
             this.rateOfFire = 100;
+            this.explosion = new objects.Explosion(ExplodeTypes.MAGGOT, this.GetPosition(), 2);
+            this.explosions = [
+                new objects.Explosion(ExplodeTypes.MAGGOT, this.GetPosition(), 3),
+                new objects.Explosion(ExplodeTypes.MAGGOT, this.GetPosition(), 3),
+                new objects.Explosion(ExplodeTypes.MAGGOT, this.GetPosition(), 3),
+                new objects.Explosion(ExplodeTypes.MAGGOT, this.GetPosition(), 3)
+            ];
         }
         // Methods
         public Start(): void {
@@ -34,7 +42,38 @@ module objects {
                 }
             }
             else {
-                if(this.currentAnimation == "Boss2_Worm"){
+                for (let i = 0; i < this.explosions.length; i++) {
+                    const e = this.explosions[i];
+                    switch (i) {
+                        case 0:
+                            e.x = (this.x - this.halfW) + 100;
+                            e.y = (this.y - this.halfH);
+                            break;
+                        case 1:
+                            e.x = (this.x - this.halfW) - 100;
+                            e.y = (this.y - this.halfH);
+                            break;
+                        case 2:
+                            e.x = (this.x - this.halfW) + 200;
+                            e.y = (this.y - this.halfH) - 50;
+                            break;
+                        case 3:
+                            e.x = (this.x - this.halfW) - 200;
+                            e.y = (this.y - this.halfH) - 50;
+                            break;
+                    }
+                }
+                managers.Game.stage.addChild(this.explosions[0]);
+                if (ticker % 30 == 0) {
+                    managers.Game.stage.addChild(this.explosions[1]);
+                }
+                if (ticker % 60 == 0) {
+                    managers.Game.stage.addChild(this.explosions[2]);
+                }
+                if (ticker % 90 == 0) {
+                    managers.Game.stage.addChild(this.explosions[3]);
+                }
+                if (this.currentAnimation == "Boss2_Worm") {
                     this.SwitchAnimation("Boss2_Worm_Alpha");
                 }
                 if (ticker % 90 == 0 && this.currentAnimation == "Boss2_Worm_Alpha") {
@@ -49,31 +88,32 @@ module objects {
         public Move(): void {
             // Not necessarily move but its method path.
             let ticker = createjs.Ticker.getTicks();
-            if(ticker % 60 == 0) {
+            if (ticker % 60 == 0) {
                 if (this.currentAnimation == "Boss2_Worm") {
-                let command: number = Math.floor(Math.random() * Math.floor(4)); // Between 0 to 3
-                let pos: math.Vec2;
-                pos = new math.Vec2(this.x + 18, this.y + 34);
-                this.BulletFire(pos);
-                switch (command) {
-                    case 0:
-                        pos = new math.Vec2(this.x - 106, this.y - 54);
-                        this.SpawnCreateAndActivate(pos);
-                        break;
-                    case 1:
-                        pos = new math.Vec2(this.x - 68, this.y + 26);
-                        this.BulletFire(pos);
-                        break;
-                    case 2:
-                        pos = new math.Vec2(this.x + 77, this.y - 17);
-                        this.SpawnCreateAndActivate(pos);
-                        break;
-                    case 3:
-                        pos = new math.Vec2(this.x + 109, this.y - 70);
-                        this.BulletFire(pos);
-                        break;
+                    let command: number = Math.floor(Math.random() * Math.floor(4)); // Between 0 to 3
+                    let pos: math.Vec2;
+                    pos = new math.Vec2(this.x + 18, this.y + 34);
+                    this.BulletFire(pos);
+                    switch (command) {
+                        case 0:
+                            pos = new math.Vec2(this.x - 106, this.y - 54);
+                            this.SpawnCreateAndActivate(pos);
+                            break;
+                        case 1:
+                            pos = new math.Vec2(this.x - 68, this.y + 26);
+                            this.BulletFire(pos);
+                            break;
+                        case 2:
+                            pos = new math.Vec2(this.x + 77, this.y - 17);
+                            this.SpawnCreateAndActivate(pos);
+                            break;
+                        case 3:
+                            pos = new math.Vec2(this.x + 109, this.y - 70);
+                            this.BulletFire(pos);
+                            break;
+                    }
                 }
-            }}
+            }
         }
         public CheckBound(): void {
             super.CheckBound();

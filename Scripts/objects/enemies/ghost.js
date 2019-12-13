@@ -15,6 +15,7 @@ var objects;
 (function (objects) {
     var Ghost = /** @class */ (function (_super) {
         __extends(Ghost, _super);
+        // Variable
         // Constructors
         function Ghost(moveSpeed) {
             var _this = _super.call(this, managers.Game.enemies_TextureAtlas, "Ghost_Idle") || this;
@@ -24,7 +25,7 @@ var objects;
             _this.eatTimer = 300;
             _this.isFlying = true;
             // Create explosion
-            _this.explosion = new objects.Explosion(objects.ExplodeTypes.GHOST, _this.x, _this.y, 0);
+            _this.explosion = new objects.Explosion(objects.ExplodeTypes.GHOST, _this.GetPosition(), 0);
             return _this;
         }
         // Methods
@@ -67,10 +68,6 @@ var objects;
                     this.visible = false;
                 }
                 this.SwitchAnimation("Ghost_Explode");
-                // Add Explosion
-                this.explosion.x = this.x - this.halfW;
-                this.explosion.y = this.y - this.halfH;
-                managers.Game.stage.addChild(this.explosion);
             }
             _super.prototype.Update.call(this);
         };

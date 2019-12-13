@@ -29,7 +29,7 @@ var objects;
     var Explosion = /** @class */ (function (_super) {
         __extends(Explosion, _super);
         // Constructor
-        function Explosion(type, x, y, repeatCount) {
+        function Explosion(type, position, repeatCount) {
             var _this = this;
             switch (type) {
                 case ExplodeTypes.DEFAULT:
@@ -63,8 +63,8 @@ var objects;
                     _this = _super.call(this, managers.Game.bosses_TextureAtlas, "Boss1_Explode") || this;
                     break;
             }
-            _this.x = x;
-            _this.y = y;
+            _this.x = position.x;
+            _this.y = position.y;
             _this.type = type;
             _this.repeatCount = repeatCount;
             _this.Start();
@@ -72,22 +72,26 @@ var objects;
         }
         // Methods
         Explosion.prototype.Start = function () {
+            managers.Game.SFX = createjs.Sound.play("anyDefeated");
+            managers.Game.SFX.volume = 0.4;
             this.on("animationend", this.animationEnded.bind(this), false);
         };
-        Explosion.prototype.Update = function () { };
+        Explosion.prototype.Update = function () {
+        };
         Explosion.prototype.Reset = function () { };
         Explosion.prototype.Move = function () { };
         Explosion.prototype.CheckBound = function () { };
         Explosion.prototype.animationEnded = function () {
             this.alpha = 0;
             this.off("animationend", this.animationEnded.bind(this), false);
-            if (this.repeatCount > 0) {
-                this.ExplosionB = new objects.Explosion(this.type, this.x, this.y, this.repeatCount - 1);
-                managers.Game.stage.addChild(this.ExplosionB);
-                managers.Game.stage.setChildIndex(this.ExplosionB, managers.Game.stage.getChildIndex(managers.Game.player) + 1);
-            }
             managers.Game.stage.removeChild(this);
             this.visible = false;
+            if (this.repeatCount > 0) {
+                console.log("REPEAT");
+                this.ExplosionB = new objects.Explosion(this.type, this.GetPosition(), this.repeatCount - 1);
+                managers.Game.stage.addChild(this.ExplosionB);
+                this.repeatCount -= 1;
+            }
         };
         return Explosion;
     }(objects.GameObject));

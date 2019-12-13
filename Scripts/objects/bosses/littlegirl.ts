@@ -32,6 +32,7 @@ module objects {
             this.spawnCount = 0;
             this.spawnLimit = 1;
             this.bounty = 1;
+            this.explosion = new objects.Explosion(ExplodeTypes.GHOSTWOMAN, this.GetPosition(),2);
         }
 
         // Methods
@@ -145,7 +146,7 @@ module objects {
                 (managers.Game.currentStage as scenes.PlayScene).AddEnemyToScene(this.spawnA);
             }
             else{
-                this.spawnB = new objects.ConjuringHand(leftNotRight);
+                this.spawnB = new objects.ConjuringHand(leftNotRight,4);
                 (managers.Game.currentStage as scenes.PlayScene).AddEnemyToScene(this.spawnB);
             }
             this.spawnCount += 1;

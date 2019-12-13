@@ -25,6 +25,7 @@ var objects;
             _this.updateTime = updateTime;
             _this.currentTime = updateTime;
             _this.isFlying = true;
+            _this.explosion = new objects.Explosion(objects.ExplodeTypes.DEFAULT, _this.GetPosition(), 0);
             return _this;
         }
         // methods

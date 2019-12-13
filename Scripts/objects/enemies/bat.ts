@@ -4,7 +4,6 @@ module objects{
         private updateTime: number;
         private currentTime: number;
         private trajectory: math.Vec2;
-
         // constructors
         
         constructor(moveSpeed:number, updateTime: number){
@@ -17,6 +16,7 @@ module objects{
             this.updateTime = updateTime;
             this.currentTime = updateTime;
             this.isFlying = true;
+            this.explosion = new objects.Explosion(ExplodeTypes.DEFAULT,this.GetPosition(),0);
         }
         // methods
 
