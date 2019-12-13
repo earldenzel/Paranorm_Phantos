@@ -16,8 +16,9 @@ module objects {
         private repeatCount: number;
         private type: ExplodeTypes;
         private ExplosionB: objects.Explosion;
+        private sfx: boolean;
         // Constructor
-        constructor(type:ExplodeTypes ,position: math.Vec2, repeatCount: number){
+        constructor(type:ExplodeTypes ,position: math.Vec2, repeatCount: number, sfx?: boolean){
             switch(type) {
                 case ExplodeTypes.DEFAULT:
                     super(managers.Game.phoebe_TextureAtlas,"Phoebe_Explosion");
@@ -53,13 +54,20 @@ module objects {
             this.x = position.x;
             this.y = position.y;
             this.type = type;
+            if(sfx != null){
+                this.sfx = sfx;
+            } else {
+                this.sfx = true;
+            }
             this.repeatCount = repeatCount;
             this.Start();
         }
         // Methods
         public Start(): void {
-            managers.Game.SFX = createjs.Sound.play("anyDefeated");
-            managers.Game.SFX.volume = 0.4;
+            if(this.sfx){
+                managers.Game.SFX = createjs.Sound.play("anyDefeated");
+                managers.Game.SFX.volume = 0.4;
+            }
             this.on("animationend",this.animationEnded.bind(this),false);
         }
 

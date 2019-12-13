@@ -34,7 +34,7 @@ var objects;
             _this.rateOfFire = 35;
             _this.puddleCount = managers.Game.slimePuddles.length;
             _this.powerUp = config.PowerUp.SLIME;
-            _this.explosion = new objects.Explosion(objects.ExplodeTypes.GHOSTSLIME, _this.GetPosition(), 2);
+            _this.explosion = new objects.Explosion(objects.ExplodeTypes.GHOSTSLIME, _this.GetPosition(), 2, false);
             return _this;
         }
         // Methods

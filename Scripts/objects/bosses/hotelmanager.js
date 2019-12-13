@@ -29,7 +29,7 @@ var objects;
             _this.eatTimer = 3000;
             _this.isFlying = true;
             _this.bounty = 1;
-            _this.explosion = new objects.Explosion(objects.ExplodeTypes.GHOSTSHADOW, _this.GetPosition(), 2);
+            _this.explosion = new objects.Explosion(objects.ExplodeTypes.GHOSTSHADOW, _this.GetPosition(), 2, false);
             return _this;
         }
         // Methods

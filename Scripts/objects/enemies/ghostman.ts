@@ -31,7 +31,7 @@ module objects{
 
             this.direction = config.Direction.DOWN;
 
-            this.explosion = new objects.Explosion(ExplodeTypes.GHOSTSHADOW,this.GetPosition(),2);
+            this.explosion = new objects.Explosion(ExplodeTypes.GHOSTSHADOW,this.GetPosition(),2,false);
         }
 
         // Methods

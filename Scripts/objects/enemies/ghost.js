@@ -25,7 +25,7 @@ var objects;
             _this.eatTimer = 300;
             _this.isFlying = true;
             // Create explosion
-            _this.explosion = new objects.Explosion(objects.ExplodeTypes.GHOST, _this.GetPosition(), 0);
+            _this.explosion = new objects.Explosion(objects.ExplodeTypes.GHOST, _this.GetPosition(), 0, false);
             return _this;
         }
         // Methods

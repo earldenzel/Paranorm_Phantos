@@ -13,7 +13,7 @@ module objects {
             this.knockback = 0.75;
             this.eatTimer = 300;
             this.isFlying = true;
-            this.explosion = new objects.Explosion(ExplodeTypes.GHOST,this.GetPosition(),0);
+            this.explosion = new objects.Explosion(ExplodeTypes.GHOST,this.GetPosition(),0,false);
             this.Start();
         }
 

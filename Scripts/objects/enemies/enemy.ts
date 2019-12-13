@@ -207,6 +207,8 @@ module objects {
 
         public RemoveFromPlay(bounty: number): void {
             this.isDead = true;
+            managers.Game.SFX = createjs.Sound.play("anyDefeated");
+            managers.Game.SFX.volume = 0.4;
             managers.Game.player.GainEcto();
             if (bounty > 0) {
                 if (!this.bountyTaken){

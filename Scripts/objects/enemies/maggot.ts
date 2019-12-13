@@ -32,7 +32,7 @@ module objects{
             this.walk = ["Maggot_WalkForward","Maggot_WalkForward","Maggot_WalkSide","Maggot_WalkSide"];
 
             this.direction = config.Direction.DOWN;
-            this.explosion = new objects.Explosion(ExplodeTypes.MAGGOT,this.GetPosition(),0);
+            this.explosion = new objects.Explosion(ExplodeTypes.MAGGOT,this.GetPosition(),0,false);
 
             this.SpawnCreation();
         }

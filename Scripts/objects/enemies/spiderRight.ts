@@ -23,7 +23,7 @@ module objects {
             this.halfSpeed = this.moveSpeed / 2;
             this.rateOfFire = 70;
             this.expGain = 3;
-            this.explosion = new objects.Explosion(ExplodeTypes.GHOSTSHADOW,this.GetPosition(),0);
+            this.explosion = new objects.Explosion(ExplodeTypes.GHOSTSHADOW,this.GetPosition(),0,false);
         }
 
         // methods

@@ -33,7 +33,7 @@ module objects {
 
             this.direction = config.Direction.DOWN;
             this.expGain = 20;
-            this.explosion = new objects.Explosion(ExplodeTypes.UNDERTAKER, this.GetPosition(),2);
+            this.explosion = new objects.Explosion(ExplodeTypes.UNDERTAKER, this.GetPosition(),2,false);
             this.explosions = [
                 new objects.Explosion(ExplodeTypes.UNDERTAKER, this.GetPosition(), 3),
                 new objects.Explosion(ExplodeTypes.UNDERTAKER, this.GetPosition(), 3),

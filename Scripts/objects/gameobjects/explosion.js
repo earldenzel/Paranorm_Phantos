@@ -29,7 +29,7 @@ var objects;
     var Explosion = /** @class */ (function (_super) {
         __extends(Explosion, _super);
         // Constructor
-        function Explosion(type, position, repeatCount) {
+        function Explosion(type, position, repeatCount, sfx) {
             var _this = this;
             switch (type) {
                 case ExplodeTypes.DEFAULT:
@@ -66,14 +66,22 @@ var objects;
             _this.x = position.x;
             _this.y = position.y;
             _this.type = type;
+            if (sfx != null) {
+                _this.sfx = sfx;
+            }
+            else {
+                _this.sfx = true;
+            }
             _this.repeatCount = repeatCount;
             _this.Start();
             return _this;
         }
         // Methods
         Explosion.prototype.Start = function () {
-            managers.Game.SFX = createjs.Sound.play("anyDefeated");
-            managers.Game.SFX.volume = 0.4;
+            if (this.sfx) {
+                managers.Game.SFX = createjs.Sound.play("anyDefeated");
+                managers.Game.SFX.volume = 0.4;
+            }
             this.on("animationend", this.animationEnded.bind(this), false);
         };
         Explosion.prototype.Update = function () {

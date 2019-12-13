@@ -25,7 +25,7 @@ module objects{
             this.rateOfFire = 35;
             this.puddleCount = managers.Game.slimePuddles.length;
             this.powerUp = config.PowerUp.SLIME;
-            this.explosion = new objects.Explosion(ExplodeTypes.GHOSTSLIME,this.GetPosition(),2);
+            this.explosion = new objects.Explosion(ExplodeTypes.GHOSTSLIME,this.GetPosition(),2,false);
         }
         // Methods
         public Start():void{

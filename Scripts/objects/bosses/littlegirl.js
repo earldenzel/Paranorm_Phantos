@@ -34,7 +34,7 @@ var objects;
             _this.spawnCount = 0;
             _this.spawnLimit = 1;
             _this.bounty = 1;
-            _this.explosion = new objects.Explosion(objects.ExplodeTypes.GHOSTWOMAN, _this.GetPosition(), 2);
+            _this.explosion = new objects.Explosion(objects.ExplodeTypes.GHOSTWOMAN, _this.GetPosition(), 2, false);
             return _this;
         }
         // Methods

@@ -32,7 +32,7 @@ module objects {
             this.spawnCount = 0;
             this.spawnLimit = 1;
             this.bounty = 1;
-            this.explosion = new objects.Explosion(ExplodeTypes.GHOSTWOMAN, this.GetPosition(),2);
+            this.explosion = new objects.Explosion(ExplodeTypes.GHOSTWOMAN, this.GetPosition(),2,false);
         }
 
         // Methods

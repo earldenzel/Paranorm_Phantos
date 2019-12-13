@@ -26,7 +26,7 @@ var objects;
             _this.isFlying = false;
             _this.rateOfFire = 50;
             _this.expGain = 3;
-            _this.explosion = new objects.Explosion(objects.ExplodeTypes.MAGGOT, _this.GetPosition(), 0);
+            _this.explosion = new objects.Explosion(objects.ExplodeTypes.MAGGOT, _this.GetPosition(), 0, false);
             return _this;
         }
         // methods
