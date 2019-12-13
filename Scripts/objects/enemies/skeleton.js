@@ -33,7 +33,7 @@ var objects;
             _this.rateOfFire = 100;
             _this.walk = ["Skeleton_WalkBack", "Skeleton_WalkFront", "Skeleton_WalkRight", "Skeleton_WalkRight"];
             _this.direction = config.Direction.DOWN;
-            _this.explosion = new objects.Explosion(objects.ExplodeTypes.SKELETON, _this.GetPosition(), 0);
+            _this.explosion = new objects.Explosion(objects.ExplodeTypes.SKELETON, _this.GetPosition(), 0, false);
             return _this;
         }
         // Methods

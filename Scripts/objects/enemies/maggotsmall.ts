@@ -27,7 +27,7 @@ module objects {
             this.walk = ["Maggot_SmallWalkForward", "Maggot_SmallWalkForward", "Maggot_SmallWalkSide", "Maggot_SmallWalkSide"];
 
             this.direction = config.Direction.DOWN;
-            this.explosion = new objects.Explosion(ExplodeTypes.MAGGOT,this.GetPosition(),0);
+            this.explosion = new objects.Explosion(ExplodeTypes.MAGGOT,this.GetPosition(),0,false);
         }
         // Methods
         public Start(): void {

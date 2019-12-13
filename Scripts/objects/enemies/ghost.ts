@@ -10,7 +10,7 @@ module objects {
             this.eatTimer = 300;
             this.isFlying = true;
             // Create explosion
-            this.explosion = new objects.Explosion(ExplodeTypes.GHOST,this.GetPosition(),0);
+            this.explosion = new objects.Explosion(ExplodeTypes.GHOST,this.GetPosition(),0,false);
         }
 
         // Methods

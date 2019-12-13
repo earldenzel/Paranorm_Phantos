@@ -36,7 +36,7 @@ var objects;
             _this.attack = ["Boss1_AttackBack", "Boss1_AttackFront", "Boss1_AttackRight", "Boss1_AttackRight"];
             _this.direction = config.Direction.DOWN;
             _this.expGain = 20;
-            _this.explosion = new objects.Explosion(objects.ExplodeTypes.UNDERTAKER, _this.GetPosition(), 2);
+            _this.explosion = new objects.Explosion(objects.ExplodeTypes.UNDERTAKER, _this.GetPosition(), 2, false);
             _this.explosions = [
                 new objects.Explosion(objects.ExplodeTypes.UNDERTAKER, _this.GetPosition(), 3),
                 new objects.Explosion(objects.ExplodeTypes.UNDERTAKER, _this.GetPosition(), 3),

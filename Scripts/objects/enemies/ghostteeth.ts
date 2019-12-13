@@ -25,7 +25,7 @@ module objects {
 
             this.attack = ["GhostTeeth_AttackFront", "GhostTeeth_AttackBack", "GhostTeeth_AttackRight", "GhostTeeth_AttackRight"];
             this.direction = config.Direction.UP;
-            this.explosion = new objects.Explosion(ExplodeTypes.GHOST,this.GetPosition(),2);
+            this.explosion = new objects.Explosion(ExplodeTypes.GHOST,this.GetPosition(),2,false);
         }
 
         // Methods

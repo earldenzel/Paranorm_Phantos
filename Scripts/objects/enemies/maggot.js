@@ -34,7 +34,7 @@ var objects;
             _this.hasSpawn = false;
             _this.walk = ["Maggot_WalkForward", "Maggot_WalkForward", "Maggot_WalkSide", "Maggot_WalkSide"];
             _this.direction = config.Direction.DOWN;
-            _this.explosion = new objects.Explosion(objects.ExplodeTypes.MAGGOT, _this.GetPosition(), 0);
+            _this.explosion = new objects.Explosion(objects.ExplodeTypes.MAGGOT, _this.GetPosition(), 0, false);
             _this.SpawnCreation();
             return _this;
         }

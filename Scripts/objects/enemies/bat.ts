@@ -16,7 +16,7 @@ module objects{
             this.updateTime = updateTime;
             this.currentTime = updateTime;
             this.isFlying = true;
-            this.explosion = new objects.Explosion(ExplodeTypes.DEFAULT,this.GetPosition(),0);
+            this.explosion = new objects.Explosion(ExplodeTypes.DEFAULT,this.GetPosition(),0,false);
         }
         // methods
 

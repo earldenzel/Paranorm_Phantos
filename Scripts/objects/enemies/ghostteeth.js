@@ -31,7 +31,7 @@ var objects;
             _this.powerUp = config.PowerUp.BITE;
             _this.attack = ["GhostTeeth_AttackFront", "GhostTeeth_AttackBack", "GhostTeeth_AttackRight", "GhostTeeth_AttackRight"];
             _this.direction = config.Direction.UP;
-            _this.explosion = new objects.Explosion(objects.ExplodeTypes.GHOST, _this.GetPosition(), 2);
+            _this.explosion = new objects.Explosion(objects.ExplodeTypes.GHOST, _this.GetPosition(), 2, false);
             return _this;
         }
         // Methods
