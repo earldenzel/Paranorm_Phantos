@@ -25,7 +25,8 @@ module scenes{
             //];
             //this.enemies[0] = new objects.Undertaker(2);
             //this.enemies[0] = new objects.HotelManager(2,true,false);
-            this.enemies[0] = new objects.LittleGirl(1,true,false);
+            //this.enemies[0] = new objects.LittleGirl(1,true,false);
+            this.enemies[0] = new objects.Ghost(0);
             //this.enemies[0].hp = 1;
             //this.enemies[0] = new objects.GhostSlime();
             //this.enemies[1] = new objects.GhostSlime();

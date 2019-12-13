@@ -1,7 +1,7 @@
 module objects {
     export class Ghost extends objects.Enemy {
         // Variable
-
+        private explosion: objects.Explosion;
         // Constructors
         constructor(moveSpeed: number) {
             super(managers.Game.enemies_TextureAtlas, "Ghost_Idle");
@@ -10,6 +10,8 @@ module objects {
             this.knockback = 0.75;
             this.eatTimer = 300;
             this.isFlying = true;
+            // Create explosion
+            this.explosion = new objects.Explosion(ExplodeTypes.GHOST,this.x,this.y,0);
         }
 
         // Methods
@@ -48,10 +50,15 @@ module objects {
             }
             else {
                 if (this.currentAnimation == "Ghost_Explode" && this.currentAnimationFrame > 3) {
+                    
                     managers.Game.stage.removeChild(this);
                     this.visible = false;
                 }
                 this.SwitchAnimation("Ghost_Explode");
+                // Add Explosion
+                this.explosion.x = this.x - this.halfW;
+                this.explosion.y = this.y - this.halfH;
+                managers.Game.stage.addChild(this.explosion);
             }
             super.Update();
         }
