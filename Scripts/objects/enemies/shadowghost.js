@@ -31,7 +31,7 @@ var objects;
             _this.isTransparent = true;
             _this.powerUp = config.PowerUp.SHADOW;
             _this.expGain = 5;
-            _this.explosion = new objects.Explosion(objects.ExplodeTypes.GHOSTSHADOW, _this.GetPosition(), 2);
+            _this.explosion = new objects.Explosion(objects.ExplodeTypes.GHOSTSHADOW, _this.GetPosition(), 2, false);
             return _this;
         }
         // Methods
