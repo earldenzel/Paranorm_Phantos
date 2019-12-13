@@ -34,6 +34,7 @@ var objects;
             _this.spawnCount = 0;
             _this.spawnLimit = 1;
             _this.bounty = 1;
+            _this.explosion = new objects.Explosion(objects.ExplodeTypes.GHOSTWOMAN, _this.GetPosition(), 2);
             return _this;
         }
         // Methods
@@ -139,7 +140,7 @@ var objects;
                 managers.Game.currentStage.AddEnemyToScene(this.spawnA);
             }
             else {
-                this.spawnB = new objects.ConjuringHand(leftNotRight);
+                this.spawnB = new objects.ConjuringHand(leftNotRight, 4);
                 managers.Game.currentStage.AddEnemyToScene(this.spawnB);
             }
             this.spawnCount += 1;

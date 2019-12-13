@@ -30,6 +30,8 @@ module objects{
             this.attack = ["GhostMan_AttackBack", "GhostMan_AttackFront", "GhostMan_AttackLeft", "GhostMan_AttackLeft"];
 
             this.direction = config.Direction.DOWN;
+
+            this.explosion = new objects.Explosion(ExplodeTypes.GHOSTSHADOW,this.GetPosition(),2);
         }
 
         // Methods

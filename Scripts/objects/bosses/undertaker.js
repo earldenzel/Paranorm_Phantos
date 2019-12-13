@@ -36,6 +36,12 @@ var objects;
             _this.attack = ["Boss1_AttackBack", "Boss1_AttackFront", "Boss1_AttackRight", "Boss1_AttackRight"];
             _this.direction = config.Direction.DOWN;
             _this.expGain = 20;
+            _this.explosion = new objects.Explosion(objects.ExplodeTypes.UNDERTAKER, _this.GetPosition(), 2);
+            _this.explosions = [
+                new objects.Explosion(objects.ExplodeTypes.UNDERTAKER, _this.GetPosition(), 3),
+                new objects.Explosion(objects.ExplodeTypes.UNDERTAKER, _this.GetPosition(), 3),
+                new objects.Explosion(objects.ExplodeTypes.UNDERTAKER, _this.GetPosition(), 3)
+            ];
             return _this;
         }
         // methods
@@ -45,6 +51,7 @@ var objects;
             this.x = 350;
         };
         Undertaker.prototype.Update = function () {
+            var ticker = createjs.Ticker.getTicks();
             if (this.isDead) {
                 this.SwitchAnimation("Boss1_Explode");
             }
@@ -53,6 +60,30 @@ var objects;
                     this.attackingMode = false;
                     if (this.currentAnimation != "Boss1_Stun") {
                         this.SwitchAnimation("Boss1_Destroy");
+                        for (var i = 0; i < this.explosions.length; i++) {
+                            var e = this.explosions[i];
+                            switch (i) {
+                                case 0:
+                                    e.x = (this.x - this.halfW) + 250;
+                                    e.y = (this.y - this.halfH);
+                                    break;
+                                case 1:
+                                    e.x = (this.x - this.halfW) + 100;
+                                    e.y = (this.y - this.halfH);
+                                    break;
+                                case 2:
+                                    e.x = (this.x - this.halfW) + 150;
+                                    e.y = (this.y - this.halfH) + 250;
+                                    break;
+                            }
+                        }
+                        managers.Game.stage.addChild(this.explosions[0]);
+                        if (ticker % 30 == 0) {
+                            managers.Game.stage.addChild(this.explosions[1]);
+                        }
+                        if (ticker % 60 == 0) {
+                            managers.Game.stage.addChild(this.explosions[2]);
+                        }
                     }
                     if (this.currentAnimation == "Boss1_Destroy" && this.currentAnimationFrame > 10) {
                         this.SwitchAnimation("Boss1_Stun");
@@ -64,9 +95,9 @@ var objects;
                             this.SwitchAnimation(this.attack[this.direction]);
                         }
                         else {
-                            var ticker = createjs.Ticker.getTicks();
+                            var ticker_1 = createjs.Ticker.getTicks();
                             if (this.currentAnimation == "Boss1_Idle") {
-                                switch (ticker % 3) {
+                                switch (ticker_1 % 3) {
                                     case 0:
                                         this.SwitchAnimation("Boss1_ShovelAttack");
                                         break;

@@ -1,7 +1,6 @@
 module objects {
     export class Ghost extends objects.Enemy {
         // Variable
-
         // Constructors
         constructor(moveSpeed: number) {
             super(managers.Game.enemies_TextureAtlas, "Ghost_Idle");
@@ -10,6 +9,8 @@ module objects {
             this.knockback = 0.75;
             this.eatTimer = 300;
             this.isFlying = true;
+            // Create explosion
+            this.explosion = new objects.Explosion(ExplodeTypes.GHOST,this.GetPosition(),0);
         }
 
         // Methods
@@ -48,6 +49,7 @@ module objects {
             }
             else {
                 if (this.currentAnimation == "Ghost_Explode" && this.currentAnimationFrame > 3) {
+                    
                     managers.Game.stage.removeChild(this);
                     this.visible = false;
                 }

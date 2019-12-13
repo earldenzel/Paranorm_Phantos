@@ -7,7 +7,7 @@ module scenes{
             super(false,false,false,false,config.Design.HOTEL);
             this.hasProjectileShooters = true;
             this.player.ecto = this.player.maxEcto;
-            //this.player.GainMaxHealth();
+            this.player.GainMaxHealth();
             this.Start();
         }
         // Methods
@@ -25,11 +25,15 @@ module scenes{
             //];
             //this.enemies[0] = new objects.Undertaker(2);
             //this.enemies[0] = new objects.HotelManager(2,true,false);
-            this.enemies[0] = new objects.LittleGirl(1,true,false);
-            //this.enemies[0].hp = 1;
+            //this.enemies[0] = new objects.LittleGirl(1,true,false);
+            //this.enemies[0] = new objects.Ghost(0);
+            
             //this.enemies[0] = new objects.GhostSlime();
             //this.enemies[1] = new objects.GhostSlime();
             //this.enemies[0] = new objects.GhostMan(2);
+            //this.enemies[0].hp = 1;
+            //this.enemies[0] = new objects.RedSkeleton(new math.Vec2(300,300),2,true,false);
+
             //this.enemies[0] = new objects.Skeleton(new math.Vec2(300,300),2,true,false);
             super.Start();
         }

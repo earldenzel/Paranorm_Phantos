@@ -8,6 +8,7 @@ module objects{
 
         private walk: Array<any>;
         public direction: config.Direction;
+        public hasSpawn: boolean;
 
         // Constructor
         constructor(moveSpeed: number, rightDirection: boolean, downDirection: boolean, spawnNumber: number) {
@@ -26,10 +27,12 @@ module objects{
             this.isFlying = false;
             this.expGain = 3;
             this.halfSpeed = moveSpeed / 2;
+            this.hasSpawn = false;
 
             this.walk = ["Maggot_WalkForward","Maggot_WalkForward","Maggot_WalkSide","Maggot_WalkSide"];
 
             this.direction = config.Direction.DOWN;
+            this.explosion = new objects.Explosion(ExplodeTypes.MAGGOT,this.GetPosition(),0);
 
             this.SpawnCreation();
         }
@@ -45,8 +48,9 @@ module objects{
             }
             else{
                 if (this.currentAnimation == "Maggot_Explode" && this.currentAnimationFrame > 3) {
-                    if(this.visible){
+                    if(!this.hasSpawn){
                         this.ActivateSpawns();
+                        this.hasSpawn = true;
                     }
                     managers.Game.stage.removeChild(this);
                     this.visible = false;

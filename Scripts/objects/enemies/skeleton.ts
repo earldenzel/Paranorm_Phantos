@@ -28,6 +28,7 @@ module objects{
 
             this.walk = ["Skeleton_WalkBack", "Skeleton_WalkFront", "Skeleton_WalkRight", "Skeleton_WalkRight"];
             this.direction = config.Direction.DOWN;
+            this.explosion = new objects.Explosion(ExplodeTypes.SKELETON,this.GetPosition(),0);
         }
 
         // Methods

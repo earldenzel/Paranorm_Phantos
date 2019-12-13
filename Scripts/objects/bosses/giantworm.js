@@ -28,6 +28,13 @@ var objects;
             _this.bounty = 200;
             _this.isFlying = false;
             _this.rateOfFire = 100;
+            _this.explosion = new objects.Explosion(objects.ExplodeTypes.MAGGOT, _this.GetPosition(), 2);
+            _this.explosions = [
+                new objects.Explosion(objects.ExplodeTypes.MAGGOT, _this.GetPosition(), 3),
+                new objects.Explosion(objects.ExplodeTypes.MAGGOT, _this.GetPosition(), 3),
+                new objects.Explosion(objects.ExplodeTypes.MAGGOT, _this.GetPosition(), 3),
+                new objects.Explosion(objects.ExplodeTypes.MAGGOT, _this.GetPosition(), 3)
+            ];
             return _this;
         }
         // Methods
@@ -43,6 +50,37 @@ var objects;
                 }
             }
             else {
+                for (var i = 0; i < this.explosions.length; i++) {
+                    var e = this.explosions[i];
+                    switch (i) {
+                        case 0:
+                            e.x = (this.x - this.halfW) + 100;
+                            e.y = (this.y - this.halfH);
+                            break;
+                        case 1:
+                            e.x = (this.x - this.halfW) - 100;
+                            e.y = (this.y - this.halfH);
+                            break;
+                        case 2:
+                            e.x = (this.x - this.halfW) + 200;
+                            e.y = (this.y - this.halfH) - 50;
+                            break;
+                        case 3:
+                            e.x = (this.x - this.halfW) - 200;
+                            e.y = (this.y - this.halfH) - 50;
+                            break;
+                    }
+                }
+                managers.Game.stage.addChild(this.explosions[0]);
+                if (ticker % 30 == 0) {
+                    managers.Game.stage.addChild(this.explosions[1]);
+                }
+                if (ticker % 60 == 0) {
+                    managers.Game.stage.addChild(this.explosions[2]);
+                }
+                if (ticker % 90 == 0) {
+                    managers.Game.stage.addChild(this.explosions[3]);
+                }
                 if (this.currentAnimation == "Boss2_Worm") {
                     this.SwitchAnimation("Boss2_Worm_Alpha");
                 }

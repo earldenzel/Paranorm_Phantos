@@ -65,8 +65,8 @@ var scenes;
                 this.obstacles[0] = new objects.Barriers(managers.Game.graveyard_TextureAtlas, "GraveTile");
                 this.obstacles[0].SetPosition(new math.Vec2(320, 600));
             }
-            this.cosmetics[5] = new objects.Stairs(config.Scene.HOTEL_1, true);
-            this.cosmetics[6] = new objects.Stairs(config.Scene.MANSION_1, true);
+            this.cosmetics[5] = new objects.Stairs(config.Scene.HOTEL_1, this.design, true);
+            this.cosmetics[6] = new objects.Stairs(config.Scene.MANSION_1, this.design, true);
             this.cosmetics[5].SetPosition(new math.Vec2(500, 550));
             this.cosmetics[6].SetPosition(new math.Vec2(500, 650));
             this.cosmetics[5].visible = (managers.Game.player.stageFinished > 0);

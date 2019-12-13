@@ -33,6 +33,7 @@ var objects;
             _this.walk = ["GhostMan_IdleBack", "GhostMan_IdleFront", "GhostMan_IdleLeft", "GhostMan_IdleLeft"];
             _this.attack = ["GhostMan_AttackBack", "GhostMan_AttackFront", "GhostMan_AttackLeft", "GhostMan_AttackLeft"];
             _this.direction = config.Direction.DOWN;
+            _this.explosion = new objects.Explosion(objects.ExplodeTypes.GHOSTSHADOW, _this.GetPosition(), 2);
             return _this;
         }
         // Methods

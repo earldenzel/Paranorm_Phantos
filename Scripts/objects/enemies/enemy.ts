@@ -14,6 +14,7 @@ module objects {
         public canBeAttacked: boolean;
         protected expGain: number;
         public bountyTaken: boolean = false;
+        protected explosion: objects.Explosion;
 
         public startPosition: math.Vec2;
 
@@ -41,6 +42,12 @@ module objects {
             if (this.hp <= 0) {
                 this.isStunned = true;
                 this.CheckBound();
+            }
+
+            if(this.isDead && this.explosion != null){
+                this.explosion.x = this.x - this.halfW;
+                this.explosion.y = this.y - this.halfH;
+                managers.Game.stage.addChild(this.explosion);
             }
 
             if (this.fallSequence !== 0){
@@ -202,8 +209,6 @@ module objects {
             this.isDead = true;
             managers.Game.player.GainEcto();
             if (bounty > 0) {
-                managers.Game.SFX = createjs.Sound.play("anyDefeated");
-                managers.Game.SFX.volume = 0.2;
                 if (!this.bountyTaken){
                     managers.Game.player.GainDollars(bounty);
                     this.bountyTaken = true;

@@ -25,6 +25,7 @@ module objects {
             this.attack = ["Zombie_AttackBack", "Zombie_AttackFront", "Zombie_AttackLeft", "Zombie_AttackLeft"];
 
             this.direction = config.Direction.UP;
+            this.explosion = new objects.Explosion(ExplodeTypes.ZOMBIE,this.GetPosition(),0);
         }
 
         // Methods

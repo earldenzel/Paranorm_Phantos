@@ -22,6 +22,7 @@ module objects {
             this.eatTimer = 3000;
             this.isFlying = true;
             this.bounty = 1;
+            this.explosion = new objects.Explosion(ExplodeTypes.GHOSTSHADOW, this.GetPosition(),2);
         }
         // Methods
         public Start():void{

@@ -24,6 +24,7 @@ var objects;
             _this.knockback = 0.75;
             _this.eatTimer = 300;
             _this.isFlying = true;
+            _this.explosion = new objects.Explosion(objects.ExplodeTypes.GHOST, _this.GetPosition(), 0);
             _this.Start();
             return _this;
         }

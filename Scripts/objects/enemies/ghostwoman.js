@@ -34,6 +34,7 @@ var objects;
             _this.powerUp = config.PowerUp.ICE;
             _this.walk = ["GhostWoman_IdleBack", "GhostWoman_IdleFront", "GhostWoman_IdleLeft", "GhostWoman_IdleLeft"];
             _this.direction = config.Direction.DOWN;
+            _this.explosion = new objects.Explosion(objects.ExplodeTypes.GHOSTWOMAN, _this.GetPosition(), 2);
             return _this;
         }
         // Methods

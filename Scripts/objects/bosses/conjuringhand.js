@@ -22,13 +22,18 @@ var objects;
     var ConjuringHand = /** @class */ (function (_super) {
         __extends(ConjuringHand, _super);
         // Constructor
-        function ConjuringHand(leftNotRight) {
+        function ConjuringHand(leftNotRight, moveSpeed) {
             var _this = _super.call(this, managers.Game.bosses_TextureAtlas, "Boss3_OpenHand") || this;
             _this.leftNotRight = leftNotRight;
             _this.Start();
             _this.hp = 50;
             _this.attackPower = 2;
-            _this.moveSpeed = 2;
+            if (moveSpeed == null) {
+                _this.moveSpeed = 2;
+            }
+            else {
+                _this.moveSpeed = moveSpeed;
+            }
             _this.knockback = 0.25;
             _this.eatTimer = 1000;
             _this.bounty = 50;
@@ -37,6 +42,12 @@ var objects;
             _this.rateOfFire = 5;
             _this.attackingMode = HandAttackMode.CHASE;
             _this.quakingCounter = 0;
+            _this.explosion = new objects.Explosion(objects.ExplodeTypes.DEFAULT, _this.GetPosition(), 2);
+            _this.explosions = [
+                new objects.Explosion(objects.ExplodeTypes.DEFAULT, _this.GetPosition(), 3),
+                new objects.Explosion(objects.ExplodeTypes.DEFAULT, _this.GetPosition(), 3),
+                new objects.Explosion(objects.ExplodeTypes.DEFAULT, _this.GetPosition(), 3)
+            ];
             return _this;
         }
         // Methods
@@ -48,6 +59,33 @@ var objects;
             }
         };
         ConjuringHand.prototype.Update = function () {
+            var ticker = createjs.Ticker.getTicks();
+            if (this.isDead) {
+                for (var i = 0; i < this.explosions.length; i++) {
+                    var e = this.explosions[i];
+                    switch (i) {
+                        case 0:
+                            e.x = (this.x - this.halfW);
+                            e.y = (this.y - this.halfH) - 100;
+                            break;
+                        case 1:
+                            e.x = (this.x - this.halfW);
+                            e.y = (this.y - this.halfH) - 150;
+                            break;
+                        case 2:
+                            e.x = (this.x - this.halfW);
+                            e.y = (this.y - this.halfH) + 100;
+                            break;
+                    }
+                }
+                managers.Game.stage.addChild(this.explosions[0]);
+                if (ticker % 60 == 0) {
+                    managers.Game.stage.addChild(this.explosions[1]);
+                }
+                if (ticker % 60 == 0) {
+                    managers.Game.stage.addChild(this.explosions[2]);
+                }
+            }
             if (this.attackingMode != HandAttackMode.QUAKE) {
                 if (this.leftNotRight) {
                     this.scaleX = 1;

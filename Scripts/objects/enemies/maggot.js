@@ -31,8 +31,10 @@ var objects;
             _this.isFlying = false;
             _this.expGain = 3;
             _this.halfSpeed = moveSpeed / 2;
+            _this.hasSpawn = false;
             _this.walk = ["Maggot_WalkForward", "Maggot_WalkForward", "Maggot_WalkSide", "Maggot_WalkSide"];
             _this.direction = config.Direction.DOWN;
+            _this.explosion = new objects.Explosion(objects.ExplodeTypes.MAGGOT, _this.GetPosition(), 0);
             _this.SpawnCreation();
             return _this;
         }
@@ -47,8 +49,9 @@ var objects;
             }
             else {
                 if (this.currentAnimation == "Maggot_Explode" && this.currentAnimationFrame > 3) {
-                    if (this.visible) {
+                    if (!this.hasSpawn) {
                         this.ActivateSpawns();
+                        this.hasSpawn = true;
                     }
                     managers.Game.stage.removeChild(this);
                     this.visible = false;
